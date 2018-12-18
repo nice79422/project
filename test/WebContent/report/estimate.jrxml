@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="608" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="03b9272e-aefd-4b48-b59a-7efa600b78e9">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="137"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="f040e5d8-5889-4856-a12b-0ed504c230d0"/>
+	<parameter name="orderDraftNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT ESTIMATE.*
+     ,ESTIMATE_DETAIL.ESTIMATE_DETAIL_CODE
+     ,ESTIMATE_DETAIL.ITEM_CODE
+     ,ESTIMATE_DETAIL.ESTIMATE_AMOUNT*1 AS ESTIMATE_AMOUNT
+     ,ESTIMATE_DETAIL.ESTIMATE_DETAIL_UNIT_PRICE*1 AS ESTIMATE_DETAIL_UNIT_PRICE
+     ,ITEM.*
+     ,CLIENT.*
+     ,ITEM.UNIT_PRICE*ESTIMATE_DETAIL.ESTIMATE_AMOUNT SUM
+  FROM "ESTIMATE" ESTIMATE
+   INNER JOIN "ESTIMATE_DETAIL" ESTIMATE_DETAIL
+       ON ESTIMATE."ESTIMATE_CODE" = ESTIMATE_DETAIL."ESTIMATE_CODE"
+   INNER JOIN "CLIENT" CLIENT
+       ON ESTIMATE."CLIENT_CODE" = CLIENT."CLIENT_CODE"
+   INNER JOIN "ITEM" ITEM
+       ON ESTIMATE_DETAIL."ITEM_CODE" = ITEM."ITEM_CODE"
+ WHERE ESTIMATE.ESTIMATE_CODE = $P{orderDraftNo}]]>
+	</queryString>
+	<field name="ESTIMATE_CODE" class="java.lang.String"/>
+	<field name="ESTIMATE_DATE" class="java.lang.String"/>
+	<field name="CONTRACT_STATUS" class="java.lang.String"/>
+	<field name="CLIENT_CODE" class="java.lang.String"/>
+	<field name="ESTIMATE_DETAIL_CODE" class="java.lang.String"/>
+	<field name="ITEM_CODE" class="java.lang.String"/>
+	<field name="ESTIMATE_AMOUNT" class="java.lang.Number"/>
+	<field name="ESTIMATE_DETAIL_UNIT_PRICE" class="java.math.BigDecimal"/>
+	<field name="ITEM_NAME" class="java.lang.String"/>
+	<field name="UNIT" class="java.lang.String"/>
+	<field name="UNIT_PRICE" class="java.lang.String"/>
+	<field name="COM_PRODUCT_STATUS" class="java.lang.String"/>
+	<field name="PURCHASING_PLACE_CODE" class="java.lang.String"/>
+	<field name="CLIENT_NAME" class="java.lang.String"/>
+	<field name="BUSINESS_NUMBER" class="java.lang.String"/>
+	<field name="BUSINESS_CONDITIONS" class="java.lang.String"/>
+	<field name="REPRESENT_NAME" class="java.lang.String"/>
+	<field name="POST_CODE" class="java.lang.String"/>
+	<field name="ADDRESS" class="java.lang.String"/>
+	<field name="DETAIL_ADDRESS" class="java.lang.String"/>
+	<field name="TEL" class="java.lang.String"/>
+	<field name="FAX" class="java.lang.String"/>
+	<field name="SUM" class="java.math.BigDecimal"/>
+	<variable name="gong" class="java.lang.Integer">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="bu" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{gong}*10/100]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="hab" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{gong}+$V{bu}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="gong1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{gong}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="bu1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{bu}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="hab1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{hab}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="ESTIMATE_DETAIL_UNIT_PRICE_1" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{ESTIMATE_DETAIL_UNIT_PRICE}]]></variableExpression>
+	</variable>
+	<variable name="SUM_1" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUM}]]></variableExpression>
+	</variable>
+	<variable name="SUM_2" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUM}]]></variableExpression>
+	</variable>
+	<variable name="ESTIMATE_DETAIL_UNIT_PRICE_2" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{ESTIMATE_DETAIL_UNIT_PRICE}]]></variableExpression>
+	</variable>
+	<variable name="SUM_3" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUM}]]></variableExpression>
+	</variable>
+	<variable name="ESTIMATE_AMOUNT_1" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{ESTIMATE_AMOUNT}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="184" y="0" width="233" height="40" uuid="2f52fab8-3a66-4ad5-8275-cdc7f0619790"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[견 적 서]]></text>
+			</staticText>
+			<line>
+				<reportElement x="155" y="47" width="300" height="1" uuid="9428dbde-5268-4c76-8117-fd1582ce1698"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="248" height="46" uuid="6adae130-b7ca-429d-bccd-7a62cb8ec61b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="22" width="160" height="22" uuid="960296cd-050b-4e37-a22a-ee7b52a0b5dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="0" width="160" height="23" uuid="254d6ea1-7c7c-4508-b8db-d8dade9b3efd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="123" y="23" width="125" height="21" uuid="d00b2063-062d-4880-a253-42ccef432d9f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="123" y="0" width="125" height="23" uuid="4dcbd58f-d187-47fb-921f-270ea3888131"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="23" width="147" height="21" backcolor="#CCCCCC" uuid="c848aec4-0143-4cee-b881-c8e28ad38580"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="0" width="147" height="23" backcolor="#CCCCCC" uuid="adc69819-b8ea-4aa5-b20b-12b8e605cd23"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="248" y="0" width="147" height="22" uuid="67365c64-4d56-4b69-b63d-eb389d6e1528"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[사업장명]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="25" width="100" height="20" uuid="174912ab-d165-48eb-a87c-341482cbea41"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATE_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="3" width="100" height="20" uuid="e0e3cb13-1cc4-4870-b67f-b54a306b97a0"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATE_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="248" y="23" width="147" height="22" uuid="3f73013e-de2d-428b-a72d-1a8d3c0bea5e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[사업자번호]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="22" width="123" height="22" backcolor="#CCCCCC" uuid="d1b67ea6-2a90-4696-8f9d-7e86dcc09e28"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="123" height="23" backcolor="#CCCCCC" uuid="e6f83b3d-bed2-495e-a64a-d6c84a48a1d1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="123" height="23" uuid="e372b68e-96a1-4bd6-9759-b5e155873cef"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[견적일자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="23" width="123" height="22" uuid="e5299fdc-9832-4d54-8a51-448bd95abb83"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[견적번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="3" width="100" height="20" uuid="d6661666-ecf4-476e-bf89-49c768efa25b"/>
+				<textElement>
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[SY석재]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="26" width="100" height="20" uuid="16019e2a-26c8-4a6c-81ca-a66a1465f4ae"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[108-74-57804]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="118" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-2" width="248" height="63" uuid="8e8061b2-b176-45e9-9a87-9980cda7ffaf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="39" width="160" height="22" uuid="19d269c3-f7e3-4c40-b7fd-89860bcce61f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="20" width="160" height="20" uuid="dea2b309-b04e-4728-90b9-5f16c5f60d72"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="0" width="160" height="20" uuid="e9a2575a-f46c-421c-8b56-2a784fee8797"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="38" width="147" height="23" backcolor="#CCCCCC" uuid="97a3b59d-b1f5-4e41-aa74-8cae555aabdb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="17" width="147" height="21" backcolor="#CCCCCC" uuid="59dda74e-af73-46af-8edd-a6c55b39e021"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="248" y="0" width="147" height="21" backcolor="#CCCCCC" uuid="103d7d3d-91ba-4286-b8e9-b0ff14d4ed3b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="248" y="18" width="147" height="20" uuid="2a7b3e4b-2774-41a5-bd80-887506ff9382"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[업  종]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="0" width="147" height="20" uuid="9754458d-cabc-4111-b2bd-8ab79e3469f9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[업  태]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="37" width="147" height="22" uuid="97a5f065-87c0-4826-b5d0-a7048fc4d800"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[소재지]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="61" width="555" height="21" backcolor="#CCCCCC" uuid="310fe67f-3be8-4407-8421-e99aca032d2d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="475" y="102" width="80" height="15" uuid="38b207b6-030f-4f11-8957-4850bddf2710"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="405" y="102" width="70" height="15" uuid="f6d35a68-4bba-483c-9b69-ea43da392a9e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="337" y="102" width="68" height="15" uuid="69456070-10cb-4a06-9f3c-7e5cdd745177"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="298" y="102" width="39" height="15" uuid="c3a0df36-f18d-4dfc-ab55-1ec27e233c7f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="270" y="102" width="28" height="15" uuid="4819589e-f0f3-416d-b05b-7ce42ac853dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="210" y="102" width="60" height="15" uuid="4009b7a1-4bb0-4ed9-97d1-32b9e03bea4b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="102" width="74" height="15" uuid="aead146b-275a-4f3d-93e8-105b2ebfd376"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="102" width="135" height="15" uuid="fb466532-cf97-4f8b-86ab-c4bebf1345e9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="82" width="555" height="20" backcolor="#FFFFFF" uuid="ce1b2ad2-e8a5-4ec8-8ed4-bc4013cd9000"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="23" y="102" width="88" height="15" uuid="03213851-e1a9-4b9f-af04-1b6f2b02396e"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[견적일련번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="102" width="93" height="15" uuid="97199fb5-512e-461b-b63a-6abbe4bc23d8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[품번]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="102" width="28" height="15" uuid="0da0eb97-0ced-413d-883a-e31618b36638"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[단위]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="102" width="39" height="15" uuid="8fd841a2-21f8-4f0f-b4b8-7d36939bb280"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[수량]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="102" width="68" height="15" uuid="84c734b6-5677-4b90-8f10-e59f630ffcd7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[단가]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="102" width="68" height="15" uuid="f68e0ef2-8108-480f-a359-9d7523292ea1"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[공급가]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="103" width="79" height="15" uuid="1cdd71a5-8ff1-4097-9558-9d3bbec1e270"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[합계]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="82" width="554" height="20" backcolor="#99CCFF" uuid="2c0bf667-f789-42e1-837e-a5ec0cbccbba"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[견적명세]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="102" width="53" height="15" uuid="fbbb456d-ae93-4fd4-ad16-93d5f520e7d2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[품명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="0" width="100" height="20" uuid="c9d2c3b9-18bb-4589-9c93-84afe494a0f3"/>
+				<textElement>
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[제조]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="21" width="115" height="20" uuid="8c28951a-873b-4ff3-872b-c9bc051ef635"/>
+				<textElement>
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[가공및 시공]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="41" width="100" height="20" uuid="14be7f97-954d-4bdf-8718-41fb22291e8e"/>
+				<textElement>
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[경남 진주시]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="21" width="100" height="20" uuid="fb5c6d81-74b4-4955-9681-c225cbbcf58e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CLIENT_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="270" y="0" width="28" height="20" uuid="c262265f-ba75-4a52-ae0b-dab60697581f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="298" y="0" width="39" height="20" uuid="1b4819b0-a7f1-4086-9914-fc282ec68d36"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="337" y="0" width="68" height="20" uuid="0a04377c-e9a2-4380-b54f-ce63b62d5547"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="405" y="0" width="71" height="20" uuid="a2e93327-1e15-4c36-8ece-f253cb0bef09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="475" y="0" width="80" height="20" uuid="bedeb87e-ce47-4766-b7a5-540b85384349"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="135" height="20" uuid="c77dd62e-4775-44eb-b2d5-6478bb72ed5e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="210" y="0" width="60" height="20" uuid="956bf6a7-2da1-442d-82b5-e5ed45743cf9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="0" width="74" height="20" uuid="df240add-a2ff-420d-b303-def8ad1002ad"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="270" y="0" width="28" height="20" uuid="c1528245-aa3f-4294-bca7-b01c68afda2b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[EA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="209" y="0" width="59" height="20" uuid="922c2572-0707-4991-aee5-e74856791e9b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="69" height="20" uuid="7025623c-0d6b-41f9-a26b-46ddabe7079f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ITEM_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="123" height="20" uuid="2dff24d4-22ba-41cd-a0d0-4e8ed548bdca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATE_DETAIL_CODE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="340" y="0" width="65" height="20" uuid="9f8efeb3-7247-46e8-8869-ed6292ab4fdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATE_DETAIL_UNIT_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="476" y="0" width="78" height="20" uuid="284333d9-4182-4f65-b7f0-614c79904a82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SUM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="407" y="0" width="68" height="20" uuid="7ef6422c-80fc-4b0d-883d-ef9ae8e40609"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATE_DETAIL_UNIT_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="39" height="20" uuid="df087aac-d9d7-4525-bb5b-a9ca4d55226e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESTIMATE_AMOUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="106" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="106" uuid="6803a9d8-7d7c-4ba2-9860-f0c6b2c3d81d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="59" height="17" backcolor="#FFFFFF" uuid="abba316c-ba39-4eb9-8363-25e416ead38d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[견적조건]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="16" width="59" height="1" uuid="00696222-bf49-48b0-b699-1cc39321e6f0"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="78" width="59" height="15" uuid="be8143b5-290a-4dd0-ba1f-716be497d283"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[특이사항]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="140" height="14" uuid="8405f21c-0128-46c9-87f1-3a193b95e3de"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[1. 제품보증 : 무상보증 6개월]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="37" width="160" height="14" uuid="6adddf25-fe22-492d-b99f-5a6934f2dfcd"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[2. 견적 유효 기간 : 견적 후 7일]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="93" width="59" height="1" uuid="f0aeb6cc-be88-4fef-8238-ea778fc16ec5"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="101" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="99" uuid="64599fa1-ba39-4fda-9bd0-a83b44260ff5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="78" y="19" width="339" height="51" uuid="3ad189a8-748b-4f74-bb45-d37094fa9e76"/>
+				<textElement textAlignment="Center">
+					<font size="36" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[SY석재 대표 강순용]]></text>
+			</staticText>
+			<image>
+				<reportElement x="419" y="0" width="127" height="99" uuid="ce72507e-7006-41f8-8c16-8715e1152ddc"/>
+				<imageExpression><![CDATA["C:\\Users\\hello\\Pictures\\아이유.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="77" splitType="Stretch">
+			<rectangle>
+				<reportElement x="405" y="0" width="71" height="20" uuid="9872e4df-d4e3-43af-a18d-de2035b94e75"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="337" y="0" width="68" height="20" uuid="abb88a68-fdaf-40f1-af49-3e804997293e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="297" height="20" backcolor="#CCCCCC" uuid="1a940de3-22d8-4900-a438-1c7e43f7c3c7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="19" width="555" height="57" uuid="56588604-290c-415d-aa79-abae845e9ed2"/>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="20" width="555" height="56" uuid="107376a2-8028-4b45-8423-4ab090600e81"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="297" height="18" uuid="90a10965-ea59-4e25-95ba-47dd35726300"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[소계]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="337" y="1" width="68" height="20" uuid="4de16799-1dad-4a6d-8663-a48e7896aa4c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ESTIMATE_DETAIL_UNIT_PRICE_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="407" y="1" width="70" height="20" uuid="112cfc5c-5672-46dc-8c33-b9fbd80bd1dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ESTIMATE_DETAIL_UNIT_PRICE_2}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="475" y="0" width="80" height="19" uuid="f3500b21-9237-4d52-b61b-cd0062427f59"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="297" y="0" width="40" height="19" uuid="50455a80-bdc3-44e7-bf53-49804cae6c00"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="477" y="1" width="69" height="20" uuid="3a717430-5720-473c-a2e9-58775680afd8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{SUM_3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="298" y="1" width="39" height="20" uuid="e521cf33-b32b-4ba7-9426-4f00fa949ecf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ESTIMATE_AMOUNT_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
