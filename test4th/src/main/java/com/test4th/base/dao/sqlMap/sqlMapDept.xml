@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Dept">
+    <typeAlias alias="deptBean" type="com.test4th.base.to.DepartmentBean"/>
+    <resultMap id="deptResult" class="deptBean">
+        <result property="deptCode" column="DEPT_CODE"/>
+        <result property="deptName" column="DEPT_NAME"/>
+        <result property="deptTel" column="DEPT_TEL"/>
+    </resultMap>
+
+
+    <select id="selectDeptList" resultMap="deptResult">
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            DEPARTMENT
+        ORDER BY
+            DEPT_CODE
+    ]]>
+    </select>
+
+
+
+	<insert id="insertDept" parameterClass="deptBean">
+		<![CDATA[
+	        INSERT INTO
+	            DEPARTMENT
+	            (
+	            DEPT_CODE,
+	            DEPT_NAME,
+	            DEPT_TEL
+	            )
+	        VALUES (
+	            #deptCode#,
+	            #deptName#,
+	            #deptTel#
+	        )
+    	]]>
+	</insert>
+
+
+	<update id="updateDept" parameterClass="deptBean">
+		<![CDATA[
+	       UPDATE
+	            DEPARTMENT
+	       SET
+	            DEPT_NAME = #deptName#,
+	            DEPT_TEL = #deptTel#
+	       WHERE
+	            DEPT_CODE = #deptCode#
+
+    	]]>
+	</update>
+
+
+	<delete id="deleteDept" parameterClass="deptBean">
+		<![CDATA[
+	      DELETE FROM
+	      		DEPARTMENT
+	      WHERE
+	            DEPT_CODE = #deptCode#
+    	]]>
+	</delete>
+
+</sqlMap>

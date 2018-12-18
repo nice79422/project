@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="post">
+	<typeAlias alias="SidoBean" type="com.test4th.base.to.SidoBean"/>
+	<typeAlias alias="SigunguBean" type="com.test4th.base.to.SigunguBean"/>
+	<typeAlias alias="AddressBean" type="com.test4th.base.to.AddressBean"/>
+
+	<resultMap id="sidoResult" class="SidoBean">
+		<result property="sidoCode" column="code" />
+		<result property="sidoValue" column="value" />
+	</resultMap>
+
+	<resultMap id="sigunguResult" class="SigunguBean">
+		<result property="gungu" column="value" />
+		<result property="sido" column="code" />
+	</resultMap>
+
+	<resultMap id="addressResult" class="AddressBean">
+		<result property="zipCode" column="zipcode" />
+		<result property="address" column="road_name" />
+	</resultMap>
+
+	<!-- 특별시, 광역시, 도를 조회하는 메서드 -->
+	<select id="findSido" resultMap="sidoResult">
+    <![CDATA[
+        SELECT DISTINCT * FROM POST_SI ORDER BY VALUE
+    ]]>
+	</select>
+
+	<!-- 특별시, 광역시, 도에 해당하는 시,군,구를 조회하는 메서드  -->
+	<select id="findSiGunGuList" resultMap="sigunguResult">
+    <![CDATA[
+    	SELECT DISTINCT * FROM POST_SIGUNGU WHERE CODE=#sido# ORDER BY VALUE
+    ]]>
+	</select>
+
+	<!-- 전체조건에 맞는 주소를 가지고 오는 메서드 -->
+	<select id="findAddrList" resultMap="addressResult"	parameterClass="map">
+    <![CDATA[
+        SELECT DISTINCT ZIPCODE,
+       		 SIGUNGU ||' '|| BOROUGH ||' '|| DONG ||' '|| RI ||' '|| ROAD_NAME AS ROAD_NAME
+		FROM ROAD_POST_$sido$
+		WHERE SIGUNGU=#sigungu#
+		AND SIGUNGU ||' '|| BOROUGH ||' '|| DONG ||' '|| RI ||' '|| ROAD_NAME LIKE '%'||#roadName#||'%'
+    ]]>
+	</select>
+
+</sqlMap>

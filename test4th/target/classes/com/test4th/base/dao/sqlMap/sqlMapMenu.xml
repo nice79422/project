@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Menu">
+	<typeAlias alias="menuBean" type="com.test4th.base.to.MenuBean" />
+	<resultMap id="menuResult" class="menuBean">
+		<result property="menuCode" column="MENU_CODE" />
+		<result property="menuName" column="MENU_NAME" />
+		<result property="menuUrl" column="MENU_URL" />
+		<result property="superMenuCode" column="SUPER_MENU_CODE" />
+		<result property="usingStatus" column="USING_STATUS" />
+		<result property="level" column="level" />
+	</resultMap>
+
+	<!-- 메뉴목록을 가지고오는 메서드 -->
+	<select id="findMenuList" resultMap="menuResult">
+    <![CDATA[
+		SELECT
+				LEVEL,
+				MENU_CODE,
+				SUPER_MENU_CODE,
+				MENU_NAME,
+				MENU_URL,
+    			USING_STATUS
+		FROM MENU
+		START WITH SUPER_MENU_CODE IS NULL
+		CONNECT BY PRIOR MENU_CODE=SUPER_MENU_CODE
+    ]]>
+	</select>
+</sqlMap>

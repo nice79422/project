@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="salPaymentDate">
+    <typeAlias alias="salPaymentDateBean" type="com.test4th.hr.circumstance.to.SalPaymentDateBean"/>
+    <resultMap id="salPaymentDateResult" class="salPaymentDateBean">
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="inputedYearMonth" column="INPUTED_YEAR_MONTH"/>
+        <result property="jikjongCode" column="JIKJONG_CODE"/>
+        <result property="targetChoice" column="TARGET_CHOICE"/>
+        <result property="sameTimeSelection" column="SAME_TIME_SELECTION"/>
+        <result property="payType" column="PAY_TYPE"/>
+        <result property="salaryTypeCode" column="SALARY_TYPE_CODE"/>
+        <result property="note" column="NOTE"/>
+    </resultMap>
+
+	<!-- 해당 귀속년월의 급/상여 지급일 및 관련정보를 조회하는 메서드 -->
+    <select id="selectSalPaymentDateList" resultMap="salPaymentDateResult" parameterClass="String">
+    <![CDATA[
+        SELECT * FROM SAL_PAYMENT_DATE
+        WHERE INPUTED_YEAR_MONTH like (#inputedYearMonth# || '%')
+        ORDER BY PAYMENT_DATE
+    ]]>
+    </select>
+
+	<!-- 급/상여 지급일 및 관련정보를 등록하는 메서드 -->
+	
+    <insert id="insertSalPaymentDate" parameterClass="salPaymentDateBean">
+    <![CDATA[
+    	INSERT INTO SAL_PAYMENT_DATE
+	    VALUES (
+	    	#paymentDate#,
+	    	#inputedYearMonth#,
+	    	#jikjongCode#,
+	    	#targetChoice#,	    	
+	    	#payType#,
+	    	#salaryTypeCode#,
+			#note#,
+			#sameTimeSelection#
+	    )
+	]]>
+    </insert>
+    
+
+	<!-- 급/상여 지급일 및 관련정보를 수정하는 메서드 -->
+	
+    <update id="updateSalPaymentDate" parameterClass="salPaymentDateBean">
+	<![CDATA[
+	        UPDATE SAL_PAYMENT_DATE
+	        SET
+	            JIKJONG_CODE = #jikjongCode#,
+	            TARGET_CHOICE = #targetChoice#,
+	            SAME_TIME_SELECTION = #sameTimeSelection#,
+	            PAY_TYPE = #payType#,
+	            SALARY_TYPE_CODE = #salaryTypeCode#,
+	            NOTE = #note#
+	        WHERE PAYMENT_DATE = #paymentDate#
+	        AND INPUTED_YEAR_MONTH = #inputedYearMonth#
+	]]>
+	</update>
+	
+
+	<!-- 급/상여 지급일 및 관련정보를 삭제하는 메서드 -->
+	
+	<delete id="deleteSalPaymentDate" parameterClass="salPaymentDateBean">
+	<![CDATA[
+		DELETE FROM SAL_PAYMENT_DATE
+	    WHERE PAYMENT_DATE = #paymentDate#
+	    AND INPUTED_YEAR_MONTH = #inputedYearMonth#
+	]]>
+    </delete>
+	
+	
+</sqlMap>

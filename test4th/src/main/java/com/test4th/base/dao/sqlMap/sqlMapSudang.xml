@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sudang">
+	<typeAlias alias="overtimeSalBean" type="com.test4th.base.to.OvertimeSalBean"/>
+	<typeAlias alias="etcSalBean" type="com.test4th.base.to.EtcSalBean"/>
+
+	<resultMap id="overtimeSalResult" class="overtimeSalBean">
+		<result property="overtimeSalCode" column="OVERTIME_SAL_CODE" />
+		<result property="overtimeSalName" column="OVERTIME_SAL_NAME" />
+		<result property="overtimeSalRate" column="OVERTIME_SAL_RATE" />
+	</resultMap>
+
+	<resultMap id="etcSalResult" class="etcSalBean">
+		<result property="etcSalCode" column="ETC_SAL_CODE" />
+		<result property="etcSalName" column="ETC_SAL_NAME" />
+		<result property="etcSalPrice" column="ETC_SAL_PRICE" />
+	</resultMap>
+
+	<!-- 연장,야간,휴일수당목록을 가져오는 메서드  -->
+	<select id="selectOvertimeSalList" resultMap="overtimeSalResult">
+    <![CDATA[
+ 		SELECT OVERTIME_SAL_CODE
+ 			  ,OVERTIME_SAL_NAME
+ 			  ,OVERTIME_SAL_RATE 
+ 	 	  FROM OVERTIME_SAL 
+ 	 	ORDER BY OVERTIME_SAL_CODE
+    ]]>
+	</select>
+
+	<select id="selectEtcSalList" resultMap="etcSalResult">
+    <![CDATA[
+        SELECT  ETC_SAL_CODE
+        		,ETC_SAL_NAME
+        		,ETC_SAL_PRICE
+          FROM
+        	    ETC_SAL
+        ORDER BY
+            	ETC_SAL_CODE
+    ]]>
+	</select>
+
+
+	 <insert id="insertOvertimeSal" parameterClass="overtimeSalBean">
+		<![CDATA[
+	        INSERT INTO
+	            OVERTIME_SAL
+	            (
+	            OVERTIME_SAL_CODE,
+	            OVERTIME_SAL_NAME,
+	            OVERTIME_SAL_RATE
+	            )
+	        VALUES (
+	            #overtimeSalCode#,
+	            #overtimeSalName#,
+	            #overtimeSalRate#
+	        )
+    	]]>
+	</insert>
+
+	<update id="updateOvertimeSal" parameterClass="overtimeSalBean">
+		<![CDATA[
+	       UPDATE
+	            OVERTIME_SAL
+	       SET
+	            OVERTIME_SAL_NAME = #overtimeSalName#,
+	            OVERTIME_SAL_RATE = #overtimeSalRate#
+	       WHERE
+	            OVERTIME_SAL_CODE = #overtimeSalCode#
+
+    	]]>
+	</update>
+
+	<delete id="deleteOvertimeSal" parameterClass="overtimeSalBean">
+		<![CDATA[
+	      DELETE
+	      FROM
+	      		OVERTIME_SAL
+	      WHERE
+	            OVERTIME_SAL_CODE = #overtimeSalCode#
+    	]]>
+	</delete>
+
+	<insert id="insertEtcSal" parameterClass="etcSalBean">
+		<![CDATA[
+	        INSERT INTO
+	            ETC_SAL
+	            (
+	            ETC_SAL_CODE,
+	            ETC_SAL_NAME,
+	            ETC_SAL_PRICE
+	            )	            
+	        VALUES (
+	            #etcSalCode#,
+	            #etcSalName#,
+	            #etcSalPrice#
+	        )
+    	]]>
+	</insert>
+
+	<update id="updateEtcSal" parameterClass="etcSalBean">
+		<![CDATA[
+	       UPDATE
+	            ETC_SAL
+	       SET
+	            ETC_SAL_NAME = #etcSalName#,
+	            ETC_SAL_PRICE = #etcSalPrice#
+	       WHERE
+	            ETC_SAL_CODE = #etcSalCode#
+
+    	]]>
+	</update>
+ 
+	<delete id="deleteEtcSal" parameterClass="etcSalBean">
+		<![CDATA[
+	      DELETE
+	      FROM
+	      		ETC_SAL
+	      WHERE
+	            ETC_SAL_CODE = #etcSalCode#
+    	]]>
+	</delete>
+
+</sqlMap>

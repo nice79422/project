@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="employee">
+    <!-- 사원정보를 담을 Result -->
+    <typeAlias alias="employeeBean" type="com.test4th.base.to.EmployeeBean"/>
+   	
+    <resultMap id="employeeResult" class="employeeBean">
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="authorityCode" column="AUTHORITY_CODE"/>
+        <result property="deptCode" column="DEPT_CODE"/>
+        <result property="positionCode" column="POSITION_CODE"/>
+    </resultMap>
+
+
+	<!-- 사원등록시 사용하는 PARAMETERMAP 프로시저 사용!-->
+	<parameterMap class="employeeBean" id="insertEmployeeParameter">
+		<parameter property="empCode" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="empName" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="password" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="deptCode" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="positionCode" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="authorityCode" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorCode" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorMsg" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+	</parameterMap>
+
+
+	<!-- 사원연차 관리 사원목록 -->
+ 	<typeAlias alias="employeeHireDateBean" type="com.test4th.base.to.EmployeeHireDateBean"/>
+
+	<resultMap id="employeeHireDateResult" class="employeeHireDateBean">
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="authorityCode" column="AUTHORITY_CODE"/>
+        <result property="deptCode" column="DEPT_CODE"/>
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="hireDate" column="HIRE_DATE"/>
+    </resultMap>
+
+	
+	<!-- 모든 사원정보를 가지고 오는 메서드 -->
+	 <select id="selectEmployeeList" resultMap="employeeResult">
+	    <![CDATA[
+	        SELECT
+	            *
+	        FROM
+	            EMPLOYEE
+	        ORDER BY
+	            EMP_CODE,DEPT_CODE
+	    ]]>
+    </select>
+    
+    <!-- 사원을 등록하는 프로시저 -->
+    <!-- 재직정보 / 사원상세정보/ 급여정보 Primary키 를 한번에 등록해줌.. [프로시저에서 한번에 등록됨] -->
+	<procedure id="insertEmployee" parameterMap="insertEmployeeParameter">
+		CALL P_HR_PM.P_INSERT_EMPLOYEE(?, ?, ?, ?, ?, ?, ? ,?)		
+	</procedure>
+	
+	
+	 <!-- 퇴직한 사원 정보 제외한 사원정보를 가지고 오는 메서드 -->
+	 <!--퇴사일이 없는 사원은 현재 회사를 다니고 있는 사원이다.-->
+	 <select id="selectFilterEmployeeList" resultMap="employeeResult">
+	    <![CDATA[
+	     	SELECT T1.EMP_CODE 
+     			  ,T1.EMP_NAME 
+     			  ,T1.PASSWORD 
+     			  ,T1.POSITION_CODE 
+    			  ,T1.DEPT_CODE 
+   				  ,T1.AUTHORITY_CODE 
+  			  FROM EMPLOYEE T1 
+    			 , WORK_INFO T2 
+			 WHERE T1.EMP_CODE = T2.EMP_CODE 
+      		   AND T2.RETIRE_DATE IS NULL
+	    ]]>
+    </select>
+    
+    
+    <!-- 사원기초정보관리 -->
+        <update id="updateEmployee" parameterClass="employeeBean">
+	    <![CDATA[
+	       UPDATE
+	        	EMPLOYEE
+	       SET
+	        	PASSWORD = #password#,
+	        	EMP_NAME = #empName#,
+	        	AUTHORITY_CODE = #authorityCode#,
+	        	DEPT_CODE = #deptCode#,
+	        	POSITION_CODE = #positionCode#
+	       WHERE
+	            EMP_CODE = #empCode#
+	    ]]>
+    </update>
+    
+    
+    <!-- 모든사원의 사원정보, 재직정보를 가지고 오는 메서드  -->
+    <select id="selectEmployeeHireDateList" resultMap="employeeHireDateResult">
+	<![CDATA[
+    	SELECT 
+    		 E.EMP_CODE
+    		 ,E.EMP_NAME
+    		 ,E.POSITION_CODE
+    		 ,E.DEPT_CODE
+    		 ,WI.HIRE_DATE
+    		 ,E.AUTHORITY_CODE
+    		 ,E.PASSWORD
+	    FROM
+			EMPLOYEE E, WORK_INFO WI
+	    WHERE
+	       	E.EMP_CODE = WI.EMP_CODE(+)
+	]]>
+    </select>
+   
+</sqlMap>

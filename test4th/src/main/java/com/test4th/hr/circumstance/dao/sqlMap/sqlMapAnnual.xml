@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="annual">
+
+	<typeAlias alias="annualBean" type="com.test4th.hr.circumstance.to.AnnualBean" />
+	<resultMap id="annualResult" class="annualBean">
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="standardYear" column="STANDARD_YEAR"/>
+        <result property="restDays" column="REST_DAYS"/>
+        <result property="usableDays" column="USABLE_DAYS"/>
+        <result property="usedDays" column="USED_DAYS"/>
+        <result property="lengthOfService" column="LENGTH_OF_SERVICE"/>
+    </resultMap>
+ 
+	<parameterMap class="Map" id="annualMgtParameter">
+		<parameter property="empCode" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="standardYear" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+		<parameter property="hireDate" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorCode" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorMsg" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+	</parameterMap>
+
+
+	<!-- 연차관리테이블을 조회하는 메서드 -->
+	<select id="selectAnnualList" resultMap="annualResult">
+    <![CDATA[
+    	SELECT EMP_CODE
+    		  ,STANDARD_YEAR
+    		  ,REST_DAYS
+    		  ,USABLE_DAYS
+    		  ,USED_DAYS
+    		  ,LENGTH_OF_SERVICE    	
+    	 FROM ANNUAL_MGT
+    ]]>
+    </select>
+
+	<!-- 해당년도, 해당사원의 연차정보를 생성하는 메서드 -->
+	
+	<procedure id="createAnnual" parameterMap="annualMgtParameter">
+		CALL P_HR_ANNUAL.P_CREATE_ANNUAL( ?, ?, ?, ?, ?)
+	</procedure>
+	
+
+	<!-- 연차관리테이블에서 연차를 수정하는 메서드  -->
+	
+	<update id="updateAnnual" parameterClass="annualBean">
+	<![CDATA[
+	       UPDATE
+	            ANNUAL_MGT
+	       SET
+	            REST_DAYS = #restDays#,
+	            USABLE_DAYS = #usableDays#,
+	            USED_DAYS = #usedDays#,
+	            LENGTH_OF_SERVICE = #lengthOfService#
+	       WHERE
+	            EMP_CODE = #empCode#
+    ]]>
+	</update>
+
+	
+	<!-- 연차관리테이블에서 해당년도, 해당사원의 연차를 삭제하는 메서드 -->
+	
+	<delete id="deleteAnnual" parameterClass="annualBean">
+	<![CDATA[
+	      DELETE FROM
+	      		ANNUAL_MGT
+	      WHERE
+	            EMP_CODE = #empCode#
+	      AND
+	       		STANDARD_YEAR=#standardYear#
+    ]]>
+	</delete>
+	 
+
+	<!-- 연차신청시 연차관리테이블을 update하기위한 메서드 -->
+	
+	<update id="updateAnnualMgt" parameterClass="Map">
+	<![CDATA[
+	      UPDATE
+	            ANNUAL_MGT
+	       SET
+	            REST_DAYS = #restDays#,
+	            USED_DAYS = #days#
+	       WHERE
+	            EMP_CODE = #empCode#
+	       AND
+	       		STANDARD_YEAR = #standardYear#
+    ]]>
+	</update>
+
+</sqlMap>
