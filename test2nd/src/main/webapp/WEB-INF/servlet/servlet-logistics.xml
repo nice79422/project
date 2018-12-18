@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	 <bean id="logisticsUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="1" />
+		<property name="alwaysUseFullPath" value="true" />
+		<property name="mappings">
+			<props>
+				<prop key="/logistics/item/itemListForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/itemDetailListForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/bomListForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/addItemForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/item.do">itemController</prop>
+				<prop key="/logistics/item/bom.do">bomController</prop>
+				<prop key="/logistics/item/stock.do">stockController</prop>
+
+				<prop key="/logistics/business/clientListForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/contractListForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/estimateForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/client.do">clientController</prop>
+				<prop key="/logistics/business/contract.do">businessContractController</prop>
+				<prop key="/logistics/business/estimate.do">businessEstimateController</prop>
+
+				<prop key="/logistics/product/mpsForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/product/mrpForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/product/mps.do">productMpsController</prop>
+				<prop key="/logistics/product/mrp.do">productMrpController</prop>
+
+				<prop key="/logistics/purchase/purchaseForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/purchase/purchase.do">productPurchaseController</prop>
+				<prop key="/logistics/purchase/purchasingPlaceListForm.html">urlFilenameViewController</prop>
+				<prop key="/logistics/purchase/purchasingPlace.do">purchasingPlaceController</prop>
+
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="stockController" class="com.test.logistics.item.controller.StockController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:itemServiceFacade-ref="itemServiceFacade" />
+
+	<bean id="itemController" class="com.test.logistics.item.controller.ItemController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:itemServiceFacade-ref="itemServiceFacade" />
+
+	<bean id="bomController" class="com.test.logistics.item.controller.BomController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:itemServiceFacade-ref="itemServiceFacade" />
+
+	<bean id="clientController" class="com.test.logistics.business.controller.ClientController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade" />
+
+	<bean id="businessContractController" class="com.test.logistics.business.controller.BusinessContractController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade" />
+
+	<bean id="businessEstimateController" class="com.test.logistics.business.controller.BusinessEstimateController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade" />
+
+	<bean id="productMpsController" class="com.test.logistics.product.controller.ProductMpsController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:productServiceFacade-ref="productServiceFacade" />
+
+	<bean id="productMrpController" class="com.test.logistics.product.controller.ProductMrpController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:productServiceFacade-ref="productServiceFacade" />
+	
+	<bean id="productPurchaseController" class="com.test.logistics.purchase.controller.ProductPurchaseController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:purchaseServiceFacade-ref="purchaseServiceFacade" />
+
+	<bean id="purchasingPlaceController" class="com.test.logistics.purchase.controller.PurchasingPlaceController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:purchaseServiceFacade-ref="purchaseServiceFacade" />
+
+
+
+	<bean id="viewResolver" p:order="1"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean> 
+
+</beans>

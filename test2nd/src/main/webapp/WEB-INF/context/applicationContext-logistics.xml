@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- itemServiceFacade /ref-itemApplicationService -->
+
+	
+
+	<!-- productServiceFacade /ref-productApplicationService -->
+	
+	 <bean id="itemServiceFacade" class="com.test.logistics.item.sf.ItemServiceFacadeImpl"
+		p:itemApplicationService-ref="itemApplicationService" />
+
+	 <bean id="businessServiceFacade" class="com.test.logistics.business.sf.BusinessServiceFacadeImpl"
+		p:businessApplicationService-ref="businessApplicationService" />
+		
+	<bean id="productServiceFacade" class="com.test.logistics.product.sf.ProductServiceFacadeImpl"
+		p:productApplicationService-ref="productApplicationService" />
+	
+	<bean id="purchaseServiceFacade" class="com.test.logistics.purchase.sf.PurchaseServiceFacadeImpl"
+		p:purchaseApplicationService-ref="purchaseApplicationService" />
+
+	<!--  businessApplicationService /ref-contractDAO, customerDAO, estimateDAO,
+		shippingDAO, stockDAO, codeDetailDAO 
+ -->
+	<!--  <bean id="businessApplicationService"
+		class="com.test.logistics.business.applicationservice.BusinessApplicationServiceImpl"/>  -->
+		 
+ 	 <bean id="businessApplicationService"
+		class="com.test.logistics.business.applicationservice.BusinessApplicationServiceImpl"
+		p:contractDAO-ref="contractDAO" p:contractDetailDAO-ref="contractDetailDAO"
+		p:estimateDAO-ref="estimateDAO" p:estimateDetailDAO-ref="estimateDetailDAO"
+		p:clientDAO-ref="clientDAO" />  
+
+	<!-- itemApplicationService /ref-itemDAO, warehouseDAO, stockDAO, codeDetailDAO -->
+
+ 	<bean id="itemApplicationService"
+		class="com.test.logistics.item.applicationservice.ItemApplicationServiceImpl"
+		p:itemDAO-ref="itemDAO" p:bomDAO-ref="bomDAO" p:stockDAO-ref="stockDAO" />
+
+<!-- 	productApplicationService /ref-mpsDAO, mrpDAO, contractDAO, purchaseDAO,
+		stockDAO -->
+
+	 <bean id="productApplicationService"
+		class="com.test.logistics.product.applicationservice.ProductApplicationServiceImpl"
+		p:mpsDAO-ref="mpsDAO" p:mrpDAO-ref="mrpDAO" p:contractDetailDAO-ref="contractDetailDAO"
+		p:stockDAO-ref="stockDAO" p:contractDAO-ref="contractDAO" />
+		
+	<bean id="purchaseApplicationService"
+		class="com.test.logistics.purchase.applicationservice.PurchaseApplicationServiceImpl"
+		p:mrpDAO-ref="mrpDAO" p:purchaseDAO-ref="purchaseDAO" p:purchasingPlaceDAO-ref="purchasingPlaceDAO"  />	
+
+
+	<bean id="contractDetailDAO" class="com.test.logistics.business.dao.ContractDetailDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="contractDAO" class="com.test.logistics.business.dao.ContractDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="clientDAO" class="com.test.logistics.business.dao.ClientDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="estimateDAO" class="com.test.logistics.business.dao.EstimateDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="estimateDetailDAO" class="com.test.logistics.business.dao.EstimateDetailDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="stockDAO" class="com.test.logistics.item.dao.StockDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="itemDAO" class="com.test.logistics.item.dao.ItemDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="bomDAO" class="com.test.logistics.item.dao.BomDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="mpsDAO" class="com.test.logistics.product.dao.MpsDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+
+	<bean id="mrpDAO" class="com.test.logistics.product.dao.MrpDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+		
+	<bean id="purchaseDAO" class="com.test.logistics.purchase.dao.PurchaseDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />
+	
+	<bean id="purchasingPlaceDAO" class="com.test.logistics.purchase.dao.PurchasingPlaceDAOImpl"
+		p:dataSourceTransactionManager-ref="dataSourceTransactionManager" />		
+
+
+</beans>
