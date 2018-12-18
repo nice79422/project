@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="client">
+
+	<typeAlias alias="clientBean" type="com.test.logistics.business.to.ClientBean" />
+	<resultMap id="ClientResult" class="clientBean">
+		<result property="clientCode" column="CLIENT_CODE" />
+		<result property="clientName" column="CLIENT_NAME" />
+		<result property="businessNumber" column="BUSINESS_NUMBER" />
+		<result property="businessConditions" column="BUSINESS_CONDITIONS" />
+		<result property="representName" column="REPRESENT_NAME" />
+		<result property="postNumber" column="POST_CODE" />
+		<result property="addr" column="ADDRESS" />
+		<result property="detailAddr" column="DETAIL_ADDRESS" />
+		<result property="tel" column="TEL" />
+		<result property="fax" column="FAX" />
+		
+	</resultMap>
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			CLIENT
+    ]]>
+	</select>
+
+	<select id="selectClientList" resultMap="ClientResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT * FROM                                                                                                     
+	(SELECT ROW_NUMBER() OVER(ORDER BY CLIENT_CODE) RN, 
+	v.CLIENT_CODE, 
+	v.CLIENT_NAME, 
+	v.BUSINESS_NUMBER,              
+	v.BUSINESS_CONDITIONS, 
+	v.REPRESENT_NAME, 
+	v.POST_CODE,  
+	v.ADDRESS, 
+	v.DETAIL_ADDRESS,  
+	v.TEL,  
+	v.FAX  
+	FROM CLIENT v)
+ 	WHERE RN BETWEEN #startRow# AND #endRow#
+    ]]>
+	</select>
+
+	<insert id="insertClient" parameterClass="ClientBean">
+    <![CDATA[
+		INSERT INTO CLIENT VALUES
+       (
+           #clientCode#
+         , #clientName#
+         , #businessNumber#
+         , #businessConditions#
+         , #representName#
+         , #postNumber#
+         , #addr#
+         , #detailAddr#
+         , #tel#
+         , #fax#
+        )
+    ]]>
+	</insert>
+
+</sqlMap>

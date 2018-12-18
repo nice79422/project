@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- itemServiceFacade /ref-itemApplicationService -->
+
+	
+
+	<!-- productServiceFacade /ref-productApplicationService -->
+	
+	<bean id="itemServiceFacade" class="com.test.logistics.item.sf.ItemServiceFacadeImpl"
+		p:itemApplicationService-ref="itemApplicationService" />
+
+	<bean id="businessServiceFacade" class="com.test.logistics.business.sf.BusinessServiceFacadeImpl"
+		p:businessApplicationService-ref="businessApplicationService" />
+		
+	<bean id="productServiceFacade" class="com.test.logistics.product.sf.ProductServiceFacadeImpl"
+		p:productApplicationService-ref="productApplicationService" />
+	
+	<bean id="purchaseServiceFacade" class="com.test.logistics.purchase.sf.PurchaseServiceFacadeImpl"
+		p:purchaseApplicationService-ref="purchaseApplicationService" />
+
+	<!--  businessApplicationService /ref-contractDAO, customerDAO, estimateDAO,
+		shippingDAO, stockDAO, codeDetailDAO --> 
+
+	 <!-- <bean id="businessApplicationService"
+		class="com.yoogle.logistics.business.applicationservice.BusinessApplicationServiceImpl"/> --> 
+		 
+ 	 <bean id="businessApplicationService"
+		class="com.test.logistics.business.applicationservice.BusinessApplicationServiceImpl"
+		p:contractDAO-ref="contractDAO" p:estimateDAO-ref="estimateDAO" 
+		p:clientDAO-ref="clientDAO" />  
+
+	<!-- itemApplicationService /ref-itemDAO, warehouseDAO, stockDAO, codeDetailDAO -->
+
+ 	<bean id="itemApplicationService"
+		class="com.test.logistics.item.applicationservice.ItemApplicationServiceImpl"
+		p:itemDAO-ref="itemDAO" p:stockDAO-ref="stockDAO" />
+
+	<!-- productApplicationService /ref-mpsDAO, mrpDAO, contractDAO, purchaseDAO,
+		stockDAO -->
+
+	 <bean id="productApplicationService"
+		class="com.test.logistics.product.applicationservice.ProductApplicationServiceImpl"
+		p:mpsDAO-ref="mpsDAO" p:mrpDAO-ref="mrpDAO" p:contractDAO-ref="contractDAO" />
+		
+	<bean id="purchaseApplicationService"
+		class="com.test.logistics.purchase.applicationservice.PurchaseApplicationServiceImpl"
+		p:mrpDAO-ref="mrpDAO" p:purchaseDAO-ref="purchaseDAO" p:purchasingPlaceDAO-ref="purchasingPlaceDAO"  />	
+
+
+<!-- 	<bean id="contractDetailDAO" class="com.yoogle.logistics.business.dao.ContractDetailDAOImpl"
+		parent="iBatisDAOSupport" /> -->
+
+	<bean id="contractDAO" class="com.test.logistics.business.dao.ContractDAOImpl"
+		parent="iBatisDAOSupport" />
+
+	<bean id="clientDAO" class="com.test.logistics.business.dao.ClientDAOImpl"
+		parent="iBatisDAOSupport" />
+
+	<bean id="estimateDAO" class="com.test.logistics.business.dao.EstimateDAOImpl"
+		parent="iBatisDAOSupport" />
+
+<!-- 	<bean id="estimateDetailDAO" class="com.yoogle.logistics.business.dao.EstimateDetailDAOImpl"
+		parent="iBatisDAOSupport" />-->
+
+	<bean id="stockDAO" class="com.test.logistics.item.dao.StockDAOImpl"
+		parent="iBatisDAOSupport" />
+
+	<bean id="itemDAO" class="com.test.logistics.item.dao.ItemDAOImpl"
+		parent="iBatisDAOSupport" />
+
+	<bean id="mpsDAO" class="com.test.logistics.product.dao.MpsDAOImpl"
+		parent="iBatisDAOSupport" />
+
+	<bean id="mrpDAO" class="com.test.logistics.product.dao.MrpDAOImpl"
+		parent="iBatisDAOSupport" />
+		
+	<bean id="purchaseDAO" class="com.test.logistics.purchase.dao.PurchaseDAOImpl"
+		parent="iBatisDAOSupport" />
+	
+	<bean id="purchasingPlaceDAO" class="com.test.logistics.purchase.dao.PurchasingPlaceDAOImpl"
+		parent="iBatisDAOSupport" />
+
+</beans>

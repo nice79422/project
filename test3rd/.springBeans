@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.1.201710100539-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/webapp/WEB-INF/context/applicationContext-logistics.xml</config>
+	</configs>
+	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/context/applicationContext-aop.xml</config>
+		<config>src/main/webapp/WEB-INF/context/applicationContext-jdbc.xml</config>
+		<config>src/main/webapp/WEB-INF/servlet/servlet-base.xml</config>
+		<config>src/main/webapp/WEB-INF/servlet/servlet-emp.xml</config>
+		<config>src/main/webapp/WEB-INF/context/applicationContext-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/servlet/servlet-main.xml</config>
+		<config>src/main/webapp/WEB-INF/context/applicationContext.xml</config>
+		<config>src/main/webapp/WEB-INF/context/applicationContext-emp.xml</config>
+		<config>src/main/webapp/WEB-INF/context/applicationContext-common.xml</config>
+		<config>src/main/webapp/WEB-INF/servlet/servlet-logistics.xml</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

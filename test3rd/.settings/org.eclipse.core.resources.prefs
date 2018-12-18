@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/test/logistics/business/controller/BusinessContractController.java=UTF-8
+encoding//src/main/java/com/test/logistics/business/controller/BusinessEstimateController.java=UTF-8
+encoding//src/main/java/com/test/logistics/item/controller/StockController.java=UTF-8
+encoding//src/main/java/com/test/logistics/product/controller/ProductMpsController.java=UTF-8
+encoding//src/main/java/com/test/logistics/product/controller/ProductMrpController.java=UTF-8

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mps">
+
+	<typeAlias alias="MpsBean"
+		type="com.test.logistics.product.to.MpsBean" />
+	<resultMap id="MpsResult" class="MpsBean">
+	
+	
+		<result property="mpsCode" column="MPS_CODE" />
+		<result property="contractDetailCode" column="CONTRACT_DETAIL_CODE" />
+		<result property="planQuantity" column="PLAN_AMOUNT" />
+		<result property="planDate" column="PLAN_DATE" />
+		<result property="workplaceCode" column="WORKPLACE_CODE" />
+		<result property="mrpStatus" column="MRP_STATUS" />
+		<result property="stockCode" column="STOCK_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemBean" column="ITEM_CODE" select="item.selectItem" />
+		<result property="stockBean" column="ITEM_CODE" select="stock.selectStock" />
+		<result property="bomBean" column="ITEM_CODE" select="item.selectBomList" />
+		<result property="contractDetailBean" column="CONTRACT_DETAIL_CODE" select="contract.selectContractDetaillList" />
+	</resultMap>
+
+
+
+	<select id="selectMpsListRowCount" resultClass="int"
+	parameterClass="map">
+    <![CDATA[
+	SELECT COUNT(*) FROM CONTRACT_DETAIL WHERE MPS_STATUS = #mpsStatus#
+    ]]>
+	</select>
+	
+	<select id="selectMpsLineListRowCount" resultClass="int"
+	parameterClass="map">
+    <![CDATA[
+	 SELECT COUNT(*) FROM MPS m, CONTRACT_DETAIL ci         
+	 WHERE m.CONTRACT_DETAIL_CODE = ci.CONTRACT_DETAIL_CODE 
+	 AND m.MRP_STATUS=#mrpStatus#                           
+	 AND ci.MPS_STATUS=#mpsStatus#                          
+	 AND M.WORKPLACE_CODE=#workpalceCode#                   
+    ]]>
+	</select>
+	
+	<select id="selectNotApplyMpsList" resultMap="MpsResult" parameterClass="map">
+    <![CDATA[
+	SELECT 
+	  t.CONTRACT_DETAIL_CODE
+	, t.ITEM_CODE 
+  	, t.LOSS_RATE
+  	, t.LEAD_TIME
+  	, t.DELIVERY_SCHEDULE_DATE
+  	, t.CONTRACT_QUANTITY
+  	, t.STOCK_AMOUNT
+  	, t.CONTRACT_QUANTITY AS PLAN_AMOUNT
+  	, t.OUTPUT_EXPEC_AMOUNT 
+  	, t.STOCK_CODE
+  	, t.DELIVERY_SCHEDULE_DATE AS PLAN_DATE
+  	, '' AS MPS_CODE
+	, '' AS PLAN_AMOUNT
+	, '' AS WORKPLACE_CODE
+	, '' AS MRP_STATUS
+	
+FROM 
+	(SELECT ROW_NUMBER() OVER(ORDER BY it.CONTRACT_DETAIL_CODE) rn, 
+	 it.CONTRACT_DETAIL_CODE AS CONTRACT_DETAIL_CODE
+ 	 ,it.LOSS_RATE AS LOSS_RATE
+	 ,it.LEAD_TIME AS LEAD_TIME
+	 ,it.DELIVERY_SCHEDULE_DATE  AS DELIVERY_SCHEDULE_DATE
+	 ,it.CONTRACT_QUANTITY AS CONTRACT_QUANTITY           
+     ,it.CONTRACT_QUANTITY AS PLAN_AMOUNT
+ 	 ,it.DELIVERY_SCHEDULE_DATE AS PLAN_DATE    
+	 ,it.MPS_STATUS AS MPS_STATUS
+ 	 ,s.STOCK_AMOUNT AS STOCK_AMOUNT
+ 	 ,s.OUTPUT_EXPEC_AMOUNT AS OUTPUT_EXPEC_AMOUNT     
+	 ,s.STOCK_CODE AS STOCK_CODE
+	 ,s.ITEM_CODE AS ITEM_CODE
+  	FROM 
+	(SELECT ci.CLIENT_CODE,ci.CONTRACT_CODE,ci.CONTRACT_DETAIL_CODE,ci.CONTRACT_QUANTITY,ci.DELIVERY_SCHEDULE_DATE,ci.ITEM_CODE,ci.MPS_STATUS,
+	i.LEAD_TIME, 
+	i.LOSS_RATE FROM	                               
+	(SELECT CONTRACT_DETAIL.CLIENT_CODE,CONTRACT_DETAIL.CONTRACT_CODE,CONTRACT_DETAIL.CONTRACT_DETAIL_CODE,CONTRACT_DETAIL.CONTRACT_QUANTITY,
+  CONTRACT_DETAIL.DELIVERY_SCHEDULE_DATE,CONTRACT_DETAIL.ITEM_CODE,CONTRACT_DETAIL.MPS_STATUS
+	FROM CONTRACT_DETAIL 
+	WHERE MPS_STATUS = #mpsStatus# ) ci , 
+	(SELECT ITEM_CODE,LOSS_RATE,LEAD_TIME          
+	FROM bom) i 
+	WHERE ci.ITEM_CODE=i.ITEM_CODE) it, 
+	STOCK s 
+	WHERE it.item_code = s.item_code) t 
+	WHERE t.rn BETWEEN #startRow# AND #endRow#
+    ]]>
+	</select>
+
+
+
+	<select id="selectApplyMpsList" resultMap="MpsResult" parameterClass="map">
+    <![CDATA[
+	SELECT 	
+		t.CONTRACT_DETAIL_CODE
+	  ,	t.ITEM_CODE
+	  , t.LOSS_RATE
+      , t.LEAD_TIME
+      , t.DELIVERY_SCHEDULE_DATE
+      , t.CONTRACT_QUANTITY
+      , t.STOCK_AMOUNT
+      , t.PLAN_AMOUNT
+      , t.OUTPUT_EXPEC_AMOUNT
+      , t.STOCK_CODE
+      , t.PLAN_DATE
+      , t.MPS_STATUS
+      , t.MRP_STATUS
+      , '' AS MPS_CODE
+	  , '' AS PLAN_AMOUNT
+	  , '' AS WORKPLACE_CODE
+	  , '' AS MRP_STATUS
+  FROM 
+       (SELECT ROW_NUMBER() OVER(ORDER BY ci.CONTRACT_DETAIL_CODE) rn
+            , ss.ITEM_CODE
+            , ss.STOCK_CODE
+            , ss.STOCK_AMOUNT
+            , ss.OUTPUT_EXPEC_AMOUNT 
+            , b.LEAD_TIME
+            , b.LOSS_RATE 
+            , ci.DELIVERY_SCHEDULE_DATE
+            , ci.MPS_STATUS
+            , ci.CONTRACT_DETAIL_CODE 
+            , ci.CONTRACT_QUANTITY
+            , m.PLAN_DATE
+            , m.MRP_STATUS 
+            , m.WORKPLACE_CODE
+            , m.PLAN_AMOUNT 
+         FROM CONTRACT_DETAIL ci
+            , ITEM i
+            , BOM b
+            , MPS m
+            , 
+              (SELECT s.STOCK_CODE
+                   , s.STOCK_AMOUNT 
+                   , s.OUTPUT_EXPEC_AMOUNT 
+                   ,t1.* 
+                FROM 
+                     (SELECT ITEM_CODE
+                          , MAX(INPUT_DATE) INPUT_DATE 
+                          , MAX(OUTPUT_DATE) OUTPUT_DATE 
+                       FROM STOCK 
+                      GROUP BY ITEM_CODE
+                     ) t1
+                   , STOCK s 
+               WHERE t1.ITEM_CODE = s.ITEM_CODE
+                     AND t1.INPUT_DATE = s.INPUT_DATE
+                     AND t1.OUTPUT_DATE = s.OUTPUT_DATE
+              ) ss
+        WHERE ci.ITEM_CODE = i.ITEM_CODE
+              AND ci.ITEM_CODE = b.ITEM_CODE
+              AND ci.ITEM_CODE = ss.ITEM_CODE
+              AND ci.CONTRACT_DETAIL_CODE = m.CONTRACT_DETAIL_CODE(+)
+        ORDER BY ci.ITEM_CODE
+            , ci.DELIVERY_SCHEDULE_DATE)t
+        ORDER BY CONTRACT_DETAIL_CODE DESC
+    ]]>
+	</select>
+
+ 
+
+	<select id="selectMpsList" resultMap="MpsResult" parameterClass="map">
+    <![CDATA[
+	SELECT t.* FROM (SELECT ROWNUM RN, ss.ITEM_CODE, ss.STOCK_CODE, ss.STOCK_AMOUNT, ss.OUTPUT_EXPEC_AMOUNT
+	, b.LEAD_TIME, b.LOSS_RATE , ci.DELIVERY_SCHEDULE_DATE, ci.MPS_STATUS, ci.CONTRACT_DETAIL_CODE
+	 , ci.CONTRACT_QUANTITY, m.PLAN_DATE, m.MRP_STATUS , m.WORKPLACE_CODE, m.PLAN_AMOUNT, m.MPS_CODE
+	FROM CONTRACT_DETAIL ci, ITEM i, BOM b, MPS m, (SELECT s.STOCK_CODE, s.STOCK_AMOUNT, s.OUTPUT_EXPEC_AMOUNT ,t1.*
+	 FROM (SELECT ITEM_CODE, MAX(INPUT_DATE) INPUT_DATE , MAX(OUTPUT_DATE) OUTPUT_DATE FROM STOCK GROUP BY ITEM_CODE) t1, STOCK s
+	 WHERE t1.ITEM_CODE = s.ITEM_CODE AND t1.INPUT_DATE = s.INPUT_DATE AND t1.OUTPUT_DATE = s.OUTPUT_DATE) ss
+	 WHERE ci.ITEM_CODE = i.ITEM_CODE AND ci.ITEM_CODE = b.ITEM_CODE AND ci.ITEM_CODE = ss.ITEM_CODE
+	AND ci.CONTRACT_DETAIL_CODE = m.CONTRACT_DETAIL_CODE(+) AND ci.MPS_STATUS = #mpsStatus# AND m.MRP_STATUS = #mrpStatus# AND m.WORKPLACE_CODE= #workpalceCode# 
+	ORDER BY ci.ITEM_CODE, ci.DELIVERY_SCHEDULE_DATE) t
+	WHERE t.plan_date BETWEEN #sDate# AND #eDate# AND rn BETWEEN #startRow# AND #endRow#
+	 ]]>
+	</select>
+
+	<insert id="insertMps" parameterClass="MpsBean">
+    <![CDATA[
+	INSERT INTO MPS VALUES 
+       (
+           seq_mps.NEXTVAL 
+         , #contractDetailCode# 
+         , #planQuantity# 
+         , #planDate# 
+         , 'WP-'||substr(#stockCode#,0,3)
+         , 'N' 
+         ,  #itemCode# 
+       )
+    ]]>
+	</insert>
+
+	<update id="updateMps" parameterClass="MpsBean">
+			 <![CDATA[
+			UPDATE MPS
+	        SET MRP_STATUS='Y'
+			WHERE CONTRACT_DETAIL_CODE=#contractDetailCode#
+ 		 ]]>
+	</update>
+</sqlMap>

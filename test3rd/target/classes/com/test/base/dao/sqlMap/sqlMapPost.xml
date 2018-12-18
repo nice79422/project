@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="post">
+
+	<typeAlias alias="ZipCodeBean" type="com.test.base.to.ZipCodeBean" />
+	<resultMap id="PostResult" class="ZipCodeBean">
+		<result property="sido" column="SIDO" />
+		<result property="gugun" column="GUGUN" />
+		<result property="dong" column="DONG" />
+		<result property="ri" column="RI" />
+		<result property="bunji" column="BUNJI" />
+		<result property="zipNo" column="ZIP_NO" />
+	</resultMap>
+
+	<select id="selectZipcodeList" resultMap="PostResult"
+		parameterClass="string">
+    <![CDATA[
+     select
+            *
+        from
+            s_zipcode
+        where
+            DONG = #dong#
+    ]]>
+	</select>
+
+
+</sqlMap>

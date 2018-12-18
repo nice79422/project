@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="item">
+
+	<typeAlias alias="ItemBean" type="com.test.logistics.item.to.ItemBean" />
+	<resultMap id="ItemResult" class="ItemBean">
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unit" column="UNIT" />
+		<result property="unitPrice" column="UNIT_PRICE" />
+		<result property="productStatus" column="COM_PRODUCT_STATUS" />
+		<result property="purchasingPlaceCode" column="PURCHASING_PLACE_CODE" />
+		<result property="stockBean" column="ITEM_CODE" select="stock.selectItemStock" />
+		
+	</resultMap>
+
+	<typeAlias alias="BomBean" type="com.test.logistics.item.to.BomBean" />
+	<resultMap id="BomResult" class="BomBean">
+		<result property="level" column="LEV" />
+		<result property="bomCode" column="BOM_CODE" />
+		<result property="parentCode" column="PARENT_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="lossRate" column="LOSS_RATE" />
+		<result property="leadTime" column="LEAD_TIME" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitPrice" column="UNIT_PRICE" />
+		
+	</resultMap>
+
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			ITEM
+    ]]>
+	</select>
+
+	<select id="selectItem" resultMap="ItemResult" parameterClass="String">
+    <![CDATA[
+	SELECT 
+		 ITEM_CODE
+		,ITEM_NAME
+		,UNIT
+		,UNIT_PRICE
+		,COM_PRODUCT_STATUS
+		,PURCHASING_PLACE_CODE
+  	FROM ITEM
+ 	WHERE ITEM_CODE = #itemCode#
+    ]]>
+	</select>
+
+	<select id="selectBomList" resultMap="BomResult" parameterClass="String">
+    <![CDATA[
+	SELECT 
+	  BOM_CODE
+	, PARENT_CODE
+	, ITEM_CODE
+	, QUANTITY
+	, LOSS_RATE
+	, LEAD_TIME
+	, NET_QUANTITY
+	, '' LEV
+	, NECESSARY_QUANTITY
+	, '' ITEM_NAME
+	, '' UNIT_PRICE
+	
+	FROM BOM
+	WHERE ITEM_CODE=#itemCode#
+ 	]]>
+	</select>
+
+	<select id="selectItemList" resultMap="ItemResult" parameterClass="map">
+    <![CDATA[
+		SELECT * FROM ITEM 
+		WHERE COM_PRODUCT_STATUS LIKE '%'||#productStatus#||'%'
+	]]>
+		
+	</select>
+	
+	<select id="selectSearchItemList" resultMap="ItemResult" parameterClass="map">
+    <![CDATA[
+		 SELECT * FROM 
+		(SELECT ROW_NUMBER() OVER( ORDER BY ITEM_CODE ) RN, 
+		ITEM_CODE, ITEM_NAME, UNIT, UNIT_PRICE, COM_PRODUCT_STATUS,
+		PURCHASING_PLACE_CODE  FROM ITEM) 
+		WHERE RN BETWEEN #startRow#  AND #endRow#
+	]]>
+	</select>
+
+	<select id="selectNameItemList" resultMap="ItemResult" parameterClass="map">
+    <![CDATA[
+		 SELECT * FROM 
+		(SELECT ROW_NUMBER() OVER( ORDER BY DECODE(ITEM_CODE,'WA',1 ) ) RN, 
+		ITEM_CODE, ITEM_NAME, UNIT, UNIT_PRICE, COM_PRODUCT_STATUS,
+		PURCHASING_PLACE_CODE   FROM ITEM )
+		 WHERE RN BETWEEN #startRow#  AND #endRow#
+		 AND ITEM_NAME LIKE '%'||#searchWord#||'%' 
+	]]>
+	</select>
+	
+	<select id="selectCodeItemList" resultMap="ItemResult" parameterClass="map">
+    <![CDATA[
+		 SELECT * FROM 
+		(SELECT ROW_NUMBER() OVER( ORDER BY DECODE(ITEM_CODE,'WA',1 ) ) RN, 
+		ITEM_CODE, ITEM_NAME, UNIT, UNIT_PRICE, COM_PRODUCT_STATUS,
+		PURCHASING_PLACE_CODE   FROM ITEM )
+		 WHERE RN BETWEEN #startRow#  AND #endRow#
+		 AND ITEM_CODE LIKE '%'||#searchWord#||'%' 
+	]]>
+	</select>
+	
+	<select id="selectAllItemList" resultMap="ItemResult" parameterClass="map">
+    <![CDATA[
+		SELECT * FROM
+	(SELECT ROW_NUMBER() OVER( ORDER BY ITEM_CODE ) RN, 
+	ITEM_CODE, ITEM_NAME, UNIT, UNIT_PRICE, COM_PRODUCT_STATUS,
+	PURCHASING_PLACE_CODE  FROM ITEM 
+	WHERE ITEM_CODE LIKE '%'||#itemCode#||'%'  
+	 AND ITEM_NAME LIKE '%'||#itemName#||'%'  ) 
+	WHERE RN BETWEEN #startRow# AND #endRow#
+	]]>
+	</select>
+	
+	<insert id="insertItem" parameterClass="ItemBean">
+    <![CDATA[
+		INSERT INTO ITEM VALUES
+       (
+           #itemCode#
+         , #itemName#
+         , #unit#
+         , #unitPrice#
+         , #productStatus#
+         , #purchasingPlaceCode#
+        )
+    ]]>
+	</insert>
+
+	<select id="selectBom" resultMap="BomResult" parameterClass="map">
+		SELECT (LPAD ('  ', (LEVEL)*5) || BT.ITEM_CODE) LEV
+     , BT.ITEM_CODE 
+     , BT.ITEM_NAME 
+     , BT.UNIT 
+     , BT.UNIT_PRICE 
+     , BT.LOSS_RATE 
+     , BT.LEAD_TIME 
+     , BT.QUANTITY 
+     , BT.PARENT_CODE 
+     , '' BOM_CODE
+  FROM 
+       (SELECT i.ITEM_CODE ITEM_CODE 
+            , i.ITEM_NAME ITEM_NAME 
+            , i.UNIT UNIT 
+            , i.UNIT_PRICE UNIT_PRICE 
+            , b.LOSS_RATE LOSS_RATE 
+            , b.LEAD_TIME LEAD_TIME 
+            , b.QUANTITY QUANTITY 
+            , b.PARENT_CODE PARENT_CODE 
+            , b.BOM_CODE
+         FROM ITEM i 
+            , BOM b 
+        WHERE i.ITEM_CODE=b.ITEM_CODE 
+       ) BT START 
+	WITH BT.ITEM_CODE LIKE '%'||#searchCode#||'%'
+		<dynamic prepend="CONNECT BY">
+			<isEqual property="bom" compareValue="revBom">
+				PRIOR BT.PARENT_CODE=BT.ITEM_CODE
+			</isEqual>
+
+			<isEqual property="bom" compareValue="bom">
+				PRIOR BT.ITEM_CODE=BT.PARENT_CODE
+			</isEqual>
+		</dynamic>
+	</select>
+</sqlMap>
