@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,14" Height="777" Id="basicRegistrationForm" Left="8" OnLoadCompleted="basicRegistrationForm_OnLoadCompleted" PidAttrib="7" Title="basicRegistrationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsDepartmentCopy">
+				<Contents>
+					<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DEPT_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="DEPT_TEL" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsPositionCopy">
+				<Contents>
+					<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="POSITION_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsAuthorityCopy">
+				<Contents>
+					<colinfo id="AUTHORITY_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="AUTHORITY_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="인사&#32;정보&#32;등록" Top="2" VAlign="Middle" Width="953"></Static>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,11" Height="510" Hilight3dColor="black" Id="Static6" Left="256" TabOrder="20" Text="사원기본정보등록" Top="144" Type="Groupbox" Width="423"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static2" Left="303" TabOrder="2" Text="사원번호" Top="187" VAlign="Middle" Width="160"></Static>
+		<Edit Align="CENTER" BKColor="white" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="empCode" Left="471" TabOrder="3" Top="187" Width="177"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static1" Left="303" TabOrder="4" Text="사원이름" Top="227" VAlign="Middle" Width="160"></Static>
+		<Edit Align="CENTER" BKColor="white" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="empName" Left="471" TabOrder="5" Top="227" Width="177"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static3" Left="303" TabOrder="6" Text="비밀번호" Top="267" VAlign="Middle" Width="160"></Static>
+		<Edit Align="CENTER" BKColor="white" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="empPassword" Left="471" TabOrder="7" Top="267" Width="177"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static4" Left="303" TabOrder="8" Text="직급코드/직급명" Top="315" VAlign="Middle" Width="160"></Static>
+		<Edit Align="CENTER" BindDataset="dsPosition" Column="POSITION_CODE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="positionCode" ImeMode="none" Left="303" Readonly="TRUE" TabOrder="9" Top="355" Width="160"></Edit>
+		<Combo BindDataset="dsPosition" CodeColumn="POSITION_CODE" Column="POSITION_CODE" DataColumn="POSITION_NAME" Font="한컴&#32;윤고딕&#32;240,11" Height="28" Id="positionCode_combo" ImeMode="none" InnerDataset="dsPositionCopy" Left="472" TabOrder="10" Top="355" Width="177"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static5" Left="303" TabOrder="11" Text="권한코드/권한명" Top="395" VAlign="Middle" Width="160"></Static>
+		<Edit Align="CENTER" BindDataset="dsAuthority" Column="AUTHORITY_CODE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="authorityCode" Left="303" Readonly="TRUE" TabOrder="12" Top="435" Width="160"></Edit>
+		<Combo BindDataset="dsAuthority" CodeColumn="AUTHORITY_CODE" Column="AUTHORITY_CODE" DataColumn="AUTHORITY_NAME" Font="한컴&#32;윤고딕&#32;240,11" Height="27" Id="authorityCode_combo" InnerDataset="dsAuthorityCopy" Left="471" TabOrder="13" Top="435" Width="177"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static7" Left="303" TabOrder="14" Text="부서코드/부서명" Top="475" VAlign="Middle" Width="160"></Static>
+		<Edit Align="CENTER" BindDataset="dsDepartment" Column="DEPT_CODE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="deptCode" Left="303" Readonly="TRUE" TabOrder="15" Top="515" Width="160"></Edit>
+		<Combo BindDataset="dsDepartment" CodeColumn="DEPT_CODE" Column="DEPT_CODE" DataColumn="DEPT_NAME" Font="한컴&#32;윤고딕&#32;240,11" Height="28" Id="deptCode_combo" InnerDataset="dsDepartmentCopy" Left="471" TabOrder="16" Top="514" Width="177"></Combo>
+		<Static Align="Center" Color="crimson" Font="한컴&#32;윤고딕&#32;240,11" Height="28" Id="Static8" Left="306" TabOrder="17" Text="사원&#32;기본정보&#32;등록&#32;후&#32;상세정보를&#32;입력하세요." Top="555" VAlign="Middle" Width="288"></Static>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Face3dColor="aliceblue" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="registrationBtn" Left="360" OnClick="registrationBtn_OnClick" TabOrder="18" Text="등&#32;&#32;&#32;록" Top="601" Width="119"></Button>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Face3dColor="aliceblue" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="cancelBtn" Left="482" OnClick="cancelBtn_OnClick" TabOrder="19" Text="취&#32;&#32;소" Top="601" Width="119"></Button>
+	</Form>
+	<Script><![CDATA[
+function basicRegistrationForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	
+	//alert(getDate()+"====="+substr(getDate(),2,12));
+	
+	//var s = getDate().Right(6);
+	empcode.Text=substr(getDate(),2,12);
+	
+	//var date = today();
+	//var year = substr(date,0,4);
+
+	//empCode.Text=substr(time(),2,8);
+	
+	//transaction자리.. 51에서는 또 13개를 다 실행함
+	// 부서(이미 담음) 직급 권한 다 Global dataset에 담고 copf해서 사용 함 
+	
+	//transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+	// 부서는 로그인 하면서 이미 Global dataset에 담겨져있음
+	dsDepartmentCopy.Copy(dsDepartment); // 부서는 Global -> form dataset으로
+	
+	//직급List가져옴
+	transaction("findPositionList","svcBase::/position.do?method=findPositionList","","dsPosition=dsPosition","","callback");
+	dsPositionCopy.Copy(dsPosition); // 카피를 해서 사용 하지 않으면 첫 번째 값이 안 뜬다..Edit 에 값이 제대로 안 뜸!!
+	
+	//권한 리스트 가져오기
+	transaction("findAuthorityList","svcBase::/authority.do?method=findAuthorityList","","dsAuthority=dsAuthority","","callback");
+	dsAuthorityCopy.Copy(dsAuthority);
+}
+
+//취소
+function cancelBtn_OnClick(obj)
+{
+	Reload();
+}
+
+//등록
+function registrationBtn_OnClick(obj)
+{
+	http.sync=true;	
+	
+	var empCode_input=empCode.Text;
+	var empName_input=empName.Text;
+	var password_input=empPassword.Text;
+	var deptCode_input=deptCode.Text;
+	var positionCode_input=positionCode.Text;
+	var authorityCode_input=authorityCode.Text;
+	
+	//값 감기
+
+  if(empName_input==""){
+      alert(" empName_input=='' :( ");
+   }else if(password_input==""){
+      alert(" password_input=='' :( ");
+   }else if(deptCode_input==""){
+      alert(" deptCode_input=='' :( ");
+   }else if(positionCode_input==""){
+      alert(" positionCode_input=='' :( ");
+   }else if(authorityCode_input==""){
+      alert(" authorityCode_input=='' :( ");
+   }else{
+
+      dsEmployee.addrow(); //한행 추가
+		// rowpos -> 현재 선택된 Record의 Index를 얻어옴, 값SetColumn(nRow,strColID,varVal);
+      dsEmployee.SetColumn(dsEmployee.rowpos,"EMP_CODE",empCode_input); //SetColumn(변경한 recode Index, 변경할 clounm ID, 변경할 )
+      dsEmployee.SetColumn(dsEmployee.rowpos,"PASSWORD",password_input);
+      dsEmployee.SetColumn(dsEmployee.rowpos,"EMP_NAME",empName_input);
+      dsEmployee.SetColumn(dsEmployee.rowpos,"AUTHORITY_CODE",authorityCode_input);
+      dsEmployee.SetColumn(dsEmployee.rowpos,"DEPT_CODE",deptCode_input);
+      dsEmployee.SetColumn(dsEmployee.rowpos,"POSITION_CODE",positionCode_input);
+
+      transaction(
+         "batchEmployee", "svcBase::/employee.do?method=batchEmployee", "dsEmployee=dsEmployee:u", "dsEmployee=dsEmployee", "",
+         "callback"
+      );
+      //trace(http.SendHttpStr);
+      reLoad();
+   }
+}
+
+//callback 함수 선언
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=='batchEmployee'){
+      if(ErrorCode!=0){
+         alert(ErrorMsg+" :( ");
+      }else{
+         //alert(ErrorMsg+" :) "); //0과 같으면 성공했다.?
+         alert("사원 기본정보 등록이 완료되었습니다."); //0과 같으면 성공했다.?
+         Reload();
+      }      
+   }
+}
+
+//새로 받아온 dataset 적용  filter적용 후 dataset 새롭게 받으면 그게 적용 됨 test용
+// function Button0_OnClick(obj)
+// {
+	
+	 // dialog("base::empDialog.xml","");
+// }
+
+function detailRegistrationTab_tab2_batchBtn_OnClick(obj)
+{
+	adobe0.src="c:/ireport/1.pdf";
+}
+]]></Script>
+</Window>

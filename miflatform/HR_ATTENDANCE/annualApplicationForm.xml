@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="annualApplicationForm" Left="8" OnLoadCompleted="annualApplicationForm_OnLoadCompleted" PidAttrib="7" Title="annualApplicationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsDayAnnual">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAY_ANNUAL_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="CAUSE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CAUSE" size="256" summ="default" type="STRING"/>
+					<colinfo id="STANDARD_YEAR" size="256" summ="default" type="STRING"/>
+					<colinfo id="ANNUAL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsAnnualType">
+				<Contents>
+					<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="VALUE" size="256" summ="default" type="STRING"/>
+					<record>
+						<CODE>AQC013</CODE>
+						<VALUE>연차</VALUE>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;230,9" Height="300" Hilight3dColor="black" Id="Static1" Left="17" TabOrder="2" Text="연차정보" Top="51" Type="Groupbox" Width="338"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;230,12" Height="30" Id="Static0" Left="1" TabOrder="1" Text="연차&#32;현황&#32;조회" Top="361" VAlign="Middle" Width="953"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static2" Left="40" TabOrder="3" Text="기준년도" Top="81" VAlign="Middle" Width="106"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static3" Left="40" TabOrder="4" Text="사원명" Top="118" VAlign="Middle" Width="106"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static4" Left="40" TabOrder="5" Text="부&#32;서" Top="155" VAlign="Middle" Width="106"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static5" Left="40" TabOrder="6" Text="근속년수" Top="192" VAlign="Middle" Width="106"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static6" Left="40" TabOrder="7" Text="사용가능일수" Top="229" VAlign="Middle" Width="106"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static7" Left="40" TabOrder="8" Text="잔여일수" Top="266" VAlign="Middle" Width="106"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static8" Left="40" TabOrder="9" Text="사용한일수" Top="303" VAlign="Middle" Width="106"></Static>
+		<Edit Align="CENTER" BindDataset="dsAnnual" Column="STANDARD_YEAR" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="standardYear" Left="147" TabOrder="10" Top="81" Width="127"></Edit>
+		<Edit Align="CENTER" BindDataset="__VARBIND__" Column="g_empName" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="empName" Left="147" TabOrder="11" Top="118" Width="193"></Edit>
+		<Edit Align="CENTER" BindDataset="__VARBIND__" Column="g_deptName" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="deptName" Left="147" TabOrder="12" Top="155" Width="193"></Edit>
+		<Edit Align="CENTER" BindDataset="dsAnnual" Column="LENGTH_OF_SERVICE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="lengthOfService" Left="147" TabOrder="13" Top="192" Width="169"></Edit>
+		<Edit Align="CENTER" BindDataset="dsAnnual" Column="USABLE_DAYS" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="usableDays" Left="147" TabOrder="14" Top="229" Width="169"></Edit>
+		<Edit Align="CENTER" BindDataset="dsAnnual" Column="REST_DAYS" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="restDays" Left="147" TabOrder="15" Top="266" Width="169"></Edit>
+		<Edit Align="CENTER" BindDataset="dsAnnual" Column="USED_DAYS" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="usedDays" Left="147" TabOrder="16" Top="303" Width="169"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static9" Left="316" TabOrder="17" Text="년" Top="192" VAlign="Middle" Width="24"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static10" Left="316" TabOrder="18" Text="일" Top="229" VAlign="Middle" Width="24"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static11" Left="316" TabOrder="19" Text="일" Top="266" VAlign="Middle" Width="24"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static12" Left="316" TabOrder="20" Text="일" Top="303" VAlign="Middle" Width="24"></Static>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;230,9" Height="300" Hilight3dColor="black" Id="Static13" Left="377" TabOrder="21" Text="연차신청" Top="49" Type="Groupbox" Width="564"></Static>
+		<Grid BindDataset="dsDayAnnual" BkColor2="default" BoldHead="true" Bottom="760" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;230,9" HeadHeight="25" Height="293" Id="annualApplicationGrid" InputPanel="FALSE" Left="8" LineColor="default" Right="944" RowHeight="20" TabOrder="22" TabStop="true" Top="467" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="936">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="107"/>
+						<col width="80"/>
+						<col width="86"/>
+						<col width="71"/>
+						<col width="100"/>
+						<col width="100"/>
+						<col width="93"/>
+						<col width="96"/>
+						<col width="129"/>
+						<col width="70"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="사원코드"/>
+						<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="사원이름"/>
+						<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="기준년도"/>
+						<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="구분"/>
+						<cell bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="시작일"/>
+						<cell bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="종료일"/>
+						<cell bkcolor="silver" col="6" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="일수"/>
+						<cell bkcolor="silver" col="7" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="사유"/>
+						<cell bkcolor="silver" col="8" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="상세사유"/>
+						<cell bkcolor="silver" col="9" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" text="승인상태"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" color="green" display="text" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="2" colid="STANDARD_YEAR" display="text" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="3" colid="ANNUAL_CODE" combocol="CODE" combodataset="dsAnnualType" combotext="VALUE" display="combo" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="4" colid="START_DATE" display="text" font="LG&#32;PC,11" limit="-1" Mask="####-##-##"/>
+						<cell align="center" col="5" colid="END_DATE" combotext="name" display="text" font="LG&#32;PC,11" limit="-1" Mask="####-##-##"/>
+						<cell align="center" col="6" colid="DAYS" display="text" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="7" colid="CAUSE_CODE" display="text" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="8" colid="DETAIL_CAUSE" display="text" font="LG&#32;PC,11" limit="-1"/>
+						<cell align="center" col="9" colid="APPROVAL_STATUS" display="text" font="휴먼모음T,10" limit="-1"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="34" Id="Static14" Left="8" TabOrder="23" Text="조회기간" Top="421" VAlign="Middle" Width="104"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;230,9" HeaderFont="LG&#32;PC,11" Height="34" Id="fromDate" Left="116" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="24" Top="421" WeeksFont="LG&#32;PC,11" Width="104"></Calendar>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;230,9" HeaderFont="LG&#32;PC,11" Height="34" Id="toDate" Left="265" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="25" Top="421" WeeksFont="LG&#32;PC,11" Width="104"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="34" Id="Static15" Left="225" TabOrder="26" Text="~" Top="421" VAlign="Middle" Width="32"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="searchBtn" Left="829" OnClick="searchBtn_OnClick" TabOrder="27" Text="조회" Top="421" Width="94"></Button>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static16" Left="393" TabOrder="28" Text="신청기간" Top="81" VAlign="Middle" Width="104"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;230,9" HeaderFont="LG&#32;PC,11" Height="30" Id="startDate" Left="497" OnChanged="startDate_OnChanged" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="29" Top="81" WeeksFont="LG&#32;PC,11" Width="104"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static17" Left="601" TabOrder="30" Text="~" Top="81" VAlign="Middle" Width="32"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;230,9" HeaderFont="LG&#32;PC,11" Height="30" Id="endDate" Left="633" OnChanged="endDate_OnChanged" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="31" Top="81" WeeksFont="LG&#32;PC,11" Width="104"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static18" Left="393" TabOrder="32" Text="일&#32;수" Top="119" VAlign="Middle" Width="104"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static20" Left="393" TabOrder="33" Text="구&#32;분" Top="157" VAlign="Middle" Width="104"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static19" Left="393" TabOrder="34" Text="사&#32;유" Top="195" VAlign="Middle" Width="104"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static21" Left="393" TabOrder="35" Text="상세사유" Top="233" VAlign="Middle" Width="104"></Static>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="days" Left="498" TabOrder="36" Top="119" Width="134"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static22" Left="633" TabOrder="37" Text="일" Top="119" VAlign="Middle" Width="32"></Static>
+		<Combo CodeColumn="CODE" DataColumn="VALUE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="selAnnualType" InnerDataset="dsAnnualType" Left="498" TabOrder="38" Top="157" Width="134"></Combo>
+		<Edit Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="cause" Left="498" TabOrder="39" Top="195" Width="425"></Edit>
+		<Edit Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="detailCause" Left="498" TabOrder="40" Top="233" Width="425"></Edit>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="applyBtn" Left="829" OnClick="applyBtn_OnClick" TabOrder="41" Text="신&#32;청" Top="81" Width="94"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="nextBtn" Left="276" OnClick="nextBtn_OnClick" TabOrder="42" Text="다음&#32;연도" Top="81" Width="64"></Button>
+		<Static Align="Center" Color="red" Font="한컴&#32;윤고딕&#32;230,9" Height="56" Id="Static23" Left="401" TabOrder="43" Text="신청&#32;기간&#32;설정시&#32;연차정보의&#32;기준년도를&#13;&#10;참고하여&#32;잔여일수&#32;확인&#32;수&#32;신청&#32;하세요." Top="273" VAlign="Middle" Width="352"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;230,12" Height="30" Id="formtitle" Left="1" TabOrder="44" Text="휴가&#32;/&#32;연차&#32;신청" Top="1" VAlign="Middle" Width="953"></Static>
+	</Form>
+	<Script><![CDATA[
+var turn = 1;
+
+
+function annualApplicationForm_OnLoadCompleted(obj)
+{
+	http.sync=true;
+	 var presentYear = tonumber(substr(GetDate(),0,4));//현재 년도 가져옴 
+	 //alert(presentYear);
+	 //전체 연차 정보를 가져 와서 filter 이용 해당 사원의 정보로 .. 
+	transaction( 
+	"findAnnualList",
+	"svcHrCircumstance::/annual.do?method=findAnnualList",
+	"",
+	"dsAnnual=dsAnnual",
+	"",
+	"callback");
+	
+	// 해당 사원의 연차 신청 정보  확인. 
+	transaction(
+      "findAnnualMgt",
+      "svcHrAttendance::/dayAnnual.do?method=findAnnualMgt",
+      "",
+      "dsDayAnnual=dsDayAnnual",
+      "empCode='" + g_empCode + "' standardYear='" + presentYear + "'",
+      "callback"
+   );
+	dsDayAnnual.Filter("EMP_CODE='"+0+"'");
+	dsAnnual.Filter("STANDARD_YEAR='"+presentYear+"' && EMP_CODE='"+ g_empCode +"'");
+	
+	transaction(
+      "findDailyAttdList",
+      "svcHrAttendance::/dailyAttd.do?method=findDailyAttdList",
+      "",
+      "dsDailyAttd=dsDailyAttd",
+      "empCode='"+g_empCode + "'",
+      "callback"
+	);  // 해당 사원의 일 근태 정보를 얻어 온다.!
+	
+	transaction(
+      "findAttdRestList",
+      "svcHrAttendance::/dailyAttdRest.do?method=findAttdRestList",
+      "",
+      "dsDailyAttdRest=dsDailyAttdRest",
+      "empCode='"+g_empCode+"'",
+      "callback"
+   ); //해당 사원의 근태 외 신청 확인!
+	
+	http.sync=false;
+	
+	
+}
+
+
+//당해 년도 연차 신청 현황 조회 
+function searchBtn_OnClick(obj)
+{
+	
+	if(fromDate.value=="" || toDate.value==""){
+      alert(" 조회기간을 입력해 주세요 ");
+   }else{
+      if(fromDate.value>toDate.value){
+         alert(" 조회기간 범위를 확인해 주세요 ! ");
+         Reload();
+      }else{
+         dsDayAnnual.UnFilter();
+         //alert(dsDayAnnual.GetRowCount());
+         //alert("START_DATE>='"+fromDate.Value+"'"+"&&"+"START_DATE<='"+toDate.Value+"'");
+         //dsDayAnnual.Filter("START_DATE>='"+fromDate.Value+"'" );
+         dsDayAnnual.Filter("START_DATE>='"+fromDate.Value+"'"+"&&"+"START_DATE<='"+toDate.Value+"'" );
+         //alert(dsDayAnnual.GetRowCount());
+         if(dsDayAnnual.GetRowCount()==0){
+            alert(fromDate.text+" ~ "+toDate.text+" 해당 기한내에연차신청 내역이 없습니다.  ");
+         }else{
+            alert(fromDate.text+" ~ "+toDate.text+" 연차신청 현황 조회 성공.");
+         }
+      }
+   }
+
+}
+
+//신청 시작 기간이 변할 때 
+function startDate_OnChanged(obj,strOldText,strNewText)
+{
+   dsDailyAttd.UnFilter(); //일근태신청
+   dsDailyAttdRest.UnFilter(); //근태외 신청
+
+   //alert(startDate.Value);
+   strText = startDate.Value;
+   
+   dsDailyAttd.Filter("BASIC_DAY='"+strText+"'");//시작일이 일 근태 날 짜 안에 있다면 안된다. 
+   dsDailyAttdRest.Filter("START_DATE<="+strText+" &&"+strText+"<=END_DATE"); //근태외 신청일 안에 존재 한다면 안된다.!!
+   dsDayAnnual.Filter("START_DATE<="+strText+" &&"+strText+"<=END_DATE"); //이미 연차 신청일과 겹쳐도 안된다. 
+	/*
+   if(dsDailyAttd.GetCount()!=0 || dsDailyAttdRest.GetCount()!=0 || dsDayAnnual.GetCount()!=0){
+      dsDailyAttd.UnFilter();
+      alert("dsDailyAttd.GetCount()!=0 || dsDailyAttdRest.GetCount()!=0 || dsDayAnnual.GetCount()!=0 :( ");
+      return false;
+   }
+   */
+   if(startDate<toDay()){
+		dsDailyAttd.UnFilter();
+		alert("연차신청일이 연차시작일보다 작습니다.");  
+   }
+   
+   if(dsDailyAttd.GetCount()!=0){
+		dsDailyAttd.UnFilter();
+		alert("일근태 기간에는 휴가/연차 신청이 불가합니다.");
+   }
+   if(dsDailyAttdRest.GetCount()!=0){
+		dsDailyAttd.UnFilter();
+		alert("근태 외 신청(출장,교육)기간에는 휴가/연차 신청이 불가합니다.");
+   }
+      if(dsDayAnnual.GetCount()!=0){
+		dsDailyAttd.UnFilter();
+		alert("이미 동일기간 내 휴가/연차 신청 내역이 존재합니다.");
+   }
+   
+}
+
+// 12월에 다음해의 1월 연차 사용하기 위해서 정보 검색 용으로 추가함 
+function nextBtn_OnClick(obj)
+{
+	var presentYear = tonumber(substr(GetDate(),0,4));//현재 년도 가져옴 
+	
+	if(turn == 1){
+	dsAnnual.Filter("STANDARD_YEAR='"+(presentYear+1)+"' && EMP_CODE='"+ g_empCode +"'");
+	nextBtn.text="이전 연도";
+	turn = 0;
+	//alert(turn);
+	return;
+	}
+	
+	if(turn == 0){
+	dsAnnual.Filter("STANDARD_YEAR='"+presentYear+"' && EMP_CODE='"+ g_empCode +"'");
+	nextBtn.text="다음 연도";
+	turn = 1;
+	//alert(turn);
+	return;
+	}
+	
+}
+
+// 신청 끝 기간이 변할 때 
+function endDate_OnChanged(obj,strOldText,strNewText)
+{
+	
+	//alert(endDate.Value);
+	endText = endDate.Value;
+	
+   if(endDate.value==""){
+      alert("기간을 재설정해 주세요");
+   }else{
+      if(startDate.value>endDate.value){
+         alert(" 신청 기간을 다시 선택해 주세요 ");
+         days.text="";
+         return false;
+      }else{
+         dsDailyAttd.UnFilter();
+         dsDailyAttdRest.UnFilter();
+
+         dsDailyAttd.Filter("BASIC_DAY='"+endText+"'");
+         dsDailyAttdRest.Filter("START_DATE<="+endText+" &&"+endText+"<=END_DATE");
+         dsDayAnnual.Filter("START_DATE<="+endText+" &&"+endText+"<=END_DATE");
+   
+         if(dsDailyAttd.GetCount()!=0 || dsDailyAttdRest.GetCount()!=0 || dsDayAnnual.GetCount()!=0){
+            alert("dsDailyAttd.GetCount()!=0 || dsDailyAttdRest.GetCount()!=0 || dsDayAnnual.GetCount()!=0 :( ");
+            return false;
+         }else{
+			var applicationDays=ToString(parseDateTime(endDate)-parseDateTime(startDate)+1); // 신청 일 수 계산 
+			
+			alert(applicationDays);
+			if(TONUMBER(restDays.value) < TONUMBER(applicationDays)){
+				alert(" 신청일수는 잔여일수를 넘길 수 없습니다. ");
+				days.text="";
+				endDate.text="";
+				return false;
+			}else{
+				days.text= applicationDays;
+            }
+         }
+      }
+   }
+   
+}
+
+//연차 신청 하기 
+function applyBtn_OnClick(obj)
+{
+	
+	
+   var annualType=selAnnualType.Value;
+   var standardYear=standardYear.text;
+   var days=ParseInt(days.text);
+   var cause=cause.text;
+   var detailCause=detailCause.text;
+   var empCode=g_empCode;
+   var empName=g_empName;
+   var usedDays=ParseInt(usedDays.text); //기존 사용한 일 수 
+   var restDays=ToString(ParseInt(restDays.text)-days); //잔여 일 수가 줄어 듬 
+   var annualDays=ToString(usedDays+days); // 연차 신청 하게 되면 사용한 일 수 
+
+   if(ParseInt(restDays)<0){ //남은 잔여 일수가 0보다 작아 지면 신청 불가능 !
+      alert(" 잔여일수가 남아 있지 않아 신청이 불가합니다. ");
+      break;
+   }
+   
+   if(startDate.text=="" || endDate.text=="" || cause=="" || detailCause=="" || selAnnualType.text==""){
+      alert(" 신청 내용이 제대로 입력 되지 않았습니다.  ");
+   }else{
+      if(confirm(" 신청하시겠습니까 ? ")){
+			
+		http.sync=true;
+         dsDayAnnual.AddRow();
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"EMP_CODE",empCode);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"START_DATE",startDate.value);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"END_DATE",endDate.value);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"CAUSE_CODE",cause);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"DETAIL_CAUSE",detailCause);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"STANDARD_YEAR",standardYear);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"ANNUAL_CODE",annualType);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"DAYS",days);
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"APPROVAL_STATUS","N");
+         dsDayAnnual.SetColumn(dsDayAnnual.row,"EMP_NAME",empName);
+         
+         transaction( //연차 신청 테이블 
+            "addDayAnnual",
+            "svcHrAttendance::/dayAnnual.do?method=addDayAnnual",
+            "dsDayAnnual=dsDayAnnual:u",
+            "dsDayAnnual=dsDayAnnual",
+            "",
+            "callback"
+         );
+
+          transaction( // 연차 관리 연차 사용으로 변동 을 주기 위해서 !!
+            "editAnnualMgt",
+            "svcHrCircumstance::/annual.do?method=editAnnualMgt",
+            "",
+            "dsAnnual=dsAnnual",
+            "standardYear='" + standardYear + "' empCode='" + empCode + "' days='" +annualDays + "' restDays='" + restDays + "'",
+            "callback"
+         );
+         reload();
+         http.sync=false;
+      }
+   }
+	
+}
+]]></Script>
+</Window>

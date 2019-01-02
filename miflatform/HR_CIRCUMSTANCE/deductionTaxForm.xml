@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="deductionTaxForm" Left="8" OnLoadCompleted="deductionTaxForm_OnLoadCompleted" PidAttrib="7" Title="deductionTaxForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsIncomeTaxCopy">
+				<Contents>
+					<colinfo id="INCOME_TAX_RATE" size="256" type="STRING"/>
+					<colinfo id="INPUTED_YEAR" size="256" type="STRING"/>
+					<colinfo id="LOW_SAL" size="256" type="STRING"/>
+					<colinfo id="HIGH_SAL" size="256" type="STRING"/>
+					<colinfo id="PROGRESSIVE_DEDUCTION" size="256" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsDeductionTaxCopy">
+				<Contents>
+					<colinfo id="INPUTED_YEAR" size="256" summ="default" type="STRING"/>
+					<colinfo id="HEALTH_INSUR_RATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="NATIONAL_PEN_RATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="LONG_TERM_CARE_RATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMPLOYEEMENT_INSUR_RATE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,10" Height="700" Id="Static0" TabOrder="6" Text="급여&#32;공제&#32;항목&#32;조회" Top="48" Type="Groupbox" Width="472"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="급여&#32;공제항목&#32;등록/조회" Top="1" VAlign="Middle" Width="953"></Static>
+		<Combo BKColor="white" CodeColumn="YEAR" DataColumn="YEAR" DisplayRowCnt="10" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="selYear" ImeMode="none" InnerDataset="dsBaseYear" Left="98" TabOrder="2" Top="82" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static1" Left="8" TabOrder="3" Text="기준년도" Top="82" VAlign="Middle" Width="87"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="findPayDeductionBtn" Left="280" OnClick="findPayDeductionBtn_OnClick" TabOrder="4" Text="조&#32;&#32;회" Top="82" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="removeBtn" Left="370" OnClick="removeBtn_OnClick" TabOrder="5" Text="삭&#32;&#32;제" Top="82" Width="87"></Button>
+		<Static Border="RaisedEdge" Color="user2" Font="한컴&#32;윤고딕&#32;240,10" Height="220" Id="Static6" Left="8" TabOrder="7" Text="소득세" Top="120" Type="Groupbox" Width="456"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsIncomeTaxCopy" BkColor2="default" BoldHead="true" Bottom="325" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="177" Id="Grid0" InputPanel="FALSE" Left="17" LineColor="default" MinWidth="100" Right="457" RowHeight="20" TabOrder="8" TabStop="true" Top="148" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="440">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="25"/>
+						<col width="64"/>
+						<col width="120"/>
+						<col width="120"/>
+						<col width="106"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="NO"/>
+						<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="소득세율"/>
+						<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="최저급여"/>
+						<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="최고급여"/>
+						<cell bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="누진공제"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="INCOME_TAX_RATE" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@%"/>
+						<cell align="center" col="2" colid="LOW_SAL" display="currency" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="HIGH_SAL" display="currency" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="4" colid="PROGRESSIVE_DEDUCTION" display="currency" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static28" Left="8" TabOrder="12" Text="건강보험" Top="368" Type="Groupbox" Width="456"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static32" Left="8" TabOrder="10" Text="고용보험" Top="448" Type="Groupbox" Width="456"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static13" Left="8" TabOrder="9" Text="국민연금" Top="528" Type="Groupbox" Width="456"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static10" Left="8" TabOrder="11" Text="장기요양보험" Top="608" Type="Groupbox" Width="456"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static2" Left="98" TabOrder="13" Text="건강보험&#32;부담률" Top="394" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static3" Left="98" TabOrder="14" Text="고용보험&#32;부담률" Top="480" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static4" Left="98" TabOrder="15" Text="국민연금&#32;부담률" Top="552" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static5" Left="98" TabOrder="16" Text="장기요양보험&#32;부담률" Top="640" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static7" Left="340" TabOrder="17" Text="%" Top="394" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static8" Left="340" TabOrder="18" Text="%" Top="480" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static9" Left="340" TabOrder="19" Text="%" Top="552" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static11" Left="340" TabOrder="20" Text="%" Top="640" VAlign="Middle" Width="30"></Static>
+		<Edit Align="CENTER" BindDataset="dsDeductionTaxCopy" Column="HEALTH_INSUR_RATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="heRate" Left="249" TabOrder="23" Top="394" Width="87"></Edit>
+		<Edit Align="CENTER" BindDataset="dsDeductionTaxCopy" Column="EMPLOYEEMENT_INSUR_RATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="emRate" Left="249" TabOrder="24" Top="479" Width="87"></Edit>
+		<Edit Align="CENTER" BindDataset="dsDeductionTaxCopy" Column="NATIONAL_PEN_RATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="naRate" Left="249" TabOrder="21" Top="551" Width="87"></Edit>
+		<Edit Align="CENTER" BindDataset="dsDeductionTaxCopy" Column="LONG_TERM_CARE_RATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="loRate" Left="249" TabOrder="22" Top="639" Width="87"></Edit>
+		<Static Color="red" Font="한컴&#32;윤고딕&#32;240,10" Height="40" Id="Static12" Left="8" TabOrder="25" Text="※&#32;장기요양보험&#32;계산&#13;&#10;※&#32;건강보험&#32;*&#32;7.38%&#32;*50%(근로자부담)" Top="698" VAlign="Middle" Width="408"></Static>
+		<Static Font="한컴&#32;윤고딕&#32;240,10" Height="700" Id="Static14" Left="480" TabOrder="26" Text="급여&#32;공제&#32;항목&#32;등록" Top="48" Type="Groupbox" Width="472"></Static>
+		<Combo BKColor="white" CodeColumn="YEAR" DataColumn="YEAR" DisplayRowCnt="10" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="addSelYear" ImeMode="none" InnerDataset="dsBaseYear" Left="578" OnChanged="addSelYear_OnChanged" TabOrder="27" Top="82" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static15" Left="488" TabOrder="28" Text="기준년도" Top="82" VAlign="Middle" Width="87"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="addBtn" Left="763" OnClick="addBtn_OnClick" TabOrder="29" Text="추&#32;가" Top="82" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="saveBtn" Left="853" OnClick="saveBtn_OnClick" TabOrder="30" Text="저&#32;장" Top="82" Width="87"></Button>
+		<Static Border="RaisedEdge" Color="user2" Font="한컴&#32;윤고딕&#32;240,10" Height="220" Id="Static16" Left="488" TabOrder="31" Text="소득세" Top="122" Type="Groupbox" Width="456"></Static>
+		<Grid AutoEnter="TRUE" AutoFit="TRUE" BindDataset="dsIncomeTax" BkColor2="default" BoldHead="true" Bottom="325" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="177" Id="incomeTaxGrid" InputPanel="FALSE" Left="500" LineColor="default" MinWidth="100" OnCellDBLClick="incomeTaxGrid_OnCellDblClick" Right="940" RowHeight="20" TabOrder="32" TabStop="true" Top="148" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="440">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="25"/>
+						<col width="63"/>
+						<col width="120"/>
+						<col width="120"/>
+						<col width="107"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="NO"/>
+						<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="소득세율"/>
+						<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="최저급여"/>
+						<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="최고급여"/>
+						<cell bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="누진공제"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="INCOME_TAX_RATE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9" Mask="@@%"/>
+						<cell align="center" col="2" colid="LOW_SAL" display="currency" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="HIGH_SAL" display="currency" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="4" colid="PROGRESSIVE_DEDUCTION" display="currency" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Border="None" Color="red" Font="한컴&#32;윤고딕&#32;240,10" Height="40" Id="Static17" Left="488" TabOrder="33" Text="※&#32;주민세율&#32;=&#32;소득세&#32;*&#32;10%&#13;&#10;※&#32;주민세는&#32;급여정산때&#32;계산됩니다.&#32;" Top="698" VAlign="Middle" Width="408"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static23" Left="488" TabOrder="36" Text="장기요양보험" Top="608" Type="Groupbox" Width="456"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static20" Left="488" TabOrder="34" Text="국민연금" Top="528" Type="Groupbox" Width="456"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static18" Left="488" TabOrder="35" Text="고용보험" Top="448" Type="Groupbox" Width="456"></Static>
+		<Static Border="RaisedEdge" Color="black" Font="한컴&#32;윤고딕&#32;240,10" Height="72" Hilight3dColor="black" Id="Static19" Left="488" TabOrder="37" Text="건강보험" Top="368" Type="Groupbox" Width="456"></Static>
+		<Edit Align="CENTER" BindDataset="dsDeductionTax" Column="HEALTH_INSUR_RATE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="health" Left="736" TabOrder="40" Top="392" Width="87"></Edit>
+		<Edit Align="CENTER" BindDataset="dsDeductionTax" Column="EMPLOYEEMENT_INSUR_RATE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="emp" Left="736" TabOrder="41" Top="480" Width="87"></Edit>
+		<Edit Align="CENTER" BindDataset="dsDeductionTax" Column="NATIONAL_PEN_RATE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="national" Left="736" TabOrder="38" Top="552" Width="87"></Edit>
+		<Edit Align="CENTER" BindDataset="dsDeductionTax" Column="LONG_TERM_CARE_RATE" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="longTerm" Left="736" TabOrder="39" Top="640" Width="87"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static21" Left="586" TabOrder="42" Text="건강보험&#32;부담률" Top="392" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static22" Left="586" TabOrder="43" Text="고용보험&#32;부담률" Top="480" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static24" Left="586" TabOrder="44" Text="국민연금&#32;부담률" Top="552" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static25" Left="586" TabOrder="45" Text="장기요양보험&#32;부담률" Top="640" VAlign="Middle" Width="147"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static26" Left="827" TabOrder="49" Text="%" Top="640" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static27" Left="827" TabOrder="48" Text="%" Top="552" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static29" Left="827" TabOrder="47" Text="%" Top="480" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static30" Left="827" TabOrder="46" Text="%" Top="392" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static31" Left="185" TabOrder="50" Text="년" Top="82" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static33" Left="665" TabOrder="51" Text="년" Top="82" VAlign="Middle" Width="30"></Static>
+	</Form>
+	<Script><![CDATA[
+
+//로딩 시 
+function deductionTaxForm_OnLoadCompleted(obj)
+{
+	
+	http.Sync=true;
+	
+	transaction("findDeductionsInsuranceList",
+				"svcHrCircumstance::/deductionInsurance.do?method=findDeductionInsuranceList",
+				"",
+				"dsDeductionTax=dsDeductionTax dsIncomeTax=dsIncomeTax",
+				"",
+				"callback");
+
+	dsIncomeTaxCopy.Copy(dsIncomeTax);
+	dsDeductionTaxCopy.Copy(dsDeductionTax);
+   
+	dsIncomeTaxCopy.Filter("INPUTED_YEAR='"+0+"'");
+	dsDeductionTaxCopy.Filter("INPUTED_YEAR='"+0+"'");
+   
+	dsIncomeTax.Filter("INPUTED_YEAR='"+0+"'");
+	dsDeductionTax.Filter("INPUTED_YEAR='"+0+"'");
+	
+}
+
+// 조회 시!!
+function findPayDeductionBtn_OnClick(obj)
+{
+	dsIncomeTaxCopy.Filter("INPUTED_YEAR='"+selYear.text+"'");
+	dsDeductionTaxCopy.Filter("INPUTED_YEAR='"+selYear.text+"'");
+   
+	if(dsIncomeTaxCopy.GetRowCount()==0){
+		if(dsDeductionTaxCopy.GetRowCount()==0){
+			alert("해당년도에 급여 공제항목이 등록되어 있지 않습니다.");
+		}
+	}
+	
+	
+}
+
+//삭제 시 
+function removeBtn_OnClick(obj)
+{
+	
+	
+	
+	if(selYear.text==""){
+      alert(" 선택된 기준년도가 없습니다.  ");
+      break;
+	}
+	
+	var presentYear = tonumber(substr(GetDate(),0,4));
+	alert(presentYear);
+	var choiceYear = tonumber(selYear.text); 
+	
+	if(presentYear < choiceYear){ //현재년도 < 선택년도
+		
+		if(confirm(selYear.text+"의 급여공제 항목을 삭제 하시겠습니까? ")){
+		dsIncomeTaxCopy.DeleteRow(dsIncomeTaxCopy.rowpos);
+		dsDeductionTaxCopy.DeleteRow(dsDeductionTaxCopy.rowpos);
+   
+		transaction(
+			"removeDeductionTax"
+			,"svcHrCircumstance::/deductionInsurance.do?method=removeDeductionTax"
+			,"dsDeductionTax=dsDeductionTaxCopy:u dsIncomeTax=dsIncomeTaxCopy:u"
+			,"dsDeductionTax=dsDeductionTax dsIncomeTax=dsIncomeTax"
+			,""
+			,"callback");
+		}
+		
+	}else{
+		alert("삭제를 할 수 없습니다. ");
+	}	
+   
+  
+}
+
+
+//등록화면에서 추가 기준년도 변경 시 
+function addSelYear_OnChanged(obj,strCode,strText,nOldIndex,nNewIndex)
+{
+	
+	dsIncomeTax.Filter("INPUTED_YEAR='"+addselYear.text+"'");
+	dsDeductionTax.Filter("INPUTED_YEAR='"+addselYear.text+"'");
+
+	if(dsIncomeTax.GetRowCount()!=0){
+		if(dsDeductionTax.GetRowCount()!=0){
+      
+			alert("해당년도는 이미 공제항목이 등록되어 있습니다.");
+			reload();	 
+		}
+	}else{
+      //alert(" dsDeductionTax.GetRowCount()==0 :) ");
+         dsDeductionTax.AddRow(); // 4대보험 부담률 추가 
+	}
+	
+}
+// 추가 버튼 누를 경우 
+function addBtn_OnClick(obj)
+{
+	
+	dsIncomeTax.AddRow(); // 소득세율 추가 됨. 
+	dsIncomeTax.SetColumn(dsIncomeTax.row,"INPUTED_YEAR",addSelYear.text);// 기준년도 채워짐 
+	
+}
+
+//변경 사항 저장 버튼 누를 경우 
+function saveBtn_OnClick(obj)
+{
+	
+	if(addSelYear.text==""){
+      alert(" 기준년도가 입력 되어 있지 않습니다. ");
+   }else if(dsIncomeTax.GetRowCount()==0){
+      alert(" 등록된 소득세율이 없습니다.  ");
+   }else if(health.text==""){
+      alert(" 등록된 건강보험 부담률이 없습니다.  ");
+   }else if(emp.text==""){
+      alert("등록됨 고용보험 부담률이 없습니다. ");
+   }else if(national.text==''){
+      alert("등록됨 국민연금 부담률이 없습니다. ");
+   }else if(longTerm.text==""){
+      alert("등록된 장기요양보험 부담률이 없습니다. ");
+   }
+   
+   //alert(national.text);
+   
+   if(addSelYear.text !="" && dsIncomeTax.GetRowCount() !=0 && health.text !="" && emp.text != "" && national.text !="" && longTerm.Text !=""){   
+      dsDeductionTax.SetColumn(dsDeductionTax.row,"INPUTED_YEAR",addSelYear.text);
+      dsDeductionTax.SetColumn(dsDeductionTax.row,"HEALTH_INSUR_RATE",health.text);
+      dsDeductionTax.SetColumn(dsDeductionTax.row,"NATIONAL_PEN_RATE",national.text);
+      dsDeductionTax.SetColumn(dsDeductionTax.row,"LONG_TERM_CARE_RATE",longTerm.text);
+      dsDeductionTax.SetColumn(dsDeductionTax.row,"EMPLOYEEMENT_INSUR_RATE",emp.text);
+
+   
+      transaction(
+         "batchDeductionTax"
+         ,"svcHrCircumstance::/deductionInsurance.do?method=batchDeductionTax"
+         ,"dsDeductionTax=dsDeductionTax:u dsIncomeTax=dsIncomeTax:u"
+         ,"dsDeductionTax=dsDeductionTax dsIncomeTax=dsIncomeTax"
+         ,""
+         ,"callback");
+      Reload();
+   }
+	
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=='batchDeductionTax'){
+      if(ErrorCode!=0){
+         alert("ErrorCode!=0 :(");
+      }else{
+         alert(ErrorMsg);
+         Reload();
+      }
+   }
+   
+   if(trid=='removeDeductionTax'){
+      if(ErrorCode!=0){
+         alert("ErrorCode!=0 :( ");
+      }else{   
+         alert(ErrorMsg);
+         Reload();
+      }   
+   }
+}
+]]></Script>
+</Window>

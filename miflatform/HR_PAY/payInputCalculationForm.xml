@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="payInputCaculationForm" Left="8" OnLoadCompleted="payInputCalculationForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="payInputCaculationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsPay">
+				<Contents>
+					<colinfo id="PAY_DEDUCTION_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="PRICE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCTION_ITEM_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCTION_ITEM_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAYMENT_DATE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsDeduction">
+				<Contents>
+					<colinfo id="PAY_DEDUCTION_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="PRICE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCTION_ITEM_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCTION_ITEM_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAYMENT_DATE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSalaryType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="WINDOWTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="-4" TabOrder="1" Text="급여&#32;입력/계산" Top="2" VAlign="Middle" Width="960"></Static>
+		<Combo BKColor="white" CodeColumn="YEAR" DataColumn="YEAR" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selYear" InnerDataset="dsBaseYear" Left="82" TabOrder="2" Top="48" Width="87"></Combo>
+		<Combo BKColor="white" CodeColumn="month" DataColumn="month" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selMonth" InnerDataset="dsBaseMonth" Left="230" ResetIndex="FIRST" TabOrder="3" Top="48" Width="87"></Combo>
+		<Grid AutoFit="TRUE" BindDataset="dsEmployee" BkColor2="default" BoldHead="true" Bottom="758" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="661" Id="fullEmployeeGrid" InputPanel="FALSE" Left="15" LineColor="default" MinWidth="100" OnCellClick="fullEmployeeGrid_OnCellClick" OnCellPosChanged="fullEmployeeGrid_OnCellPosChanged" Right="349" RowHeight="20" TabOrder="7" TabStop="true" Top="97" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="334">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="82"/>
+						<col width="78"/>
+						<col width="65"/>
+						<col width="51"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+						<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+						<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="부서명"/>
+						<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="직급명"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="DEPT_CODE" combocol="DEPT_CODE" combodataset="dsDepartment" combotext="DEPT_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="POSITION_CODE" combocol="POSITION_CODE" combodataset="dsPosition" combotext="POSITION_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="총&#32;인원"/>
+						<cell bkcolor="silver" col="1" color="black" colspan="3" display="text" font="한컴&#32;윤고딕&#32;240,11">
+							<cell align="center" col="0" color="black" colspan="5" display="text" expr='RowCount+&quot;명&quot;'/>
+							<cell col="5" display="text"/>
+						</cell>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<MaskEdit Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="payDate" Left="456" LeftMargin="27" Mask="@@@@-@@-@@" TabOrder="4" Top="49" Type="STRING" Width="130"></MaskEdit>
+		<Grid AutoFit="TRUE" BindDataset="dsPay" BkColor2="default" BoldHead="true" Bottom="483" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="387" Id="payGrid" InputPanel="FALSE" Left="368" LineColor="default" MinWidth="100" Right="648" RowHeight="20" TabOrder="6" TabStop="true" Top="96" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="280">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="131"/>
+						<col width="100"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="지급항목"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="금액"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="PAY_DEDUCTION_ITEM_NAME" display="text" font="한컴&#32;윤고딕&#32;240,9"/>
+						<cell align="center" col="1" colid="PRICE" display="number" font="한컴&#32;윤고딕&#32;240,9" Mask="###,###,###0"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;230,12" text="지급총액"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="number" expr='dsPay.SUM(&quot;price&quot;)' font="한컴&#32;윤고딕&#32;230,12" Mask="###,###,###0"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="dsDeduction" BkColor2="default" BoldHead="true" Bottom="484" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="387" Id="deductionGrid" InputPanel="FALSE" Left="662" LineColor="default" MinWidth="100" Right="940" RowHeight="20" TabOrder="5" TabStop="true" Top="97" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="278">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="131"/>
+						<col width="102"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;230,12" text="공제항목"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;230,12" text="금액"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="PAY_DEDUCTION_ITEM_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="PRICE" display="number" font="한컴&#32;윤고딕&#32;230,11" Mask="###,###,###0"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="공제총액"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="number" expr='dsDeduction.SUM(&quot;price&quot;)' font="한컴&#32;윤고딕&#32;240,11" Mask="###,###,###0"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="15" TabOrder="8" Text="귀속년월" Top="48" VAlign="Middle" Width="66"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="169" TabOrder="9" Text="년" Top="48" VAlign="Middle" Width="32"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="317" TabOrder="10" Text="월" Top="48" VAlign="Middle" Width="32"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="360" TabOrder="11" Text="급여지급일자" Top="49" VAlign="Middle" Width="98"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="searchBtn" Left="587" OnClick="searchBtn_OnClick" TabOrder="12" Text="조&#32;&#32;회" Top="48" Width="56"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="payCalculationBtn" Left="853" OnClick="payCalculationBtn_OnClick" TabOrder="13" Text="급여&#32;계산" Top="48" Width="87"></Button>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static4" Left="368" TabOrder="14" Text="사원번호" Top="505" VAlign="Middle" Width="190"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static5" Left="796" TabOrder="15" Text="급여형태" Top="585" VAlign="Middle" Width="142"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static6" Left="368" TabOrder="16" Text="입사일자" Top="585" VAlign="Middle" Width="142"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static7" Left="512" TabOrder="17" Text="퇴사일자" Top="585" VAlign="Middle" Width="142"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static8" Left="559" TabOrder="18" Text="부&#32;&#32;서" Top="505" VAlign="Middle" Width="190"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static9" Left="750" TabOrder="19" Text="직&#32;&#32;급" Top="505" VAlign="Middle" Width="190"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static10" Left="654" TabOrder="20" Text="지급일자" Top="585" VAlign="Middle" Width="142"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static11" Left="368" TabOrder="21" Text="차인지급액" Top="729" VAlign="Middle" Width="142"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static12" Left="368" TabOrder="22" Text="공제총액" Top="697" VAlign="Middle" Width="142"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static13" Left="368" TabOrder="23" Text="지급총액" Top="667" VAlign="Middle" Width="142"></Static>
+		<Edit Align="CENTER" BindDataset="dsSalaryInput" Column="EMP_CODE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="restEmpCodeEdit" Left="368" TabOrder="24" Top="537" Width="190"></Edit>
+		<Combo BindDataset="dsSalaryInput" CodeColumn="DEPT_CODE" Column="DEPT_CODE" DataColumn="dept_name" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selectDept" InnerDataset="dsDepartment" Left="559" OnChanged="selectDept_OnChanged" TabOrder="25" Top="537" Width="190"></Combo>
+		<Combo BindDataset="dsSalaryInput" CodeColumn="POSITION_CODE" Column="POSITION_CODE" DataColumn="POSITION_NAME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selectPosition" InnerDataset="dsPosition" Left="750" OnChanged="selectDept_OnChanged" TabOrder="26" Top="537" Width="190"></Combo>
+		<MaskEdit Align="Center" BindDataset="dsSalaryInput" Column="HIRE_DATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="hireDate" Left="368" LeftMargin="28" Mask="@@@@-@@-@@" TabOrder="27" Top="615" Type="STRING" Width="142"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsSalaryInput" Column="RETIRE_DATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="outDate" Left="512" LeftMargin="28" Mask="@@@@-@@-@@" TabOrder="28" Top="615" Type="STRING" Width="142"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsSalaryInput" Column="PAYMENT_DATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="paymentDate" Left="654" LeftMargin="28" Mask="@@@@-@@-@@" TabOrder="29" Top="615" Type="STRING" Width="142"></MaskEdit>
+		<Combo BindDataset="dsSalaryInput" CodeColumn="DETAIL_CODE" Column="SALARY_TYPE_CODE" DataColumn="DETAIL_CODE_NAME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="salaryType" InnerDataset="dsSalaryType" Left="796" TabOrder="30" Top="615" Width="142"></Combo>
+		<MaskEdit BindDataset="dsSalaryInput" Column="TOTAL_SALARY" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="totalSalary" Left="512" TabOrder="31" Top="667" Value="MaskEdit0" Width="393"></MaskEdit>
+		<MaskEdit BindDataset="dsSalaryInput" Column="TOTAL_DEDUCTION_PRICE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="totalDeductionPrice" Left="512" TabOrder="32" Top="697" Value="MaskEdit0" Width="393"></MaskEdit>
+		<MaskEdit BindDataset="dsSalaryInput" Column="CHINE_PAYMENTS" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="chinePayment" Left="512" TabOrder="33" Top="729" Value="MaskEdit0" Width="393"></MaskEdit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static14" Left="906" TabOrder="34" Text="원" Top="667" VAlign="Middle" Width="32"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static15" Left="906" TabOrder="35" Text="원" Top="697" VAlign="Middle" Width="32"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static16" Left="906" TabOrder="36" Text="원" Top="729" VAlign="Middle" Width="32"></Static>
+	</Form>
+	<Script><![CDATA[
+var baseYear; // 기준년도
+var baseMonth;	//기준월
+
+function payInputCalculationForm_OnLoadCompleted(obj)
+{
+		
+	http.Sync=true;
+	
+	dsSalaryInput.ClearData(); // dataSet을 비운다. 
+	//전체 사원 목록 
+	transaction("findEmployeeList","svcBase::/employee.do?method=findEmployeeList","","dsEmployee=dsEmployee","","callback"); 
+	dsEmployee.UnFilter();
+	
+	//부서목록 가져오기 -> 로드할 때 부서 목록 다 받아옴 따로 조회 필요 없음 (단. 사원의 경우 퇴직자 선택 할 경우 때문에 조회 버튼 있음)
+	transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+	
+	//직급List가져옴
+	transaction("findPositionList","svcBase::/position.do?method=findPositionList","","dsPosition=dsPosition","","callback");
+	
+	//코드 목록도 얻어 옴
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'PA'"); // 연봉,월급,주급,일급,시급.. 
+	dsSalaryType.CopyF(dsDetailCode);
+	
+	http.Sync=false;
+
+}
+
+// 사원 선택 시.. (다 받아온 뒤 )
+function fullEmployeeGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	dsPay.Filter("EMP_CODE == '"+dsEmployee.GetColumn(nRow,"EMP_CODE")+"'");
+	dsDeduction.Filter("EMP_CODE == '"+dsEmployee.GetColumn(nRow,"EMP_CODE")+"'");
+	dsSalaryInput.Filter("EMP_CODE == '"+dsEmployee.GetColumn(nRow,"EMP_CODE")+"'");
+}
+function fullEmployeeGrid_OnCellPosChanged(obj,nRow,nCell,nOldRow,nOldCell,nPivotIndex,nOldPivotIndex)
+{
+	dsPay.Filter("EMP_CODE == '"+dsEmployee.GetColumn(nRow,"EMP_CODE")+"'");
+	dsDeduction.Filter("EMP_CODE == '"+dsEmployee.GetColumn(nRow,"EMP_CODE")+"'");
+	dsSalaryInput.Filter("EMP_CODE == '"+dsEmployee.GetColumn(nRow,"EMP_CODE")+"'");	
+}
+
+// 조회 시.
+function searchBtn_OnClick(obj)
+{
+	baseYear=selYear.Value;
+	baseMonth=selMonth.Value;
+   
+	if(selYear.text =="" || selMonth.text==""){
+		alert(" 귀속년월을 지정하시기 바랍니다. ");
+	}else{
+		Dialog("HR_PAY::payDateDialog.xml","yearMonth="+(baseYear+baseMonth));
+	}
+}
+
+
+// 급여 계산 프로 시저 
+function payCalculationBtn_OnClick(obj)
+{
+	transaction(
+      "payCalculate",
+      "svcHrPay::/pay.do?method=payCalculate",
+      "",
+      "dsSalaryInput=dsSalaryInput dsPayDeduction=dsPayDeduction",
+      "paymentDate='"+payDate.Value+"' standardDate='"+baseYear+baseMonth+"'",
+      "callback"
+	);
+  
+	dsEmployee.rowpos=0; // 첫번째 사원
+}
+
+// 받아오는게 성공 하면.. 여기 실행 !
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(ErrorCode<0){
+    alert(ErrorMsg);
+   }else if(trid == "payCalculate"){
+      alert("급여계산 내역조회 성공");
+      dsPayDeduction.Filter("PAY_DEDUCTION_ITEM_CODE == 'P-10' || PAY_DEDUCTION_ITEM_CODE == 'P-20' || PAY_DEDUCTION_ITEM_CODE == 'P-30' || PAY_DEDUCTION_ITEM_CODE == 'P-40'|| PAY_DEDUCTION_ITEM_CODE == 'P-50' || PAY_DEDUCTION_ITEM_CODE == 'P-100' || PAY_DEDUCTION_ITEM_CODE == 'P-110' || PAY_DEDUCTION_ITEM_CODE == 'P-60' || PAY_DEDUCTION_ITEM_CODE == 'P-90'");
+      dsPay.CopyF(dsPayDeduction);
+      dsPayDeduction.Filter("PAY_DEDUCTION_ITEM_CODE == 'P-120' || PAY_DEDUCTION_ITEM_CODE == 'P-140' || PAY_DEDUCTION_ITEM_CODE == 'P-130' || PAY_DEDUCTION_ITEM_CODE == 'P-150' || PAY_DEDUCTION_ITEM_CODE == 'P-160' || PAY_DEDUCTION_ITEM_CODE == 'P-170'");
+      dsDeduction.CopyF(dsPayDeduction);
+      fullEmployeeGrid_OnCellClick();
+   }
+}
+]]></Script>
+</Window>

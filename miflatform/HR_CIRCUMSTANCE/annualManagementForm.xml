@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="annualManagementForm" Left="8" OnLoadCompleted="annualManagementForm_OnLoadCompleted" PidAttrib="7" Title="annualManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsEmployeeHiredateList">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PASSWORD" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="AUTHORITY_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="HIRE_DATE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="사원연차&#32;등록/관리" Top="1" VAlign="Middle" Width="953"></Static>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,10" Height="568" Hilight3dColor="black" Id="Static1" Left="385" TabOrder="6" Text="연차정보" Top="132" Type="Groupbox" Width="562"></Static>
+		<Static Color="red" Font="한컴&#32;윤고딕&#32;240,10" Height="77" Id="Static9" Left="399" TabOrder="4" Text="1.&#32;입사일자가&#32;등록되지&#32;않은&#32;사원은&#32;연차&#32;등록을&#32;할&#32;수&#32;없습니다.&#13;&#10;2.&#32;근속년수&#32;1년&#32;미만의&#32;연차는&#32;사내규정에&#32;따라&#32;별도로&#32;처리됩니다(담당자&#32;문의)&#13;&#10;3.&#32;근속년수&#32;1년&#32;이상인&#32;경우&#32;15일의&#32;연차가&#32;발생,&#32;1년마다&#32;1일&#32;증가,&#32;최대&#32;25일까지&#32;발생합니다." Top="622" VAlign="Middle" Width="535"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsAnnual" BkColor2="default" BoldHead="true" Bottom="616" Enable="FALSE" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="416" Id="annualGrid" InputPanel="FALSE" Left="400" LineColor="black" MinWidth="100" Right="936" RowHeight="20" TabOrder="5" TabStop="true" Top="200" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="536">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="78"/>
+						<col width="111"/>
+						<col width="87"/>
+						<col width="88"/>
+						<col width="87"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원이름"/>
+						<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기준년도"/>
+						<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사용가능한일수"/>
+						<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사용한일수"/>
+						<cell bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="잔여일수"/>
+						<cell bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근속년수"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" color="BACKGROUND" combocol="EMP_CODE" combodataset="dsEmployeeHiredateList" combotext="EMP_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="STANDARD_YEAR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="USABLE_DAYS" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="USED_DAYS" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="4" colid="REST_DAYS" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="5" colid="LENGTH_OF_SERVICE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Combo BKColor="white" CodeColumn="YEAR" DataColumn="YEAR" DisplayRowCnt="10" Font="한컴&#32;윤고딕&#32;240,10" Height="28" Id="standardYear" ImeMode="none" InnerDataset="dsBaseYear" Left="109" ResetIndex="FIRST" TabOrder="7" Top="79" Width="114"></Combo>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="searchBtn" Left="280" OnClick="searchBtn_OnClick" TabOrder="8" Text="조&#32;회" Top="80" Width="87"></Button>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="addAnnualBtn" Left="558" OnClick="addAnnualBtn_OnClick" TabOrder="9" Text="연차등록" Top="79" Width="87"></Button>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="removeBtn" Left="655" OnClick="removeBtn_OnClick" TabOrder="10" Text="연차삭제" Top="79" Width="87"></Button>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="saveBtn" Left="753" OnClick="saveBtn_OnClick" TabOrder="11" Text="저장" Top="79" Width="87"></Button>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="AnnualExcelBtn" Left="848" OnClick="AnnualExcelBtn_OnClick" TabOrder="12" Text="엑셀출력" Top="79" Width="87"></Button>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,10" Height="568" Hilight3dColor="black" Id="Static0" Left="12" TabOrder="3" Text="사원&#32;목록" Top="132" Type="Groupbox" Width="368"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsEmployeeHiredateList" BkColor2="default" BoldHead="true" Bottom="652" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="448" Id="empGrid" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" OnCellClick="empGrid_OnCellClick" OnCellPosChanged="empGrid_OnCellPosChanged" Right="369" RowHeight="20" TabOrder="2" TabStop="true" Top="204" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="345">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="75"/>
+						<col width="60"/>
+						<col width="60"/>
+						<col width="60"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="사원번호" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="사원명" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="직급" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="부서명" Valign="Center"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" font="LG&#32;PC,11" limit="-1" Valign="Center"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" font="LG&#32;PC,11" limit="-1" Valign="Center"/>
+						<cell align="center" col="2" colid="POSITION_CODE" combocol="POSITION_CODE" combodataset="dsPosition" combotext="POSITION_NAME" display="combo" font="LG&#32;PC,11" limit="-1" Valign="Center"/>
+						<cell align="center" col="3" colid="DEPT_CODE" combocol="DEPT_CODE" combodataset="dsDepartment" combotext="DEPT_NAME" display="combo" font="LG&#32;PC,11" limit="-1" Valign="Center"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" limit="-1" text="총&#32;인원"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" colspan="3" display="text" expr='RowCount+&quot;명&quot;' font="한컴&#32;윤고딕&#32;230,11" limit="-1"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static4" Left="222" TabOrder="13" Text="년" Top="79" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static2" Left="24" TabOrder="14" Text="조회년도" Top="79" VAlign="Middle" Width="87"></Static>
+	</Form>
+	<Script><![CDATA[var selEmpCode="DEFAULT";
+var selEmpName="DEFAULT";
+var selHireDate="DEFAULT";
+
+
+function annualManagementForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	transaction("findEmployeeHireDateList","svcBase::/employee.do?method=findEmployeeHireDateList","","dsEmployeeHiredateList=dsEmployeeHiredateList","","callback");
+	 
+	 //부서목록 가져오기 -> 로드할 때 부서 목록 다 받아옴 따로 조회 필요 없음 (단. 사원의 경우 퇴직자 선택 할 경우 때문에 조회 버튼 있음)
+	transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+	//직급List가져옴
+	transaction("findPositionList","svcBase::/position.do?method=findPositionList","","dsPosition=dsPosition","","callback");
+	//전체 연차정보
+	transaction("findAnnualList","svcHrCircumstance::/annual.do?method=findAnnualList","","dsAnnual=dsAnnual","","callback");
+	
+	dsAnnual.Filter("STANDARD_YEAR='"+0+"'");
+	
+	http.Sync=false; 
+	
+	selEmpCode = dsEmployeeHiredateList.getColumn(dsEmployeeHiredateList.rowpos, "EMP_CODE");
+	selEmpName = dsEmployeeHiredateList.getColumn(dsEmployeeHiredateList.rowpos, "EMP_NAME");
+	selHireDate = dsEmployeeHiredateList.getColumn(dsEmployeeHiredateList.rowpos,"HIRE_DATE");   
+}
+
+// 사원목록의 사원 선택 시 
+function empGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	selEmpCode = dsEmployeeHiredateList.getColumn(nRow, "EMP_CODE");
+	selEmpName = dsEmployeeHiredateList.getColumn(nRow, "EMP_NAME"); 
+	selHireDate = dsEmployeeHiredateList.getColumn(nRow,"HIRE_DATE"); 
+ 
+
+	dsAnnual.Filter("EMP_CODE='"+selEmpCode+"'");
+	if(dsAnnual.GetRowCount() == 0){
+      alert("해당 사원의 연차 정보가 없습니다. ");
+	}
+	
+}
+
+
+// 기준년도 선택 후 조회 버튼 누를경우
+function searchBtn_OnClick(obj)
+{
+	dsAnnual.Filter("STANDARD_YEAR='"+standardYear.text+"'");
+}
+
+//연차등록하기
+function addAnnualBtn_OnClick(obj)
+{
+
+
+	var standardYear=standardYear.text;
+   dsAnnual.Filter("STANDARD_YEAR='"+standardYear+"' && EMP_CODE='"+selEmpCode+"'"); //선택년도,선택사원 정보가져옴
+   
+   if(standardYear ==""){
+      alert("기준년도를 선택해 주세요 ");
+      break;
+   }
+   
+   if(dsAnnual.GetRowCount() != 0){
+      dsAnnual.Filter("STANDARD_YEAR='"+0+"'");
+      alert("해당 년도에  해당사원의 연차정보가 등록되어 있습니다.");
+      break;
+   }
+   
+   if(selEmpCode =="DEFAULT" && selHireDate =="DEFAULT"){
+      alert("사원을 선택하지 않았거나, 해당 사원의 입사일이 존재 하지 않습니다.");
+      break; // 이게 될 가능성이 거의 없다. 
+   }
+	
+/*   
+   if(selHireDate == null){
+      alert("해당 사원의 입사일이 등록 되어 있지 않습니다. ");
+      break;
+   }
+*/  
+   if(confirm(selEmpName+"님 연차등록 하시겠습니까?")){
+      transaction(
+         "createAnnual",
+         "svcHrCircumstance::/annual.do?method=createAnnual",
+         "",
+         "dsAnnual=dsAnnual",
+         "standardYear='" + standardYear + "' empCode='" + selEmpCode + "' hireDate='" + selHireDate + "'",
+         "callback"
+      );
+     // Reload();   
+   }
+   
+	
+}
+
+
+//연차 삭제  날짜를 넣어서 이전 년도는 삭제 못하도록 막야야 될 것 같은데 우선 놔둠
+function removeBtn_OnClick(obj)
+{
+	dsAnnual.DeleteRow(dsAnnual.row);
+}
+
+
+
+
+
+
+//연차 정보 변동 사항 저장 -> 지나지 않은 연도에 연차 삭제 . 가능 수정의 경우 . 연차사용은 승인 할 때 자동 으로 변동 될듯 우선 넣어둠  
+function saveBtn_OnClick(obj)
+{
+	if(confirm("저장 하시겠습니까? ")){
+      transaction(
+         "batchAnnual",
+         "svcHrCircumstance::/annual.do?method=batchAnnual",
+         "dsAnnual=dsAnnual:u",
+         "dsAnnual=dsAnnual",
+         "",
+         "callback"
+      );
+     
+	}
+	 Reload();
+}
+
+
+//엑셀 출력 
+function AnnualExcelBtn_OnClick(obj)
+{
+	 if(Confirm("엑셀로 출력 하시겠습니까? ")){
+      annualGrid.ExportExcelEx("AnnualExcel");
+  }	
+}
+
+//잡았는데 callback 함수가 실행 안되는 듯...
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=='createAnnual'){
+		
+      if(ErrorCode!=0){
+         alert("연차등록 실패");
+      }else{
+         alert("연차등록 성공");
+         Reload();   
+      }   
+   }
+   
+   if(trid=='batchAnnual'){
+      if(ErrorCode!=0){
+        alert("ErrorCode!=0 :( ");
+      }else{
+          alert("ErrorCode==0 :) ");
+         Reload();
+      }   
+   }
+   
+}
+function empGrid_OnCellPosChanged(obj,nRow,nCell,nOldRow,nOldCell,nPivotIndex,nOldPivotIndex)
+{
+		selEmpCode = dsEmployeeHiredateList.getColumn(nRow, "EMP_CODE");
+	selEmpName = dsEmployeeHiredateList.getColumn(nRow, "EMP_NAME"); 
+	selHireDate = dsEmployeeHiredateList.getColumn(nRow,"HIRE_DATE"); 
+ 
+
+	dsAnnual.Filter("EMP_CODE='"+selEmpCode+"'");
+	if(dsAnnual.GetRowCount() == 0){
+      alert("해당 사원의 연차 정보가 없습니다. ");
+	}
+}
+]]></Script>
+</Window>

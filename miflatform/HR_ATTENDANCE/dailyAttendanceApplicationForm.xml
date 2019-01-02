@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="dailyAttendanceApplicationForm" Left="8" OnLoadCompleted="dailyAttendanceApplicationForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="dailyAttendanceApplicationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsDailyAttdType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="692" Id="Static1" Left="7" TabOrder="1" Text="신청" Top="56" Type="Groupbox" Width="306"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="28" TabOrder="2" Text="사원번호" Top="102" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="28" TabOrder="3" Text="사&#32;&#32;&#32;&#32;&#32;원" Top="153" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static4" Left="28" TabOrder="4" Text="부&#32;&#32;&#32;&#32;&#32;서" Top="204" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static5" Left="28" TabOrder="5" Text="기&#32;준&#32;일" Top="255" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static6" Left="28" TabOrder="6" Text="시&#32;&#32;&#32;&#32;&#32;간" Top="306" VAlign="Middle" Width="77"></Static>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="empCode" Left="110" TabOrder="7" Top="102" Width="177"></Edit>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="empName" Left="110" TabOrder="8" Top="153" Width="177"></Edit>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="deptName" Left="110" TabOrder="9" Top="204" Width="177"></Edit>
+		<Calendar DayFont="한컴&#32;윤고딕&#32;240,12" Font="한컴&#32;윤고딕&#32;240,12" HeaderFont="한컴&#32;윤고딕&#32;240,12" Height="30" Id="basicDate" Left="110" SaturdayTextColor="blue" SelectedDayFont="한컴&#32;윤고딕&#32;240,12,Bold" SundayTextColor="red" TabOrder="10" Top="255" WeeksFont="한컴&#32;윤고딕&#32;240,12,Bold" Width="177"></Calendar>
+		<MaskEdit Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="currentTime" Left="110" Mask="@@:@@" OnChanged="currentTime_OnChanged" TabOrder="11" Top="306" Type="STRING" Width="177"></MaskEdit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static8" Left="28" TabOrder="12" Text="근태구분" Top="456" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static9" Left="28" TabOrder="13" Text="기타수당" Top="506" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static10" Left="28" TabOrder="14" Text="신청사유" Top="556" VAlign="Middle" Width="77"></Static>
+		<Edit Font="한컴&#32;윤고딕&#32;240,12" Height="90" Id="cause" ImeMode="none" Left="27" TabOrder="15" Top="598" Width="261"></Edit>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,12" Height="33" Id="applicationBtn" Left="201" OnClick="applicationBtn_OnClick" TabOrder="16" Text="신청" Top="697" Width="87"></Button>
+		<Combo CodeColumn="DETAIL_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="attendanceType" InnerDataset="dsDailyAttdType" Left="110" OnChanged="attendanceType_OnChanged" TabOrder="17" Top="456" Width="177"></Combo>
+		<Combo CodeColumn="ETC_SAL_CODE" DataColumn="ETC_SAL_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="etcSal" InnerDataset="dsEtcSal" Left="110" TabOrder="18" Top="506" Width="177"></Combo>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="692" Id="Static11" Left="322" TabOrder="19" Text="근태&#32;현황&#32;조회" Top="56" Type="Groupbox" Width="626"></Static>
+		<Grid BindDataset="dsDailyAttd" BkColor2="default" BoldHead="true" Bottom="730" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="578" Id="DayAttdGrid" InputPanel="FALSE" Left="328" LineColor="default" Right="945" RowHeight="20" TabOrder="20" TabStop="true" Top="152" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="617">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="127"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="277"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기준일" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근태구분" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="시간" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인상태" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="금액" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사유" Valign="Center"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="1" colid="BASIC_DAY" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="####-##-##" Valign="Center"/>
+						<cell align="center" col="2" colid="ATTD_TYPE_CODE" combocol="DETAIL_CODE" combodataset="dsDailyAttdType" combotext="DETAIL_CODE_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="3" colid="TIME" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##" Valign="Center"/>
+						<cell align="center" col="4" colid="APPROVAL_STATUS" display="text" expr="DECODE(APPROVAL_STATUS,&apos;Y&apos;,&apos;승인&apos;,&apos;미결&apos;)" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="5" colid="COST" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="6" colid="CAUSE" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static12" Left="326" TabOrder="21" Text="조회기간" Top="102" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static13" Left="561" TabOrder="22" Text="~" Top="102" VAlign="Middle" Width="77"></Static>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,12" Height="33" Id="searchBtn" Left="856" OnClick="searchBtn_OnClick" TabOrder="23" Text="조회" Top="102" Width="87"></Button>
+		<Calendar Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="fromDate" Left="408" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="24" Top="102" Width="147"></Calendar>
+		<Calendar Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="toDate" Left="646" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="25" Top="102" Width="147"></Calendar>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" TabOrder="26" Text="일근태&#32;신청" VAlign="Middle" Width="953"></Static>
+		<Static Color="red" Font="한컴&#32;윤고딕&#32;240,9" Height="120" Id="Static0" Left="24" TabOrder="27" Text="&#32;&#32;&#32;&#32;&#32;&#32;■■■■■■■&#32;&#32;&#32;참고사항&#32;&#32;&#32;■■■■■■■&#13;&#10;1)&#32;기본&#32;출근시간&#32;09:00,&#32;퇴근시간&#32;18:00&#32;입니다.&#13;&#10;2)&#32;연장근무&#32;적용시간은&#32;19:00~22:00&#32;입니다.&#13;&#10;3)&#32;심야근무&#32;적용시간은&#32;22:00~24:00입니다.&#13;&#10;4)&#32;연장/심야&#32;근무&#32;종료&#32;후&#32;반드시&#32;★퇴근★&#32;신청&#13;&#10;&#32;※퇴근&#32;미신청시&#32;연장/심야&#32;근무&#32;★미적용★" Top="336" VAlign="Middle" Width="283"></Static>
+	</Form>
+	<Script><![CDATA[function dailyAttendanceApplicationForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	DayAttdGrid.Redraw=false;
+	empCode.text=g_empCode;
+	empName.text=g_empName;
+	deptName.text=g_deptName;
+	
+	//CODE, DETAIL_CODE를 동시에 받아옴
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+	
+	dsDetailCode.Filter("DETAIL_CODE='ADC001' ||DETAIL_CODE='ADC002'||DETAIL_CODE='ADC003'||DETAIL_CODE='ADC004'");
+	dsDailyAttdType.CopyF(dsDetailCode);
+   //야간, 연장 근무 같은 경우에는 자동으로 신청이 되기 때문에 굳이 신청 항목이 없어도 된다
+    transaction("findSalaryList","svcBase::/salary.do?method=findSalaryList","","dsEtcSal=dsEtcSal ","","callback");
+	dsEtcSal.Filter("SubStr(ETC_SAL_CODE,0,3) == 'ETS'");
+   // 이미 지나간 날을 선택 못하도록 바꾸는게 좋을 것 같음. (5일 이전 까지는 수정 할 수도 있기 때문엔 열어 둔다? 혹은 2주.. 생각해봄 )
+	basicDate.Value=today();
+
+	//자료가 많아 지면 같은 해 혹은 같은 달 목록만 가져 온다 처음에는.. (데이터가 많지 않아서 전체를 다 받아 온다. 여기선)
+	transaction(
+      "findDailyAttdList",
+      "svcHrAttendance::/dailyAttd.do?method=findDailyAttdList",
+      "",
+      "dsDailyAttd=dsDailyAttd",
+      "empCode='"+g_empCode + "'",
+      "callback"
+	);
+   
+	dsDailyAttd.Filter("BASIC_DAY='"+0+"'");
+	DayAttdGrid.Redraw=true;
+	http.sync=false;
+}
+
+
+//기간 설정 후 조회 눌렀을 경우 
+function searchBtn_OnClick(obj)
+{
+	DayAttdGrid.Redraw=false;
+	var fromDate=fromDate.Value;
+	var toDate=toDate.Value;
+	if(fromDate=="" || toDate==""){
+		alert("값이 입력 되지 않았습니다.");
+	}else if(fromDate>toDate){
+		alert("조회기간이 잘못 입력 되었습니다.");
+	}else{
+		dsDailyAttd.UnFilter();  //다시 조회 버튼 누르면 새롭게 검색 되도록
+		dsDailyAttd.Filter("BASIC_DAY>='"+fromDate+"'&&BASIC_DAY<='"+toDate+"'");
+		if(dsDailyAttd.GetRowCount()==0)
+			alert("조회할 목록이 없습니다. ");
+			DayAttdGrid.Redraw=true;
+	}	
+}
+
+
+// 근태 구분이 변경 될 때 마다. 
+function attendanceType_OnChanged(obj,strCode,strText,nOldIndex,nNewIndex)
+{
+	dsDailyAttd.Filter("EMP_CODE=='"+empCode.text+"'&& BASIC_DAY=='"+basicDate.Value+"'&& ATTD_TYPE_CODE=='"+attendanceType.value+"'");
+	if(dsDailyAttd.GetRowCount()!=0){
+		alert("이미 값이 존재합니다");
+		applicationBtn.Enable=false; //버튼 작동 안되도록!! 
+		
+	}else{
+		applicationBtn.Enable=true; 
+	}
+	}
+}
+
+
+// 근태 입력 창!!
+function applicationBtn_OnClick(obj)
+{
+	http.Sync=true; 
+	
+		
+   var empCode=empCode.Text;
+   var empName=empName.Text;
+   var basicDate=basicDate.Value;
+   var attdTime=currentTime.Value;   
+   var attdType=attendanceType.Value;   
+   var etcSal=etcSal.Text;
+   var cause=cause.Text;
+   var price=0;
+   var approvalStatus='N';
+   
+   
+   /*
+   if(attdType = 'AT-03' || attdType = 'AT-04'){
+      approvalStatus='N';
+   }  // attdType가 저렇게 나올 게 없다??
+     */
+   //alert(dsHoliday.GetRowCount());
+   /*if(dsHoliday.GetRowCount() > 0){
+      approvalStatus='N';
+      
+   }
+   */
+   /*
+   if(attdType=="ADC001" || attdType=="ADC002"){
+		approvalStatus='Y';
+   }else{
+		approvalStatus='N';
+   }
+   */
+   
+   if(etcSal != ""){
+		dsEtcSal.Filter("ETC_SAL_NAME='"+etcSal+"'");
+		price=dsEtcSal.GetColumn(dsEtcSal.row,"ETC_SAL_PRICE");
+		etcSal=price;
+   }else{
+		etcSal=price;
+   }
+   
+	if(cause == ""){
+      cause="cause";
+   }
+   
+   //alert("출력되는 값" +approvalStatus+"///"+etcSal+"/////"+cause);
+
+	if(basicDate="" || attdType=="" || attdTime==""){
+      alert("기준일, 시간, 근태형태를 입력하세요  ");
+	}else{
+      if(confirm(" 신청 하시겠습니까? ")){
+         dsDailyAttd.UnFilter();
+         dsDailyAttd.AddRow();   
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"EMP_CODE",empCode);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"BASIC_DAY",basicDate);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"ATTD_TYPE_CODE",attdType);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"TIME",attdTime);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"COST",etcSal);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"CAUSE",cause);   
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"APPROVAL_STATUS",approvalStatus);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"DAY_ATTD_SEQ",approvalStatus);
+         dsDailyAttd.SetColumn(dsDailyAttd.row,"EMP_NAME",empName);
+      
+         transaction(
+            "addDailyAttd",
+            "svcHrAttendance::/dailyAttd.do?method=addDailyAttd", 
+            "dsDailyAttd=dsDailyAttd:u", // 입력한 값만 날라간다.
+            "dsDailyAttd=dsDailyAttd", // 받아온 값
+            "",
+            "callback"
+         );   
+      }
+   }
+   
+   http.Sync=false;
+}
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=="addDailyAttd"){
+      if(ErrorCode!=0){
+         alert(" callback_ErrorCode!=0 ");
+      }else{
+         alert(ErrorMsg);
+         Reload();
+      }
+   }
+}
+
+]]></Script>
+</Window>

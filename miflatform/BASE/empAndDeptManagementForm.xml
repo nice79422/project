@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="700" Id="empAndDeptManagementForm" Left="8" OnLoadCompleted="empAndDeptManagementForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="empAndDeptManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsCheck">
+				<Contents>
+					<colinfo id="check" size="256" summ="default" type="STRING"/>
+					<record>
+						<check>Y</check>
+					</record>
+					<record>
+						<check>N</check>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Flat" BorderColor="black" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="35" Id="formtitle" TabOrder="7" Text="사원/부서&#32;관리" Top="8" VAlign="Middle" Width="954"></Static>
+		<Static Border="RaisedEdge" Color="user4" Font="한컴&#32;윤고딕&#32;240,12" Height="577" Hilight3dColor="black" Id="Static1" Left="8" TabOrder="1" Text="사원목록" Top="48" Type="Groupbox" Width="472"></Static>
+		<Static Border="RaisedEdge" Color="user4" Font="한컴&#32;윤고딕&#32;240,12" Height="577" Hilight3dColor="black" Id="Static2" Left="501" TabOrder="2" Text="부서목록" Top="47" Type="Groupbox" Width="448"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsDepartment" BkColor2="default" BoldHead="true" Bottom="550" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="470" Id="deptGrid" InputPanel="FALSE" Left="513" LineColor="default" MinWidth="100" Right="939" RowHeight="20" TabOrder="4" TabStop="true" Top="80" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="426">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="39"/>
+						<col width="38"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="NO"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="부서코드"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="부서명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="내선번호"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" edit="normal" expr="currow+1" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="DEPT_CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="DEPT_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="DEPT_TEL" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" colspan="2" display="text" text="부서수" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="2" colspan="2" display="text" expr="RowCount()" Valign="Center"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="dsEmployee" BkColor2="default" BoldHead="true" Bottom="550" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="470" Id="empGrid" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="464" RowHeight="20" TabOrder="3" TabStop="true" Top="80" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="440">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="107"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="100"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="사원번호"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="사원명"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="부서명"/>
+						<cell bkcolor="silver" col="3" combotext="한" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="권한명"/>
+						<cell bkcolor="silver" col="4" combocol="POSITION_CODE" combodataset="dsPosition" combotext="POSITION_NAME" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="직급명"/>
+						<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="비밀번호"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="2" colid="DEPT_CODE" combocol="DEPT_CODE" combodataset="dsDepartment" combotext="DEPT_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="3" colid="AUTHORITY_CODE" combocol="AUTHORITY_CODE" combodataset="dsAuthority" combotext="AUTHORITY_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="4" colid="POSITION_CODE" combocol="POSITION_CODE" combodataset="dsPosition" combotext="POSITION_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="5" colid="PASSWORD" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" display="text" limit="-1" text="총인원"/>
+						<cell align="center" bkcolor="silver" col="1" colspan="5" display="text" expr='RowCount()+&quot;명&quot;' limit="-1"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="searchEmpBtn" Left="191" OnClick="searchEmpBtn_OnClick" TabOrder="6" Text="사원조회" Top="562" Width="87"></Button>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="saveEmpBtn" Left="282" OnClick="saveEmpBtn_OnClick" TabOrder="5" Text="저장" Top="562" Width="87"></Button>
+		<Static Color="red" Font="한컴&#32;윤고딕&#32;240,10" Height="49" Id="Static6" Left="8" TabOrder="8" Text="사원목록(사원번호변경&#32;불가/&#32;퇴직자포함(미포함)선택가능/&#32;사원삭제불가&#13;&#10;부서목록(부서에&#32;사원&#32;있을&#32;경우&#32;삭제불가/부서코드변경불가&#32;나머지&#32;추가/수정/삭제&#32;가능)" Top="635" VAlign="Middle" Width="752"></Static>
+		<Checkbox BindDataset="dsCheck" Column="check" FalseValue="N" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="empCheckBox" Left="24" TabOrder="9" Text="퇴직사원&#32;포함여부" TextAlign="CENTER" Top="564" TrueValue="Y" Width="177"></Checkbox>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="resetBtn" Left="374" OnClick="resetBtn_OnClick" TabOrder="10" Text="수정취소" Top="562" Width="87"></Button>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="deptResetBtn" Left="843" OnClick="deptResetBtn_OnClick" TabOrder="11" Text="수정취소" Top="562" Width="87"></Button>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="saveDeptBtn" Left="751" OnClick="saveDeptBtn_OnClick" TabOrder="12" Text="저장" Top="562" Width="87"></Button>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="removeDeptBtn" Left="659" OnClick="removeDeptBtn_OnClick" TabOrder="14" Text="삭제" Top="562" Width="87"></Button>
+		<Button BKColor="silver" DkshadowColor="INFOTEXT" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="addDeptBtn" Left="567" OnClick="addDeptBtn_OnClick" TabOrder="13" Text="추가" Top="562" Width="87"></Button>
+	</Form>
+	<Script><![CDATA[
+
+function empAndDeptManagementForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	//전체 사원 목록 받아 옴(그사이 사원추가 등록 했을 경우..대비)
+	transaction("findEmployeeList","svcBase::/employee.do?method=findEmployeeList","","dsEmployee=dsEmployee","","callback"); 
+	//부서목록 가져오기 -> 로드할 때 부서 목록 다 받아옴 따로 조회 필요 없음 (단. 사원의 경우 퇴직자 선택 할 경우 때문에 조회 버튼 있음)
+	transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+	//직급List가져옴
+	transaction("findPositionList","svcBase::/position.do?method=findPositionList","","dsPosition=dsPosition","","callback");
+	//권한 리스트 가져오기
+	transaction("findAuthorityList","svcBase::/authority.do?method=findAuthorityList","","dsAuthority=dsAuthority","","callback");
+	http.Sync=false;
+}
+
+
+//check_box 체크 했는지 여부 판단
+function searchEmpBtn_OnClick(obj)
+{
+	//alert(dsCheck.getColumn(0,"check"));
+	if(dsCheck.getColumn(0,"check") == "N"){
+		
+		//전체 사원 목록 받아 옴(그사이 사원추가 등록 했을 경우..대비) - 퇴직자를 제외한 사원 조회!!
+		transaction("findEmployeeList","svcBase::/employee.do?method=findFilterEmployeeList","","dsEmployee=dsEmployee","","callback"); 
+				
+	}else{
+		
+		//전체 사원 목록 받아 옴(그사이 사원추가 등록 했을 경우..대비) - 퇴직자도 함께 나옴. 
+		transaction("findEmployeeList","svcBase::/employee.do?method=findEmployeeList","","dsEmployee=dsEmployee","","callback"); 
+	}
+		
+}
+
+function resetBtn_OnClick(obj)
+{
+	Reload(); //초기화
+}
+
+//사원 수정 저장
+function saveEmpBtn_OnClick(obj)
+{
+	if(confirm("저장 하시겠습니까?")){
+		transaction(
+			"batcEditEmployee",
+			"svcBase::/employee.do?method=batcEditEmployee",
+			"dsEmployee=dsEmployee:u",
+			"dsEmployee=dsEmployee",
+			"",
+			"callback"
+		);
+	}
+}
+
+function addDeptBtn_OnClick(obj)
+{
+	dsDepartment.AddRow();
+	//iif(rowType=='insert','normal','none') 그리드 안에 설정되어 있음 추가시에 부서 코드 넣을수 있고 기존에 존재하는것은 수정 불가!
+}
+
+function deptResetBtn_OnClick(obj)
+{
+	Reload(); //초기화
+}
+
+function removeDeptBtn_OnClick(obj)
+{
+	var selDeptCode = dsDepartment.GetColumn(dsDepartment.rowpos, "DEPT_CODE");
+	
+	//var deptRowType = dsDepartment.GetRowType(dsDepartment.rowpos, "DEPT_CODE");
+	//alert("deptRowType---"+deptRowType+":::selDeptCode---"+selDeptCode); //새로추가된건지 기존에 있는건지 판단하기 위해 (필요없어짐)
+	
+	dsEmployee.UnFilter();
+	dsEmployee.Filter("DEPT_CODE='"+selDeptCode+"'"); // 해당 부서에 등록 된 사원이 있는지 조사함
+	
+	
+	if(dsEmployee.GetRowCount() !=0){
+		alert("부서에 등록된 사원이 존재 합니다[삭제 불가]"); //dsEmployee.GetRowCount() !=0 :( -> 등록된 사원이 있습니다. 
+	}else{
+		dsDepartment.DeleteRow(dsDepartment.row);
+		dsEmployee.UnFilter();
+		alert("부서가 삭제 되었습니다."); //dsDepartment.DeleteRow(dsDepartment.row) :) -> 삭제완료!
+	}
+	
+}
+
+function saveDeptBtn_OnClick(obj)
+{
+	if(confirm("저장 하시겠습니까?")){
+		transaction(
+			"batchDept",
+			"svcBase::/department.do?method=batchDept",
+			"dsDepartment=dsDepartment:u",
+			"dsDepartment=dsDepartment",
+			"",
+			"callback"
+		);  //저장 버튼 후 변경된 결과를 dsDeprtment가 반영한다. 
+	}
+}]]></Script>
+</Window>

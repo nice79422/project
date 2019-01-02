@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ConnectGroup BkColor="white" Border="false" device="Win32&#32;(800x600)" Font="Default,0" height="700" HideFrame="true" Initurl="BASE::mainForm.xml" SessionURL="BASE::loginForm.xml" Statusbar="true" Title="test4th" titlebar="true" version="1.0" width="960" work_height="643" work_width="960">
+	<container Url="adobe" Version="1000">
+		<Component Height="21" Id="Spin" Image="10" Name="cySpin" Title="Spin" Version="1000" Width="121"/>
+		<Component Height="21" Id="MaskEdit" Image="19" Name="cyMaskedit" Title="MaskEdit" Version="1000" Width="121"/>
+		<Component Height="21" Id="Button" Image="2" Name="cyButton" Title="Button" Version="1000" Width="104"/>
+		<Component Height="13" Id="Static" Image="8" Name="cyStatic" Title="Static" Version="1000" Width="40"/>
+		<Component Height="21" Id="Edit" Image="3" Name="cyEdit" Title="Edit" Version="1000" Width="121"/>
+		<Component Height="65" Id="Shape" Image="28" Name="cyShape" Title="Shape" Version="1000" Width="65"/>
+		<Component Height="65" Id="Pie" Image="30" Name="cyPie" Title="Pie" Version="1000" Width="65"/>
+		<Component Height="21" Id="Checkbox" Image="4" Name="cyCheckBox" Title="Check&#32;Box" Version="1000" Width="97"/>
+		<Component Height="24" Id="FileDialog" Image="18" Name="cyFileDialog" Title="File&#32;Dialog" Version="1000" Width="24"/>
+		<Component Height="24" Id="File" Image="25" Name="cyFile" Title="File" Version="1000" Width="24"/>
+		<Component Height="97" Id="List" Image="6" Name="cyListBox" Title="List" Version="1000" Width="145"/>
+		<Component Height="21" Id="Combo" Image="5" Name="cyComboEx" Title="ComboBox" Version="1000" Width="145"/>
+		<Component Height="21" Id="Radio" Image="7" Name="cyRadio" Title="Radio" Version="1000" Width="113"/>
+		<Component Height="72" Id="TextArea" Image="16" Name="cyTextArea" Title="Text&#32;Area" Version="1000" Width="185"/>
+		<Component Height="17" Id="Progressbar" Image="31" Name="cyProgressbar" Title="Progressbar" Version="1000" Width="150"/>
+		<Component Height="97" Id="TreeView" Image="11" Module="CyTreeView" Name="cyTreeView" Title="Tree&#32;View" Version="1000" Width="121"/>
+		<Component Height="120" Id="Grid" Image="1" Module="CyGrid" Name="cyGrid" Title="Grid" Version="1000" Width="320"/>
+		<Component Height="105" Id="Image" Image="9" Name="cyImage" Title="Image" Version="1000" Width="105"/>
+		<Component Height="21" Id="Calendar" Image="13" Module="CyCalendarEx" Name="cyCalendarEx" Title="Calendar" Version="1000" Width="145"/>
+		<Component Height="193" Id="Div" Image="20" Name="cyDiv" Title="Division" Version="1000" Width="289"/>
+		<Component Id="PopupDiv" Image="54" Name="CyPopupDiv" Title="Popup&#32;Div" Version="1000"/>
+		<Component Height="193" Id="Tab" Image="12" Name="cyTab" Title="Tab" Version="1000" Width="289"/>
+		<Component Height="260" Id="WebBrowser" Image="24" Module="CyWebBrowser" Name="cyWebBrowser" Title="WebBrowser" Version="1000" Width="364"/>
+		<Component Height="168" Id="swFlash" Image="27" Module="CySWFlash" Name="cySWFlash" Title="Flash" Version="1000" Width="248"/>
+		<Component Height="24" Id="MenuBar" Image="32" Module="CyMenuBar" Name="cyMenuBar" Title="MenuBar" Version="1000" Width="192"/>
+		<Component Height="50" Id="Split" Image="55" Module="CySplit" Name="cySplit" Title="Split" Version="1000" Width="8"/>
+		<Component Height="8" Id="SplitJoint" Image="56" Module="CySplitU" Name="cySplitJoint" Title="SplitJoint" Version="1000" Width="8"/>
+		<Component Height="50" Id="Sign" Image="57" Module="CySign" Name="cySign" Title="Sign" Version="1000" Width="50"/>
+	</container>
+	<protocols version="1000">
+		<protocol id="file" name="cyHttpAdp" version="1000"/>
+		<protocol id="http" name="cyHttpAdp" version="1000"/>
+		<protocol id="https" name="cyHttpAdp" version="1000"/>
+	</protocols>
+	<AppGroups>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="BASE" Type="Form" Version="1000">
+			<script Baseurl="./BASE/" ScriptUrl="./BASE/"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="SCRIPTS" Type="js" Version="1000">
+			<Script Baseurl="./SCRIPTS/"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="HR_ATTENDANCE" Type="form" Version="1000">
+			<Script Baseurl="./HR_ATTENDANCE/" ScriptUrl="./HR_ATTENDANCE/"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="HR_CIRCUMSTANCE" Type="form" Version="1000">
+			<Script Baseurl="./HR_CIRCUMSTANCE/" ScriptUrl="./HR_CIRCUMSTANCE/"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="HR_PAY" Type="form" Version="1000">
+			<Script Baseurl="./HR_PAY/" ScriptUrl="./HR_PAY/"/>
+		</AppGroup>
+		<AppGroup CodePage="utf-8" Language="1042" Prefix="HR_PM" Type="form" Version="1000">
+			<Script Baseurl="./HR_PM/" ScriptUrl="./HR_PM/"/>
+		</AppGroup>
+		<DataGroup Baseurl="http://localhost:8282/test4th/base" CodePage="utf-8" Language="0" Prefix="svcBase" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/test4th/hr/circumstance" CodePage="utf-8" Language="0" Prefix="svcHrCircumstance" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/test4th/hr/pm" CodePage="utf-8" Language="0" Prefix="svcHrPM" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/test4th/hr/attendance" CodePage="utf-8" Language="0" Prefix="svcHrAttendance" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+		<DataGroup Baseurl="http://localhost:8282/test4th/hr/pay" CodePage="utf-8" Language="0" Prefix="svcHrPay" Streamver="4000" TrMethod="normal" Type="JSP" Version="1000"/>
+	</AppGroups>
+	<Script></Script>
+	<Datasets>
+		<Dataset DataSetType="Dataset" Id="dsDepartment">
+			<Contents>
+				<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_TEL" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsEmployee">
+			<Contents>
+				<colinfo id="EMP_CODE" size="256" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" type="STRING"/>
+				<colinfo id="PASSWORD" size="256" type="STRING"/>
+				<colinfo id="POSITION_CODE" size="256" type="STRING"/>
+				<colinfo id="DEPT_CODE" size="256" type="STRING"/>
+				<colinfo id="AUTHORITY_CODE" size="256" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsAuthority">
+			<Contents>
+				<colinfo id="AUTHORITY_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="AUTHORITY_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsPosition">
+			<Contents>
+				<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="POSITION_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsCode">
+			<Contents>
+				<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CODE_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="USING_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDetailCode">
+			<Contents>
+				<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="USING_STATUS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsStatus">
+			<Contents>
+				<colinfo id="STATUS" size="256" summ="default" type="STRING"/>
+				<record>
+					<STATUS>Y</STATUS>
+				</record>
+				<record>
+					<STATUS>N</STATUS>
+				</record>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsMenu">
+			<Contents>
+				<colinfo id="MENU_CODE" size="256" type="STRING"/>
+				<colinfo id="MENU_NAME" size="256" type="STRING"/>
+				<colinfo id="MENU_URL" size="256" type="STRING"/>
+				<colinfo id="SUPER_MENU_CODE" size="256" type="STRING"/>
+				<colinfo id="USING_STATUS" size="256" type="STRING"/>
+				<colinfo id="LEVEL" size="256" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsMenuAuthority">
+			<Contents>
+				<colinfo id="MENU_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="MENU_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="AUTHORITY_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="AUTHORITY_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsHobong">
+			<Contents>
+				<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="HOBONG" size="256" summ="default" type="STRING"/>
+				<colinfo id="BASE_SAL" size="256" summ="default" type="STRING"/>
+				<colinfo id="BONUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="SIGUB" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsBaseWorkTime">
+			<Contents>
+				<colinfo id="APPLY_YEAR" size="256" type="STRING"/>
+				<colinfo id="ATTEND_TIME" size="256" type="STRING"/>
+				<colinfo id="QUIT_TIME" size="256" type="STRING"/>
+				<colinfo id="OVER_TIME" size="256" type="STRING"/>
+				<colinfo id="NIGHT_TIME" size="256" type="STRING"/>
+				<colinfo id="LUNCH_START_TIME" size="256" type="STRING"/>
+				<colinfo id="LUNCH_END_TIME" size="256" type="STRING"/>
+				<colinfo id="DINNER_START_TIME" size="256" type="STRING"/>
+				<colinfo id="DINNER_END_TIME" size="256" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsBaseYear">
+			<Contents>
+				<colinfo id="YEAR" size="256" summ="default" type="STRING"/>
+				<record>
+					<YEAR>2018</YEAR>
+				</record>
+				<record>
+					<YEAR>2019</YEAR>
+				</record>
+				<record>
+					<YEAR>2020</YEAR>
+				</record>
+				<record>
+					<YEAR>2021</YEAR>
+				</record>
+				<record>
+					<YEAR>2022</YEAR>
+				</record>
+				<record>
+					<YEAR>2023</YEAR>
+				</record>
+				<record>
+					<YEAR>2024</YEAR>
+				</record>
+				<record>
+					<YEAR>2025</YEAR>
+				</record>
+				<record>
+					<YEAR>2026</YEAR>
+				</record>
+				<record>
+					<YEAR>2027</YEAR>
+				</record>
+				<record>
+					<YEAR>2028</YEAR>
+				</record>
+				<record>
+					<YEAR>2029</YEAR>
+				</record>
+				<record>
+					<YEAR>2030</YEAR>
+				</record>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsHoliday">
+			<Contents>
+				<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+				<colinfo id="HOLIDAY_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="NOTE" size="256" summ="default" type="STRING"/>
+				<colinfo id="HOLIDAY_TYPE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsAnnual">
+			<Contents>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="STANDARD_YEAR" size="256" summ="default" type="STRING"/>
+				<colinfo id="REST_DAYS" size="256" summ="default" type="STRING"/>
+				<colinfo id="USABLE_DAYS" size="256" summ="default" type="STRING"/>
+				<colinfo id="USED_DAYS" size="256" summ="default" type="STRING"/>
+				<colinfo id="LENGTH_OF_SERVICE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsEtcSal">
+			<Contents>
+				<colinfo id="ETC_SAL_CODE" size="256" type="STRING"/>
+				<colinfo id="ETC_SAL_NAME" size="256" type="STRING"/>
+				<colinfo id="ETC_SAL_PRICE" size="256" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsOvertimeSal">
+			<Contents>
+				<colinfo id="OVERTIME_SAL_CODE" size="256" type="STRING"/>
+				<colinfo id="OVERTIME_SAL_NAME" size="256" type="STRING"/>
+				<colinfo id="OVERTIME_SAL_RATE" size="256" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDailyAttd">
+			<Contents>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DAY_ATTD_SEQ" size="256" summ="default" type="STRING"/>
+				<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COST" size="256" summ="default" type="STRING"/>
+				<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDailyAttdRest">
+			<Contents>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+				<colinfo id="COST" size="256" summ="default" type="STRING"/>
+				<colinfo id="DAYS" size="256" summ="default" type="STRING"/>
+				<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUEST_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_REST_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_REST_SEQ" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsOverNight">
+			<Contents>
+				<colinfo id="OVER_NIGHT_SEQ" size="256" summ="default" type="STRING"/>
+				<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUEST_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="TYPE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDailyAttdManage">
+			<Contents>
+				<colinfo id="DAY_ATTD_SEQ" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COST" size="256" summ="default" type="STRING"/>
+				<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDailyAttdRestManage">
+			<Contents>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_REST_SEQ" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_REST_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="REQUEST_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DAYS" size="256" summ="default" type="STRING"/>
+				<colinfo id="COST" size="256" summ="default" type="STRING"/>
+				<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+				<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsApproval">
+			<Contents>
+				<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="VALUE" size="256" summ="default" type="STRING"/>
+				<record>
+					<CODE>Y</CODE>
+					<VALUE>승인</VALUE>
+				</record>
+				<record>
+					<CODE>N</CODE>
+					<VALUE>미승인</VALUE>
+				</record>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsUnCloseDailyAttd">
+			<Contents>
+				<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DAILY" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTEND_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTEND_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="QUIT_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="QUIT_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAVE_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="RETURN_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAVE_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORK_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="LATE_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="CLOSE_YN" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_DAY_TYPE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EARLY_LEAVE_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDailyAttdReport">
+			<Contents>
+				<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DAILY" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTEND_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTEND_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="QUIT_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="QUIT_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAVE_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="RETURN_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="LEAVE_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="WORK_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="LATE_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+				<colinfo id="CLOSE_YN" size="256" summ="default" type="STRING"/>
+				<colinfo id="ATTD_DAY_TYPE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EARLY_LEAVE_TIME" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsIncomeTax">
+			<Contents>
+				<colinfo id="INPUTED_YEAR" size="256" summ="default" type="STRING"/>
+				<colinfo id="INCOME_TAX_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="LOW_SAL" size="256" summ="default" type="STRING"/>
+				<colinfo id="HIGH_SAL" size="256" summ="default" type="STRING"/>
+				<colinfo id="PROGRESSIVE_DEDUCTION" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsDeductionTax">
+			<Contents>
+				<colinfo id="INPUTED_YEAR" size="256" summ="default" type="STRING"/>
+				<colinfo id="HEALTH_INSUR_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="NATIONAL_PEN_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="LONG_TERM_CARE_RATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMPLOYEEMENT_INSUR_RATE" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsBaseMonth">
+			<Contents>
+				<colinfo id="MONTH" size="256" summ="default" type="STRING"/>
+				<record>
+					<MONTH>01</MONTH>
+				</record>
+				<record>
+					<MONTH>02</MONTH>
+				</record>
+				<record>
+					<MONTH>03</MONTH>
+				</record>
+				<record>
+					<MONTH>04</MONTH>
+				</record>
+				<record>
+					<MONTH>05</MONTH>
+				</record>
+				<record>
+					<MONTH>06</MONTH>
+				</record>
+				<record>
+					<MONTH>07</MONTH>
+				</record>
+				<record>
+					<MONTH>08</MONTH>
+				</record>
+				<record>
+					<MONTH>09</MONTH>
+				</record>
+				<record>
+					<MONTH>10</MONTH>
+				</record>
+				<record>
+					<MONTH>11</MONTH>
+				</record>
+				<record>
+					<MONTH>12</MONTH>
+				</record>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsSalaryInput">
+			<Contents>
+				<colinfo id="PAYMENT_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="SALARY_TYPE_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="TOTAL_SALARY" size="256" summ="default" type="STRING"/>
+				<colinfo id="TOTAL_DEDUCTION_PRICE" size="256" summ="default" type="STRING"/>
+				<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="HIRE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="RETIRE_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CHINE_PAYMENTS" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="dsPayDeduction">
+			<Contents>
+				<colinfo id="PAY_DEDUCTION_SEQ" size="256" summ="default" type="STRING"/>
+				<colinfo id="PRICE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PAY_DEDUCTION_ITEM_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PAY_DEDUCTION_ITEM_NAME" size="256" summ="default" type="STRING"/>
+				<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="PAYMENT_DATE" size="256" summ="default" type="STRING"/>
+				<colinfo id="FORMULA" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONDITION" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONDITION_TRUE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONDITION_FALSE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONDITION_KOR" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONDITION_TRUE_KOR" size="256" summ="default" type="STRING"/>
+				<colinfo id="CONDITION_FALSE_KOR" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+		<Dataset DataSetType="Dataset" Id="gds_post">
+			<Contents>
+				<colinfo id="zip_no" size="256" summ="default" type="STRING"/>
+				<colinfo id="lnm_adres" size="256" summ="default" type="STRING"/>
+				<colinfo id="rn_adres" size="256" summ="default" type="STRING"/>
+			</Contents>
+		</Dataset>
+	</Datasets>
+	<Variables>
+		<Var Id="g_authorityCode" Type="Global"/>
+		<Var Id="g_deptName" Type="Global"/>
+		<Var Id="g_empCode" Type="Global"/>
+		<Var Id="g_empName" Type="Global"/>
+	</Variables>
+	<UserColor User0="brown" User1="darkmagenta" User2="APPWORKSPACE" User3="olive"/>
+	<ActiveX Version="1000">
+		<Component Id="Adobe" Image="23" Progid="AcroPDF.PDF.1" Title="Adobe" Version="1000"/>
+	</ActiveX>
+	<Resource Ext="res" Url="C:\Miplatform\test4th\IMAGES\img.res" Version="1000"/>
+</ConnectGroup>

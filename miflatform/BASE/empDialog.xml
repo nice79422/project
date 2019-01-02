@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="450" Id="empDialog" Left="8" PidAttrib="7" Title="empDialog" Top="8" Ver="1.0" Width="300" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,16" Height="30" Id="Static1" Left="8" TabOrder="1" Text="사원&#32;조회" Top="5" VAlign="Middle" Width="280"></Static>
+		<Grid BindDataset="dsEmployee" BkColor2="default" BoldHead="true" Bottom="435" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" Height="395" Id="employeeGrid" InputPanel="FALSE" Left="8" LineColor="default" OnCellDBLClick="employeeGrid_OnCellDblClick" Right="288" TabOrder="2" TabStop="true" Top="40" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="280">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="92"/>
+						<col width="92"/>
+						<col width="92"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" expandsize="20" font="한컴&#32;윤고딕&#32;240,9" text="부서코드"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,9" text="사원코드"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,9" text="사원이름"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="DEPT_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,9" text="사원수" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="1" colspan="2" display="text" expr='RowCount()+&#32;&quot;명&quot;' font="한컴&#32;윤고딕&#32;240,9" Valign="Center"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function employeeGrid_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	
+	var selEmpCode = dsEmployee.GetColumn(nRow, "EMP_CODE");
+	var selEmpName = dsEmployee.GetColumn(nRow, "EMP_NAME");
+	var empPassword = dsEmployee.GetColumn(nRow, "PASSWORD");
+	var empdeptCode = dsEmployee.GetColumn(nRow, "DEPT_CODE");
+	var selAuthorityCode = dsEmployee.GetColumn(nRow, "AUTHORITY_CODE");
+	g_empCode = selEmpCode;
+	g_empName = selEmpName;
+	g_authorityCode = selAuthorityCode;
+		
+	
+	parent.empCode.text=selEmpCode;
+	
+	//로그인시 입력값과 DB의 값을 비교 하기 위해 dataset의 값을 담는다. 
+	parent.setPw(empPassword);  
+	parent.setDeptCode(empdeptCode);
+	
+	close();
+	
+}
+]]></Script>
+</Window>

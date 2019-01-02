@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="unApprovedDailyAttdDialog" Left="8" PidAttrib="7" Title="unApprovedDailyAttdDialog" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsDailyAttdType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsDailyAttdRestType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" TabOrder="1" Text="일근태&#32;/&#32;근태외&#32;미승인&#32;목록" VAlign="Middle" Width="952"></Static>
+		<Static Font="한컴&#32;윤고딕&#32;240,10" Height="315" Id="Static1" Left="19" TabOrder="4" Text="일근태&#32;미승인&#32;목록" Top="105" Type="Groupbox" Width="918"></Static>
+		<Static Font="한컴&#32;윤고딕&#32;240,10" Height="315" Id="Static2" Left="19" TabOrder="5" Text="일근태외&#32;미승인&#32;목록" Top="423" Type="Groupbox" Width="918"></Static>
+		<Grid BindDataset="dsDailyAttdRestManage" BkColor2="default" BoldHead="true" Bottom="719" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="255" Id="Grid1" InputPanel="FALSE" Left="24" LineColor="default" Right="928" RowHeight="20" TabOrder="10" TabStop="true" Top="464" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="904">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="120"/>
+						<col width="110"/>
+						<col width="0"/>
+						<col width="100"/>
+						<col width="110"/>
+						<col width="110"/>
+						<col width="110"/>
+						<col width="80"/>
+						<col width="110"/>
+						<col width="80"/>
+						<col width="250"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="ATTD_REST_SEQ"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근태타입"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청일자"/>
+						<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="시작일"/>
+						<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="종료일"/>
+						<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,11" text="일수"/>
+						<cell bkcolor="silver" col="8" display="text" font="한컴&#32;윤고딕&#32;240,11" text="금액"/>
+						<cell bkcolor="silver" col="9" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인상태"/>
+						<cell bkcolor="silver" col="10" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사유"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="ATTD_REST_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="3" colid="ATTD_REST_CODE" combocol="DETAIL_CODE" combodataset="dsDailyAttdRestType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="4" colid="REQUEST_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+						<cell align="center" col="5" colid="START_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+						<cell align="center" col="6" colid="END_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+						<cell align="center" col="7" colid="DAYS" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="8" colid="COST" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="9" colid="APPROVAL_STATUS" combocol="CODE" combodataset="dsApproval" combotext="VALUE" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="10" colid="CAUSE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="dsDailyAttdManage" BkColor2="default" BoldHead="true" Bottom="399" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="255" Id="Grid0" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="928" RowHeight="20" TabOrder="9" TabStop="true" Top="144" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="904">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="0"/>
+						<col width="110"/>
+						<col width="95"/>
+						<col width="100"/>
+						<col width="95"/>
+						<col width="100"/>
+						<col width="80"/>
+						<col width="180"/>
+					</columns>
+					<head>
+						<cell bkcolor="mistyrose" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="DAY_ATTD_SEQ"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기준일"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="시간"/>
+						<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="금액"/>
+						<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인상태"/>
+						<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사유"/>
+					</head>
+					<body>
+						<cell col="0" colid="DAY_ATTD_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="3" colid="BASIC_DAY" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+						<cell align="center" col="4" colid="TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="##:##"/>
+						<cell align="center" col="5" colid="COST" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="6" colid="APPROVAL_STATUS" combocol="CODE" combodataset="dsApproval" combotext="VALUE" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="7" colid="CAUSE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static16" Left="19" TabOrder="3" Text="기준일" Top="65" VAlign="Middle" Width="104"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,10" HeaderFont="LG&#32;PC,11" Height="30" Id="unApprovalDate" Left="130" OnChanged="unApprovalDate_OnChanged" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="2" Top="65" WeeksFont="LG&#32;PC,11" Width="104"></Calendar>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="searchBtn" Left="623" OnClick="searchBtn_OnClick" TabOrder="6" Text="일괄승인" Top="65" Width="100"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="saveBtn" Left="731" OnClick="saveBtn_OnClick" TabOrder="7" Text="저장" Top="65" Width="100"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="cancelBtn" Left="837" OnClick="cancelBtn_OnClick" TabOrder="8" Text="취소" Top="65" Width="100"></Button>
+	</Form>
+	<Script><![CDATA[
+var basicDay;
+
+function unApprovedDailyAttdDialog_OnLoadCompleted(obj)
+{
+	basicDay=obj.basicDay;
+	unApprovalDate.Value=basicDay;
+	
+	http.sync=true;
+	//코드 목록도 얻어 옴
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+      
+    //경조사 ~ 초과근무  (근태외 사용 코드) 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'ASC'");
+	dsDailyAttdRestType.CopyF(dsDetailCode);
+   
+    //출근/퇴근 ~ 휴무 ... (근태 사용 코드 )
+	dsDetailCode.UnFilter();
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'ADC'");
+	dsDailyAttdType.CopyF(dsDetailCode);
+	http.sync=true;
+	
+	alert(http.RecvHttpStr);
+}
+
+
+//전부사 승인 (N -> Y)
+function searchBtn_OnClick(obj)
+{
+	 if(confirm(unApprovalDate.Text)){
+      for(var index = 0; index < dsDailyAttdManage.rowCount; index++) {
+         dsDailyAttdManage.SetColumn(index, "APPROVAL_STATUS", "Y");
+      }
+      for(var index = 0; index < dsDailyAttdRestManage.rowCount; index++) {
+         dsDailyAttdRestManage.SetColumn(index, "APPROVAL_STATUS", "Y");
+      }
+   }
+	
+	
+}
+
+//취소 버튼 누를 경우 (승인 취소 )
+function cancelBtn_OnClick(obj)
+{
+	if(confirm(" 승인을 취소 하시겠습니까?  ")){
+		//alert(dsDailyAttdManage.GetRowCount()+"----" +dsDailyAttdRestManage.GetRowCount());
+      if(dsDailyAttdManage.GetRowCount()>0 || dsDailyAttdRestManage.GetRowCount()>0){
+         //if(confirm(" dsDailyAttd.GetRowCount()>0 || dsDailyAttdRest.GetRowCount()>0 ")){   
+            close(-1);
+         //}
+      }
+   }
+}
+
+
+//승인 결과를 저장 할 때 ! (부서 상관 없이 해당 일자의 신청 내역을 모두 승인 하게 된다. )
+function saveBtn_OnClick(obj)
+{
+	http.Sync=true;
+   
+   transaction(
+      "updateApproval",
+      "svcHrAttendance::/dailyAttd.do?method=updateApproval",
+      "dsDailyAttd=dsDailyAttdManage:u",
+      "dsDailyAttdManage=dsDailyAttd",
+      "basicDay="+basicDay ,
+      "callback"
+   );
+   transaction(
+      "updateApprovalRest",
+      "svcHrAttendance::/dailyAttdRest.do?method=updateApproval",
+      "dsDailyAttdRest=dsDailyAttdRestManage:u",
+      "dsDailyAttdRestManage=dsDailyAttdRest",
+      "basicDay="+basicDay ,
+      "callback"
+   );   
+   
+   parent.findDailyAttdReport();
+   close();
+	
+	http.Sync=false;
+	
+}
+]]></Script>
+</Window>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="450" Id="PostInfoForm" Left="8" PidAttrib="7" Title="주소" Top="8" Ver="1.0" Width="780" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="ds_address">
+				<Contents>
+					<colinfo id="TYPE" size="256" summ="default" type="STRING"/>
+					<record>
+						<TYPE>지번</TYPE>
+					</record>
+					<record>
+						<TYPE>도로명</TYPE>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Tab Height="432" Id="Tab0" Left="10" TabOrder="1" Top="8" Width="758">
+			<Contents>
+				<TabPage BorderColor="black" Height="407" Id="tab1" Left="2" TabOrder="1" Text="주소검색" Top="23" Width="754">
+					<Static Align="Center" BKColor="silver" Color="black" Font="돋움체,10" Height="30" Id="Static4" Left="12" TabOrder="1" Text="지번/도로명" Top="25" VAlign="Middle" Width="104"></Static>
+					<Edit Height="30" Id="edt_address" Left="113" TabOrder="2" Top="25" Width="110"></Edit>
+					<Button BKColor="silver" Font="돋움,11" Height="30" Id="btn_serachAddress" Left="224" OnClick="Tab0_tab1_btn_serachAddress_OnClick" TabOrder="3" Text="검색" Top="25" Width="56"></Button>
+					<Grid AutoFit="TRUE" BindDataset="gds_post" BkColor2="default" BoldHead="true" Bottom="399" Enable="true" EndLineColor="default" Height="332" Id="Grid0" InputPanel="FALSE" Left="12" LineColor="default" MinWidth="100" OnCellDBLClick="Tab0_tab1_Grid0_OnCellDblClick" Right="751" TabOrder="4" TabStop="true" Top="67" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="739">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="25"/>
+									<col width="80"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell col="0" display="text" text="우편번호"/>
+									<cell col="1" display="text" text="도로명주소"/>
+									<cell col="2" display="text" text="지번주소"/>
+								</head>
+								<body>
+									<cell col="0" colid="zip_no" display="text"/>
+									<cell col="1" colid="lnm_adres" display="text"/>
+									<cell col="2" colid="rn_adres" display="text"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Combo BKColor="silver" CodeColumn="TYPE" DataColumn="TYPE" Height="30" Id="cbo_addressType" INDEX="0" InnerDataset="ds_address" Left="652" TabOrder="5" Top="24" Width="99"></Combo>
+				</TabPage>
+			</Contents>
+		</Tab>
+		<Button BKColor="silver" Height="31" Id="btn_pre" Left="336" OnClick="btn_pre_OnClick" TabOrder="2" Text="이전" Top="53" Width="48"></Button>
+		<Button BKColor="silver" Height="31" Id="btn_next" Left="392" OnClick="btn_next_OnClick" TabOrder="3" Text="다음" Top="53" Width="48"></Button>
+	</Form>
+	<Script><![CDATA[var globalDong;
+var globalPage;
+
+function Tab0_tab1_btn_serachAddress_OnClick(obj)
+{
+   var dong = this.Tab0.tab1.edt_address.text;
+   globalDong = dong;
+   globalPage = 1;
+   
+   searchAddress(dong,globalPage);
+   
+}
+
+function btn_next_OnClick(obj)
+{
+   
+   globalPage = globalPage + 1;
+   
+   searchAddress(globalDong,globalPage);
+}
+
+function btn_pre_OnClick(obj)
+{   
+   if(globalPage > 1){
+      globalPage = globalPage - 1;
+   }
+   searchAddress(globalDong,globalPage);
+   
+}
+
+
+
+function Tab0_tab1_Grid0_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+   var addressType = this.Tab0.tab1.cbo_addressType.Text;
+   
+   if(addressType == "지번"){
+      parent.detailRegistrationTab.tab1.baseAddress.text = gds_post.GetColumn(nRow,"RN_ADRES");
+   }else{
+      parent.detailRegistrationTab.tab1.baseAddress.text = gds_post.GetColumn(nRow,"LNM_ADRES");
+   }
+   parent.detailRegistrationTab.tab1.zipCode .text = gds_post.GetColumn(nRow,"ZIP_NO");
+   parent.detailRegistrationTab.tab1.detailAddress.text = "";
+   close();
+}
+
+
+function searchAddress(dong, page){
+   http.Sync="true";
+   Transaction("findPostList","svcBase::postList.do?method=findPostList","","gds_post=gds_post","dong='"+dong+"' page='"+globalPage+"'","callback");
+   http.Sync="false";
+} ]]></Script>
+</Window>

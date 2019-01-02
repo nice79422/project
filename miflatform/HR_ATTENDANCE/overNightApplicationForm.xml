@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="overNightApplicationForm" Left="8" OnLoadCompleted="overNightApplicationForm_OnLoadCompleted" PidAttrib="7" Title="overNightApplicationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="3" TabOrder="1" Text="연장&#32;/&#32;심야&#32;근무신청" Top="3" VAlign="Middle" Width="952"></Static>
+		<Static Align="Center" Color="red" Font="한컴&#32;윤고딕&#32;240,9" Height="48" Id="Static23" Left="8" TabOrder="2" Text="일근태&#32;승인&#32;후&#32;(직원&#32;누구나&#32;신청&#32;가능&#32;단체)&#13;&#10;연장&#32;/&#32;심야&#32;근무&#32;신청을&#32;해줘야&#32;됨" Top="40" VAlign="Middle" Width="340"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static11" Left="352" TabOrder="7" Text="조회&#32;기간" Top="64" VAlign="Middle" Width="104"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="fromDate" Left="456" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="4" Top="64" WeeksFont="LG&#32;PC,11" Width="127"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static10" Left="583" TabOrder="6" Text="~" Top="64" VAlign="Middle" Width="32"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="toDate" Left="616" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="5" Top="64" WeeksFont="LG&#32;PC,11" Width="127"></Calendar>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="searchBtn" Left="768" OnClick="searchBtn_OnClick" TabOrder="8" Text="조&#32;회" Top="64" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="batchBtn" Left="858" OnClick="batchBtn_OnClick" TabOrder="9" Text="일괄&#32;신청" Top="64" Width="87"></Button>
+		<Grid AutoEnter="TRUE" AutoFit="TRUE" BindDataset="dsOverNight" BkColor2="default" BoldHead="true" Bottom="759" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,9" HeadHeight="25" Height="657" Id="OverWorkApprovalMgtGrid" InputPanel="FALSE" Left="17" LineColor="default" MinWidth="100" Right="945" RowHeight="20" TabOrder="3" TabStop="true" Top="102" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="928">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="0"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="mistyrose" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="OVER_NIGHT_SEQ"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청일자"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청유형"/>
+						<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인여부"/>
+						<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청여부"/>
+					</head>
+					<body>
+						<cell col="0" colid="OVER_NIGHT_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="3" colid="BASIC_DAY" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="4" colid="TYPE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="5" colid="APPROVAL_STATUS" color="expr:decode(APPROVAL_STATUS,&apos;N&apos;,&#32;&apos;red&apos;,&#32;&apos;Y&apos;,&#32;&apos;blue&apos;)" display="text" expr="decode(APPROVAL_STATUS,&apos;N&apos;,&#32;&apos;미승인&apos;,&#32;&apos;Y&apos;,&#32;&apos;승인&apos;)" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="6" colid="REQUEST_STATUS" color="expr:decode(REQUEST_STATUS,&apos;N&apos;,&apos;red&apos;,&apos;Y&apos;,&apos;blue&apos;)" display="text" expr="decode(REQUEST_STATUS,&apos;N&apos;,&#32;&apos;미신청&apos;,&#32;&apos;Y&apos;,&#32;&apos;신청&apos;)" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+
+//로딩 시 
+function overNightApplicationForm_OnLoadCompleted(obj)
+{
+	http.sync=true;
+	transaction(
+      "findOverNightAttdReport",
+      "svcHrAttendance::/attdReport.do?method=findOverNightAttdReport",
+      "",
+      "dsOverNight=dsOverNight",
+      "",
+      "callback"
+	);
+   dsOverNight.Filter("EMP_CODE='"+0+"'");
+   http.sync=false;
+}
+
+function searchBtn_OnClick(obj)
+{
+	
+	if(fromDate.Value=="" || toDate.Value==""){
+      alert(" 조회기간을 지정하시기 바랍니다. ");
+   }else{
+      if(fromDate.Value>toDate.Value){
+         alert(" 조회기간이 잘못 지정되었습니다. ");
+         toDate.Value="";
+      }else{
+         dsOverNight.UnFilter();
+         
+         dsOverNight.Filter("BASIC_DAY>='"+fromDate.Value+"' && BASIC_DAY<='"+toDate.Value+"'");
+         if(dsOverNight.GetRowCount()==0){
+            alert("조회할 목록이 없습니다. ");
+         }
+      }
+   }
+	
+}
+
+
+
+function updateOverNight(){  //변경된 것 저장 하는 함수 
+  transaction(
+      "updateRequestStatus",
+      "svcHrAttendance::/attdReport.do?method=updateRequestStatus",
+      "dsOverNight=dsOverNight:u",
+      "",
+      "",
+      "callback"
+   );
+   //alert(http.SendHttpStr);
+}
+
+function callback(trid, ErrorCode, ErrorMsg){
+   if(trid=="updateRequestStatus"){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0? :( ");
+      }else{
+         alert(ErrorMsg);
+         Reload();
+      }
+   }
+}
+
+function batchBtn_OnClick(obj)
+{
+	if(confirm(" 일괄 신청하시겠습니까? ")){
+	
+      for(var index=0 ; index<dsOverNight.GetRowCount(); index++){
+         dsOverNight.SetColumn(index,"REQUEST_STATUS","Y"); //신청 여부를 Y로 변경 한다. (Y 인 것은 변하지 않는 듯. N -> Y)
+      }
+      updateOverNight();
+   }
+}]]></Script>
+</Window>

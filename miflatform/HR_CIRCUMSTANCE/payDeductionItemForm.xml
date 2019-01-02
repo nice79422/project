@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="payDeductionItemForm" Left="8" OnLoadCompleted="payDeductionItemForm_OnLoadCompleted" PidAttrib="7" Title="payDeductionItemForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsPayType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsPayDeductionType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsTaxType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSalMonth">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSuSubApply">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsInOutApply">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsPayDeduction">
+				<Contents>
+					<colinfo id="PAY_DEDUCTION_ITEM_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCT_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="INPUTED_YEAR" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCTION_ITEM_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_DEDUCTION_ITEM_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="TAX_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="SUSUB_APPLY" size="256" summ="default" type="STRING"/>
+					<colinfo id="MONTH_SAL" size="256" summ="default" type="STRING"/>
+					<colinfo id="PRICE" size="256" summ="default" type="STRING"/>
+					<colinfo id="IN_OUT_APPLY" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" TabOrder="1" Text="지급&#32;공제&#32;항목&#32;등록" VAlign="Middle" Width="953"></Static>
+		<Static BKColor="gainsboro" Font="한컴&#32;윤고딕&#32;240,12" Height="40" Id="Static3" TabOrder="2" Top="40" Width="953"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="22" TabOrder="3" Text="급여구분" Top="40" VAlign="Middle" Width="87"></Static>
+		<Combo BKColor="white" CodeColumn="DETAIL_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selPayType" InnerDataset="dsPayType" Left="110" TabOrder="4" Top="40" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="293" TabOrder="7" Text="지급공제구분" Top="40" VAlign="Middle" Width="87"></Static>
+		<Combo BKColor="white" CodeColumn="DETAIL_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selPayDeductionType" InnerDataset="dsPayDeductionType" Left="382" TabOrder="5" Top="40" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="557" TabOrder="8" Text="귀속년도" Top="40" VAlign="Middle" Width="87"></Static>
+		<Combo BKColor="white" CodeColumn="YEAR" DataColumn="YEAR" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selYear" InnerDataset="dsBaseYear" Left="646" ResetIndex="FIRST" TabOrder="6" Top="40" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static4" Left="731" TabOrder="9" Text="년" Top="40" VAlign="Middle" Width="30"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static5" Left="22" TabOrder="13" Text="지급&#32;공제&#32;항목&#32;목록" Top="96" VAlign="Middle" Width="317"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsPayDeduction" BkColor2="default" BoldHead="true" Bottom="713" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="577" Id="payDeductionGrid" InputPanel="FALSE" Left="22" LineColor="default" MinWidth="100" OnCellDBLClick="payDeductionGrid_OnCellDblClick" OnKillFocus="payDeductionGrid_OnKillFocus" Right="339" RowHeight="20" TabOrder="12" TabStop="true" Top="136" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="317">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="102"/>
+						<col width="118"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" edit="normal" font="한컴&#32;윤고딕&#32;240,12" text="항목코드"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" edit="normal" font="한컴&#32;윤고딕&#32;240,12" text="항목명"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="PAY_DEDUCTION_ITEM_CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="PAY_DEDUCTION_ITEM_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="607" Hilight3dColor="black" Id="Static6" Left="374" TabOrder="16" Text="지급&#32;/&#32;공제&#32;항목&#32;설정" Top="144" Type="Groupbox" Width="560"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static7" Left="501" TabOrder="17" Text="과세&#32;구분" Top="335" VAlign="Middle" Width="88"></Static>
+		<Combo BindDataset="dsPayDeduction" CodeColumn="DETAIL_CODE" Column="TAX_TYPE_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selTaxType" InnerDataset="dsTaxType" Left="605" TabOrder="22" Top="335" Width="177"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static8" Left="501" TabOrder="18" Text="월정급여" Top="387" VAlign="Middle" Width="88"></Static>
+		<Combo BindDataset="dsPayDeduction" CodeColumn="DETAIL_CODE" Column="MONTH_SAL" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selMonthSal" InnerDataset="dsSalMonth" Left="605" TabOrder="24" Top="387" Width="177"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static9" Left="501" TabOrder="19" Text="수습적용" Top="439" VAlign="Middle" Width="88"></Static>
+		<Combo BindDataset="dsPayDeduction" CodeColumn="DETAIL_CODE" Column="SUSUB_APPLY" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selSusub" InnerDataset="dsSuSubApply" Left="605" TabOrder="23" Top="439" Width="177"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static10" Left="501" TabOrder="20" Text="입퇴사적용" Top="491" VAlign="Middle" Width="88"></Static>
+		<Combo BindDataset="dsPayDeduction" CodeColumn="DETAIL_CODE" Column="IN_OUT_APPLY" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selInoutApply" InnerDataset="dsInOutApply" Left="605" TabOrder="25" Top="491" Width="177"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static11" Left="501" TabOrder="21" Text="급&#32;&#32;액" Top="543" VAlign="Middle" Width="88"></Static>
+		<Edit BindDataset="dsPayDeduction" Border="Default" Column="PRICE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="input_price" Left="605" TabOrder="26" Top="543" Width="177"></Edit>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="addBtn" Left="276" OnClick="addBtn_OnClick" TabOrder="11" Text="+" Top="721" Width="30"></Button>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="removeBtn" Left="309" OnClick="removeBtn_OnClick" TabOrder="10" Text="-" Top="721" Width="30"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="searchBtn" Left="760" OnClick="searchBtn_OnClick" TabOrder="15" Text="조&#32;&#32;회" Top="96" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="batchBtn" Left="847" OnClick="batchBtn_OnClick" TabOrder="14" Text="일괄저장" Top="96" Width="87"></Button>
+	</Form>
+	<Script><![CDATA[
+
+
+var payType;
+var payDeductionType;
+var inputYear;
+var selRow;
+var flag=0;
+
+// 초기 로딩 시 
+function payDeductionItemForm_OnLoadCompleted(obj)
+{
+	
+	Http.Sync=true;
+	transaction(
+		"findPayDeductionList",
+		"svcHrCircumstance::/payDeduction.do?method=findPayDeductionList",
+		"",
+		"dsPayDeduction=dsPayDeduction",
+		"",
+		"callback"
+	);
+	
+	//코드 목록도 얻어 옴
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+	Http.Sync=false;
+   
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'SG' && SubStr(DETAIL_CODE,0) != 'SGC000'"); // 급여(SGC001) 상여(SGC002) 
+	dsPayType.CopyF(dsDetailCode);
+	
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'PDC'");  //지급(PDC001) 공제(PDC002)
+	dsPayDeductionType.CopyF(dsDetailCode);
+	
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'PT'");  //과세(PTC001) 비과세(PTC002) 
+	dsTaxType.CopyF(dsDetailCode);
+	
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'PDM'"); //  환경등록적용(PDM001), 정상적용(PDM002), 일할적용(PDM003)
+	dsSuSubApply.CopyF(dsDetailCode); //수습적용
+	dsInOutApply.CopyF(dsDetailCode); //입퇴사적용
+	
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'PM'"); // 포함(PM001) 비포함(PM002) 
+	dsSalMonth.CopyF(dsDetailCode); //월정급여
+	
+	dsPayDeduction.Filter("PAY_TYPE_CODE='0'");
+	
+}
+
+/*
+	공제면  % 따라서 뺌 받은것에서 뺌..  (세금..)?.
+	지급이면 주고서 과세 비과세에 따라서 뺌(나머진 비과세.. 기본급은 지급이면서 과세.. )?
+	
+*/
+
+
+function searchBtn_OnClick(obj)
+{
+	payType=selPayType.Value; // 급여구분 선택 
+	payDeductionType=SelPayDeductionType.Value; // 지급공제구분 선택
+	inputYear=selYear.Text;	// 귀속년도
+
+	if(payType=="" || payDeductionType=="" || inputYear==""){
+		alert("급여구분/지급공제구분/귀속년도를 지정하시기 바랍니다."); 
+	}else{
+		dsPayDeduction.UnFilter();
+		dsPayDeduction.Filter("PAY_TYPE_CODE='"+payType+"'&&PAY_DEDUCTION_TYPE_CODE='"+payDeductionType+"'&&INPUTED_YEAR='"+inputYear+"'");
+		if(dsPayDeduction.GetRowCount() ==0){
+			alert(" 등록된 내용이 없습니다.  ");
+		}
+	}
+}
+
+// focus를 잃었을 때 
+function payDeductionGrid_OnKillFocus(obj)
+{
+	flag=0;
+}
+
+function payDeductionGrid_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	if(flag!=1 && nCell==0){
+		alert(" flag!=1 && nCell==0 :( ");
+	}else{
+		payDeductionGrid.Editable=true;
+	}
+}
+
+function addBtn_OnClick(obj)
+{
+	payType=selPayType.Value;
+	payDeductionType=selPayDeductionType.Value;
+	inputYear=selYear.Value;
+	
+	if(payType=="" || payDeductionType=="" || inputYear=="" ){
+		alert("급여구분/지급공제구분/귀속년도를 지정하시기 바랍니다."); 
+	}else{
+		dsPayDeduction.AddRow();
+		
+		dsPayDeduction.SetColumn(dsPayDeduction.row,"PAY_TYPE_CODE",payType);
+		dsPayDeduction.SetColumn(dsPayDeduction.row,"PAY_DEDUCTION_TYPE_CODE",payDeductionType);
+		dsPayDeduction.SetColumn(dsPayDeduction.row,"INPUTED_YEAR",inputYear);	
+	}
+	flag=1;
+}
+
+function removeBtn_OnClick(obj)
+{
+	dsPayDeduction.DeleteRow(dsPayDeduction.row);
+}
+
+
+
+//수정 내용 저장 시
+function batchBtn_OnClick(obj)
+{
+	if(confirm("일괄저장하시겠습니까 ?")){
+	
+		var taxType=selTaxType.Value;
+		var monthSal=selMonthSal.Value;
+		var susub=selSusub.Value;
+		var inoutApply=selInoutApply.Value;
+		var price=input_price.Value;
+	
+		dsPayDeduction.SetColumn(dsPayDeduction.rowpos,"TAX_TYPE_CODE",taxType);
+		dsPayDeduction.SetColumn(dsPayDeduction.rowpos,"MONTH_SAL",monthSal);
+		dsPayDeduction.SetColumn(dsPayDeduction.rowpos,"SUSUB_APPLY",susub);
+		dsPayDeduction.SetColumn(dsPayDeduction.rowpos,"IN_OUT_APPLY",inoutApply);
+		dsPayDeduction.SetColumn(dsPayDeduction.rowpos,"PRICE",price);
+    
+		transaction(
+			"batchPayDeduction",
+			"svcHrCircumstance::/payDeduction.do?method=batchPayDeduction",
+			"dsPayDeduction=dsPayDeduction:u",
+			"dsPayDeduction=dsPayDeduction",
+			"",
+			"callback"
+		);
+	}
+	flag=0;
+	
+}
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+	if(trid=='findPayDeductionList'){
+		if(ErrorCode!=0){
+			//alert("ErrorCode!=0 :( ");	
+		}
+	}
+	
+	if(trid=='batchPayDeduction'){
+		if(ErrorCode!=0){
+			alert("ErrorCode!=0 :) ");
+		}else{
+			alert(ErrorMsg);
+			Reload();
+		}	
+	}
+}
+]]></Script>
+</Window>

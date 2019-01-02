@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="basicWorktimeManagementForm" Left="8" OnLoadCompleted="basicWorktimeManagementForm_OnLoadCompleted" PidAttrib="7" Title="basicWorktimeManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="405" Hilight3dColor="black" Id="Static11" Left="161" TabOrder="15" Text="근무시간" Top="211" Type="Groupbox" Width="591"></Static>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="103" Hilight3dColor="black" Id="Static10" Left="161" TabOrder="7" Text="검&#32;&#32;색" Top="103" Type="Groupbox" Width="591"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="204" TabOrder="3" Text="적용년도&#32;검색" Top="145" VAlign="Middle" Width="160"></Static>
+		<Combo BKColor="white" CodeColumn="YEAR" DataColumn="YEAR" DisplayRowCnt="10" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="applyYear" InnerDataset="dsBaseYear" Left="367" TabOrder="6" Top="145" Width="150"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static9" Left="518" TabOrder="4" Text="년" Top="145" VAlign="Middle" Width="40"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="searchBtn" Left="632" OnClick="searchBtn_OnClick" TabOrder="5" Text="찾&#32;기" Top="144" Width="87"></Button>
+		<Static Align="Center" Color="red" Font="한컴&#32;윤고딕&#32;240,12" Height="99" Id="Static6" Left="161" TabOrder="2" Text="★&#32;시간&#32;입력시&#32;09:00&#32;☞&#32;0900&#32;형태로&#32;입력하세요.&#13;&#10;(1)&#32;저녁&#32;기본&#32;시간은&#32;1시간이며,&#32;18:00&#32;이후&#32;저녁시간&#32;적용입니다.&#13;&#10;(2)&#32;연장근무는&#32;19:00&#32;이후&#32;적용됩니다.&#13;&#10;(3)&#32;심야근무는&#32;22:00&#32;이후&#32;적용됩니다." Top="624" VAlign="Middle" Width="585"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="204" TabOrder="8" Text="적용년도" Top="237" VAlign="Middle" Width="160"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="204" TabOrder="9" Text="출근시각" Top="292" VAlign="Middle" Width="160"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static7" Left="204" TabOrder="13" Text="퇴근시각" Top="347" VAlign="Middle" Width="160"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static4" Left="204" TabOrder="11" Text="점심시작시각" Top="402" VAlign="Middle" Width="160"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static5" Left="204" TabOrder="12" Text="점심종료시각" Top="457" VAlign="Middle" Width="160"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="204" TabOrder="10" Text="연장시각" Top="509" VAlign="Middle" Width="160"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static8" Left="204" TabOrder="14" Text="심야시각" Top="563" VAlign="Middle" Width="160"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="addBtn" Left="629" OnClick="addBtn_OnClick" TabOrder="17" Text="등&#32;&#32;록" Top="509" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="saveBtn" Left="629" OnClick="saveBtn_OnClick" TabOrder="16" Text="저&#32;&#32;장" Top="563" Width="87"></Button>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="WINDOWTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="기본&#32;근무시간&#32;관리" Top="2" VAlign="Middle" Width="953"></Static>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="APPLY_YEAR" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="applyYearEdit" ImeMode="none" Left="367" TabOrder="18" Top="237" Width="150"></Edit>
+		<MaskEdit Align="Center" BindDataset="dsBaseWorkTime" Column="ATTEND_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="attendTime1" Left="518" Mask="@@:@@" TabOrder="19" Top="292" Type="STRING" Width="77"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsBaseWorkTime" Column="QUIT_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="quitTime1" Left="518" Mask="@@:@@" TabOrder="23" Top="347" Type="STRING" Width="77"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsBaseWorkTime" Column="LUNCH_START_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="lunchStartTime1" Left="518" Mask="@@:@@" TabOrder="21" Top="402" Type="STRING" Width="77"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsBaseWorkTime" Column="LUNCH_END_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="lunchEndTime1" Left="518" Mask="@@:@@" TabOrder="22" Top="457" Type="STRING" Width="77"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsBaseWorkTime" Column="OVER_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="overTime1" Left="518" Mask="@@:@@" TabOrder="20" Top="509" Type="STRING" Width="77"></MaskEdit>
+		<MaskEdit Align="Center" BindDataset="dsBaseWorkTime" Column="NIGHT_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="nightTime1" Left="518" Mask="@@:@@" TabOrder="24" Top="563" Type="STRING" Width="77"></MaskEdit>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="ATTEND_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="attendTime" ImeMode="none" Left="367" TabOrder="25" Top="292" Width="150"></Edit>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="QUIT_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="quitTime" ImeMode="none" Left="367" TabOrder="26" Top="347" Width="150"></Edit>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="LUNCH_START_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="lunchStartTime" ImeMode="none" Left="367" TabOrder="27" Top="402" Width="150"></Edit>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="LUNCH_END_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="lunchEndTime" ImeMode="none" Left="367" TabOrder="28" Top="457" Width="150"></Edit>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="OVER_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="overTime" ImeMode="none" Left="367" TabOrder="29" Top="509" Width="150"></Edit>
+		<Edit Align="CENTER" BindDataset="dsBaseWorkTime" Column="NIGHT_TIME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="nightTime" ImeMode="none" Left="367" TabOrder="30" Top="563" Width="150"></Edit>
+	</Form>
+	<Script><![CDATA[
+
+var dataLength;
+var totalRowNum;
+
+//로딩 시
+function basicWorktimeManagementForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	transaction("findBaseWorkTimeList","svcHrCircumstance::/baseWorkTime.do?method=findBaseWorkTimeList","","dsBaseWorkTime=dsBaseWorkTime","","callback");
+	dsBaseWorkTime.Filter("APPLY_YEAR='"+0+"'");	
+	http.Sync=false;
+	
+	attendTime1.Text=attendTime.Text;
+	quitTime1.Text=quitTime.Text;
+	lunchStartTime1.Text=lunchStartTime.Text;
+	lunchEndTime1.Text=lunchEndTime.Text;
+	overTime1.Text=overTime.Text;
+	nightTime1.Text=nightTime.Text;
+}
+
+function searchBtn_OnClick(obj)
+{
+	var presentYear = tonumber(substr(GetDate(),0,4));
+	var choiceYear = tonumber(applyYear.text);
+	//alert(presentYear>=choiceYear);
+	// 당일에 해당하는 연도보다이전에는수정 금지 삭제 금지..다기록 다가오는 년도는 입력 가능.!! 0,1 구해서 푼다!
+	dsBaseWorkTime.Filter("APPLY_YEAR='"+applyYear.text+"'");
+	dataLength=dsBaseWorkTime.GetRowCount();
+	if(applyYear.text == ""){
+			alert("적용 년도를 선택해 주세요 ");
+	}else{
+	
+	if(dataLength==0){
+      alert("해당 연도에 설정된 기본 근무시간이 없습니다.\n(등록버튼을 눌러서 해당연도의 기본 근무시간을 등록해 주세요)");
+	}
+   
+	if((presentYear>choiceYear)==0){
+		applyYearEdit.Enable="false";
+		attendTime.Enable="true";
+		overTime.Enable="true";
+		lunchStartTime.Enable="true";
+		lunchEndTime.Enable="true";
+		quitTime.Enable="true";
+		nightTime.Enable="true";	
+	}else{
+		applyYearEdit.Enable="false";
+		attendTime.Enable="false";
+		overTime.Enable="false";
+		lunchStartTime.Enable="false";
+		lunchEndTime.Enable="false";
+		quitTime.Enable="false";
+		nightTime.Enable="false";	
+	
+   }
+   }
+}
+
+function addBtn_OnClick(obj)
+{
+	if(applyYear.text == ""){
+			alert("적용 년도를 선택해 주세요 ");
+	}else{
+      dsBaseWorkTime.UnFilter();
+      dsBaseWorkTime.addRow();
+      totalRowNum=dsBaseWorkTime.row;  //시작 값은 0
+      //alert(">>>>>>>>>>>"+totalRowNum);
+      dsBaseWorkTime.SetColumn(totalRowNum,"APPLY_YEAR",applyYear.text);//선택한 년도내용 들어감.
+	}
+}
+
+function saveBtn_OnClick(obj)
+{
+	//dataLength==0 이면 신규  1이면 기존에 존재 것 
+
+	if(confirm("저장하시겠습니까?  ")){
+		if(dataLength == 0){
+			//alert("quitTime.Text"+quitTime.Text);
+			//var changeTime=( substr(quitTime.Text,0,2)+substr(quitTime.Text,3,2));
+			//var dinnerEndTime = tonumber(changeTime) + 100; //한시간후 저녁시간 끝!!
+			//alert(dinnerEndTime);
+		    
+			dsBaseWorkTime.SetColumn(totalRowNum,"ATTEND_TIME",attendTime.text);
+			dsBaseWorkTime.SetColumn(totalRowNum.row,"QUIT_TIME",quitTime.text);
+			dsBaseWorkTime.SetColumn(totalRowNum,"OVER_TIME",overTime.text);
+			dsBaseWorkTime.SetColumn(totalRowNum,"NIGHT_TIME",nightTime.text);
+			dsBaseWorkTime.SetColumn(totalRowNum,"LUNCH_START_TIME",lunchStartTime.text);
+			dsBaseWorkTime.SetColumn(totalRowNum,"LUNCH_END_TIME",lunchEndTime.text);
+			dsBaseWorkTime.SetColumn(totalRowNum,"DINNER_START_TIME",quitTime.text); //퇴근 시각과같다.
+			dsBaseWorkTime.SetColumn(totalRowNum,"DINNER_END_TIME",overTime.text); //연장 시각과 같다.
+   
+			transaction(
+				"addBaseWorkTime",
+				"svcHrCircumstance::/baseWorkTime.do?method=addBaseWorkTime",
+				"dsBaseWorkTime=dsBaseWorkTime:u",
+				"dsBaseWorkTime=dsBaseWorkTime",
+				"",
+				"callback");
+   
+		}else{
+			
+			dsBaseWorkTime.SetColumn(0,"DINNER_START_TIME",quitTime.text); //퇴근 시각과같다.
+			dsBaseWorkTime.SetColumn(0,"DINNER_END_TIME",overTime.text); //연장 시각과 같다.
+		
+			transaction(
+				"editBaseWorkTime",
+				"svcHrCircumstance::/baseWorkTime.do?method=editBaseWorkTime",
+				"dsBaseWorkTime=dsBaseWorkTime:u",
+				"dsBaseWorkTime=dsBaseWorkTime",
+				"",
+				"callback"
+			);   
+			
+		}
+		Reload();
+	}
+}
+
+]]></Script>
+</Window>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="holidayManagementForm" Left="8" OnLoadCompleted="holidayManagementForm_OnLoadCompleted" PidAttrib="7" Title="holidayManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsHolidayType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,9" Height="677" Hilight3dColor="black" Id="Static1" Left="409" TabOrder="8" Text="휴일&#32;목록" Top="72" Type="Groupbox" Width="520"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" TabOrder="1" Text="휴일&#32;관리" VAlign="Middle" Width="953"></Static>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,9" Height="224" Hilight3dColor="black" Id="Static3" Left="15" TabOrder="9" Text="휴일&#32;조회" Top="168" Type="Groupbox" Width="376"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static2" Left="27" TabOrder="2" Text="조회기간" Top="266" VAlign="Middle" Width="56"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="fromDate" Left="86" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="4" Top="266" WeeksFont="LG&#32;PC,11" Width="87"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static0" Left="176" TabOrder="3" Text="~" Top="266" VAlign="Middle" Width="30"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="toDate" Left="210" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="5" Top="266" WeeksFont="LG&#32;PC,11" Width="87"></Calendar>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="searchBtn" Left="305" OnClick="searchBtn_OnClick" TabOrder="6" Text="조&#32;회" Top="265" Width="77"></Button>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,9" Height="357" Hilight3dColor="black" Id="Static4" Left="15" TabOrder="10" Text="휴일&#32;등록" Top="392" Type="Groupbox" Width="376"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static5" Left="51" TabOrder="11" Text="기준일" Top="442" VAlign="Middle" Width="120"></Static>
+		<Calendar DayFont="LG&#32;PC,11" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="basicDate" Left="195" OnChanged="basicDate_OnChanged" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="14" Top="442" WeeksFont="LG&#32;PC,11" Width="165"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static6" Left="51" TabOrder="12" Text="휴일명" Top="495" VAlign="Middle" Width="120"></Static>
+		<Edit Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="holidayName" Left="195" TabOrder="15" Top="495" Width="165"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static7" Left="51" TabOrder="17" Text="휴일근태구분" Top="548" VAlign="Middle" Width="120"></Static>
+		<Combo CodeColumn="DETAIL_CODE" DataColumn="DETAIL_CODE_NAME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="holidayType" InnerDataset="dsHolidayType" Left="195" TabOrder="18" Top="548" Width="165"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static8" Left="51" TabOrder="13" Text="비&#32;&#32;&#32;고" Top="601" VAlign="Middle" Width="120"></Static>
+		<Edit Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="note" Left="51" TabOrder="16" Top="642" Width="309"></Edit>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="addBtn" Left="91" OnClick="addBtn_OnClick" TabOrder="19" Text="추&#32;가" Top="703" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="removeBtn" Left="180" OnClick="removeBtn_OnClick" TabOrder="20" Text="삭&#32;제" Top="703" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="saveBtn" Left="270" OnClick="saveBtn_OnClick" TabOrder="21" Text="일괄저장" Top="703" Width="87"></Button>
+		<Grid AutoFit="TRUE" BindDataset="dsHoliday" BkColor2="default" BoldHead="true" Bottom="732" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,9" HeadHeight="25" Height="630" Id="holidayManagementGrid" InputPanel="FALSE" Left="430" LineColor="default" MinWidth="100" Right="912" RowHeight="20" TabOrder="7" TabStop="true" Top="102" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="482">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="45"/>
+						<col width="87"/>
+						<col width="127"/>
+						<col width="87"/>
+						<col width="177"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="NO"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기준일"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="휴일명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="휴일근태구분"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="비고"/>
+					</head>
+					<body>
+						<cell align="center" col="0" color="expr:&#32;decode(HOLIDAY_NAME,&#32;&apos;일요일&apos;,&#32;&apos;red&apos;,&#32;&apos;토요일&apos;,&#32;&apos;blue&apos;)" combodataset="dsHolidayMgt" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="BASIC_DAY" color="expr:&#32;decode(HOLIDAY_NAME,&#32;&apos;일요일&apos;,&#32;&apos;red&apos;,&#32;&apos;토요일&apos;,&#32;&apos;blue&apos;)" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="HOLIDAY_NAME" color="expr:&#32;decode(HOLIDAY_NAME,&#32;&apos;일요일&apos;,&#32;&apos;red&apos;,&#32;&apos;토요일&apos;,&#32;&apos;blue&apos;)" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="3" colid="HOLIDAY_TYPE" combocol="DETAIL_CODE" combodataset="dsHolidayType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell col="4" colid="NOTE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Static Align="Center" Color="black" Font="한컴&#32;윤고딕&#32;250,18" Height="96" Id="Static9" Left="17" ShadowColor="BACKGROUND" TabOrder="22" Text="회사&#32;창립일&#32;:&#32;2018년12월01일" Top="67" VAlign="Middle" Width="376"></Static>
+	</Form>
+	<Script><![CDATA[var toDay = tonumber(substr(GetDate(),0,8));
+
+//로딩 시 
+function holidayManagementForm_OnLoadCompleted(obj)
+{
+	http.sync=true;
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+
+	dsHoliday.Filter("BASIC_DAY='"+0+"'");// 처음에는 무엇이 담겨 있어도 초기화
+	
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'HG'");
+	dsHolidayType.CopyF(dsDetailCode); //공휴일 타입 설정 
+	http.sync=false;
+}
+
+function searchBtn_OnClick(obj)
+{
+	if(length(fromDate.Value)!=0 && length(toDate.Value)!=0){
+		//dsHoliday.Filter("BASIC_DAY>='"+fromDate.Value+"'&&BASIC_DAY<='"+toDate.Value+"'");
+		alert("선택기간----"+fromDate.value+"~"+toDate.value);
+		//transaction("findHolidayListAll","svcHrCircumstance::/holiday.do?method=findHolidayListAll","","dsHoliday=dsHoliday","","callback");
+		transaction("findHolidayList","svcHrCircumstance::/holiday.do?method=findHolidayList","","dsHoliday=dsHoliday","fromDate='"+fromDate.value+"' toDate='"+toDate.value+"'","callback");
+		basicDate.Enable=true;
+	}else{
+		alert(" 조회 기간을 선택해 주세요  ");
+	}
+}
+
+
+//기본 날짜 변경시 
+function basicDate_OnChanged(obj,strOldText,strNewText)
+{
+	
+	fromDate.Value=basicDate.value;
+	toDate.Value=basicDate.value;
+   
+	dsHoliday.UnFilter();
+	dsHoliday.Filter("BASIC_DAY='"+basicDate.value+"'"); 
+   
+	if(dsHoliday.GetRowCount()!=0){
+		dsHoliday.Filter("BASIC_DAY='"+dsHoliday.GetColumn(0,'BASIC_DAY')+"'");
+		alert("해당일자에 이미등록된 내용이 있습니다. ");
+	}else{
+		alert("해당일자에 내용을 등록해 주세요 ");
+		holidayType.Enable=true;
+		holidayName.Enable=true;
+		note.Enable=true;   
+	}
+}
+
+
+//추가버튼 
+function addBtn_OnClick(obj)
+{
+	
+	if(dsHoliday.GetRowCount()!=0){
+		dsHoliday.Filter("BASIC_DAY='"+dsHoliday.GetColumn(0,'BASIC_DAY')+"'");
+		alert("해당일자에 이미등록된 내용이 있습니다. ");
+	}else if(holidayName.text==""){
+      alert("휴일명을 입력하세요 ");
+	}else if(holidayType.text==""){
+      alert("휴일 근태구분을 선택하세요 ");
+	}else{
+   
+	alert(toDay>=basicDate.Value); //거짓이면 0 참이면 1
+	
+	if(toDay>=basicDate.Value == 0){
+	
+		    
+		if(basicDate.text !="" && holidayName.text !="" && holidayType.text !=""){
+			dsHoliday.UnFilter();
+			var rowNum=dsHoliday.GetRowCount();
+			
+			//var basicDay=Replace(basicDate.text,"-","");
+     
+			dsHoliday.AddRow();
+			dsHoliday.setColumn(rowNum,"BASIC_DAY",basicDate.value);
+			dsHoliday.setColumn(rowNum,"HOLIDAY_NAME",holidayName.text);
+			dsHoliday.setColumn(rowNum,"HOLIDAY_TYPE",holidayType.Value);
+			dsHoliday.setColumn(rowNum,"NOTE",note.text);
+      
+			dsHoliday.Filter("BASIC_DAY='"+basicDate.value+"'");
+			
+		}
+		
+	
+	}else{
+		alert(" 현재 기준일 보다 이전 내용은 추가 할 수 없습니다. ");
+		Reload();
+	}
+   
+  }
+  
+}
+
+// 휴일삭제 
+function removeBtn_OnClick(obj)
+{
+	var deletDate = dsHoliday.getColumn(dsHoliday.row,"BASIC_DAY");
+	if(toDay>=deletDate == 0){
+		dsHoliday.DeleteRow(dsHoliday.row);
+	}else{
+		alert("현재 기준일 보다 이전 내용은 삭제  할 수 없습니다.");
+	}
+}
+
+
+//변경 사항 저장 하기 
+function saveBtn_OnClick(obj)
+{
+	if(confirm("변경 내용을 저장하시겠습니까? ")){
+
+      transaction(   
+         "batchHoliday", "svcHrCircumstance::/holiday.do?method=batchHoliday",
+         "dsHoliday=dsHoliday:u",
+         "dsHoliday=dsHoliday",
+         "",
+         "callback"
+      );
+		Reload();
+   }	
+}
+]]></Script>
+</Window>

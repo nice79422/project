@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="496" Id="loginForm" Left="8" OnLoadCompleted="loginForm_OnLoadCompleted" PidAttrib="7" scroll="false" Top="8" Ver="1.0" Width="528" WorkArea="true">
+		<Static Align="Center" Border="Sunken" Color="black" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Static2" Left="105" TabOrder="1" Text="사원번호" Top="388" VAlign="Middle" Width="78"></Static>
+		<Edit Align="CENTER" Color="WINDOWFRAME" DisableBKColor="MENU" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="empCode" Left="183" TabOrder="4" Top="388" Width="93"></Edit>
+		<Static Align="Center" Border="Sunken" Color="black" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Static1" Left="105" TabOrder="1" Text="부서코드" Top="353" VAlign="Middle" Width="78"></Static>
+		<Edit Align="CENTER" Color="WINDOWFRAME" DisableBKColor="MENU" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="deptCode" Left="183" OnClick="deptCode_OnClick" TabOrder="3" Top="353" Width="128"></Edit>
+		<Static Align="Center" Border="Sunken" Color="black" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Static0" Left="105" TabOrder="2" Text="부서명" Top="319" VAlign="Middle" Width="78"></Static>
+		<Edit Align="CENTER" Color="WINDOWFRAME" DisableBKColor="MENU" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="deptName" Left="183" TabOrder="5" Top="319" Width="93"></Edit>
+		<Static Align="Center" Border="Sunken" Color="black" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Static3" Left="105" TabOrder="7" Text="비밀번호" Top="423" VAlign="Middle" Width="78"></Static>
+		<Edit Align="CENTER" Color="WINDOWFRAME" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="empPassword" ImeMode="none" Left="183" Password="TRUE" TabOrder="6" Top="423" Width="128"></Edit>
+		<Button BKColor="silver" BorderColor="WINDOW" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="91" Id="loginButton" Left="319" OnClick="loginButton_OnClick" TabOrder="8" Text="로그인" Top="319" Width="108"></Button>
+		<Button BKColor="silver" BorderColor="WINDOW" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="41" Id="cancleButton" Left="319" OnClick="cancleButton_OnClick" TabOrder="9" Text="취소" Top="410" Width="108"></Button>
+		<Button Appearance="FLAT" BKColor="silver" BorderColor="navy" Color="whitesmoke" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Btn_deptSearch" Left="268" OnClick="Btn_deptSearch_OnClick" TabOrder="11" Text="검색" Top="319" Width="43"></Button>
+		<Button Appearance="FLAT" BKColor="silver" BorderColor="BACKGROUND" Color="whitesmoke" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Btn_empSearch" Left="268" OnClick="Btn_empSearch_OnClick" TabOrder="12" Text="검색" Top="388" Width="43"></Button>
+		<Image FillType="STRETCH" Font="한컴&#32;윤고딕&#32;240,9" Height="280" Id="Image0" ImageID="iu2" Left="103" TabOrder="13" Top="16" Width="320"></Image>
+	</Form>
+	<Script><![CDATA[
+function loginform_OnLoadCompleted(obj)  
+{
+	initSession(true);
+	
+	transaction("findEmployeeList","svcBase::/employee.do?method=findEmployeeList","","dsEmployee=dsEmployee","","callback"); //전체 사원 목록 받아 옴
+	
+	deptName.text="부서선택";
+	empCode.text="사원선택";
+	
+}
+
+function Btn_deptSearch_OnClick(obj)
+{
+	initSession(true); //초기화 성공공여부
+	empCode.text=""; //부서 재선택시 입력되어 있는 사원의 정보를 지우는 목적
+	dialog("base::deptDialog.xml","");	
+}
+
+function Btn_empSearch_OnClick(obj)
+{
+	dsEmployee.Filter("DEPT_CODE='"+deptCode.text+"'");  // filter로 제약을 줘서 선택한 부서의 사원만 뜨게 한다.
+	dialog("base::empDialog.xml","");
+}
+
+
+function cancleButton_OnClick(obj)  //취소 버튼 누를 경우!
+{
+	//alert("로그인 취소되었습니다.");
+	initSession(false);
+	exit();
+}
+
+
+// 선택한 사원의 pw, 부서 번호를 가져옴 입력한 값과 비교!
+var checkEmpPassword;
+var checkDeptCode;
+
+function setPw(empPassword){
+	this.checkEmpPassword=empPassword;
+}
+function setDeptCode(empdeptCode){
+	this.checkDeptCode = empdeptCode;
+}
+
+
+function loginButton_OnClick(obj)
+{
+	if(deptCode.text==""){
+		alert("부서를 선택해 주세요");  // 공백이면 입력 해야 됨.
+	}
+	else if(empCode.text==""){
+		alert("사원코드를 선택해 주세요");
+	}
+	else if(deptCode.text == checkDeptCode){   
+		if(empCode.text==g_empCode){
+			if(empPassword.text==checkEmpPassword){
+				alert(g_empName+" 님 환영합니다");
+				go("base::mainform.xml");
+			}
+			else{
+				//alert(checkEmpPassword);
+				alert("입력하신 비밀번호가 올바르지 않습니다");
+				empPassword.text="";
+			}
+		}
+		else{
+			alert("입력하신 사원번호가 올바르지 않습니다");
+			empCode.text="";
+			//alert(empCode.text);
+			//alert(password.text);
+		}
+	}else{     //checkDeptCode 와 일치 하지 않으면 부서 번호가 다르다고 뜬다. 
+		//alert(checkDeptCode);
+		//alert(deptCode.text);
+		alert("부서가 올바르지 않습니다.");
+		deptCode.text="";
+		deptName.text="";
+	}
+
+	
+}
+
+
+// 필터의 경우 dataset은 있고. 필터조건으로 보여주는 값이 다르다. 필터 후 조건 없이 dataset을 호출 하면 필터마지막 결과값이 나옴. 
+// function Button0_OnClick(obj)
+// {
+	// dsEmployee.Filter("DEPT_CODE='DEP009'");
+	// dialog("base::empDialog.xml","");
+// }
+function Image0_OnClick(obj,nX,nY)
+{
+	
+}
+]]></Script>
+</Window>

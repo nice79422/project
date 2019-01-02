@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="200" Id="employeementInsurDialog" Left="8" PidAttrib="7" scroll="false" Title="employeementInsurDialog" Top="8" Ver="1.0" Width="317" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="고용&#32;보험&#32;계산" Top="2" VAlign="Middle" Width="310"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static1" Left="8" TabOrder="2" Text="자동계산" Top="69" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static0" Left="8" TabOrder="3" Text="집접입력" Top="108" VAlign="Middle" Width="77"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="calculationBtn" Left="136" OnClick="calculationBtn_OnClick" TabOrder="6" Text="계&#32;산" Top="153" Width="80"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="finishBtn" Left="222" OnClick="finishBtn_OnClick" TabOrder="7" Text="적&#32;용" Top="152" Width="80"></Button>
+		<MaskEdit Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="salary" Left="88" Mask="@@@,@@@,@@@" TabOrder="8" Top="68" Value="MaskEdit2" Width="88"></MaskEdit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static2" Left="176" TabOrder="4" Text="X" Top="68" VAlign="Middle" Width="24"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static3" Left="272" TabOrder="5" Text="%" Top="68" VAlign="Middle" Width="30"></Static>
+		<MaskEdit BindDataset="dsDeductionTax" Column="EMPLOYEEMENT_INSUR_RATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empInsurRate" Left="200" TabOrder="9" Top="68" Value="MaskEdit2" Width="72"></MaskEdit>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="resultEmpInsur" Left="88" TabOrder="10" Top="108" Width="214"></Edit>
+		<Checkbox Font="한컴&#32;윤고딕&#32;240,9" Height="12" Id="directCheckbox" Left="8" OnClick="directCheckbox_OnClick" TabOrder="11" Top="146" Width="12"></Checkbox>
+	</Form>
+	<Script><![CDATA[
+var sysDate;
+var baseSal;
+var bouns;
+
+
+function employeementInsurDialog_OnLoadCompleted(obj)
+{
+	sysDate=substr(today(),0,4);
+	
+	baseSal=StripNum(parent.detailRegistrationTab.tab3.baseSal.text);
+	
+	bouns=StripNum(parent.detailRegistrationTab.tab3.bonus.text); // 고용 보험은 상여금 + 기본급 포함 
+	salary.text=baseSal+bouns;
+	dsDeductionTax.Filter("INPUTED_YEAR='"+sysDate+"'");
+	directCheckbox.Value=0;
+}
+
+function calculationBtn_OnClick(obj)
+{
+	var result=StripNum(salary.text) * ParseFloat(empInsurRate.text)/100;
+		resultEmpInsur.text=Round(result,0);
+}
+
+function directCheckbox_OnClick(obj,strValue)
+{
+	if(directCheckbox.Value == 1){
+			resultEmpInsur.Enable=1;
+			calculationBtn.Enable=false;
+	}else{
+			resultEmpInsur.Enable=0;
+			calculationBtn.Enable=true;
+	}
+}
+
+function finishBtn_OnClick(obj)
+{
+	parent.detailRegistrationTab.tab3.empInsur.text=resultEmpInsur.text;
+	close();
+}
+]]></Script>
+</Window>

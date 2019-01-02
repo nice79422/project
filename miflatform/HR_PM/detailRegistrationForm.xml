@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="detailRegistrationForm" Left="8" OnLoadCompleted="detailRegistrationForm_OnLoadCompleted" PidAttrib="7" Title="detailRegistrationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsTempEmployee">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" type="STRING"/>
+					<colinfo id="PASSWORD" size="256" type="STRING"/>
+					<colinfo id="POSITION_CODE" size="256" type="STRING"/>
+					<colinfo id="DEPT_CODE" size="256" type="STRING"/>
+					<colinfo id="AUTHORITY_CODE" size="256" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsTempDepartment">
+				<Contents>
+					<colinfo id="DEPT_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DEPT_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="DEPT_TEL" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsTempPosition">
+				<Contents>
+					<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="POSITION_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsEmpInfo">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="RESIDENT_NUMBER" size="256" summ="default" type="STRING"/>
+					<colinfo id="BRITH_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="GENDER" size="256" summ="default" type="STRING"/>
+					<colinfo id="IMG_SRC" size="256" summ="default" type="STRING"/>
+					<colinfo id="ZIP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASE_ADDRESS" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_ADDRESS" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMAIL" size="256" summ="default" type="STRING"/>
+					<colinfo id="TEL" size="256" summ="default" type="STRING"/>
+					<colinfo id="PHONE_NUMBER" size="256" summ="default" type="STRING"/>
+					<colinfo id="HIGHEST_EDUCATION_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="NATIVE_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DISABILITY_CODE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsGender">
+				<Contents>
+					<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="VALUE" size="256" summ="default" type="STRING"/>
+					<record>
+						<CODE>M</CODE>
+						<VALUE>남성</VALUE>
+					</record>
+					<record>
+						<CODE>F</CODE>
+						<VALUE>여성</VALUE>
+					</record>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsNativeType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="USING" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsDisabilityType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsImg">
+				<Contents>
+					<colinfo id="EMP_FILE_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo encrypt="base64" id="IMG_FILE_DATA" size="256" summ="default" type="BLOB"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsWorkInfo">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="HIRE_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="RETIRE_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMPLOYEEMENT_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="RETIRE_CAUSE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PROBATION_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="PROBATION_EXPIRE_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="PROJECT_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="JIKJONG_CODE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsEmployeementType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsWhether">
+				<Contents>
+					<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+					<record>
+						<CODE>Y</CODE>
+					</record>
+					<record>
+						<CODE>N</CODE>
+					</record>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsJikjong">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsProject">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsFamilyInfo">
+				<Contents>
+					<colinfo id="FAMILY_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="FAMILY_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="FAMILY_BIRTH_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="RELATIONSHIP" size="256" summ="default" type="STRING"/>
+					<colinfo id="SUPPORTING" size="256" summ="default" type="STRING"/>
+					<colinfo id="COHABITATION_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="DISABILITY_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="HIGHEST_EDUCATION_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="JOB" size="256" summ="default" type="STRING"/>
+					<colinfo id="COMPANY_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="TEL" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsRelationship">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsHighestEducation">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsLicenseInfo">
+				<Contents>
+					<colinfo id="LICENSE_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="LICENSE_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="LICENSE_CENTER" size="256" summ="default" type="STRING"/>
+					<colinfo id="LICENSE_LEVEL" size="256" summ="default" type="STRING"/>
+					<colinfo id="LICENSE_NO" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsEducationInfo">
+				<Contents>
+					<colinfo id="EDUCATION_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="CAMPUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="MAJOR" size="256" summ="default" type="STRING"/>
+					<colinfo id="SUB_MAJOR" size="256" summ="default" type="STRING"/>
+					<colinfo id="ENTER_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="GRADUATION_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="GRADE" size="256" summ="default" type="STRING"/>
+					<colinfo id="LOCATION" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsCampusType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsHobongType">
+				<Contents>
+					<colinfo id="HOBONG" size="256" summ="default" type="STRING"/>
+					<record>
+						<HOBONG>1호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>2호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>3호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>4호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>5호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>6호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>7호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>8호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>9호봉</HOBONG>
+					</record>
+					<record>
+						<HOBONG>10호봉</HOBONG>
+					</record>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsHobongCopy">
+				<Contents>
+					<colinfo id="HOBONG" size="256" summ="default" type="STRING"/>
+					<colinfo id="POSITION_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASE_SAL" size="256" summ="default" type="STRING"/>
+					<colinfo id="BONUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="SIGUB" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSalInfo">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" type="STRING"/>
+					<colinfo id="HOBONG" size="256" type="STRING"/>
+					<colinfo id="SALARY_TYPE_CODE" size="256" type="STRING"/>
+					<colinfo id="PENSION_TYPE" size="256" type="STRING"/>
+					<colinfo id="NATIONAL_PENSION" size="256" type="STRING"/>
+					<colinfo id="HEALTH_INSURANCE" size="256" type="STRING"/>
+					<colinfo id="EMPLOYEEMENT_INSURANCE" size="256" type="STRING"/>
+					<colinfo id="LONG_TERM_CARE_INSURANCE" size="256" type="STRING"/>
+					<colinfo id="MANY_CHILD_DEDUCTION" size="256" type="STRING"/>
+					<colinfo id="ACCOUNT_CODE" size="256" type="STRING"/>
+					<colinfo id="ACCOUNT_HOLDER" size="256" type="STRING"/>
+					<colinfo id="SAL_TRANS_BANK" size="256" type="STRING"/>
+					<colinfo id="SUPPORT_TWENTY_BELOW" size="256" type="STRING"/>
+					<colinfo id="SUPPORT_SIXTY_ABOVE" size="256" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSalaryType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsCount">
+				<Contents>
+					<colinfo id="CODE" size="256" summ="default" type="CHAR"/>
+					<record>
+						<CODE>0명</CODE>
+					</record>
+					<record>
+						<CODE>1명</CODE>
+					</record>
+					<record>
+						<CODE>2명</CODE>
+					</record>
+					<record>
+						<CODE>3명</CODE>
+					</record>
+					<record>
+						<CODE>4명</CODE>
+					</record>
+					<record>
+						<CODE>5명</CODE>
+					</record>
+					<record>
+						<CODE>6명</CODE>
+					</record>
+					<record>
+						<CODE>7명</CODE>
+					</record>
+					<record>
+						<CODE>8명</CODE>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Tab BKColor="gainsboro" BKSelColor="gainsboro" Font="한컴&#32;윤고딕&#32;240,10" Height="516" Id="detailRegistrationTab" Left="312" SelectFont="한컴&#32;윤고딕&#32;230,11" TabOrder="3" Top="48" Width="629">
+			<Contents>
+				<TabPage BorderColor="black" Height="486" Id="tab1" Left="2" TabOrder="6" Text="사원정보" Top="28" Width="625">
+					<Static Font="한컴&#32;윤고딕&#32;230,11" Height="367" Id="Static0" Left="5" TabOrder="1" Text="사진" Type="Groupbox" Width="287"></Static>
+					<Image Border="SunkenEdge" FillType="STRETCH" Height="340" Id="empImg" Left="13" OnClick="detailRegistrationTab_tab1_empImg_OnClick" TabOrder="1" Top="23" Width="272"></Image>
+					<FileDialog Bottom="372" FilePath="C:\apache2.2\htdocs\worldMiplatform\EMP-IMG\noimage.jpg" Height="24" Id="imgFileOpen" Left="294" Right="318" TabOrder="3" Top="348" Width="24"></FileDialog>
+					<File Bottom="372" Height="24" Id="imgFile" Left="320" Right="344" TabOrder="3" Top="348" Width="24"></File>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="findImgBtn" Left="295" OnClick="detailRegistrationTab_tab1_findImgBtn_OnClick" TabOrder="3" Text="사진찾기" Top="312" Width="61"></Button>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static1" Left="295" TabOrder="4" Text="사&#32;원&#32;코&#32;드" Top="13" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static2" Left="295" TabOrder="5" Text="사&#32;원&#32;&#32;명" Top="46" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static3" Left="295" TabOrder="6" Text="주민등록번호" Top="78" VAlign="Middle" Width="96"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static4" Left="295" TabOrder="7" Text="성&#32;&#32;&#32;&#32;&#32;별" Top="110" VAlign="Middle" Width="137"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static5" Left="295" TabOrder="8" Text="최&#32;종&#32;학&#32;력" Top="142" VAlign="Middle" Width="93"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static6" Left="295" TabOrder="9" Text="내국인여부" Top="174" VAlign="Middle" Width="136"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static7" Left="295" TabOrder="10" Text="휴대폰번호" Top="206" VAlign="Middle" Width="104"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static8" Left="295" TabOrder="11" Text="병&#32;력&#32;사&#32;항" Top="238" VAlign="Middle" Width="93"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static9" Left="295" TabOrder="12" Text="E-mail" Top="272" VAlign="Middle" Width="77"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static10" Left="6" TabOrder="13" Text="우편번호" Top="387" VAlign="Middle" Width="69"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static11" Left="6" TabOrder="14" Text="주소" Top="418" VAlign="Middle" Width="69"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static12" Left="6" TabOrder="15" Text="상세주소" Top="449" VAlign="Middle" Width="69"></Static>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="EMP_CODE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="empCode" ImeMode="none" Left="405" TabOrder="16" Top="13" Width="210"></Edit>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="EMP_NAME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="empName" ImeMode="none" Left="405" TabOrder="17" Top="47" Width="210"></Edit>
+					<MaskEdit Align="Center" BindDataset="dsEmpInfo" Column="RESIDENT_NUMBER" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="residentNumber" Left="392" Mask="@@@@@@-@@@@@@@" TabOrder="18" Top="78" Type="STRING" Width="223"></MaskEdit>
+					<Combo BindDataset="dsEmpInfo" CodeColumn="CODE" Column="GENDER" DataColumn="VALUE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Combo0" InnerDataset="dsGender" Left="433" TabOrder="19" Top="110" Width="183"></Combo>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="HIGHEST_EDUCATION_CODE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="highestEducationCode" Left="389" TabOrder="20" Top="142" Width="154"></Edit>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="findHigestEducationList" Left="545" OnClick="detailRegistrationTab_tab1_findHigestEducationList_OnClick" TabOrder="21" Text="검&#32;색" Top="142" Width="71"></Button>
+					<Combo BindDataset="dsEmpInfo" CodeColumn="CODE" Column="NATIVE_TYPE_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Combo1" InnerDataset="dsNativeType" Left="432" TabOrder="22" Top="174" Width="184"></Combo>
+					<MaskEdit Align="Center" BindDataset="dsEmpInfo" Column="PHONE_NUMBER" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="phoneNumber" Left="400" Mask="@@@-@@@@-@@@@" TabOrder="23" Top="206" Type="STRING" Width="216"></MaskEdit>
+					<Combo BindDataset="dsEmpInfo" CodeColumn="DETAIL_CODE" Column="DISABILITY_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="disabilityCode" InnerDataset="dsDisabilityType" Left="389" TabOrder="24" Top="238" Width="225"></Combo>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="EMAIL" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="email" Left="373" TabOrder="25" Top="272" Width="241"></Edit>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="ZIP_CODE" Enable="FALSE" Font="LG&#32;PC,11" Height="30" Id="zipCode" Left="76" TabOrder="26" Top="387" Width="148"></Edit>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="BASE_ADDRESS" Enable="FALSE" Font="LG&#32;PC,11" Height="30" Id="baseAddress" Left="76" TabOrder="27" Top="418" Width="364"></Edit>
+					<Edit Align="CENTER" BindDataset="dsEmpInfo" Column="DETAIL_ADDRESS" Font="LG&#32;PC,11" Height="30" Id="detailAddress" Left="76" OnChanged="detailRegistrationTab_tab1_detailAddress_OnChanged" TabOrder="28" Top="449" Width="364"></Edit>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="adressSearchBtn" Left="226" OnClick="detailRegistrationTab_tab1_adressSearchBtn_OnClick" TabOrder="29" Text="주소검색" Top="387" Width="61"></Button>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="saveImgBtn" Left="358" OnClick="detailRegistrationTab_tab1_saveImgBtn_OnClick" TabOrder="30" Text="사진저장" Top="312" Width="61"></Button>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="batchBtn" Left="527" OnClick="detailRegistrationTab_tab1_batchBtn_OnClick" TabOrder="31" Text="일괄저장" Top="452" Width="87"></Button>
+				</TabPage>
+				<TabPage BorderColor="black" Height="486" Id="tab2" Left="2" TabOrder="6" Text="재직정보" Top="28" Width="625">
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static1" Left="70" TabOrder="1" Text="입사일자" Top="50" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static2" Left="70" TabOrder="2" Text="퇴사일자" Top="90" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static3" Left="70" TabOrder="3" Text="고용형태" Top="130" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static4" Left="70" TabOrder="4" Text="수습여부" Top="170" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static5" Left="70" TabOrder="5" Text="수습만료일" Top="210" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static6" Left="71" TabOrder="6" Text="직&#32;&#32;종" Top="251" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="30" Id="Static7" Left="70" TabOrder="7" Text="프로젝트" Top="290" VAlign="Middle" Width="109"></Static>
+					<Static Align="Center" Border="Sunken" Height="73" Id="Static8" Left="70" TabOrder="8" Text="퇴사사유" Top="330" VAlign="Middle" Width="109"></Static>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Font="LG&#32;PC,11" Height="30" Id="batchBtn" Left="525" OnClick="detailRegistrationTab_tab1_batchBtn_OnClick" TabOrder="17" Text="일괄저장" Top="451" Width="87"></Button>
+					<Calendar BindDataset="dsWorkInfo" Column="HIRE_DATE" Dateformat="LONGDATE" DayFont="LG&#32;PC,11" DaySelect="Auto" Font="한컴&#32;윤고딕&#32;230,11" HeaderFont="LG&#32;PC,11" Height="24" Id="hireDate" Left="182" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="9" Top="50" WeeksFont="LG&#32;PC,11" Width="153"></Calendar>
+					<Calendar BindDataset="dsWorkInfo" Column="RETIRE_DATE" Dateformat="LONGDATE" DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;230,11" HeaderFont="LG&#32;PC,11" Height="24" Id="retireDate" Left="182" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="10" Top="92" WeeksFont="LG&#32;PC,11" Width="153"></Calendar>
+					<Combo BindDataset="dsWorkInfo" CodeColumn="DETAIL_CODE" Column="EMPLOYEEMENT_TYPE_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;230,11" Height="26" Id="Combo0" InnerDataset="dsEmployeementType" Left="182" TabOrder="11" Top="129" Width="120"></Combo>
+					<Combo BindDataset="dsWorkInfo" CodeColumn="CODE" Column="PROBATION_STATUS" DataColumn="CODE" Font="한컴&#32;윤고딕&#32;230,11" Height="26" Id="cmbProbYeobu" InnerDataset="dsWhether" Left="182" TabOrder="12" Top="169" Width="120"></Combo>
+					<Calendar BindDataset="dsWorkInfo" Column="PROBATION_STATUS" Dateformat="LONGDATE" DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;230,11" HeaderFont="LG&#32;PC,11" Height="24" Id="probationEndDate" Left="182" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="13" Top="210" WeeksFont="LG&#32;PC,11" Width="153"></Calendar>
+					<Combo BindDataset="dsWorkInfo" CodeColumn="DETAIL_CODE" Column="JIKJONG_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;230,11" Height="26" Id="Combdd" InnerDataset="dsJikjong" Left="182" TabOrder="14" Top="250" Width="120"></Combo>
+					<Combo BindDataset="dsWorkInfo" CodeColumn="DETAIL_CODE" Column="PROJECT_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;230,11" Height="26" Id="projectCombo" InnerDataset="dsProject" Left="182" TabOrder="15" Top="290" Width="180"></Combo>
+					<TextArea BindDataset="dsWorkInfo" Column="RETIRE_CAUSE" Font="한컴&#32;윤고딕&#32;230,11" Height="73" Id="retireCauseTextArea" Left="182" TabOrder="16" Top="330" Width="336"></TextArea>
+				</TabPage>
+				<TabPage BorderColor="black" Height="486" Id="tab3" Left="2" TabOrder="6" Text="급여정보" Top="28" Width="625">
+					<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;230,14" Height="176" Id="Static27" Left="10" TabOrder="25" Text="연금및&#32;보험관리" Top="230" Type="Groupbox" Width="328"></Static>
+					<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;230,14" Height="204" Id="Static26" Left="14" TabOrder="2" Text="급여관리" Top="20" Type="Groupbox" Width="592"></Static>
+					<Edit BindDataset="dsSalInfo" Column="ACCOUNT_HOLDER" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Edit9" Left="414" TabOrder="8" Top="146" Width="171"></Edit>
+					<Static Align="Center" Color="red" Font="한컴&#32;윤고딕&#32;230,10" Height="20" Id="Static16" Left="22" TabOrder="1" Text="소득세,&#32;주민세는&#32;급여계산때&#32;계산" Top="44" Width="207"></Static>
+					<Edit Align="CENTER" BindDataset="dsPosition" Column="POSITION_NAME" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="positionEdit" Left="143" TabOrder="5" Top="74" Width="108"></Edit>
+					<MaskEdit BindDataset="dsHobongCopy" Column="BASE_SAL" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="baseSal" Left="143" TabOrder="9" Top="107" Value="MaskEdit2" Width="108"></MaskEdit>
+					<Combo BindDataset="dsSalInfo" CodeColumn="HOBONG" Column="HOBONG" DataColumn="HOBONG" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="selHobong" INDEX="0" InnerDataset="dsHobongType" Left="143" OnChanged="detailRegistrationTab_tab3_selHobong_OnChanged" TabOrder="3" Text="선택하세요" Top="140" Width="108"></Combo>
+					<MaskEdit BindDataset="dsHobongCopy" Column="BONUS" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="bonus" Left="143" TabOrder="11" Top="174" Value="MaskEdit2" Width="108"></MaskEdit>
+					<Edit BindDataset="dsSalInfo" Column="ACCOUNT_CODE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Edit8" Left="414" TabOrder="7" Top="180" Width="171"></Edit>
+					<Edit BindDataset="dsSalInfo" Column="SAL_TRANS_BANK" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="bankName" Left="414" TabOrder="6" Top="113" Width="114"></Edit>
+					<Combo BindDataset="dsSalInfo" CodeColumn="DETAIL_CODE" Column="SALARY_TYPE_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="payTypeCombo" InnerDataset="dsSalaryType" Left="414" TabOrder="4" Text="선택하세요" Top="80" Width="108"></Combo>
+					<MaskEdit BindDataset="dsHobongCopy" Column="SIGUB" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="sigub" Left="414" TabOrder="10" Top="47" Value="MaskEdit2" Width="108"></MaskEdit>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static1" Left="22" TabOrder="12" Text="직&#32;&#32;급" Top="74" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static0" Left="22" TabOrder="13" Text="기본급" Top="107" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static2" Left="22" TabOrder="14" Text="상여금" Top="174" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static3" Left="22" TabOrder="15" Text="호&#32;&#32;봉" Top="140" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static4" Left="294" TabOrder="16" Text="급여형태" Top="80" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static6" Left="294" TabOrder="18" Text="급여이체은행" Top="113" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static8" Left="294" TabOrder="20" Text="시간당&#32;기본수당" Top="47" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static5" Left="294" TabOrder="17" Text="계좌번호" Top="180" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static7" Left="294" TabOrder="19" Text="예&#32;금&#32;주" Top="146" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static9" Left="252" TabOrder="21" Text="원" Top="107" VAlign="Middle" Width="32"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static10" Left="252" TabOrder="22" Text="원" Top="174" VAlign="Middle" Width="32"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Static11" Left="522" TabOrder="23" Text="원" Top="47" VAlign="Middle" Width="32"></Static>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="findBankBtn" Left="529" OnClick="detailRegistrationTab_tab3_findBankBtn_OnClick" TabOrder="24" Text="검색" Top="113" Width="56"></Button>
+					<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;230,11" Height="176" Id="Static28" Left="342" TabOrder="26" Text="부양가족&#32;관리" Top="230" Type="Groupbox" Width="264"></Static>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="batchBtn" Left="527" OnClick="detailRegistrationTab_tab1_batchBtn_OnClick" TabOrder="27" Text="일괄저장" Top="452" Width="87"></Button>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static12" Left="358" TabOrder="28" Text="부양&#32;20세&#32;이하" Top="270" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static13" Left="358" TabOrder="29" Text="부양&#32;60세&#32;이상" Top="302" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static14" Left="358" TabOrder="30" Text="다자녀&#32;추가공제" Top="334" VAlign="Middle" Width="120"></Static>
+					<Edit Align="RIGHT" BindDataset="dsSalInfo" Column="LONG_TERM_CARE_INSURANCE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="longTermCare" Left="143" TabOrder="37" Top="365" Width="108"></Edit>
+					<Edit Align="RIGHT" BindDataset="dsSalInfo" Column="EMPLOYEEMENT_INSURANCE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="empInsur" Left="143" TabOrder="36" Top="299" Width="108"></Edit>
+					<Edit Align="RIGHT" BindDataset="dsSalInfo" Column="HEALTH_INSURANCE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="healthInsur" Left="143" TabOrder="35" Top="332" Width="108"></Edit>
+					<Edit Align="RIGHT" BindDataset="dsSalInfo" Column="NATIONAL_PENSION" Enable="FALSE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="nationalPen" Left="143" TabOrder="34" Top="266" Width="108"></Edit>
+					<Combo BindDataset="dsSalInfo" CodeColumn="CODE" Column="SUPPORT_TWENTY_BELOW" DataColumn="CODE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Combo0" InnerDataset="dsCount" Left="478" TabOrder="31" Text="선택하세요" Top="270" Width="121"></Combo>
+					<Combo BindDataset="dsSalInfo" CodeColumn="CODE" Column="SUPPORT_SIXTY_ABOVE" DataColumn="CODE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Combo1" InnerDataset="dsCount" Left="478" TabOrder="32" Text="선택하세요" Top="302" Width="121"></Combo>
+					<Combo BindDataset="dsSalInfo" CodeColumn="CODE" Column="MANY_CHILD_DEDUCTION" DataColumn="CODE" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Combo2" InnerDataset="dsWhether" Left="478" TabOrder="33" Text="선택하세요" Top="334" Width="121"></Combo>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static17" Left="22" TabOrder="38" Text="국민연금" Top="266" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static18" Left="22" TabOrder="39" Text="건강보험" Top="332" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static19" Left="22" TabOrder="40" Text="고용보험" Top="299" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static20" Left="22" TabOrder="41" Text="장기요양보험" Top="365" VAlign="Middle" Width="120"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static15" Left="252" TabOrder="42" Text="원" Top="266" VAlign="Middle" Width="32"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static21" Left="252" TabOrder="43" Text="원" Top="299" VAlign="Middle" Width="32"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static22" Left="252" TabOrder="44" Text="원" Top="332" VAlign="Middle" Width="32"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="Static23" Left="252" TabOrder="45" Text="원" Top="365" VAlign="Middle" Width="32"></Static>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="findNationPenBtn" Left="286" OnClick="detailRegistrationTab_tab3_findNationPenBtn_OnClick" TabOrder="46" Text="계산" Top="266" Width="47"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="findEmpInsurBtn" Left="286" OnClick="detailRegistrationTab_tab3_findEmpInsurBtn_OnClick" TabOrder="47" Text="계산" Top="299" Width="47"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="findHealInsurBtn" Left="286" OnClick="detailRegistrationTab_tab3_findHealInsurBtn_OnClick" TabOrder="48" Text="계산" Top="332" Width="47"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,11" Height="30" Id="autoResultBtn" Left="286" OnClick="detailRegistrationTab_tab3_autoResultBtn_OnClick" TabOrder="49" Text="계산" Top="366" Width="47"></Button>
+				</TabPage>
+			</Contents>
+		</Tab>
+		<Tab BKColor="gainsboro" BKSelColor="gainsboro" Font="한컴&#32;윤고딕&#32;240,10" Height="187" Id="detailRegistrationSubTab" Left="9" SelectFont="한컴&#32;윤고딕&#32;230,11" TabIndex="2" TabOrder="4" Top="578" Width="933">
+			<Contents>
+				<TabPage BorderColor="black" Height="157" Id="tab1" Left="2" TabOrder="6" Text="가족정보" Top="28" Width="929">
+					<Grid AutoEnter="TRUE" BindDataset="dsFamilyInfo" BkColor2="default" BoldHead="true" Bottom="141" Editable="TRUE" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="100" Id="famailyGrid" InputPanel="FALSE" Left="12" LineColor="default" Right="918" RowHeight="20" TabOrder="1" TabStop="true" Top="41" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="906">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="45"/>
+									<col width="90"/>
+									<col width="110"/>
+									<col width="80"/>
+									<col width="60"/>
+									<col width="60"/>
+									<col width="80"/>
+									<col width="90"/>
+									<col width="100"/>
+									<col width="180"/>
+									<col width="180"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;230,11" text="NO" Valign="Center"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;230,11" text="성명" Valign="Center"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;230,11" text="생년월일" Valign="Center"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;230,11" text="관계" Valign="Center"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;230,11" text="부양여부" Valign="Center"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;230,11" text="동거여부" Valign="Center"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;230,11" text="병력사항" Valign="Center"/>
+									<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;230,11" text="최종학력" Valign="Center"/>
+									<cell bkcolor="silver" col="8" display="text" font="한컴&#32;윤고딕&#32;230,11" text="직업" Valign="Center"/>
+									<cell bkcolor="silver" col="9" display="text" font="한컴&#32;윤고딕&#32;230,11" text="직장명" Valign="Center"/>
+									<cell bkcolor="silver" col="10" display="text" font="한컴&#32;윤고딕&#32;230,11" text="전화번호"/>
+								</head>
+								<body>
+									<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="1" colid="FAMILY_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="2" colid="FAMILY_BIRTH_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,10" Mask="####-##-##"/>
+									<cell align="center" col="3" colid="RELATIONSHIP" combocol="DETAIL_CODE" combodataset="dsRelationship" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="4" colid="SUPPORTING" display="checkbox" edit="checkbox" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="5" colid="COHABITATION_STATUS" display="checkbox" edit="checkbox" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="6" colid="DISABILITY_CODE" combocol="DETAIL_CODE" combodataset="dsDisabilityType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="7" colid="HIGHEST_EDUCATION_CODE" combocol="DETAIL_CODE" combodataset="dsHighestEducation" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="8" colid="JOB" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="9" colid="COMPANY_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,10"/>
+									<cell align="center" col="10" colid="TEL" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,10"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Cursor="HAND" Font="LG&#32;PC,11" Height="30" Id="familyAddBtn" Left="856" OnClick="detailRegistrationSubTab_tab1_familyAddBtn_OnClick" TabOrder="2" Text="+" Top="6" Width="30"></Button>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Cursor="HAND" Font="LG&#32;PC,11" Height="30" Id="familyRemoveBtn" Left="888" OnClick="detailRegistrationSubTab_tab1_familyRemoveBtn_OnClick" TabOrder="3" Text="-" Top="6" Width="30"></Button>
+				</TabPage>
+				<TabPage BorderColor="black" Height="157" Id="tab2" Left="2" TabOrder="6" Text="자격정보" Top="28" Width="929">
+					<Grid AutoFit="TRUE" BindDataset="dsLicenseInfo" BkColor2="default" BoldHead="true" Bottom="143" Editable="TRUE" Enable="true" EndLineColor="default" HeadHeight="25" Height="100" Id="licenseGrid" InputPanel="FALSE" Left="12" LineColor="default" MinWidth="100" Right="918" RowHeight="20" TabOrder="1" TabStop="true" Top="43" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="906">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="45"/>
+									<col width="120"/>
+									<col width="90"/>
+									<col width="90"/>
+									<col width="150"/>
+									<col width="80"/>
+									<col width="150"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;230,11" text="NO"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;230,11" text="자격증명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;230,11" text="취득일"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;230,11" text="만료일"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;230,11" text="발행기관"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;230,11" text="등급"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;230,11" text="발급번호"/>
+								</head>
+								<body>
+									<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="1" colid="LICENSE_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="2" colid="START_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+									<cell align="center" col="3" colid="END_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+									<cell align="center" col="4" colid="LICENSE_CENTER" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="5" colid="LICENSE_LEVEL" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="6" colid="LICENSE_NO" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Font="LG&#32;PC,11" Height="30" Id="licenseAddBtn" Left="855" OnClick="detailRegistrationSubTab_tab2_licenseAddBtn_OnClick" TabOrder="2" Text="+" Top="7" Width="30"></Button>
+					<Button BKColor="silver" Font="LG&#32;PC,11" Height="30" Id="licenseRemoveBtn" Left="888" OnClick="detailRegistrationSubTab_tab2_licenseRemoveBtn_OnClick" TabOrder="3" Text="-" Top="7" Width="30"></Button>
+				</TabPage>
+				<TabPage BorderColor="black" Height="157" Id="tab3" Left="2" TabOrder="6" Text="학력정보" Top="28" Width="929">
+					<Grid AutoFit="TRUE" BindDataset="dsEducationInfo" BkColor2="default" BoldHead="true" Bottom="142" Editable="TRUE" Enable="true" EndLineColor="default" HeadHeight="25" Height="100" Id="educationGrid" InputPanel="FALSE" Left="12" LineColor="default" MinWidth="100" Right="918" RowHeight="20" TabOrder="1" TabStop="true" Top="42" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="906">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="40"/>
+									<col width="130"/>
+									<col width="120"/>
+									<col width="120"/>
+									<col width="120"/>
+									<col width="120"/>
+									<col width="80"/>
+									<col width="100"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;230,11" text="NO"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;230,11" text="학교명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;230,11" text="전공"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;230,11" text="부전공"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;230,11" text="입학날짜"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;230,11" text="졸업날짜"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;230,11" text="학점"/>
+									<cell bkcolor="silver" col="7" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11" text="위&#32;&#32;&#32;&#32;&#32;치"/>
+								</head>
+								<body>
+									<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="1" colid="CAMPUS" combocol="DETAIL_CODE" combodataset="dsCampusType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="2" colid="MAJOR" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="3" colid="SUB_MAJOR" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="4" colid="ENTER_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+									<cell align="center" col="5" colid="GRADUATION_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+									<cell align="center" col="6" colid="GRADE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="7" colid="LOCATION" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="educationRemoveBtn" Left="888" OnClick="detailRegistrationSubTab_tab3_educationRemoveBtn_OnClick" TabOrder="3" Text="-" Top="6" Width="30"></Button>
+					<Button BKColor="silver" BorderColor="SCROLLBAR" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="educationAddBtn" Left="855" OnClick="detailRegistrationSubTab_tab3_educationAddBtn_OnClick" TabOrder="2" Text="+" Top="6" Width="30"></Button>
+				</TabPage>
+			</Contents>
+		</Tab>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" TabOrder="1" Text="인사&#32;기록카드" VAlign="Middle" Width="953"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsTempEmployee" BkColor2="default" BoldHead="true" Bottom="565" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,10" HeadHeight="25" Height="440" Id="detailEmpGrid" InputPanel="FALSE" Left="12" LineColor="default" MinWidth="100" OnCellClick="detailEmpGrid_OnCellClick" OnCellPosChanged="detailEmpGrid_OnCellPosChanged" Right="301" RowHeight="20" TabOrder="2" TabStop="true" Top="125" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="289">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="115"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="70"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;230,11" text="사원번호"/>
+						<cell align="center" bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;230,11" text="사원명"/>
+						<cell align="center" bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;230,11" text="부서명"/>
+						<cell align="center" bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;230,11" text="직급"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="DEPT_CODE" combocol="DEPT_CODE" combodataset="dsTempDepartment" combotext="DEPT_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="3" colid="POSITION_CODE" combocol="POSITION_CODE" combodataset="dsTempPosition" combotext="POSITION_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+					<summary>
+						<cell align="center" bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="총인원"/>
+						<cell align="center" bkcolor="silver" col="1" colspan="3" display="text" expr='RowCount()+&quot;명&quot;' font="한컴&#32;윤고딕&#32;240,11"/>
+					</summary>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="batchBtn" Left="840" OnClick="detailRegistrationTab_tab1_batchBtn_OnClick" TabOrder="5" Text="일괄저장" Top="568" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Button0" Left="752" OnClick="Button0_OnClick" TabOrder="6" Text="증명서발급" Top="568" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;230,9" Height="30" Id="Button1" Left="664" OnClick="Button1_OnClick" TabOrder="7" Text="이메일전송" Top="569" Width="87"></Button>
+		<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="codeManager" Left="12" TabOrder="8" Text="부서&#32;조회" Top="56" VAlign="Middle" Width="289"></Static>
+		<Combo CodeColumn="DEPT_CODE" DataColumn="DEPT_NAME" Font="한컴&#32;윤고딕&#32;240,10" Height="25" Id="deptSerchCombo" InnerDataset="dsTempDepartment" Left="12" OnChanged="deptSerchCombo_OnChanged" TabOrder="9" Top="90" Width="289"></Combo>
+	</Form>
+	<Script><![CDATA[
+var selEmpCode;
+var selPositionCode;
+var empFilename;
+
+var sEmpCode;
+var sEmail;
+
+//이미지 불러오기 & 등록
+var imgFile;
+var imgFileOpen;
+var empImg;
+
+
+function detailRegistrationForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	//전체 사원 목록 받아 옴(그사이 사원추가 등록 했을 경우..대비)
+	transaction("findEmployeeList","svcBase::/employee.do?method=findEmployeeList","","dsEmployee=dsEmployee","","callback"); 
+	//부서목록 가져오기 -> 로드할 때 부서 목록 다 받아옴 따로 조회 필요 없음 (단. 사원의 경우 퇴직자 선택 할 경우 때문에 조회 버튼 있음)
+	transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+	//직급List가져옴
+	transaction("findPositionList","svcBase::/position.do?method=findPositionList","","dsPosition=dsPosition","","callback");
+	//코드 목록도 얻어 옴
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+	
+	//호봉 정보를 가져옴 
+	transaction("findHobongList","svcHrCircumstance::/hobong.do?method=findHobongList","","dsHobong=dsHobong","","callback");
+	
+	//소득세율 4대보험 부담률 받아 옴 
+	transaction("findDeductionsInsuranceList",
+				"svcHrCircumstance::/deductionInsurance.do?method=findDeductionInsuranceList",
+				"",
+				"dsDeductionTax=dsDeductionTax dsIncomeTax=dsIncomeTax",
+				"",
+				"callback");
+	//일단 상세테이블 6개 받아옴
+	
+	transaction("findEmployeeInfoAll",
+		"svcHrPM::/register.do?method=findEmployeeInfoAll",
+		"",
+		"dsEmpInfo=dsEmpInfo dsFamilyInfo=dsFamilyInfo dsLicenseInfo=dsLicenseInfo dsWorkInfo=dsWorkInfo dsSalInfo=dsSalInfo dsEducationInfo=dsEducationInfo",
+		"",
+		"callback"
+	);
+	
+	//받아 오자마자 아무도 세팅 을 안한다.!(reload 될 때 아무도 없게 하기 위해서 넣어 줌)	
+	dsEmpInfo.Filter("EMP_CODE='"+0+"'");
+	dsWorkInfo.Filter("EMP_CODE='"+0+"'");
+	dsFamilyInfo.Filter("EMP_CODE='"+0+"'");
+	dsLicenseInfo.Filter("EMP_CODE='"+0+"'");
+	dsEducationInfo.Filter("EMP_CODE='"+0+"'");
+	dsSalInfo.Filter("EMP_CODE='"+0+"'");
+	dsPosition.Filter("POSITION_CODE='"+0+"'");
+	
+	
+	dsHobongCopy.Copy(dsHobong); // 호봉정보 담는다. 
+	dsHobongCopy.Filter("POSITION_CODE='"+0+"'"); // 초기에 값이 없도록 
+
+	
+	dsTempDepartment.Copy("dsDepartment");
+	dsTempPosition.Copy("dsPosition");
+	
+	//이미지 등록 시!!
+	imgFile=detailRegistrationTab.tab1.imgFile;
+	imgFileOpen=detailRegistrationTab.tab1.imgFileOpen;
+	empImg=detailRegistrationTab.tab1.empImg;
+	
+	//전체 detailCode를 filter사용 값을 제한 적으로 담음
+	detailCodeFilter();
+	
+	http.Sync=false;
+}
+
+
+function deptSerchCombo_OnChanged(obj,strCode,strText,nOldIndex,nNewIndex)
+{
+	http.Sync=true;	
+	//alert(strCode);
+	
+	dsEmployee.filter("DEPT_CODE='"+strCode+"'");
+	dsTempEmployee.CopyF(dsEmployee);
+
+	http.Sync=false;
+}
+
+
+
+
+// 사진 찾기 
+function detailRegistrationTab_tab1_findImgBtn_OnClick(obj)
+{
+	http.Sync=true;
+	//파일 불러올 dialog창 부름
+	imgFileOpen.open();
+	//dialog.filepath -> 선택된 경로... (마지막 / 까지 \\ \/ 넣는 것.. 경로/선택한 파일명)
+	var fileName=imgFileOpen.FilePath + "\\" + imgFileOpen.FileName;
+	
+	alert("fileName"+fileName); //-> 파일 경로가 뜬다.
+	
+	imgFile.FileName=fileName; // file에도 이름을 넣고 
+	
+	empImg.ImageID=fileName;      // Img에도 이름을 넣어 준다.(표시할 이미지 )
+	empImg.FillType="STRETCH";   //이미지를 영역에 맞도록 늘려 준다.
+	http.Sync=false;
+}
+
+//가장 많은 것을 할 것 !! 부서 선택 후 사원을 클릭 할 경우 받아온다.(뜨는거 봐서 더블클릭이 나으면 그것으로 )
+function detailEmpGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	//선택한 사원의 이름 사원크드 직급코드 담는다.
+	var selEmpName = dsEmployee.getColumn(nRow, "EMP_NAME");
+	selEmpCode = dsEmployee.getColumn(nRow, "EMP_CODE");
+	selPositionCode = dsEmployee.GetColumn(nRow,"POSITION_CODE");
+	
+	//선택한 사원의 상세정보가 뜬다!
+	dsEmpInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsWorkInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsFamilyInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsLicenseInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsEducationInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsSalInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsHobongCopy.Filter("POSITION_CODE='"+selPositionCode+"' && HOBONG='"+dsSalInfo.GetColumn(dsEmployee.rowpos,"HOBONG")+"'");
+	dsPosition.Filter("POSITION_CODE='"+selPositionCode+"'");
+	
+	
+	if(detailRegistrationTab.tab3.selHobong.Text!=""){  // 신규 사원이나 호봉이 등록 되어 있지 않는 사원의 초기 값
+		detailRegistrationTab.tab3.baseSal.Text=dsHobongCopy.GetColumn(0,"BASE_SAL");
+		detailRegistrationTab.tab3.bonus.Text=dsHobongCopy.GetColumn(0,"BONUS");
+		detailRegistrationTab.tab3.sigub.Text=dsHobongCopy.GetColumn(0,"SIGUB");
+	}else{
+		detailRegistrationTab.tab3.baseSal.Text="";
+		detailRegistrationTab.tab3.bonus.Text="";
+		detailRegistrationTab.tab3.sigub.Text="";
+	}
+	//alert("사원 사진 정보 있으면 사진 불러 옵니다.!! [일단 주석 처리]");
+	
+	//[사원의 사진 정보 가져 오는 곳!!]
+	var empImgName=dsEmpInfo.getColumn(dsEmpInfo.rowpos,'IMG_SRC');
+	
+	//alert("empImgName-----"+empImgName);
+	
+	if(Length(empImgName)!=0){	
+      empImg.ImageID="http://localhost:8282/test4th/img/"+empImgName+"?time="+timem();   
+      empImg.FillType="STRETCH";  
+	}else{
+      alert("이미지 호출 실패!");
+      empImg.ImageID="http://localhost:8282/test4th/img/noimage.jpg?time="+timem();
+    } 
+	
+}
+
+
+//최종 학력 검색 dialog
+function detailRegistrationTab_tab1_findHigestEducationList_OnClick(obj)
+{
+	
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2)=='ED'"); //고종 중졸 석 박 사 등등 나옴
+	dialog("HR_PM::highestEducationDialog.xml","");
+	
+	
+}
+
+// 기본 Dataset에 code에 filter를 사용 값을 제한 적으로 담음 
+function detailCodeFilter(){
+	//내국인 외국인 조사
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'NA'");
+	dsNativeType.CopyF(dsDetailCode);
+	
+	//병역 사항
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'DI'");
+	dsDisabilityType.CopyF(dsDetailCode);
+	
+	//고용형태 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'EMT'");
+	dsEmployeementType.CopyF(dsDetailCode);
+	
+	
+	//직종 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'JJ'");
+	dsJikjong.CopyF(dsDetailCode);
+	
+	
+	//프로젝트
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'PJ'");
+	dsProject.CopyF(dsDetailCode);
+	
+	//가족관계 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'RL'");
+	dsRelationship.CopyF(dsDetailCode);
+	
+	//최종학력 (x없는 듯. )
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'ED'");
+	dsHighestEducation.CopyF(dsDetailCode);
+
+	//학교 선택
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'UN'");
+	dsCampusType.CopyF(dsDetailCode);
+	
+	//급여형태 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'PA'");
+	dsSalaryType.CopyF(dsDetailCode);
+	
+	/*
+	
+	//일단 자격증 안쓰는듯.
+	
+	//자격증 유무 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'LI'");
+	dsLicenseType.CopyF(dsDetailCode);
+	
+	//발행처 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'LC'");
+	dsLicenseCenter.CopyF(dsDetailCode);
+	
+	
+	
+	//연금유형 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'PEC'");
+	dsPensionType.CopyF(dsDetailCode);
+	*/
+
+}
+
+
+//주소 검색
+function detailRegistrationTab_tab1_adressSearchBtn_OnClick(obj)
+{
+	dialog("Base::PostInfoForm.xml","");
+}
+
+//사진 저장!!(웹로직 이용)
+function detailRegistrationTab_tab1_saveImgBtn_OnClick(obj)
+{
+	http.Sync=true;
+	//empFilename=imgFileOpen.Filename;   
+	
+	
+	// 사원 번호로 파일 이름을 만든다.[추가부분]
+	var fileExtend = SubStr(imgFileOpen.fileName, IndexOf(imgFileOpen.fileName,"."));
+   
+	
+   
+	empFileName =  selEmpCode + fileExtend;
+	
+	//alert(empFileName);//확장자 얻어 옴 .jpg 등 
+	// 사원 선택 해서 들어 오면 여기 받아온다 사원 번호
+	
+	
+	//여기까지 이름변경 해 보려고[추가부분]
+	
+	imgFile.Open("rb");
+
+    var empImgFile=imgFile.ReadBinary(); //Binary 형식으로 읽기
+   
+	dsImg.AddRow();  // file 이름과 data를 넣을 dataset 에 row를 추가함
+	
+	//이미지 데이터 셋에. 
+	dsImg.SetColumn(dsImg.GetCurrow(),"EMP_FILE_NAME",empFilename);
+	dsImg.SetColumn(dsImg.GetCurrow(),"IMG_FILE_DATA",empImgFile);
+	//사원상세 정보의 이미지 경로를 창에 이미지 이름을 저장해 둔다.
+	dsEmpInfo.SetColumn(dsEmpInfo.row,"IMG_SRC",empFilename);
+	//저장되는 이름을 확인!!
+	alert("사진경로:::"+empFilename);
+	//이미지 저장 메서드 호출 !!
+	//alert("웹로직 할 때 생성 되는지 확인 가능 함");
+	Transaction("saveEmpImg","svcHrPM::/register.do?method=saveEmpImg","dsImg=dsImg:u","","","callback");
+	//웹로직 연결시 생성되는지 확인 가능 [나중에 할 것!!]
+	http.Sync=false;
+}
+
+
+//일괄 저장[수정 완료 후 저장 버튼]
+function detailRegistrationTab_tab1_batchBtn_OnClick(obj)
+{
+
+	if(confirm("저장 하시겠습니까?")){
+	
+	//alert("저장하기 버튼");
+	//우선 사원 정보만 수정 함.
+		transaction(
+			"batchEmployeeInfoAll",
+			"svcHrPM::/register.do?method=batchEmployeeInfoAll",
+			"dsEmpInfo=dsEmpInfo:u dsWorkInfo=dsWorkInfo:u dsFamilyInfo=dsFamilyInfo:u dsLicenseInfo=dsLicenseInfo:u dsEducationInfo=dsEducationInfo:u dsSalInfo=dsSalInfo:u" ,
+			"dsEmpInfo=dsEmpInfo dsWorkInfo=dsWorkInfo dsFamilyInfo=dsFamilyInfo dsLicenseInfo=dsLicenseInfo dsEducationInfo=dsEducationInfo dsSalInfo=dsSalInfo" ,
+			"",
+			"callback");	
+	}
+	detailRegistrationTab.tab3.autoResultBtn.visible=false;
+	Reload();
+}
+
+
+
+
+//가족 정보 추가하기
+function detailRegistrationSubTab_tab1_familyAddBtn_OnClick(obj)
+{
+	dsFamilyInfo.AddRow(); //한 행 추가 
+	dsFamilyInfo.SetColumn(dsFamilyInfo.rowpos,"EMP_CODE",selEmpCode);
+				//시퀀스빼고 10개 입력됨. 사원번호는 선택 된 사원 번호 들어감.
+}
+//가족 정보 삭제하기
+function detailRegistrationSubTab_tab1_familyRemoveBtn_OnClick(obj)
+{
+		dsFamilyInfo.DeleteRow(dsFamilyInfo.rowpos); // 선택된 내용 삭제.. 
+}
+
+//자격증 정보 추가하기
+function detailRegistrationSubTab_tab2_licenseAddBtn_OnClick(obj)
+{
+	dsLicenseInfo.AddRow();
+	dsLicenseInfo.SetColumn(dsLicenseInfo.rowpos,"EMP_CODE",selEmpCode);
+}
+//자격증 정보 삭제하기
+function detailRegistrationSubTab_tab2_licenseRemoveBtn_OnClick(obj)
+{
+	dsLicenseInfo.DeleteRow(dsLicenseInfo.rowpos);
+}
+
+
+
+//학력정보입력
+
+function detailRegistrationSubTab_tab3_educationAddBtn_OnClick(obj)
+{
+	dsEducationInfo.AddRow();
+	dsEducationInfo.SetColumn(dsLicenseInfo.rowpos,"EMP_CODE",selEmpCode);
+}
+
+//학력정보삭제
+function detailRegistrationSubTab_tab3_educationRemoveBtn_OnClick(obj)
+{
+	dsEducationInfo.DeleteRow(dsLicenseInfo.rowpos);
+}
+
+
+// 호봉 선택 시 
+function detailRegistrationTab_tab3_selHobong_OnChanged(obj,strCode,strText,nOldIndex,nNewIndex)
+{
+	dsHobong.UnFilter();
+	dsHobong.Filter("POSITION_CODE='"+selPositionCode+"' && HOBONG='"+strText+"'");
+	if(dsHobong.GetRowCount()==0){
+		alert(" dsHobong.GetRowCount()==0:( ");
+		detailRegistrationTab.tab3.baseSal.Text="";
+		detailRegistrationTab.tab3.bonus.Text="";
+		detailRegistrationTab.tab3.sigub.Text="";
+	}else{
+		detailRegistrationTab.tab3.baseSal.Text=dsHobong.GetColumn(0,"BASE_SAL");
+		detailRegistrationTab.tab3.bonus.Text=dsHobong.GetColumn(0,"BONUS");
+		detailRegistrationTab.tab3.sigub.Text=dsHobong.GetColumn(0,"SIGUB");
+	}
+}
+
+function detailRegistrationTab_tab3_findBankBtn_OnClick(obj)
+{
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,3) == 'BNK'");
+	dialog("HR_PM::bankDialog.xml","");
+}
+
+//국민연금계산
+function detailRegistrationTab_tab3_findNationPenBtn_OnClick(obj)
+{
+	dialog("HR_PM::nationalPenDialog.xml","");
+}
+//고용 보험 계산 
+function detailRegistrationTab_tab3_findEmpInsurBtn_OnClick(obj)
+{
+	dialog("HR_PM::employeementInsurDialog.xml","");
+}
+
+//건강보험 계산
+function detailRegistrationTab_tab3_findHealInsurBtn_OnClick(obj)
+{
+	dialog("HR_PM::healthInsurDialog.xml","");
+	detailRegistrationTab.tab3.autoResultBtn.visible=true;
+}
+
+// 장기 요양 보험 계산 
+function detailRegistrationTab_tab3_autoResultBtn_OnClick(obj)
+{
+	if(detailRegistrationTab.tab3.healthInsur.text ==""){
+      alert("건강 보험을 먼저 계산 하셔야 합니다. ");   
+   }else{
+      dsDeductionTax.Filter("INPUTED_YEAR='"+substr(today(),0,4)+"'");
+      var longTermCareRate=dsDeductionTax.getColumn(dsDeductionTax.row,"LONG_TERM_CARE_RATE"); // 장기 요양 보험률 가져 옴
+      var healthInsurSal=StripNum(detailRegistrationTab.tab3.healthInsur.text);
+      var resultLongTermCareSal=healthInsurSal * ParseFloat(longTermCareRate) / 100;
+      detailRegistrationTab.tab3.longTermCare.text=Round(resultLongTermCareSal,0);
+   }
+}
+
+function detailEmpGrid_OnCellPosChanged(obj,nRow,nCell,nOldRow,nOldCell,nPivotIndex,nOldPivotIndex)
+{
+	//선택한 사원의 이름 사원크드 직급코드 담는다.
+	var selEmpName = dsEmployee.getColumn(nRow, "EMP_NAME");
+	selEmpCode = dsEmployee.getColumn(nRow, "EMP_CODE");
+	selPositionCode = dsEmployee.GetColumn(nRow,"POSITION_CODE");
+	
+	//선택한 사원의 상세정보가 뜬다!
+	dsEmpInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsWorkInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsFamilyInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsLicenseInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsEducationInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsSalInfo.Filter("EMP_CODE='"+selEmpCode+"'");
+	dsHobongCopy.Filter("POSITION_CODE='"+selPositionCode+"' && HOBONG='"+dsSalInfo.GetColumn(dsEmployee.rowpos,"HOBONG")+"'");
+	dsPosition.Filter("POSITION_CODE='"+selPositionCode+"'");
+	
+	
+	if(detailRegistrationTab.tab3.selHobong.Text!=""){  // 신규 사원이나 호봉이 등록 되어 있지 않는 사원의 초기 값
+		detailRegistrationTab.tab3.baseSal.Text=dsHobongCopy.GetColumn(0,"BASE_SAL");
+		detailRegistrationTab.tab3.bonus.Text=dsHobongCopy.GetColumn(0,"BONUS");
+		detailRegistrationTab.tab3.sigub.Text=dsHobongCopy.GetColumn(0,"SIGUB");
+	}else{
+		detailRegistrationTab.tab3.baseSal.Text="";
+		detailRegistrationTab.tab3.bonus.Text="";
+		detailRegistrationTab.tab3.sigub.Text="";
+	}
+	//alert("사원 사진 정보 있으면 사진 불러 옵니다.!! [일단 주석 처리]");
+	
+	//[사원의 사진 정보 가져 오는 곳!!]
+	var empImgName=dsEmpInfo.getColumn(dsEmpInfo.rowpos,'IMG_SRC');
+	
+	//alert("empImgName-----"+empImgName);
+	
+	if(Length(empImgName)!=0){	
+      empImg.ImageID="http://localhost:8282/test4th/img/"+empImgName+"?time="+timem();   
+      empImg.FillType="STRETCH";  
+	}else{
+      //alert("이미지 호출 실패!");
+      empImg.ImageID="http://localhost:8282/test4th/img/noimage.jpg?time="+timem();
+    }	
+}
+
+
+
+//재직증명서 발급 
+
+
+
+
+
+
+
+function Button0_OnClick(obj)
+{
+	sEmpCode=dsTempEmployee.GetColumn(dsTempEmployee.row, "EMP_CODE");
+   //sEmpCode=dsTempEmployee.GetColumn(nRow, "EMP_CODE");
+   trace("@@@@"+sEmpCode);
+   
+   transaction("findEmployeeList",
+            "svcBase::/employee.do?method=pdfSend",
+            "",
+            "dsEmployee=dsEmployee",
+            "sEmpCode='"+sEmpCode+"'",
+            "callback");
+   Dialog("base::pdfForm.xml","");
+
+
+}
+
+function Button1_OnClick(obj)
+{
+	sEmpCode=dsTempEmployee.GetColumn(dsTempEmployee.row, "EMP_CODE");
+   sEmail=dsEmpInfo.GetColumn(dsEmpInfo.row,"EMAIL");
+   trace("@@@@!!"+sEmpCode);
+   if(Length(sEmpCode)==0){
+      alert("사원을 선택하세요.");
+   
+   }else{
+      transaction("findEmployeeList",
+               "svcBase::/employee.do?method=sendEmail",
+               "",
+               "dsEmployee=dsEmployee",
+               "sEmpCode="+Quote(sEmpCode)+" sEmail="+Quote(sEmail),
+               "callback");
+      alert("메일전송을 완료 했습니다.");
+   }
+}
+]]></Script>
+</Window>

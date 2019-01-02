@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,16" Height="700" Id="codeManagementForm" Left="8" OnLoadCompleted="codeManagementForm_OnLoadCompleted" PidAttrib="7" Title="codeManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsOutPutType">
+				<Contents>
+					<colinfo id="NAME" size="256" summ="default" type="STRING"/>
+					<record>
+						<NAME>0.인사</NAME>
+					</record>
+					<record>
+						<NAME>선택하세요.</NAME>
+					</record>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="darkmagenta" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="10" Text="코드&#32;관리" Top="1" VAlign="Middle" Width="955"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="darkmagenta" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="40" Id="Static3" Left="40" TabOrder="8" Text="관리코드&#32;리스트" Top="85" VAlign="Middle" Width="272"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="darkmagenta" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="40" Id="Static4" Left="346" TabOrder="9" Text="상세코드&#32;리스트" Top="85" VAlign="Middle" Width="570"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsCode" BkColor2="default" BoldHead="true" BorderColor="HIGHLIGHT" Bottom="646" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,9" HeadHeight="25" Height="517" Id="codeGrid" InputPanel="FALSE" Left="40" LineColor="default" MinWidth="100" OnCellClick="codeGrid_OnCellClick" OnCellPosChanged="codeGrid_OnCellPosChanged" Right="312" RowHeight="20" TabOrder="1" TabStop="true" Top="129" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="272">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="65"/>
+						<col width="100"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="코드"/>
+						<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" text="코드명"/>
+						<cell bkcolor="silver" col="2" color="black" combodataset="dsStatus" display="text" edit="combo" font="한컴&#32;윤고딕&#32;240,11" text="수정여부"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="CODE_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="USING_STATUS" combocol="STATUS" combodataset="dsStatus" combotext="STATUS" display="text" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="dsDetailCode" BkColor2="default" BoldHead="true" BorderColor="HIGHLIGHT" Bottom="646" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,9" HeadHeight="25" Height="517" Id="CodeDetail" InputPanel="FALSE" Left="346" LineColor="default" MinWidth="100" Right="914" RowHeight="20" TabOrder="2" TabStop="true" Top="129" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="568">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="190"/>
+						<col width="93"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="코드"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="상세코드"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="상세코드명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="수정여부"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="1" colid="DETAIL_CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="2" colid="DETAIL_CODE_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,11"/>
+						<cell align="center" col="3" colid="USING_STATUS" combocol="STATUS" combodataset="dsStatus" combotext="STATUS" display="text" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="addCodeBtn" Left="248" OnClick="addCodeBtn_OnClick" TabOrder="3" Text="+" Top="650" Width="30"></Button>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="removeCodeBtn" Left="282" OnClick="removeCodeBtn_OnClick" TabOrder="4" Text="-" Top="650" Width="30"></Button>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="addDetailCodeBtn" Left="851" OnClick="addDetailCodeBtn_OnClick" TabOrder="5" Text="+" Top="650" Width="30"></Button>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="removeDetailCodeBtn" Left="884" OnClick="removeDetailCodeBtn_OnClick" TabOrder="6" Text="-" Top="650" Width="30"></Button>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,10" Height="32" Id="saveBtn" Left="837" OnClick="saveBtn_OnClick" TabOrder="7" Text="일괄저장" Top="43" Width="79"></Button>
+		<Static BKColor="gainsboro" Font="한컴&#32;윤고딕&#32;240,9" Height="32" Id="Static1" Left="5" TabOrder="11" Top="43" Width="827"></Static>
+		<Static Font="한컴&#32;윤고딕&#32;240,10" Height="30" Id="Static2" Left="17" TabOrder="12" Text="출력구분" Top="45" VAlign="Middle" Width="57"></Static>
+		<Combo BKColor="white" CodeColumn="NAME" DataColumn="NAME" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="selectCode" InnerDataset="dsOutPutType" Left="81" ResetIndex="FIRST" TabOrder="13" Top="45" Width="105"></Combo>
+	</Form>
+	<Script><![CDATA[
+function codeManagementForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+	
+	dsDetailCode.Filter("CODE=='"+0+"'");
+
+	http.Sync=false;
+}
+
+
+function addCodeBtn_OnClick(obj)
+{
+	dsCode.addrow(); // row 추가
+
+}
+function removeCodeBtn_OnClick(obj)
+{
+if(confirm("해당 관리내역을 삭제하시면 코드 ["+dsCode.GetColumn(dsDetailCode.row,"CODE")+"]로 입력된 내용을 볼 수 없습니다. 그래도 삭제하시겠습니까?")){
+	dsCode.DeleteRow(dsCode.row);
+	alert("관리코드 삭제완료");
+	}
+}
+
+function ResetBtn_OnClick(obj)
+{
+	
+	Reload();
+}
+
+function addDetailCodeBtn_OnClick(obj)
+{
+	var rowNum=dsDetailCode.GetRowCount();
+ 
+	var parentCode=dsCode.GetColumn(dsCode.row,"CODE");
+		
+	if(Type(parentCode)=="null"){
+		alert(" Type(parentCode)=='null':( ");
+	}else{
+		dsDetailCode.AddRow();
+		
+		dsDetailCode.SetColumn(rowNum,"CODE",parentCode);
+	}
+}
+
+
+function codeGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	dsDetailCode.filter("CODE='"+dsCode.GetColumn(nRow,"CODE")+"'");
+}
+function codeGrid_OnCellPosChanged(obj,nRow,nCell,nOldRow,nOldCell,nPivotIndex,nOldPivotIndex)
+{
+	dsDetailCode.filter("CODE='"+dsCode.GetColumn(nRow,"CODE")+"'");	
+}
+
+function removeDetailCodeBtn_OnClick(obj)
+{
+	if(confirm("해당 관리내역을 삭제하시면 코드 ["+dsDetailCode.GetColumn(dsDetailCode.row,"DETAIL_CODE")+"]로 입력된 내용을 볼 수 없습니다. 그래도 삭제하시겠습니까?")){
+	dsDetailCode.DeleteRow(dsDetailCode.row);
+	alert("일괄저장버튼을 눌러주세요.");
+	}
+}
+
+function saveBtn_OnClick(obj)
+{
+	if(confirm("코드/상세코드 수정 사항을 저장하시겠습니까? ")){
+		transaction(
+			"batchCode",
+			"svcBase::/code.do?method=batchCode",
+			"dsCode=dsCode:u dsDetailCode=dsDetailCode:u",
+			"dsCode=dsCode dsDetailCode=dsDetailCode",
+			"",
+			"saveCallback");
+			
+		}
+		Reload();
+		
+}
+
+
+function saveCallback(trid, ErrorCode, ErrorMsg) {
+	if(trid=='findCodeList'){
+		if(ErrorCode!=0){
+			alert("CodeList 호출 시 ERROR 발생"); //ErrorCode!=0 :( 
+		}	
+	}
+	
+	if(trid=='batchCode'){
+		if(ErrorCode!=0){
+			alert("수정 저장 중 ERROR 발생(입력하신 내용을 다시 확인해 주세요)"); // ErrorCode!=0 :( 
+		}else{
+			
+			alert("수정 저장 완료"); // ErrorCode==0 :) 
+			//Reload();
+			codeManagementForm_OnLoadCompleted(codeManagementForm);
+			
+		}	
+	}
+	
+}]]></Script>
+</Window>

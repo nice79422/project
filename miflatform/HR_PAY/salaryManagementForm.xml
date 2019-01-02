@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="700" Id="sudangForm" Left="8" OnLoadCompleted="sudangForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="sudangForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,16" Height="30" Id="formtitle" Left="4" TabOrder="12" Text="수당&#32;관리" Top="2" VAlign="Middle" Width="951"></Static>
+		<Static Color="user4" Font="한컴&#32;윤고딕&#32;240,16" Height="640" Hilight3dColor="black" Id="Static1" Left="8" TabOrder="1" Text="연장수당&#32;및&#32;기타수당&#32;관리" Top="48" Type="Groupbox" Width="944"></Static>
+		<Static Color="crimson" Font="한컴&#32;윤고딕&#32;240,12" Height="28" Id="Static4" Left="24" TabOrder="2" Text="※연장수당=근로시간*시급*연장수당률" Top="83" Width="352"></Static>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,10" Height="30" Id="savaBtn" Left="848" OnClick="savaBtn_OnClick" TabOrder="3" Text="일괄저장" Top="80" Width="87"></Button>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,16" Height="30" Id="Static2" Left="24" TabOrder="4" Text="연장&#32;수당" Top="128" VAlign="Middle" Width="912"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsOvertimeSal" BkColor2="default" BoldHead="true" Bottom="344" Editable="TRUE" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="184" Id="overtimeSalGrid" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="936" RowHeight="20" TabOrder="5" TabStop="true" Top="160" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="912">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="20"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="NO"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="연장수당코드"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="연장수당명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="연장수당률"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" edit="normal" expr="currow+1" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="OVERTIME_SAL_CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="OVERTIME_SAL_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="OVERTIME_SAL_RATE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,10" Height="29" Id="addOvertimeSalBtn" Left="872" OnClick="addOvertimeSalBtn_OnClick" TabOrder="6" Text="+" Top="351" Width="29"></Button>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,10" Height="29" Id="removeOvertimeSalBtn" Left="904" OnClick="removeOvertimeSalBtn_OnClick" TabOrder="7" Text="-" Top="351" Width="29"></Button>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,16" Height="30" Id="Static3" Left="24" TabOrder="8" Text="기타&#32;수당" Top="399" VAlign="Middle" Width="912"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsEtcSal" BkColor2="default" BoldHead="true" Bottom="632" Editable="TRUE" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="200" Id="etcSalGrid" InputPanel="FALSE" Left="24" LineColor="default" MinWidth="100" Right="936" RowHeight="20" TabOrder="9" TabStop="true" Top="432" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="912">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="20"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="NO"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기타수당코드"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기타수당명"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="금액"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" edit="normal" expr="currow+1" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="ETC_SAL_CODE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="ETC_SAL_NAME" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="ETC_SAL_PRICE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,10" Height="29" Id="addEtcSalBtn" Left="872" OnClick="addEtcSalBtn_OnClick" TabOrder="11" Text="+" Top="641" Width="29"></Button>
+		<Button BKColor="silver" BorderColor="SCROLLBAR" Color="WINDOW" Cursor="HAND" Font="한컴&#32;윤고딕&#32;230,10" Height="29" Id="removeEtcSalBtn" Left="904" OnClick="removeEtcSalBtn_OnClick" TabOrder="10" Text="-" Top="641" Width="29"></Button>
+	</Form>
+	<Script><![CDATA[
+
+
+function sudangForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	transaction("findSalaryList","svcBase::/salary.do?method=findSalaryList","","dsEtcSal=dsEtcSal dsOvertimeSal=dsOvertimeSal","","callback");
+	
+	http.Sync=false;
+}
+// 연장 수당 추가 
+function addOvertimeSalBtn_OnClick(obj)
+{
+	dsOvertimeSal.AddRow();	
+}
+
+// 연장 수당 삭제 
+function removeOvertimeSalBtn_OnClick(obj)
+{
+	dsOvertimeSal.DeleteRow(dsOvertimeSal.row);	
+}
+
+// 기타 수당 추가 
+function addEtcSalBtn_OnClick(obj)
+{
+	dsEtcSal.AddRow();
+}
+
+// 기타 수당 삭제 
+function removeEtcSalBtn_OnClick(obj)
+{
+	dsEtcSal.DeleteRow(dsEtcSal.row);
+}
+
+
+// 일괄 저장
+function savaBtn_OnClick(obj)
+{
+	
+	if(confirm("savaBtn?")){
+		transaction(
+			"batchSudang",
+			"svcBase::/salary.do?method=batchSudang",
+			"dsEtcSal=dsEtcSal:u dsOvertimeSal=dsOvertimeSal:u",
+			"dsEtcSal=dsEtcSal dsOvertimeSal=dsOvertimeSal",
+			"",
+			"callback"
+		);	
+	}
+	
+}
+
+function callback(trid, ErrorCode, ErrorMsg){
+	if(trid == 'batchSudang'){
+		if(ErrorCode!=0){
+			alert("ErrorCode!=0");
+		}else{
+			alert(ErrorMsg);
+		}
+	}
+}
+
+]]></Script>
+</Window>

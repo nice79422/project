@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="dailyAttdManagementForm" Left="8" OnLoadCompleted="dailyAttdManagementForm_OnLoadCompleted" PidAttrib="7" Title="dailyAttdManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsApprovalDailyAttdReport">
+				<Contents>
+					<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAILY" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTEND_TIME" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTEND_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="QUIT_TIME" size="256" summ="default" type="STRING"/>
+					<colinfo id="QUIT_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="LEAVE_TIME" size="256" summ="default" type="STRING"/>
+					<colinfo id="RETURN_TIME" size="256" summ="default" type="STRING"/>
+					<colinfo id="LEAVE_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="LATE_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="CLOSE_YN" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTD_DAY_TYPE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EARLY_LEAVE_TIME" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsAttdDayType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsAttdQuitType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="일근태관리" Top="1" VAlign="Middle" Width="953"></Static>
+		<Tab BKColor="gainsboro" BKSelColor="user2" Color="INACTIVECAPTIONTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="703" Id="dailyAttdManagementTab" Left="17" SelColor="white" SelectFont="한컴&#32;윤고딕&#32;240,12" TabIndex="1" TabOrder="2" Top="51" Width="921">
+			<Contents>
+				<TabPage BorderColor="black" Height="669" Id="tab1" Left="2" TabOrder="4" Text="마감관리항목" Top="32" Width="917">
+					<Grid BindDataset="dsApprovalDailyAttdReport" BkColor2="default" BoldHead="true" Bottom="657" Enable="true" EndLineColor="default" HeadHeight="25" Height="612" Id="approvalGrid" InputPanel="FALSE" Left="13" LineColor="default" Right="913" RowHeight="20" TabOrder="1" TabStop="true" Top="45" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="900">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="130"/>
+									<col width="95"/>
+									<col width="150"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="기준일"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="요일"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근무일구분"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="출근시각"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="출근형태"/>
+									<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,11" text="퇴근시각"/>
+									<cell bkcolor="silver" col="8" display="text" font="한컴&#32;윤고딕&#32;240,11" text="외출시각"/>
+									<cell bkcolor="silver" col="9" display="text" font="한컴&#32;윤고딕&#32;240,11" text="외출시간"/>
+									<cell bkcolor="silver" col="10" display="text" font="한컴&#32;윤고딕&#32;240,11" text="귀사시각"/>
+									<cell bkcolor="silver" col="11" display="text" font="한컴&#32;윤고딕&#32;240,11" text="지각시간"/>
+									<cell bkcolor="silver" col="12" display="text" font="한컴&#32;윤고딕&#32;240,11" text="조퇴시각"/>
+									<cell bkcolor="silver" col="13" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근무시간"/>
+									<cell bkcolor="silver" col="14" display="text" font="한컴&#32;윤고딕&#32;240,11" text="연장시간"/>
+									<cell bkcolor="silver" col="15" display="text" font="한컴&#32;윤고딕&#32;240,11" text="심야시간"/>
+									<cell bkcolor="silver" col="16" display="text" font="한컴&#32;윤고딕&#32;240,11" text="마감여부"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="2" colid="BASIC_DAY" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@@-@@-@@"/>
+									<cell align="center" col="3" colid="DAILY" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="4" colid="ATTD_DAY_TYPE" combocol="DETAIL_CODE" combodataset="dsAttdDayType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="5" colid="ATTEND_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="6" colid="ATTEND_TYPE_CODE" combocol="DETAIL_CODE" combodataset="dsAttdQuitType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="7" colid="QUIT_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="8" colid="LEAVE_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="9" colid="LEAVE_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="10" colid="RETURN_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="11" colid="LATE_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="12" colid="EARLY_LEAVE_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="13" colid="WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="14" colid="OVER_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="15" colid="NIGHT_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="16" colid="CLOSE_YN" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="searchBtn" Left="733" OnClick="dailyAttdManagementTab_tab1_searchBtn_OnClick" TabOrder="2" Text="조&#32;회" Top="6" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="cancelBtn" Left="823" OnClick="dailyAttdManagementTab_tab1_cancelBtn_OnClick" TabOrder="3" Text="마감&#32;취소" Top="6" Width="87"></Button>
+				</TabPage>
+				<TabPage BKColor="gainsboro" BorderColor="black" Font="한컴&#32;윤고딕&#32;240,12" Height="669" Id="tab2" Left="2" TabOrder="4" Text="미마감관리항목" Top="32" Width="917">
+					<Grid BindDataset="dsDailyAttdReport" BkColor2="default" BoldHead="true" Bottom="654" Color="black" Enable="true" EndLineColor="default" HeadHeight="25" Height="612" Id="approvalGrid" InputPanel="FALSE" Left="10" LineColor="default" Right="910" RowHeight="20" TabOrder="1" TabStop="true" Top="42" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="900">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="120"/>
+									<col width="95"/>
+									<col width="150"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,10" text="사원번호"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,10" text="사원명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,10" text="기준일"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,10" text="요일"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,10" text="근무일구분"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,10" text="출근시각"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,10" text="출근형태"/>
+									<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,10" text="퇴근시각"/>
+									<cell bkcolor="silver" col="8" display="text" font="한컴&#32;윤고딕&#32;240,10" text="외출시각"/>
+									<cell bkcolor="silver" col="9" display="text" font="한컴&#32;윤고딕&#32;240,10" text="귀사시각"/>
+									<cell bkcolor="silver" col="10" display="text" font="한컴&#32;윤고딕&#32;240,10" text="외출시간"/>
+									<cell bkcolor="silver" col="11" display="text" font="한컴&#32;윤고딕&#32;240,10" text="근무시간"/>
+									<cell bkcolor="silver" col="12" display="text" font="한컴&#32;윤고딕&#32;240,10" text="지각시간"/>
+									<cell bkcolor="silver" col="13" display="text" font="한컴&#32;윤고딕&#32;240,10" text="조퇴시각"/>
+									<cell bkcolor="silver" col="14" display="text" font="한컴&#32;윤고딕&#32;240,10" text="연장근무시간"/>
+									<cell bkcolor="silver" col="15" display="text" font="한컴&#32;윤고딕&#32;240,10" text="심야근무시간"/>
+									<cell bkcolor="silver" col="16" display="text" font="한컴&#32;윤고딕&#32;240,10" text="마감여부"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="2" colid="BASIC_DAY" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@@-@@-@@"/>
+									<cell align="center" col="3" colid="DAILY" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="4" colid="ATTD_DAY_TYPE" combocol="DETAIL_CODE" combodataset="dsAttdDayType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="5" colid="ATTEND_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="6" colid="ATTEND_TYPE_CODE" combocol="DETAIL_CODE" combodataset="dsAttdQuitType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="7" colid="QUIT_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="8" colid="LEAVE_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="9" colid="RETURN_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="10" colid="LEAVE_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="11" colid="WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="12" colid="LATE_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="13" colid="EARLY_LEAVE_TIME" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" Mask="##:##"/>
+									<cell align="center" col="14" colid="OVER_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="15" colid="NIGHT_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="16" colid="CLOSE_YN" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Button BKColor="silver" Color="black" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="searchBtn" Left="729" OnClick="dailyAttdManagementTab_tab2_searchBtn_OnClick" TabOrder="2" Text="조&#32;회" Top="6" Width="87"></Button>
+					<Button BKColor="silver" Color="black" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="closeBtn" Left="822" OnClick="dailyAttdManagementTab_tab2_closeBtn_OnClick" TabOrder="3" Text="마&#32;감" Top="6" Width="87"></Button>
+				</TabPage>
+			</Contents>
+		</Tab>
+		<Static Align="Center" Border="Sunken" Color="INACTIVECAPTIONTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static16" Left="742" TabOrder="3" Text="기준일" Top="38" VAlign="Middle" Width="87"></Static>
+		<Calendar Color="INACTIVECAPTIONTEXT" DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,12" HeaderFont="LG&#32;PC,11" Height="30" Id="basicDate" Left="831" OnChanged="basicDate_OnChanged" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="4" Top="38" WeeksFont="LG&#32;PC,11" Width="107"></Calendar>
+	</Form>
+	<Script><![CDATA[
+
+
+//로딩 시 상세코드 받아 와서 나눠서 담는다. 
+function dailyAttdManagementForm_OnLoadCompleted(obj)
+{
+	
+	http.sync=true;
+	//코드 목록도 얻어 옴
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+	//나누어서 filter사용 담는다.(휴무/휴일/정상근무일)
+	dsDetailCode.Filter("DETAIL_CODE='AQC008' || DETAIL_CODE='AQC009' || DETAIL_CODE='AQC010'");
+	dsAttdDayType.CopyF(dsDetailCode);
+	// (연장/심야/지각/정상출근/정상퇴근/조퇴/결근/출장/교육/연차)
+	dsDetailCode.Filter("DETAIL_CODE='AQC001' || DETAIL_CODE='AQC002' || DETAIL_CODE='AQC003' || DETAIL_CODE='AQC004' || DETAIL_CODE='AQC005' || DETAIL_CODE='AQC006' || DETAIL_CODE='AQC007' || DETAIL_CODE='AQC008'|| DETAIL_CODE='AQC009' || DETAIL_CODE='AQC011' || DETAIL_CODE='AQC012' || DETAIL_CODE='AQC013'");
+	dsAttdQuitType.CopyF(dsDetailCode);
+	
+	dsDailyAttdReport.Filter("CLOSE_YN='0'"); // 다른 곳 갔다 왔을 경우 이전 정보 뜨는거 막기 위해 
+	http.sync=false;
+}
+
+
+//마감관리항목 조회 시 
+function dailyAttdManagementTab_tab1_searchBtn_OnClick(obj)
+{
+	http.Sync=true;
+
+   if(basicDate.Value==""){
+      alert(" 기준일을 선택하시기 바랍니다. ");
+   }else{
+      transaction(
+         "findApprovalDailyAttdReport",
+         "svcHrAttendance::/attdReport.do?method=findApprovalDailyAttdReport",
+         "",
+         "dsApprovalDailyAttdReport=dsDailyAttdReport",
+         "baseDay=" + basicDate.Value,
+         "callback"
+      );   
+      dailyAttdManagementTab.tab1.cancelBtn.Enable=true; //조회 후 마감 버튼 활성화   
+   }
+   http.Sync=false;
+	
+	
+}
+
+//마감관리항목 마감 취소 시 
+function dailyAttdManagementTab_tab1_cancelBtn_OnClick(obj)
+{
+	
+	if(confirm("마감을 취소 하시겠습니까? ")){
+      for(var index = 0; index < dsApprovalDailyAttdReport.rowCount; index++) {
+         dsApprovalDailyAttdReport.SetColumn(index,"CLOSE_YN","N");
+      }
+   
+      transaction(
+         "updateDailyAttdCloseCalcelYN",
+         "svcHrAttendance::/attdReport.do?method=updateDailyAttdCloseYN",
+         "dsDailyAttdReport=dsApprovalDailyAttdReport:u",
+         "",
+         "",
+         "callback"
+      );
+     
+   }
+	
+}
+
+// 해당 일자의  일근태 미마감 내역 조회 
+function dailyAttdManagementTab_tab2_searchBtn_OnClick(obj)
+{
+	http.Sync=true;
+	
+	if(basicDate==""){
+		alert(" 기준일을 선택하시기 바랍니다. ");
+	}else{
+		var approvalStatus="N";
+		var basicDay=basicDate.Value;
+		var deptCode="";
+		// 해당 일자의 미승인 일근태 내역 조회 (dsDailyAttdManage -> 조회된 결과를 담을 dataset)
+		transaction(
+			"findUnapprovedDailyAttd",
+			"svcHrAttendance::/dailyAttd.do?method=findDailyAttdListByCondition","",
+			"dsDailyAttdManage=dsDailyAttd",
+			"approvalStatus='" + approvalStatus + "' basicDay='" + basicDay + "' deptCode='" + deptCode + "'" ,
+			"callback"
+		);	
+		
+		//해당 일자의 미승인 일근태외 내역 조회 (dsDailyAttdRestManage -> 조회된 결과를 담을 dataset)
+		transaction(
+			"findUnapprovedDailyAttdRest",
+			"svcHrAttendance::/dailyAttdRest.do?method=findAttdRestListByCondition",
+			"",
+			"dsDailyAttdRestManage=dsDailyAttdRest",
+			"approvalStatus='" + approvalStatus + "' basicDay='" + basicDay + "' deptCode='" + deptCode + "'" ,
+			"callback"
+		);
+		
+      if(confirm(basicDate.Text)){
+		//alert(dsDailyAttdManage.GetRowCount()+"----"+dsDailyAttdRestManage.GetRowCount());
+		
+		// 미 마감 내역이 있으면 뜬다. 해당 일자에.. 	
+         if(dsDailyAttdManage.GetRowCount()>0 || dsDailyAttdRestManage.GetRowCount()>0){
+				var result=Dialog("HR_ATTENDANCE::unApprovedDailyAttdDialog.xml","basicDay="+basicDate.Value);
+				//alert("result----"+result); // 승인 취소시 -1 을 던져 준다. 
+				if(result==-1){
+					Reload();
+				}
+         }else{
+			// 조회시 해당일자에 미승인 내역이 없을 때 실행 또.. 미승인내역을 승인으로 처리 후 실행 됨.!!
+			 findDailyAttdReport(); // 미승인 내역이 없을 때?
+         }
+      
+        
+      }
+      dailyAttdManagementTab.tab2.closeBtn.Enable=true;
+	}
+	http.Sync=false;
+	
+	
+}
+
+//날짜가 변경 된다면.. 
+function basicDate_OnChanged(obj,strOldText,strNewText)
+{
+		
+		dailyAttdManagementTab.tab1.cancelBtn.Enable=false;
+		dailyAttdManagementTab.tab2.closeBtn.Enable=false;
+}
+
+
+// 미승인 내역이 없다면... 
+function findDailyAttdReport(){
+   http.sync=true;
+   
+   transaction(
+      "findDailyAttdReport",
+      "svcHrAttendance::/attdReport.do?method=findDailyAttdReport",
+      "",
+      "dsDailyAttdReport=dsDailyAttdReport",
+      "baseDay=" + basicDate.Value,
+      "callback"
+   );
+   dsDailyAttdReport.Filter("CLOSE_YN='N'"); // 마감 되지 않은 것만 가져 온다.!
+}
+
+
+// 미마감 내역 마감 버튼 누를 경우 
+function dailyAttdManagementTab_tab2_closeBtn_OnClick(obj)
+{
+	if(confirm(basicDate.value+":: 마감을 하시겠습니까? ")){
+      for(var index = 0; index < dsDailyAttdReport.rowCount; index++) {
+         dsDailyAttdReport.SetColumn(index,"CLOSE_YN","Y");
+      }
+      updateDailyCloseYeobuTR();  // 변경된 내용을 반영 한다. 
+   }
+}
+
+
+function updateDailyCloseYeobuTR()
+{
+   transaction(
+      "updateDailyAttdCloseYN",
+      "svcHrAttendance::/attdReport.do?method=updateDailyAttdCloseYN",
+      "dsDailyAttdReport=dsDailyAttdReport:u",
+      "",
+      "",
+      "callback"
+   );
+   RELOAD();
+}
+]]></Script>
+</Window>
