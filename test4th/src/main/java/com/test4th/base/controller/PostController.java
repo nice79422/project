@@ -2,10 +2,9 @@ package com.test4th.base.controller;
 
 
 
-import com.tobesoft.platform.data.PlatformData;
-
 import com.test4th.base.to.AddressBean;
 import com.test4th.common.controller.AbstractMiplatformMultiActionController;
+import com.tobesoft.platform.data.PlatformData;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

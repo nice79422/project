@@ -26,6 +26,7 @@ public class BasicEmployeeAppServiceImpl implements BasicEmployeeAppService {
 	/* 사원정보를 일괄처리하는 메서드(저장) */
 	@Override
 	public void batchEmployee(EmployeeBean employeeBean) {
+		
 		employeeDAO.insertEmployee(employeeBean);
 	}
 	

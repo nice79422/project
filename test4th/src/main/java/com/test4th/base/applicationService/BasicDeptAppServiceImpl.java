@@ -15,8 +15,8 @@ public class BasicDeptAppServiceImpl implements BasicDeptAppService {
     }
 
     @Override
-    public List<DepartmentBean> findDeptList() {
-        return deptDAO.selectDeptList();
+    public List<DepartmentBean> findDeptList(String businessPlaceCode) {
+        return deptDAO.selectDeptList(businessPlaceCode);
     }
 
 	@Override

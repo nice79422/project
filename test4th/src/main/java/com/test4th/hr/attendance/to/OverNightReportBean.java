@@ -12,7 +12,29 @@ public class OverNightReportBean extends BaseBean{
 	private String approvalStatus;
 	private String requestStatus;
 	private String type;
-
+	private String requestDate;
+	private String fromTime;
+	private String toTime;
+	
+    public String getFromTime() {
+		return fromTime;
+	}
+	public void setFromTime(String fromTime) {
+		this.fromTime = fromTime;
+	}
+	public String getToTime() {
+		return toTime;
+	}
+	public void setToTime(String toTime) {
+		this.toTime = toTime;
+	}
+	
+	public String getRequestDate() {
+		return requestDate;
+	}
+	public void setRequestDate(String requestDate) {
+		this.requestDate = requestDate;
+	}
 	public String getEmpName() {
 		return empName;
 	}

@@ -13,6 +13,7 @@
         <result property="authorityCode" column="AUTHORITY_CODE"/>
         <result property="deptCode" column="DEPT_CODE"/>
         <result property="positionCode" column="POSITION_CODE"/>
+        <result property="businessCode" column="BUSINESS_CODE"/>
     </resultMap>
 
 
@@ -41,6 +42,21 @@
         <result property="positionCode" column="POSITION_CODE"/>
         <result property="hireDate" column="HIRE_DATE"/>
     </resultMap>
+
+
+<!-- 사원한명조회 로그인 시-->
+ <select id="selectEmployee" resultMap="employeeResult" parameterClass="String">
+	
+	        SELECT * 
+            FROM EMPLOYEE 
+            WHERE emp_code=#empCode#
+            
+
+    </select>
+
+
+
+
 
 	
 	<!-- 모든 사원정보를 가지고 오는 메서드 -->
@@ -72,6 +88,7 @@
      			  ,T1.POSITION_CODE 
     			  ,T1.DEPT_CODE 
    				  ,T1.AUTHORITY_CODE 
+   				  ,T1.BUSINESS_CODE
   			  FROM EMPLOYEE T1 
     			 , WORK_INFO T2 
 			 WHERE T1.EMP_CODE = T2.EMP_CODE 

@@ -18,13 +18,17 @@ public class AttdReportController extends AbstractMiplatformMultiActionControlle
 	}
 
 	
-	/*연장 신야 신청 */
+	/*연장 심야 신청 조회버튼  */
 	public void findOverNightAttdReport(PlatformData inData, PlatformData outData) throws Exception {
-		List<OverNightReportBean> overNightReportList=attendanceServiceFacade.findOverNightReport();
+		String empCode = inData.getVariable("empCode").getValue().asString();
+		String fromDate = inData.getVariable("fromDate").getValue().asString();
+		String toDate = inData.getVariable("toDate").getValue().asString();
+		
+		List<OverNightReportBean> overNightReportList=attendanceServiceFacade.findOverNightReport(empCode,fromDate,toDate);
 		datasetBeanMapper.beansToDataset(outData, overNightReportList, OverNightReportBean.class);
     }
 
-	/*연장/심야 일괄 신청*/
+	/*연장 심야 일괄 신청버튼 --> 없앴다*/   
 	public void updateRequestStatus(PlatformData inData, PlatformData outData) throws Exception {
 		List<OverNightReportBean> overNightReportList=datasetBeanMapper.datasetToBeans(inData, OverNightReportBean.class);
 		attendanceServiceFacade.updateRequestStatus(overNightReportList);
@@ -71,7 +75,12 @@ public class AttdReportController extends AbstractMiplatformMultiActionControlle
 	/*연장심야 승인 결과 저장*/
 	public void batchOverNight(PlatformData inData, PlatformData outData) throws Exception {
 		List<OverNightReportBean> overNightReportList=datasetBeanMapper.datasetToBeans(inData, OverNightReportBean.class);
+		
+		for(OverNightReportBean oo:overNightReportList) {
+		System.out.println("ddd:"+oo.getEmpCode());
+		}
 		attendanceServiceFacade.batchOverNight(overNightReportList);
+		datasetBeanMapper.beansToDataset(outData, overNightReportList, OverNightReportBean.class);
     }
 	
 	

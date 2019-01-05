@@ -35,17 +35,17 @@ public class DatasetBeanMapper {
         }
 
         if (annotations.length == 0)
-            columnName = formattingToSnake(method.getName());
+            columnName = formattingToSnake(method.getName()); //자동으로 칼럼이름 같게 해주는 거
         return columnName;
     }
 
     private String formattingToSnake(String name) {
-        String regex = "([a-z])([A-Z])";
-        String replacement = "$1_$2";
+        String regex = "([a-z])([A-Z])"; //첫번째그룹 : a~z까지  두번째 그룹: A~Z까지
+        String replacement = "$1_$2";  //ex)codeName  code 첫번째 그룹 (?) N(2번째그룹)
 
-        name = name.substring(3);
+        name = name.substring(3); //get 이나 set  잘라내는역할 (뭐로 하는건지 정확히 모르겠음)
         name = name.replaceAll(regex, replacement);
-        return name.toLowerCase();
+        return name.toLowerCase(); //code_name
     }
 
     @SuppressWarnings("unused")

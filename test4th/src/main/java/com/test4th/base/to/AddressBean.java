@@ -1,24 +1,32 @@
 package com.test4th.base.to;
 
 import com.test4th.common.annotation.Dataset;
-import com.test4th.common.to.BaseBean;
 
-@Dataset(name="dsAddress")
-public class AddressBean extends BaseBean{
-	
-	private String zipCode;
-	private String address;
+@Dataset(name="gds_post")
+public class AddressBean{
+   String zipNO, lnmAdres, rnAdres;
 
-	public String getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+   public String getZipNO() {
+      return zipNO;
+   }
+
+   public void setZipNO(String zipNO) {
+      this.zipNO = zipNO;
+   }
+
+   public String getLnmAdres() {
+      return lnmAdres;
+   }
+
+   public void setLnmAdres(String lnmAdres) {
+      this.lnmAdres = lnmAdres;
+   }
+
+   public String getRnAdres() {
+      return rnAdres;
+   }
+
+   public void setRnAdres(String rnAdres) {
+      this.rnAdres = rnAdres;
+   }
 }

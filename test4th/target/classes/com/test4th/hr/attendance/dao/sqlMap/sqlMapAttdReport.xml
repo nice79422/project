@@ -15,6 +15,9 @@
         <result property="approvalStatus" column="APPROVAL_STATUS"/>
         <result property="requestStatus" column="REQUEST_STATUS"/>
         <result property="type" column="TYPE"/>
+        <result property="requestDate" column="REQUEST_DATE"/>
+        <result property="fromTime" column="FROM_TIME"/>
+        <result property="toTime" column="TO_TIME"/>
       </resultMap>
     
     <typeAlias alias="dailyAttdReportBean" type="com.test4th.hr.attendance.to.DailyAttdReportBean"/>
@@ -95,8 +98,8 @@
   
 
 
-    <select id="selectOverNightReport" resultMap="overNightReportResult">
-    <![CDATA[
+    <select id="selectOverNightReport" resultMap="overNightReportResult" parameterClass="map">
+
          SELECT
              BASIC_DAY
              ,EMP_NAME
@@ -105,8 +108,13 @@
              ,TYPE
              ,EMP_CODE
              ,OVER_NIGHT_SEQ 
+             ,REQUEST_DATE
+             ,FROM_TIME
+             ,TO_TIME
           FROM OVER_NIGHT_TIME_MGT
-    ]]>
+          WHERE EMP_CODE=#empCode# 
+          AND BASIC_DAY BETWEEN #fromDate# AND #toDate#
+               
     </select>
     
     
@@ -215,7 +223,7 @@
                 E.DEPT_CODE = #deptCode#
             </isNotEmpty>
             <isNotEmpty property="basicDay" prepend="AND">
-                O.BASIC_DAY = #basicDay#
+                O.REQUEST_DATE = #basicDay#
             </isNotEmpty>
             <isNotEmpty property="approvalStatus" prepend="AND">
                 O.APPROVAL_STATUS = #approvalStatus#
@@ -234,6 +242,54 @@
     ]]>
     </update>
   
+
+    <insert id="insertOverNightReport" parameterClass="overNightReportBean">
+    
+    
+    		 <selectKey keyProperty="overNightSeq" resultClass="String">
+	 
+	           SELECT OVER_NIGHT_SEQ.NEXTVAL FROM DUAL
+	
+		     </selectKey>
+		    
+		     INSERT INTO 
+		            OVER_NIGHT_TIME_MGT
+		     ( EMP_CODE
+              ,BASIC_DAY
+              ,EMP_NAME
+              ,APPROVAL_STATUS
+              ,REQUEST_STATUS
+              ,TYPE
+              ,OVER_NIGHT_SEQ
+              ,REQUEST_DATE
+              ,FROM_TIME
+              ,TO_TIME  
+       		)		
+		    VALUES(
+				 #empCode#
+				,#basicDay#
+				,#empName#
+				,#approvalStatus#
+				,#requestStatus#
+				,#type#
+				,#overNightSeq#
+				,#requestDate#
+				,#fromTime#
+				,#toTime#
+		    )
+		     
+    </insert>
+   
+    <delete id="deleteOverNightReport" parameterClass="overNightReportBean">
+    
+	        DELETE FROM
+	            OVER_NIGHT_TIME_MGT
+	        WHERE
+	            OVER_NIGHT_SEQ = #overNightSeq# AND
+	            EMP_CODE = #empCode#
+	   
+    </delete>
+
 
 
    <!-- 해당년월의 일근태관리테이블의 데이터중 미마감인 day관련 정보를 조회하는 항목 -->

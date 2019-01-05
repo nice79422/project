@@ -1,5 +1,6 @@
 package com.test4th.hr.attendance.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.test4th.common.dao.IBatisDAO;
@@ -11,8 +12,12 @@ public class DailyAttdDAOImpl extends IBatisDAO implements DailyAttdDAO {
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	/* 일근태목록을 가지고 오는 메서드 */
-	public List<DailyAttdBean> selectDailyAttdList(String empCode) {
-		return getSqlMapClientTemplate().queryForList("dailyAttd.selectDailyAttdList",empCode);
+	public List<DailyAttdBean> selectDailyAttdList(String empCode,String fromDate,String toDate) {
+		HashMap<String,String> map=new HashMap<>();
+		map.put("empCode", empCode);
+		map.put("fromDate", fromDate);
+		map.put("toDate", toDate);
+		return getSqlMapClientTemplate().queryForList("dailyAttd.selectDailyAttdList",map);
 	}
 
 	

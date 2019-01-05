@@ -19,8 +19,8 @@ public class AttdReportAppServiceImpl implements AttdReportAppService {
 	}
 
 	//연장 심야 신청 리스트 
-	public List<OverNightReportBean> findOverNightReport(){
-		return attdReportDAO.selectOverNightReport();
+	public List<OverNightReportBean> findOverNightReport(String empCode,String fromDate,String toDate){
+		return attdReportDAO.selectOverNightReport(empCode,fromDate,toDate);
 	}
 	
 	//연장 심야 신청 일괄 신청
@@ -64,11 +64,18 @@ public class AttdReportAppServiceImpl implements AttdReportAppService {
 	}	
 	
 	
-	//연장 심야 상세 저장
+	//연장 심야 신청등록, 신청삭제, 승인업데이트
 	public void batchOverNight(List<OverNightReportBean> overNightReportList){
 		for(OverNightReportBean overNightReportBean:overNightReportList){
-			attdReportDAO.updateApprovalStatus(overNightReportBean);
-		}
+			
+			switch(overNightReportBean.getStatus()) {
+			
+			case "insert" : attdReportDAO.insertOverNightReport(overNightReportBean); break;
+			case "update" : attdReportDAO.updateApprovalStatus(overNightReportBean); break;
+			case "delete" : attdReportDAO.deleteOverNightReport(overNightReportBean); break;
+		
+			}
+	    }
 	}
 	
 	

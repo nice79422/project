@@ -16,7 +16,9 @@ public class DeptController extends AbstractMiplatformMultiActionController{
 
     /* 부서목록을 조회하는 메서드 */
 	public void findDeptList(PlatformData inData, PlatformData outData) throws Exception {
-        List<DepartmentBean> deptList=baseServiceFacade.findDeptList();
+
+		String businessPlaceCode= inData.getVariable("businessPlaceCode").getValue().asString();
+		List<DepartmentBean> deptList=baseServiceFacade.findDeptList(businessPlaceCode);
         datasetBeanMapper.beansToDataset(outData, deptList, DepartmentBean.class);
         /*
          * 	beansToDataset : bean --> dataset

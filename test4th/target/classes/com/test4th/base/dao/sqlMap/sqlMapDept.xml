@@ -11,12 +11,13 @@
     </resultMap>
 
 
-    <select id="selectDeptList" resultMap="deptResult">
+    <select id="selectDeptList" resultMap="deptResult" parameterClass="String">
     <![CDATA[
         SELECT
             *
         FROM
             DEPARTMENT
+        WHERE BUSINESS_PLACE_CODE=#businessPlaceCode#
         ORDER BY
             DEPT_CODE
     ]]>

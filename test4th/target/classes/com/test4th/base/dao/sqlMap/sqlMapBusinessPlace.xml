@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BusinessPlace">
+    <typeAlias alias="businessPlaceBean" type="com.test4th.base.to.BusinessPlaceBean"/>
+    <resultMap id="businessPlaceResult" class="businessPlaceBean">
+        <result property="businessPlaceCode" column="BUSINESS_PLACE_CODE"/>
+        <result property="businessPlaceName" column="BUSINESS_PLACE_NAME"/>
+        <result property="businessPlaceTel" column="BUSINESS_PLACE_TEL"/>
+        <result property="companyCode" column="COMPANY_CODE"/>
+    </resultMap>
+
+
+    <select id="selectBusinessPlaceList" resultMap="businessPlaceResult">
+   
+        SELECT
+            *
+        FROM
+            BUSINESS_PLACE
+        ORDER BY
+            BUSINESS_PLACE_CODE
+ 
+    </select>
+
+
+
+	<insert id="insertBusinessPlace" parameterClass="businessPlaceBean">
+	
+	        INSERT INTO
+	            BUSINESS_PLACE
+	            (
+	           BUSINESS_PLACE_CODE			
+               ,BUSINESS_PLACE_NAME		
+               ,BUSINESS_PLACE_TEL			
+               ,COMPANY_CODE	
+	            )
+	        VALUES (
+	             #businessPlaceCode#
+	            ,#businessPlaceName#
+	            ,#businessPlaceTel#
+	            ,#companyCode#
+	        )
+	        
+	</insert>
+
+
+	<update id="updateBusinessPlace" parameterClass="businessPlaceBean">
+	
+	       UPDATE
+	            BUSINESS_PLACE
+	       SET
+	            BUSINESS_PLACE_NAME=#businessPlaceName#	
+               ,BUSINESS_PLACE_TEL=	#businessPlaceTel#		
+               ,COMPANY_CODE=#companyCode#
+	       WHERE
+	            BUSINESS_PLACE_CODE = #businessPlaceCode#
+
+    
+	</update>
+
+
+	<delete id="deleteBusinessPlace" parameterClass="businessPlaceBean">
+	
+	      DELETE FROM
+	      		BUSINESS_PLACE
+	      WHERE
+	            BUSINESS_PLACE_CODE = #businessPlaceCode#
+    
+	</delete>
+
+</sqlMap>

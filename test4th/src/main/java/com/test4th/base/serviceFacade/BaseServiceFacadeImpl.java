@@ -7,15 +7,24 @@ import com.test4th.base.applicationService.AuthorityAppService;
 import com.test4th.base.applicationService.BasicDeptAppService;
 import com.test4th.base.applicationService.BasicEmployeeAppService;
 import com.test4th.base.applicationService.BasicSalaryAppService;
+import com.test4th.base.applicationService.BusinessPlaceAppService;
 import com.test4th.base.applicationService.CodeAppService;
+import com.test4th.base.applicationService.CompanyAppService;
+import com.test4th.base.applicationService.LoginAppService;
 import com.test4th.base.applicationService.MenuAppService;
 import com.test4th.base.applicationService.PositionAppService;
 import com.test4th.base.applicationService.PostAppService;
+import com.test4th.base.exception.BusinessPlaceNotFoundException;
+import com.test4th.base.exception.DeptNotFoundException;
+import com.test4th.base.exception.EmpCodeNotFoundException;
+import com.test4th.base.exception.PwMissMatchException;
 import com.test4th.base.to.AddressBean;
 import com.test4th.base.to.AuthorityBean;
 import com.test4th.base.to.AuthorityInfoBean;
+import com.test4th.base.to.BusinessPlaceBean;
 import com.test4th.base.to.CodeBean;
 import com.test4th.base.to.CodeInfoBean;
+import com.test4th.base.to.CompanyBean;
 import com.test4th.base.to.DepartmentBean;
 import com.test4th.base.to.DetailCodeBean;
 import com.test4th.base.to.EmployeeBean;
@@ -47,6 +56,13 @@ public class BaseServiceFacadeImpl implements BaseServiceFacade{
 	private PostAppService postAppService;
 
 	private BasicSalaryAppService basicSalaryAppService;
+	
+	private CompanyAppService companyAppService;
+
+	private BusinessPlaceAppService businessPlaceAppService;
+	
+	private LoginAppService loginAppService;
+	
 	
 
 	public void setBasicDeptAppService(BasicDeptAppService basicDeptAppService) {
@@ -81,10 +97,22 @@ public class BaseServiceFacadeImpl implements BaseServiceFacade{
 		this.basicSalaryAppService = basicSalaryAppService;
 	}
 
+	public void setCompanyAppService(CompanyAppService companyAppService) {
+		this.companyAppService = companyAppService;
+	}
+	
+	public void setBusinessPlaceAppService(BusinessPlaceAppService businessPlaceAppService) {
+		this.businessPlaceAppService = businessPlaceAppService;
+	}
+	
+	public void setLoginAppService(LoginAppService loginAppService) {
+		this.loginAppService = loginAppService;
+	}
+	
 	/* 부서코드목록을 반환하는 메서드 */
 	@Override
-	public List<DepartmentBean> findDeptList() {
-		return basicDeptAppService.findDeptList();
+	public List<DepartmentBean> findDeptList(String businessPlaceCode) {
+		return basicDeptAppService.findDeptList(businessPlaceCode);
 	}
 
 	/*로그인시 사원정보 얻어 옴*/
@@ -111,6 +139,12 @@ public class BaseServiceFacadeImpl implements BaseServiceFacade{
 	public List<PositionBean> findPositionList() {
 		return positionAppService.findPositionList();
 	}
+	
+	/*호봉목록을 가져오는 메서드*/
+	public PositionBean findPosition(String positionCode) {
+		return positionAppService.findPosition(positionCode);
+	}
+	
 	
 	/* 권한목록을 가져오는 메서드 */
 	@Override
@@ -211,6 +245,35 @@ public class BaseServiceFacadeImpl implements BaseServiceFacade{
 	public void batchSudang(SudangInfoBean sudangInfoBean) {
 		basicSalaryAppService.batchSudang(sudangInfoBean);
 
+	}
+    /*회사정보 가져오는 메서드*/
+	@Override
+	public CompanyBean findCompany() {
+		return companyAppService.findCompany();
+	}
+
+	@Override
+	public void batchCompany(CompanyBean companyBean) {
+
+		companyAppService.batchCompany(companyBean);
+	}
+
+	@Override
+	public List<BusinessPlaceBean> findBusinessPlaceList() {
+		 return businessPlaceAppService.findBusinessPlaceList();
+	}
+
+	@Override
+	public void batchBusinessPlaceList(List<BusinessPlaceBean> businessPlaceList) {
+	   
+		businessPlaceAppService.batchBusinessPlaceList(businessPlaceList);
+	
+	}
+	
+	public EmployeeBean checkLogin(String businessPlaceCode,String deptCode,String empCode,String password)throws EmpCodeNotFoundException,BusinessPlaceNotFoundException,DeptNotFoundException,PwMissMatchException {
+		
+		return loginAppService.checkLogin(businessPlaceCode,deptCode,empCode,password);
+		
 	}
 
 }

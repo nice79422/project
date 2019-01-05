@@ -12,7 +12,14 @@ public class EmployeeBean extends BaseBean{
 	private String authorityCode;
 	private String deptCode;
 	private String positionCode;
-
+	private String businessCode;
+	
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	public void setBusinessCode(String businessCode) {
+		this.businessCode = businessCode;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}

@@ -8,6 +8,7 @@ import com.test4th.base.to.EmployeeHireDateBean;
 
 public interface EmployeeDAO {
 	
+	public EmployeeBean selectEmployee(String empCode);
 	
 	public List<EmployeeBean> selectEmployeeList();
 	

@@ -23,14 +23,15 @@
 
 	<!-- 일근태 목록을 가지고 오는 메서드 -->
 	<select id="selectDailyAttdList" resultMap="dailyAttdResult"
-		parameterClass="String">
-    <![CDATA[
+		parameterClass="map">
+ 
     	SELECT DA.*, E.*
 		FROM DAY_ATTD DA, EMPLOYEE E
 		WHERE DA.EMP_CODE = #empCode#
 		AND DA.EMP_CODE = E.EMP_CODE
+		AND BASIC_DAY BETWEEN #fromDate# AND #toDate#
 		ORDER BY DAY_ATTD_SEQ, LENGTH(APPROVAL_STATUS) DESC, BASIC_DAY
-    ]]>
+
 	</select>
 
 	<!-- 신청한 일근태 내용을 추가하는 메서드 -->

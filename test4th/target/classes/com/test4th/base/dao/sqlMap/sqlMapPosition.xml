@@ -16,4 +16,12 @@
     ]]>
     </select>
 
+    <!-- 직급하나 조회하기 -->
+   <select id="selectPosition" resultMap="positionResult" parameterClass="String">
+  
+      SELECT * FROM POSITION WHERE POSITION_CODE=#positionCode#
+    
+    </select>
+
+
 </sqlMap>

@@ -10,7 +10,7 @@ import com.test4th.hr.attendance.to.OverNightReportBean;
 
 public interface AttdReportDAO {
 	
-	public List<OverNightReportBean> selectOverNightReport();
+	public List<OverNightReportBean> selectOverNightReport(String empCode,String fromDate,String toDate);
 	
 	public void updateRequestStatus(OverNightReportBean overNightReportBean);
 	
@@ -25,7 +25,14 @@ public interface AttdReportDAO {
 	
 	//연장 심야 승인
 	public List<OverNightReportBean> selectOverNightReportByCondition(ConditionBean condition);
+	
 	public void updateApprovalStatus(OverNightReportBean overNightReportBean);
+	
+	public void insertOverNightReport(OverNightReportBean overNightReportBean);
+
+	public void deleteOverNightReport(OverNightReportBean overNightReportBean);
+	
+	
 	
 	//월근태 미마감 항목조회
 	public List<DailyAttdReportBean> selectUnClosedDailyAttdReport(String baseYearMonth);

@@ -18,13 +18,12 @@ public class CodeController extends AbstractMiplatformMultiActionController{
 		this.baseServiceFacade = baseServiceFacade;
 	}
 
-	/* 코드목록을 반환하는 메서드 3차 때랑 좀 다름. 상위bean의 하위List에 넣었는데 여기선 addAll사용.. */
 	public void findCodeList(PlatformData inData, PlatformData outData) throws Exception{
-		List<CodeBean> codeList=baseServiceFacade.findCodeList(); /*뒤에서 상위bean속에 담아온 것을 꺼내여 담는다. out이 2개라서 .*/
+		List<CodeBean> codeList=baseServiceFacade.findCodeList();
 		List<DetailCodeBean> detailCodeList=new ArrayList<DetailCodeBean>();
 		for(CodeBean codeBean : codeList){
 			List<DetailCodeBean> detailCodeBeanList=codeBean.getDetailCodeList();
-			/* 자바로 ArrayList복사하는 메서드 : addAll */
+			/* ArrayList를  ArrayList에 담을 수 있는 메서드 : addAll   ->add의 경우 ArrayList는 못담는듯 하다 에러가 난다 */
 			detailCodeList.addAll(detailCodeBeanList);
 		}
 		datasetBeanMapper.beansToDataset(outData, codeList, CodeBean.class);

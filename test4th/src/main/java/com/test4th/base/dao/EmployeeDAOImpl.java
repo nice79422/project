@@ -8,7 +8,16 @@ import com.test4th.common.dao.IBatisDAO;
 
 public class EmployeeDAOImpl extends IBatisDAO implements EmployeeDAO {
 
-	/*로그인시 사원정보 얻기*/
+	/*로그인 사원한명 정보얻기*/
+	@SuppressWarnings("deprecation")
+	@Override
+	public EmployeeBean selectEmployee(String empCode) {
+		
+		return (EmployeeBean)getSqlMapClientTemplate().queryForObject("employee.selectEmployee",empCode);
+	}
+	
+	
+	/*사원 리스트얻기*/
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public List<EmployeeBean> selectEmployeeList() {

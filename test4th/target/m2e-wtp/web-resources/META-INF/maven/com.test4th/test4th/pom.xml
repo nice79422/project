@@ -9,7 +9,7 @@
      <!-- miplatform -->
       <dependency>
       	<groupId>HR.MiPlatform.test4th</groupId>
-      	<artifactId>miplatform</artifactId>
+      	<artifactId>test4th</artifactId>
       	<version>3.2</version>
       	<scope>system</scope>
       <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/miplatform-3.2.jar</systemPath>

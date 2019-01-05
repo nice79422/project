@@ -16,5 +16,10 @@ public class PositionAppServiceImpl implements PositionAppService {
 	public List<PositionBean> findPositionList() {
 		return positionDAO.selectPositionList();
 	}
+	
+	public PositionBean findPosition(String positionCode) {
+		
+		return positionDAO.selectPosition(positionCode);
+	}
 
 }

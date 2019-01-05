@@ -45,8 +45,8 @@
         <!-- Ant패턴으로 sqlMap 파일들을 읽어오기  -->
         <property name="mappingLocations">
           <list>
-          <value>classpath:com/project/test4th/**/dao/sqlMap/sqlMapHobong.xml</value>
-          <value>classpath:com/project/test4th/**/dao/sqlMap/sqlMapPosition.xml</value>  
+          <value>classpath:com/test4th/**/dao/sqlMap/sqlMapHobong.xml</value>
+          <value>classpath:com/test4th/**/dao/sqlMap/sqlMapPosition.xml</value>  
           <value>classpath:com/test4th/**/dao/sqlMap/*.xml</value>
          
           </list>

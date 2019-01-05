@@ -3,11 +3,17 @@ package com.test4th.base.serviceFacade;
 import java.util.List;
 import java.util.Map;
 
+import com.test4th.base.exception.BusinessPlaceNotFoundException;
+import com.test4th.base.exception.DeptNotFoundException;
+import com.test4th.base.exception.EmpCodeNotFoundException;
+import com.test4th.base.exception.PwMissMatchException;
 import com.test4th.base.to.AddressBean;
 import com.test4th.base.to.AuthorityBean;
 import com.test4th.base.to.AuthorityInfoBean;
+import com.test4th.base.to.BusinessPlaceBean;
 import com.test4th.base.to.CodeBean;
 import com.test4th.base.to.CodeInfoBean;
+import com.test4th.base.to.CompanyBean;
 import com.test4th.base.to.DepartmentBean;
 import com.test4th.base.to.DetailCodeBean;
 import com.test4th.base.to.EmployeeBean;
@@ -25,7 +31,7 @@ import com.test4th.base.to.SudangInfoBean;
 
 public interface BaseServiceFacade {
 	/* 부서 */
-	public List<DepartmentBean> findDeptList();
+	public List<DepartmentBean> findDeptList(String businessPlaceCode);
 	public void batchDept(List<DepartmentBean> deptList);
 
 	/*사원*/
@@ -43,6 +49,9 @@ public interface BaseServiceFacade {
 	
 	/* 직급 */
 	public List<PositionBean> findPositionList();
+	
+	/* 호봉 */
+	public PositionBean findPosition(String positionCode);
 	
 	/*권한목록*/
 	public List<AuthorityBean> findAuthorityList();
@@ -63,5 +72,16 @@ public interface BaseServiceFacade {
 	public List<OvertimeSalBean> findOvertimeSalList();
 	public List<EtcSalBean> findEtcSalList();
 	public void batchSudang(SudangInfoBean sudangInfoBean);
+	
+	/*회사*/
+	public CompanyBean findCompany();
+	public void batchCompany(CompanyBean companyBean);
+	
+	/*사업장*/
+	public List<BusinessPlaceBean> findBusinessPlaceList();
+	public void batchBusinessPlaceList(List<BusinessPlaceBean> businessPlaceList);
+	
+	/*로그인*/
+	public EmployeeBean checkLogin(String businessPlaceCode,String deptCode,String empCode,String password)throws EmpCodeNotFoundException,BusinessPlaceNotFoundException,DeptNotFoundException,PwMissMatchException;
 
 }

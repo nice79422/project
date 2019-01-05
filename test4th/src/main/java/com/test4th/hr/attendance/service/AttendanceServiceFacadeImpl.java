@@ -47,8 +47,8 @@ public class AttendanceServiceFacadeImpl implements AttendanceServiceFacade{
 
 	@Override
 	/* 근태목록을 가지고오는 메서드 */
-	public List<DailyAttdBean> findDailyAttdList(String empCode) {
-		return dailyAttdAppService.findDailyAttdList(empCode);
+	public List<DailyAttdBean> findDailyAttdList(String empCode,String fromDate,String toDate) {
+		return dailyAttdAppService.findDailyAttdList(empCode,fromDate,toDate);
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class AttendanceServiceFacadeImpl implements AttendanceServiceFacade{
 	
 	@Override
 	// 연장 심야 신청 리스트
-	public List<OverNightReportBean> findOverNightReport(){
-		return attdReportAppService.findOverNightReport();
+	public List<OverNightReportBean> findOverNightReport(String empCode,String fromDate,String toDate){
+		return attdReportAppService.findOverNightReport(empCode,fromDate,toDate);
 	} 
 	/*연장심야 일괄 신청*/
 	public void updateRequestStatus(List<OverNightReportBean> overNightReportList){

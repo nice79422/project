@@ -46,7 +46,7 @@ public class RegistrationController extends AbstractMiplatformMultiActionControl
 		String fileName = dataset.getColumn(0, "EMP_FILE_NAME").getString();
 		try {
 			if (fileName != null) {
-				out = new FileOutputStream("C:/apache2.2/htdocs/worldMiplatform/EMP-IMG/" + fileName);
+				out = new FileOutputStream("C:/sts-3.9.6.RELEASE/work/test4th/src/main/webapp/img/" + fileName);
 				
 				
 				byte[] file = dataset.getColumnAsByteArray(0, "IMG_FILE_DATA");

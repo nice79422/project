@@ -13,4 +13,10 @@ public class PositionDAOImpl extends IBatisDAO implements PositionDAO {
 	public List<PositionBean> selectPositionList() {
 		return getSqlMapClientTemplate().queryForList("position.selectPositionList");
 	}
+	
+	@SuppressWarnings("deprecation")
+	public PositionBean selectPosition(String positionCode) {
+		
+		return (PositionBean)getSqlMapClientTemplate().queryForObject("position.selectPosition",positionCode);
+	}
 }

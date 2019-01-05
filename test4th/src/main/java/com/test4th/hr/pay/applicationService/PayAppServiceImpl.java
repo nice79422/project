@@ -16,8 +16,8 @@ public class PayAppServiceImpl implements PayAppService {
 
 	/* 급여를 계산하는 메서드 */
 	@Override
-	public List<SalaryInputBean> payCalculate(String paymentsDate, String standardDate) throws ProcedureException {
-		Map<String, Object> map = payDAO.payCalculate(paymentsDate, standardDate);
+	public List<SalaryInputBean> payCalculate(String paymentDate, String standardDate) throws ProcedureException {
+		Map<String, Object> map = payDAO.payCalculate(paymentDate, standardDate);
 		
 		if(map.get("errorCode")!=null) {
 	        int errorCode = Integer.parseInt((String) map.get("errorCode"));
@@ -25,6 +25,6 @@ public class PayAppServiceImpl implements PayAppService {
 			throw new ProcedureException((String) map.get("errorMsg"));
 		}
 		}
-		return payDAO.selectSalaryInputList(paymentsDate); // 급여 조회 
+		return payDAO.selectSalaryInputList(paymentDate); // 급여 조회 
 	}
 }

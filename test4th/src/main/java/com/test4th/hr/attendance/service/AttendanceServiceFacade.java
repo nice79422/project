@@ -13,7 +13,7 @@ import com.test4th.hr.attendance.to.OverNightReportBean;
 
 public interface AttendanceServiceFacade {
 	//근태 정보 가져 오기 
-	public List<DailyAttdBean> findDailyAttdList(String empCode);
+	public List<DailyAttdBean> findDailyAttdList(String empCode,String fromDate,String toDate);
 	
 	//근태 신청
 	public List<DailyAttdBean> addDailyAttd(DailyAttdBean dailyAttdBean);
@@ -31,7 +31,7 @@ public interface AttendanceServiceFacade {
 	public List<DailyAttdRestBean> addDailyAttdRest(DailyAttdRestBean dailyAttdRestBean);
 	
 	/*연장심야 신청 찾기*/
-	public List<OverNightReportBean> findOverNightReport();
+	public List<OverNightReportBean> findOverNightReport(String empCode,String fromDate,String toDate);
 	/*연장 심야 일괄 신청*/
 	public void updateRequestStatus(List<OverNightReportBean> overNightReportList);
 	

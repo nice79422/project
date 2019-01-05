@@ -15,15 +15,15 @@ public class DailyAttdAppServiceImpl implements DailyAttdAppService {
 
 	// 일근태목록을 가지고 오는 메서드 
 	@Override
-	public List<DailyAttdBean> findDailyAttdList(String empCode) {
-		return dailyAttdDAO.selectDailyAttdList(empCode);
+	public List<DailyAttdBean> findDailyAttdList(String empCode,String fromDate,String toDate) {
+		return dailyAttdDAO.selectDailyAttdList(empCode,fromDate,toDate);
 	}
 
 	// 일근태를 추가하는 메서드 
 	@Override
 	public List<DailyAttdBean> addDailyAttd(DailyAttdBean dailyAttdBean) {
 		dailyAttdDAO.insertDailyAttd(dailyAttdBean);
-		return findDailyAttdList(dailyAttdBean.getEmpCode());
+		return findDailyAttdList(dailyAttdBean.getEmpCode(),dailyAttdBean.getBasicDay(),dailyAttdBean.getBasicDay());
 	}
 	
 	

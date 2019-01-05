@@ -15,8 +15,13 @@ public class AttdReportDAOImpl extends IBatisDAO implements AttdReportDAO {
 	// 연장 심야 근무 신청 목록 
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
-	public List<OverNightReportBean> selectOverNightReport(){
-		return getSqlMapClientTemplate().queryForList("attdReport.selectOverNightReport");
+	public List<OverNightReportBean> selectOverNightReport(String empCode,String fromDate,String toDate){
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("empCode",empCode);
+		map.put("fromDate",fromDate);
+		map.put("toDate",toDate);
+		return getSqlMapClientTemplate().queryForList("attdReport.selectOverNightReport",map);
 	}
 	
 	//연장 심야 일괄 신청(N -> Y)
@@ -72,6 +77,21 @@ public class AttdReportDAOImpl extends IBatisDAO implements AttdReportDAO {
 	public void updateApprovalStatus(OverNightReportBean overNightReportBean){
 		getSqlMapClientTemplate().update("attdReport.updateApprovalStatus",overNightReportBean);
 	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void insertOverNightReport(OverNightReportBean overNightReportBean){
+		getSqlMapClientTemplate().insert("attdReport.insertOverNightReport",overNightReportBean);
+	}
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public void deleteOverNightReport(OverNightReportBean overNightReportBean){
+		
+		getSqlMapClientTemplate().delete("attdReport.deleteOverNightReport",overNightReportBean);
+		
+	}
+	
 	
 	
 	// 해당년월의 일근태관리테이블의 데이터중 미마감인 day관련 정보를 조회하는 항목 

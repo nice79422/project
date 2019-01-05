@@ -3,6 +3,7 @@ package com.test4th.base.controller;
 import java.util.List;
 
 import com.tobesoft.platform.data.PlatformData;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,8 +46,9 @@ public class BasicEmployeeController extends AbstractMiplatformMultiActionContro
 	public void setBaseServiceFacade(BaseServiceFacade baseServiceFacade){
 		this.baseServiceFacade=baseServiceFacade;
 	}
-
-	/*(로그인시) 사원 정보 구해오기*/	
+	
+	
+	/*사원리스트 조회하기*/	
 	public void findEmployeeList(PlatformData inData, PlatformData outData) throws Exception{
 		  
 		  List<EmployeeBean> EmployeeList=baseServiceFacade.findEmployeeList();
@@ -89,18 +91,18 @@ public class BasicEmployeeController extends AbstractMiplatformMultiActionContro
 	      String sEmpCode = inData.getVariable("sEmpCode").getValue().asString();
 	      System.out.println("!@#$:-----"+sEmpCode);
 	        
-	      String templatePath = "C:/apache2.2/htdocs/worldMiplatform/report/KJCompany_Report.jrxml";
+	      String templatePath = "C:/sts-3.9.6.RELEASE/work/test4th/src/main/webapp/report/empPdf.jrxml";
 	       // 출력할 PDF 파일 경로
-	      String destPath = "C:/apache2.2/htdocs/worldMiplatform/report/"+sEmpCode+".pdf";
+	      String destPath = "C:/sts-3.9.6.RELEASE/work/test4th/src/main/webapp/report/"+sEmpCode+".pdf";
 	      Connection con = null;
 	      try {
 	      //템플레이트 XML 컴파일
 	      JasperReport jasperReport = JasperCompileManager.compileReport(templatePath);
 	      Map<String,Object> paramMap = new HashMap<>();
-	      paramMap.put("sEmpCode",sEmpCode);
+	      paramMap.put("empCode",sEmpCode);
 	      //getConnection
 	      Class.forName("oracle.jdbc.OracleDriver");
-	      con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "hr1","hr1");
+	      con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "test4","test4");
 	      //데이타의 동적 바인드
 	      JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, con);
 	      //PDF로 출력
@@ -173,7 +175,7 @@ public class BasicEmployeeController extends AbstractMiplatformMultiActionContro
 	          
 	         //이미지를 첨부한다.
 	         bodyPart = new MimeBodyPart();
-	         String filename = "C:/apache2.2/htdocs/worldMiplatform/report/"+empCode+".pdf";
+	         String filename = "C:/sts-3.9.6.RELEASE/work/test4th/src/main/webapp/report/"+empCode+".pdf";
 	         //첨부할 파일 경로
 	         FileDataSource source = new FileDataSource(filename);
 	         bodyPart.setDataHandler(new DataHandler(source));

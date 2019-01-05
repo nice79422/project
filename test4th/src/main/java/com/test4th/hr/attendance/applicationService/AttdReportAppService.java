@@ -10,7 +10,7 @@ import com.test4th.hr.attendance.to.OverNightReportBean;
 
 public interface AttdReportAppService {
 	//연장 심야 신청 리스트 
-	public List<OverNightReportBean> findOverNightReport();
+	public List<OverNightReportBean> findOverNightReport(String empCode,String fromDate,String toDate);
 	//연장심야 일괄 신청
 	public void updateRequestStatus(List<OverNightReportBean> overNightReportList);
 	//해당 일자의 일근태 마감 내역 조회 

@@ -9,8 +9,8 @@ public class DeptDAOImpl extends IBatisDAO implements DeptDAO {
 
     @Override
 	@SuppressWarnings({ "deprecation", "unchecked" })
-    public List<DepartmentBean> selectDeptList() {
-        return getSqlMapClientTemplate().queryForList("Dept.selectDeptList");
+    public List<DepartmentBean> selectDeptList(String businessPlaceCode) {
+        return getSqlMapClientTemplate().queryForList("Dept.selectDeptList",businessPlaceCode);
         
     }
 

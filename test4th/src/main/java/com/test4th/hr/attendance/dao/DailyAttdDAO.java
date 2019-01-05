@@ -7,7 +7,7 @@ import com.test4th.hr.attendance.to.DailyAttdBean;
 
 public interface DailyAttdDAO {
 	//근태 목록 가져오기 
-	public List<DailyAttdBean> selectDailyAttdList(String empCode);
+	public List<DailyAttdBean> selectDailyAttdList(String empCode,String fromDate,String toDate);
 	//근태 추가하기
 	public void insertDailyAttd(DailyAttdBean dailyAttdBean);
 	

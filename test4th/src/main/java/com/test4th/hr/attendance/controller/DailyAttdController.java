@@ -18,7 +18,9 @@ public class DailyAttdController extends AbstractMiplatformMultiActionController
 	/* 일근태 목록을 가지고 오는 메서드 */
 	public void findDailyAttdList(PlatformData inData, PlatformData outData) throws Exception {
 		String empCode = inData.getVariable("empCode").getValue().asString();
-		List<DailyAttdBean> dailyAttdList=attendanceServiceFacade.findDailyAttdList(empCode);
+		String fromDate = inData.getVariable("fromDate").getValue().asString();
+		String toDate = inData.getVariable("toDate").getValue().asString();
+		List<DailyAttdBean> dailyAttdList=attendanceServiceFacade.findDailyAttdList(empCode,fromDate,toDate);
 		datasetBeanMapper.beansToDataset(outData, dailyAttdList, DailyAttdBean.class);
     }
 
