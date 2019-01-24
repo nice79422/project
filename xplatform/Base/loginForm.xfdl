@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="loginForm" classname="loginForm" inheritanceid="" position="absolute 0 0 798 406" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer00" taborder="0" position2="absolute l:13 w:407 t:12 h:377" positiontype="position2" image="URL('..\..\..\Users\hello\Pictures\iu2.jpg')" stretch="fit"/>
+        <Static id="Static00" text="사업장" position2="absolute l:456 w:95 t:70 h:42" positiontype="position2" style="background:silver;color:black;align:middle;font:Yu Gothic UI,11,bold;"/>
+        <Static id="Static01" text="부서코드" position2="absolute l:456 w:95 t:131 h:42" positiontype="position2" style="background:silver;color:black;align:middle;font:Yu Gothic UI,11,bold;"/>
+        <Static id="Static02" text="사원코드" position2="absolute l:456 w:95 t:192 h:42" positiontype="position2" style="background:silver;color:black;align:middle;font:Yu Gothic UI,11,bold;"/>
+        <Static id="Static03" text="비밀번호" position2="absolute l:456 w:95 t:256 h:42" positiontype="position2" style="background:silver;color:black;align:middle;font:Yu Gothic UI,11,bold;"/>
+        <Button id="businessPlaceCodeBt" taborder="1" text="+" position2="absolute l:711 w:48 t:70 h:42" positiontype="position2" style="background:silver;color:black;" onclick="businessPlaceCodeBt_onclick"/>
+        <Button id="deptCodeBt" taborder="2" text="+" position2="absolute l:711 w:48 t:131 h:42" positiontype="position2" style="background:silver;color:black;" onclick="deptCodeBt_onclick"/>
+        <Button id="loginBt" taborder="3" position2="absolute l:496 w:238 t:320 h:49" positiontype="position2" text="로 그 인" style="background:silver;color:black;" onclick="loginBt_onclick"/>
+        <Static id="Static08" text="SY Company" position2="absolute l:463 w:289 t:17 h:45" positiontype="position2" style="background:gainsboro;color:black;align:middle;font:Wide Latin,16,bold;"/>
+        <Edit id="password" taborder="4" position2="absolute l:568 w:191 t:256 h:42" positiontype="position2" style="background:white;color:black;" password="true"/>
+        <Edit id="empCode" taborder="5" password="false" position2="absolute l:568 w:191 t:192 h:42" positiontype="position2" style="background:white;color:black;"/>
+        <Edit id="deptCode" taborder="6" position2="absolute l:568 w:143 t:131 h:42" positiontype="position2" style="background:white;color:black;" enable="false"/>
+        <Edit id="businessPlaceCode" taborder="7" position2="absolute l:568 w:143 t:70 h:42" positiontype="position2" style="background:white;color:black;" enable="false" oneditclick="businessPlaceCode_oneditclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript4.0"><![CDATA[
+function loginForm_onload(obj:Form, e:LoadEventInfo)
+{
+
+
+	transaction("findEmployeeList",
+				"svcBase::findEmployeeList.do",
+				"",
+				"ds_employee=dsEmployee",
+				"",
+				"callback",
+				false);
+				
+	
+
+	
+
+	transaction("findMenuList",
+				"svcBase::findMenuList.do",
+				"",
+				"ds_menu=dsMenu",
+				"",
+				"callback",
+				false);
+				
+	dsTopMenu.copyData(ds_menu);
+	
+}
+   
+
+
+
+function deptCodeBt_onclick(obj:Button,  e:ClickEventInfo)
+{
+
+		dialog("daptCodeDialog",
+				"Base::deptDialog.xfdl", 
+				"",
+				{},
+				"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='Form'",
+				"", "", "", "",this);	
+}
+
+function businessPlaceCodeBt_onclick(obj:Button,  e:ClickEventInfo)
+{
+		dialog("businessPlaceDialog",
+			"Base::businessPlaceDialog.xfdl", 
+			"",
+			{},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='Form'",
+			"", "", "", "",this);
+}
+
+
+
+function loginBt_onclick(obj:Button,  e:ClickEventInfo)
+
+{
+	g_empCode=empCode.value;
+  
+   transaction( "checkLogin"
+               ,"svcBase::checkLogin.do"
+               ,""
+               ,"ds_employee=dsEmployee"
+               ,"businessPlaceCode='"+businessPlaceCode.text+ "' deptCode='"+deptCode.text+"' empCode='"+empCode.value+"' password='"+password.value+"'"
+               ,"callback",
+               false
+               );
+ 
+  
+  }
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=="checkLogin"){
+      if(ErrorCode<0){
+         alert(ErrorMsg);   
+      }else{      
+         g_businessPlaceCode=businessPlaceCode.text;
+         alert("로그인성공");
+         
+         go("Base::mainform.xfdl");
+         
+      }
+   }
+}
+]]></Script>
+  </Form>
+</FDL>

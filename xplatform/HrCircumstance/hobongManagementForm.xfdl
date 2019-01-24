@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="hobongManagementForm" classname="hobongManagementForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="hobongManagementForm_onload" style="background:gainsboro;color:black;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="직급별 호봉 관리" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <GroupBox id="GroupBox00" text="직급 리스트" position2="absolute l:13 w:362 t:59 h:551" positiontype="position2" style="background:gainsboro;color:black;font:malgun gothic,14,bold antialias;"/>
+        <GroupBox id="GroupBox01" text="직급별 호봉 리스트" position2="absolute l:393 w:556 t:59 h:365" positiontype="position2" style="background:gainsboro;color:black;font:malgun gothic,14,bold antialias;"/>
+        <GroupBox id="GroupBox02" position2="absolute l:393 w:556 t:439 h:171" positiontype="position2" style="background:gainsboro;"/>
+        <Grid id="positionGrid" taborder="1" useinputpanel="false" position2="absolute l:24 w:340 t:93 h:499" positiontype="position2" style="border:1 solid #cbcbcbff ;" binddataset="ds_position" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;position_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:position_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col" oncellclick="positionGrid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="직급코드"/>
+                <Cell col="2" text="직급명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1"/>
+                <Cell col="1" text="bind:POSITION_CODE"/>
+                <Cell col="2" text="bind:POSITION_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:404 w:535 t:93 h:320" positiontype="position2" style="border:1 solid #cbcbcbff ;" binddataset="ds_hobong" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;hobong&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;base_sal&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bonus&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;sigub&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:hobong&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:base_sal&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:bonus&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:sigub&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="호봉"/>
+                <Cell col="1" text="기본급"/>
+                <Cell col="2" text="상여급"/>
+                <Cell col="3" text="시급"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="normal" text="bind:HOBONG"/>
+                <Cell col="1" displaytype="currency" edittype="normal" text="bind:BASE_SAL"/>
+                <Cell col="2" displaytype="currency" edittype="normal" text="bind:BONUS"/>
+                <Cell col="3" displaytype="currency" edittype="normal" text="bind:SIGUB"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="addHobongBtn" taborder="1" text="추  가" position2="absolute l:456 w:81 t:474 h:38" positiontype="position2" onclick="addHobongBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="saveHobongBtn" taborder="1" text="일괄저장" position2="absolute l:798 w:81 t:474 h:38" positiontype="position2" onclick="saveHobongBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="removeHobongBtn" taborder="1" text="삭 제" position2="absolute l:570 w:81 t:474 h:38" positiontype="position2" onclick="removeHobongBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="resetHobongBtn" taborder="1" text="취 소" position2="absolute l:684 w:81 t:474 h:38" positiontype="position2" onclick="resetHobongBtn_onclick" style="background:silver;color:white;"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript4.0"><![CDATA[
+function hobongManagementForm_onload(obj:Form, e:LoadEventInfo)
+{
+	
+	transaction("findPositionList",
+	"svcBase::findPositionList.do",
+	"",
+	"ds_position=dsPosition",
+	"",
+	"callback",
+	false);
+}
+
+
+function positionGrid_oncellclick(obj:Grid, e:GridClickEventInfo)
+{
+	transaction("findHobongList",
+	"svcBase::findHobongList.do",
+	"","ds_hobong=dsHobong",
+	"positionCode='"+ds_position.getColumn(e.row,"POSITION_CODE")+"'",
+	"callback",
+	false);
+}
+
+
+function addHobongBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	var rowNum=ds_hobong.getRowCount();
+	
+	var parentPositionCode=ds_position.getColumn(ds_position.rowposition,"POSITION_CODE");
+	
+	ds_hobong.addRow(); // row 추가
+	ds_hobong.setColumn(rowNum,"POSITION_CODE",parentPositionCode); // 상위코드의 직급 코드 가져 온다. 
+}
+
+
+function removeHobongBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	ds_hobong.deleteRow(ds_hobong.rowposition);
+}
+
+function resetHobongBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	reload();
+}
+
+function saveHobongBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+		if(confirm("저장 하시겠습니까 ?")){
+      transaction(
+         "batchHobong",
+         "svcHrCircumstance::batchHobong.do",
+         "dsHobong=ds_hobong:u",
+         "ds_hobong=dsHobong",
+         "",
+         "callback",
+         false
+      );
+   }
+}
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   
+   if(trid=='batchHobong'){
+      if(ErrorCode!=0){
+         alert("저장중 ERROR발생! ");
+      }else{      
+         //var selPositionCode = dsPosition.GetColumn(dsPosition.rowpos,'POSITION_CODE');
+         //dsHobong.UnFilter();   
+         //dsHobong.Filter("POSITION_CODE='"+selPositionCode+"'");
+         reload();
+         alert("저장에 성공하였습니다!");//ErrorCode==0 :) 
+      }   
+   }
+}
+]]></Script>
+  </Form>
+</FDL>

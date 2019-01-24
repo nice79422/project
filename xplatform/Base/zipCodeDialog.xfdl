@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="zipCodeDialog" classname="zipCodeDialog" inheritanceid="" position="absolute 0 0 716 444" titletext="New Form" style="background:gainsboro;" onload="zipCodeDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="지번/도로명" position2="absolute l:28 w:103 t:45 h:28" positiontype="position2"/>
+        <Edit id="edt_address" taborder="1" position2="absolute l:132 w:139 t:46 h:26" positiontype="position2"/>
+        <Button id="Button00" taborder="2" text="검색" position2="absolute l:273 w:57 t:44 h:29" positiontype="position2" onclick="btn_serachAddress_onclick" style="color:black;"/>
+        <Button id="btn_pre" taborder="3" text="이전" position2="absolute l:360 w:56 t:44 h:32" positiontype="position2" onclick="btn_pre_onclick" style="color:black;"/>
+        <Button id="btn_next" taborder="4" text="다음" position2="absolute l:424 w:56 t:44 h:32" positiontype="position2" onclick="btn_next_onclick" style="color:black;"/>
+        <Combo id="cbo_addressType" taborder="5" position2="absolute l:506 w:110 t:45 h:34" positiontype="position2" index="1" innerdataset="@ds_address" codecolumn="TYPE" datacolumn="TYPE" value="도로명" text="도로명" onitemchanged="cbo_addressType_onitemchanged"/>
+        <Grid id="Grid0" taborder="6" useinputpanel="false" position2="absolute l:24 w:653 t:91 h:286" positiontype="position2" oncelldblclick="Grid0_oncelldblclick" binddataset="gds_post" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="113"/>
+                <Column size="541"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" text="우편번호"/>
+                <Cell col="1" displaytype="normal" text="도로명주소"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" text="bind:ZIP_NO"/>
+                <Cell col="1" displaytype="normal" text="bind:LNM_ADRES"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="div0" taborder="8" position2="absolute l:21 w:684 t:90 h:318" positiontype="position2" visible="false" style="background:white;border:0px solid #9f9f9fb3 ;">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" useinputpanel="false" position2="absolute l:18 w:654 t:8 h:302" binddataset="gds_post" positiontype="position2">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="109"/>
+                      <Column size="542"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell displaytype="normal" text="우편번호"/>
+                      <Cell col="1" displaytype="normal" text="지번주소"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="normal" text="bind:ZIP_NO"/>
+                      <Cell col="1" displaytype="normal" text="bind:RN_ADRES"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_address" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="TYPE">지번</Col>
+          </Row>
+          <Row>
+            <Col id="TYPE">도로명</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="div0.Grid00" propid="binddataset" datasetid="gds_post"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[var globalDong;
+var globalPage;
+
+function zipCodeDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	gds_post.clearData();
+}
+
+function btn_pre_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(globalPage > 1){
+		globalPage = globalPage - 1;
+	}
+	searchAddress(globalDong,globalPage);
+}
+
+function btn_next_onclick(obj:Button,  e:ClickEventInfo)
+{
+	globalPage = globalPage + 1;
+	
+	searchAddress(globalDong,globalPage);
+}
+
+
+function Grid0_oncelldblclick(obj:Grid, e:GridClickEventInfo)
+{
+	var addressType = cbo_addressType.Text;
+	
+	if(addressType == "지번"){
+		opener.Tab00.tabpage1.baseAddress.value = gds_post.getColumn(e.row,"RN_ADRES");
+	}else{
+		opener.Tab00.tabpage1.baseAddress.value = gds_post.getColumn(e.row,"LNM_ADRES");
+	}
+	opener.Tab00.tabpage1.zipCode.value = gds_post.getColumn(e.row,"ZIP_NO");
+	opener.Tab00.tabpage1.detailAddress.value = "";
+	close();
+	
+}
+
+function btn_serachAddress_onclick(obj:Button,  e:ClickEventInfo)  //검색버튼
+{   	var dong = edt_address.text;
+      	globalDong = dong;
+	    globalPage = 1;
+	
+	 searchAddressF(dong,globalPage);
+	
+}
+
+
+function searchAddressF(dong, page){
+	  transaction("findPostList",
+	              "svcBase::findPostList.do",
+	              "",
+	              "gds_post=gds_post",
+	              "dong='"+dong+"' page='"+globalPage+"'",
+	              "callback",
+	              false);
+ }
+ 
+ 
+
+
+function cbo_addressType_onitemchanged(obj:Combo, e:ItemChangeEventInfo)
+{   if(cbo_addressType.value == "지번"){
+	div0.visible=true;
+	Grid0.visible=false;
+	}
+	else{
+	div0.visible=false;
+	Grid0.visible=true;
+	}
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

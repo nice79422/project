@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="monthlyAttdApplicationForm" classname="monthlyAttdApplicationForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="monthlyAttdApplicationForm_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="월 근태 관리" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Static id="Static03" text="기준월" enable="false" enableevent="false" position2="absolute l:776 w:94 t:52 h:24" positiontype="position2" style="background:silver;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static01" text="기준년도" enable="false" enableevent="false" position2="absolute l:570 w:94 t:53 h:24" positiontype="position2" style="background:silver;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Combo id="selYear" taborder="1" position2="absolute l:663 w:113 t:52 h:24" positiontype="position2" index="0" innerdataset="@ds_baseYear" datacolumn="YEAR" codecolumn="YEAR" style="align:center middle;"/>
+        <Combo id="selMonth" taborder="1" position2="absolute l:871 w:70 t:52 h:24" positiontype="position2" index="0" innerdataset="@ds_baseMonth" datacolumn="MONTH" codecolumn="MONTH" style="align:center middle;"/>
+        <Tab id="Tab00" taborder="1" position2="absolute l:14 w:937 t:73 h:569" positiontype="position2" tabindex="0" scrollbars="autoboth" style="color:black;font:함초롬돋움,12,bold antialias;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="월근태 미마감 항목" style="anchor:default;background:gainsboro;">
+              <Layouts>
+                <Layout>
+                  <Button id="searchBtn" taborder="0" text="조  회" position2="absolute l:590 w:124 t:9 h:35" positiontype="position2" onclick="Tab00_tabpage1_searchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="closeBtn" taborder="1" text="마  감" position2="absolute l:743 w:124 t:9 h:35" positiontype="position2" onclick="Tab00_tabpage1_closeBtn_onclick" style="background:silver;color:white;"/>
+                  <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:2 w:899 t:50 h:486" positiontype="position2" binddataset="ds_monthAttdReport" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;basic_year_month&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;basic_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;basic_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;weekday_work&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;holiday_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;holiday_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;holiday_over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;holiday_night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;12&quot; disptype=&quot;normal&quot; text=&quot;absent_days&quot;/&gt;&#10;      &lt;Cell col=&quot;13&quot; disptype=&quot;normal&quot; text=&quot;late_days&quot;/&gt;&#10;      &lt;Cell col=&quot;14&quot; disptype=&quot;normal&quot; text=&quot;late_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;15&quot; disptype=&quot;normal&quot; text=&quot;leave_early_days&quot;/&gt;&#10;      &lt;Cell col=&quot;16&quot; disptype=&quot;normal&quot; text=&quot;leave_days&quot;/&gt;&#10;      &lt;Cell col=&quot;17&quot; disptype=&quot;normal&quot; text=&quot;close_yn&quot;/&gt;&#10;      &lt;Cell col=&quot;18&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;19&quot; disptype=&quot;normal&quot; text=&quot;attd_rest_days&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_year_month&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:weekday_work&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;12&quot; disptype=&quot;normal&quot; text=&quot;bind:absent_days&quot;/&gt;&#10;      &lt;Cell col=&quot;13&quot; disptype=&quot;normal&quot; text=&quot;bind:late_days&quot;/&gt;&#10;      &lt;Cell col=&quot;14&quot; disptype=&quot;normal&quot; text=&quot;bind:late_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;15&quot; disptype=&quot;normal&quot; text=&quot;bind:leave_early_days&quot;/&gt;&#10;      &lt;Cell col=&quot;16&quot; disptype=&quot;normal&quot; text=&quot;bind:leave_days&quot;/&gt;&#10;      &lt;Cell col=&quot;17&quot; disptype=&quot;normal&quot; text=&quot;bind:close_yn&quot;/&gt;&#10;      &lt;Cell col=&quot;18&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;19&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_rest_days&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell rowspan="2" text="사원번호"/>
+                          <Cell col="1" rowspan="2" text="사원명"/>
+                          <Cell col="2" rowspan="2" text="적용년월"/>
+                          <Cell col="3" colspan="2" text="근무일"/>
+                          <Cell col="5" colspan="2" text="근무시간"/>
+                          <Cell col="7" rowspan="2" text="연장근무시간"/>
+                          <Cell col="8" rowspan="2" text="심야근무시간"/>
+                          <Cell col="9" rowspan="2" text="지각시간"/>
+                          <Cell col="10" rowspan="2" text="근태외일수(연차)"/>
+                          <Cell col="11" rowspan="2" text="결근일수"/>
+                          <Cell col="12" rowspan="2" text="지각일수"/>
+                          <Cell col="13" rowspan="2" text="조퇴일수"/>
+                          <Cell col="14" rowspan="2" text="외출일수"/>
+                          <Cell col="15" rowspan="2" text="마감여부"/>
+                          <Cell row="1" col="3" text="기준일수"/>
+                          <Cell row="1" col="4" text="실제일수"/>
+                          <Cell row="1" col="5" text="기준시간"/>
+                          <Cell row="1" col="6" text="실제시간"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:BASIC_YEAR_MONTH" mask="####-##"/>
+                          <Cell col="3" text="bind:BASIC_WORK_DAYS"/>
+                          <Cell col="4" text="bind:WEEKDAY_WORK"/>
+                          <Cell col="5" text="bind:BASIC_WORK_HOUR"/>
+                          <Cell col="6" text="bind:WORK_HOUR"/>
+                          <Cell col="7" text="bind:OVER_WORK_HOUR"/>
+                          <Cell col="8" text="bind:NIGHT_WORK_HOUR"/>
+                          <Cell col="9" text="bind:LATE_HOUR"/>
+                          <Cell col="10" text="bind:ATTD_REST_DAYS"/>
+                          <Cell col="11" text="bind:ABSENT_DAYS"/>
+                          <Cell col="12" text="bind:LATE_DAYS"/>
+                          <Cell col="13" text="bind:LEAVE_EARLY_DAYS"/>
+                          <Cell col="14" text="bind:LEAVE_DAYS"/>
+                          <Cell col="15" displaytype="combo" style="color:EXPR(close_yn == 'Y' ? 'blue' : 'red');color2:EXPR(close_yn == 'Y' ? 'blue' : 'red');" text="bind:CLOSE_YN" combodataset="ds_close" combocodecol="CODE" combodatacol="VALUE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="월근태 마감 항목" style="anchor:default;background:gainsboro;">
+              <Layouts>
+                <Layout>
+                  <Button id="searchBtn" taborder="0" text="조  회" position2="absolute l:590 w:124 t:5 h:35" positiontype="position2" onclick="Tab00_tabpage2_searchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="uncloseBtn" taborder="1" text="마감 취소" position2="absolute l:743 w:124 t:5 h:35" positiontype="position2" enable="false" onclick="Tab00_tabpage2_uncloseBtn_onclick" style="background:silver;color:white;"/>
+                  <Grid id="Grid00" taborder="1" binddataset="ds_closedMonthAttdReport" useinputpanel="false" position2="absolute l:4 w:915 t:50 h:486" positiontype="position2" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;basic_year_month&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;basic_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;basic_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;weekday_work&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;holiday_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;holiday_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;holiday_over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;holiday_night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;12&quot; disptype=&quot;normal&quot; text=&quot;absent_days&quot;/&gt;&#10;      &lt;Cell col=&quot;13&quot; disptype=&quot;normal&quot; text=&quot;late_days&quot;/&gt;&#10;      &lt;Cell col=&quot;14&quot; disptype=&quot;normal&quot; text=&quot;late_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;15&quot; disptype=&quot;normal&quot; text=&quot;leave_early_days&quot;/&gt;&#10;      &lt;Cell col=&quot;16&quot; disptype=&quot;normal&quot; text=&quot;leave_days&quot;/&gt;&#10;      &lt;Cell col=&quot;17&quot; disptype=&quot;normal&quot; text=&quot;close_yn&quot;/&gt;&#10;      &lt;Cell col=&quot;18&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;19&quot; disptype=&quot;normal&quot; text=&quot;attd_rest_days&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_year_month&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:weekday_work&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_work_days&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;bind:holiday_night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;12&quot; disptype=&quot;normal&quot; text=&quot;bind:absent_days&quot;/&gt;&#10;      &lt;Cell col=&quot;13&quot; disptype=&quot;normal&quot; text=&quot;bind:late_days&quot;/&gt;&#10;      &lt;Cell col=&quot;14&quot; disptype=&quot;normal&quot; text=&quot;bind:late_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;15&quot; disptype=&quot;normal&quot; text=&quot;bind:leave_early_days&quot;/&gt;&#10;      &lt;Cell col=&quot;16&quot; disptype=&quot;normal&quot; text=&quot;bind:leave_days&quot;/&gt;&#10;      &lt;Cell col=&quot;17&quot; disptype=&quot;normal&quot; text=&quot;bind:close_yn&quot;/&gt;&#10;      &lt;Cell col=&quot;18&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;19&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_rest_days&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell rowspan="2" text="사원번호"/>
+                          <Cell col="1" rowspan="2" text="사원명"/>
+                          <Cell col="2" rowspan="2" text="적용년월"/>
+                          <Cell col="3" colspan="2" text="근무일"/>
+                          <Cell col="5" colspan="2" text="근무시간"/>
+                          <Cell col="7" rowspan="2" text="연장근무시간"/>
+                          <Cell col="8" rowspan="2" text="심야근무시간"/>
+                          <Cell col="9" rowspan="2" text="지각시간"/>
+                          <Cell col="10" rowspan="2" text="근태외일수(연차)"/>
+                          <Cell col="11" rowspan="2" text="결근일수"/>
+                          <Cell col="12" rowspan="2" text="지각일수"/>
+                          <Cell col="13" rowspan="2" text="조퇴일수"/>
+                          <Cell col="14" rowspan="2" text="외출일수"/>
+                          <Cell col="15" rowspan="2" text="휴일근무일수"/>
+                          <Cell col="16" rowspan="2" text="휴일근무시간"/>
+                          <Cell col="17" rowspan="2" text="휴일연장근무시간"/>
+                          <Cell col="18" rowspan="2" text="휴일심야근무시간"/>
+                          <Cell col="19" rowspan="2" displaytype="normal" text="마감여부"/>
+                          <Cell row="1" col="3" text="기준일수"/>
+                          <Cell row="1" col="4" text="실제일수"/>
+                          <Cell row="1" col="5" text="기준시간"/>
+                          <Cell row="1" col="6" text="실제시간"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:BASIC_YEAR_MONTH" mask="####-##"/>
+                          <Cell col="3" text="bind:BASIC_WORK_DAYS"/>
+                          <Cell col="4" text="bind:WEEKDAY_WORK"/>
+                          <Cell col="5" text="bind:BASIC_WORK_HOUR"/>
+                          <Cell col="6" text="bind:WORK_HOUR"/>
+                          <Cell col="7" text="bind:OVER_WORK_HOUR"/>
+                          <Cell col="8" text="bind:NIGHT_WORK_HOUR"/>
+                          <Cell col="9" text="bind:LATE_HOUR"/>
+                          <Cell col="10" text="bind:ATTD_REST_DAYS"/>
+                          <Cell col="11" text="bind:ABSENT_DAYS"/>
+                          <Cell col="12" text="bind:LATE_DAYS"/>
+                          <Cell col="13" text="bind:LEAVE_EARLY_DAYS"/>
+                          <Cell col="14" text="bind:LEAVE_DAYS"/>
+                          <Cell col="15" text="bind:HOLIDAY_WORK_DAYS"/>
+                          <Cell col="16" text="bind:HOLIDAY_WORK_HOUR"/>
+                          <Cell col="17" text="bind:HOLIDAY_OVER_WORK_HOUR"/>
+                          <Cell col="18" text="bind:HOLIDAY_NIGHT_WORK_HOUR"/>
+                          <Cell col="19" displaytype="combo" style="color:EXPR(close_yn == 'Y' ? 'blue' : 'red');color2:EXPR(close_yn == 'Y' ? 'blue' : 'red');" text="bind:CLOSE_YN" combodataset="ds_close" combocodecol="CODE" combodatacol="VALUE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_closedMonthAttdReport">
+        <ColumnInfo>
+          <Column id="BASIC_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="WEEKDAY_WORK" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="ABSENT_DAYS" type="STRING" size="256"/>
+          <Column id="LATE_DAYS" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="LEAVE_EARLY_DAYS" type="STRING" size="256"/>
+          <Column id="LEAVE_DAYS" type="STRING" size="256"/>
+          <Column id="CLOSE_YN" type="STRING" size="256"/>
+          <Column id="ATTD_REST_DAYS" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript4.0"><![CDATA[
+var baseYear;
+var baseMonth;
+
+//로딩시 
+function monthlyAttdApplicationForm_onload(obj:Form, e:LoadEventInfo)
+{
+	//baseYear = Date().getYear();
+	selYear.value = String(g_today).substr(0,4);;
+	
+
+	
+	transaction("findEmployeeList",
+				"svcBase::findEmployeeList.do",
+				"",
+				"ds_employeeList=dsEmployee",
+				"",
+				"callback",
+				false);
+				
+			
+	ds_employeeList.filter("");
+	ds_monthAttdReport.filter("EMP_CODE==0");
+	
+}
+
+
+//미마감 항목 조회시 
+function Tab00_tabpage1_searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+		
+	baseYear=selYear.value;
+	baseMonth=selMonth.value;
+	
+	
+	if(selMonth.value == undefined || selYear.value == undefined){
+		alert(" 기준년도 또는 기준월을 선택해 주세요 :( ");
+	}else{
+		transaction(
+			"findUnClosedDailyAttdReport",
+			"svcHrAttendance::findUnClosedDailyAttdReport.do",
+			"",
+			"ds_unCloseDailyAttd=dsDailyAttdReport",
+			"baseYearMonth=" +(baseYear+baseMonth),
+			"callback",false
+		);
+		// 해당 월에 일근태 미마감 항목이 있는지 조사
+				
+		
+		if(confirm(baseYear+"년 "+baseMonth+"월 월근태 미마감현황을 조회하시겠습니까?")){
+			if(ds_unCloseDailyAttd.getRowCount()>0 ){  //미마감 내역이 있다면 여기 실행 
+				var v_baseYearMonth=baseYear+baseMonth; //해당 년월을 변수에 담음 
+				alert(v_baseYearMonth);
+				application.dialog(
+					"modal",
+					"HrAttendance::unCloseDailyAttdDialog.xfdl",
+					mainframe,
+					{},
+					"showtitlebar=true showstatusbar=false",
+					300, 300, 300, 350,
+					this
+				);
+			
+			}else{
+				//alert("일근태 미 마감 내역이 없습니다.!");
+				findMonthAttdReport();
+				
+				
+			}	
+		}
+		
+	}			
+}
+
+
+
+function findMonthAttdReport(){
+	ds_monthAttdReport.filter("");
+	transaction(
+		"findMonthAttdReport",
+		"svcHrAttendance::findMonthAttdReport.do",
+		"",
+		"ds_monthAttdReport=dsMonthAttdReport",
+		"baseYearMonth="+(baseYear+baseMonth),
+		"callback"
+	);
+}
+
+//월근태 미 마감 마감 시 !
+function Tab00_tabpage1_closeBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm(" 현재 기준월의 데이터를 마감하시겠습니까? ")){
+		for(var index = 0; index < ds_monthAttdReport.rowcount; index++) {
+			ds_monthAttdReport.setColumn(index,"CLOSE_YN","Y");
+		}
+		updateMonthCloseYNTR();
+	}		
+}
+
+function updateMonthCloseYNTR()
+{
+	transaction(
+		"updateMonthAttdCloseYN",
+		"svcHrAttendance::updateMonthAttdCloseYN.do",
+		"dsMonthAttdReport=ds_monthAttdReport:u",
+		"",
+		"",
+		"callback",false
+	);
+}
+
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+	if(trid=='updateMonthAttdCloseYN'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			ds_monthAttdReport.clearData();
+			alert(" 성공적으로 마감이 되었습니다 :) ");
+		}
+	}
+	
+	if(trid=='updateMonthAttdUnCloseYN'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			ds_closedMonthAttdReport.clearData();
+			Tab00.tabpage2.uncloseBtn.enable=false; // 마감취소 버튼 활성화 
+			alert(" 성공적으로 마감을 취소하였습니다 :) ");
+		}
+	}
+	
+	if(trid=='findClosedMonthAttdReport'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			if(ds_closedMonthAttdReport.getRowCount()==0){
+				alert("현재날짜에는 마감된 항목이 없습니다");
+			}
+			Tab00.tabpage2.uncloseBtn.enable=true; // 마감취소 버튼 활성화 
+			 
+		}
+	}
+	
+	if(trid=='findMonthAttdReport'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			var closeYN=ds_monthAttdReport.getColumn(0,"CLOSE_YN");
+			if(ds_monthAttdReport.getRowCount() >0 && closeYN=='Y'){
+				ds_monthAttdReport.clearData();
+				alert("현재월에는 마감이되어있습니다 마감취소후 다시마감해주세요");
+			}
+		}	
+	}
+}
+
+
+// 월근태 마감 항목 조회 
+function Tab00_tabpage2_searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	baseYear=selYear.value;
+	baseMonth=selMonth.value;
+
+	if(selMonth.value == undefined || selYear.value == undefined){
+		alert(" 기준년도 또는 기준월을 선택해 주세요 :( ");
+	}else{
+		transaction(
+			"findClosedMonthAttdReport",
+			"svcHrAttendance::findClosedMonthAttdReport.do",
+			"",
+			"ds_closedMonthAttdReport=dsMonthAttdReport",
+			"baseYearMonth=" +(baseYear+baseMonth),
+			"callback",false
+		);
+	}	
+	
+}
+
+//마감 취소 시 !!
+function Tab00_tabpage2_uncloseBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("마감취소 하시겠습니까?")){
+		for(var index = 0; index < ds_closedMonthAttdReport.rowcount; index++) {
+			ds_closedMonthAttdReport.setColumn(index,"CLOSE_YN","N");
+		}
+		
+		transaction(
+			"updateMonthAttdUnCloseYN",
+			"svcHrAttendance::updateMonthAttdCloseYN.do",
+			"dsMonthAttdReport=ds_closedMonthAttdReport:u",
+			"",
+			"",
+			"callback"
+		);	
+	}	
+}
+]]></Script>
+  </Form>
+</FDL>

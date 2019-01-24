@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="attendanceApprovalManagement" classname="attendanceApprovalManagement" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="attendanceApprovalManagement_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="근태 승인관리" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Tab id="Tab00" taborder="1" position2="absolute l:11 w:941 t:56 h:582" positiontype="position2" tabindex="0" scrollbars="autoboth" style="background:gainsboro;color:black;font:함초롬돋움,12,bold antialias;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="근태 승인관리">
+              <Layouts>
+                <Layout width="929" height="552">
+                  <Static id="Static11" text="승인관리 접속자" enable="false" enableevent="false" position2="absolute l:68 w:160 t:45 h:25" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Edit id="empName" taborder="1" position2="absolute l:230 w:185 t:45 h:25" positiontype="position2" enable="false" style="align:center middle;"/>
+                  <Static id="Static00" text="기준일" enable="false" enableevent="false" position2="absolute l:124 w:104 t:99 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static01" text="부서" enable="false" enableevent="false" position2="absolute l:384 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static02" text="승인구분" enable="false" enableevent="false" position2="absolute l:620 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Calendar id="basicDate" taborder="1" position2="absolute l:230 w:151 t:97 h:26" positiontype="position2" dateformat="yyyy-MM-dd" value="null" style="align:center middle;"/>
+                  <Combo id="selDeptCode" taborder="1" position2="absolute l:486 w:128 t:97 h:24" positiontype="position2" index="-1" style="align:center middle;" innerdataset="@ds_dept" datacolumn="DEPT_NAME" codecolumn="DEPT_CODE" onitemchanged="Tab00_tabpage1_selDeptCode_onitemchanged"/>
+                  <Combo id="selApprovalStatus" taborder="1" position2="absolute l:724 w:128 t:97 h:24" positiontype="position2" index="-1" style="align:center middle;" datacolumn="VALUE" codecolumn="CODE" innerdataset="@ds_approval"/>
+                  <Button id="searchBtn" taborder="1" text="조 회" position2="absolute l:358 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage1_searchBtn_onclick" style="background:silver;color:white; :disabled {background:silver;}"/>
+                  <Button id="batchBtn" taborder="1" text="일괄승인" position2="absolute l:487 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage1_batchBtn_onclick" enable="true" style="background:silver;color:white; :disabled {background:silver;}"/>
+                  <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:616 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage1_saveBtn_onclick" style="background:silver;color:white; :disabled {background:silver;}"/>
+                  <Button id="cancelBtn" taborder="1" text="취 소" position2="absolute l:745 w:105 t:138 h:32" positiontype="position2" enable="false" onclick="Tab00_tabpage1_cancelBtn_onclick" style=":disabled {background:silver;color:white;opacity:100;}"/>
+                  <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:5 w:913 t:188 h:352" positiontype="position2" binddataset="ds_localDailyAttd" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;day_attd_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;attd_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;time&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;cost&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;cause&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:day_attd_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:time&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:cost&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:cause&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="107"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="99"/>
+                          <Column size="89"/>
+                          <Column size="70"/>
+                          <Column size="110"/>
+                          <Column size="82"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="선택승인취소"/>
+                          <Cell col="1" displaytype="normal" text="사원코드"/>
+                          <Cell col="2" displaytype="normal" text="사원명"/>
+                          <Cell col="3" displaytype="normal" text="기준일"/>
+                          <Cell col="4" displaytype="normal" text="시각"/>
+                          <Cell col="5" displaytype="normal" text="근태구분"/>
+                          <Cell col="6" displaytype="normal" text="비용"/>
+                          <Cell col="7" displaytype="normal" text="승인상태"/>
+                          <Cell col="8" displaytype="normal" text="사유"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="checkbox" edittype="checkbox" text="bind:APPROVAL_STATUS" expr="expr:APPROVAL_STATUS=='Y'?'0':(APPROVAL_STATUS=='N'?'0':APPROVAL_STATUS)" combodisplaynulltype="none" combodisplay="edit"/>
+                          <Cell col="1" displaytype="normal" text="bind:EMP_CODE"/>
+                          <Cell col="2" displaytype="normal" text="bind:EMP_NAME"/>
+                          <Cell col="3" displaytype="normal" text="bind:BASIC_DAY" mask="####-##-##"/>
+                          <Cell col="4" displaytype="normal" text="bind:TIME" mask="##:##"/>
+                          <Cell col="5" displaytype="combo" edittype="combo" text="bind:ATTD_TYPE_CODE" editdisplay="display" combodataset="ds_attdType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                          <Cell col="6" displaytype="normal" text="bind:COST"/>
+                          <Cell col="7" displaytype="normal" edittype="none" text="bind:APPROVAL_STATUS" expr="expr:APPROVAL_STATUS=='1'?'N':(APPROVAL_STATUS=='0' ? 'Y': APPROVAL_STATUS)"/>
+                          <Cell col="8" displaytype="normal" text="bind:CAUSE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="근태외 승인관리" style="anchor:default;background:gainsboro; :disabled {background:cornflowerblue;opacity:80;}">
+              <Layouts>
+                <Layout>
+                  <Static id="Static11" text="승인관리 접속자" enable="false" enableevent="false" position2="absolute l:68 w:160 t:45 h:25" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Edit id="empName" taborder="1" enable="false" position2="absolute l:230 w:185 t:45 h:25" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static00" text="기준일" enable="false" enableevent="false" position2="absolute l:124 w:104 t:99 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Calendar id="basicDate" taborder="1" dateformat="yyyy-MM-dd" position2="absolute l:230 w:151 t:97 h:26" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static01" text="부서" enable="false" enableevent="false" position2="absolute l:384 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Combo id="selDeptCode" taborder="1" innerdataset="@ds_dept" codecolumn="DEPT_CODE" datacolumn="DEPT_NAME" position2="absolute l:486 w:128 t:97 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static02" text="승인구분" enable="false" enableevent="false" position2="absolute l:620 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Combo id="selApprovalStatus" taborder="1" innerdataset="@ds_approval" codecolumn="CODE" datacolumn="VALUE" position2="absolute l:724 w:128 t:97 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Button id="searchBtn" taborder="1" text="조 회" position2="absolute l:358 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage2_searchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="batchBtn" taborder="1" text="일괄승인" position2="absolute l:487 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage2_batchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:616 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage2_saveBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="cancelBtn" taborder="1" text="취 소" enable="false" position2="absolute l:745 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage2_cancelBtn_onclick" style=":disabled {background:silver;color:white;opacity:100;}"/>
+                  <Grid id="Grid00" taborder="1" binddataset="ds_localDailyAttdRest" useinputpanel="false" autofittype="col" position2="absolute l:13 w:913 t:188 h:352" positiontype="position2" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;cause&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;cost&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;days&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;request_date&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;attd_rest_code&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;attd_rest_seq&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:cause&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:cost&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:days&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:request_date&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_rest_code&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_rest_seq&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="300"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원번호"/>
+                          <Cell col="1" text="사원명"/>
+                          <Cell col="2" text="신청일자"/>
+                          <Cell col="3" text="시작일"/>
+                          <Cell col="4" text="종료일"/>
+                          <Cell col="5" text="일수"/>
+                          <Cell col="6" text="금액"/>
+                          <Cell col="7" text="승인상태"/>
+                          <Cell col="8" text="사유"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:REQUEST_DATE" mask="####-##-##"/>
+                          <Cell col="3" text="bind:START_DATE" mask="####-##-##"/>
+                          <Cell col="4" text="bind:END_DATE" mask="####-##-##"/>
+                          <Cell col="5" text="bind:DAYS"/>
+                          <Cell col="6" text="bind:COST"/>
+                          <Cell col="7" displaytype="combo" style="color:EXPR(approval_status== 'N' ? &quot;red&quot; : &quot;black&quot;);color2:EXPR(approval_status == 'N' ? &quot;red&quot; : &quot;black&quot;);" text="bind:APPROVAL_STATUS" combodataset="ds_approval" combocodecol="CODE" combodatacol="VALUE"/>
+                          <Cell col="8" text="bind:CAUSE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static03" text="※근태외 승인 시 일근태 관리에서 마감 할 것!(필수)※" position2="absolute l:490 w:358 t:24 h:51" positiontype="position2" style="background:gainsboro;color:#ff0000ff;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="연장/심야 승인관리" style="anchor:default;background:gainsboro;">
+              <Layouts>
+                <Layout>
+                  <Static id="Static11" text="승인관리 접속자" enable="false" enableevent="false" position2="absolute l:68 w:160 t:45 h:25" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Edit id="empName" taborder="1" enable="false" position2="absolute l:230 w:185 t:45 h:25" positiontype="position2" style="align:center middle; :disabled {opacity:100;}"/>
+                  <Static id="Static00" text="기준일" enable="false" enableevent="false" position2="absolute l:124 w:104 t:99 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Calendar id="basicDate" taborder="1" dateformat="yyyy-MM-dd" position2="absolute l:230 w:151 t:97 h:26" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static01" text="부서" enable="false" enableevent="false" position2="absolute l:384 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Combo id="selDeptCode" taborder="1" innerdataset="@ds_dept" codecolumn="DEPT_CODE" datacolumn="DEPT_NAME" position2="absolute l:488 w:128 t:97 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static02" text="승인구분" enable="false" enableevent="false" position2="absolute l:620 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Combo id="selApprovalStatus" taborder="1" innerdataset="@ds_approval" codecolumn="CODE" datacolumn="VALUE" position2="absolute l:724 w:128 t:97 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Button id="cancelBtn" taborder="1" text="취 소" enable="false" position2="absolute l:745 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage3_cancelBtn_onclick" style=":disabled {background:silver;color:white;opacity:100;}"/>
+                  <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:616 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage3_saveBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="batchBtn" taborder="1" text="일괄승인" position2="absolute l:487 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage3_batchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="searchBtn" taborder="1" text="조 회" position2="absolute l:358 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage3_searchBtn_onclick" style="background:silver;color:white;"/>
+                  <Grid id="Grid00" taborder="1" binddataset="ds_overNightCopy" useinputpanel="false" autofittype="col" position2="absolute l:5 w:913 t:188 h:352" positiontype="position2" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;over_night_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;request_status&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;type&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:over_night_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:request_status&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:type&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원번호"/>
+                          <Cell col="1" text="사원명"/>
+                          <Cell col="2" text="신청일자"/>
+                          <Cell col="3" text="승인여부"/>
+                          <Cell col="4" text="신청여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:BASIC_DAY" mask="####-##-##"/>
+                          <Cell col="3" displaytype="combo" style="color:EXPR(APPROVAL_STATUS == 'Y' ? 'blue' : 'red');" text="bind:APPROVAL_STATUS" combodataset="ds_approval" combocodecol="CODE" combodatacol="VALUE"/>
+                          <Cell col="4" displaytype="combo" style="color:EXPR(REQUEST_STATUS == 'Y' ? 'blue' : 'red ');" text="bind:REQUEST_STATUS" combodataset="ds_requestType" combocodecol="CODE" combodatacol="VALUE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage4" text="휴가/연차 승인관리" style="anchor:default;background:gainsboro;">
+              <Layouts>
+                <Layout>
+                  <Static id="Static11" text="승인관리 접속자" enable="false" enableevent="false" position2="absolute l:68 w:160 t:45 h:25" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Edit id="empName" taborder="1" enable="false" position2="absolute l:230 w:185 t:45 h:25" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static00" text="기준일" enable="false" enableevent="false" position2="absolute l:124 w:104 t:99 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Calendar id="basicDate" taborder="1" dateformat="yyyy-MM-dd" position2="absolute l:230 w:151 t:97 h:26" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static01" text="부서" enable="false" enableevent="false" position2="absolute l:384 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Combo id="selDeptCode" taborder="1" innerdataset="@ds_dept" codecolumn="DEPT_CODE" datacolumn="DEPT_NAME" position2="absolute l:488 w:128 t:97 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Static id="Static02" text="승인구분" enable="false" enableevent="false" position2="absolute l:620 w:104 t:97 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Combo id="selApprovalStatus" taborder="1" innerdataset="@ds_approval" codecolumn="CODE" datacolumn="VALUE" position2="absolute l:724 w:128 t:97 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Button id="searchBtn" taborder="1" text="조 회" position2="absolute l:358 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage4_searchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="batchBtn" taborder="1" text="일괄승인" position2="absolute l:487 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage4_batchBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:616 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage4_saveBtn_onclick" style="background:silver;color:white;"/>
+                  <Button id="cancelBtn" taborder="1" text="취 소" enable="false" position2="absolute l:745 w:105 t:138 h:32" positiontype="position2" onclick="Tab00_tabpage4_cancelBtn_onclick" style=":disabled {background:silver;color:white;opacity:100;}"/>
+                  <Grid id="Grid00" taborder="1" binddataset="ds_dayAnnual" useinputpanel="false" autofittype="col" position2="absolute l:13 w:913 t:188 h:352" positiontype="position2" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;day_annual_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;cause_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;detail_cause&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;standard_year&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;annual_code&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;days&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;approval_status&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:day_annual_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:cause_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:detail_cause&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:standard_year&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:annual_code&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:days&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:approval_status&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="90"/>
+                          <Column size="300"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원번호"/>
+                          <Cell col="1" text="사원명"/>
+                          <Cell col="2" text="시작일"/>
+                          <Cell col="3" text="종료일"/>
+                          <Cell col="4" text="일수"/>
+                          <Cell col="5" text="승인상태"/>
+                          <Cell col="6" text="상세사유"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" displaytype="combo" text="bind:EMP_CODE" combodataset="ds_employee_copy" combocodecol="EMP_CODE" combodatacol="EMP_NAME"/>
+                          <Cell col="2" text="bind:START_DATE" mask="####-##-##"/>
+                          <Cell col="3" text="bind:END_DATE" mask="####-##-##"/>
+                          <Cell col="4" text="bind:DAYS"/>
+                          <Cell col="5" displaytype="combo" style="color:EXPR(approval_status=='Y' ? 'blue' : 'red');color2:EXPR(approval_status=='Y' ? 'blue' : 'red');" text="bind:APPROVAL_STATUS" combodataset="ds_approval" combocodecol="CODE" combodatacol="VALUE"/>
+                          <Cell col="6" text="bind:DETAIL_CAUSE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static03" text="※휴가/연차 승인 시 일근태 관리에서 마감 할 것!(필수)※" position2="absolute l:490 w:358 t:24 h:51" positiontype="position2" style="background:gainsboro;color:#ff0000ff;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_localDailyAttd">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_SEQ" type="STRING" size="256"/>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_localDailyAttdRest">
+        <ColumnInfo>
+          <Column id="ATTD_REST_SEQ" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="ATTD_REST_CODE" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="DAYS" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="OTHER_SUDANG" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_overNightCopy">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="REQUEST_STATUS" type="STRING" size="256"/>
+          <Column id="TYPE" type="STRING" size="256"/>
+          <Column id="OVER_NIGHT_SEQ" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="FROM_TIME" type="STRING" size="256"/>
+          <Column id="TO_TIME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_attdType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="USING_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_requestType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="VALUE">신청</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">N</Col>
+            <Col id="VALUE">미신청</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_employee_copy" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript4.0"><![CDATA[
+var settingDate;
+
+//로딩 시
+function attendanceApprovalManagement_onload(obj:Form, e:LoadEventInfo)
+{
+	/*
+	var nYear= String(g_toDate).substr(0,4);
+	//var objDate = new Date(Date());
+	var nMonth = String(g_toDate).substr(5,2);
+	var nDate = objDate.getDate();
+*/
+	settingDate = new Date().toFormatString("%Y%m%d");
+
+	Tab00.tabpage1.Grid00.controlcheckbox.value=0;
+	
+	ds_dept.filter(""); // 로그인시 담은 부서 dataSet 초기화  
+	Tab00.tabpage1.empName.value=g_empName;
+	Tab00.tabpage1.basicDate.value=settingDate;
+	
+	Tab00.tabpage2.empName.value=g_empName;
+	Tab00.tabpage2.basicDate.value=settingDate;
+	
+	Tab00.tabpage3.empName.value=g_empName;
+	Tab00.tabpage3.basicDate.value=settingDate;
+	
+	Tab00.tabpage4.empName.value=g_empName;
+	Tab00.tabpage4.basicDate.value=settingDate;
+
+    transaction("findCodeList","svcBase::findCodeList.do","","ds_detailCode=dsDetailCode","","callback",false);
+    ds_detailCode.filter("CODE=='CO-16'");
+	ds_attdType.copyData(ds_detailCode,true);
+  
+
+
+}
+
+//근태 조회 
+function Tab00_tabpage1_searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+
+	ds_detailCode.filter("");
+	ds_approval.filter("");
+	ds_localDailyAttd.filter("");
+	//Tab00.tabpage1.cancelBtn.enable=false;//취소 버튼 비활성화 
+	// Tab00.tabpage1.saveBtn.enable=false; 
+	var basicDate=Tab00.tabpage1.basicDate.value;
+	var deptCode=Tab00.tabpage1.selDeptCode.value;
+	var approvalStatus=Tab00.tabpage1.selApprovalStatus.value;	
+					
+	if(deptCode==undefined){
+		deptCode="";	
+	}		
+	if(approvalStatus==undefined){
+		approvalStatus="";
+	}
+	
+	
+	transaction(
+		"findDailyAttdListByCondition",
+		"svcHrAttendance::findDailyAttdListByCondition.do",
+		"",
+		"ds_localDailyAttd=dsDailyAttd",
+		"approvalStatus='"+approvalStatus+"' basicDay='"+ basicDate+"' deptCode='"+deptCode+"'",
+		"callback",
+		false
+	);
+		
+}
+
+//근태 일괄 승인 
+function Tab00_tabpage1_batchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+
+	for(var index = 0; index < ds_localDailyAttd.getRowCount(); index++) {
+			ds_localDailyAttd.setColumn(index, "APPROVAL_STATUS", "Y");
+		}
+	
+      Tab00.tabpage1.cancelBtn.enable=true;  // 취소 버튼 활성화 
+      Tab00.tabpage1.saveBtn.enable=true;  // 취소 버튼 활성화 
+}
+
+//일근태 취소 
+function Tab00_tabpage1_cancelBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("취소 하시겟습니까?")){
+		Tab00_tabpage1_searchBtn_onclick();
+
+	}	
+}
+
+	
+
+//일 근태 저장 시 
+function Tab00_tabpage1_saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{    
+     for(var i = 0; i < ds_localDailyAttd.getRowCount(); i++) {
+         
+      if(ds_localDailyAttd.getColumn(i, "APPROVAL_STATUS")=='1'){
+           ds_localDailyAttd.setColumn(i, "APPROVAL_STATUS","N")
+         
+       }
+      else{
+          ds_localDailyAttd.setColumn(i, "APPROVAL_STATUS","Y")
+       }
+       
+       
+   }
+   
+	
+	if(confirm("현재 내용을 저장 하시겠습니까?")){
+		transaction(
+			"batchDailyAttd",
+			"svcHrAttendance::batchDailyAttd.do",
+			"dsDailyAttd=ds_localDailyAttd:u",
+			"",
+			"",
+			"callback"
+		);
+	}	
+}
+
+
+
+// function findDailyAttdReport(){
+// 	trace("프로시저 가동 미마감 항목 생성 및 조회 ");
+// 	trace(Tab00.tabpage1.basicDate.value);
+// 	var setBaseBay = Tab00.tabpage1.basicDate.value; 
+// 	
+// 	transaction(
+// 		"findDailyAttdReport",
+// 		"svcHrAttendance::findDailyAttdReport.do",
+// 		"",
+// 		"ds_dailyAttdReport=dsDailyAttdReport",
+// 		"baseDay=" + setBaseBay,
+// 		"callback",
+// 		false
+// 	);
+// 	ds_dailyAttdReport.filter("CLOSE_YN=='N'");//미마감 내역만. 
+// 	alert("연장/심야 근무 신청 확인!");
+// }
+
+
+
+
+//일 근태외 승인 조회 
+function Tab00_tabpage2_searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+
+
+		
+	ds_detailCode.filter("");
+	ds_approval.filter("");
+	ds_localDailyAttdRest.filter("");
+	Tab00.tabpage2.cancelBtn.enable=false;//취소 버튼 비활성화 
+	
+	var requestDate=Tab00.tabpage2.basicDate.value;
+	var deptCode=Tab00.tabpage2.selDeptCode.value;
+	var approvalStatus=Tab00.tabpage2.selApprovalStatus.value;	
+		
+	if(deptCode==undefined){
+		deptCode="";	
+	}		
+	if(approvalStatus==undefined){
+		approvalStatus="";
+	}
+	
+	trace(requestDate+"::"+deptCode+"::"+approvalStatus);
+	
+	
+	transaction("findEmployeeList",
+				"svcBase::findEmployeeList.do",
+				"",
+				"ds_employee=dsEmployee",
+				"",
+				"callback",
+				false);
+	
+	transaction(
+		"findAttdRestListByCondition",
+		"svcHrAttendance::findAttdRestListByCondition.do",
+		"",
+		"ds_localDailyAttdRest=dsDailyAttdRest",
+		"approvalStatus='"+approvalStatus+"' basicDay='"+ requestDate+"' deptCode='"+deptCode+"'",
+		"callback",
+		false
+	);
+}
+
+//일근태외 일괄 승인 
+function Tab00_tabpage2_batchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	for(var index = 0; index < ds_localDailyAttdRest.getRowCount(); index++) {
+			ds_localDailyAttdRest.setColumn(index, "APPROVAL_STATUS", "Y");
+		}
+	
+      Tab00.tabpage2.cancelBtn.enable=true;  // 취소 버튼 활성화 
+}
+
+//일근태외 취소
+function Tab00_tabpage2_cancelBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("취소 하시겟습니까?")){
+		Tab00_tabpage2_searchBtn_onclick();
+		 
+	
+	}	
+}
+
+//일근태외 저장시 
+function Tab00_tabpage2_saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("현재 내용을 저장 하시겠습니까?")){
+			transaction(
+				"batchDailyAttdRest",
+				"svcHrAttendance::batchDailyAttdRest.do",
+				"dsDailyAttdRest=ds_localDailyAttdRest:u",
+				"",
+				"",
+				"callback"
+			);
+	}	
+}
+
+
+//연장심야 승인조회 
+function Tab00_tabpage3_searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	ds_detailCode.filter("");
+	ds_approval.filter("");
+	ds_overNightCopy.filter("");
+	Tab00.tabpage3.cancelBtn.enable=false;//취소 버튼 비활성화 
+	
+	var requestDate=Tab00.tabpage3.basicDate.value;
+	var deptCode=Tab00.tabpage3.selDeptCode.value;
+	var approvalStatus=Tab00.tabpage3.selApprovalStatus.value;	
+		
+	if(deptCode==undefined){
+		deptCode="";	
+	}		
+	if(approvalStatus==undefined){
+		approvalStatus="";
+	}
+	
+	trace(requestDate+"::"+deptCode+"::"+approvalStatus);
+	
+	
+	transaction(
+		"findOverNightByCondition",
+		"svcHrAttendance::findOverNightReportByCondition.do",
+		"",
+		"ds_overNightCopy=dsOverNight",
+		"approvalStatus='"+approvalStatus+"' basicDay='"+ requestDate+"' deptCode='"+deptCode+"'",
+		"callback",false
+	);
+		
+		ds_overNightCopy.filter("REQUEST_STATUS=='Y'");	
+		if(ds_overNightCopy.getRowCount()==0){
+			alert(" 해당날짜에 저장된 데이터가 없습니다");
+		}
+	
+		
+	
+}
+
+
+
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+	
+	//일근태 조회 
+	if(trid=='findDailyAttdListByCondition'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			if(ds_localDailyAttd.getRowCount()==0){
+				alert(" 해당날짜에 저장된 데이터가 없습니다");
+			    
+	
+			}
+		}	
+	}
+	
+	//일근태 저장
+	if(trid=='batchDailyAttd'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 일근태 승인이 성공적으로 수행되었습니다 :)  ");
+			//Tab00.tabpage1.basicDate.value="";
+			ds_localDailyAttd.filter("EMP_CODE==0");
+			Tab00.tabpage1.selDeptCode.value="";
+			Tab00.tabpage1.selApprovalStatus.value="";
+			
+			//Tab00.tabpage1.cancelBtn.enable=false;//취소 버튼 비활성화 
+			//Tab00.tabpage1.saveBtn.enable=false; 
+			
+			//findDailyAttdReport();//일근태 미마감 목록 생성을 하면서 연장 심야 테이블 생성 되기 때문에 어쩔 수 없이 여기서 프로시저 호출
+		}	
+	}
+	//일근태외 조회시 
+	if(trid=='findAttdRestListByCondition'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			if(ds_localDailyAttdRest.getRowCount()==0){
+				alert(" 해당날짜에 저장된 데이터가 없습니다");
+			}
+		}	
+	}
+	//일근태외 저장시 
+	if(trid=='batchDailyAttdRest'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 근태외 승인이 성공적으로 수행되었습니다 ");
+			//Tab00.tabpage2.basicDate.value="";
+			ds_localDailyAttdRest.filter("EMP_CODE==0");
+			Tab00.tabpage2.selDeptCode.value="";
+			Tab00.tabpage2.selApprovalStatus.value="";
+		}	
+	}
+	
+	
+	
+	
+	if(trid=='batchOverNight'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 성공적으로 데이터를 저장하였습니다 ");
+		}	
+	}
+	
+	
+	if(trid=='batchDayAnnual'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 성공적으로 데이터를 저장하였습니다 :)  ");
+		}	
+	}
+}
+
+//연장_심야 일괄 승인 
+function Tab00_tabpage3_batchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(ds_overNight.findRow("REQUEST_STATUS","N")<0){  
+			// 신청일 경우 만족하는 값 없을 때 -1 N을 못찾으면 -1(즉 신청 된 상태) 0인경우 찾으면
+		for(var index = 0; index < ds_overNightCopy.getRowCount(); index++) {
+			ds_overNightCopy.setColumn(index, "APPROVAL_STATUS", "Y");
+		}
+		Tab00.tabpage3.cancelBtn.enable=true;
+   }else{
+      alert("연장 / 심야 승인 신청이 이루어 지지 않았습니다. \t(연장/심야 승인 신청을 먼저 해주세요)");
+   }      
+}
+
+//연장심야승인취소
+function Tab00_tabpage3_cancelBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("취소 하시겟습니까?")){
+		Tab00_tabpage3_searchBtn_onclick();
+	
+	}	
+
+}
+
+//연장 심야 저장 
+function Tab00_tabpage3_saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	if(confirm("현재 내용을 저장하시겠습니까?")){
+		transaction(
+			"batchOverNight",
+			"svcHrAttendance::batchOverNight.do",
+			"dsOverNight=ds_overNightCopy:u",
+			"",
+			"",
+			"callback",
+			false
+		);
+		
+		ds_overNightCopy.filter("EMP_CODE==0");
+		Tab00.tabpage3.selDeptCode.value="";
+		Tab00.tabpage3.selApprovalStatus.value="";
+			
+		Tab00.tabpage3.cancelBtn.enable=false;//취소 버튼 비활성화 
+		
+	}	
+	
+}
+
+//휴가 연차 승인관리 조회
+function Tab00_tabpage4_searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	ds_detailCode.filter("");
+	ds_approval.filter("");
+	ds_dayAnnual.filter("");
+	Tab00.tabpage4.cancelBtn.enable=false;//취소 버튼 비활성화 
+	
+	var requestDate=Tab00.tabpage4.basicDate.value;
+	var deptCode=Tab00.tabpage4.selDeptCode.value;
+	var approvalStatus=Tab00.tabpage4.selApprovalStatus.value;	
+		
+	if(deptCode==undefined){
+		deptCode="";	
+	}		
+	if(approvalStatus==undefined){
+		approvalStatus="";
+	}
+	
+	trace(requestDate+"::"+deptCode+"::"+approvalStatus);
+	
+		
+				transaction("findEmployeeList",
+				"svcBase::findEmployeeList.do",
+				"",
+				"ds_employee=dsEmployee",
+				"",
+				"callback",
+				false);
+
+
+	
+	ds_employee_copy.copyData(ds_employee);
+	transaction(
+		"findDayAnnualListByCondition",
+		"svcHrAttendance::findDayAnnualListByCondition.do",
+		"",
+		"ds_dayAnnual=dsDayAnnual",
+		"approvalStatus='"+approvalStatus+"' basicDay='"+ requestDate+"' deptCode='"+deptCode+"'",
+		"callback",false
+	);
+		
+	if(ds_dayAnnual.getRowCount()==0){
+		alert(" 해당날짜에 저장된 데이터가 없습니다 :( ");
+	}
+	
+	
+}
+
+//연차 휴가 일괄 승인 
+function Tab00_tabpage4_batchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	for(var index = 0; index < ds_dayAnnual.getRowCount(); index++) {
+			ds_dayAnnual.setColumn(index, "APPROVAL_STATUS", "Y");
+		}
+		Tab00.tabpage4.cancelBtn.enable=true;
+}
+
+//연차 휴가 취소 
+function Tab00_tabpage4_cancelBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("취소 하시겟습니까?")){
+		Tab00_tabpage4_searchBtn_onclick();
+		Tab00.tabpage4.cancelBtn.enable=false;
+	
+	}	
+}
+
+//연차 휴가 저장 
+function Tab00_tabpage4_saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(confirm("저장하시겠습니까?")){
+	
+		transaction(
+			"batchDayAnnual",
+			"svcHrAttendance::batchDayAnnual.do",
+			"dsDayAnnual=ds_dayAnnual:u",
+			"",
+			"",	
+			"callback",
+			false
+		);
+		      
+		ds_dayAnnual.filter("EMP_CODE==0");
+		Tab00.tabpage4.selDeptCode.value="";
+		Tab00.tabpage4.selApprovalStatus.value="";
+			
+		Tab00.tabpage4.cancelBtn.enable=false;//취소 버튼 비활성화 
+		
+	}
+	
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

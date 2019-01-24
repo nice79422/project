@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae010498-02fe-495f-bccc-5e0b5913ff7a">
+	<property name="ireport.zoom" value="2.143588810000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="145"/>
+	<parameter name="empCode" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="empName" class="java.lang.String"/>
+	<field name="empCode" class="java.lang.String"/>
+	<field name="detailCodeName" class="java.lang.String"/>
+	<field name="deptName" class="java.lang.String"/>
+	<field name="positionName" class="java.lang.String"/>
+	<field name="baseAddress" class="java.lang.String"/>
+	<field name="detailAddress" class="java.lang.String"/>
+	<field name="hireDate" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="151" y="36" width="264" height="38" uuid="1db9fd16-0dce-4f43-85b6-7e208fb15a59"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서" size="24" pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[재 직 증 명 서 ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="358" splitType="Stretch">
+			<staticText>
+				<reportElement x="27" y="31" width="100" height="20" uuid="09a5e4f9-5812-4d1d-8e59-fb4aa37b9c2d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="궁서" size="12" pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[1. 재직정보]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="51" width="100" height="20" backcolor="#CCCCCC" uuid="5d37c7ff-c1ab-409f-976d-3d66836c2360"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="71" width="100" height="20" backcolor="#CCCCCC" uuid="990c0753-8c99-4baf-8be6-72cf37f68098"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="92" width="100" height="46" backcolor="#CCCCCC" uuid="cfff602b-1e3b-43ff-bb26-9a90c3f12d21"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="27" y="53" width="100" height="15" uuid="2ad0a476-e411-4430-990d-b6f29128c78d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[사원명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="72" width="76" height="20" uuid="ff83a44a-9a5e-4f34-ac61-c8e592a9732a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[부서명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="91" width="100" height="35" uuid="e8feb350-f6c5-4248-be1c-9669b09cda6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[직급]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="127" y="51" width="100" height="20" uuid="b8b7e986-2c5e-496a-8bc8-71168afa4c1a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="127" y="71" width="100" height="20" uuid="86f751c3-8dbf-4fb4-a5d8-3bd499707aa0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="127" y="91" width="100" height="47" uuid="783067b7-5e45-49d3-ab90-f3c6b7517997"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="227" y="51" width="100" height="40" backcolor="#CCCCCC" uuid="5cd3fd42-1254-414a-85e5-833db53d0ab3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="227" y="53" width="100" height="25" uuid="ebe2700d-7307-42e2-800e-0e2e44647217"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[주소]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="327" y="51" width="215" height="20" uuid="9d74b232-db80-4e5f-96e7-d0391623dfc9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="327" y="71" width="215" height="21" uuid="5a5f2943-6499-482a-8548-ac26e2ac957b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="327" y="111" width="215" height="27" uuid="ae2ec2e8-7076-40e1-9493-6ec1f265f42e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="227" y="91" width="100" height="19" backcolor="#CCCCCC" uuid="dd38868b-2ee8-4e23-96b8-24ced1850d9f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="227" y="91" width="100" height="16" uuid="8d0617d2-c279-460f-bbf1-8744f34fbc5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[직종]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="227" y="111" width="100" height="27" uuid="53576f98-7b81-44a1-a71c-192945f814c3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="327" y="93" width="215" height="18" backcolor="#CCCCCC" uuid="3c23fd05-924b-4781-a834-f6a73b9fc434"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="377" y="92" width="100" height="16" uuid="0b82e735-bb9c-4979-ac12-f4680a80c20a"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[입사일]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="51" width="85" height="20" uuid="53169db4-0b27-4217-b312-b620d2e4c9cc"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="73" width="77" height="18" uuid="2ed8c119-4dbc-42ab-ba17-8bcd1026ed3b"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deptName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="107" width="77" height="20" uuid="4fc12a4a-9504-4296-881e-75d574ad0171"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{positionName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="53" width="176" height="20" uuid="1b51606a-3dd7-4f5b-83ab-a88c82aac898"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{baseAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="73" width="100" height="20" uuid="dfd8edc1-f84c-4ae0-a4b4-2997bb71c03a"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="111" width="77" height="20" uuid="4ae06000-30e3-430c-8f10-d864fcebc98a"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detailCodeName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="111" width="100" height="20" uuid="cc667647-b171-4ce2-8984-6a6abae3256c"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hireDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="178" width="100" height="20" uuid="047bffd7-f966-4ff5-b8da-6b3978fa7610"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="궁서" size="12" pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[2. 회사정보 ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="198" width="100" height="22" backcolor="#CCCCCC" uuid="559b6748-c1b3-401e-9239-38ad7b967c9f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="220" width="100" height="23" backcolor="#CCCCCC" uuid="22107668-4c2c-4dd0-a7ad-e78a65aacd0a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="127" y="198" width="415" height="22" uuid="b6a5dd0a-844d-4ffe-a019-2f402535faa6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="127" y="220" width="415" height="23" uuid="9e0eb0fa-2422-44a0-9424-81adec926f8b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="37" y="215" width="76" height="23" uuid="d1e77f87-26ce-4c59-9d8a-1fda6e73505b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[회사명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="198" width="86" height="22" uuid="14aba380-e1d1-4e84-8f7e-4dc3ed6cccf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[회사주소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="200" width="400" height="20" uuid="72b9d406-297f-49bb-9972-625c913679f8"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ 경상남도 진주시 가좌길74번길 혜람빌딩 5층]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="220" width="400" height="20" uuid="7d255757-4031-444f-8c21-aeb7897fe182"/>
+				<textElement>
+					<font pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[SY Company]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="270" width="326" height="34" uuid="6c0b2333-bf0a-4508-90cd-be025dc89887"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서" size="16" pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[위와 같이 재직하고 있음을 증명합니다.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="304" width="154" height="38" uuid="b5d50b40-58d6-4f92-89de-ae36540b48fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서" size="16" pdfFontName="C:\workspace-sts-3.9.6.RELEASE\test5th\src\main\webapp\report\HANBATANG/HANBATANG.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[대표 강 순 용(인)]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

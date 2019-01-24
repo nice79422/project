@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test5th.base.dao.BusinessPlaceDAO">
+
+    <resultMap id="businessPlaceResult" type="businessPlaceBean">
+        <result property="businessPlaceCode" column="BUSINESS_PLACE_CODE"/>
+        <result property="businessPlaceName" column="BUSINESS_PLACE_NAME"/>
+        <result property="businessPlaceTel" column="BUSINESS_PLACE_TEL"/>
+        <result property="companyCode" column="COMPANY_CODE"/>
+    </resultMap>
+
+
+    <select id="selectBusinessPlaceList" resultMap="businessPlaceResult">
+   
+        SELECT
+            *
+        FROM
+            BUSINESS_PLACE
+        ORDER BY
+            BUSINESS_PLACE_CODE
+ 
+    </select>
+
+
+
+	<insert id="insertBusinessPlace" parameterType="businessPlaceBean">
+	
+	        INSERT INTO
+	            BUSINESS_PLACE
+	            (
+	           BUSINESS_PLACE_CODE			
+               ,BUSINESS_PLACE_NAME		
+               ,BUSINESS_PLACE_TEL			
+               ,COMPANY_CODE	
+	            )
+	        VALUES (
+	             #{businessPlaceCode}
+	            ,#{businessPlaceName}
+	            ,#{businessPlaceTel}
+	            ,#{companyCode}
+	        )
+	        
+	</insert>
+
+
+	<update id="updateBusinessPlace" parameterType="businessPlaceBean">
+	
+	       UPDATE
+	            BUSINESS_PLACE
+	       SET
+	            BUSINESS_PLACE_NAME=#{businessPlaceName}	
+               ,BUSINESS_PLACE_TEL=	#{businessPlaceTel}		
+               ,COMPANY_CODE=#{companyCode}
+	       WHERE
+	            BUSINESS_PLACE_CODE = #{businessPlaceCode}
+
+    
+	</update>
+
+
+	<delete id="deleteBusinessPlace" parameterType="businessPlaceBean">
+	
+	      DELETE FROM
+	      		BUSINESS_PLACE
+	      WHERE
+	            BUSINESS_PLACE_CODE = #{businessPlaceCode}
+    
+	</delete>
+
+</mapper>

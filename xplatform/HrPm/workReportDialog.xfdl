@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="workReportDialog" classname="workReportDialog" inheritanceid="" position="absolute 0 0 750 701" titletext="재직증명서" onload="workReportDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <ActiveX id="ActiveX" position2="absolute l:9 w:736 t:8 h:625" positiontype="position2" anchor="default" taborder="0" progid="{CA8A9780-280D-11CF-A24D-444553540000}"/>
+        <Button id="email" taborder="1" text="email전송" position2="absolute l:222 w:312 t:651 h:35" positiontype="position2" style="background:silver;color:white;" onclick="email_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript4.0"><![CDATA[
+function workReportDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	var parameterNo=empCode;
+	ActiveX.src = "http://localhost:8282/test5th/hr/pm/pdfPrintEmp.do?empCode="+parameterNo+"&format=pdf";
+	ActiveX.show();
+}
+
+
+function email_onclick(obj:Button,  e:ClickEventInfo)
+{
+		dialog("emailDialog",
+				"HrPm::emailDialog.xfdl", 
+				"",
+				{},
+				"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='Form'",
+				"", "", "", "",this);	
+		
+}
+
+]]></Script>
+  </Form>
+</FDL>

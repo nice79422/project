@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting value="true"       name="callSettersOnNulls" /><!-- 값이 null인 컬럼누락방지. -->
+        <setting value="false"      name="cacheEnabled" />
+        <setting value="true"       name="useGeneratedKeys" /><!-- 생성키 사용여부를 결정. 디폴트 false -->
+        <setting value="REUSE"      name="defaultExecutorType" /><!-- 디폴트 실행 타입을 결정. reuse : preparestatement객체를 재사용한다. -->
+        <setting value="VARCHAR"    name="jdbcTypeForNull" /><!-- MyBatis에서 쿼리에 매핑되는 파라미터에 null값이 있는 경우 에러가 나는데 이를 방지. -->
+        <setting value="true"       name="mapUnderscoreToCamelCase" />
+        <!-- 데이터베이스 컬럼 명에 별도의 별칭을 사용하지 않고 자바빈즈 객체, 
+        맵 객체에 낙타 표기 형식의 프로퍼티에 정상적으로 바인딩 하기 위해서 true로 설정 --> 
+    </settings>
+
+     <typeAliases>
+
+     	<typeAlias alias="deptBean"           		type="com.test5th.base.to.DepartmentBean"/> 
+     	<typeAlias alias="employeeBean" 		    type="com.test5th.base.to.EmployeeBean"/> 
+     	<typeAlias alias="employeeHireDateBean"     type="com.test5th.base.to.EmployeeHireDateBean"/>
+       	<typeAlias alias="codeBean"                 type="com.test5th.base.to.CodeBean"/>
+    	<typeAlias alias="detailCodeBean" 		    type="com.test5th.base.to.DetailCodeBean"/>
+    	<typeAlias alias="menuBean" 				type="com.test5th.base.to.MenuBean"/>
+     	<typeAlias alias="positionBean" 	    	type="com.test5th.base.to.PositionBean"/>
+     	<typeAlias alias="addressBean"              type="com.test5th.base.to.AddressBean"/>
+    	<typeAlias alias="overtimeSalBean" 			type="com.test5th.base.to.OvertimeSalBean"/>	
+    	<typeAlias alias="etcSalBean" 	            type="com.test5th.base.to.EtcSalBean"/>
+    	<typeAlias alias="businessPlaceBean" 	    type="com.test5th.base.to.BusinessPlaceBean"/>
+    	<typeAlias alias="companyBean" 	            type="com.test5th.base.to.CompanyBean"/>
+    	<typeAlias alias="dustBean" 	            type="com.test5th.base.to.DustBean"/>
+    	
+    	
+    	<typeAlias alias="educationInfoBean"    	type="com.test5th.hr.pm.to.EducationInfoBean" />
+     	<typeAlias alias="empInfoBean"      		type="com.test5th.hr.pm.to.EmpInfoBean" />
+     	<typeAlias alias="familyInfoBean" 	    	type="com.test5th.hr.pm.to.FamilyInfoBean" />
+     	<typeAlias alias="licenseInfoBean" 			type="com.test5th.hr.pm.to.LicenseInfoBean" />
+     	<typeAlias alias="salInfoBean" 				type="com.test5th.hr.pm.to.SalInfoBean" />
+     	<typeAlias alias="workInfoBean" 			type="com.test5th.hr.pm.to.WorkInfoBean" />
+     	
+     	<typeAlias alias="salaryInputBean"          type="com.test5th.hr.pay.to.SalaryInputBean"/>
+    	<typeAlias alias="p_payDeductionBean" 	    type="com.test5th.hr.pay.to.PayDeductionBean"/>
+
+    	
+    	<typeAlias alias="annualBean" 	        	type="com.test5th.hr.circumstance.to.AnnualBean"/>
+		<typeAlias alias="baseWorkTimeBean"     	type="com.test5th.hr.circumstance.to.BaseWorkTimeBean"/>
+		<typeAlias alias="deductionTaxBean" 		type="com.test5th.hr.circumstance.to.DeductionTaxBean"/>
+		<typeAlias alias="incomeTaxBean" 	    	type="com.test5th.hr.circumstance.to.IncomeTaxBean"/>
+		<typeAlias alias="hobongBean" 				type="com.test5th.hr.circumstance.to.HobongBean" />
+		<typeAlias alias="holidayBean"          	type="com.test5th.hr.circumstance.to.HolidayBean"/>
+		<typeAlias alias="payDeductionBean" 		type="com.test5th.hr.circumstance.to.PayDeductionBean"/>
+		<typeAlias alias="salPaymentDateBean" 		type="com.test5th.hr.circumstance.to.SalPaymentDateBean"/>
+     	 
+     	 
+     	<typeAlias alias="overNightReportBean"      type="com.test5th.hr.attendance.to.OverNightReportBean"/>
+     	<typeAlias alias="dailyAttdReportBean"  	type="com.test5th.hr.attendance.to.DailyAttdReportBean"/>
+     	<typeAlias alias="conditionBean" 			type="com.test5th.hr.attendance.to.ConditionBean"/>
+     	<typeAlias alias="monthAttdReportBean"  	type="com.test5th.hr.attendance.to.MonthAttdReportBean"/>
+     	
+     	
+     	<typeAlias alias="dailyAttdBean" 			type="com.test5th.hr.attendance.to.DailyAttdBean"/>
+     	<typeAlias alias="dailyAttdRestBean" 		type="com.test5th.hr.attendance.to.DailyAttdRestBean"/>
+     	<typeAlias alias="dayAnnualBean"         	type="com.test5th.hr.attendance.to.DayAnnualBean"/>
+     
+     
+     	<typeAlias alias="reportBean"         		type="com.test5th.hr.pm.to.ReportBean"/> 
+
+     	<!--   
+
+		<typeAlias alias="workReportBean"  			type="com.test5th.hr.pm.to.WorkReportBean" />
+
+         -->
+    </typeAliases>
+
+</configuration>

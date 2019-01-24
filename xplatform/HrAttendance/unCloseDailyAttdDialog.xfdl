@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="unCloseDailyAttdDialog" classname="unCloseDailyAttdDialog" inheritanceid="" position="absolute 0 0 450 632" titletext="New Form" onload="unCloseDailyAttdDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="일근태 미마감 목록" position2="absolute l:0 w:450 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Static id="Static01" text="기준년월" enable="false" enableevent="false" position2="absolute l:98 w:94 t:48 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <MaskEdit id="baseYearMonthMask" taborder="1" position2="absolute l:193 w:148 t:48 h:24" positiontype="position2" mask="####-##" style="align:center middle;" type="string"/>
+        <Button id="allCloseBtn" taborder="1" text="전체마감" position2="absolute l:15 w:122 t:92 h:28" positiontype="position2" onclick="allCloseBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:165 w:122 t:92 h:28" positiontype="position2" onclick="saveBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="findMonthAttdBtn" taborder="1" text="조 회" position2="absolute l:315 w:122 t:92 h:28" positiontype="position2" onclick="findMonthAttdBtn_onclick" style="background:silver;color:white;"/>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:15 w:423 t:133 h:403" positiontype="position2" binddataset="ds_unCloseDailyAttd" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;daily&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;attend_time&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;attend_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;quit_time&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;quit_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;leave_time&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;return_time&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;leave_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;late_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;12&quot; disptype=&quot;normal&quot; text=&quot;over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;13&quot; disptype=&quot;normal&quot; text=&quot;night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;14&quot; disptype=&quot;normal&quot; text=&quot;close_yn&quot;/&gt;&#10;      &lt;Cell col=&quot;15&quot; disptype=&quot;normal&quot; text=&quot;attd_day_type&quot;/&gt;&#10;      &lt;Cell col=&quot;16&quot; disptype=&quot;normal&quot; text=&quot;early_leave_time&quot;/&gt;&#10;      &lt;Cell col=&quot;17&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:daily&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:attend_time&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:attend_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:quit_time&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:quit_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:leave_time&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:return_time&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:leave_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;bind:late_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;12&quot; disptype=&quot;normal&quot; text=&quot;bind:over_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;13&quot; disptype=&quot;normal&quot; text=&quot;bind:night_work_hour&quot;/&gt;&#10;      &lt;Cell col=&quot;14&quot; disptype=&quot;normal&quot; text=&quot;bind:close_yn&quot;/&gt;&#10;      &lt;Cell col=&quot;15&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_day_type&quot;/&gt;&#10;      &lt;Cell col=&quot;16&quot; disptype=&quot;normal&quot; text=&quot;bind:early_leave_time&quot;/&gt;&#10;      &lt;Cell col=&quot;17&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="기준일자"/>
+                <Cell col="1" text="요일"/>
+                <Cell col="2" text="마감여부" combodataset="dsClose" combocodecol="code" combodatacol="value"/>
+                <Cell col="3" text="근무일 구분"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:BASIC_DAY" mask="####-##-##"/>
+                <Cell col="1" text="bind:DAILY"/>
+                <Cell col="2" displaytype="combo" style="color:EXPR(close_yn == 'Y' ? 'blue' : 'red');color2:EXPR(close_yn == 'Y' ? 'blue' : 'red');" text="bind:CLOSE_YN" combodataset="ds_close" combocodecol="CODE" combodatacol="VALUE"/>
+                <Cell col="3" displaytype="combo" text="bind:ATTD_DAY_TYPE" combodataset="ds_attdDayType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <GroupBox id="GroupBox00" position2="absolute l:15 w:423 t:553 h:65" positiontype="position2"/>
+        <Static id="Static02" text="※일근태만 한번에 마감 가능※&#13;&#10;※근태외 / 연차(휴가)의 경우 해당 일자들 각각 마감 할 것!※" position2="absolute l:21 w:414 t:559 h:54" positiontype="position2" style="background:cornsilk;color:#ff0000ff;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_attdDayType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript4.0"><![CDATA[
+
+//로딩 시
+function unCloseDailyAttdDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	baseYearMonthMask.value =opener.selYear.value+opener.selMonth.value; 
+	ds_detailCode.filter("");
+	
+	transaction("findCodeList",
+				"svcBase::findCodeList.do",
+				"",
+				"ds_code=dsCode ds_detailCode=dsDetailCode",
+				"",
+				"callback",
+				false);
+	
+	ds_detailCode.filter("DETAIL_CODE=='AQC008' || DETAIL_CODE=='AQC009' || DETAIL_CODE=='AQC010'");
+	
+	ds_attdDayType.copyData(ds_detailCode,true);
+	
+	
+	
+	
+}
+
+
+//전체마감 
+function allCloseBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	for(var index = 0; index < ds_unCloseDailyAttd.rowcount; index++) {
+		ds_unCloseDailyAttd.setColumn(index,"CLOSE_YN","Y");
+	}	
+}
+
+
+//저장 시
+function saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{   
+	alert(ds_unCloseDailyAttd.getColumn(0,"BASIC_DAY"));
+	transaction(
+		"batchDailyAttdCloseYN",
+		"svcHrAttendance::batchDailyAttdCloseYN.do",
+		"dsDailyAttdReport=ds_unCloseDailyAttd:u",
+		"ds_unCloseDailyAttd=dsDailyAttdReport",
+		"",
+		"callback"
+	);	
+	
+}
+
+//조회시 
+function findMonthAttdBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	if(confirm(" 현재 기준년월로 조회하시겠습니까? ")){
+		opener.findMonthAttdReport();
+		close();
+
+	}
+	
+}
+]]></Script>
+  </Form>
+</FDL>

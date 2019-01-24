@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="bankDialog" classname="bankDialog" inheritanceid="" position="absolute 0 0 350 400" titletext="New Form" onload="bankDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="메일 전송" position2="absolute l:0 w:350 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Edit id="Edit00" taborder="1" position2="absolute l:131 w:181 t:114 h:42" positiontype="position2" oneditclick="Edit00_oneditclick" enable="true"/>
+        <Edit id="Edit01" taborder="2" position2="absolute l:131 w:181 t:178 h:42" positiontype="position2"/>
+        <Static id="Static01" text="사 번" position2="absolute l:25 w:93 t:114 h:42" positiontype="position2" style="background:silver;color:white;align:center middle;font:Verdana,13,bold;"/>
+        <Static id="Static02" text="받는사람" position2="absolute l:25 w:93 t:178 h:42" positiontype="position2" style="background:silver;color:white;align:center middle;font:Verdana,13,bold;"/>
+        <Button id="Button00" taborder="3" text="메일 전송" position2="absolute l:79 w:187 t:282 h:52" positiontype="position2" style="background:silver;color:white;" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript4.0"><![CDATA[function bankDialog_onload(obj:Form, e:LoadEventInfo)
+{
+
+}
+
+
+function Button00_onclick(obj:Button,  e:ClickEventInfo)
+{
+	sEmpCode=Edit00.value;
+	alert(sEmpCode);
+	sEmail=Edit01.value;
+	alert(sEmail);
+	
+  transaction( "sendEmail"
+              ,"svcHrPM::sendEmail.do"
+              ,""
+              ,"ds_email=dsEmail"
+              ,"sEmpCode='"+sEmpCode+ "' sEmail='"+sEmail+"' "
+              ,"callback",
+              false
+               );
+ 
+ close();
+  
+}
+]]></Script>
+  </Form>
+</FDL>

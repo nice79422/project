@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test5th.hr.pm.dao.WorkInfoDAO">
+	
+	<resultMap id="workInfoResult" type="workInfoBean">
+		<result property="hireDate" column="HIRE_DATE" />
+		<result property="retireDate" column="RETIRE_DATE" />
+		<result property="employeementTypeCode" column="EMPLOYEEMENT_TYPE_CODE" />
+		<result property="retireCause" column="RETIRE_CAUSE" />
+		<result property="probationStatus" column="PROBATION_STATUS" />
+		<result property="probationExpireDate" column="PROBATION_EXPIRE_DATE" />
+		<result property="projectCode" column="PROJECT_CODE" />
+		<result property="jikjongCode" column="JIKJONG_CODE" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="empName" column="EMP_NAME" />
+	</resultMap>
+
+	<!-- 사원의 재직정보를 조회하는 메서드 -->
+	<select id="selectWorkInfoAll" resultMap="workInfoResult">
+	<![CDATA[
+		SELECT * FROM WORK_INFO ORDER BY EMP_CODE
+	]]>
+	</select>
+
+	<!-- 사원의 재직정보 업데이트 -->
+	<update id="updateWorkInfo" parameterType="workInfoBean">
+	    <![CDATA[
+
+	           UPDATE
+	           		WORK_INFO
+	           SET
+	           		HIRE_DATE=#{hireDate},
+	           		RETIRE_DATE=#{retireDate},
+	           		EMPLOYEEMENT_TYPE_CODE=#{employeementTypeCode},
+	           		RETIRE_CAUSE=#{retireCause},
+	           		PROBATION_STATUS=#{probationStatus},
+	           		PROBATION_EXPIRE_DATE=#{probationExpireDate},
+	           		PROJECT_CODE=#{projectCode},
+	           		JIKJONG_CODE=#{jikjongCode},
+	           		EMP_NAME=#{empName}
+	           WHERE
+	           		EMP_CODE=#{empCode}
+
+
+	    ]]>
+	</update>
+
+
+</mapper>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project active_adl="test5th" version="1.1">
+  <TypeDefinition url="default_typedef.xml"/>
+  <GlobalVariables url="globalvars.xml"/>
+  <ADL id="test5th" url="test5th.xadl"/>
+  <Options positiontype="position2"/>
+  <Themes>
+    <RecentlyUsed>
+      <Theme url="test5.xtheme" extern="false"/>
+    </RecentlyUsed>
+  </Themes>
+</Project>

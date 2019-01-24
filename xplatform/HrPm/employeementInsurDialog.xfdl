@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="employeementInsurDialog" classname="employeementInsurDialog" inheritanceid="" position="absolute 0 0 400 200" titletext="New Form" onload="employeementInsurDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="고용 보험 계산" position2="absolute l:0 w:400 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Static id="Static13" text="자동계산" enable="false" enableevent="false" position2="absolute l:16 w:110 t:80 h:24" positiontype="position2" style="background:silver;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static01" text="X" enable="false" enableevent="false" position2="absolute l:223 w:33 t:80 h:24" positiontype="position2" style="background:silver;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static02" text="%" enable="false" enableevent="false" position2="absolute l:320 w:33 t:80 h:24" positiontype="position2" style="background:silver;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static03" text="직접입력" enable="false" enableevent="false" position2="absolute l:17 w:110 t:128 h:24" positiontype="position2" style="background:silver;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Edit id="rate" taborder="1" enable="false" position2="absolute l:260 w:58 t:79 h:25" positiontype="position2"/>
+        <Button id="calculationBtn" taborder="1" text="계 산" onclick="calculationBtn_onclick" position2="absolute l:196 w:68 t:164 h:24" positiontype="position2" style="background:silver;color:white;"/>
+        <Button id="finishBtn" taborder="1" text="적 용" onclick="finishBtn_onclick" position2="absolute l:282 w:68 t:164 h:24" positiontype="position2" style="background:silver;color:white;"/>
+        <CheckBox id="directCheckbox" taborder="1" onclick="directCheckbox_onclick" position2="absolute l:16 w:23 t:106 h:20" positiontype="position2"/>
+        <MaskEdit id="salary" taborder="1" mask="99,999" enable="false" position2="absolute l:127 w:95 t:80 h:24" positiontype="position2"/>
+        <MaskEdit id="result" taborder="1" mask="99,999" enable="false" position2="absolute l:129 w:224 t:128 h:24" positiontype="position2" style=":disabled {align:right middle;}"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="rate" propid="value" datasetid="dsDeductionTax" columnid="EMPLOYEEMENT_INSUR_RATE"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[
+var sysDate;
+var baseSal;
+var bouns;
+
+
+
+//로딩시 
+function employeementInsurDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	
+	
+	sysDate  = String(g_toDate).substr(0,4);// 현재 년도 구하기 
+	baseSal=this.opener.Tab00.tabpage3.baseSal.value;
+	
+	bouns=this.opener.Tab00.tabpage3.bonus.value; // 고용 보험은 상여금 + 기본급 포함 
+	
+	salary.value=baseSal+bouns;
+	dsDeductionTax.filter("");
+	dsDeductionTax.filter("INPUTED_YEAR=='"+sysDate+"'");
+	dsDeductionTax.rowposition=0;
+	directCheckbox.value=0;	
+	
+}
+
+
+
+
+//체크 클릭 시 
+function directCheckbox_onclick(obj:CheckBox,  e:ClickEventInfo)
+{
+	if(directCheckbox.value==1){
+		result.enable=1;
+		calculationBtn.enable=false;
+	}else{
+		result.enable=0;
+		calculationBtn.enable=true;
+	}
+}
+
+//계산 시 
+function calculationBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	result.value=Math.round(parseFloat(salary.value) * parseFloat(rate.value)/100,0);
+	
+}
+
+//적용 시 
+function finishBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	this.opener.Tab00.tabpage3.empInsur.value=result.value;	
+	close();
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="businessDialog" classname="businessDialog" inheritanceid="" position="absolute 0 0 273 402" titletext="New Form" onload="businessDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="사업장조회" position2="absolute l:10 w:244 t:15 h:39" positiontype="position2" style="background:silver;color:floralwhite;align:middle;font:맑은 고딕,16,bold;"/>
+        <Grid id="businessPlaceGrid" taborder="1" useinputpanel="false" position2="absolute l:15 w:239 t:64 h:320" positiontype="position2" binddataset="ds_businessPlace" oncelldblclick="businessPlaceGrid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="111"/>
+                <Column size="124"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head" style="background:silver;cellcolor:ghostwhite;">
+                <Cell style="background:silver;" text="사업장코드"/>
+                <Cell col="1" style="background:silver;" text="사업장명"/>
+              </Band>
+              <Band id="body">
+                <Cell style="color:black;" text="bind:BUSINESS_PLACE_CODE"/>
+                <Cell col="1" style="color:black;" text="bind:BUSINESS_PLACE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript4.0"><![CDATA[
+function businessDialog_onload(obj:Form, e:LoadEventInfo)
+{    
+   
+	 transaction("findBusinessPlaceList","svcBase::findBusinessPlaceList.do","","ds_businessPlace=dsBusinessPlace","","callback",false);
+}
+
+function businessPlaceGrid_oncelldblclick(obj:Grid, e:GridClickEventInfo)
+{
+	var selBusinessPlaceCode = ds_businessPlace.getColumn(e.row, "BUSINESS_PLACE_CODE");
+	var selBusinessPlaceName = ds_businessPlace.getColumn(e.row, "BUSINESS_PLACE_NAME");
+
+	//g_businessPlaceName=selBusinessPlaceName;
+	this.opener.businessPlaceCode.value=selBusinessPlaceCode;
+
+	close();
+}
+]]></Script>
+  </Form>
+</FDL>
