@@ -93,7 +93,7 @@
 		</Dataset>
 		<Dataset DataSetType="Dataset" Id="dsCode">
 			<Contents>
-				<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+				<colinfo id="CODE" size="255" summ="default" type="STRING"/>
 				<colinfo id="CODE_NAME" size="256" summ="default" type="STRING"/>
 				<colinfo id="USING_STATUS" size="256" summ="default" type="STRING"/>
 			</Contents>
