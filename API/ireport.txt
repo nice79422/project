@@ -1,0 +1,18 @@
+ @Autowired
+   private DataSource dataSource;
+
+
+   @RequestMapping("logistics/business/pdfPrint.do")
+   public ModelAndView pdfPrintEmp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      // String empCode = request.getParameter("empCode");
+      // String format = request.getParameter("format");
+      //response.getOutputStream().flush();
+
+      ModelMap modelMap = new ModelMap();
+      modelMap.put("format", "pdf");
+      modelMap.put("contract_no", "CONT190115-57");
+      modelMap.put("jdbcDataSource", dataSource);
+      ModelAndView modelAndView = new ModelAndView("multiformat-view", modelMap);
+
+      return modelAndView;
+   }
