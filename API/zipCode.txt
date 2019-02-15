@@ -1,71 +1,71 @@
-<input type="text" id="sample2_postcode" placeholder="¿ìÆí¹øÈ£">
-<input type="button" onclick="sample2_execDaumPostcode()" value="¿ìÆí¹øÈ£ Ã£±â"><br>
-<input type="text" id="sample2_address" placeholder="ÁÖ¼Ò"><br>
-<input type="text" id="sample2_detailAddress" placeholder="»ó¼¼ÁÖ¼Ò">
-<input type="text" id="sample2_extraAddress" placeholder="Âü°íÇ×¸ñ">
+<input type="text" id="sample2_postcode" placeholder="ï¿½ï¿½ï¿½ï¿½ï¿½È£">
+<input type="button" onclick="sample2_execDaumPostcode()" value="ï¿½ï¿½ï¿½ï¿½ï¿½È£ Ã£ï¿½ï¿½"><br>
+<input type="text" id="sample2_address" placeholder="ï¿½Ö¼ï¿½"><br>
+<input type="text" id="sample2_detailAddress" placeholder="ï¿½ï¿½ï¿½Ö¼ï¿½">
+<input type="text" id="sample2_extraAddress" placeholder="ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½">
 
-<!-- iOS¿¡¼­´Â position:fixed ¹ö±×°¡ ÀÖÀ½, Àû¿ëÇÏ´Â »çÀÌÆ®¿¡ ¸Â°Ô position:absolute µîÀ» ÀÌ¿ëÇÏ¿© top,left°ª Á¶Á¤ ÇÊ¿ä -->
+<!-- iOSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ position:fixed ï¿½ï¿½ï¿½×°ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Â°ï¿½ position:absolute ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ top,leftï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="´Ý±â ¹öÆ°">
+<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="ï¿½Ý±ï¿½ ï¿½ï¿½Æ°">
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-    // ¿ìÆí¹øÈ£ Ã£±â È­¸éÀ» ³ÖÀ» element
+    // commit test
     var element_layer = document.getElementById('layer');
 
     function closeDaumPostcode() {
-        // iframeÀ» ³ÖÀº element¸¦ ¾Èº¸ÀÌ°Ô ÇÑ´Ù.
+        // iframeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ elementï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì°ï¿½ ï¿½Ñ´ï¿½.
         element_layer.style.display = 'none';
     }
 
     function sample2_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºÐ.
+                // ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½Û¼ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½.
 
-                // °¢ ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-                // ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºÐ±â ÇÑ´Ù.
-                var addr = ''; // ÁÖ¼Ò º¯¼ö
-                var extraAddr = ''; // Âü°íÇ×¸ñ º¯¼ö
+                // ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿£ ï¿½ï¿½ï¿½ï¿½('')ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½, ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ð±ï¿½ ï¿½Ñ´ï¿½.
+                var addr = ''; // ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+                var extraAddr = ''; // ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-                //»ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò Å¸ÀÔ¿¡ µû¶ó ÇØ´ç ÁÖ¼Ò °ªÀ» °¡Á®¿Â´Ù.
-                if (data.userSelectedType === 'R') { // »ç¿ëÀÚ°¡ µµ·Î¸í ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì
+                //ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
+                if (data.userSelectedType === 'R') { // ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½Ö¼Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                     addr = data.roadAddress;
-                } else { // »ç¿ëÀÚ°¡ Áö¹ø ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì(J)
+                } else { // ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(J)
                     addr = data.jibunAddress;
                 }
 
-                // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò°¡ µµ·Î¸í Å¸ÀÔÀÏ¶§ Âü°íÇ×¸ñÀ» Á¶ÇÕÇÑ´Ù.
+                // ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ Å¸ï¿½ï¿½ï¿½Ï¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
                 if(data.userSelectedType === 'R'){
-                    // ¹ýÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù. (¹ýÁ¤¸®´Â Á¦¿Ü)
-                    // ¹ýÁ¤µ¿ÀÇ °æ¿ì ¸¶Áö¸· ¹®ÀÚ°¡ "µ¿/·Î/°¡"·Î ³¡³­´Ù.
-                    if(data.bname !== '' && /[µ¿|·Î|°¡]$/g.test(data.bname)){
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½. (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ "ï¿½ï¿½/ï¿½ï¿½/ï¿½ï¿½"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+                    if(data.bname !== '' && /[ï¿½ï¿½|ï¿½ï¿½|ï¿½ï¿½]$/g.test(data.bname)){
                         extraAddr += data.bname;
                     }
-                    // °Ç¹°¸íÀÌ ÀÖ°í, °øµ¿ÁÖÅÃÀÏ °æ¿ì Ãß°¡ÇÑ´Ù.
+                    // ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // Ç¥½ÃÇÒ Âü°íÇ×¸ñÀÌ ÀÖÀ» °æ¿ì, °ýÈ£±îÁö Ãß°¡ÇÑ ÃÖÁ¾ ¹®ÀÚ¿­À» ¸¸µç´Ù.
+                    // Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                    // Á¶ÇÕµÈ Âü°íÇ×¸ñÀ» ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                    // ï¿½ï¿½ï¿½Õµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½Êµå¿¡ ï¿½Ö´Â´ï¿½.
                     document.getElementById("sample2_extraAddress").value = extraAddr;
                 
                 } else {
                     document.getElementById("sample2_extraAddress").value = '';
                 }
 
-                // ¿ìÆí¹øÈ£¿Í ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                // ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½Êµå¿¡ ï¿½Ö´Â´ï¿½.
                 document.getElementById('sample2_postcode').value = data.zonecode;
                 document.getElementById("sample2_address").value = addr;
-                // Ä¿¼­¸¦ »ó¼¼ÁÖ¼Ò ÇÊµå·Î ÀÌµ¿ÇÑ´Ù.
+                // Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¼ï¿½ ï¿½Êµï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
                 document.getElementById("sample2_detailAddress").focus();
 
-                // iframeÀ» ³ÖÀº element¸¦ ¾Èº¸ÀÌ°Ô ÇÑ´Ù.
-                // (autoClose:false ±â´ÉÀ» ÀÌ¿ëÇÑ´Ù¸é, ¾Æ·¡ ÄÚµå¸¦ Á¦°ÅÇØ¾ß È­¸é¿¡¼­ »ç¶óÁöÁö ¾Ê´Â´Ù.)
+                // iframeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ elementï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì°ï¿½ ï¿½Ñ´ï¿½.
+                // (autoClose:false ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ñ´Ù¸ï¿½, ï¿½Æ·ï¿½ ï¿½Úµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ È­ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.)
                 element_layer.style.display = 'none';
             },
             width : '100%',
@@ -73,26 +73,26 @@
             maxSuggestItems : 5
         }).embed(element_layer);
 
-        // iframeÀ» ³ÖÀº element¸¦ º¸ÀÌ°Ô ÇÑ´Ù.
+        // iframeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ elementï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ñ´ï¿½.
         element_layer.style.display = 'block';
 
-        // iframeÀ» ³ÖÀº elementÀÇ À§Ä¡¸¦ È­¸éÀÇ °¡¿îµ¥·Î ÀÌµ¿½ÃÅ²´Ù.
+        // iframeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ elementï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å²ï¿½ï¿½.
         initLayerPosition();
     }
 
-    // ºê¶ó¿ìÀúÀÇ Å©±â º¯°æ¿¡ µû¶ó ·¹ÀÌ¾î¸¦ °¡¿îµ¥·Î ÀÌµ¿½ÃÅ°°íÀÚ ÇÏ½Ç¶§¿¡´Â
-    // resizeÀÌº¥Æ®³ª, orientationchangeÀÌº¥Æ®¸¦ ÀÌ¿ëÇÏ¿© °ªÀÌ º¯°æµÉ¶§¸¶´Ù ¾Æ·¡ ÇÔ¼ö¸¦ ½ÇÇà ½ÃÄÑ ÁÖ½Ã°Å³ª,
-    // Á÷Á¢ element_layerÀÇ top,left°ªÀ» ¼öÁ¤ÇØ ÁÖ½Ã¸é µË´Ï´Ù.
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½æ¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½
+    // resizeï¿½Ìºï¿½Æ®ï¿½ï¿½, orientationchangeï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½Ã°Å³ï¿½,
+    // ï¿½ï¿½ï¿½ï¿½ element_layerï¿½ï¿½ top,leftï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½Ã¸ï¿½ ï¿½Ë´Ï´ï¿½.
     function initLayerPosition(){
-        var width = 300; //¿ìÆí¹øÈ£¼­ºñ½º°¡ µé¾î°¥ elementÀÇ width
-        var height = 400; //¿ìÆí¹øÈ£¼­ºñ½º°¡ µé¾î°¥ elementÀÇ height
-        var borderWidth = 5; //»ùÇÃ¿¡¼­ »ç¿ëÇÏ´Â borderÀÇ µÎ²²
+        var width = 300; //ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ñ½º°ï¿½ ï¿½ï¿½î°¥ elementï¿½ï¿½ width
+        var height = 400; //ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ñ½º°ï¿½ ï¿½ï¿½î°¥ elementï¿½ï¿½ height
+        var borderWidth = 5; //ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ borderï¿½ï¿½ ï¿½Î²ï¿½
 
-        // À§¿¡¼­ ¼±¾ðÇÑ °ªµéÀ» ½ÇÁ¦ element¿¡ ³Ö´Â´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ elementï¿½ï¿½ ï¿½Ö´Â´ï¿½.
         element_layer.style.width = width + 'px';
         element_layer.style.height = height + 'px';
         element_layer.style.border = borderWidth + 'px solid';
-        // ½ÇÇàµÇ´Â ¼ø°£ÀÇ È­¸é ³Êºñ¿Í ³ôÀÌ °ªÀ» °¡Á®¿Í¼­ Áß¾Ó¿¡ ¶ã ¼ö ÀÖµµ·Ï À§Ä¡¸¦ °è»êÇÑ´Ù.
+        // ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½Êºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ß¾Ó¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
         element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
     }
