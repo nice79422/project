@@ -1,99 +1,102 @@
-<input type="text" id="sample2_postcode" placeholder="¿ìÆí¹øÈ£">
-<input type="button" onclick="sample2_execDaumPostcode()" value="¿ìÆí¹øÈ£ Ã£±â"><br>
-<input type="text" id="sample2_address" placeholder="ÁÖ¼Ò"><br>
-<input type="text" id="sample2_detailAddress" placeholder="»ó¼¼ÁÖ¼Ò">
-<input type="text" id="sample2_extraAddress" placeholder="Âü°íÇ×¸ñ">
-
-<!-- iOS¿¡¼­´Â position:fixed ¹ö±×°¡ ÀÖÀ½, Àû¿ëÇÏ´Â »çÀÌÆ®¿¡ ¸Â°Ô position:absolute µîÀ» ÀÌ¿ëÇÏ¿© top,left°ª Á¶Á¤ ÇÊ¿ä -->
-<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="´İ±â ¹öÆ°">
-</div>
-
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+  <jsp:include page="/decorator/head.jsp"/>
 <script>
-    // ¿ìÆí¹øÈ£ Ã£±â È­¸éÀ» ³ÖÀ» element
-    var element_layer = document.getElementById('layer');
-
-    function closeDaumPostcode() {
-        // iframeÀ» ³ÖÀº element¸¦ ¾Èº¸ÀÌ°Ô ÇÑ´Ù.
-        element_layer.style.display = 'none';
-    }
-
-    function sample2_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºĞ.
-
-                // °¢ ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-                // ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºĞ±â ÇÑ´Ù.
-                var addr = ''; // ÁÖ¼Ò º¯¼ö
-                var extraAddr = ''; // Âü°íÇ×¸ñ º¯¼ö
-
-                //»ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò Å¸ÀÔ¿¡ µû¶ó ÇØ´ç ÁÖ¼Ò °ªÀ» °¡Á®¿Â´Ù.
-                if (data.userSelectedType === 'R') { // »ç¿ëÀÚ°¡ µµ·Î¸í ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì
-                    addr = data.roadAddress;
-                } else { // »ç¿ëÀÚ°¡ Áö¹ø ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì(J)
-                    addr = data.jibunAddress;
-                }
-
-                // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò°¡ µµ·Î¸í Å¸ÀÔÀÏ¶§ Âü°íÇ×¸ñÀ» Á¶ÇÕÇÑ´Ù.
-                if(data.userSelectedType === 'R'){
-                    // ¹ıÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù. (¹ıÁ¤¸®´Â Á¦¿Ü)
-                    // ¹ıÁ¤µ¿ÀÇ °æ¿ì ¸¶Áö¸· ¹®ÀÚ°¡ "µ¿/·Î/°¡"·Î ³¡³­´Ù.
-                    if(data.bname !== '' && /[µ¿|·Î|°¡]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // °Ç¹°¸íÀÌ ÀÖ°í, °øµ¿ÁÖÅÃÀÏ °æ¿ì Ãß°¡ÇÑ´Ù.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // Ç¥½ÃÇÒ Âü°íÇ×¸ñÀÌ ÀÖÀ» °æ¿ì, °ıÈ£±îÁö Ãß°¡ÇÑ ÃÖÁ¾ ¹®ÀÚ¿­À» ¸¸µç´Ù.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // Á¶ÇÕµÈ Âü°íÇ×¸ñÀ» ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
-                    document.getElementById("sample2_extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("sample2_extraAddress").value = '';
-                }
-
-                // ¿ìÆí¹øÈ£¿Í ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
-                document.getElementById('sample2_postcode').value = data.zonecode;
-                document.getElementById("sample2_address").value = addr;
-                // Ä¿¼­¸¦ »ó¼¼ÁÖ¼Ò ÇÊµå·Î ÀÌµ¿ÇÑ´Ù.
-                document.getElementById("sample2_detailAddress").focus();
-
-                // iframeÀ» ³ÖÀº element¸¦ ¾Èº¸ÀÌ°Ô ÇÑ´Ù.
-                // (autoClose:false ±â´ÉÀ» ÀÌ¿ëÇÑ´Ù¸é, ¾Æ·¡ ÄÚµå¸¦ Á¦°ÅÇØ¾ß È­¸é¿¡¼­ »ç¶óÁöÁö ¾Ê´Â´Ù.)
-                element_layer.style.display = 'none';
-            },
-            width : '100%',
-            height : '100%',
-            maxSuggestItems : 5
-        }).embed(element_layer);
-
-        // iframeÀ» ³ÖÀº element¸¦ º¸ÀÌ°Ô ÇÑ´Ù.
-        element_layer.style.display = 'block';
-
-        // iframeÀ» ³ÖÀº elementÀÇ À§Ä¡¸¦ È­¸éÀÇ °¡¿îµ¥·Î ÀÌµ¿½ÃÅ²´Ù.
-        initLayerPosition();
-    }
-
-    // ºê¶ó¿ìÀúÀÇ Å©±â º¯°æ¿¡ µû¶ó ·¹ÀÌ¾î¸¦ °¡¿îµ¥·Î ÀÌµ¿½ÃÅ°°íÀÚ ÇÏ½Ç¶§¿¡´Â
-    // resizeÀÌº¥Æ®³ª, orientationchangeÀÌº¥Æ®¸¦ ÀÌ¿ëÇÏ¿© °ªÀÌ º¯°æµÉ¶§¸¶´Ù ¾Æ·¡ ÇÔ¼ö¸¦ ½ÇÇà ½ÃÄÑ ÁÖ½Ã°Å³ª,
-    // Á÷Á¢ element_layerÀÇ top,left°ªÀ» ¼öÁ¤ÇØ ÁÖ½Ã¸é µË´Ï´Ù.
-    function initLayerPosition(){
-        var width = 300; //¿ìÆí¹øÈ£¼­ºñ½º°¡ µé¾î°¥ elementÀÇ width
-        var height = 400; //¿ìÆí¹øÈ£¼­ºñ½º°¡ µé¾î°¥ elementÀÇ height
-        var borderWidth = 5; //»ùÇÃ¿¡¼­ »ç¿ëÇÏ´Â borderÀÇ µÎ²²
-
-        // À§¿¡¼­ ¼±¾ğÇÑ °ªµéÀ» ½ÇÁ¦ element¿¡ ³Ö´Â´Ù.
-        element_layer.style.width = width + 'px';
-        element_layer.style.height = height + 'px';
-        element_layer.style.border = borderWidth + 'px solid';
-        // ½ÇÇàµÇ´Â ¼ø°£ÀÇ È­¸é ³Êºñ¿Í ³ôÀÌ °ªÀ» °¡Á®¿Í¼­ Áß¾Ó¿¡ ¶ã ¼ö ÀÖµµ·Ï À§Ä¡¸¦ °è»êÇÑ´Ù.
-        element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
-        element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
-    }
+	$(document).ready(function(){
+		$("#findAddr").click(zipcodeList);
+		$("input:button").button().css({
+			"font-size" : "10pt"
+		});
+	});
+	function zipcodeList(){
+		alert($("#searchAddr").val());
+		$.ajax({
+			url : '${pageContext.request.contextPath}/base/zipCode.do',
+			cache : false,
+			dataType : 'json' ,
+			data : {"dong" : $("#searchAddr").val(), "method" : "searchDong"},
+			success : function(msg){
+				$("#zipcodeContainer").html("");
+				var buffer=[];
+				var zipcodeCol=["ìš°í¸ë²ˆí˜¸", "ì‹œ/ë„", "êµ¬/êµ°", "ë™", "ë¦¬", "ë²ˆì§€"];
+				$("<table>",{
+					"id" : "table1"
+				}).appendTo("#zipcodeContainer");
+				$("<tr>",{
+					"id" : "colname"
+				}).appendTo("#table1");
+				$.each(zipcodeCol, function(index, value){
+					$("<td>",{
+						"html" : value
+					}).appendTo("#colname");
+				});
+				$.each(msg.zipcodebean, function(index1, zipcode){
+					$("<tr>",{
+						"id" : "tr"+(index1+1)
+					}).appendTo("#table1").hover(over,out);
+					$("<td>",{
+						"html" : zipcode.zipNo
+					}).appendTo("#tr"+(index1+1));
+					$("<td>",{
+						"html" : zipcode.sido
+					}).appendTo("#tr"+(index1+1));
+					$("<td>",{
+						"html" : zipcode.gugun
+					}).appendTo("#tr"+(index1+1));
+					$("<td>",{
+						"html" : zipcode.dong
+					}).appendTo("#tr"+(index1+1));
+					$("<td>",{
+						"html" : zipcode.ri
+					}).appendTo("#tr"+(index1+1));
+					$("<td>",{
+						"html" : zipcode.bunji
+					}).appendTo("#tr"+(index1+1));
+					$("<input>",{
+						"type" : "button",
+						"value" : "+",
+						"id" : "addZipcode"
+					}).appendTo("#tr"+(index1+1)).button().css({
+						"font-size" : "8pt"
+					}).click(getZipcode);
+				});
+			},
+			error : function(error1, error2, error3){
+				alert(error1+" , "+error2+" , "+error3);
+			},
+		});
+	}
+	function over(){
+		$(this).css("background","#edf870");
+	}
+	function out(){
+		$(this).css("background","#fdfef3");
+	}
+	function getZipcode(){
+	var fullAddr=$(this).siblings().eq(1).html()+" ";
+	fullAddr+=$(this).siblings().eq(2).html()+" ";
+	fullAddr+=$(this).siblings().eq(3).html()+" ";
+	fullAddr+=$(this).siblings().eq(4).html()+" ";
+	fullAddr+=$(this).siblings().eq(5).html();
+	alert(fullAddr);
+	 $("#postCode", opener.document).val($(this).siblings().eq(0).html());
+	 $("#addr", opener.document).val(fullAddr);
+	 window.close();
+	}
 </script>
+<body>
+<center>
+<div id="findzipcodeContainer">
+<input type="text" id="searchAddr"><input type="button" id="findAddr" value="ìš°í¸ë²ˆí˜¸ì°¾ê¸°">
+</div>
+<br/>
+<div id="zipcodeContainer">
+</div>
+</center>
+</body>
+</html>
