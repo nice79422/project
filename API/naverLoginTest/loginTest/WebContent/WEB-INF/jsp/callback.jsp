@@ -5,6 +5,6 @@
 </head>
 <body>
     <br>
-    <div style="text-align:center">${result}+@@@@</div>
+    <div style="text-align:center">${result}로그인완료</div>
 </body>
 </html>
