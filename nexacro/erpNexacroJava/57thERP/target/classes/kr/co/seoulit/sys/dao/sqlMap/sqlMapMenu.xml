@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.MenuDAO">
+
+<!-- menuDAO -->
+
+	<resultMap type="menuTO" id="menuResult">
+
+	<result property="menuCode" column="MENU_CODE"/>
+	<result property="superMenuCode" column="SUPER_MENU_CODE"/>
+	<result property="menuName" column="MENU_NAME"/>
+	<result property="menuUrl" column="MENU_URL"/>
+	<result property="usingStatus" column="USING_STATUS"/>
+	<result property="level" column="LEVEL"/>
+
+	</resultMap>
+
+
+
+ 	<select id="selectMenuList" resultMap="menuResult">
+
+		SELECT
+				MENU_CODE,
+				SUPER_MENU_CODE,
+				MENU_NAME,
+				MENU_URL,
+    			USING_STATUS,
+				LEVEL
+		FROM MENU
+		START WITH SUPER_MENU_CODE IS NULL
+		CONNECT BY PRIOR MENU_CODE=SUPER_MENU_CODE
+		
+<!-- 		SELECT
+		MENU_CODE,
+		SUPER_MENU_CODE,
+		MENU_NAME,
+		MENU_URL,
+		USING_STATUS
+		FROM MENU
+		ORDER BY MENU_CODE -->
+	</select>
+
+
+</mapper>

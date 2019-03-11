@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_TempAppointmentDialog" left="0" top="0" width="500" height="300" titletext="New Form" oninit="hr_TempAppointmentDialog_oninit">
+    <Layouts>
+      <Layout>
+        <Grid id="Grid00" taborder="0" useinputpanel="false" left="5%" top="31" right="6%" height="244" binddataset="ds_tempAppointment" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="발령구분"/>
+                <Cell col="2" text="적용된발령"/>
+                <Cell col="3" text="취소된발령"/>
+                <Cell col="4" text="취소발령번호"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="combo" text="bind:EMPLOYEE_NO" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="1" displaytype="combo" text="bind:APPOINTMENT_HISTORY" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="2" displaytype="combo" text="bind:CURRENT_INFORMATION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" displaytype="combo" text="bind:PRE_APPOINTMENT_INFORMATION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" text="bind:APPOINTMENT_NO"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_tempAppointment">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_HISTORY" type="STRING" size="256"/>
+          <Column id="CURRENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="PRE_APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[this.hr_TempAppointmentDialog_oninit = function(obj:Form, e:nexacro.InitEventInfo)
+{	
+	trace("aaaaaaaaaaaaaaaa");
+	this.ds_tempAppointment.copyData(this.parent.ds);
+	trace("bbbbbbbbbbbbbbbb");
+//	alert("발령이 취소/삭제되었습니다. \n취소내역을 확인하시기 바랍니다.");
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="employeeCodeDialog" left="0" top="0" width="373" height="376" titletext="New Form" name="customerDialog" onload="employeeCodeDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="employeeList_gird" taborder="1" useinputpanel="false" left="4.56%" top="62" right="3.22%" height="299" binddataset="ds_employeeCode" autofittype="col" oncelldblclick="employeeList_gird_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="149"/>
+                <Column size="141"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원코드"/>
+                <Cell col="1" text="사원명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DETAIL_CODE"/>
+                <Cell col="1" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sys_customer_stc" taborder="2" text="사원코드" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_employeeCode" onload="ds_customer_onload">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+사원 다이얼로그                                             						                                                                         
+@Path		공통              				   				
+@Description	사원코드 및 코드명 조회위함					
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 22                             		                    				                                            
+********************************************************************************/
+
+//계정디테일에는 있다고 되있는데 아직 분개상세에는 띄우는 곳이 없어서 작동확인 못해봄.ㅠ
+
+this.employeeCodeDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		this.transaction("findCustomerDetailCodeList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_employeeCode=gds_codeDetail",
+					"",
+					"callback",
+					false
+					);
+					
+					
+		this.ds_employeeCode.filter("DIVISION_CODE_NO=='SYS08'");	
+}
+
+
+var dialogName=""; 
+this.employeeList_gird_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{     
+    dialogName=this.parent.dialogName;
+    
+	var detailCode=this.ds_employeeCode.getColumn(e.row,"DETAIL_CODE");
+    var detailCodeName=this.ds_employeeCode.getColumn(e.row,"DETAIL_CODE_NAME");
+
+
+    this.close(detailCode+"/"+detailCodeName);  
+
+     if(dialogName=="employee"){  //dialog 이름으로 if 걸어서  각각 받고 싶은 데이터 받아가세요~~ 
+	 this.close(detailCode+"/"+detailCodeName);
+	 return;
+	 }
+   
+    this.close();  
+
+}
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

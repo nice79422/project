@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="companyRegistrationForm" left="0" top="0" width="1185" height="785" titletext="companyRegistrationForm" onload="companyRegistrationForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="8" text="회사 상세 정보" left="14" top="9" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;" onclick="Static00_onclick" right="14"/>
+        <Static id="Static01" taborder="9" text="회 사 명" left="20.25%" top="133" right="65.4%" height="52"/>
+        <Static id="Static04" taborder="12" text="대 표 자 명" left="20.25%" top="277" right="65.4%" height="52"/>
+        <Static id="Static06" taborder="14" text="사업자 등록번호" left="20.25%" top="205" right="65.4%" height="52"/>
+        <Static id="Static08" taborder="16" text="사업장 소재지" left="20.25%" top="349" right="65.4%" height="52"/>
+        <Static id="Static10" taborder="18" text="사 업 구 분" left="20.25%" top="421" right="65.4%" height="52"/>
+        <Static id="Static12" taborder="20" text="회사 창립일" left="20.25%" top="493" right="65.4%" height="52"/>
+        <Static id="Static14" taborder="22" text="내선번호" left="20.25%" top="565" right="65.4%" height="52"/>
+        <Edit id="Edit00" taborder="23" oneditclick="Edit00_oneditclick" left="37.72%" top="133" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Edit id="Edit06" taborder="24" left="37.72%" top="565" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Edit id="Edit05" taborder="25" left="37.72%" top="493" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Edit id="Edit04" taborder="26" left="37.72%" top="421" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Edit id="Edit03" taborder="27" left="37.72%" top="349" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Edit id="Edit02" taborder="28" left="37.72%" top="205" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Edit id="Edit01" taborder="29" left="37.72%" top="277" right="19.66%" height="51" enable="false" style="color:black;"/>
+        <Button id="update_btn" taborder="30" text="수 정" left="41.1%" top="651" right="47.85%" height="40" onclick="update_btn_onclick"/>
+        <Button id="save_btn" taborder="31" text="저장" left="57.3%" top="651" right="31.65%" height="40" onclick="save_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_company">
+        <ColumnInfo>
+          <Column id="COMPANY_CODE" type="STRING" size="256"/>
+          <Column id="COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="COMPANY_DIVISION" type="STRING" size="256"/>
+          <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+          <Column id="CORPORATION_LICENSE_NUMBER" type="STRING" size="256"/>
+          <Column id="COMPANY_CEO_NAME" type="STRING" size="256"/>
+          <Column id="COMPANY_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+          <Column id="COMPANY_BUSINESS_ITEMS" type="STRING" size="256"/>
+          <Column id="COMPANY_ZIP_CODE" type="STRING" size="256"/>
+          <Column id="COMPANY_BASIC_ADDRESS" type="STRING" size="256"/>
+          <Column id="COMPANY_DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="COMPANY_TEL_NUMBER" type="STRING" size="256"/>
+          <Column id="COMPANY_FAX_NUMBER" type="STRING" size="256"/>
+          <Column id="COMPANY_ESTABLISHMENT_DATE" type="STRING" size="256"/>
+          <Column id="COMPANY_OPEN_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="Edit01" propid="value" datasetid="ds_company" columnid="COMPANY_CEO_NAME"/>
+      <BindItem id="item2" compid="Edit02" propid="value" datasetid="ds_company" columnid="BUSINESS_LICENSE_NUMBER"/>
+      <BindItem id="item3" compid="Edit03" propid="value" datasetid="ds_company" columnid="COMPANY_BASIC_ADDRESS"/>
+      <BindItem id="item4" compid="Edit04" propid="value" datasetid="ds_company" columnid="COMPANY_BUSINESS_CONDITIONS"/>
+      <BindItem id="item5" compid="Edit05" propid="value" datasetid="ds_company" columnid="COMPANY_OPEN_DATE"/>
+      <BindItem id="item6" compid="Edit06" propid="value" datasetid="ds_company" columnid="COMPANY_TEL_NUMBER"/>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_company" columnid="COMPANY_NAME"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+메인메뉴 화면                                             						                                                                         
+@Path		공통              				   				
+@Description 회사정보							
+@Author	  	강순용				    			                        								                                            
+@Create           2019. 02. 13.                             		                    				                                            
+********************************************************************************/
+
+this.companyRegistrationForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findCompanyList",
+					"dataURL::sys/findCompanyList.do",
+					"",
+					"ds_company=ds_company",
+					"",
+					"callback"
+					);
+}
+
+
+
+
+this.update_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.Edit01.set_enable(true);
+	this.Edit03.set_enable(true);
+	this.Edit04.set_enable(true);
+	this.Edit05.set_enable(true);
+	this.Edit06.set_enable(true);
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	 if(confirm("변경사항을 저장하시겠습니까?"))
+	 {
+		this.transaction("updateCompanyInfo",
+					"dataURL::sys/updateCompanyInfo.do",
+					"ds_company=ds_company:u",
+					"",
+					"",
+					"callback"
+					);
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

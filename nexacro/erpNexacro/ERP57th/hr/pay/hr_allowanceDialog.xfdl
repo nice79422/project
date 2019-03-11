@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_allowanceDialog" left="0" top="0" width="729" height="329" titletext="hr_allowanceDialog" onload="hr_allowanceDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="1" text="급여 / 상여 지급일자" left="0" top="0" width="720" height="40"/>
+        <GroupBox id="GroupBox00" taborder="2" left="8" top="55" width="698" height="54"/>
+        <MaskEdit id="yearMonth" taborder="4" type="string" mask="####-##" left="165" top="72" width="118" height="24" style="align:center middle;"/>
+        <Button id="cancel_btn" taborder="6" text="닫  기" onclick="cancelBtn_onclick" left="568" top="72" width="118" height="24"/>
+        <Button id="cancelBtn00" taborder="7" text="귀속연월" onclick="cancelBtn_onclick" left="32" top="72" width="118" height="24"/>
+        <Grid id="salPayment_grd" taborder="8" binddataset="ds_salPaymentDate" useinputpanel="false" left="8" top="131" width="698" height="169" oncelldblclick="salPayment_grd_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="149"/>
+                <Column size="133"/>
+                <Column size="96"/>
+                <Column size="80"/>
+                <Column size="105"/>
+                <Column size="57"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="지급일자"/>
+                <Cell col="1" text="직종"/>
+                <Cell col="2" text="대상자선정"/>
+                <Cell col="3" text="동시발행"/>
+                <Cell col="4" text="급여구분"/>
+                <Cell col="5" text="급여형태"/>
+                <Cell col="6" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:PAYMENT_DATE"/>
+                <Cell col="1" displaytype="combo" text="bind:JIKJONG_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="2" text="bind:TARGET_CHOICE"/>
+                <Cell col="3" displaytype="combo" text="bind:SAME_TIME_SELECTION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" displaytype="combo" text="bind:PAY_TYPE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="5" displaytype="combo" text="bind:SALARY_TYPE_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="6" text="bind:NOTE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_salPaymentDate" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+          <Column id="INPUTED_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="TARGET_CHOICE" type="STRING" size="256"/>
+          <Column id="SAME_TIME_SELECTION" type="STRING" size="256"/>
+          <Column id="PAY_TYPE" type="STRING" size="256"/>
+          <Column id="SALARY_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+          <Column id="JIKJONG_CODE" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="yearMonth" propid="value" datasetid="ds_salPaymentDate" columnid="PAYMENT_DATE"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+지급일자 다이알로그                                             						                                                                         
+@Path		인사              				   				
+@Description	수당지급일 다이알로그							
+@Author	  	허용석				    			                        								                                            
+@Create           2019. 01. 31.                             		                    				                                            
+********************************************************************************/
+
+this.hr_allowanceDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		
+		//alert(this.parent.baseYearMonth);
+		this.transaction(
+		"findSalPaymentDateList",
+		"dataURL::hr/circumstance/findSalPaymentDateList.do",
+		"",
+		"ds_salPaymentDate=ds_salPaymentDate",
+		"inputedYearMonth="+this.parent.baseYearMonth,
+		"callback"
+	);
+
+}
+
+this.cancelBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+this.salPayment_grd_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.opener.paymentDate_mEdit.set_value(this.ds_salPaymentDate.getColumn(e.row,"PAYMENT_DATE"));
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

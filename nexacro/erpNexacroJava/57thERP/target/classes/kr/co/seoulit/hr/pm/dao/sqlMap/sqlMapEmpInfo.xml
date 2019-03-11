@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.pm.dao.EmpInfoDAO">
+	
+	<resultMap id="empInfoResult" type="empInfoTO">
+		<result property="chk" column="CHK" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="residentNumber" column="RESIDENT_NUMBER" />
+		<result property="birthDate" column="BIRTH_DATE" />
+		<result property="gender" column="GENDER" />
+		<result property="imgSrc" column="IMG_SRC" />
+		<result property="zipCode" column="ZIP_CODE" />
+		<result property="baseAddress" column="BASE_ADDRESS" />
+		<result property="detailAddress" column="DETAIL_ADDRESS" />
+		<result property="email" column="EMAIL" />
+		<result property="tel" column="TEL" />
+		<result property="phoneNumber" column="PHONE_NUMBER" />
+		<result property="highestEducationCode" column="HIGHEST_EDUCATION_CODE" />
+		<result property="nativeTypeCode" column="NATIVE_TYPE_CODE" />
+		<result property="disabilityCode" column="DISABILITY_CODE" />
+	</resultMap>
+
+
+	<!-- 사원의 상세정보를 가지고 오는 메서드  -->
+	<select id="selectEmpInfoAll" resultMap="empInfoResult">
+	<![CDATA[
+		SELECT /* EmpInfoDAO.selectEmpInfoAll */
+			   '0' AS CHK
+		       , EMP_CODE
+			   , EMP_NAME
+			   , RESIDENT_NUMBER
+			   , BIRTH_DATE
+			   , GENDER
+			   , TEL
+			   , PHONE_NUMBER
+			   , NATIVE_TYPE_CODE
+			   , EMAIL
+			   , HIGHEST_EDUCATION_CODE
+			   , BASE_ADDRESS
+			   , DETAIL_ADDRESS
+			   , ZIP_CODE
+			   , IMG_SRC
+			   , DISABILITY_CODE
+          FROM EMPLOYEE_INFO
+		 ORDER BY EMP_CODE
+	]]>
+	</select>
+	
+ 	<!-- 사원 한명의 상세정보를 가지고 오는 메서드  -->
+	<select id="selectEmpInfoList" resultMap="empInfoResult" parameterType="map">
+	<![CDATA[
+		SELECT /* EmpInfoDAO.findEmpInfoList */
+				 EMP_CODE
+			   , EMP_NAME
+			   , RESIDENT_NUMBER
+			   , BIRTH_DATE
+			   , GENDER
+			   , TEL
+			   , PHONE_NUMBER
+			   , NATIVE_TYPE_CODE
+			   , EMAIL
+			   , HIGHEST_EDUCATION_CODE
+			   , BASE_ADDRESS
+			   , DETAIL_ADDRESS
+			   , ZIP_CODE
+			   , IMG_SRC
+			   , DISABILITY_CODE
+          FROM EMPLOYEE_INFO
+		  WHERE EMP_CODE = #{empCode}
+	]]>
+	</select> 
+	
+	
+	<insert id="insertEmpinfo" parameterType="empInfoTO">
+
+	INSERT INTO EMPLOYEE_INFO(
+		EMP_CODE, EMP_NAME, RESIDENT_NUMBER, BIRTH_DATE, GENDER, TEL
+		PHONE_NUMBER, NATIVE_TYPE_CODE, EMAIL, HIGHEST_EDUCATION_CODE
+		BASE_ADDRESS, DETAIL_ADDRESS, ZIP_CODE, IMG_SRC, DISABILITY_CODE
+		)
+		VALUES
+		( #{empCode}, #{empName}, #{residentNumber}, #{birthDate}, #{gender}, #{tel}, 
+		#{phoneNumber}, #{nativeTypeCode}, #{email}, #{highestEducationCode},
+		#{baseAddress}, #{detailAddress}, #{zipCode}, #{imgSrc}, #{disabilityCode}
+		 )
+
+	</insert>
+	
+	
+	<!-- 사원상세정보를 수정하는 메서드 -->
+ 	<update id="updateEmpInfo" parameterType="empInfoTO">
+    <![CDATA[
+           UPDATE
+           		EMPLOYEE_INFO
+           SET
+           		EMP_NAME=#{empName},
+            	RESIDENT_NUMBER=#{residentNumber},
+            	BIRTH_DATE='19'||SUBSTR(RESIDENT_NUMBER,0,4),
+            	GENDER=#{gender},
+            	IMG_SRC=#{imgSrc},
+            	ZIP_CODE=#{zipCode},
+            	BASE_ADDRESS=#{baseAddress},
+            	DETAIL_ADDRESS=#{detailAddress},
+            	EMAIL=#{email},
+            	TEL=#{tel},
+            	PHONE_NUMBER=#{phoneNumber},
+            	HIGHEST_EDUCATION_CODE=#{highestEducationCode},
+            	NATIVE_TYPE_CODE=#{nativeTypeCode},
+            	DISABILITY_CODE=#{disabilityCode}
+           WHERE
+           		EMP_CODE=#{empCode}
+
+    ]]>
+    </update>
+    
+    <delete id="deleteEmpinfo" parameterType="empInfoTO">
+		DELETE FROM EMPLOYEE_INFO
+		WHERE EMP_CODE =  #{empCode}
+	</delete>
+    
+    
+</mapper>

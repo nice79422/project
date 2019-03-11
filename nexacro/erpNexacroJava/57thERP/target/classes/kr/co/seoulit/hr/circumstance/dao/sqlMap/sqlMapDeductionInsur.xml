@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.circumstance.dao.DeductionInsurDAO">
+	
+	<resultMap type="deductionTaxTO" id="deductionTaxResult">
+        <result property="inputedYear" column="INPUTED_YEAR"/>
+        <result property="healthInsurRate" column="HEALTH_INSUR_RATE"/>
+        <result property="nationalPenRate" column="NATIONAL_PEN_RATE"/>
+        <result property="longTermCareRate" column="LONG_TERM_CARE_RATE"/>
+        <result property="employeementInsurRate" column="EMPLOYEEMENT_INSUR_RATE"/>
+	</resultMap>
+	
+	<resultMap type="incomeTaxTO" id="incomeTaxResult">
+        <result property="inputedYear" column="INPUTED_YEAR"/>
+        <result property="incomeTaxRate" column="INCOME_TAX_RATE"/>
+        <result property="lowSal" column="LOW_SAL"/>
+        <result property="highSal" column="HIGH_SAL"/>
+        <result property="progressiveDeduction" column="PROGRESSIVE_DEDUCTION"/>
+    </resultMap>
+
+	<!-- 보험공제 관련 목록을 조회하는 메서드 -->
+	<select id="selectDeductionTaxList" resultMap="deductionTaxResult">
+	<![CDATA[
+		SELECT * FROM DEDUCTIONS_TAX_MGT
+		ORDER BY INPUTED_YEAR
+	]]>	
+	</select>
+
+	<!-- 소득세관련 정보를 조회하는 메서드 -->
+    <select id="selectIncomeTaxList" resultMap="incomeTaxResult">
+	<![CDATA[
+	      SELECT *
+	      FROM INCOME_TAX_MGT
+	      ORDER BY INPUTED_YEAR,TO_NUMBER(INCOME_TAX_RATE) asc
+	]]>
+    </select>   
+        
+    <!-- 보험공제 관련정보를 삭제하는 메서드 -->
+	
+	<delete id="deleteDeductionTax" parameterType="deductionTaxTO">
+	<![CDATA[
+	      DELETE FROM DEDUCTIONS_TAX_MGT
+	      WHERE INPUTED_YEAR = #{inputedYear}
+    ]]>
+	</delete>
+	
+	
+	<!-- 소득세관련 정보를 삭제하는 메서드  한줄 씩 삭제 하면 추가 안됨.. 한번에 다 삭제 해야 됨.. -->
+	 
+	<delete id="deleteIncomeTax" parameterType="incomeTaxTO">
+	<![CDATA[
+	      DELETE
+	      FROM INCOME_TAX_MGT
+	      WHERE INPUTED_YEAR = #{inputedYear}
+    ]]>
+	</delete>
+	
+	
+
+	<!-- 보험공제 관련 목록을 추가하는 메서드 -->
+	
+    <insert id="insertDeductionTax" parameterType="deductionTaxTO">
+	<![CDATA[
+	      INSERT INTO
+	      DEDUCTIONS_TAX_MGT
+	      		(INPUTED_YEAR,
+	      		HEALTH_INSUR_RATE,
+	      		NATIONAL_PEN_RATE,
+	      		LONG_TERM_CARE_RATE,
+	      		EMPLOYEEMENT_INSUR_RATE)
+	      VALUES (
+	          #{inputedYear},
+	          #{healthInsurRate},
+	          #{nationalPenRate},
+	          #{longTermCareRate},
+	          #{employeementInsurRate}
+	      )
+	]]>
+	</insert>
+	
+
+	<!-- 소득세 관련부분을 추가하는 메서드 -->
+	
+	<insert id="insertIncomeTax" parameterType="incomeTaxTO">
+	<![CDATA[
+	        INSERT INTO
+	        INCOME_TAX_MGT
+	        		(INCOME_TAX_RATE,
+	        		INPUTED_YEAR,
+	        		LOW_SAL,
+	        		HIGH_SAL,
+	        		PROGRESSIVE_DEDUCTION
+	        		)
+	        		
+	        VALUES (
+	            #{incomeTaxRate},
+	            #{inputedYear},
+	            #{lowSal},
+	            #{highSal},
+	            #{progressiveDeduction}
+	        )
+    ]]>
+	</insert>
+
+</mapper>

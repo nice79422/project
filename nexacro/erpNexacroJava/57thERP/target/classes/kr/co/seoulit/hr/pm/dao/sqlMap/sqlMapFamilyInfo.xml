@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.pm.dao.FamilyInfoDAO">
+	
+	<resultMap id="familyInfoResult" type="familyInfoTO">
+		<result property="familySeq" column="FAMILY_SEQ" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="familyName" column="FAMILY_NAME" />
+		<result property="familyBirthDate" column="FAMILY_BIRTH_DATE" />
+		<result property="relationship" column="RELATIONSHIP" />
+		<result property="supporting" column="SUPPORTING" />
+		<result property="cohabitationStatus" column="COHABITATION_STATUS" />
+		<result property="disabilityCode" column="DISABILITY_CODE" />
+		<result property="highestEducationCode" column="HIGHEST_EDUCATION_CODE" />
+		<result property="job" column="JOB" />
+		<result property="companyName" column="COMPANY_NAME" />
+		<result property="tel" column="TEL" />
+	</resultMap>
+
+	<!-- 사원의 가족정보를 가지고 오는 메서드 -->
+	<select id="selectFamilyInfoAll" resultMap="familyInfoResult">
+	<![CDATA[
+			SELECT 
+				RELATIONSHIP
+				,EMP_CODE
+				,FAMILY_NAME
+				,SUPPORTING
+				,COHABITATION_STATUS
+				,DISABILITY_CODE
+				,HIGHEST_EDUCATION_CODE
+				,JOB
+				,COMPANY_NAME
+				,TEL
+				,FAMILY_BIRTH_DATE
+				,FAMILY_SEQ
+	        FROM FAMILY_INFO
+	        ORDER BY EMP_CODE
+	]]>
+	</select>
+
+
+	<insert id="insertFamilyInfo" parameterType="familyInfoTO">
+	
+	<selectKey keyProperty="familySeq" resultType="String">
+	<![CDATA[
+	     SELECT FAMILY_SEQ.NEXTVAL FROM DUAL
+	]]>
+	
+    </selectKey>
+	<![CDATA[
+		INSERT INTO
+			FAMILY_INFO
+			(
+			EMP_CODE,
+			RELATIONSHIP,
+			FAMILY_NAME,
+			SUPPORTING,
+			COHABITATION_STATUS,
+			DISABILITY_CODE,
+			HIGHEST_EDUCATION_CODE,			
+			JOB,
+			COMPANY_NAME,
+			FAMILY_SEQ,
+			FAMILY_BIRTH_DATE,
+			TEL
+			)
+			
+		VALUES(
+			#{empCode},
+		    #{relationship},
+			#{familyName},
+			#{supporting},
+			#{cohabitationStatus},
+			#{disabilityCode},
+			#{highestEducationCode},			
+	       	#{job},
+	       	#{companyName},
+	       	#{familySeq},
+	       	#{familyBirthDate},
+	       	#{tel}
+		)
+	]]>
+	
+
+	</insert>
+
+ 
+ 	
+	<!-- 사원의 가족정보를 수정하는 메서드 -->
+
+	<update id="updateFamilyInfo" parameterType="familyInfoTO">
+	<![CDATA[
+	       UPDATE
+	       		FAMILY_INFO
+	       SET
+	       		FAMILY_NAME=#{familyName},
+	       		FAMILY_BIRTH_DATE=#{familyBirthDate},
+	       		RELATIONSHIP=#{relationship},
+	       		SUPPORTING=#{supporting},
+	       		COHABITATION_STATUS=#{cohabitationStatus},
+	       		DISABILITY_CODE=#{disabilityCode},
+	       		HIGHEST_EDUCATION_CODE=#{highestEducationCode},
+	       		JOB=#{job},
+	       		COMPANY_NAME=#{companyName},
+				TEL=#{tel}
+	       	WHERE
+	       		EMP_CODE=#{empCode}
+	       	AND
+	       	    FAMILY_SEQ=#{familySeq}
+	]]>
+	</update>
+
+	<!-- 사원의 가족정보를 삭제하는 메서드 -->
+
+	<delete id="deleteFamilyInfo" parameterType="familyInfoTO">
+	<![CDATA[
+		DELETE FROM
+			FAMILY_INFO
+		WHERE
+			EMP_CODE=#{empCode}
+		AND
+			FAMILY_SEQ=#{familySeq}
+    ]]>
+	</delete>
+	
+
+</mapper>

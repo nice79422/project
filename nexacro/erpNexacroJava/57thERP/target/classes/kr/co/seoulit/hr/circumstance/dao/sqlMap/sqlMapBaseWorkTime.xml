@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.circumstance.dao.BaseWorkTimeDAO">
+
+	<resultMap type="baseWorkTimeTO" id="baseWorkTimeResult">
+      	<result property="applyYear" column="APPLY_YEAR"/>
+        <result property="attendTime" column="ATTEND_TIME"/>
+        <result property="quitTime" column="QUIT_TIME"/>
+        <result property="overTime" column="OVER_TIME"/>
+        <result property="nightTime" column="NIGHT_TIME"/>
+        <result property="lunchStartTime" column="LUNCH_START_TIME"/>
+        <result property="lunchEndTime" column="LUNCH_END_TIME"/>
+        <result property="dinnerStartTime" column="DINNER_START_TIME"/>
+        <result property="dinnerEndTime" column="DINNER_END_TIME"/>
+	</resultMap>
+
+	<select resultMap="baseWorkTimeResult" id="selectBaseWorkTimeList">
+	<![CDATA[
+		SELECT 	APPLY_YEAR,
+			ATTEND_TIME,
+			QUIT_TIME,
+			OVER_TIME,
+			NIGHT_TIME,
+			LUNCH_START_TIME,
+			LUNCH_END_TIME,
+			DINNER_START_TIME,
+			DINNER_END_TIME 
+		FROM BASE_WORK_TIME
+	]]>
+	</select>
+
+	<insert id="insertBaseWorkTime" parameterType="baseWorkTimeTO">
+	<![CDATA[
+		INSERT INTO
+		BASE_WORK_TIME
+			(
+			APPLY_YEAR,
+			ATTEND_TIME,
+			QUIT_TIME,
+			OVER_TIME,
+			NIGHT_TIME,
+			LUNCH_START_TIME,
+			LUNCH_END_TIME,
+			DINNER_START_TIME,
+			DINNER_END_TIME 			
+			)
+		VALUES (
+			#{applyYear},
+			#{attendTime},
+			#{quitTime},
+			#{overTime},
+			#{nightTime},
+ 			#{lunchStartTime},
+			#{lunchEndTime},
+			#{dinnerStartTime},
+			#{dinnerEndTime}
+	   )
+	]]>
+	</insert>
+
+	<update id="updateBaseWorkTime" parameterType="baseWorkTimeTO">
+	<![CDATA[
+		UPDATE BASE_WORK_TIME
+		SET
+			ATTEND_TIME = #{attendTime},
+			QUIT_TIME = #{quitTime},
+			OVER_TIME = #{overTime},
+			NIGHT_TIME = #{nightTime},
+			LUNCH_START_TIME = #{lunchStartTime},
+			LUNCH_END_TIME = #{lunchEndTime},
+			DINNER_START_TIME=#{quitTime},
+			DINNER_END_TIME=#{overTime}
+		WHERE APPLY_YEAR = #{applyYear}
+		
+	
+	]]>
+	</update>
+	
+	<delete id="deleteBaseWorkTime" parameterType="baseWorkTimeTO">
+	<![CDATA[
+		DELETE
+		FROM BASE_WORK_TIME
+		WHERE APPLY_YEAR=#{applyYear}
+	
+	]]>
+	</delete>
+	
+</mapper>

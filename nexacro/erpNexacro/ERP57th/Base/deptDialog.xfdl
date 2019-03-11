@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="deptDialog" left="0" top="0" width="300" height="200" titletext="New Form" onload="deptDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="grd_dept" taborder="0" binddataset="ds_dept" useinputpanel="false" autofittype="col" left="5%" top="10" right="5%" height="180" oncelldblclick="grd_dept_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="부서코드"/>
+                <Cell col="1" text="부서명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DEPT_CODE"/>
+                <Cell col="1" text="bind:DEPT_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_TEL" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+부서검색 다이알로그                                             						                                                                         
+@Path		공통              				   				
+@Description	로그인등의 부서검색 다이알로그							
+@Author	  	심승현				    			                        								                                            
+@Create           2019. 01. 31.                             		                    				                                            
+********************************************************************************/
+this.deptDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	obj.transaction("findBusinessPlaceList",
+					"dataURL::sys/findDepartmentList.do",
+					"",
+					"ds_dept=gds_department",
+					"businessPlaceCode="+ this.opener.edt_businessPlaceCode.value,
+					"callback");
+	
+}
+
+
+
+this.grd_dept_oncelldblclick = function(obj:Grid, e:GridClickEventInfo)
+{	
+	var selDeptCode = this.ds_dept.getColumn(e.row, "DEPT_CODE");
+	var selDeptName = this.ds_dept.getColumn(e.row, "DEPT_NAME");
+	this.opener.edt_deptCode.set_value(selDeptCode);
+	this.close();
+}
+//넥사 svn 테스트
+//nexa test 02
+
+/////////////////56565656565]]></Script>
+  </Form>
+</FDL>

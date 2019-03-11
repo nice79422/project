@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="1.2">
+  <TypeDefinition url="default_typedef.xml"/>
+  <GlobalVariables url="globalvars.xml"/>
+  <Application id="ERP57th" codepage="utf-8" language="Korean" loginformurl="" loginformstyle="" windowopeneffect="" windowcloseeffect="" version="" tracemode="none" themeid="default_CUSTOM.xtheme" onload="application_onload">
+    <Layout>
+      <MainFrame id="mainframe" title="maintitle" defaultfont="" resizable="true" showtitlebar="true" showstatusbar="false" left="0" top="0" width="1440" height="900" titletext="ERP57th" style="titlebarheight:25;">
+        <VFrameSet id="VFrameSet0" separatesize="100,*" showtitleicon="false" showcascadestatustext="false" showcascadetitletext="false">
+          <Frames>
+            <ChildFrame id="ChildFrame0" showtitlebar="false" showtitleicon="false" formurl="base::mainTopForm.xfdl" showcascadestatustext="false" showcascadetitletext="false" dragmovetype="none"/>
+            <HFrameSet id="HFrameSet0" separatesize="250,*" showtitleicon="false" showcascadestatustext="false" showcascadetitletext="false">
+              <Frames>
+                <ChildFrame id="ChildFrame1" showtitlebar="false" showtitleicon="false" formurl="base::mainMenuForm.xfdl" showcascadestatustext="false" showcascadetitletext="false" dragmovetype="none"/>
+                <ChildFrame id="ChildFrame2" dragmovetype="none" showtitlebar="false" showtitleicon="false"/>
+              </Frames>
+            </HFrameSet>
+          </Frames>
+        </VFrameSet>
+      </MainFrame>
+    </Layout>
+    <ScreenInfo>
+      <Screen name="screen_init" type="desktop" screenwidth="1920" sizeorientation="" autozoom="false" zoommin="100%" zoommax="" systemos="" systemlocale="" formlayoutwidth="1440" formlayoutheight="900"/>
+    </ScreenInfo>
+  </Application>
+  <Script type="xscript4.0"><![CDATA[// this.application_onload = function(obj:Application, e:nexacro.LoadEventInfo)
+// {      
+//    // 현재 화면 해상도 읽기
+//    var nMoniterIndex = system.getMonitorIndex(system.cursorx, system.cursory); // MoniterIndex
+// 
+//    var strScreenRes = system.getScreenResolution(nMoniterIndex); 
+//    var arrScreen = strScreenRes.split(" ");
+// 
+//    var nCenterX = new Number(arrScreen[0]); // X Resolution
+//    var nCenterY = new Number(arrScreen[1]); // Y Resolution
+//    
+//    trace("화면 해상도 : 가로 " + nCenterX + ", 세로 " + nCenterY);
+// 
+//    application.setVariable("gvScreenWidth", nCenterX);
+//    application.setVariable("gvScreenHeight", nCenterY);
+// 
+//    // 현재 화면 해상도에 맞춰서 화면 중앙에 뜨도록 좌표 설정 
+//    
+//    var nLoginWidth = 500;  // 로그인 폼의 너비
+//    var nLoginHeight = 400;  // 로그인 폼의 높이
+// 
+//    var nLeft = nCenterX/2 - nLoginWidth/2;
+//    var nTop = nCenterY/2 - nLoginHeight/2;
+//    
+//    // 메인프레임 안보이게 숨기기
+//    application.mainframe.set_visible(false);
+//    
+//    var loginFormUrl = "base::loginForm.xfdl";
+//    
+//    application.open("login", "base::loginForm.xfdl", null, "", 
+//       "showtitlebar=true showstatusbar=false style.border='1px solid blue'", 
+//       nLeft, nTop, nLoginWidth, nLoginHeight);
+// }
+
+
+this.application_onload = function(obj:Application, e:LoadEventInfo)
+{   
+   //현재 화면 해상도 읽기
+   var nMoniterIndex = system.getMonitorIndex(system.cursorx, system.cursory); // MoniterIndex
+
+   var strScreenRes = system.getScreenResolution(nMoniterIndex); 
+   var arrScreen = strScreenRes.split(" ");
+
+   var nCenterX = new Number(arrScreen[0]); // X Resolution
+   var nCenterY = new Number(arrScreen[1]); // Y Resolution
+   
+   trace("화면 해상도 : 가로 " + nCenterX + ", 세로 " + nCenterY);
+
+   application.setVariable("gvScreenWidth", nCenterX);
+   application.setVariable("gvScreenHeight", nCenterY);
+
+   // 현재 화면 해상도에 맞춰서 화면 중앙에 뜨도록 좌표 설정 
+   
+   var nLoginWidth = 500;  // 로그인 폼의 너비
+   var nLoginHeight = 400;  // 로그인 폼의 높이
+
+   var nLeft = nCenterX/2 - nLoginWidth/2;
+   var nTop = nCenterY/2 - nLoginHeight/2;
+   application.open("login", "base::loginForm.xfdl", null, "", 
+      "showtitlebar=true showstatusbar=false style.border='1px solid blue'", 
+      nLeft, nTop, nLoginWidth, nLoginHeight);
+   application.mainframe.set_visible(false);// mainframe을 처음에 보이지 않고 loginform 뜸!
+   //openLoginFormDialog("loginForm","LoginForm","base::loginForm.xfdl");
+   
+}
+
+this.openLoginFormDialog = function(sID,sTitle,sUrl){
+
+   
+   //Dialog.showModal(sParent);
+   
+   var loginDialog = new ChildFrame(sID,0,0,0,0,sUrl);   
+   loginDialog.showstatusbar=false;
+   loginDialog.resizable = false;
+   //loginDialog.titletext=sTitle;
+   loginDialog.showstatusbar = false;
+   loginDialog.openalign = "center middle"; //ChildFrame 뜰때 위치 지정 
+   loginDialog.showcascadetitletext = false; // newForm 상단에 나타나는것 제거!!(text 미포함)
+   loginDialog.showModal(sID,"");  // 선언 순서 상관 있음 
+   
+}
+
+this.gfn_Open = function(sID, sURL, sTitle){
+   var menuTreePath=application.mainframe.VFrameSet0.HFrameSet0.ChildFrame2;
+    
+    menuTreePath.set_formurl(sURL);
+    menuTreePath.set_titletext(sTitle);
+
+}
+
+/********************************************************************************                                                                            
+오늘 날짜                                                                                                                                      
+@Path      공통                                        
+@Description   오늘 날짜 불러오는 함수                   
+@Author        조아람                                                                                                                     
+@Create           2019. 02. 12.                                                                                                               
+********************************************************************************/
+this.today = function(){
+
+   var date=new Date();
+   var year = date.getFullYear().toString().padLeft(4, "0");
+    var month = (date.getMonth()+1).toString().padLeft(2, "0");
+    var day = date.getDate().toString().padLeft(2, "0");
+    var today=year+month+day;
+    
+    return today;
+}
+
+/********************************************************************************                                                                            
+오늘 날짜 작데기버전                                                                                                                                     
+@Path      공통                                        
+@Description   오늘 날짜 불러오는 함수                   
+@Author        조윤희                                                                                                                     
+@Create           2019. 02. 27.                                                                                                               
+********************************************************************************/
+this.todayBar = function(){
+
+   var date=new Date();
+   var year = date.getFullYear().toString().padLeft(4, "0");
+    var month = (date.getMonth()+1).toString().padLeft(2, "0");
+    var day = date.getDate().toString().padLeft(2, "0");
+    var today=year+month+day;
+    
+    var s_today=today.toString();
+   
+   var today=s_today.substr(0,4)+"-"+s_today.substr(4,2)+"-"+s_today.substr(6,2);
+    
+   return today;
+}
+
+/********************************************************************************                                                                            
+기초데이터                                                                                                                                      
+@Path      공통                                        
+@Description   시스템 초기화시 기초데이터 불러오는 함수                   
+@Author        허용석                                                                                                                     
+@Create           2019. 02. 13.                                                                                                               
+********************************************************************************/
+this.basicTransaction=function(){
+      var objFrameSet = application.mainframe.all["VFrameSet0"].all["ChildFrame0"].form;
+      objFrameSet.edt_authorityCode.value;
+      var businessPlaceCode=objFrameSet.edt_businessCode.value;
+      trace(businessPlaceCode);
+      objFrameSet.edt_deptCode.value;
+      objFrameSet.edt_empCode.value;
+      objFrameSet.edt_empName.value;
+
+      application.transaction("findBusinessPlaceList",
+               "dataURL::sys/findDepartmentList.do",
+               "",
+               "gds_dept=gds_department",
+               "businessPlaceCode="+ businessPlaceCode,
+               "callback");
+
+      application.transaction("findBaseYearList",
+               "dataURL::sys/findBaseYearList.do",
+               "",
+               "gds_baseYear=gds_baseYear",
+               "businessPlaceCode="+ businessPlaceCode,
+               "callback");
+      application.transaction("findEmployeeList",
+               "dataURL::hr/emp/findEmployeeList.do",
+               "",
+               "gds_employee=gds_employee",
+               "",
+               "callback");
+      application.transaction("findCodeDetailList",
+               "dataURL::sys/findCodeDetailList.do",
+               "",
+               "gds_codeDetail=gds_codeDetail",
+               "",
+               "callback");                                 
+}
+]]></Script>
+</ADL>

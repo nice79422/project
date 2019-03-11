@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.appointment.dao.PersonalAppointmentDetailDAO">
+
+
+<!-- personalAppointmentDetailDAO -->
+
+	<resultMap type="personalAppointmentDetailTO" id="personalAppointmentDetailResult">
+	
+		<result property="appointmentNo" column="APPOINTMENT_NO" />
+		<result property="employeeNo" column="EMPLOYEE_NO" />
+		<result property="appointmentHistory" column="APPOINTMENT_HISTORY" />
+		<result property="currentInformation" column="CURRENT_INFORMATION" />
+		<result property="preAppointmentInformation" column="PRE_APPOINTMENT_INFORMATION" />
+		<result property="appointmentInformation" column="APPOINTMENT_INFORMATION" />
+		<result property="note" column="NOTE" />
+				
+	</resultMap>
+
+
+	<select id="selectPersonalAppointmentDetail" resultMap="personalAppointmentDetailResult" parameterType="HashMap">
+		
+		SELECT P.APPOINTMENT_NO AS APPOINTMENT_NO,
+		       P.EMPLOYEE_NO AS EMPLOYEE_NO,
+		       P.APPOINTMENT_HISTORY AS APPOINTMENT_HISTORY,
+		       P.CURRENT_INFORMATION AS CURRENT_INFORMATION,
+		       P.PRE_APPOINTMENT_INFORMATION AS PRE_APPOINTMENT_INFORMATION,
+		       P.APPOINTMENT_INFORMATION AS APPOINTMENT_INFORMATION,
+		       P.NOTE AS NOTE
+		FROM   PERSONAL_APPOINTMENT_DETAIL P
+		<choose>
+			<when test="applyDate.equals('undefined')">
+		<![CDATA[ 
+		WHERE  EMPLOYEE_NO      = #{employeeNo}
+		AND    P.APPOINTMENT_HISTORY = #{appointmentHistory}
+		AND    P.APPOINTMENT_NO      =
+		       (SELECT MAX(APPOINTMENT_NO)
+		       FROM    PERSONAL_APPOINTMENT_DETAIL
+		       WHERE   APPOINTMENT_NO < #{appointmentNo}
+		       )	
+		]]> 
+			</when>
+			
+			<when test="applyDate!='undefined'">
+		WHERE  EMPLOYEE_NO      = #{employeeNo}
+		AND    P.APPOINTMENT_NO = #{appointmentNo}		
+			</when>
+		</choose>			
+	</select>
+	
+	<insert id="insertPersonalAppointmentDetail" parameterType="personalAppointmentDetailTO">
+		INSERT INTO PERSONAL_APPOINTMENT_DETAIL(
+			APPOINTMENT_NO,
+			EMPLOYEE_NO,
+			APPOINTMENT_HISTORY,
+			CURRENT_INFORMATION,
+			PRE_APPOINTMENT_INFORMATION,
+			APPOINTMENT_INFORMATION,
+			NOTE
+		)
+		VALUES(
+			#{appointmentNo},
+			#{employeeNo},
+			#{appointmentHistory},
+			#{currentInformation},
+			#{preAppointmentInformation},
+			#{appointmentInformation},
+			#{note}
+		)
+	</insert>
+
+
+
+
+
+
+
+
+
+
+	<select id="selectPersonalAppointmentDetail2" resultMap="personalAppointmentDetailResult">
+		SELECT APPOINTMENT_NO,
+		       EMPLOYEE_NO,
+		       APPOINTMENT_HISTORY,
+		       CURRENT_INFORMATION,
+		       PRE_APPOINTMENT_INFORMATION,
+		       APPOINTMENT_INFORMATION,
+		       NOTE
+		FROM   PERSONAL_APPOINTMENT_DETAIL
+	</select>
+
+	<update id="updatePersonalAppointmentDetail" parameterType="personalAppointmentDetailTO">
+		UPDATE PERSONAL_APPOINTMENT_DETAIL
+		SET    APPOINTMENT_NO              =#{appointmentNo},
+		       EMPLOYEE_NO                 =#{employeeNo},
+		       APPOINTMENT_HISTORY         =#{appointmentHistory},
+		       CURRENT_INFORMATION         =#{currentInformation},
+		       PRE_APPOINTMENT_INFORMATION =#{preAppointmentInformation},
+		       APPOINTMENT_INFORMATION     =#{appointmentInformation},
+		       NOTE                        =#{note}
+		WHERE  APPOINTMENT_NO              =#{appointmentNo}
+		AND    EMPLOYEE_NO                 =#{employeeNo}
+
+	</update>
+	
+
+
+
+
+
+
+
+
+<!--20190224 프로시저 테스트-->
+	<resultMap type="tempAppointmentTO" id="tempAppointmentResult">
+    
+		<result property="appointmentNo" column="APPOINTMENT_NO" />
+		<result property="employeeNo" column="EMPLOYEE_NO" />
+		<result property="appointmentHistory" column="APPOINTMENT_HISTORY" />
+		<result property="currentInformation" column="CURRENT_INFORMATION" />
+		<result property="preAppointmentInformation" column="PRE_APPOINTMENT_INFORMATION" />
+				
+	</resultMap>
+
+ <parameterMap id="AppointmentNoParameter" type="map">
+      <parameter property="appointmentNo" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+      <parameter property="appointmentDivision" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+      <parameter property="result" jdbcType="CURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="tempAppointmentResult"/> 
+      <parameter property="errorCode" jdbcType="DECIMAL" javaType="java.lang.Integer" mode="OUT" />
+      <parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" />
+   </parameterMap>
+
+    <select id="selectAppointmentHistory" parameterMap="AppointmentNoParameter" resultMap="tempAppointmentResult" statementType="CALLABLE">
+        <![CDATA[
+            {call P_APPOINTMENT(?,?,?,?,?)}
+        ]]>
+   </select>
+
+
+
+<!--20190225 프로시저 테스트  -->
+
+ <parameterMap id="appointmentInfoParameter" type="map">
+      <parameter property="appointmentNo" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+      <parameter property="appointmentDivision" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+      <parameter property="result" jdbcType="CURSOR" javaType="java.sql.ResultSet" mode="OUT" resultMap="tempAppointmentResult"/> 
+      <parameter property="errorCode" jdbcType="DECIMAL" javaType="java.lang.Integer" mode="OUT" />
+      <parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" />
+   </parameterMap>
+
+    <select id="selectCanceledAppointment" parameterMap="appointmentInfoParameter" resultMap="tempAppointmentResult" statementType="CALLABLE">
+        <![CDATA[
+            {call P_CANCLE_APPOINTMENT(?,?,?,?,?)}
+        ]]>
+   </select>
+
+
+
+
+</mapper>

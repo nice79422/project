@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="basicWorktimeManagement" left="0" top="0" width="1185" height="785" titletext="New Form" onload="basicWorktimeManagement_onload">
+    <Layouts>
+      <Layout>
+        <GroupBox id="serch_gb" text="검색" taborder="1" left="19.66%" top="80" right="18.31%" height="180" titlealign="topcenter"/>
+        <GroupBox id="workTime_gb" text="근무시간" taborder="2" left="19.66%" top="270" right="18.14%" height="470" titlealign="topcenter"/>
+        <Static id="Static00" taborder="3" text="기본 근무시간 관리" onclick="Static00_onclick" left="-10" top="9" right="38" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="applyYearSelect_stc" taborder="4" text="적용년도 선택" left="27%" top="131" right="57.97%" height="45"/>
+        <Static id="applyYear_stc" taborder="5" text="적용년도" left="27%" top="302" right="57.89%" height="45"/>
+        <Static id="attendTime_stc" taborder="6" text="출근시각" left="27%" top="352" right="57.89%" height="45"/>
+        <Static id="quitTime_stc" taborder="7" text="퇴근시각" left="27%" top="402" right="57.89%" height="45"/>
+        <Static id="lunchStartTime_stc" taborder="8" text="점심시작시각" left="27%" top="452" right="57.89%" height="45"/>
+        <Static id="lunchEndTime_stc" taborder="9" text="점심종료시각" left="27%" top="502" right="57.89%" height="45"/>
+        <Static id="overTime_stc" taborder="10" text="연장시각" left="27%" top="552" right="57.89%" height="45"/>
+        <Static id="nightTime_stc" taborder="11" text="심야시각" left="27%" top="602" right="57.89%" height="50"/>
+        <Edit id="applyYear_edt" taborder="12" left="43.63%" top="302" height="45" width="200" style=":disabled {align:center middle;}" enable="false"/>
+        <MaskEdit id="attendTime_mEdit" taborder="13" left="43.63%" top="352" height="45" width="200" mask="##:##" enable="false" type="string" style=":disabled {align:center middle;}"/>
+        <MaskEdit id="quitTime_mEdit" taborder="14" left="43.63%" top="402" width="200" height="45" mask="##:##" enable="false" type="string" style=":disabled {align:center middle;}"/>
+        <MaskEdit id="lunchStartTime_mEdit" taborder="15" left="43.63%" top="452" width="200" height="45" enable="false" mask="##:##" type="string" style=":disabled {align:center middle;}"/>
+        <MaskEdit id="lunchEndTime_mEdit" taborder="16" left="43.63%" top="502" width="200" height="45" enable="false" mask="##:##" type="string" style=":disabled {align:center middle;}"/>
+        <MaskEdit id="overTime_mEdit" taborder="17" left="43.63%" top="552" width="200" height="45" enable="false" mask="##:##" type="string" style=":disabled {align:center middle;}"/>
+        <MaskEdit id="nightTime_mEdit" taborder="18" left="43.63%" top="602" width="200" height="45" enable="false" mask="##:##" type="string" style=":disabled {align:center middle;}"/>
+        <Combo id="applyYear_combo" taborder="19" left="43.63%" top="131" height="45" width="200" innerdataset="@ds_baseYear" codecolumn="YEAR" datacolumn="YEAR"/>
+        <Button id="serch_btn" taborder="20" text="검  색" left="63.63%" top="131" height="45" width="130" onclick="serch_btn_onclick"/>
+        <Button id="register_btn" taborder="21" text="등  록" left="63.88%" top="552" height="45" width="130"/>
+        <Button id="save_btn" taborder="22" text="저  장" left="63.88%" top="602" height="45" width="130"/>
+        <Static id="Static09" taborder="23" text=" ※저녁시간은 1시간이며, 퇴근시각 이후부터 저녁시간입니다." left="27%" top="663" right="25.4%" height="50" onclick="Static09_onclick" style="color:red;align:left middle;"/>
+      </Layout>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_baseWorkTime">
+        <ColumnInfo>
+          <Column id="APPLY_YEAR" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="OVER_TIME" type="STRING" size="256"/>
+          <Column id="NIGHT_TIME" type="STRING" size="256"/>
+          <Column id="LUNCH_START_TIME" type="STRING" size="256"/>
+          <Column id="LUNCH_END_TIME" type="STRING" size="256"/>
+          <Column id="DINNER_START_TIME" type="STRING" size="256"/>
+          <Column id="DINNER_END_TIME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_baseYear">
+        <ColumnInfo>
+          <Column id="YEAR" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="YEAR">2018</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2019</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2020</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2021</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2022</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2023</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2024</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2025</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2026</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2027</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2028</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2029</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2030</Col>
+          </Row>
+          <Row>
+            <Col id="YEAR">2031</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[var dataLength;
+var presentYear;
+var choiceYear
+
+
+this.basicWorktimeManagement_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findBasicWorkTimeList",
+					"dataURL::hr/circumstance/findBaseWorkTimeList.do",
+					"",
+					"callback",
+					false);
+	applyYear_combo.value=String(g_today).substr(0,4);	//현재년도 구하기
+	ds_baseWorkTime.filter("APPLY_YEAR=='"+applyYear.value+"'");
+}
+
+this.serch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	ds_baseWorkTime.filter("APPLY_YEAR=='0'");
+	ds_baseWorkTime.filter("APPLY_YEAR=='"+applyYear.value+"'");
+	
+	presentYear = String(g_today).substr(0,4);
+	choiceYear = applyYear.value;
+		
+}]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_AppointmentForm" left="0" top="0" width="500" height="400" titletext="발령호수 선택" onload="hr_AppointmentForm_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="appointmentEmployee_grid" taborder="0" useinputpanel="false" left="5%" top="24" right="5%" height="358" binddataset="ds_appointment" autofittype="col" oncelldblclick="appointmentEmployee_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="59"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="발령호수"/>
+                <Cell col="2" text="발령제목"/>
+                <Cell col="3" text="발령구분"/>
+                <Cell col="4" text="발령일자"/>
+                <Cell col="5" text="승인상태"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" text="bind:APPOINTMENT_NO"/>
+                <Cell col="2" text="bind:APPOINTMENT_TITLE"/>
+                <Cell col="3" displaytype="combo" text="bind:APPOINTMENT_DIVISION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" text="bind:APPOINTMENT_DATE"/>
+                <Cell col="5" text="bind:APPROVAL_STATUS" expr="APPROVAL_STATUS=='Y' ? '승인' : APPROVAL_STATUS=='N'? '미승인': '취소'"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="registerAppointment_btn" taborder="1" text="선택완료" left="106.8%" top="24" right="-21%" height="32" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_employee" oncolumnchanged="ds_employee_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+          <Column id="CHECK" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EMP_CODE">1001</Col>
+            <Col id="EMP_NAME">조윤희</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1002</Col>
+            <Col id="EMP_NAME">손창우</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS001</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP001</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1003</Col>
+            <Col id="EMP_NAME">강순용</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS004</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1004</Col>
+            <Col id="EMP_NAME">정승훈</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS007</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP001</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1005</Col>
+            <Col id="EMP_NAME">김성화</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">LOGI</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1006</Col>
+            <Col id="EMP_NAME">김태형</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1111</Col>
+            <Col id="EMP_NAME">허용석</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">0724</Col>
+            <Col id="EMP_NAME">김민서</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1234</Col>
+            <Col id="EMP_NAME">조아람</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1010</Col>
+            <Col id="EMP_NAME">서정훈</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1114</Col>
+            <Col id="EMP_NAME">심승현</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1009</Col>
+            <Col id="EMP_NAME">강호경</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1007</Col>
+            <Col id="EMP_NAME">황지창</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">LOGI</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1008</Col>
+            <Col id="EMP_NAME">이원민</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_appointment">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256" description="발령호수"/>
+          <Column id="APPOINTMENT_TITLE" type="STRING" size="256" description="인사발령 제목"/>
+          <Column id="APPOINTMENT_DIVISION" type="STRING" size="256" description="발령구분"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256" description="발령일자"/>
+          <Column id="APPOINTMENT_DIRECTOR" type="STRING" size="256" description="발령자"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256" description="승인상태"/>
+          <Column id="NOTE" type="STRING" size="256" description="비고"/>
+          <Column id="APPOINTMENT_SEQ" type="STRING" size="256" description="시퀀스"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+발령대상자 선택 다이얼로그
+@Path		인사
+@Description	발령대상자 선택 다이얼로그 
+@Author	  	심승현
+@Create           2019. 02. 13.
+********************************************************************************/
+//폼 온로드
+this.hr_AppointmentForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//alert(this.parent.form.name);
+	this.transaction("findAppointmentList",
+					"dataURL::hr/appointment/findAppointmentList.do",
+					"",
+					"ds_appointment=ds_appointment",
+					"",
+					"callback",
+					false
+					);
+}
+
+this.appointmentEmployee_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var selAppointmentNo = this.ds_appointment.getColumn(e.row, "APPOINTMENT_NO");
+	var selAppointmentDate = this.ds_appointment.getColumn(e.row, "APPOINTMENT_DATE");
+	var selAppointmentTitle = this.ds_appointment.getColumn(e.row, "APPOINTMENT_TITLE");
+	var selAppointmentDivision = this.ds_appointment.getColumn(e.row, "APPOINTMENT_DIVISION");
+	
+	this.opener.appointmentNo_edt.set_value(selAppointmentNo);
+ 	this.opener.appointmentTitle_edt.set_value(selAppointmentTitle);
+ 	this.opener.appointmentDate_mEdt.set_value(selAppointmentDate);
+ 	this.opener.appointmentDivision_combo00.set_value(selAppointmentDivision);
+	this.opener.appointmentNo_edt_onchanged();
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

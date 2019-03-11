@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="accountant" left="0" top="0" width="1185" height="785" titletext="New Form">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="Static00" taborder="0" text="거래처원장" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="term_stc" taborder="1" text="기간" left="49.28%" top="71" right="43.21%" height="40"/>
+        <Calendar id="startDate_cal" taborder="2" left="56.71%" top="71" height="40" style="align:center middle;" width="150"/>
+        <Static id="between_stc" taborder="3" text="~" left="69.37%" top="71" right="27.26%" height="40" style="align:center middle;"/>
+        <Calendar id="endDate_cal" taborder="4" left="72.74%" top="71" height="40" style="align:center middle;" width="150"/>
+        <Button id="serch_btn" taborder="5" text="조회" left="87.51%" top="71" right="3.54%" height="40" onclick="serch_btn_onclick"/>
+        <Static id="accountSubject_stc" taborder="6" text="계정과목" left="2.45%" top="71" right="89.96%" height="40"/>
+        <Edit id="accountName_edt" taborder="7" value="외상매출금" enable="false" left="10.04%" top="71" right="79.16%" height="40" style="align:center middle;"/>
+        <Static id="customer_stc" taborder="8" text="거래처" left="24.64%" top="71" right="67.76%" height="40"/>
+        <Edit id="customerName_edt" taborder="9" left="32.15%" top="71" right="56.88%" height="40" style="align:center middle;" enable="false"/>
+        <Grid id="Grid00" taborder="10" binddataset="ds_accountant" useinputpanel="false" autofittype="col" left="1.27%" top="131" right="1.52%" height="605">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="거래처"/>
+                <Cell col="1" text="등록번호"/>
+                <Cell col="2" text="대표자명"/>
+                <Cell col="3" text="전기이월"/>
+                <Cell col="4" text="차변"/>
+                <Cell col="5" text="대변"/>
+                <Cell col="6" text="잔액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CUSTOMER_NAME"/>
+                <Cell col="1" text="bind:BUSINESS_LICENSE_NUMBER"/>
+                <Cell col="2" text="bind:CUSTOMER_CEO"/>
+                <Cell col="3" text="bind:AMOUNT"/>
+                <Cell col="4" text="bind:LEFT_DEBTOR_PRICE"/>
+                <Cell col="5" text="bind:RIGHT_CREDITS_PRICE"/>
+                <Cell col="6" text="bind:BALANCE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="11" text="▼" left="43.21%" top="71" height="40" width="50" onclick="Button00_onclick"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_accountant">
+        <ColumnInfo>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CEO" type="STRING" size="256"/>
+          <Column id="AMOUNT" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+급여 공제항목 관리 화면                                             						                                                                         
+@Path			회계              				   				
+@Description	거래처 원장 조회폼							
+@Author	  		손창우   			                        								                                            
+@Create         2019. 03. 04.                             		                    				                                            
+********************************************************************************/
+
+this.dialogName="";
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	this.dialogName="CustomerDialog";	
+	application.open("CustomerDialog","base::customerDialog.xfdl",this.getOwnerFrame(),null,null,750, 150);
+}
+
+this.setVal = function(Code,FormName,Name){
+		if(FormName=="CustomerDialog"){
+		this.customerName_edt.set_value(Name);
+	
+		}
+}
+
+this.serch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var customerName = this.customerName_edt.value;
+	var startDate=this.startDate_cal.value;
+	var endDate = this.endDate_cal.value;
+	
+	if( endDate<startDate){
+           alert("기간확인!!!");
+        }
+	
+	this.transaction("AccountantList", 
+					"dataURL::acc/accBookMgt/AccountantList.do", 
+					"", 
+					"ds_accountant=ds_accountant", 
+					"customerName='"+customerName+"' startDate='"+startDate+"' endDate='"+endDate+"'", 
+					"callback",
+					false);
+}
+
+
+this.callback=function(trid, errorCode, errorMsg)
+{
+	if(trid=="AccountantList"){
+		if(errorCode!=0){
+			alert("조회실패: "+errorMsg);				
+		}
+	}
+}]]></Script>
+  </Form>
+</FDL>

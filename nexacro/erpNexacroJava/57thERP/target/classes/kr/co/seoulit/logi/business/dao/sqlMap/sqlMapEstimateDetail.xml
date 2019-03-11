@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.business.dao.EstimateDetailDAO">
+<!-- estimateDetailDAO -->
+
+	<resultMap type="estimateDetailTO" id="estimateDetailResult">
+
+		<result property="estimateDetailNo" column="ESTIMATE_DETAIL_NO" />
+		<result property="estimateNo" column="ESTIMATE_NO" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfEstimate" column="UNIT_OF_ESTIMATE" />
+		<result property="dueDateOfEstimate" column="DUE_DATE_OF_ESTIMATE" />
+		<result property="estimateAmount" column="ESTIMATE_AMOUNT" />
+		<result property="unitPriceOfEstimate" column="UNIT_PRICE_OF_ESTIMATE" />
+		<result property="sumPriceOfEstimate" column="SUM_PRICE_OF_ESTIMATE" />
+		<result property="description" column="DESCRIPTION" />
+
+	</resultMap>
+
+	<select id="selectEstimateDetailList" parameterType="string" resultMap="estimateDetailResult">
+
+		SELECT
+		ESTIMATE_DETAIL_NO, ESTIMATE_NO, ITEM_CODE
+		, ITEM_NAME,
+		UNIT_OF_ESTIMATE, DUE_DATE_OF_ESTIMATE
+		, ESTIMATE_AMOUNT,
+		UNIT_PRICE_OF_ESTIMATE
+		, SUM_PRICE_OF_ESTIMATE, SUM_PRICE_OF_ESTIMATE
+
+		DESCRIPTION
+		FROM ESTIMATE_DETAIL
+		WHERE ESTIMATE_NO= #{estimateNo}
+
+	</select>
+
+	<insert id="insertEstimateDetail" parameterType="estimateDetailTO">
+
+		INSERT INTO ESTIMATE_DETAIL(
+		  ESTIMATE_DETAIL_NO
+		, ESTIMATE_NO
+		, ITEM_CODE
+		, ITEM_NAME
+		, UNIT_OF_ESTIMATE
+		, DUE_DATE_OF_ESTIMATE
+		, ESTIMATE_AMOUNT
+		, UNIT_PRICE_OF_ESTIMATE
+		, SUM_PRICE_OF_ESTIMATE
+		, DESCRIPTION
+		)
+		VALUES
+		( #{estimateDetailNo}
+		, #{estimateNo}
+		, #{itemCode}
+		, #{itemName}
+		, #{unitOfEstimate}
+		, #{dueDateOfEstimate}
+		, #{estimateAmount}
+		, #{unitPriceOfEstimate}
+		, #{sumPriceOfEstimate}
+		, #{description}
+		)
+
+	</insert>
+
+	<update id="updateEstimateDetail" parameterType="estimateDetailTO">
+
+		UPDATE ESTIMATE_DETAIL SET
+		ESTIMATE_DETAIL_NO = #{estimateDetailNo}
+		,ESTIMATE_NO = #{estimateNo}
+		,ITEM_CODE = #{itemCode}
+		,ITEM_NAME = #{itemName}
+		,UNIT_OF_ESTIMATE =
+		#{unitOfEstimate}
+		,DUE_DATE_OF_ESTIMATE = #{dueDateOfEstimate}
+		,ESTIMATE_AMOUNT = #{estimateAmount}
+		,UNIT_PRICE_OF_ESTIMATE =
+		#{unitPriceOfEstimate}
+		,SUM_PRICE_OF_ESTIMATE = #{sumPriceOfEstimate}
+		,DESCRIPTION = #{description}
+		WHERE ESTIMATE_DETAIL_NO =
+		#{estimateDetailNo}
+
+	</update>
+
+	<delete id="deleteEstimateDetail" parameterType="estimateDetailTO">
+
+		DELETE FROM ESTIMATE_DETAIL
+		WHERE ESTIMATE_DETAIL_NO =
+		#{estimateDetailNo}
+		AND ESTIMATE_NO = #{estimateNo}
+
+	</delete>
+
+</mapper>

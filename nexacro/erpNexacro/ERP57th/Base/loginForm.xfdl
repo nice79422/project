@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="form_login" left="0" top="0" width="500" height="450" titletext="Login" onload="form_login_onload" onclose="form_login_onclose" onbeforeclose="form_login_onbeforeclose">
+    <Layouts>
+      <Layout width="500" height="450">
+        <Edit id="edt_businessPlaceCode" taborder="2" left="37.6%" top="175" right="17.2%" height="44" readonly="true"/>
+        <Edit id="edt_deptCode" taborder="5" left="37.6%" top="223" right="17.2%" height="44" readonly="true"/>
+        <Edit id="edt_empCode" taborder="8" left="37.6%" top="271" right="17.2%" height="44"/>
+        <Edit id="edt_password" taborder="10" left="37.6%" top="319" right="17.2%" height="44" password="true"/>
+        <Static id="Static00" taborder="1" text="사업장코드" left="14%" top="175" right="64.2%" height="44"/>
+        <Static id="Static01" taborder="4" text="부서코드" left="14%" top="223" right="64.2%" height="44"/>
+        <Static id="Static02" taborder="7" text="사원번호" left="14%" top="271" right="64.2%" height="44"/>
+        <Static id="Static03" taborder="9" text="비밀번호" left="14%" top="319" right="64.2%" height="44"/>
+        <Static id="Static04" taborder="0" text="57th ERP" left="26.2%" top="45" right="26.2%" height="95" style="align:center middle;font:24 Dotum;"/>
+        <Button id="btn_login" taborder="11" text="로그인" left="16.6%" top="379" right="16.6%" height="44" onclick="btn_login_onclick"/>
+        <Button id="btn_bisinessPlaceCodeDialog" taborder="3" text="검색" left="85.4%" top="176" right="5.4%" height="41" onclick="btn_bisinessPlaceCodeDialog_onclick"/>
+        <Button id="btn_deptCodeDialog" taborder="6" text="검색" left="85.4%" top="224" right="5.4%" height="41" onclick="btn_deptCodeDialog_onclick"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="512" height="400"/>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_businessPlace">
+        <ColumnInfo>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_NAME" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_TEL" type="STRING" size="256"/>
+          <Column id="COMPANY_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_employee">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_businessPlaceCode" propid="value" datasetid="gds_businessPlace" columnid="BUSINESS_PLACE_NAME"/>
+      <BindItem id="item1" compid="edt_deptCode" propid="value" datasetid="" columnid=""/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+로그인 화면                                             						                                                                         
+@Path		공통              				   				
+@Description	로그인을 하기 위한 폼							
+@Author	  	심승현				    			                        								                                            
+@Create           2019. 01. 31.                             		                    				                                            
+********************************************************************************/
+
+
+this.form_login_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	
+	this.edt_businessPlaceCode.set_value("사업장선택");
+	this.edt_deptCode.set_value("부서선택");
+}
+
+
+
+
+this.btn_bisinessPlaceCodeDialog_onclick = function (obj:Button,  e:ClickEventInfo)
+{		
+
+	application.open("modeless",
+			"base::businessDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_businessPlace}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='businessPlace'"
+			);
+}
+
+this.btn_deptCodeDialog_onclick = function(obj:Button,  e:ClickEventInfo)
+{
+	if(this.edt_businessPlaceCode.value=="사업장선택"){
+                alert("사업장코드를 검색해주세요");
+         }
+        else{
+	     	application.open("modeless",
+			"base::deptDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_deptPlace}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='dept'"
+			); 
+	    }
+}
+
+
+
+this.btn_login_onclick = function (obj:Button,  e:ClickEventInfo)
+{
+if(this.edt_empCode.text==""){
+  alert("사원코드를 입력하세요");
+  }
+  else if(this.edt_password.text==""){
+  alert("비밀번호를 입력하세요");
+  }
+  else if(this.edt_deptCode.text=="부서선택"){
+  alert("부서를 선택해주세요");
+  }
+  else{
+   this.transaction( "checkLogin"
+               ,"dataURL::sys/checkLogin.do"
+               ,""
+               ,"ds_employee=gds_employee"
+               ,"businessPlaceCode='"+this.edt_businessPlaceCode.value+ "' deptCode='"+this.edt_deptCode.value+"' empCode='"+this.edt_empCode.value+"' password='"+this.edt_password.value+"'"
+               ,"callback"
+               ,false);
+  }
+}
+	
+
+
+
+this.callback = function(strSvcID, nErrorCode, strErrorMsg) {
+   if(strSvcID=="checkLogin"){
+      if(nErrorCode<0){
+         alert(strErrorMsg);   
+      }else{      
+		alert("로그인성공");
+        	application.g_authorityCode=this.ds_employee.getColumn(0,"AUTHORITY_CODE");
+	        application.g_businessCode=this.ds_employee.getColumn(0,"BUSINESS_PLACE_CODE");
+	        application.g_deptCode=this.ds_employee.getColumn(0,"DEPT_CODE");
+	        application.g_positionCode=this.ds_employee.getColumn(0,"POSITION_CODE");
+	        application.g_empCode=this.ds_employee.getColumn(0,"EMP_CODE");
+	        application.g_empName=this.ds_employee.getColumn(0,"EMP_NAME");
+	        
+	        
+       
+         var objFrameSet = application.mainframe.all["VFrameSet0"].all["ChildFrame0"].form;
+                  //.all["HFrameSet0"]
+//           var objFrameSet=application.mainframe.VFrameSet0.ChildFrame0;
+          objFrameSet.edt_authorityCode.set_value(application.g_authorityCode);
+          objFrameSet.edt_businessCode.set_value(application.g_businessCode);
+          objFrameSet.edt_deptCode.set_value(application.g_deptCode);
+          objFrameSet.edt_empCode.set_value(application.g_empCode);
+          objFrameSet.edt_empName.set_value(application.g_empName);
+
+   
+        application.mainframe.set_visible(true);
+		this.close();
+         
+      }  
+   }
+}
+this.form_login_onbeforeclose = function(obj:Form, e:nexacro.CloseEventInfo)
+{
+	application.basicTransaction();
+}
+]]></Script>
+  </Form>
+</FDL>

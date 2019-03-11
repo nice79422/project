@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_MRPForm" left="0" top="0" width="1185" height="785" titletext="MRPForm" onload="logi_MRPForm_onload">
+    <Objects>
+      <Dataset id="ds_mps">
+        <ColumnInfo>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="SALES_PLAN_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MPS" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_DATE" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_AMOUNT" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_MPS" type="STRING" size="256"/>
+          <Column id="SCHEDULED_END_DATE" type="STRING" size="256"/>
+          <Column id="MRP_APPLY_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mrpGathering">
+        <ColumnInfo>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_OR_PRODUCTION_STATUS" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP_GATHERING" type="STRING" size="256"/>
+          <Column id="NECESSARY_AMOUNT" type="STRING" size="256"/>
+          <Column id="DUE_DATE" type="STRING" size="256"/>
+          <Column id="CLAIM_DATE" type="STRING" size="256"/>
+          <Column id="ON_GOING_PROCESS_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mrp">
+        <ColumnInfo>
+          <Column id="MRP_NO" type="STRING" size="256"/>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP" type="STRING" size="256"/>
+          <Column id="REQUIRED_AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="REQUIRED_DATE" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mrpOpenTemp">
+        <ColumnInfo>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="BOM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP" type="STRING" size="256"/>
+          <Column id="PLAN_AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="REQUIRED_DATE" type="STRING" size="256"/>
+          <Column id="TOTAL_LOSS_RATE" type="STRING" size="256"/>
+          <Column id="CACULATED_AMOUNT" type="STRING" size="256"/>
+          <Column id="REQUIRED_AMOUNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="test">
+        <ColumnInfo>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="BOM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP" type="STRING" size="256"/>
+          <Column id="PLAN_AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="REQUIRED_DATE" type="STRING" size="256"/>
+          <Column id="TOTAL_LOSS_RATE" type="STRING" size="256"/>
+          <Column id="CACULATED_AMOUNT" type="STRING" size="256"/>
+          <Column id="REQUIRED_AMOUNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Layouts>
+      <Layout>
+        <Grid id="mps_grid" taborder="1" binddataset="ds_mps" useinputpanel="false" autofittype="col" left="33" top="130" width="1106" height="190">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="146"/>
+                <Column size="195"/>
+                <Column size="81"/>
+                <Column size="107"/>
+                <Column size="69"/>
+                <Column size="140"/>
+                <Column size="66"/>
+                <Column size="174"/>
+                <Column size="140"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="주생산계획번호"/>
+                <Cell col="1" text="수주상세번호"/>
+                <Cell col="2" text="품목코드"/>
+                <Cell col="3" text="품목명"/>
+                <Cell col="4" text="단위"/>
+                <Cell col="5" text="계획일자"/>
+                <Cell col="6" text="계획수량"/>
+                <Cell col="7" text="납기일"/>
+                <Cell col="8" text="예정마감일자"/>
+                <Cell col="9" text="MRP적용상태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:MPS_NO"/>
+                <Cell col="1" text="bind:CONTRACT_DETAIL_NO"/>
+                <Cell col="2" text="bind:ITEM_CODE"/>
+                <Cell col="3" text="bind:ITEM_NAME"/>
+                <Cell col="4" text="bind:UNIT_OF_MPS"/>
+                <Cell col="5" text="bind:MPS_PLAN_DATE"/>
+                <Cell col="6" text="bind:MPS_PLAN_AMOUNT"/>
+                <Cell col="7" text="bind:SCHEDULED_END_DATE"/>
+                <Cell col="8" text="bind:DUE_DATE_OF_MPS"/>
+                <Cell col="9" text="bind:MRP_APPLY_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="searchMPS_btn" taborder="2" text="미전개 MPS목록조회" onclick="btn_searchMPS_onclick" left="32" top="81" width="145" height="39"/>
+        <Button id="mrpOpenTemp2_btn" taborder="3" text="소요량개별전개" onclick="btn_mrpOpenTemp2_onclick" left="890" top="81" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+        <Button id="mrpOpenTemp_btn" taborder="4" text="소요량일괄전개" onclick="btn_mrpOpenTemp_onclick" left="1013" top="81" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+        <Tab id="mrp_tab" taborder="5" left="30" top="352" width="1112" height="402" tabindex="0" scrollbars="autoboth" style="font:한컴산뜻돋움,13,bold;" onchanged="mrp_tab_onchanged">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="소요량전개내역">
+              <Layouts>
+                <Layout width="1223" height="413">
+                  <Grid id="grd_mrp" taborder="3" binddataset="ds_mrp" useinputpanel="false" autofittype="col" left="8" top="57" width="1097" height="313">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="100"/>
+                          <Column size="100"/>
+                          <Column size="100"/>
+                          <Column size="104"/>
+                          <Column size="45"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="107"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="소요량전개번호"/>
+                          <Cell col="1" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="주생산계획번호"/>
+                          <Cell col="2" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="소요량취합번호"/>
+                          <Cell col="3" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목명"/>
+                          <Cell col="4" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="단위"/>
+                          <Cell col="5" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="필요수량"/>
+                          <Cell col="6" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="발주일자"/>
+                          <Cell col="7" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="소요일자"/>
+                          <Cell col="8" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="소요량취합여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MRP_NO"/>
+                          <Cell col="1" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MPS_NO"/>
+                          <Cell col="2" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MRP_GATHERING_NO"/>
+                          <Cell col="3" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_NAME"/>
+                          <Cell col="4" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:UNIT_OF_MRP"/>
+                          <Cell col="5" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:REQUIRED_AMOUNT"/>
+                          <Cell col="6" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ORDER_DATE"/>
+                          <Cell col="7" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:REQUIRED_DATE"/>
+                          <Cell col="8" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MRP_GATHERING_STATUS"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="batchMrpGathering_btn" taborder="4" text="소요량취합" onclick="btn_batchMrpGathering_onclick" left="982" top="5" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+                  <Combo id="gatheringStatus_combo" taborder="5" codecolumn="codecolumn" datacolumn="datacolumn" left="847" top="2" width="115" height="42" onitemchanged="mrp_tab_tabpage1_gatheringStatus_combo_onitemchanged">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">Y</Col>
+                          <Col id="datacolumn">Y</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">N</Col>
+                          <Col id="datacolumn">N</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="소요량취합내역">
+              <Layouts>
+                <Layout>
+                  <Grid id="grd_mrpGathering" taborder="2" binddataset="ds_mrpGathering" useinputpanel="false" autofittype="col" oncelldblclick="mrp_tab_tabpage2_grd_mrpGathering_oncelldblclick" left="1" top="79" width="1089" height="302">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="101"/>
+                          <Column size="80"/>
+                          <Column size="101"/>
+                          <Column size="104"/>
+                          <Column size="49"/>
+                          <Column size="57"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="소요량취합번호"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="구매/생산여부"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="필요수량"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="지시일"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="납기일"/>
+                          <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="공정진행여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MRP_GATHERING_NO"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_OR_PRODUCTION_STATUS"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_MRP_GATHERING"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:NECESSARY_AMOUNT"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DUE_DATE"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CLAIM_DATE"/>
+                          <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ON_GOING_PROCESS_STATUS"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Combo id="workStatus_combo" taborder="3" codecolumn="codecolumn" datacolumn="datacolumn" left="975" top="10" width="115" height="42" onitemchanged="mrp_tab_tabpage2_com_workStatus_onitemchanged">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">Y</Col>
+                          <Col id="datacolumn">Y</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">N</Col>
+                          <Col id="datacolumn">N</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">O</Col>
+                          <Col id="datacolumn">O</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Static id="MRP_stc" taborder="6" text="소요량전개/취합" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[/************************************************************************
+소요량전개 취합 화면
+@Path			물류
+@Description	소요량전개,취합 다이알로그
+@Author			wonminlee
+@Create			2019.02.15
+
+@Last Update    2019.02.20
+************************************************************************/
+/*
+application.open("modeless",
+			"logi_production::MrpDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_deptPlace}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='dept'"
+);
+*/
+
+
+this.logi_MRPForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ds_mps.filter("");
+	var toDate=application.today();
+	this.transaction(
+		"findMpsList",
+		"dataURL::logi/production/findMpsList.do",
+		"",
+		"ds_mps=ds_mps",
+		"fromDate='mrpSelect' toDate='"+toDate+"'",
+		"callback",
+		true
+	);
+	var mrpgStatus='NO';					
+	this.transaction(
+		"findMrpList",
+		"dataURL::logi/production/findMrpList.do",
+		"",
+		"ds_mrp=ds_mrp",
+		"mrpgStatus='"+mrpgStatus+"'",
+		"callback",
+		true
+	);
+	
+}
+
+
+
+// 미전개 mps목록조회 버튼 클릭이벤트
+this.btn_searchMPS_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var toDate="20190218";
+	this.transaction("findMpsList",
+		"dataURL::logi/production/findMpsList.do",
+		"",
+		"ds_mps=ds_mps",
+		"fromDate='mrpSelect' toDate='"+toDate+"'",
+		"callback",
+		true
+	);
+}
+
+
+//소요량 개별전개 버튼 클릭이벤트
+this.btn_mrpOpenTemp2_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var mpsRow = this.ds_mps.rowposition;
+ 	var mpsNo = this.ds_mps.getColumn(mpsRow,"MPS_NO");
+ 	
+	alert(mpsNo);
+	
+	if(this.confirm("소요량 전개를 진행하시겠습니까?")){
+			this.transaction("findMrpOpenTempProcess",
+			"dataURL::logi/production/findMrpOpenTempProcess.do",
+			"",
+			"ds_mrpOpenTemp=ds_mrpOpenTemp",
+			"mpsNo='"+mpsNo+"'",
+			"callback",
+			false
+	);	
+	
+	}
+	/*
+	application.open("modeless",
+			"logi_production::MrpDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_mrpOpenTemp},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='mrp'"
+	);
+	alert("전개됨1");
+	*/
+	
+}
+
+//소요량 일괄전개 버튼 클릭이벤트
+this.btn_mrpOpenTemp_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.confirm("소요량 일괄전개를 진행하시겠습니까?")){
+			this.transaction("findMrpOpenTempList",
+			"dataURL::logi/production/findMrpOpenTempList.do",
+			"ds_mps=ds_mps",
+			"ds_mrpOpenTemp=ds_mrpOpenTemp",
+			"",
+			"callback",
+			false);	
+	
+	}
+}
+
+//소요량 취합버튼 클릭이벤트
+this.btn_batchMrpGathering_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.confirm("소요량 취합을 진행하시겠습니까?")){
+
+		this.transaction("registMrpGathering",
+			"dataURL::logi/production/registMrpGathering.do",
+			"ds_mrp=ds_mrp:a",
+			"ds_mrp=ds_mrp",
+			"",
+			"callback",
+			false
+		);	
+		
+	}
+	
+}
+
+//탭 변경 이벤트
+this.mrp_tab_onchanged = function(obj:Tab, e:nexacro.TabIndexChangeEventInfo)
+{
+	var gatheringStatus="Y";
+	if(e.postindex==1){
+			this.transaction("findMrpGatheringList",
+				"dataURL::logi/production/findMrpGatheringList.do",
+				"",
+				"ds_mrpGathering=ds_mrpGathering",
+				"gatheringStatus='"+gatheringStatus+"'",
+				"callback",
+				false
+			);
+	}
+}
+
+//
+this.mrp_tab_tabpage1_gatheringStatus_combo_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+		if(e.posttext=='Y'){
+			//gds_mrp.filter("MRP_GATHERING_STATUS=='Y'");
+			var mrpgStatus='YES';					
+			this.transaction("findMrpList",
+				"dataURL::logi/production/findMrpList.do",
+				"",
+				"ds_mrp=ds_mrp",
+				"mrpgStatus='"+mrpgStatus+"'",
+				"callback",
+				true
+			);	
+		}else{
+			trace(e.posttext);
+			//gds_mrp.filter("MRP_GATHERING_STATUS=='N'");
+			var mrpgStatus='NO';					
+			this.transaction("findMrpList",
+				"dataURL::logi/production/findMrpList.do",
+				"",
+				"ds_mrp=ds_mrp",
+				"mrpgStatus='"+mrpgStatus+"'",
+				"callback",
+				true
+			);			
+		}
+}
+
+
+//소요량취합내역 탭 콤보박스 내용변경 이벤트
+this.mrp_tab_tabpage2_com_workStatus_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	if(e.posttext=='Y'){
+		this.ds_mrpGathering.filter("ON_GOING_PROCESS_STATUS=='Y'");
+ 	}else if(e.posttext=='O'){
+		this.ds_mrpGathering.filter("ON_GOING_PROCESS_STATUS=='O'");
+ 	}else{
+		this.ds_mrpGathering.filter("ON_GOING_PROCESS_STATUS!='Y' && ON_GOING_PROCESS_STATUS!='O'");
+ 	}
+}
+
+//탭2 셀더블클릭 
+this.mrp_tab_tabpage2_grd_mrpGathering_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var mrpGrow=obj.getDatasetRow;
+	var mrpgNo=this.ds_mrpGathering.getColumn(mrpGrow,"MRP_GATHERING_NO");
+	
+	application.open("modeless1",
+			"logi_production::MrpGatheringDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_mrpGathering,mrpgNo:mrpgNo},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='mrpG'"
+			);
+	//alert("개더링");
+}
+
+
+
+this.callback = function(strSvcID, nErrorCode, strErrorMsg) {
+	if(strSvcID=="findMrpOpenTempList"){
+		alert(strErrorMsg);
+		
+		var open1=application.open("modeless1",
+			"logi_production::MrpDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_mrpOpenTemp},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='mrp'"
+		);
+		alert("전개됨");
+		
+		if(open1){
+			this.reload();
+		}
+	}
+	if(strSvcID=="findMrpOpenTempProcess"){  //개별전개
+		alert(strErrorMsg);
+		
+		var open2=application.open("modeless2",
+			"logi_production::MrpDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_mrpOpenTemp},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='mrp'"
+		);
+		alert("전개됨");
+		
+		if(open2){
+			this.reload();
+		}
+	}
+	if(strSvcID=="registMrpGathering"){
+		alert(strErrorMsg);
+		this.reload();
+		
+	}
+	if(strSvcID=="findMrpGatheringList"){
+		alert(strErrorMsg);
+	}
+	if(strSvcID=="findMpsList"){
+		alert(strErrorMsg);
+	}
+}
+
+]]></Script>
+  </Form>
+</FDL>

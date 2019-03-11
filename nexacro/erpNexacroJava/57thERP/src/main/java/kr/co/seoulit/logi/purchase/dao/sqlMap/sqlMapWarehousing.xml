@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.purchase.dao.WarehousingDAO">
+
+
+
+
+
+	<!-- warehousingDAO -->
+
+	<resultMap type="warehousingTO" id="warehousingResult">
+
+	<result property="itemCode" column="ITEM_CODE"/>
+	<result property="orderNo" column="ORDER_NO"/>
+	<result property="itemName" column="ITEM_NAME"/>
+	<result property="orderAmount" column="ORDER_AMOUNT"/>
+	<result property="warehousingAmount" column="WAREHOUSING_AMOUNT"/>
+	<result property="unitWarehousing" column="UNIT_WAREHOUSING"/>
+	<result property="customer" column="CUSTOMER"/>
+	<result property="description" column="DESCRIPTION"/>
+	<result property="warehousingDate" column="WAREHOUSING_DATE"/>
+	<result property="warehousingNo" column="WAREHOUSING_NO"/>
+	</resultMap>
+
+
+	<select id="selectWarehousingList"  resultMap="warehousingResult">
+
+		SELECT
+		ITEM_CODE, ORDER_NO, ITEM_NAME, ORDER_AMOUNT
+		, WAREHOUSING_AMOUNT, UNIT_WAREHOUSING, CUSTOMER, DESCRIPTION
+		, WAREHOUSING_DATE,WAREHOUSING_NO
+		FROM WAREHOUSING
+
+	</select>
+
+
+
+
+	<insert id="insertWarehousing" parameterType="warehousingTO">
+
+		INSERT INTO WAREHOUSING(
+		ITEM_CODE
+		, ORDER_NO
+		, ITEM_NAME
+		, ORDER_AMOUNT
+		, WAREHOUSING_AMOUNT
+		, UNIT_WAREHOUSING
+		, CUSTOMER
+		, DESCRIPTION
+		, WAREHOUSING_DATE
+		,WAREHOUSING_NO
+		)
+		VALUES
+		( #{itemCode}
+		, #{orderNo}
+		, #{itemName}
+		, #{orderAmount}
+		, #{warehousingAmount}
+		, #{unitWarehousing}
+		, #{customer}
+		, #{description}
+		, #{warehousingDate}
+		, #{warehousingNo})
+
+	</insert>
+
+
+	<update id="updateWarehousing" parameterType="warehousingTO">
+
+		UPDATE WAREHOUSING SET
+		ORDER_NO = #{orderNo}
+		, ITEM_NAME = #{itemName}
+		, ORDER_AMOUNT = #{orderAmount}
+		, WAREHOUSING_AMOUNT = #{warehousingAmount}
+		, UNIT_WAREHOUSING = #{unitWarehousing}
+		, CUSTOMER = #{customer}
+		, DESCRIPTION = #{description}
+		, WAREHOUSING_DATE = #{warehousingDate}
+		WHERE
+		ITEM_CODE = #{itemCode}
+		WAREHOUSING_NO=#{warehousingNo}
+
+	</update>
+
+
+
+
+
+
+</mapper>

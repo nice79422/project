@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_InventoryHistoryDialog" left="0" top="0" width="1024" height="768" titletext="New Form" onload="InventoryHistoryDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="inven_grid" taborder="1" binddataset="ds_materialPayment" useinputpanel="false" left="14" top="71" width="995" height="689" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="164"/>
+                <Column size="229"/>
+                <Column size="189"/>
+                <Column size="138"/>
+                <Column size="100"/>
+                <Column size="136"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="작업지시번호"/>
+                <Cell col="1" text="제품코드"/>
+                <Cell col="2" text="제품명"/>
+                <Cell col="3" text="출고수량"/>
+                <Cell col="4" text="단위"/>
+                <Cell col="5" text="출고일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:WORK_INSTRUCTION_NO"/>
+                <Cell col="1" text="bind:ITEM_CODE"/>
+                <Cell col="2" text="bind:ITEM_NAME"/>
+                <Cell col="3" text="bind:PAYMENT_AMOUNT"/>
+                <Cell col="4" text="bind:UNIT_PAYMENT"/>
+                <Cell col="5" text="bind:PAYMENT_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="InventoryHistory_stc" taborder="2" text="재고이력조회" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_materialPayment">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="PAYMENT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PAYMENT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="RELEASE_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+//부품 재고이력조회 온로드
+this.InventoryHistoryDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	application.trace(this.parent.itemCode);
+	this.ds_materialPayment.filter("ITEM_CODE=='"+this.parent.itemCode+"'");		
+	
+	this.transaction(
+		"findMaterialPaymentList",
+		"dataURL::logi/purchase/findMaterialPaymentList.do",
+		"",
+		"ds_materialPayment=ds_materialPayment",
+		"",
+		"callback"
+	);	
+}
+
+
+
+//콜백
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid=="findMaterialPaymentList"){
+		if(ErrorCode<0){
+			application.alert("온로드 실패");
+		} else {	
+		
+		}
+	}
+}]]></Script>
+  </Form>
+</FDL>

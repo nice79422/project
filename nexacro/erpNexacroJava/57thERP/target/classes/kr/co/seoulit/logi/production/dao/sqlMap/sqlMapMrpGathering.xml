@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.production.dao.MrpGatheringDAO">
+
+
+
+	<!-- mrpGatheringDAO -->
+
+
+
+	<!-- mrpGatheringDAO -->
+
+	<!-- 쿼리용 -->
+	<resultMap id="mrpGatheringResult2" type="mrpGatheringTO2">
+		<result property="mrpGatheringNo" column="MRP_GATHERING_NO" />
+		<result property="mrpNo" column="MRP_NO" />
+		<result property="orderOrProductionStatus"
+			column="ORDER_OR_PRODUCTION_STATUS" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfMrpGathering"
+			column="UNIT_OF_MRP_GATHERING" />
+		<result property="necessaryAmount" column="NECESSARY_AMOUNT" />
+		<result property="dueDate" column="DUE_DATE" />
+		<result property="claimDate" column="CLAIM_DATE" />
+	</resultMap>
+
+
+	<!-- 셀렉트용 -->
+	<resultMap id="mrpGatheringResult" type="mrpGatheringTO">
+		<result property="mrpGatheringNo" column="MRP_GATHERING_NO" />
+		<result property="orderOrProductionStatus"
+			column="ORDER_OR_PRODUCTION_STATUS" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfMrpGathering"
+			column="UNIT_OF_MRP_GATHERING" />
+		<result property="necessaryAmount" column="NECESSARY_AMOUNT" />
+		<result property="dueDate" column="DUE_DATE" />
+		<result property="claimDate" column="CLAIM_DATE" />
+		<result property="onGoingProcessStatus"
+			column="ON_GOING_PROCESS_STATUS" />
+	</resultMap>
+
+
+
+
+
+
+
+	<select id="selectMrpGatheringList"
+		resultMap="mrpGatheringResult" parameterType="hashmap">
+
+      SELECT
+      *
+      FROM MRP_GATHERING
+	<if test="gatheringStatus.equals('Y')">
+	WHERE ON_GOING_PROCESS_STATUS ='Y'
+	</if>
+	<if test="gatheringStatus.equals('N')">
+	WHERE ON_GOING_PROCESS_STATUS ='N' OR ON_GOING_PROCESS_STATUS IS NULL
+	</if>
+	<if test="gatheringStatus.equals('O')">
+	WHERE ON_GOING_PROCESS_STATUS ='O'
+	</if>
+	</select>
+
+
+	<update id="updateMrpGathering" parameterType="mrpGatheringTO">
+		UPDATE
+		MRP_GATHERING SET
+		ORDER_OR_PRODUCTION_STATUS = #{orderOrProductionStatus}
+		, ITEM_CODE = #{itemCode}
+		, ITEM_NAME = #{itemName}
+		, UNIT_OF_MRP_GATHERING = #{unitOfMrpGathering}
+		, NECESSARY_AMOUNT = #{necessaryAmount}
+		, DUE_DATE = #{dueDate}
+		, CLAIM_DATE = #{claimDate}
+		, ON_GOING_PROCESS_STATUS = #{onGoingProcessStatus}
+		WHERE
+		MRP_GATHERING_NO = #{mrpGatheringNo}
+	</update>
+
+	<delete id="deleteMrpGathering" parameterType="mrpGatheringTO">
+
+		DELETE FROM MRP_GATHERING
+		WHERE
+		MRP_GATHERING_NO = #{mrpGatheringNo}
+
+	</delete>
+
+
+	<parameterMap id="MrpGatheringParameter" type="map">
+		<parameter property="mpsNo"
+			typeHandler="kr.co.seoulit.common.util.OracleCallBackHandler" mode="IN" />
+		<parameter property="errorCode" jdbcType="NUMERIC"
+			javaType="int" mode="OUT" />
+		<parameter property="errorMsg" jdbcType="VARCHAR"
+			javaType="string" mode="OUT" />
+	</parameterMap>
+
+	<select id="mrpGathering" statementType="CALLABLE"
+		parameterMap="MrpGatheringParameter" resultType="map">
+   <![CDATA[
+        {call MRP_GATHERING_PKG.P_MRP_GATHERING_OPEN(?,?,?)}
+    ]]>
+	</select>
+
+
+
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="kr.co.seoulit.acc.slip.dao.SlipDAO">
+
+    <resultMap type="slipTo" id="slipResult">
+    	<result property="slipNo" column="SLIP_NO"/>
+    	<result property="accountPeriodNo" column="ACCOUNT_PERIOD_NO"/>
+    	<result property="deptCode" column="DEPT_CODE"/>
+    	<result property="slipType" column="SLIP_TYPE"/>
+    	<result property="expenseReport" column="EXPENSE_REPORT"/>
+    	<result property="authorizationStatus" column="AUTHORIZATION_STATUS"/>
+    	<result property="reportingEmpCode" column="REPORTING_EMP_CODE"/>
+    	<result property="reportingDate" column="REPORTING_DATE"/>
+    	<result property="approvalEmpCode" column="APPROVAL_EMP_CODE"/>
+    	<result property="approvalDate" column="APPROVAL_DATE"/>
+    	<result property="slipDescription" column="SLIP_DESCRIPTION"/>
+    	<result property="slipStatus" column="SLIP_STATUS"/>
+    	<collection property="journalToList" select="kr.co.seoulit.acc.slip.dao.JournalDAO.selectJournalListForSlip" column="SLIP_NO"/>
+   	</resultMap>
+
+    	<select id="selectSlipListByCondition" parameterType="map" resultMap="slipResult">
+    	SELECT
+    	  	SLIP_NO,
+			ACCOUNT_PERIOD_NO,
+			DEPT_CODE,
+			SLIP_TYPE,
+			EXPENSE_REPORT,
+			AUTHORIZATION_STATUS,
+			REPORTING_EMP_CODE,
+			REPORTING_DATE,
+			APPROVAL_EMP_CODE,
+			APPROVAL_DATE,
+			SLIP_DESCRIPTION,
+			SLIP_STATUS
+    	FROM SLIP
+        WHERE REPORTING_DATE BETWEEN #{startDate} AND #{endDate}
+         <if test='slipStatus=="승인"'>
+          AND SLIP_STATUS='승인'
+         </if>
+         <if test='slipStatus=="미결"'>
+            AND SLIP_STATUS='미결'
+         </if>
+         <if test='slipStatus=="logi"'>
+            AND DEPT_CODE IN ('DEP000','DEP003','DEP005','DEP010')
+         </if>
+         <if test='slipStatus=="hr"'>
+            AND DEPT_CODE IN ('DEP000','DEP002','DEP007','DEP012')
+         </if>
+    	</select >
+
+
+    	<select id="selectSlipSequence" resultType="String">
+    		 SELECT 'SLIP'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD(SLIP_SEQ.NEXTVAL,3,0) FROM DUAL
+    	</select>
+
+
+
+		<select id="selectSlipByReportingDate" resultMap="slipResult">
+    		SELECT *
+    		FROM SLIP
+    		WHERE REPORTING_DATE = #{reportingDate}
+    	</select>
+
+ 		<insert id="insertSlipInfo" parameterType="slipTo">
+			INSERT INTO SLIP(
+			SLIP_NO
+			,ACCOUNT_PERIOD_NO
+			, SLIP_TYPE
+			, REPORTING_DATE
+			, EXPENSE_REPORT
+			, APPROVAL_EMP_CODE
+			, REPORTING_EMP_CODE
+			, SLIP_STATUS
+			,DEPT_CODE
+			, APPROVAL_DATE
+			) VALUES (
+			#{slipNo}
+			,#{accountPeriodNo}
+			, #{slipType}
+			, #{reportingDate}
+			, #{expenseReport}
+			, #{approvalEmpCode}
+			, #{reportingEmpCode}
+			, #{slipStatus}
+			, #{deptCode}
+			, #{approvalDate}
+			)
+		</insert>
+
+		<delete id="deleteSlipInfo" parameterType="slipTo">
+			DELETE FROM SLIP
+			WHERE SLIP_NO = #{slipNo}
+		</delete>
+
+		<update id="updateSlipInfo" parameterType="slipTo">
+			UPDATE SLIP SET
+				SLIP_NO				= #{slipNo},
+    			ACCOUNT_PERIOD_NO	= #{accountPeriodNo},
+    			DEPT_CODE			= #{deptCode},
+    			SLIP_TYPE			= #{slipType},
+    			EXPENSE_REPORT		= #{expenseReport},
+    			AUTHORIZATION_STATUS= #{authorizationStatus},
+    			REPORTING_EMP_CODE	= #{reportingEmpCode},
+    			REPORTING_DATE		= #{reportingDate},
+    			APPROVAL_EMP_CODE	= #{approvalEmpCode},
+    			APPROVAL_DATE		= #{approvalDate},
+    			SLIP_DESCRIPTION	= #{slipDescription},
+    			SLIP_STATUS			= #{slipStatus}
+    		WHERE SLIP_NO = #{slipNo}
+		</update>
+
+</mapper>

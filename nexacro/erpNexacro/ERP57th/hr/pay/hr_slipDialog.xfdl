@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_slipDialog" left="0" top="0" width="1000" height="330" titletext="hrSlipDialog" onload="hr_slipDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="1" text="전표확인" left="0" top="0" width="992" height="40"/>
+        <Grid id="salPayment_grd" taborder="8" binddataset="ds_contractDetail" useinputpanel="false" left="16" top="75" width="978" height="185" oncelldblclick="salPayment_grd_oncelldblclick" autofittype="col" autosizingtype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="127"/>
+                <Column size="152"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="92"/>
+                <Column size="80"/>
+                <Column size="42"/>
+                <Column size="301"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="제품코드"/>
+                <Cell col="1" text="제품명"/>
+                <Cell col="2" text="수주량"/>
+                <Cell col="3" text="가격"/>
+                <Cell col="4" text="납품여부"/>
+                <Cell col="5" text="합계가격"/>
+                <Cell col="6" text="단위"/>
+                <Cell col="7" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center middle;" text="bind:ITEM_CODE" suppressalign="middle"/>
+                <Cell col="1" text="bind:ITEM_NAME" suppressalign="middle"/>
+                <Cell col="2" text="bind:CONTRACT_AMOUNT"/>
+                <Cell col="3" text="bind:UNIT_PRICE_OF_CONTRACT"/>
+                <Cell col="4" text="bind:DELIVERY_STATUS" suppressalign="middle"/>
+                <Cell col="5" text="bind:SUM_PRICE_OF_CONTRACT" editlimitbymask="integer" suppress="0"/>
+                <Cell col="6" text="bind:UNIT_OF_CONTRACT" suppressalign="middle"/>
+                <Cell col="7" displaytype="normal" edittype="text" text="bind:DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="cancel_btn" taborder="9" text="취소" left="87.79%" top="43" right="1.23%" height="30" onclick="cancel_btn_onclick"/>
+        <Button id="confirm_btn" taborder="10" text="전송" left="75.72%" top="43" right="13.31%" height="30" onclick="confirm_btn_onclick"/>
+        <Div id="paymentdate_div" taborder="12" text="지급일" left="4.1%" top="49" right="87%" height="20"/>
+        <Grid id="orderPayment_grd" taborder="14" binddataset="ds_salaryInput" useinputpanel="false" autofittype="col" oncelldblclick="salPayment_grd_oncelldblclick" left="16" top="75" width="978" height="185" visible="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row band="body" size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell col="0" disptype="normal" text="PAYMENT_DATE"/>
+                <Cell col="1" disptype="normal" text="EMP_CODE"/>
+                <Cell col="2" disptype="normal" text="SALARY_TYPE_CODE"/>
+                <Cell col="3" disptype="normal" text="TOTAL_SALARY"/>
+                <Cell col="4" disptype="normal" text="TOTAL_DEDUCTION_PRICE"/>
+                <Cell col="5" disptype="normal" text="DEPT_CODE"/>
+                <Cell col="6" disptype="normal" text="POSITION_CODE"/>
+                <Cell col="7" disptype="normal" text="HIRE_DATE"/>
+                <Cell col="8" disptype="normal" text="CHINE_PAYMENTS"/>
+                <Cell col="9" disptype="normal" text="RETIRE_DATE"/>
+              </Band>
+              <Band id="body">
+                <Cell col="0" disptype="normal" text="bind:PAYMENT_DATE"/>
+                <Cell col="1" disptype="normal" text="bind:EMP_CODE"/>
+                <Cell col="2" disptype="normal" text="bind:SALARY_TYPE_CODE"/>
+                <Cell col="3" disptype="normal" text="bind:TOTAL_SALARY"/>
+                <Cell col="4" disptype="normal" text="bind:TOTAL_DEDUCTION_PRICE"/>
+                <Cell col="5" disptype="normal" text="bind:DEPT_CODE"/>
+                <Cell col="6" disptype="normal" text="bind:POSITION_CODE"/>
+                <Cell col="7" disptype="normal" text="bind:HIRE_DATE"/>
+                <Cell col="8" disptype="normal" text="bind:CHINE_PAYMENTS"/>
+                <Cell col="9" disptype="normal" text="bind:RETIRE_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <MaskEdit id="paymentDate_mEdit" taborder="15" type="string" mask="####-##-##" left="13%" top="49" width="113" height="20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_salPaymentDate" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+          <Column id="INPUTED_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="TARGET_CHOICE" type="STRING" size="256"/>
+          <Column id="SAME_TIME_SELECTION" type="STRING" size="256"/>
+          <Column id="PAY_TYPE" type="STRING" size="256"/>
+          <Column id="SALARY_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+          <Column id="JIKJONG_CODE" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_salaryInput">
+        <ColumnInfo>
+          <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="SALARY_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="TOTAL_SALARY" type="STRING" size="256"/>
+          <Column id="TOTAL_DEDUCTION_PRICE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="HIRE_DATE" type="STRING" size="256"/>
+          <Column id="CHINE_PAYMENTS" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+인사전표 다이알로그                                             						                                                                         
+@Path		인사              				   				
+@Description	인사전표작성 다이알로그							
+@Author	  	허용석				    			                        								                                            
+@Create           2019. 03. 07.                             		                    				                                            
+********************************************************************************/
+
+this.hr_slipDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.paymentDate_mEdit.set_value(this.parent.paymentDate);
+	trace(this.parent.paymentDate);
+	this.ds_salaryInput.copyData(this.parent.ds);
+}
+
+this.cancel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

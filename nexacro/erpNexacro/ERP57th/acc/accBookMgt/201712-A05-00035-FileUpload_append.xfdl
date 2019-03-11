@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="TestForm_3_FileUpDown" classname="TestForm_3_FileUpDown" left="0" top="0" width="1024" height="768" titletext="New Form" onload="TestForm_3_FileUpDown_onload">
+    <Layouts>
+      <Layout>
+        <FileUpload id="FileUpload00" taborder="0" retry="0" index="0" left="20" top="24" width="404" height="80" onload="FileUpload00_onload" onsuccess="FileUpload00_onsuccess" multiselect="false" itemcount="1" style="accessibility:enable all '테스트 입니다. ' '테스트 입니다. ' '테스트 입니다. ' ;" onerror="FileUpload00_onerror"/>
+        <FileDownload id="FileDownload00" taborder="1" retry="0" text="FileDownload00" left="500" top="28" width="212" height="20" onclick="FileDownload00_onclick" onsuccess="FileDownload00_onsuccess" onerror="FileDownload00_onerror"/>
+        <Button id="Button00" taborder="2" text="UPLOAD" left="353" top="177" width="95" height="23" onclick="Button00_onclick" style="accessibility:enable all '테스트 입니다. 2222222' '' '' ;"/>
+        <Button id="Button01" taborder="3" text="DOWNLOAD" left="625" top="53" width="86" height="23" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="7" text="다운로드" left="48" top="248" width="87" height="36" onclick="Button02_onclick"/>
+        <Button id="Button03" taborder="8" text="다운로드(error)" onclick="Button03_onclick" left="144" top="248" width="106" height="36"/>
+        <Button id="Button04" taborder="9" text="append" left="34.47%" top="132" right="54.3%" height="28" onclick="Button04_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Ds_Del" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="FileNm" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_uploadresult" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false" onload="ds_uploadresult_onload">
+        <ColumnInfo>
+          <Column id="fileName" type="STRING" size="32"/>
+          <Column id="fileSize" type="BIGDECIMAL" size="8"/>
+          <Column id="fileType" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset00" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">C:\Users\Public\Pictures\Sample Pictures\Koala.jpg</Col>
+            <Col id="Column1">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript5.0"><![CDATA[
+// 업로드
+this.Button00_onclick = function(obj:Button,  e:TOBE.ClickEventInfo)
+{
+	
+	var strUrl = "http://172.10.13.64:8088/cs/fileUpload.jsp?PATH=upload";	
+	//var strUrl = "SVC2::fileUpload.jsp?PATH=up_11";	
+	var bSucc = this.FileUpload00.upload(strUrl);	
+}
+
+// 다운로드
+this.Button01_onclick = function(obj:Button,  e:TOBE.ClickEventInfo)
+{
+	var strFileName = this.ds_uploadresult.getColumn(0,"fileName");
+	//this.FileDownload00.downloadfilename = strFileName;
+    //alert("strFileName:"+strFileName);
+	//this.FileDownload00.downloadurl = "http://172.10.11.148:7657/Test_1/XP_SERVICE/fileDownload.jsp?file="+strFileName;
+	//this.FileDownload00.downloadurl = "SVC::fileDownload.jsp?file="+strFileName;
+	this.FileDownload00.set_downloadurl("http://172.10.13.64:8088/cs/fileDownload.jsp?file="+strFileName);
+	
+	var bSucc = this.FileDownload00.download();
+	trace("bSucc >> "+bSucc);	
+}
+
+this.FileUpload00_onload = function(obj:FileUpload,  e:TOBE.FileUploadLoadEventInfo)
+{
+	
+}
+
+this.FileUpload00_onsuccess = function(obj:FileUpload,  e:nexacro.FileUploadEventInfo)
+{
+	//this.alert("FileDownload00_onsuccess >> " + e.url);
+    //return;
+    
+	if( e.datasets == null )
+	{
+		alert("업로드 실패");
+	} else {
+		alert("업로드 성공");
+		trace(e.datasets[0].saveXML());
+
+		//업로드 성공 후 받은 데이터셋에서 해당 파일의 파일명을 데이터셋에 저장.
+		this.ds_uploadresult.setColumn(0,"fileName",e.datasets[0].getColumn(0,"fileName"));
+		this.Ds_Del.setColumn(0,"FileNm",e.datasets[0].getColumn(0,"fileName"));
+		FileNm = e.datasets[0].getColumn(0,"fileName"); //업로드한 파일명을 변수에 저장
+		
+		//FileDown컴포넌트를 클릭시 다운로드 되도록 셋팅.
+		this.FileDownload00.set_text = e.datasets[0].getColumn(0,"fileName");
+		this.ds_uploadresult.copyData(e.datasets[0]);
+	}		
+}
+
+this.FileDownload00_onsuccess = function(obj:FileDownload,  e:nexacro.FileDownloadEventInfo)
+{
+	this.alert("FileDownload00_onsuccess >> " + e.url);
+}
+
+this.FileDownload00_onerror = function(obj:FileDownload,  e:nexacro.FileDownloadErrorEventInfo)
+{
+	trace("FileDownload00_onerror >>  errormsg : " + e.errormsg );
+}
+
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.FileDownload00.set_downloadurl("http://172.10.13.64:8088/cs/fileDownload.jsp?file=005011.png");
+	
+	var bSucc = this.FileDownload00.download();
+	trace("bSucc >> "+bSucc);	
+	
+}
+
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.FileDownload00.set_downloadurl("http://172.10.13.64:8088/cs/fileDownload.jsp?file=xxxxx.png");
+	
+	var bSucc = this.FileDownload00.download();
+	trace("bSucc >> "+bSucc);		
+}
+
+this.FileUpload00_onerror = function(obj:FileUpload,  e:nexacro.FileUploadErrorEventInfo)
+{
+    alert("FileUpload00_onerror");
+	trace("FileUpload00_onerror");
+	trace(e.errorcode);
+	trace(e.errormsg);	
+}
+
+this.Button04_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.FileUpload00.appendItem();
+}
+]]></Script>
+  </Form>
+</FDL>

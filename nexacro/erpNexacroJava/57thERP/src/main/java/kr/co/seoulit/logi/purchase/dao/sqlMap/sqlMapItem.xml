@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.purchase.dao.ItemDAO">
+
+
+	<!-- itemDAO -->
+
+	<resultMap type="itemTO" id="itemResult">
+		<result property="itemCode" column="ITEM_CODE"/>
+		<result property="itemName" column="ITEM_NAME"/>
+		<result property="itemGroupCode" column="ITEM_GROUP_CODE"/>
+		<result property="itemClassification" column="ITEM_CLASSIFICATION"/>
+		<result property="unitOfStock" column="UNIT_OF_STOCK"/>
+		<result property="lossRate" column="LOSS_RATE"/>
+		<result property="leadTime" column="LEAD_TIME"/>
+		<result property="standardUnitPrice" column="STANDARD_UNIT_PRICE"/>
+		<result property="description" column="DESCRIPTION"/>
+	</resultMap>
+
+
+ 	<select id="selectItemList" resultMap="itemResult">
+		SELECT
+		ITEM_CODE, ITEM_NAME, ITEM_GROUP_CODE
+		, ITEM_CLASSIFICATION, UNIT_OF_STOCK
+		, LOSS_RATE, LEAD_TIME
+		, STANDARD_UNIT_PRICE, DESCRIPTION
+		, 0 AS CHK
+		FROM ITEM
+	</select>
+
+	
+	<update id="updateItem" parameterType="itemTO">
+		UPDATE
+		ITEM SET
+		ITEM_CODE = #{itemCode}
+		, ITEM_NAME = #{itemName}
+		, ITEM_GROUP_CODE = #{itemGroupCode}
+		, ITEM_CLASSIFICATION = #{itemClassification}
+		, UNIT_OF_STOCK = #{unitOfStock}
+		, LOSS_RATE = #{lossRate}
+		, LEAD_TIME = #{leadTime}
+		, STANDARD_UNIT_PRICE = #{standardUnitPrice}
+		WHERE
+		ITEM_CODE = #{itemCode}
+	</update>
+
+
+	<insert id="insertItem" parameterType="itemTO">
+		INSERT INTO ITEM
+		VALUES
+		(
+		#{itemCode}
+		, #{itemName}
+		, #{itemGroupCode}
+		, #{itemClassification}
+		, #{unitOfStock}
+		, #{lossRate}
+		, #{leadTime}
+		, #{standardUnitPrice}
+		, #{description}
+		)
+	</insert>
+
+
+	<delete id="deleteItem" parameterType="itemTO">
+		DELETE FROM ITEM
+		WHERE
+		ITEM_CODE = #{itemCode}
+	</delete>
+
+
+
+
+</mapper>

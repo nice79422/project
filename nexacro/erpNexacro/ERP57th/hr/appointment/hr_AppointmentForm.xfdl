@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_AppointmentForm" left="0" top="0" width="1185" height="785" titletext="인사발령등록" onload="hr_AppointmentForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="인사발령등록" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Grid id="appointment_grid" taborder="1" useinputpanel="false" left="3.04%" top="132" right="2.87%" height="302" binddataset="ds_appointment" autofittype="col" style="font:11 함초롬돋움,돋움;" oncellclick="appointment_grid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="79"/>
+                <Column size="200"/>
+                <Column size="68"/>
+                <Column size="101"/>
+                <Column size="83"/>
+                <Column size="221"/>
+                <Column size="48"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="7" text="인사발령 정보"/>
+                <Cell col="8"/>
+                <Cell row="1" col="1" text="발령호수"/>
+                <Cell row="1" col="2" text="제목"/>
+                <Cell row="1" col="3" text="발령구분"/>
+                <Cell row="1" col="4" text="발령일자"/>
+                <Cell row="1" col="5" text="발령담당자"/>
+                <Cell row="1" col="6" text="비고"/>
+                <Cell row="1" col="7" text="승인상태"/>
+                <Cell row="1" col="8" text="ROWTYPE"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" edittype="expr:APPROVAL_STATUS=='N'?'normal':'none'" text="bind:APPOINTMENT_NO"/>
+                <Cell col="2" edittype="expr:APPROVAL_STATUS=='N'?'normal':'none'" text="bind:APPOINTMENT_TITLE"/>
+                <Cell col="3" displaytype="combo" edittype="expr:APPROVAL_STATUS=='N'?'combo':'none'" text="bind:APPOINTMENT_DIVISION" editdisplay="edit" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME" combodisplay="display"/>
+                <Cell col="4" displaytype="date" edittype="expr:APPROVAL_STATUS=='N'?'date':'none'" text="bind:APPOINTMENT_DATE" calendardisplaynulltype="none"/>
+                <Cell col="5" displaytype="combo" text="bind:APPOINTMENT_DIRECTOR" combodataset="ds_employee" combocodecol="EMP_CODE" combodatacol="EMP_NAME"/>
+                <Cell col="6" edittype="expr:APPROVAL_STATUS=='N'?'normal':'none'" text="bind:NOTE"/>
+                <Cell col="7" text="bind:APPROVAL_STATUS" expr="expr:APPROVAL_STATUS=='Y' ? '승인' : APPROVAL_STATUS=='N'? '미승인': '취소'"/>
+                <Cell col="8" expr="expr:dataset.getRowType(currow)"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="personalAppointment_grid" taborder="2" useinputpanel="false" left="3.12%" top="515" right="2.95%" height="238" autofittype="col" binddataset="ds_personalAppointment" style="font:11 함초롬돋움,돋움;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="21"/>
+                <Column size="81"/>
+                <Column size="73"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="59"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="8" text="발령대상자"/>
+                <Cell row="1" col="1" text="발령호수"/>
+                <Cell row="1" col="2" text="발령구분"/>
+                <Cell row="1" col="3" text="사원번호"/>
+                <Cell row="1" col="4" text="사원명"/>
+                <Cell row="1" col="5" text="직급"/>
+                <Cell row="1" col="6" text="부서"/>
+                <Cell row="1" col="7" text="승인여부"/>
+                <Cell row="1" col="8" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" text="bind:APPOINTMENT_NO"/>
+                <Cell col="2" displaytype="combo" text="bind:APPOINTMENT_DIVISION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" text="bind:EMPLOYEE_NO"/>
+                <Cell col="4" displaytype="normal" text="bind:EMPLOYEE_NAME" combodataset="gds_employee" combocodecol="EMP_CODE" combodatacol="EMP_NAME"/>
+                <Cell col="5" displaytype="combo" edittype="none" text="bind:POSITION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="6" displaytype="combo" text="bind:DEPARTMENT" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="7" text="bind:APPLY_STATUS"/>
+                <Cell col="8" edittype="normal" text="bind:NOTE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <GroupBox id="appointment_grb" text="발령등록" taborder="3" left="108.69%" top="188" right="-55.44%" height="277" style="font:11 함초롬돋움,돋움;" onlbuttondown="GroupBox00_onlbuttondown"/>
+        <Button id="addEmployee_btn" taborder="4" text="사원추가" left="89.11%" top="470" right="3.46%" height="32" onclick="addEmployee_btn_onclick"/>
+        <Button id="addAppointment_btn" taborder="5" text="발령등록" left="80.34%" top="88" right="12.24%" height="32" onclick="addAppointment_btn_onclick"/>
+        <Button id="registerAppointment_btn" taborder="6" text="저장" left="88.44%" top="88" right="4.14%" height="32" onclick="batchAppointment_btn_onclick"/>
+        <Static id="Static01" taborder="7" text="발령구분" left="110.13%" top="217" right="-17.47%" height="42"/>
+        <Static id="Static02" taborder="8" text="발령자" left="110.13%" top="265" right="-17.47%" height="42"/>
+        <Static id="Static05" taborder="11" text="참조" left="110.13%" top="409" right="-17.47%" height="42"/>
+        <Edit id="appointmentDivision_edt" taborder="12" left="137.72%" top="217" right="-54.18%" height="42" visible="false"/>
+        <Edit id="appointmentDirector_edt" taborder="13" left="137.72%" top="265" right="-54.18%" height="42" visible="false"/>
+        <Edit id="referenceDepartment_edt" taborder="16" left="137.72%" top="409" right="-54.18%" height="42" visible="false"/>
+        <Combo id="Combo00" taborder="17" text="Combo00" left="118.4%" top="217" right="-35.44%" height="41" innerdataset="@ds_appointmentDivision" codecolumn="DIVISION_CODE" datacolumn="CODE_NAME"/>
+        <Combo id="Combo01" taborder="18" left="118.4%" top="265" right="-35.44%" height="41" innerdataset="@gds_codeDetail" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME"/>
+        <Combo id="Combo04" taborder="21" left="118.4%" top="409" right="-35.44%" height="41"/>
+        <Button id="delEmployee_btn" taborder="22" text="사원삭제" left="81.01%" top="470" right="11.56%" height="32" onclick="delEmployee_btn_onclick"/>
+        <Button id="delAppointment_btn" taborder="23" text="발령삭제" left="72.24%" top="88" right="20.34%" height="32" visible="false" onclick="delAppointment_btn_onclick"/>
+        <Button id="Button00" taborder="25" text="Button00" left="101.6%" top="78" right="-10.04%" height="34" onclick="Button00_onclick"/>
+        <Calendar id="fromDate_cal" taborder="26" left="3.71%" top="88" right="84.47%" height="32" oneditclick="fromDate_cal_oneditclick"/>
+        <Calendar id="toDate_cal" taborder="27" left="18.14%" top="88" right="70.04%" height="32"/>
+        <Static id="Static03" taborder="28" text="~" left="15.44%" top="88" right="81.77%" height="32" style="border:0 solid darkgray ;font:bold 24 함초롬돋움,돋움;"/>
+        <Button id="searchAppointment_btn" taborder="29" text="검색" left="31.05%" top="88" right="62.87%" height="32" onclick="searchAppointment_btn_onclick"/>
+        <Button id="Button01" taborder="30" text="Button01" left="52.32%" top="93" right="39.75%" height="31" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="31" text="Button02" left="62.19%" top="94" right="29.45%" height="30" onclick="Button02_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_appointment">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256" description="발령호수"/>
+          <Column id="APPOINTMENT_TITLE" type="STRING" size="256" description="인사발령 제목"/>
+          <Column id="APPOINTMENT_DIVISION" type="STRING" size="256" description="발령구분"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256" description="발령일자"/>
+          <Column id="APPOINTMENT_DIRECTOR" type="STRING" size="256" description="발령자"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256" description="승인상태"/>
+          <Column id="NOTE" type="STRING" size="256" description="비고"/>
+          <Column id="APPOINTMENT_SEQ" type="STRING" size="256" description="시퀀스"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_personalAppointment">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="APPLY_DATE" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DIVISION" type="STRING" size="256"/>
+          <Column id="APPLY_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_personalAppointmentDetail">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_HISTORY" type="STRING" size="256"/>
+          <Column id="CURRENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="PRE_APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointmentDivision">
+        <ColumnInfo>
+          <Column id="PARENT_CODE" type="STRING" size="256"/>
+          <Column id="DIVISION_CODE" type="STRING" size="256"/>
+          <Column id="CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DIVISION_CODE">TEST010</Col>
+            <Col id="CODE_NAME">채용</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST011</Col>
+            <Col id="CODE_NAME">승진</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST012</Col>
+            <Col id="CODE_NAME">승급</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST013</Col>
+            <Col id="CODE_NAME">호봉승급</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST014</Col>
+            <Col id="CODE_NAME">보직변경</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST015</Col>
+            <Col id="CODE_NAME">부서이동</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST016</Col>
+            <Col id="CODE_NAME">대기</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST017</Col>
+            <Col id="CODE_NAME">해제</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST018</Col>
+            <Col id="CODE_NAME">전입</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST019</Col>
+            <Col id="CODE_NAME">전출</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST020</Col>
+            <Col id="CODE_NAME">파견</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST021</Col>
+            <Col id="CODE_NAME">복귀</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST022</Col>
+            <Col id="CODE_NAME">휴직</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST023</Col>
+            <Col id="CODE_NAME">복직</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST024</Col>
+            <Col id="CODE_NAME">퇴직</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_dept"/>
+      <Dataset id="ds_employee" oncolumnchanged="ds_employee_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+          <Column id="CHECK" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EMP_CODE">1001</Col>
+            <Col id="EMP_NAME">조윤희</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1002</Col>
+            <Col id="EMP_NAME">손창우</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS001</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP001</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1003</Col>
+            <Col id="EMP_NAME">강순용</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS004</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1004</Col>
+            <Col id="EMP_NAME">정승훈</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS007</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP001</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1005</Col>
+            <Col id="EMP_NAME">김성화</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">LOGI</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1006</Col>
+            <Col id="EMP_NAME">김태형</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1111</Col>
+            <Col id="EMP_NAME">허용석</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">0724</Col>
+            <Col id="EMP_NAME">김민서</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1234</Col>
+            <Col id="EMP_NAME">조아람</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1010</Col>
+            <Col id="EMP_NAME">서정훈</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">HR</Col>
+            <Col id="DEPT_CODE">DEP007</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1114</Col>
+            <Col id="EMP_NAME">심승현</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP000</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1009</Col>
+            <Col id="EMP_NAME">강호경</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1007</Col>
+            <Col id="EMP_NAME">황지창</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">LOGI</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+          <Row>
+            <Col id="EMP_CODE">1008</Col>
+            <Col id="EMP_NAME">이원민</Col>
+            <Col id="PASSWORD">1111</Col>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="AUTHORITY_CODE">SYSTEM</Col>
+            <Col id="DEPT_CODE">DEP010</Col>
+            <Col id="BUSINESS_PLACE_CODE">BRC-01</Col>
+            <Col id="CHECK">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="appointmentDivision_edt" propid="value" datasetid="ds_appointment" columnid="APPOINTMENT_DIVISION"/>
+      <BindItem id="item1" compid="appointmentDirector_edt" propid="value" datasetid="ds_appointment" columnid="APPOINTMENT_DIRECTOR"/>
+      <BindItem id="item4" compid="referenceDepartment_edt" propid="value" datasetid="ds_appointment" columnid="REFERENCE_DEPARTMENT"/>
+      <BindItem id="item5" compid="Combo00" propid="value" datasetid="ds_appointment" columnid="APPOINTMENT_DIVISION"/>
+      <BindItem id="item6" compid="Combo01" propid="value" datasetid="ds_appointment" columnid="APPOINTMENT_DIRECTOR"/>
+      <BindItem id="item9" compid="Combo04" propid="value" datasetid="ds_appointment" columnid="REFERENCE_DEPARTMENT"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+				기본 인사발령을 등록하고 대상자를 추가하기 위한 인사발령등록 페이지
+@Path			인사
+@Description	인사발령을 하기 위한 발령폼
+@Author	  		심승현
+@Create         2019. 02. 13.
+********************************************************************************/
+
+
+var setEmpNo;
+//폼 온로드
+this.hr_AppointmentForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{				
+	this.transaction("findAppointmentList",
+					"dataURL::hr/appointment/findAppointmentList.do",
+					"",
+					"ds_appointment=ds_appointment",
+					"",
+					"callback",
+					false
+					);
+	this.transaction("findPersonalAppointmentList",
+					"dataURL::hr/appointment/findPersonalAppointmentList.do",
+					"",
+					"ds_personalAppointment=ds_personalAppointment",
+					"",
+					"callback",
+					false
+					);
+	application.gds_codeDetail.filter("DIVISION_CODE_NO=='HR29'");			
+	this.ds_personalAppointment.filter("APPOINTMENT_NO =='XXX'");						
+}
+
+//발령내역 그리드 클릭 이벤트
+this.appointment_grid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var appointmentNo=this.ds_appointment.getColumn(e.row,"APPOINTMENT_NO");
+	this.ds_personalAppointment.filter("APPOINTMENT_NO =='"+appointmentNo+"'");
+
+}
+
+var addRow;
+//발령등록버튼
+this.addAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	var lastNo=this.ds_appointment.getMax("APPOINTMENT_NO");
+	lastNo.substr(6);
+	addRow = this.ds_appointment.addRow();
+	var date=new Date();
+	var year = date.getFullYear().toString().padLeft(4, "0");
+	var appSeq = String(parseInt(lastNo.substr(6))+1).padLeft(3, "0");
+	
+	this.ds_appointment.setColumn(addRow,"APPOINTMENT_NO",year+"-"+appSeq);
+	this.ds_appointment.setColumn(addRow,"APPOINTMENT_DATE",application.today());
+	this.ds_appointment.setColumn(addRow,"APPOINTMENT_DIRECTOR",application.g_empCode);
+	this.ds_appointment.setColumn(addRow,"APPROVAL_STATUS","N");
+}
+
+
+//사원추가버튼
+this.addEmployee_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var appointmentNo = this.ds_appointment.getColumn(addRow,"APPOINTMENT_NO");
+	var appointmentTitle = this.ds_appointment.getColumn(addRow,"APPOINTMENT_TITLE");
+	var appointmentDivision = this.ds_appointment.getColumn(addRow,"APPOINTMENT_DIVISION");
+	if(appointmentTitle==undefined||appointmentDivision==undefined){
+		alert("발령구분을 선택해라");
+	}
+	else{
+		application.open("modal",
+			"hr_appointment::hr_PersonalAppointmenDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:application.gds_employee, variable:appointmentNo, variable2:appointmentDivision}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='발령대상자 선택'"
+			);
+	}
+}
+
+//사원삭제버튼
+this.delEmployee_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	var curRow = this.ds_personalAppointment.rowposition;
+	this.ds_personalAppointment.deleteRow(curRow);
+}
+
+//인사발령저장
+this.batchAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	if(confirm("인사발령을 등록하겠습니까?")){
+	trace(this.ds_appointment.saveXML());
+	trace(this.ds_personalAppointment.saveXML());
+	this.transaction("batchAppointment",
+				"dataURL::hr/appointment/batchAppointment.do",
+				"ds_appointment=ds_appointment:u ds_personalAppointment=ds_personalAppointment:u",
+				"",
+				"",
+				"callback",
+				false
+				);	
+	}
+}
+
+//callback
+this.callback = function(strSvcID, nErrorCode, strErrorMsg) {
+   if(strSvcID=="batchAppointment"){
+		if(nErrorCode<0){
+			alert("등록실패");
+			alert(strErrorMsg);   
+		}else{      
+			alert("등록완료");
+			this.reload();
+		}
+	}
+   if(strSvcID=="findPersonalAppointmentList"){
+		if(nErrorCode<0){
+			alert(strErrorMsg);   
+		}else{      
+			//alert(strErrorMsg);   
+		}
+	}
+	
+}
+
+//발령삭제
+this.delAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	alert("아직 준비중");
+}
+
+//기간별발령조회
+this.searchAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	fromDate=this.fromDate_cal.value;
+	toDate=this.toDate_cal.value;
+	
+	this.ds_appointment.filter("APPOINTMENT_DATE>='"+fromDate+"'&&APPOINTMENT_DATE<='"+toDate+"'");
+	
+}
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_appointment.filter("APPROVAL_STATUS=='Y'");
+}
+
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_appointment.filter("APPROVAL_STATUS=='N'");
+}
+]]></Script>
+  </Form>
+</FDL>

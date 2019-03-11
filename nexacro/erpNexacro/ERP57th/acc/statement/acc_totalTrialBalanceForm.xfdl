@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_totalTrialBalanceForm" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="tb_stc" taborder="0" text="합계잔액시산표" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Calendar id="tb_cal" taborder="1" left="61.72%" top="62" right="19.63%" height="42"/>
+        <Button id="tbSearch_btn" taborder="2" text="조회" left="82.91%" top="62" right="10.94%" height="42" onclick="tbSearch_btn_onclick"/>
+        <Button id="tbOutput_btn" taborder="3" text="출력" left="91.41%" top="62" right="2.44%" height="42" onclick="tbOutput_btn_onclick"/>
+        <Grid id="tb_grid" taborder="4" useinputpanel="false" left="2.34%" top="109" right="1.27%" height="636" autofittype="col" binddataset="ds_totalTrialBalance">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="156"/>
+                <Column size="160"/>
+                <Column size="134"/>
+                <Column size="171"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell colspan="2" text="차변"/>
+                <Cell col="2" rowspan="2" text="계정과목"/>
+                <Cell col="3" colspan="2" text="대변"/>
+                <Cell row="1" text="잔액"/>
+                <Cell row="1" col="1" text="합계"/>
+                <Cell row="1" col="3" text="합계"/>
+                <Cell row="1" col="4" text="잔액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:LEFT_DEBTOR_BALANCE"/>
+                <Cell col="1" text="bind:LEFT_DEBTOR_SUM"/>
+                <Cell col="2" text="bind:ACCOUNT_NAME"/>
+                <Cell col="3" text="bind:RIGHT_CREDITS_SUM"/>
+                <Cell col="4" text="bind:RIGHT_CREDITS_BALANCE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="tbSearch_stc" taborder="5" text="조회날짜" left="49.8%" top="62" right="40.43%" height="42"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_totalTrialBalance">
+        <ColumnInfo>
+          <Column id="LEFT_DEBTOR_BALANCE" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_SUM" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_SUM" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+합계잔액시산표화면                                           						                                                                         
+@Path		회계              				   				
+@Description	합계잔액 계산을 위한 창						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 28                             		                    				                                            
+********************************************************************************/
+this.tbSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+     if(this.tb_cal.value<=20181231){
+    alert("전년도 자료는 조회하실 수 없습니다");
+    return;
+   }
+
+
+		var tbSearchDate = this.tb_cal.value;
+
+	var id = "findTotalTrialBalanceList";
+    var url = "dataURL::statement/totalTrialBalance/findTotalTrialBalanceList.do";
+    var respDs = "";
+    var reqDs = "ds_totalTrialBalance=ds_totalTrialBalance";
+    var args = "approvalDate='"+tbSearchDate+"'";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback, false);	
+}
+
+
+this.tbOutput_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("합계잔액시산표를 출력하시겠습니까?")){
+		
+		this.exportObj = new ExcelExportObject();
+		var ret = this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, 
+        this.tb_grid, "Sheet1!A1");
+		this.exportObj.set_exporturl("http://localhost:8282/nexacro-xeni/XExportImport");   
+		this.exportObj.exportData(); 
+
+   }	  
+}
+
+
+function callback(trid , ErrorCode, ErrorMsg){
+
+	if(trid=="findTotalTrialBalanceList"){
+		if(ErrorCode <0){
+			alert("조회 실패 : " + ErrorMsg);
+		}else{
+			//alert(ds_totalTrialBalance.rowcount);
+		}
+	}
+	
+}
+
+]]></Script>
+  </Form>
+</FDL>

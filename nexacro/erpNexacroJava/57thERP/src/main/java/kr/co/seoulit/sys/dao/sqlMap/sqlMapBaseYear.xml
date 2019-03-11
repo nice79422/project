@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.BaseYearDAO">
+
+	<resultMap type="baseYearTO" id="baseYearResult">
+	<result property="indexNo" column="INDEX_NO"/>
+	<result property="year" column="YEAR"/>
+	<result property="accountPeriod" column="ACCOUNT_PERIOD"/>
+	</resultMap>
+
+ 	<select id="selectBaseYearList" resultMap="baseYearResult" parameterType="map">
+		SELECT
+		INDEX_NO,
+		YEAR,
+		ACCOUNT_PERIOD
+		FROM
+		BASE_YEAR
+		WHERE ACCOUNT_PERIOD LIKE '%'||#{businessPlaceCode}||'%'
+	</select>
+</mapper>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="codeManagerForm" left="0" top="0" width="1185" height="785" titletext="codeManagerForm" onload="codeManagerForm_onload">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="codeDetail_stc" taborder="4" left="50.3%" top="121" right="4.98%" height="593" style="color:black;align:center top;" text="상세코드" onclick="detailCode_stc_onclick"/>
+        <Static id="code_stc" taborder="3" left="4.39%" top="122" right="50.89%" height="592" onclick="Static00_onclick" text="기초코드" style="color:black;align:center top;"/>
+        <Grid id="code_grid" taborder="1" useinputpanel="false" left="6.84%" top="158" right="53.16%" height="531" binddataset="ds_code" autosizingtype="col" autofittype="col" oncellclick="code_grid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="코드"/>
+                <Cell col="1" text="코드명"/>
+                <Cell col="2" text="코드분류"/>
+                <Cell col="3" text="수정여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:CODE_NAME"/>
+                <Cell col="2" text="bind:CODE_GROUP"/>
+                <Cell col="3" text="bind:EDIT_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="codeDetail_grid" taborder="2" useinputpanel="false" left="52.66%" top="158" right="7.34%" height="531" binddataset="ds_codeDetail" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="상위코드"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="코드명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DIVISION_CODE_NO"/>
+                <Cell col="1" text="bind:DETAIL_CODE"/>
+                <Cell col="2" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="12" text="코드 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_code">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CODE_NAME" type="STRING" size="256"/>
+          <Column id="EDIT_STATUS" type="STRING" size="256"/>
+          <Column id="CODE_GROUP" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+메인메뉴 화면                                             						                                                                         
+@Path		공통              				   				
+@Description 코드or상세코드							
+@Author	  	강순용				    			                        								                                            
+@Create           2019. 02. 12.                             		                    				                                            
+********************************************************************************/
+
+this.codeManagerForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findCodeList",
+					"dataURL::sys/findCodeList.do",
+					"",
+					"ds_code=ds_code",
+					"",
+					"callback"
+					);
+					
+	this.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_codeDetail=ds_codeDetail",
+					"",
+					"callback"
+					);	
+	this.ds_codeDetail.filter("DIVISION_CODE_NO == '0'");
+}
+
+
+this.code_grid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{		
+			
+	var dtcode=this.ds_code.getColumn(e.row,"CODE");
+    this.ds_codeDetail.filter("DIVISION_CODE_NO =='"+dtcode+"'");
+	
+}
+
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

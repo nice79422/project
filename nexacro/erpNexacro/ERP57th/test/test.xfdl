@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="test" left="0" top="0" width="1185" height="785" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="8" text="HHHHHHHHH  업무제목    복사해서 사용해주세요" left="14" top="9" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;" onclick="Static00_onclick" right="14"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_employee">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_businessPlace">
+        <ColumnInfo>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_NAME" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_TEL" type="STRING" size="256"/>
+          <Column id="COMPANY_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+xxxxxx 화면                                             						                                                                         
+@Path		xx              				   				
+@Description	xxxx 폼							
+@Author	  	xxx				    			                        								                                            
+@Create           2019. 02. 12.                             		                    				                                            
+********************************************************************************/
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.pm.dao.LicenseInfoDAO">
+
+	<resultMap id="licenseInfoResult" type="licenseInfoTO">
+		<result property="licenseSeq" column="LICENSE_SEQ" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="licenseName" column="LICENSE_NAME" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="licenseCenter" column="LICENSE_CENTER" />
+		<result property="licenseLevel" column="LICENSE_LEVEL" />
+		<result property="licenseNo" column="LICENSE_NO" />
+	</resultMap>
+
+	<!-- 사원의 자격증 정보를 가지고 오는 메서드 -->
+	<select id="selectLicenseInfoAll" resultMap="licenseInfoResult">
+	<![CDATA[
+		SELECT EMP_CODE
+			  ,LICENSE_SEQ
+			  ,LICENSE_NAME
+			  ,START_DATE
+			  ,END_DATE
+			  ,LICENSE_CENTER
+			  ,LICENSE_LEVEL
+			  ,LICENSE_NO
+		  FROM LICENSE_INFO
+	    ORDER BY EMP_CODE
+	]]>
+	</select>
+
+	<!-- 사원의 자격증 정보를 추가하는 메서드  -->
+	
+	<insert id="insertLicenseInfo" parameterType="licenseInfoTO">
+	<selectKey keyProperty="licenseSeq" resultType="String">
+	<![CDATA[
+	     SELECT LICENSE_SEQ.NEXTVAL FROM DUAL
+	]]>
+    </selectKey>
+	 <![CDATA[
+		INSERT INTO
+			LICENSE_INFO
+			(
+			EMP_CODE,
+			LICENSE_SEQ,
+			LICENSE_NAME,
+			START_DATE,
+			END_DATE,
+			LICENSE_CENTER,
+			LICENSE_LEVEL,
+			LICENSE_NO )
+		VALUES(
+			#{empCode},
+			#{licenseSeq},
+			#{licenseName},
+			#{startDate},
+	       	#{endDate},
+	       	#{licenseCenter},
+	       	#{licenseLevel},
+	       	#{licenseNo}
+		)
+		  ]]>
+	</insert>
+	
+
+	<!-- 사원의 자격증 정보를 수정하는 메서드 -->
+
+    <update id="updateLicenseInfo" parameterType="licenseInfoTO">
+	<![CDATA[
+	       UPDATE
+	       		LICENSE_INFO
+	       SET
+	       		LICENSE_NAME=#{licenseName},
+	       		START_DATE=#{startDate},
+	       		END_DATE=#{endDate},
+	       		LICENSE_CENTER=#{licenseCenter},
+	       		LICENSE_LEVEL=#{licenseLevel},
+	       		LICENSE_NO=#{licenseNo}
+	       	WHERE
+	       		EMP_CODE=#{empCode}
+	       	AND
+	       	    LICENSE_SEQ=#{licenseSeq}
+	]]>
+	</update>
+
+
+	<!-- 사원의 자격증 정보를 삭제하는 메서드 -->
+	
+	<delete id="deleteLicenseInfo" parameterType="licenseInfoTO">
+	<![CDATA[
+		DELETE FROM
+			LICENSE_INFO
+		WHERE
+			EMP_CODE=#{empCode}
+		AND
+			LICENSE_SEQ=#{licenseSeq}
+  	]]>
+	</delete>
+
+</mapper>

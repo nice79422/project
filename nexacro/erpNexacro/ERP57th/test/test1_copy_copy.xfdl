@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="excel_test" classname="excel_test" left="0" top="0" width="1024" height="768" titletext="New Form" onload="excel_test">
+    <Layouts>
+      <Layout>
+        <Button id="Button00" taborder="0" text="Button00" left="2.25%" top="7" right="77.44%" height="56" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" left="4.88%" top="100" right="45.41%" height="365" binddataset="Dataset00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+                <Col size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row band="body" size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell col="0" disptype="normal" text="Column0"/>
+                <Cell col="1" disptype="normal" text="Column1"/>
+                <Cell col="2" disptype="normal" text="Column2"/>
+                <Cell col="3" disptype="normal" text="Column3"/>
+                <Cell col="4" disptype="normal" text="Column4"/>
+              </Band>
+              <Band id="body">
+                <Cell col="0" disptype="normal" text="bind:Column0"/>
+                <Cell col="1" disptype="normal" text="bind:Column1"/>
+                <Cell col="2" disptype="normal" text="bind:Column2"/>
+                <Cell col="3" disptype="normal" text="bind:Column3"/>
+                <Cell col="4" disptype="normal" text="bind:Column4"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Tab id="Tab00" taborder="2" left="5.47%" top="547" right="29.39%" height="193" tabindex="0" scrollbars="autoboth">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="tabpage1">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="1.95%" top="9" right="4.96%" height="127" binddataset="ds_educationInfo">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="118"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="EDUCATION_SEQ"/>
+                          <Cell col="1" text="EMP_CODE"/>
+                          <Cell col="2" text="CAMPUS"/>
+                          <Cell col="3" text="MAJOR"/>
+                          <Cell col="4" text="SUB_MAJOR"/>
+                          <Cell col="5" text="ENTER_DATE"/>
+                          <Cell col="6" text="GRADUATION_DATE"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EDUCATION_SEQ"/>
+                          <Cell col="1" text="bind:EMP_CODE"/>
+                          <Cell col="2" text="bind:CAMPUS"/>
+                          <Cell col="3" text="bind:MAJOR"/>
+                          <Cell col="4" text="bind:SUB_MAJOR"/>
+                          <Cell col="5" text="bind:ENTER_DATE"/>
+                          <Cell col="6" text="bind:GRADUATION_DATE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="tabpage2">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="1.95%" top="15" right="3.46%" height="152" binddataset="ds_familyInfo">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                          <Col size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row band="body" size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell col="0" disptype="normal" text="RELATIONSHIP"/>
+                          <Cell col="1" disptype="normal" text="EMP_CODE"/>
+                          <Cell col="2" disptype="normal" text="FAMILY_NAME"/>
+                          <Cell col="3" disptype="normal" text="SUPPORTING"/>
+                          <Cell col="4" disptype="normal" text="COHABITATION_STATUS"/>
+                          <Cell col="5" disptype="normal" text="DISABILITY_CODE"/>
+                          <Cell col="6" disptype="normal" text="HIGHEST_EDUCATION_CODE"/>
+                          <Cell col="7" disptype="normal" text="JOB"/>
+                          <Cell col="8" disptype="normal" text="COMPANY_NAME"/>
+                          <Cell col="9" disptype="normal" text="TEL"/>
+                          <Cell col="10" disptype="normal" text="FAMILY_BIRTH_DATE"/>
+                          <Cell col="11" disptype="normal" text="FAMILY_SEQ"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell col="0" disptype="normal" text="bind:RELATIONSHIP"/>
+                          <Cell col="1" disptype="normal" text="bind:EMP_CODE"/>
+                          <Cell col="2" disptype="normal" text="bind:FAMILY_NAME"/>
+                          <Cell col="3" disptype="normal" text="bind:SUPPORTING"/>
+                          <Cell col="4" disptype="normal" text="bind:COHABITATION_STATUS"/>
+                          <Cell col="5" disptype="normal" text="bind:DISABILITY_CODE"/>
+                          <Cell col="6" disptype="normal" text="bind:HIGHEST_EDUCATION_CODE"/>
+                          <Cell col="7" disptype="normal" text="bind:JOB"/>
+                          <Cell col="8" disptype="normal" text="bind:COMPANY_NAME"/>
+                          <Cell col="9" disptype="normal" text="bind:TEL"/>
+                          <Cell col="10" disptype="normal" text="bind:FAMILY_BIRTH_DATE"/>
+                          <Cell col="11" disptype="normal" text="bind:FAMILY_SEQ"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_educationInfo">
+        <ColumnInfo>
+          <Column id="EDUCATION_SEQ" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="CAMPUS" type="STRING" size="256"/>
+          <Column id="MAJOR" type="STRING" size="256"/>
+          <Column id="SUB_MAJOR" type="STRING" size="256"/>
+          <Column id="ENTER_DATE" type="STRING" size="256"/>
+          <Column id="GRADUATION_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_familyInfo">
+        <ColumnInfo>
+          <Column id="RELATIONSHIP" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="FAMILY_NAME" type="STRING" size="256"/>
+          <Column id="SUPPORTING" type="STRING" size="256"/>
+          <Column id="COHABITATION_STATUS" type="STRING" size="256"/>
+          <Column id="DISABILITY_CODE" type="STRING" size="256"/>
+          <Column id="HIGHEST_EDUCATION_CODE" type="STRING" size="256"/>
+          <Column id="JOB" type="STRING" size="256"/>
+          <Column id="COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="FAMILY_BIRTH_DATE" type="STRING" size="256"/>
+          <Column id="FAMILY_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[// 로딩시 
+// 
+// this.dsArr = [];
+// this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+// {
+// 	var exUrl = "http://localhost:9090/XExportImport";
+// 	this.exportObj = new ExcelExportObject("exportObj_");
+// 	this.addChild("exportObj_" , this.exportObj);
+// 	
+// 	//this.exportObj.addEventHandler("onerror", this.ExcelExportObject00_onerror, this);
+// 	this.exportObj.addEventHandler("onsuccess", this.ExcelExportObject00_onsuccess, this);
+// 	
+// 	
+// 	this.exportObj.set_exporttype(nexacro.ExportTypes.EXCEL2007);
+// 	this.exportObj.set_exporturl(exUrl); 
+// 	this.exportObj.set_exportfilename("a.a.a.a");	
+// 	
+// 	
+// 	for(i=0; i<=2; i++){
+// 	
+// 		this.Dataset00.filter("Column0=="+i);
+// 		
+// 		var objNewDS = new Dataset("objNewDS"+i);
+// 		objNewDS.copyData(this.Dataset00, true);
+// 		//===================
+// 		this.addChild("objNewDS" + i, objNewDS);
+// 		this.dsArr[this.dsArr.length] = objNewDS;
+// 		//===================
+// 		
+// 		var objNewGrid = new Grid("objNewGrid"+i);
+// 		objNewGrid.set_formats("<Formats>" + this.Grid00.getCurFormatString() + "</Formats>");
+// 		objNewGrid.setBindDataset(objNewDS); 
+// 		//===================
+// 		this.addChild("objNewGrid" + i, objNewGrid);
+// 		this.grdArr[this.grdArr.length] = objNewGrid;
+// 		//===================
+// 		
+// 		
+// 		this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, objNewGrid, "Sheet"+i+"!A1","","","suppress","allstyle","","","","cellline");//여러개 export
+// 		
+// 		
+// 	}
+// 	
+// 	this.exportObj.set_exportfilename("t.e.s.t");	
+// 	
+// 	trace("exporturl== "+this.exportObj.exporturl);
+// 	
+// 	
+// 	this.exportObj.exportData("","",true);
+// 	
+// }
+// this.ExcelExportObject00_onsuccess = function(obj, e)
+// {	
+// 	for(var i = 0 ; i < this.grdArr.length ; i++)
+// 	{
+// 		trace("=================" + this.grdArr[i].name);
+// 		var g = this.removeChild(this.grdArr[i].name);
+// 		var d = this.removeChild(this.dsArr[i].name);
+// 		g.destroy();
+// 		d.destroy();
+// 		g = null;
+// 		d = null;
+// 	}
+// 	this.Dataset00.filter("");
+// }
+// 
+
+this.excel_test = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		//6개 상세 정보 구하기
+	this.transaction("findEmployeeInfoAll",
+		"dataURL::hr/pm/findEmployeeInfoAll.do",
+		"",
+		"ds_familyInfo=dsFamilyInfo ds_educationInfo=dsEducationInfo",
+		"",
+		"callback",
+		false
+	);
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="sys_autholityManagementForm" left="0" top="0" width="1185" height="785" titletext="사용자권한관리폼" oninit="sys_autholityManagementForm_oninit">
+    <Layouts>
+      <Layout>
+        <GroupBox id="GroupBox02" text="권한검색" taborder="41" left="63.29%" right="0.84%" height="100" bottom="608" onlbuttondown="GroupBox02_onlbuttondown"/>
+        <GroupBox id="GroupBox01" text="사원명으로검색" taborder="40" left="30.89%" right="49.03%" height="100" bottom="608"/>
+        <GroupBox id="GroupBox00" text="부서별 전체사원 검색" taborder="39" left="1.86%" right="69.28%" height="100" bottom="608"/>
+        <Static id="autholrityMgn_stc" taborder="8" text="사용자권한관리" left="14" height="45" onclick="Static00_onclick" right="14" top="9"/>
+        <Static id="Static01" taborder="12" text="권한" left="36" width="275" height="30" bottom="359"/>
+        <Static id="Static02" taborder="13" text="권한별 접근가능 메뉴" left="344" width="275" bottom="359" height="30"/>
+        <Static id="Static03" taborder="14" text="전체메뉴" left="691" width="275" bottom="359" height="30"/>
+        <Static id="Static04" taborder="15" text="권한코드에 따른 접근가능 메뉴설정" left="25" top="342" height="40" right="3"/>
+        <Edit id="edt_businessPlaceCode" taborder="17" enable="false" width="116" height="30" bottom="662" right="1027"/>
+        <Edit id="edt_deptCode" taborder="18" enable="false" width="116" height="30" bottom="619" right="1027"/>
+        <Edit id="empName_txt" taborder="19" width="116" height="25" bottom="664" right="684"/>
+        <Button id="businessPlaceCodeSch_btn" taborder="20" text="사업장선택" width="84" height="30" bottom="662" right="940" onclick="businessPlaceCodeSch_btn_onclick"/>
+        <Button id="deptCodeSch_btn" taborder="21" text="부서선택" width="84" height="30" bottom="619" right="941" onclick="deptCodeSch_btn_onclick"/>
+        <Button id="SchByDept_btn" taborder="22" text="부서별사원조회" width="108" height="30" bottom="619" right="829" onclick="SchByDept_btn_onclick"/>
+        <Button id="empListSearch_btn" taborder="24" text="전체사원보기" width="116" height="35" bottom="618" right="645" onclick="empListSearch_btn_onclick"/>
+        <Button id="updateAuthority_btn" taborder="25" text="사원권한 일괄변경" width="132" height="30" bottom="657" left="916" onclick="updateAuthority_btn_onclick"/>
+        <Button id="empBatchSave_btn" taborder="26" text="사원권한 일괄저장" width="132" height="30" bottom="622" left="916" onclick="empBatchSave_btn_onclick"/>
+        <Grid id="emp_grd" taborder="27" binddataset="ds_employee" useinputpanel="false" autofittype="col" left="29" width="1138" height="138" bottom="463">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="EMP_CODE"/>
+                <Cell col="1" text="EMP_NAME"/>
+                <Cell col="2" text="AUTHORITY_CODE"/>
+                <Cell col="3" text="DEPT_CODE"/>
+                <Cell col="4" text="BUSINESS_PLACE_CODE"/>
+                <Cell col="5" text="POSITION_CODE"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" displaytype="combo" text="bind:AUTHORITY_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" displaytype="combo" text="bind:DEPT_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" displaytype="combo" text="bind:BUSINESS_PLACE_CODE" combodataset="ds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="5" displaytype="combo" text="bind:POSITION_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="authority_grd" taborder="28" binddataset="ds_authority" useinputpanel="false" autofittype="col" left="36" top="433" width="275" height="164" style="focusborder:0px dotted gray ;" oncellclick="authority_grd_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Col size="80"/>
+                <Col size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row band="body" size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell col="0" disptype="normal" text="AUTHORITY_CODE"/>
+                <Cell col="1" disptype="normal" text="AUTHORITY_NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell col="0" disptype="normal" text="bind:AUTHORITY_CODE"/>
+                <Cell col="1" disptype="normal" text="bind:AUTHORITY_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="accessMenuByAuthority_grd" taborder="29" binddataset="ds_menuAuthority" useinputpanel="false" autofittype="col" left="343" top="433" width="275" height="249" style="focusborder:1px dotted gray ;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="메뉴명"/>
+                <Cell col="1" text="AUTHORITY_NAME"/>
+                <Cell col="2"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="combo" text="bind:MENU_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="1" text="bind:AUTHORITY_NAME"/>
+                <Cell col="2" text="bind:MENU_CODE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="menu_grd" taborder="30" binddataset="ds_menu" useinputpanel="false" autofittype="col" treeusecheckbox="false" treeinitstatus="expand,all" left="692" top="433" width="275" height="288">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="MENU_NAME"/>
+                <Cell col="1" text="USING_STATUS"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:MENU_NAME"/>
+                <Cell col="1" text="bind:USING_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="menuRemove_btn" taborder="32" text="-" left="634" top="562" width="42" height="35" onclick="menuRemove_btn_onclick"/>
+        <Button id="authorityAdd_btn" taborder="33" text="권한추가" left="24" top="624" width="66" height="30" onclick="authorityAdd_btn_onclick"/>
+        <Button id="authorityRemove_btn" taborder="34" text="권한삭제" left="98" top="624" width="66" height="30" onclick="authorityRemove_btn_onclick"/>
+        <Button id="authorityCancle_btn" taborder="35" text="취소" left="174" top="624" width="66" height="30" onclick="authorityCancle_btn_onclick"/>
+        <Button id="save_btn" taborder="36" text="일괄저장" left="250" top="624" width="66" height="30" onclick="save_btn_onclick"/>
+        <Combo id="authorityCombo" taborder="37" innerdataset="@ds_authority" codecolumn="AUTHORITY_CODE" datacolumn="AUTHORITY_NAME" width="109" height="30" style="itemcolor:#3e3e3eff;" index="-1" bottom="656" left="795" onitemchanged="authorityCombo_onitemchanged"/>
+        <Button id="UpdateAuthorityCancle_btn" taborder="38" text="취소" width="101" height="30" bottom="657" right="22" onclick="UpdateAuthorityCancle_btn_onclick"/>
+        <Button id="empNameSearch_btn" taborder="42" text="사원명조회" right="596" bottom="664" width="84" height="25" onclick="empNameSearch_btn_onclick"/>
+        <Button id="menuAdd_btn" taborder="43" text="+" left="634" top="481" width="42" height="35" onclick="menuAdd_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="WORKPLACE_NAME" type="STRING" size="256"/>
+          <Column id="COMPANY_CODE" type="STRING" size="256"/>
+          <Column id="COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_START_DATE" type="STRING" size="256"/>
+          <Column id="DEPT_END_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_employee">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_position">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="POSITION_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_authority">
+        <ColumnInfo>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_menu">
+        <ColumnInfo>
+          <Column id="MENU_CODE" type="STRING" size="256"/>
+          <Column id="SUPER_MENU_CODE" type="STRING" size="256"/>
+          <Column id="MENU_NAME" type="STRING" size="256"/>
+          <Column id="MENU_URL" type="STRING" size="256"/>
+          <Column id="USING_STATUS" type="STRING" size="256"/>
+          <Column id="LEVEL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_menuAuthority">
+        <ColumnInfo>
+          <Column id="MENU_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="MENU_NAME" type="STRING" size="256"/>
+          <Column id="AUTHORITY_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+xxxxxx 화면                                             						                                                                         
+@Path		xx              				   				
+@Description	xxxx 폼							
+@Author	  	xxx				    			                        								                                            
+@Create           2019. 02. 12.                             		                    				                                            
+********************************************************************************/
+
+this.sys_autholityManagementForm_oninit = function(obj:Form, e:nexacro.InitEventInfo)
+{
+		this.transaction("findEmployeeList",
+					"dataURL::hr/emp/findEmployeeList.do",
+					"",
+					"ds_employee=gds_employee",
+					"",
+					"callback");
+		this.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_codeDetail=gds_codeDetail",
+					"",
+					"callback");											
+		this.transaction("findAuthorityList",
+					"dataURL::sys/findAuthorityList.do",
+					"",
+					"ds_authority=gds_authority",
+					"",
+					"callback");
+		this.transaction("findMenuList",
+					"dataURL::sys/findMenuList.do?",
+					"",
+					"ds_menu=gds_menu",
+					"",
+					"callback",
+					false);
+
+}
+
+
+this.businessPlaceCodeSch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	application.open("modeless",
+			"base::businessDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_businessPlace}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='businessPlace'"
+			);
+}
+
+this.deptCodeSch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		if(this.edt_businessPlaceCode.value=="사업장선택"){
+                alert("사업장코드를 검색해주세요");
+         }
+        else{
+	     	application.open("modeless",
+			"base::deptDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',ds:this.ds_deptPlace}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='dept'"
+			); 
+	    }
+}
+
+this.SchByDept_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		this.ds_employee.filter("BUSINESS_PLACE_CODE=='"+this.edt_businessPlaceCode.value+"' && DEPT_CODE=='"+this.edt_deptCode.value+"'");
+
+}
+
+this.empNameSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.empName_txt.text==""){
+	     alert("사원명이 입력되지 않았습니다");
+	}
+	else{
+
+	this.ds_employee.filter("EMP_NAME=='"+this.empName_txt.value+"'");
+    }	
+}
+
+this.empListSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+			this.ds_employee.filter("");
+
+}
+
+this.updateAuthority_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	      var rowNum= this.ds_employeeList.getRowCount();
+         for(var j=0; j<rowNum; j++){
+             this.ds_employeeList.setColumn(j,"AUTHORITY_CODE",this.authorityCombo.value);
+             
+            }
+
+}
+
+this.empBatchSave_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("변경내용을 저장하시겠습니까?"))
+	{
+	   transaction("batcEditEmployee"
+	             ,"svcBase::/batcEditEmployee.do?"
+	             ,"dsEmployee=ds_employeeList:u"
+	             ,"ds_employeeList=dsEmployee"
+	             ,""
+	             ,"empCallback"
+	             ,false);
+	
+	}
+	
+}
+
+this.UpdateAuthorityCancle_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+
+}
+
+this.authorityAdd_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		this.ds_authority.addRow();
+	
+}
+
+this.authorityRemove_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_authority.DeleteRow(this.ds_authority.rowposition);
+
+}
+
+this.authorityCancle_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("변경된 사항을 저장하시겠습니까?")){
+	this.transaction("batchAuthority"
+	             ,"svcBase::/sys/batchAuthority.do"
+	             ,"ds_authority=ds_authority:u ds_menuAuthority=ds_menuAuthority:u"
+	             ,"ds_authority=ds_authority ds_menuAuthority=ds_menuAuthority"
+	             ,""
+	             ,"callback"
+	             ,false);
+	 }
+
+}
+
+this.menuAdd_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var selAuthorityCode = this.ds_authority.getColumn(this.ds_authority.rowposition,"AUTHORITY_CODE");   //권한데이터셋에서 선택한 코드 가져옴
+	var selAuthorityName = this.ds_authority.getColumn(this.ds_authority.rowposition,"AUTHORITY_NAME");
+   
+    
+	var selMenuCode = this.ds_menu.getColumn(this.ds_menu.rowposition,"MENU_CODE");  //전체메뉴에서 선택한 메뉴 가져옴
+	var selMenuName = this.ds_menu.getColumn(this.ds_menu.rowposition,"MENU_NAME");
+	
+	//위에서 구한것들 다 넣을 것임
+	
+	var rowNum=this.ds_menuAuthority.getRowCount();
+	if(rowNum==0){
+	 this.ds_menuAuthority.addRow();
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"AUTHORITY_CODE",selAuthorityCode);
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"AUTHORITY_NAME",selAuthorityName);
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"MENU_CODE",selMenuCode);
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"MENU_NAME",selMenuName);
+	}else{
+	for(var i=0; i<rowNum; i++){
+	       if( this.ds_menuAuthority.getColumn(i,"MENU_CODE")==selMenuCode) 
+	       {  
+	         alert("해당메뉴는 이미 존재합니다."); 
+	         break;
+	       }else{
+	 this.ds_menuAuthority.addRow();
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"AUTHORITY_CODE",selAuthorityCode);
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"AUTHORITY_NAME",selAuthorityName);
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"MENU_CODE",selMenuCode);
+    this.ds_menuAuthority.setColumn(this.ds_menuAuthority.rowposition,"MENU_NAME",selMenuName);
+	     
+	       }
+	 }
+	}
+
+}
+
+this.menuRemove_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_menuAuthority.deleteRow(this.ds_menuAuthority.rowposition);
+	
+}
+
+this.authority_grd_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.ds_menuAuthority.filter("");
+			this.transaction("findMenuAuthorityList",
+				"dataURL::sys/findMenuAuthorityList.do?",
+				"",
+				"ds_menuAuthority=gds_menuAuthority",
+				"authorityCode="+this.ds_authority.getColumn(e.row,"AUTHORITY_CODE"),
+				"callback",true);
+	this.ds_menuAuthority.filter("AUTHORITY_CODE=='"+this.ds_authority.getColumn(e.row,"AUTHORITY_CODE")+"'");
+       
+}
+
+this.callback=function(trid, ErrorCode, ErrorMsg) {
+	
+	
+	if(trid=='batchAuthority'){
+		if(ErrorCode<0){
+			alert("권한 수정 중 오류 발생");
+		}else{
+			alert("권한 저장 완료");
+			reload();
+		}	
+	}
+	if(trid=='batchEmployee'){
+		if(ErrorCode<0){
+			alert("권한 수정 중 오류 발생");
+		}else{
+			alert("권한 저장 완료");
+			reload();
+		}	
+	}
+
+}
+
+this.authorityCombo_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+		this.ds_employee.filter("AUTHORITY_CODE=='"+e.postvalue+"'");
+}
+]]></Script>
+  </Form>
+</FDL>

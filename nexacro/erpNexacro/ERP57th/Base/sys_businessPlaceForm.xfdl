@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="sys_businessPlaceForm" left="0" top="0" width="1185" height="785" titletext="sys_businessPlaceForm" onload="sys_businessPlaceForm_onload">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="code_stc" taborder="3" left="8.78%" top="162" right="9.03%" height="592" onclick="Static00_onclick" text="사 업 장" style="color:black;align:center top;"/>
+        <Grid id="code_grid" taborder="1" useinputpanel="false" left="11.81%" top="198" right="11.98%" height="531" binddataset="ds_businessPlace" autosizingtype="col" autofittype="col" oncellclick="code_grid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사업장코드"/>
+                <Cell col="1" text="사업장명"/>
+                <Cell col="2" text="전화번호"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="normal" text="bind:BUSINESS_PLACE_CODE"/>
+                <Cell col="1" edittype="normal" text="bind:BUSINESS_PLACE_NAME"/>
+                <Cell col="2" edittype="normal" text="bind:BUSINESS_PLACE_TEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="12" text="사업처 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Button id="add_btn" taborder="13" text="추가" left="51.14%" top="109" right="37.89%" height="36" onclick="add_btn_onclick"/>
+        <Button id="delete_btn" taborder="14" text="삭제" left="65.23%" top="109" right="23.8%" height="36" onclick="delete_btn_onclick"/>
+        <Button id="save_btn" taborder="15" text="저장" left="78.82%" top="109" right="10.21%" height="36" onclick="save_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_businessPlace">
+        <ColumnInfo>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_NAME" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_TEL" type="STRING" size="256"/>
+          <Column id="COMPANY_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+사업장검색 다이알로그                                             						                                                                         
+@Path		공통              				   				
+@Description	사업장 CRUD							
+@Author	  	강순용				    			                        								                                            
+@Create           2019. 02. 15.                             		                    				                                            
+********************************************************************************/
+
+
+this.sys_businessPlaceForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		obj.transaction("findBusinessPlaceList",
+					"dataURL::sys/findBusinessPlaceList.do",
+					"",
+					"ds_businessPlace=gds_businessPlace",
+					"",
+					"callback");
+	
+}
+
+this.add_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_businessPlace.addRow();
+}
+
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	if(confirm("삭제하시겠습니까?"))
+	{
+		this.ds_businessPlace.deleteRow(this.ds_businessPlace.rowposition);
+	}
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		if(confirm("변경사항을 저장하시겠습니까?"))
+		{
+			this.transaction("batchBusinessPlace"
+					,"dataURL::sys/batchBusinessPlace.do"
+					,"gds_businessPlace=ds_businessPlace:u"
+					,"" 
+					,""
+					,"callback"
+					);
+		}
+
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.execption</value>
+			</list>
+		</property>
+	</bean>
+		<bean id="beanNameViewResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0" />
+	</bean>
+
+	<bean id="dataSetView"
+		class="kr.co.seoulit.common.view.DataSetView">
+	</bean>
+
+	<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType"
+			value="application/json; charset=UTF-8" />
+	</bean>
+
+	<bean id="excelDownloadView"
+		class="kr.co.seoulit.common.view.ExcelDownloadView">
+	</bean>
+	<bean id="platformDataHandlerMethodArgumentResolver"
+		class="kr.co.seoulit.common.resolver.PlatformDataHandlerMethodArgumentResolver" />
+
+	<bean id="customHandlerExceptionResolver"
+		class="kr.co.seoulit.common.resolver.CustomHandlerExceptionResolver" />
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000" />
+		<property name="maxInMemorySize" value="100000000" />
+
+	</bean>
+
+</beans>

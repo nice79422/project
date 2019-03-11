@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_UnApprovedDailyAttdDialog" left="0" top="0" width="1185" height="785" titletext="New Form" onload="hr_UnApprovedDailyAttdDialog_onload">
+    <Layouts>
+      <Layout>
+        <GroupBox id="GroupBox01" text="일근태 외 미승인 목록" taborder="11" left="0.84%" top="454" right="1.01%" height="321"/>
+        <GroupBox id="GroupBox00" text="일근태 미승인 목록" taborder="10" left="0.84%" top="110" right="1.01%" height="321"/>
+        <Static id="Static00" taborder="0" text="일근태 / 근태 외 미승인 목록" onclick="Static00_onclick" left="0.59%" top="9" right="0.76%" height="45"/>
+        <Static id="Static01" taborder="1" text="기준일" left="35.86%" top="65" right="55.95%" height="40"/>
+        <Calendar id="unApprovalDate_cal" taborder="2" left="44.81%" top="65" right="35.19%" height="40"/>
+        <Button id="approval_btn" taborder="3" text="일괄승인" left="68.78%" top="65" right="23.04%" height="40" onclick="approval_btn_onclick"/>
+        <Button id="save_btn" taborder="4" text="저장" left="78.23%" top="65" right="13.59%" height="40" onclick="save_btn_onclick"/>
+        <Button id="cancel_btn" taborder="5" text="취소" left="87.68%" top="65" right="4.14%" height="40" onclick="cancel_btn_onclick"/>
+        <Grid id="dailyAttd_grid" taborder="8" useinputpanel="false" left="2.11%" top="140" right="2.11%" height="279" binddataset="ds_dailyAttd" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="사원명"/>
+                <Cell col="2" text="기준일"/>
+                <Cell col="3" text="근태구분"/>
+                <Cell col="4" text="시간"/>
+                <Cell col="5" text="금액"/>
+                <Cell col="6" text="승인상태"/>
+                <Cell col="7" text="사유"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" text="bind:BASIC_DAY" mask="####-##-##"/>
+                <Cell col="3" displaytype="combo" text="bind:ATTD_TYPE_CODE" combodataset="ds_dailyAttdType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" text="bind:TIME" mask="##:##" maskchar="0"/>
+                <Cell col="5" text="bind:COST"/>
+                <Cell col="6" text="bind:APPROVAL_STATUS"/>
+                <Cell col="7" text="bind:CAUSE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00" taborder="9" useinputpanel="false" left="2.28%" top="484" right="1.94%" height="279" binddataset="ds_dailyAttdRest" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="사원명"/>
+                <Cell col="2" text="근태 외 구분"/>
+                <Cell col="3" text="신청일자"/>
+                <Cell col="4" text="시작일"/>
+                <Cell col="5" text="종료일"/>
+                <Cell col="6" text="일수"/>
+                <Cell col="7" text="금액"/>
+                <Cell col="8" text="승인상태"/>
+                <Cell col="9" text="사유"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" displaytype="combo" text="bind:ATTD_REST_CODE" combodataset="ds_dailyAttdRestType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" text="bind:REQUEST_DATE" mask="####-##-##"/>
+                <Cell col="4" text="bind:START_DATE" mask="####-##-##"/>
+                <Cell col="5" text="bind:END_DATE" mask="####-##-##"/>
+                <Cell col="6" text="bind:DAYS"/>
+                <Cell col="7" text="bind:COST"/>
+                <Cell col="8" text="bind:APPROVAL_STATUS"/>
+                <Cell col="9" text="bind:CAUSE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttdRestType">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttdType">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttd">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_SEQ" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttdRest">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="DAYS" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="ATTD_REST_CODE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[this.hr_UnApprovedDailyAttdDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var today = application.today();
+	this.unApprovalDate_cal.set_value(today);
+	
+	var approvalStatus = this.parent.approvalStatus;
+	var basicDay = this.parent.basicDay;
+	var deptCode = this.parent.deptCode;
+	
+	this.transaction( 
+				"findCodeList" ,
+				"dataURL::sys/findCodeDetailList.do",
+				"",
+				"ds_codeDetail=gds_codeDetail",
+				"",
+				"callbackFunction",
+				false
+	);
+	
+	//경조사,출장,교육,예비군,휴가,오전반차,오후반차,초과근무	
+	this.ds_codeDetail.filter("DIVISION_CODE_NO=='HR17' || DETAIL_CODE_NAME=='오전반차' || DETAIL_CODE_NAME=='오후반차'");
+	this.ds_dailyAttdRestType.copyData(this.ds_codeDetail,true);
+	this.ds_codeDetail.filter("");
+	this.ds_codeDetail.filter("DIVISION_CODE_NO=='HR16'");
+	this.ds_dailyAttdType.copyData(this.ds_codeDetail,true);
+
+	this.transaction(
+			"findUnapprovedDailyAttd",
+			"dataURL::hr/attendance/findDailyAttdListByCondition.do",
+			"",
+			"ds_dailyAttd=ds_dailyAttd",
+			"approvalStatus='"+approvalStatus+"' basicDay='"+ basicDay+"' deptCode='"+deptCode+"'",
+			"callbackFunction",
+			false
+	);
+	
+	this.transaction(
+			"findUnapprovedDailyAttdRest",
+			"dataURL::hr/attendance/findAttdRestListByCondition.do",
+			"",
+			"ds_dailyAttdRest=ds_dailyAttdRest",
+			"approvalStatus='"+approvalStatus+"' basicDay='"+ basicDay+"' deptCode='"+deptCode+"'",
+			"callbackFunction",
+			false
+	);
+}
+
+this.approval_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm(this.unApprovalDate_cal.value+"일자 근태/근태외 데이터를 일괄승인하시겠습니까? ")){
+		for(var i = 0; i < this.ds_dailyAttd.rowcount; i++) {
+			this.ds_dailyAttd.setColumn(i, "APPROVAL_STATUS", "Y");
+		}
+		for(var i = 0; i < this.ds_dailyAttdRest.rowcount; i++) {
+			this.ds_dailyAttdRest.setColumn(i, "APPROVAL_STATUS", "Y");
+		}
+	}		
+}
+
+this.cancel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm(" 취소하시겠습니까? ")){
+		this.close();
+	}	
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("저장하시겠습니까? ")){
+		this.transaction(
+			"batchDailyAttd",
+			"dataURL::hr/attendance/batchDailyAttd.do",
+			"ds_dailyAttd=ds_dailyAttd:u",
+			"",
+			"",
+			"callbackFunction",
+			false
+		);
+		
+		this.transaction(
+			"batchDailyAttdRest",
+			"dataURL::hr/attendance/batchDailyAttdRest.do",
+			"ds_dailyAttdRest=ds_dailyAttdRest:u",
+			"",
+			"",
+			"callbackFunction",
+			false
+		);
+	}		
+}
+
+this.callbackFunction=function(strSvcID, nErrorCode, strErrorMag){
+	if(strSvcID=="batchDailyAttdRest"){
+			if(nErrorCode!=0){	
+				alert(strErrorMag);
+			}else{
+				alert("완료되었습니다.");
+				this.close();
+		}
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

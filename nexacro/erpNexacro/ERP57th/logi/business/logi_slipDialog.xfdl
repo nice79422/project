@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_slipDialog" left="0" top="0" width="1000" height="330" titletext="logi_slipDialog" onload="logi_slipDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="1" text="전표확인" left="0" top="0" width="992" height="40"/>
+        <Grid id="salPayment_grd" taborder="8" binddataset="ds_contractDetail" useinputpanel="false" left="16" top="75" width="978" height="185" oncelldblclick="salPayment_grd_oncelldblclick" autofittype="col" autosizingtype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="127"/>
+                <Column size="152"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="92"/>
+                <Column size="80"/>
+                <Column size="42"/>
+                <Column size="301"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="제품코드"/>
+                <Cell col="1" text="제품명"/>
+                <Cell col="2" text="수주량"/>
+                <Cell col="3" text="가격"/>
+                <Cell col="4" text="납품여부"/>
+                <Cell col="5" text="합계가격"/>
+                <Cell col="6" text="단위"/>
+                <Cell col="7" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center middle;" text="bind:ITEM_CODE" suppressalign="middle"/>
+                <Cell col="1" text="bind:ITEM_NAME" suppressalign="middle"/>
+                <Cell col="2" text="bind:CONTRACT_AMOUNT"/>
+                <Cell col="3" text="bind:UNIT_PRICE_OF_CONTRACT"/>
+                <Cell col="4" text="bind:DELIVERY_STATUS" suppressalign="middle"/>
+                <Cell col="5" text="bind:SUM_PRICE_OF_CONTRACT" editlimitbymask="integer" suppress="0"/>
+                <Cell col="6" text="bind:UNIT_OF_CONTRACT" suppressalign="middle"/>
+                <Cell col="7" displaytype="normal" edittype="text" text="bind:DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="cancel_btn" taborder="9" text="취소" left="87.79%" top="43" right="1.23%" height="30" onclick="cancel_btn_onclick"/>
+        <Button id="confirm_btn" taborder="10" text="전송" left="75.72%" top="43" right="13.31%" height="30" onclick="confirm_btn_onclick"/>
+        <Div id="sungupyul_div" taborder="12" text="선급율" left="4.1%" top="49" right="87%" height="20"/>
+        <MaskEdit id="sungupyul_mEdit" taborder="13" left="14.6%" top="49" right="76.5%" height="20" displaynulltext="0.1" maskchar="0._" mask="0.##" onchanged="sungupyul_mEdit_onchanged"/>
+        <Grid id="orderPayment_grd" taborder="14" binddataset="ds_orderDetail" useinputpanel="false" autofittype="col" oncelldblclick="salPayment_grd_oncelldblclick" left="16" top="75" width="978" height="185" visible="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="113"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="발주상세번호"/>
+                <Cell col="1" text="제품코드"/>
+                <Cell col="2" text="제품명"/>
+                <Cell col="3" text="단위"/>
+                <Cell col="4" text="입고예정일"/>
+                <Cell col="5" text="발주수량"/>
+                <Cell col="6" text="단위가격"/>
+                <Cell col="7" text="합계가격"/>
+                <Cell col="8" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ORDER_DETAIL_NO"/>
+                <Cell col="1" text="bind:ITEM_CODE"/>
+                <Cell col="2" text="bind:ITEM_NAME"/>
+                <Cell col="3" text="bind:UNIT_OF_ORDER"/>
+                <Cell col="4" text="bind:DELIVERY_SCHEDULE_DATE"/>
+                <Cell col="5" text="bind:ORDER_AMOUNT"/>
+                <Cell col="6" text="bind:UNIT_PRICE_OF_ORDER"/>
+                <Cell col="7" text="bind:SUM_PRICE_OF_ORDER"/>
+                <Cell col="8" text="bind:DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_contractDetail" loadkeymode="keep" loadfiltermode="keep" enableevent="true">
+        <ColumnInfo>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="CONTRACT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="MPS_APPLY_STATUS" type="STRING" size="256"/>
+          <Column id="DELIVERY_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_contract" preload="false" loadkeymode="keep">
+        <ColumnInfo>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ESTIMATE_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_TYPE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CONTRACT_DATE" type="STRING" size="256"/>
+          <Column id="CONTRACT_REQUESTER" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="DELIVERY_RESULT_STATUS" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_orderInfo">
+        <ColumnInfo>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_orderDetail">
+        <ColumnInfo>
+          <Column id="ORDER_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DELIVERY_SCHEDULE_DATE" type="STRING" size="256"/>
+          <Column id="ORDER_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_DETAIL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+물류전표 다이알로그                                             						                                                                         
+@Path		물류              				   				
+@Description	물류전표작성 다이알로그							
+@Author	  	허용석				    			                        								                                            
+@Create           2019. 01. 31.                             		                    				                                            
+********************************************************************************/
+
+
+var req=""; // 전표유형설정 변수 주로 가격의 조정에 쓰임
+var sungupyul=0.1; // 수주선급비율
+this.logi_slipDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	req=this.parent.request;
+	if(req=="납품완료"){
+	this.sungupyul_mEdit.destroy();
+	//this.sungupyul_mEdit.visible(false);
+	this.sungupyul_div.set_visible(false);
+	this.confirm_btn.setEventHandler("onclick",this.confirm_btn_onclick,this);
+	
+		for(v in this.parent.contractArray){
+			this.ds_contract.addRow();
+			var contractRow=this.parent.ds.findRow("CONTRACT_NO",this.parent.contractArray[v]);
+			this.ds_contract.copyRow(v,this.parent.ds,contractRow);
+			this.ds_contract.setColumn(v,"SLIP_REGIST_STATUS","YY");
+			this.findContractSlipDetailList();
+		}
+	}else if(req=="수주선급"){
+	this.confirm_btn.setEventHandler("onclick",this.confirm_btn_onclick,this);
+		for(v in this.parent.contractArray){
+			this.ds_contract.addRow();
+			var contractRow=this.parent.ds.findRow("CONTRACT_NO",this.parent.contractArray[v]);
+			this.ds_contract.copyRow(v,this.parent.ds,contractRow);
+			this.ds_contract.setColumn(v,"SLIP_REGIST_STATUS","Y");
+			this.findContractSlipDetailList();
+		}
+	}else if(req=="발주선급"){
+		this.confirm_btn.setEventHandler("onclick",this.confirm_btn_onclick2,this);
+			
+		for(v in this.parent.orderArray){
+
+			this.orderPayment_grd.set_visible(true);
+			this.salPayment_grd.set_visible(false);
+			this.ds_orderInfo.addRow();
+			var orderRow=this.parent.ds.findRow("ORDER_NO",this.parent.orderArray[v]);
+			this.ds_orderInfo.copyRow(v,this.parent.ds,orderRow);
+			this.ds_orderInfo.setColumn(v,"SLIP_REGIST_STATUS","Y");
+			this.findOrderSlipDetailList();
+		
+		}
+	}else if(req=="입고완료"){
+	this.sungupyul_mEdit.destroy();
+	this.sungupyul_div.set_visible(false);
+	this.orderPayment_grd.set_visible(true);
+	this.salPayment_grd.set_visible(false);
+	this.confirm_btn.setEventHandler("onclick",this.confirm_btn_onclick2,this);
+		
+		for(v in this.parent.contractArray){
+			this.ds_orderInfo.addRow();
+			var orderRow=this.parent.ds.findRow("ORDER_NO",this.parent.orderArray[v]);
+			this.ds_orderInfo.copyRow(v,this.parent.ds,orderRow);
+			this.ds_orderInfo.setColumn(v,"SLIP_REGIST_STATUS","YY");}
+			this.findOrderSlipDetailList();
+	}	
+
+ 	
+}
+this.findContractSlipDetailList=function(){
+	this.transaction("findContractSlipDetailList",
+             "dataURL::acc/slip/findContractSlipDetailList.do",
+             "",
+             "ds_contractDetail=ds_contractDetail",
+             "requestStatus=slipSelect value='"+this.parent.contractArray+"'",
+             "callback");
+	trace(this.ds_contract.getRowCount());
+
+}
+
+this.findOrderSlipDetailList=function(){
+
+	this.transaction("findOrderSlipDetailList",
+             "dataURL::acc/slip/findOrderSlipDetailList.do",
+             "",
+             "ds_orderDetail=ds_orderDetail",
+             "requestStatus=slipSelect value='"+this.parent.orderArray+"'",
+             "callback");
+	trace(this.ds_orderInfo.getRowCount());
+
+}
+
+this.cancel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+this.confirm_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+// 		for(var i = 0; i < this.ds_contractDetail.rowcount; i++){
+// 			trace("+"+i);
+// 			this.ds_contractDetail.setColumn(v,"SLIP_REGIST_STATUS","YY");
+// 			trace(this.ds_contractDetail.getColumn(v,"SLIP_REGIST_STATUS"));
+// 		}
+		this.transaction("registLogiSlipList",
+             "dataURL::acc/slip/registLogiSlipList.do",
+             "ds_contract=ds_contract ds_contractDetail=ds_contractDetail",
+             "",
+             "deptCode="+application.g_deptCode +" empCode="+application.g_empCode +" reportingDate="+application.todayBar() +" businessCode="+application.g_businessCode +" req="+req,
+             "callback");
+       	this.opener.reload(); 
+        this.close();     
+}
+this.confirm_btn_onclick2 = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+		this.transaction("registLogiSlipList",
+             "dataURL::acc/slip/registLogiSlipList.do",
+             "ds_orderInfo=ds_orderInfo ds_orderDetail=ds_orderDetail",
+             "",
+             "deptCode="+application.g_deptCode +" empCode="+application.g_empCode +" reportingDate="+application.todayBar() +" businessCode="+application.g_businessCode +" req="+req,
+             "callback");
+       	this.opener.reload(); 
+        this.close();     
+}
+this.setContractCost=function(sungupyul){
+	trace("setContractCost");
+	for(var i = 0; i < this.ds_contractDetail.rowcount; i++){
+ 		trace("+"+i);
+ 		var price=this.ds_contractDetail.getColumn(i,"UNIT_PRICE_OF_CONTRACT");
+ 		var amount=this.ds_contractDetail.getColumn(i,"CONTRACT_AMOUNT");
+ 		var sumPrice=parseInt(price)*parseInt(amount);
+ 		trace("+"+i+sumPrice);
+ 		this.ds_contractDetail.setColumn(i,"SUM_PRICE_OF_CONTRACT",parseInt(sumPrice)*sungupyul);
+		this.ds_contractDetail.setColumn(i,"DESCRIPTION",sungupyul);
+ 		}
+}
+this.setDeliveryCost=function(){
+	trace("setDeliveryCost");
+	for(var i = 0; i < this.ds_contractDetail.rowcount; i++){
+ 		trace("++"+i);
+ 		var price=this.ds_contractDetail.getColumn(i,"UNIT_PRICE_OF_CONTRACT");
+ 		var amount=this.ds_contractDetail.getColumn(i,"CONTRACT_AMOUNT");
+ 		var giSungupyul=this.ds_contractDetail.getColumn(i,"DESCRIPTION");
+ 		//alert(giSungupyul);
+ 		if(!giSungupyul){
+ 		//alert(giSungupyul);
+ 		giSungupyul=0;
+ 		}
+ 		var sumPrice=(parseInt(price)*parseInt(amount))-((parseInt(price)*parseInt(amount))*giSungupyul);
+ 		trace("+"+i+sumPrice);
+ 		this.ds_contractDetail.setColumn(i,"SUM_PRICE_OF_CONTRACT",sumPrice);
+ 		}
+}
+
+this.callback=function(sId,erCode,erMsg){
+	if(sId=="findContractSlipDetailList"){
+		trace(req);
+		switch(req){
+			case '수주선급' : this.setContractCost(sungupyul); break;
+			case '납품완료' : this.setDeliveryCost(); break;
+		}
+	}
+	if(sId=="findOrderSlipDetailList"){
+		trace(req);
+		switch(req){
+			case '발주선급' : this.setOrderContractCost(sungupyul); break;
+			case '입고완료' : this.setOrderCompCost(); break;
+		}
+	}	
+}
+this.setOrderContractCost=function(sungupyul){
+	trace("setOrderContractCost");
+	for(var i = 0; i < this.ds_orderDetail.rowcount; i++){
+ 		trace("+"+i);
+ 		var price=this.ds_orderDetail.getColumn(i,"UNIT_PRICE_OF_ORDER");
+ 		var amount=this.ds_orderDetail.getColumn(i,"ORDER_AMOUNT");
+ 		var sumPrice=parseInt(price)*parseInt(amount);
+ 		trace("+"+i+sumPrice);
+ 		this.ds_orderDetail.setColumn(i,"SUM_PRICE_OF_ORDER",parseInt(sumPrice)*sungupyul);
+		this.ds_orderDetail.setColumn(i,"DESCRIPTION",sungupyul);
+ 		}
+}
+this.setOrderCompCost=function(){
+	trace("setOrderCompCost");
+	for(var i = 0; i < this.ds_orderDetail.rowcount; i++){
+ 		trace("++"+i);
+ 		var price=this.ds_orderDetail.getColumn(i,"UNIT_PRICE_OF_ORDER");
+ 		var amount=this.ds_orderDetail.getColumn(i,"ORDER_AMOUNT");
+ 		var giSungupyul=this.ds_orderDetail.getColumn(i,"DESCRIPTION");
+ 		//alert(giSungupyul);
+ 		if(!giSungupyul){
+ 		//alert(giSungupyul);
+ 		giSungupyul=0;
+ 		}
+ 		var sumPrice=(parseInt(price)*parseInt(amount))-((parseInt(price)*parseInt(amount))*giSungupyul);
+ 		trace("+"+i+sumPrice);
+ 		this.ds_orderDetail.setColumn(i,"SUM_PRICE_OF_ORDER",sumPrice);
+ 		}
+}
+
+this.sungupyul_mEdit_onchanged = function(obj:MaskEdit, e:nexacro.ChangeEventInfo)
+{
+	if(req=="수주선급"){
+	this.setContractCost(e.posttext);
+	}else if(req=="발주선급"){
+	this.setOrderContractCost(e.posttext);
+	}
+}
+
+
+/*****************************************************************************************
+ * 함  수  명	:   gf_distincDsFilter 
+ * 입      력	:   1. objDs	Dataset Object
+                    2. sColID	Column List (여러 항목일 경우 ',' 로 구분)
+ * 반      환	: 	없음
+ * 기      능	: 	Dataset의 특정 컬럼의 중복을 제거하여 Filter 한다.(넥사크로 공식문서 활용)
+ 
+ *****************************************************************************************/
+this.gf_distincDsFilter = function(objDs, arrArgs)
+{
+	trace("++"+arrArgs);
+	//var arrArgs	= this.gf_Trim(sColID).split(",");
+	var sFilterExpr		= "";
+	var sFindRowExpr	= "";
+
+	for (var i=0; i<arrArgs.length; i++)
+	{
+		trace("**"+i)
+		//if (objDs.findRow(arrArgs[i],"ORDER_NO") =-1) continue;
+		
+		sFindRowExpr	+= (this.gf_IsNull(sFindRowExpr) == false) ? " && " : "";
+		sFindRowExpr	+= "" + arrArgs[i] + "=='\" + " + arrArgs[i] + " + \"'";
+	}
+	
+	//if (this.gf_IsNull(sFindRowExpr) == false) {
+		sFilterExpr	= "rowidx==dataset.findRowExpr(\"" + sFindRowExpr + "\")";
+	//}
+	trace("**"+sFilterExpr)
+	objDs.filter(sFilterExpr);
+}
+
+
+this.gf_Trim = function(sValue)
+{
+    if (sValue == null) return "";
+    if (new String(sValue).valueOf() == "undefined") return "";
+    if (new String(sValue) == null) return "";
+
+    var retVal = (new String(sValue)).replace(/^\s+|\s+$/g, '');
+
+    return retVal;
+}    
+
+this.gf_IsNull = function(sValue)
+{
+    if (new String(sValue).valueOf() == "undefined") return true;
+    if (sValue == null) return true;
+    
+    var v_ChkStr = new String(sValue);
+
+    if (v_ChkStr == null) return true;
+    if (v_ChkStr.toString().length == 0 ) return true;
+    return false;
+}    
+]]></Script>
+  </Form>
+</FDL>

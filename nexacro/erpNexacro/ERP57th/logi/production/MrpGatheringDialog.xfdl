@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="MrpGatheringDialog" left="0" top="0" width="1025" height="490" titletext="MrpGatheringDialog" onload="MrpGatheringDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="grd_mrpGathering" taborder="0" binddataset="ds_mrpGathering" useinputpanel="false" autofittype="col" left="10" top="20" width="1002" height="461">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="129"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="51"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="106"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="소요량취합번호"/>
+                <Cell col="1" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목코드"/>
+                <Cell col="2" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목명"/>
+                <Cell col="3" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="단위"/>
+                <Cell col="4" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="지시일"/>
+                <Cell col="5" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="납기일"/>
+                <Cell col="6" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="공정진행여부"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MRP_GATHERING_NO"/>
+                <Cell col="1" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_CODE"/>
+                <Cell col="2" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_NAME"/>
+                <Cell col="3" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:UNIT_OF_MRP_GATHERING"/>
+                <Cell col="4" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:DUE_DATE"/>
+                <Cell col="5" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CLAIM_DATE"/>
+                <Cell col="6" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ON_GOING_PROCESS_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_mrp">
+        <ColumnInfo>
+          <Column id="MRP_NO" type="STRING" size="256"/>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP" type="STRING" size="256"/>
+          <Column id="REQUIRED_AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="REQUIRED_DATE" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mrpGathering">
+        <ColumnInfo>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_OR_PRODUCTION_STATUS" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP_GATHERING" type="STRING" size="256"/>
+          <Column id="NECESSARY_AMOUNT" type="STRING" size="256"/>
+          <Column id="DUE_DATE" type="STRING" size="256"/>
+          <Column id="CLAIM_DATE" type="STRING" size="256"/>
+          <Column id="ON_GOING_PROCESS_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/************************************************************************
+소요량취합 화면
+@Path			물류
+@Description	소요량취합폼
+@Author			wonminlee
+@Create			2019.02.20
+
+@Last Update    2019.02.20
+************************************************************************/
+this.MrpGatheringDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var mrpgNo=this.parent.mrpgNo;
+	var i=this.ds_mrpGathering.copyData(this.parent.ds);
+	this.ds_mrpGathering.filter("MRP_GATHERING_NO=='"+mrpgNo+"'");
+}
+]]></Script>
+  </Form>
+</FDL>

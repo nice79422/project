@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_accountDialog" left="0" top="0" width="591" height="431" titletext="New Form" onload="AccountDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="parentAccountList_grid" taborder="2" useinputpanel="false" left="2.36%" top="61" right="58.51%" height="351" binddataset="ds_parentAccount" autofittype="col" oncellclick="parentAccountList_grid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="90"/>
+                <Column size="127"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정코드"/>
+                <Cell col="1" text="계정명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="accountList_grid" taborder="3" useinputpanel="false" left="42.39%" top="62" right="2.54%" height="354" binddataset="ds_account" autofittype="col" oncelldblclick="accountList_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="81"/>
+                <Column size="125"/>
+                <Column size="107"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정코드"/>
+                <Cell col="1" text="계정명"/>
+                <Cell col="2" text="계정상세"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+                <Cell col="2" text="bind:ACCOUNT_DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="accountCode_stc" taborder="4" text="계정과목코드" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_parentAccount">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_account">
+        <ColumnInfo>
+          <Column id="PARENT_ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+계정과목 다이얼로그                                             						                                                                         
+@Path		회계              				   				
+@Description	계정과목 코드, 코드명 조회						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 22                             		                    				                                            
+********************************************************************************/
+this.AccountDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo) 
+{   
+	var id = "findParentAccountList";
+        var url = "dataURL::acc/accSubMgt/findParentAccountList.do";
+        var reqDs = "";
+        var respDs = "ds_parentAccount=gds_parentAccountSummary ds_account=gds_accountSummary";
+        var args = "";
+        var callback = "callback";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback, false);
+    this.ds_account.filter("ACCOUNT_INNER_CODE==0");
+}
+
+this.parentAccountList_grid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)  //계정부모 클릭하면
+{    
+    var accountInnerCode=this.ds_parentAccount.getColumn(e.row,"ACCOUNT_INNER_CODE")
+	this.ds_account.filter("");
+	this.ds_account.filter("PARENT_ACCOUNT_INNER_CODE=='"+accountInnerCode+"'");
+	
+}
+
+this.accountList_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo) //계정과목 더블클릭하면
+{
+	var accountCode=this.ds_account.getColumn(e.row,"ACCOUNT_INNER_CODE");
+    var accountName=this.ds_account.getColumn(e.row,"ACCOUNT_NAME");
+
+
+    this.close(accountCode+"/"+accountName);
+
+}
+]]></Script>
+  </Form>
+</FDL>

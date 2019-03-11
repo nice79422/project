@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_AppointmentCodeForm" left="0" top="0" width="400" height="400" titletext="발령호수 선택" onload="hr_AppointmentCodeForm_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="appointmentCode_grid" taborder="0" useinputpanel="false" left="5%" top="16" right="5%" height="318" binddataset="gds_codeDetail" autofittype="col" oncelldblclick="appointmentCode_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="코드명"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" text="bind:DETAIL_CODE"/>
+                <Cell col="2" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="closeAppointmentCode_btn" taborder="1" text="닫기" left="37.5%" top="349" right="37.5%" height="32" visible="false" onclick="closeAppointmentCode_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+인사발령 관련 코드 호출 다이얼로그
+@Path		인사
+@Description	인사발령 관련 코드 호출 다이얼로그
+@Author	  	심승현
+@Create           2019. 02. 14.
+********************************************************************************/
+//폼 온로드
+this.hr_AppointmentCodeForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//로그인 하면 글로벌데이터셋 호출되어있음
+	//나중에 트랜잭션 삭제
+	application.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"gds_codeDetail=gds_codeDetail",
+					"",
+					"callback",
+					false);	
+	
+	alert("dialog this.parent.code    :"+this.parent.code);
+	application.gds_codeDetail.filter("DIVISION_CODE_NO=='"+this.parent.code+"'");	
+}
+
+
+
+
+this.appointmentCode_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{	//alert("e.row"+e.row);
+	var selAppointmentCode = application.gds_codeDetail.getColumn(e.row, "DETAIL_CODE");
+	
+	//alert("opener"+this.parent.row);
+	if(this.parent.cell==2){
+		this.opener.ds_personalAppointmentDetail.setColumn(this.parent.row,"APPOINTMENT_HISTORY",selAppointmentCode);
+	}else if(this.parent.cell==6){
+		this.opener.ds_personalAppointmentDetail.setColumn(this.parent.row,"APPOINTMENT_INFORMATION",selAppointmentCode);
+	//this.opener.findInformation(selAppointmentCode);
+	}
+	this.close();
+}
+
+this.closeAppointmentCode_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.attendance.dao.DayAnnualDAO">
+	
+
+	<resultMap id="dayAnnualResult" type="dayAnnualTO">
+		<result property="dayAnnualSeq" column="DAY_ANNUAL_SEQ" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="causeCode" column="CAUSE_CODE" />
+		<result property="detailCause" column="DETAIL_CAUSE" />
+		<result property="standardYear" column="STANDARD_YEAR" />
+		<result property="annualCode" column="ANNUAL_CODE" />
+		<result property="days" column="DAYS" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="approvalStatus" column="APPROVAL_STATUS" />
+	</resultMap>
+
+	<!-- 해당년도, 해당사원의 연차정보, 사원정보를 조회하는 메서드 -->
+	<select id="selectAnnualMgt" resultMap="dayAnnualResult"
+		parameterType="Map">
+    <![CDATA[
+    	SELECT
+    		da.EMP_CODE
+		 	,da.DAY_ANNUAL_SEQ
+      		,da.START_DATE
+      		,da.END_DATE
+      		,da.CAUSE_CODE
+      		,da.DETAIL_CAUSE
+      		,da.STANDARD_YEAR
+      		,da.ANNUAL_CODE
+      		,da.DAYS
+      		,da.APPROVAL_STATUS
+      		,E.EMP_NAME
+      		,0 AS CHK
+    		
+    	FROM
+    		DAY_ANNUAL da,EMPLOYEE e
+    	WHERE
+    		da.EMP_CODE=e.EMP_CODE
+    	AND
+    		e.EMP_CODE=#{empCode}
+    	AND
+    		da.STANDARD_YEAR IN (#{standardYear}, #{standardYear} +1)
+    	ORDER BY
+    		DAY_ANNUAL_SEQ
+    ]]>
+	</select>
+
+
+
+	<!-- 연차를 신청하는 메서드 -->
+	<insert id="insertDayAnnual" parameterType="dayAnnualTO">
+		<selectKey keyProperty="dayAnnualSeq" resultType="String" order="BEFORE" >
+	<![CDATA[
+		SELECT day_annual_seq.nextval FROM dual
+	]]>
+		</selectKey>
+   	
+   	<![CDATA[
+		INSERT INTO
+				DAY_ANNUAL
+				(
+				EMP_CODE,
+				DAY_ANNUAL_SEQ,
+				START_DATE,
+				END_DATE,
+				CAUSE_CODE,
+				DETAIL_CAUSE,
+				STANDARD_YEAR,
+				ANNUAL_CODE,
+				DAYS,
+				APPROVAL_STATUS,
+				EMP_NAME
+				)
+		VALUES(
+				#{empCode},
+				#{dayAnnualSeq},
+				#{startDate},
+				#{endDate},
+				#{causeCode},
+				#{detailCause},
+				#{standardYear},
+				#{annualCode},
+				#{days},
+				#{approvalStatus},
+				#{empName}
+		)
+	]]>
+	</insert>
+
+
+	<!-- 연차 승인관리 부분에서 연차를 조건에따라 조회하는 메서드 **동적쿼리** -->
+	<select id="selectDayAnnualListByCondition" resultMap="dayAnnualResult" parameterType="map">
+		SELECT DA.DAY_ANNUAL_SEQ
+					,DA.EMP_CODE
+	  		 		,DA.START_DATE
+          			,DA.END_DATE
+          			,DA.CAUSE_CODE
+          			,DA.DETAIL_CAUSE
+          			,DA.STANDARD_YEAR
+          			,DA.ANNUAL_CODE
+          			,DA.DAYS
+          			,DA.APPROVAL_STATUS
+          			,E.EMP_NAME
+         			,0 AS CHK
+		FROM DAY_ANNUAL DA, EMPLOYEE E
+		<if test="deptCode!=''">
+			,DEPARTMENT D
+		</if>
+		 <trim prefix="WHERE" prefixOverrides="AND |OR ">
+       			DA.EMP_CODE = E.EMP_CODE
+            <if test="deptCode != ''">
+                AND E.DEPT_CODE = D.DEPT_CODE 
+                AND D.DEPT_CODE = #{deptCode}
+            </if>
+            <if test="fromDate != '' and toDate !='' "  >
+                AND DA.START_DATE  BETWEEN #{fromDate} AND #{toDate}
+            </if>
+            <if test="approvalStatus != ''">
+                AND DA.APPROVAL_STATUS = #{approvalStatus}
+            </if>
+        </trim>
+		ORDER BY DA.START_DATE
+	</select> 
+	
+
+	<!-- 연차 휴가 승인 등록 -->
+	<update id="updateDayAnnual" parameterType="dayAnnualTO">
+	<![CDATA[
+		UPDATE 
+			DAY_ANNUAL
+		SET
+			APPROVAL_STATUS = #{approvalStatus},
+			CAUSE_CODE = #{causeCode},
+			DETAIL_CAUSE = #{detailCause}
+	    WHERE
+			EMP_CODE = #{empCode}
+		AND START_DATE=#{startDate}
+	]]>
+	</update>
+	
+
+	<!-- 연차 휴가 승인 삭제 -->
+	<delete id="deleteDayAnnual" parameterType="dayAnnualTO">
+	    <![CDATA[
+      	 DELETE FROM
+	            DAY_ANNUAL
+	     WHERE
+	            DAY_ANNUAL_SEQ = #{dayAnnualSeq} AND
+	            EMP_CODE = #{empCode}
+	    ]]>
+	</delete>
+
+</mapper>

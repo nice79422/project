@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.circumstance.dao.EtcSudangDAO">
+
+
+<!-- payStepDAO -->
+
+
+	<resultMap type="etcSudangTO" id="etcSudangResult">
+
+		<result property="etcSalCode" column="ETC_SAL_CODE" />
+		<result property="etcSalName" column="ETC_SAL_NAME" />
+		<result property="etcSalPrice" column="ETC_SAL_PRICE" />
+
+	</resultMap>
+	<select id="selectEtcSudangList" resultMap="etcSudangResult">
+    <![CDATA[
+	SELECT
+	ETC_SAL_CODE,
+	ETC_SAL_NAME,
+	ETC_SAL_PRICE
+	FROM
+	ETC_SAL
+    ]]>
+    </select>
+
+	<update id="updateEtcSudang" parameterType="etcSudangTO">
+	<![CDATA[
+	UPDATE ETC_SAL
+	SET
+	ETC_SAL_NAME=#{etcSalName},
+	ETC_SAL_PRICE=#{etcSalPrice}
+	WHERE
+	ETC_SAL_CODE=#{etcSalCode}
+	]]>
+	</update>
+
+	<delete id="deleteEtcSudang" parameterType="etcSudangTO">
+	<![CDATA[
+	DELETE ETC_SAL
+	WHERE
+	ETC_SAL_CODE=#{etcSalCode}
+    ]]>
+	</delete>
+
+	<insert id="insertEtcSudang" parameterType="etcSudangTO">
+	<![CDATA[
+	INSERT INTO ETC_SAL
+	(
+	ETC_SAL_CODE,
+	ETC_SAL_NAME,
+	ETC_SAL_PRICE
+	)
+	VALUES
+	(
+	#{etcSalCode},
+	#{etcSalName},
+	#{etcSalPrice}
+	)
+    ]]>
+	</insert>
+
+</mapper>

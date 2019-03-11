@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_HmRcdCd" left="0" top="0" width="1185" height="785" titletext="New Form" style="background:#ebe9e4ff;color:#46463dff;">
+    <Layouts>
+      <Layout/>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[]]></Script>
+  </Form>
+</FDL>

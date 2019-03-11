@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.acc.accBookMgt.dao.AccountBookDAO">
+	
+	<resultMap id="accountBookResult" type="accountantTO">
+	<result property="customerName" column="CUSTOMER_NAME"/>
+	<result property="businessLicenseNumber" column="BUSINESS_LICENSE_NUMBER"/>
+	<result property="customerCeo" column="CUSTOMER_CEO"/>
+	<result property="leftDebtorPrice" column="LEFT_DEBTOR_PRICE"/>
+	<result property="rightCreditsPrice" column="RIGHT_CREDITS_PRICE"/>
+	<result property="balance" column="BALANCE"/>
+	</resultMap>
+
+
+	<select id="selectAccountantList" resultMap="accountBookResult" parameterType="map">
+
+		SELECT A.CUSTOMER_NAME
+    		  ,REGEXP_REPLACE( A.BUSINESS_LICENSE_NUMBER,'(.{3})(.{2})(.{5})', '\1-\2-\3') AS BUSINESS_LICENSE_NUMBER
+   		      ,A.CUSTOMER_CEO
+   			  ,NVL(E.LEFT_DEBTOR_PRICE,0) AMOUNT
+   			  ,A.LEFT_DEBTOR_PRICE
+   			  ,A.RIGHT_CREDITS_PRICE
+    		  ,((NVL(E.LEFT_DEBTOR_PRICE,0) + A.LEFT_DEBTOR_PRICE) - A.RIGHT_CREDITS_PRICE) BALANCE
+ 	    FROM
+       (SELECT C1.CUSTOMER_NAME
+            , C1.BUSINESS_LICENSE_NUMBER
+            , C1.CUSTOMER_CEO
+            , SUM(C1.LEFT_DEBTOR_PRICE) LEFT_DEBTOR_PRICE
+            , SUM(C1.RIGHT_CREDITS_PRICE) RIGHT_CREDITS_PRICE
+            , (SUM(C1.LEFT_DEBTOR_PRICE) - SUM(C1.RIGHT_CREDITS_PRICE)) BALANCE
+         FROM
+              (SELECT C.BUSINESS_LICENSE_NUMBER
+                   ,C.CUSTOMER_CEO
+                   ,J.CUSTOMER_NAME
+                   ,J.LEFT_DEBTOR_PRICE
+                   ,J.RIGHT_CREDITS_PRICE
+                   ,J.ACCOUNT_NAME
+                   ,J.SLIP_APPROVAL_DATE
+                FROM CUSTOMER C
+                   , JOURNAL J
+               WHERE C.CUSTOMER_NAME = J.CUSTOMER_NAME
+              ) C1
+        WHERE C1.CUSTOMER_NAME = #{customerName}
+              AND C1.ACCOUNT_NAME = '외상매출금'
+              AND C1.SLIP_APPROVAL_DATE BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD')
+        GROUP BY C1.CUSTOMER_NAME
+            , C1.BUSINESS_LICENSE_NUMBER
+            , C1.CUSTOMER_CEO
+      	 ) A
+    	 , EARLY_STATEMENTS_BY_CUSTOMER E
+ 		WHERE A.customer_name = E.customer_name(+)
+
+
+	</select>
+	</mapper>

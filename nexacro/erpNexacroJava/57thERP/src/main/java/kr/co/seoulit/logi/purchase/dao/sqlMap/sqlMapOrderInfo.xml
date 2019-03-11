@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.purchase.dao.OrderInfoDAO">
+
+
+	<!-- orderInfoDAO -->
+
+	<resultMap type="orderInfoTO" id="orderInfoResult">
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="customerCode" column="CUSTOMER_CODE"/>
+		<result property="orderDate" column="ORDER_DATE"/>
+		<result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE"/>
+		<result property="description" column="DESCRIPTION"/>
+		<result property="orderInfoStatus" column="ORDER_INFO_STATUS"/>
+		<result property="slipRegistStatus" column="SLIP_REGIST_STATUS"/>
+	</resultMap>
+
+
+ 	<select id="selectOrderInfoList" resultMap="orderInfoResult">
+		SELECT
+		ORDER_NO, CUSTOMER_CODE
+		, ORDER_DATE, PERSON_CODE_IN_CHARGE
+		, DESCRIPTION, ORDER_INFO_STATUS,SLIP_REGIST_STATUS
+		FROM ORDER_INFO
+	</select>
+
+
+	<insert id="insertOrderInfo" parameterType="orderInfoTO">
+		INSERT INTO ORDER_INFO
+		VALUES
+		( #{orderNo}
+		, #{customerCode}
+		, #{orderDate}
+		, #{personCodeInCharge}
+		, #{description}
+		, #{orderInfoStatus}
+		, #{slipRegistStatus} )
+	</insert>
+
+
+	<update id="updateOrderInfo" parameterType="orderInfoTO">
+		UPDATE ORDER_INFO SET
+		CUSTOMER_CODE = #{customerCode}
+		, ORDER_DATE = #{orderDate}
+		, PERSON_CODE_IN_CHARGE = #{personCodeInCharge}
+		, DESCRIPTION = #{description}
+		, ORDER_INFO_STATUS = #{orderInfoStatus}
+		, SLIP_REGIST_STATUS = #{slipRegistStatus}
+		WHERE
+		ORDER_NO = #{orderNo}
+	</update>
+
+</mapper>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report11" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Key" uuid="80fabf90-64df-4601-b7c7-979de25997c2">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" whenResourceMissingType="Key" uuid="5a7a6695-5b32-4db4-901f-a6927e4555fc"/>
+	<parameter name="slip_no" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT s.slip_no, s.expense_report,s.dept_code, s.reporting_date,s.slip_status, s.reporting_emp_code,j.journal_no, d.DEPT_name, j.account_name, j.customer_name, j.left_debtor_price,j.right_credits_price,e.emp_name FROM SLIP S, JOURNAL J, EMPLOYEE E, DEPARTMENT d WHERE S.SLIP_NO=J.SLIP_NO  AND e.DEPT_CODE=d.DEPT_CODE  AND e.EMP_CODE=s.REPORTING_EMP_CODE AND s.slip_no=$P{slip_no}]]>
+	</queryString>
+	<field name="slip_no" class="java.lang.String"/>
+	<field name="expense_report" class="java.lang.String"/>
+	<field name="DEPT_CODE" class="java.lang.String"/>
+	<field name="reporting_date" class="java.lang.String"/>
+	<field name="REPORTING_EMP_CODE" class="java.lang.String"/>
+	<field name="JOURNAL_NO" class="java.lang.String"/>
+	<field name="dept_name" class="java.lang.String"/>
+	<field name="account_name" class="java.lang.String"/>
+	<field name="customer_name" class="java.lang.String"/>
+	<field name="left_debtor_price" class="java.math.BigDecimal"/>
+	<field name="right_credits_price" class="java.math.BigDecimal"/>
+	<field name="emp_name" class="java.lang.String"/>
+	<field name="slip_status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<rectangle>
+				<reportElement x="704" y="9" width="64" height="25" backcolor="#CCCCCC" uuid="9e05a243-9003-4706-bdf9-63059b0b521c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="640" y="9" width="64" height="25" backcolor="#CCCCCC" uuid="94e1df04-1c5f-46aa-99be-f3b0c3fd5bbf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="512" y="9" width="64" height="25" backcolor="#CCCCCC" uuid="bcf59b80-5b4f-479b-96e7-a82b2095f524"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="704" y="9" width="64" height="24" uuid="0b1fff0f-efdd-4fb5-9636-f8d3034e1b46"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[사 장]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="9" width="64" height="25" uuid="6564657f-ad51-43b5-80c7-758437cc0135"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[부 장]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="8" width="64" height="25" uuid="d854f329-545c-4915-a31c-a459d7a9f1e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[담 당]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="576" y="9" width="64" height="25" backcolor="#CCCCCC" uuid="dc2aff41-9631-4d94-b5ba-9e115409bd0d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="576" y="8" width="64" height="24" uuid="8d022624-d59b-420d-97dc-c830c46259d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[과 장]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="704" y="37" width="64" height="35" uuid="2b4c3a38-098b-44d5-8434-575ebbd1951f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="482" y="9" width="30" height="63" backcolor="#CCCCCC" uuid="f2c56800-5996-4490-a17e-932a174ba2b6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="482" y="8" width="30" height="60" backcolor="#CCCCCC" uuid="6fdb843e-0831-4fb3-821f-ab1d8e3d556e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[결재]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="576" y="37" width="64" height="35" uuid="1cebc509-733b-4eca-984a-374c40dabac9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="63" y="9" width="324" height="60" uuid="b336e97d-c019-44a7-afd0-d62bdf7a3c52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[회 계 전 표]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="512" y="37" width="64" height="35" uuid="17575343-d6f5-45be-a0e0-32d3a503a735"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="640" y="37" width="64" height="35" uuid="66955f86-cf6c-4b7a-a662-7c58bb309436"/>
+			</rectangle>
+			<image>
+				<reportElement x="530" y="44" width="28" height="24" uuid="e886822c-193a-4090-9e85-ded81f691bac"/>
+				<imageExpression><![CDATA["C:\\eclipse-workspaceSPRINGPROJECT\\HEOSPRING\\src\\main\\webapp\\resources\\image\\dojang13.jpg"]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="648" y="48" width="46" height="23" uuid="e4958636-0e86-4d47-9b08-604d5b3fe8d5">
+					<printWhenExpression><![CDATA[$F{slip_status}.equals( "승인" )]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA["C:\\eclipse-workspaceSPRINGPROJECT\\HEOSPRING\\src\\main\\webapp\\resources\\image\\dojang2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="440" y="26" width="105" height="20" uuid="4fb7167a-11d6-4834-88a0-d8b4f6a1363d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reporting_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="704" y="26" width="70" height="20" uuid="d54fbc9e-d4cc-47aa-ace3-a890f704ed24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emp_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="26" width="54" height="20" uuid="1ab85d3e-1e3e-4738-a6ea-cd7be8248fee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[전표번호 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="26" width="49" height="20" uuid="8edcf62a-e3b6-47f3-832f-7893c11d42f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[작성일자 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="657" y="26" width="47" height="20" uuid="431343de-3c49-4023-97e0-38c538985c0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[작성자 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="657" y="6" width="47" height="20" uuid="003dcc9c-14d8-4f54-99a9-0ffa277718b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[부 서 : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="704" y="6" width="70" height="20" uuid="d09ce935-2ed1-462e-9ec4-90363c600324"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dept_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="26" width="100" height="20" uuid="2b49d208-19e1-481d-a152-7ce0057ba05d"/>
+				<textFieldExpression><![CDATA[$F{slip_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="91" splitType="Stretch">
+			<rectangle>
+				<reportElement x="18" y="58" width="130" height="30" uuid="86f5eaa5-98c6-4054-aebd-c243b648e88e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="648" y="32" width="130" height="25" backcolor="#FFCCCC" uuid="cbbefaec-d676-4ef4-9117-ca3576326df8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="518" y="7" width="260" height="25" backcolor="#FFCCCC" uuid="b55ed805-b7d2-4212-aca3-07b10a2f52d8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="148" y="7" width="370" height="50" backcolor="#FFCCCC" uuid="ab3eaff8-27de-4da6-8fe0-d4267db8ae98"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="18" y="7" width="130" height="50" backcolor="#FFCCCC" uuid="27269ad6-8c5e-4ed8-a0c4-8dff5571a232"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="648" y="58" width="130" height="30" uuid="0b024aca-9fe8-4905-8c44-c99cd7077870"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="148" y="58" width="370" height="30" uuid="1b1b4af6-0b81-420d-bd7b-9bf945df392d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="658" y="32" width="120" height="25" uuid="69c52806-e00a-4a1e-bd05-40ec5f0df443"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[대   변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="7" width="120" height="50" uuid="ec9ec7fc-8302-4f2f-bdc5-e1b5eef239d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[거 래 처 / 적요]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="518" y="32" width="130" height="25" backcolor="#FFCCCC" uuid="44b56320-7a37-4eb3-be48-bf8716635b24"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="518" y="58" width="130" height="30" uuid="afafeefc-fcbc-430a-ba68-2c09f3ab8f7d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="594" y="7" width="120" height="25" uuid="e6710ef4-5463-459b-a666-93268b544f78"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[금   액]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="518" y="32" width="120" height="25" uuid="7ed495f5-3b5e-4899-ad00-bb9729a0b118"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[차   변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="7" width="120" height="50" uuid="6b5f018e-67fd-4235-856b-f8bfb190445f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[계 정 과 목]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="58" width="36" height="30" uuid="ed59e943-a0d4-4963-9d72-59f6d312a77b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="18" y="58" width="130" height="30" uuid="c514a392-f7c0-4eff-9270-81e605a92971"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{account_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="518" y="58" width="130" height="30" uuid="91a03342-7084-4fe5-85d4-ea4bbf2b44df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{left_debtor_price}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="648" y="58" width="130" height="30" uuid="d643f1df-cc3f-4c48-ac75-a1abf6e68a7b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{right_credits_price}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="148" y="58" width="108" height="30" uuid="122ee336-c19d-4138-93e1-55854f2b6da6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="58" width="226" height="30" uuid="47aed48c-40cb-4ef4-91be-3c54e554d632"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{expense_report}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch"/>
+	</summary>
+</jasperReport>

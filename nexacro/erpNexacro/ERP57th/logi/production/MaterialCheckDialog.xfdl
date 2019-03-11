@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="MaterialCheckDialog" left="0" top="0" width="1024" height="489" titletext="MaterialCheckDialog" onload="MaterialCheckDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="materialCheck_grid" taborder="0" binddataset="ds_materialCheckTemp" useinputpanel="false" autofittype="col" left="11" top="18" width="1002" height="461" oncelldblclick="materialCheck_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="159"/>
+                <Column size="199"/>
+                <Column size="119"/>
+                <Column size="146"/>
+                <Column size="198"/>
+                <Column size="177"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="제품코드"/>
+                <Cell col="1" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="제품명"/>
+                <Cell col="2" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="재고량"/>
+                <Cell col="3" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="안전재고량"/>
+                <Cell col="4" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="재고상태"/>
+                <Cell col="5" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="안전재고여부"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_CODE"/>
+                <Cell col="1" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_NAME"/>
+                <Cell col="2" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:STOCKTAKING"/>
+                <Cell col="3" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:SAFETY_STOCKTAKING"/>
+                <Cell col="4" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:STOCK_STATUS" expr="expr:(STOCK_STATUS&gt;=0)?&quot;재고있음&quot;:&quot;재고부족&quot;"/>
+                <Cell col="5" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:SAFETY_STOCK_STATUS" expr="expr:안전재고량&gt;0?&quot;안전재고있음&quot;:&quot;안전재고부족&quot;"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_materialCheckTemp">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="STOCKTAKING" type="STRING" size="256"/>
+          <Column id="SAFETY_STOCKTAKING" type="STRING" size="256"/>
+          <Column id="STOCK_STATUS" type="STRING" size="256"/>
+          <Column id="SAFETY_STOCK_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.MaterialCheckDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	var i=this.ds_materialCheckTemp.copyData(this.parent.ds);
+}
+
+this.materialCheck_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

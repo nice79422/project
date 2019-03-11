@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_financialStatementForm" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="financialState_stc" taborder="0" text="재무상태표" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Calendar id="financialState_cal" taborder="1" left="62.7%" top="79" right="20.31%" height="31"/>
+        <Button id="financialStateSearch_btn" taborder="2" text="조회" left="82.13%" top="79" right="10.55%" height="31" onclick="financialStateSearch_btn_onclick"/>
+        <Button id="financialStateOutput_btn" taborder="3" text="출력" left="90.63%" top="79" right="2.05%" height="31" onclick="financialStateOutput_btn_onclick"/>
+        <Grid id="curFinancialState_grid" taborder="4" useinputpanel="false" left="2.34%" top="191" right="50.59%" height="489" autofittype="col" binddataset="ds_financialStatements">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="121"/>
+                <Column size="87"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="계정과목"/>
+                <Cell col="1" colspan="2" text="당기"/>
+                <Cell row="1" col="1" colspan="2" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_NAME"/>
+                <Cell col="1" text="bind:CURRENT_LEFT"/>
+                <Cell col="2" text="bind:CURRENT_RIGHT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="preFinancialState_grid00" taborder="5" useinputpanel="false" autofittype="col" left="50.78%" top="116" right="2.83%" height="564" binddataset="ds_financialStatements">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="121"/>
+                <Column size="87"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="계정과목"/>
+                <Cell col="1" colspan="2" text="전기"/>
+                <Cell row="1" col="1" colspan="2" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_NAME"/>
+                <Cell col="1" text="bind:EARLY_LEFT"/>
+                <Cell col="2" text="bind:EARLY_RIGHT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00" taborder="6" useinputpanel="false" left="4.59%" top="816" right="37.4%" height="133" binddataset="ds_financialStatements" autofittype="col" visible="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="97"/>
+                <Column size="89"/>
+                <Column size="99"/>
+                <Column size="86"/>
+                <Column size="103"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="계정과목"/>
+                <Cell col="1" colspan="2" text="전기"/>
+                <Cell col="3" colspan="2" text="당기"/>
+                <Cell row="1" col="1" colspan="2" text="금액"/>
+                <Cell row="1" col="3" colspan="2" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="bind:ACCOUNT_NAME"/>
+                <Cell col="1" text="bind:EARLY_LEFT"/>
+                <Cell col="2" text="bind:EARLY_RIGHT"/>
+                <Cell col="3" text="bind:CURRENT_LEFT"/>
+                <Cell col="4" text="bind:CURRENT_RIGHT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="noti_stc" taborder="7" text="중소기업 회계기준에 의하여 작성됨." left="30.86%" top="698" right="31.54%" height="45" style="color:red;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_earlyrevenuesAndExpense">
+        <ColumnInfo>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_efinancialStatements">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="L_PRICE" type="STRING" size="256"/>
+          <Column id="R_PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_financialStatements">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="CURRENT_LEFT" type="STRING" size="256"/>
+          <Column id="CURRENT_RIGHT" type="STRING" size="256"/>
+          <Column id="EARLY_LEFT" type="STRING" size="256"/>
+          <Column id="EARLY_RIGHT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_earlyIncomeStatement">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="PARENT_ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+재무상태표화면                                           						                                                                         
+@Path		회계              				   				
+@Description	결산을 위한 창						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 28                             		                    				                                            
+********************************************************************************/
+
+
+this.financialStateSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{ if(this.financialState_cal.value<=20181231){
+    alert("전년도 자료는 조회하실 수 없습니다");
+    return;
+   }
+   var financialStateDate = this.financialState_cal.value;
+
+	var id = "findFinancialStatements";
+    var url = "dataURL::statement/financialStatement/findFinancialStatements.do";
+    var respDs = "";
+    var reqDs = "ds_financialStatements=ds_financialStatements";
+    var args = "approvalDate='"+financialStateDate+"'";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback, false);	
+}
+
+this.financialStateOutput_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{  if(confirm("재무상태표를 출력하시겠습니까?")){
+		this.exportObj = new ExcelExportObject();
+		var ret = this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, 
+        this.Grid00, "Sheet1!A1");
+		this.exportObj.set_exporturl("http://localhost:8282/nexacro-xeni/XExportImport");   
+		this.exportObj.exportData(); 
+	}
+	
+}
+
+
+function callback(trid , ErrorCode, ErrorMsg){
+
+	if(trid=="findFinancialStatements"){
+		if(ErrorCode <0){
+			alert("조회 실패 : " + ErrorMsg);
+		}else{
+
+		}
+	}
+	
+}]]></Script>
+  </Form>
+</FDL>

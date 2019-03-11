@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_ContractForm" left="0" top="0" width="1185" height="785" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <GroupBox id="GroupBox00" text="수주등록" taborder="0" left="0.76%" top="3" right="0.68%" height="773" style="background:transparent;border:2 solid #333333ff ;color:black;font:25 Dotum,HY견고딕;"/>
+        <Calendar id="fromDate_cal" taborder="1" dateformat="yyyyMMdd" oneditclick="Calendar00_oneditclick" left="4.05%" top="60" right="84.14%" height="44"/>
+        <Static id="st_bar" taborder="2" text="~" left="16.37%" top="62" right="80.08%" height="41" style="border:0 solid darkgray ;color:black;font:25 함초롬돋움,돋움;"/>
+        <Calendar id="toDate_cal" taborder="3" dateformat="yyyyMMdd" oneditclick="Calendar00_oneditclick" left="20.76%" top="60" right="67.43%" height="44"/>
+        <Button id="btn_checkContract" taborder="4" onclick="btn_checkEstimate_onclick" left="33.42%" top="59" right="56.96%" height="45" style="background:#ffffffff;color:black;" text="수주 조회"/>
+        <Button id="btn_estimateInfo" taborder="5" text="견적정보로 추가" onclick="btn_addEstimate_onclick" left="59.66%" top="59" right="30.72%" height="45" style="background:#ffffffff;color:black;"/>
+        <Button id="btn_deleteContract" taborder="6" text="삭제" onclick="btn_delEstimate_onclick" left="70.8%" top="59" right="19.07%" height="45" style="background:#ffffffff;color:black;"/>
+        <Grid id="grd_contract" taborder="7" binddataset="ds_contract" useinputpanel="false" left="3.97%" top="127" right="7.68%" height="292" style="background:transparent;" onrbuttonup="grd_contract_onrbuttonup">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="140"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주일련번호"/>
+                <Cell col="1" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="견적일련번호"/>
+                <Cell col="2" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주유형구분"/>
+                <Cell col="3" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="거래처"/>
+                <Cell col="4" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주일자"/>
+                <Cell col="5" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주요청자"/>
+                <Cell col="6" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주담당자"/>
+                <Cell col="7" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="납품여부"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_NO"/>
+                <Cell col="1" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ESTIMATE_NO"/>
+                <Cell col="2" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_TYPE"/>
+                <Cell col="3" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CUSTOMER_CODE"/>
+                <Cell col="4" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_DATE"/>
+                <Cell col="5" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_REQUESTER"/>
+                <Cell col="6" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:PERSON_CODE_IN_CHARGE"/>
+                <Cell col="7" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:DELIVERY_RESULT_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="grd_contractDetail" taborder="8" binddataset="ds_contractDetail" useinputpanel="false" left="3.97%" top="454" right="7.68%" height="297" style="background:transparent;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="70"/>
+                <Column size="107"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="107"/>
+                <Column size="112"/>
+                <Column size="113"/>
+                <Column size="109"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주상세일련번호"/>
+                <Cell col="1" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수주일련번호"/>
+                <Cell col="2" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목코드"/>
+                <Cell col="3" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목명"/>
+                <Cell col="4" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="단위"/>
+                <Cell col="5" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="납기일"/>
+                <Cell col="6" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="수량"/>
+                <Cell col="7" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="단가"/>
+                <Cell col="8" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="합계액"/>
+                <Cell col="9" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="MPS적용여부"/>
+                <Cell col="10" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="납품여부"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_DETAIL_NO"/>
+                <Cell col="1" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_NO"/>
+                <Cell col="2" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_CODE"/>
+                <Cell col="3" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_NAME"/>
+                <Cell col="4" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:UNIT_OF_CONTRACT"/>
+                <Cell col="5" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:DUE_DATE_OF_CONTRACT"/>
+                <Cell col="6" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:CONTRACT_AMOUNT"/>
+                <Cell col="7" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:UNIT_PRICE_OF_CONTRACT"/>
+                <Cell col="8" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:SUM_PRICE_OF_CONTRACT" expr="(CONTRACT_AMOUNT)*(UNIT_PRICE_OF_CONTRACT)"/>
+                <Cell col="9" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MPS_APPLY_STATUS"/>
+                <Cell col="10" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:DELIVERY_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_batchContract" taborder="9" text="저장" onclick="btn_batchEstimate_onclick" left="82.28%" top="59" right="7.51%" height="45" style="background:#ffffffff;color:black;"/>
+        <Button id="btn_printContract" taborder="12" text="수주내력서 출력" left="43.97%" top="60" right="46.24%" height="43" style="background:#ffffffff;color:black;" onclick="btn_printContract_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_contract">
+        <ColumnInfo>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ESTIMATE_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_TYPE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CONTRACT_DATE" type="STRING" size="256"/>
+          <Column id="CONTRACT_REQUESTER" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="DELIVERY_RESULT_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_contractDetail">
+        <ColumnInfo>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="CONTRACT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="MPS_APPLY_STATUS" type="STRING" size="256"/>
+          <Column id="DELIVERY_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_estimate">
+        <ColumnInfo>
+          <Column id="ESTIMATE_NO" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="ESTIMATE_DATE" type="STRING" size="256"/>
+          <Column id="CONTRACT_STATUS" type="STRING" size="256"/>
+          <Column id="ESTIMATE_REQUESTER" type="STRING" size="256"/>
+          <Column id="EFFECTIVE_DATE" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_estimateDetail">
+        <ColumnInfo>
+          <Column id="ESTIMATE_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="ESTIMATE_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_ESTIMATE" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_ESTIMATE" type="STRING" size="256"/>
+          <Column id="ESTIMATE_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_ESTIMATE" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_ESTIMATE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[var customerCode;
+//var estimateNo;	
+var	personCodeInCharge;
+var estimateRequester;
+
+//온로드
+this.logi_ContractForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findEstimateDialog",
+				"dataURL::logi/business/findEstimateDialog.do",
+				"",
+				"ds_estimate=ds_estimate",
+				"fromDate='regContract' toDate='"+application.today()+"'",
+				"callback");
+
+   var nRow=this.ds_contract.rowposition;
+   var scode=this.ds_contract.getColumn(nRow,"CONTRACT_NO");
+   ds_contractDetail.filter(" CONTRACT_NO=='"+scode+"'");
+}
+
+//수주조회
+this.btn_checkEstimate_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.transaction("findContractList",
+	"dataURL::logi/business/findContractList.do",
+	"",
+	"ds_contract=ds_contract",
+	"fromDate='"+this.fromDate_cal.value+"' toDate='"+this.toDate_cal.value+"'",
+	"callback");
+}
+
+//수주내력서출력
+this.btn_printContract_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var row=this.ds_contract.rowposition;
+	var contractNo=this.ds_contract.getColumn(row,"CONTRACT_NO");
+	alert(contractNo);
+	application.open("contractPDF",
+			"logi_business::logi_ContractPDF.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'contractPDF',contractNo:contractNo}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='contractPDF'"
+			);
+}
+
+//견적정보로추가
+this.squenceNo="";
+var newContractNo="";
+
+this.btn_addEstimate_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	var objChildFrame = new ChildFrame();
+	objChildFrame.init("modeless"
+					,"absolute"
+                      , 0
+                      , 0
+                      , 400
+                      , 350
+                      , null
+                      , null
+                      , "logi_business::logi_EstimateDialog.xfdl"); 
+          
+         objChildFrame.showModal(this.getOwnerFrame()
+								,null
+								,this
+								,"fn_popupCallback");
+								         
+		
+				
+			this.transaction("findSequenceNo",
+ 				"dataURL::sys/findSequenceNo.do",
+ 				"",
+ 				"",
+ 				"findSeq='SERIAL_SEQ'",
+ 				"callback",
+ 				false);
+ 				
+ 	var serialCode=this.squenceNo;
+	 newContractNo="CONT"+serialCode;
+	var rowNum = this.ds_contract.addRow();
+	
+
+	
+	//var objDate = new Date();
+	//var day = objDate.toFormatString("%Y%m%d");
+			
+	this.ds_contract.setColumn(rowNum,"CONTRACT_NO",newContractNo);
+	this.ds_contract.setColumn(rowNum,"CUSTOMER_CODE",customerCode);
+	this.ds_contract.setColumn(rowNum,"CONTRACT_DATE",application.today());
+	this.ds_contract.setColumn(rowNum,"CONTRACT_TYPE","CT-01");
+
+/*		var itemCode;
+		var itemName;
+		var unitOfEstimate;
+		var dueDateOfEstimate;
+		var estimateAmount;
+		var unitPriceOfEstimate;
+		var sumPriceOfEstimate;
+		var num=1;
+		
+		trace("상세횟수"+rowNum);
+
+		for(var i=0; i<this.ds_estimateDetail.getRowCount(); i++)
+		{
+		trace("상세횟수"+i);
+		itemCode = this.ds_estimateDetail.getColumn(i,"ITEM_CODE");
+		itemName = this.ds_estimateDetail.getColumn(i,"ITEM_NAME");
+		unitOfEstimate = this.ds_estimateDetail.getColumn(i,"UNIT_OF_ESTIMATE");
+		dueDateOfEstimate = this.ds_estimateDetail.getColumn(i,"DUE_DATE_OF_ESTIMATE");
+		estimateAmount = this.ds_estimateDetail.getColumn(i,"ESTIMATE_AMOUNT");
+		unitPriceOfEstimate = this.ds_estimateDetail.getColumn(i,"UNIT_PRICE_OF_ESTIMATE");		
+		sumPriceOfEstimate = this.ds_estimateDetail.getColumn(i,"SUM_PRICE_OF_ESTIMATE");
+		
+		var contractDetailRowNum = this.ds_contractDetail.addRow();
+		
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"CONTRACT_DETAIL_NO",newContractNo+'-0'+(num++));	
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"CONTRACT_NO",newContractNo);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"ITEM_CODE",itemCode);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"ITEM_NAME",itemName);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"UNIT_OF_CONTRACT",unitOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"DUE_DATE_OF_CONTRACT",dueDateOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"CONTRACT_AMOUNT",estimateAmount);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"UNIT_PRICE_OF_CONTRACT",unitPriceOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"SUM_PRICE_OF_CONTRACT",sumPriceOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"MPS_APPLY_STATUS","");
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"DELIVERY_STATUS","N");
+		}
+		this.ds_contractDetail.filter("CONTRACT_NO=='"+newContractNo+"'");*/
+}
+
+//콜백function
+this.fn_popupCallback = function(strPopupID,strReturn)
+{
+    if(strPopupID =="modeless"){
+        this.alert(strReturn);
+        var arr=strReturn.split("/");
+    
+    var row = this.ds_contract.rowposition;
+    this.ds_contract.setColumn(row,"CUSTOMER_CODE", arr[0]);
+ 	this.ds_contract.setColumn(row,"ESTIMATE_NO", arr[1]);	
+	this.ds_contract.setColumn(row,"PERSON_CODE_IN_CHARGE", arr[2]);
+	this.ds_contract.setColumn(row,"CONTRACT_REQUESTER", arr[3]);
+    }
+};
+
+//삭제
+this.btn_delEstimate_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		this.ds_contract.deleteRow(this.ds_contract.rowposition);
+		   this.transaction("delContractlist",                           
+            "dataURL::logi/business/registerContract.do",      
+            "ds_contract=ds_contract:u ds_contractDetail=ds_contractDetail:u",
+            "",
+            "",
+            "callback");
+}
+
+//저장
+this.btn_batchEstimate_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	if(confirm("수주를 저장하시겠습니까?")){
+		this.transaction(
+		"registerContract",
+		"dataURL::logi/business/registerContract.do",
+		"ds_contract=ds_contract:u ds_contractDetail=ds_contractDetail:u",
+		"ds_contract=ds_contract ds_contractDetail=ds_contractDetail",
+		"",
+		"callback",
+		false);
+
+		
+		var row = this.ds_contract.rowposition;
+		var estimateNo = this.ds_contract.getColumn(row,"ESTIMATE_NO");
+		alert(estimateNo);
+		
+		this.transaction("findEstimateList",
+ 				"dataURL::logi/business/findEstimateList.do",
+ 				"",
+ 				"ds_estimate=ds_estimate",
+ 				"fromDate='estimateNo' toDate ='"+estimateNo+"'",
+ 				"callback",
+ 				false);
+	}
+		this.ds_contract.filter("xx");
+		this.ds_contractDetail.filter("xx");
+		alert("저장이완료되었습니다");
+	
+	for(var i=0; i<this.ds_estimate.rowcount; i++){
+	this.ds_estimate.setColumn(i,"CONTRACT_STATUS","Y");
+	}
+		this.transaction(
+		"registerEstimateDetail",
+		"dataURL::logi/business/registerEstimateDetail.do",
+		"ds_estimate=ds_estimate:u ds_estimateDetail=ds_estimateDetail",
+		"",
+		"",
+		"callback",
+		false);
+}
+
+//견적상세 function
+this.test=function(estimateNo){
+	this.transaction("findEstimateDetailList",
+				"dataURL::logi/business/findEstimateDetailList.do",
+				"",
+				"ds_estimateDetail=ds_estimateDetail",
+				"estimateNo='"+estimateNo+"'",
+				"callback",
+				 false);
+		var itemCode;
+		var itemName;
+		var unitOfEstimate;
+		var dueDateOfEstimate;
+		var estimateAmount;
+		var unitPriceOfEstimate;
+		var sumPriceOfEstimate;
+		var num=1;
+		 
+		trace(this.ds_estimateDetail.getRowCount());
+		for(var i=0; i<this.ds_estimateDetail.getRowCount(); i++)
+		{
+		trace("상세횟수"+i);
+		itemCode = this.ds_estimateDetail.getColumn(i,"ITEM_CODE");
+		itemName = this.ds_estimateDetail.getColumn(i,"ITEM_NAME");
+		unitOfEstimate = this.ds_estimateDetail.getColumn(i,"UNIT_OF_ESTIMATE");
+		dueDateOfEstimate = this.ds_estimateDetail.getColumn(i,"DUE_DATE_OF_ESTIMATE");
+		estimateAmount = this.ds_estimateDetail.getColumn(i,"ESTIMATE_AMOUNT");
+		unitPriceOfEstimate = this.ds_estimateDetail.getColumn(i,"UNIT_PRICE_OF_ESTIMATE");		
+		sumPriceOfEstimate = this.ds_estimateDetail.getColumn(i,"SUM_PRICE_OF_ESTIMATE");
+		
+		var contractDetailRowNum = this.ds_contractDetail.addRow();
+		
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"CONTRACT_DETAIL_NO",newContractNo+'-0'+(num++));	
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"CONTRACT_NO",newContractNo);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"ITEM_CODE",itemCode);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"ITEM_NAME",itemName);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"UNIT_OF_CONTRACT",unitOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"DUE_DATE_OF_CONTRACT",dueDateOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"CONTRACT_AMOUNT",estimateAmount);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"UNIT_PRICE_OF_CONTRACT",unitPriceOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"SUM_PRICE_OF_CONTRACT",sumPriceOfEstimate);
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"MPS_APPLY_STATUS","");
+		this.ds_contractDetail.setColumn(contractDetailRowNum,"DELIVERY_STATUS","N");
+		}
+//		this.ds_contractDetail.filter("CONTRACT_NO=='"+newContractNo+"'");
+}
+
+//수주상세조회
+this.grd_contract_onrbuttonup = function(obj:Grid, e:nexacro.GridMouseEventInfo)
+{
+	var contractNo = this.ds_contract.getColumn(e.row,"CONTRACT_NO");
+		application.trace(contractNo);
+			this.transaction("findContractDetailList",
+				"dataURL::logi/business/findContractDetailList.do",
+				"",
+				"ds_contractDetail=ds_contractDetail",
+				"contractNo='"+contractNo+"'",
+				"callback",
+				false);
+}
+
+]]></Script>
+  </Form>
+</FDL>

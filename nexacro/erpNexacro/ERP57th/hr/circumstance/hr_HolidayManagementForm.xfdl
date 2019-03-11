@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="annualApplicationForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="hr_HolidayManagementForm_onload">
+    <Layouts>
+      <Layout width="1024" height="768">
+        <Calendar id="fromDate_cal" taborder="0" dateformat="yyyy-MM-dd" canchange="startDate_canchange" left="743" top="62" width="134" height="30" style="align:center middle;" oneditclick="fromDate_cal_oneditclick"/>
+        <Static id="Static20" taborder="1" text="부터" onclick="Static00_onclick" left="75%" top="62" right="21.29%" height="30"/>
+        <Calendar id="toDate_cal" taborder="2" dateformat="yyyy-MM-dd" canchange="endDate_canchange" left="743" top="96" width="134" height="30" style="align:center middle;"/>
+        <Static id="search_btn" taborder="3" text="까지" onclick="Static00_onclick" left="75%" top="96" right="21.29%" height="30"/>
+        <Grid id="Grid01" taborder="4" useinputpanel="false" left="41.7%" top="136" right="1.56%" height="551" binddataset="ds_holiday" autosizingtype="none" autosizebandtype="body" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="일자"/>
+                <Cell col="2" text="명칭"/>
+                <Cell col="3" text="비고"/>
+                <Cell col="4" text="구분"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="text" text="expr:currow+1"/>
+                <Cell col="1" edittype="text" text="bind:BASIC_DAY"/>
+                <Cell col="2" edittype="text" text="bind:HOLIDAY_NAME"/>
+                <Cell col="3" edittype="text" text="bind:NOTE"/>
+                <Cell col="4" edittype="text" text="bind:HOLIDAY_TYPE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="add_btn" taborder="6" text="추가&#13;&#10;등록" left="25.98%" top="136" right="67.77%" height="64" onclick="add_onclick"/>
+        <Button id="delete_btn" taborder="8" text="삭제" left="85.94%" top="62" right="7.81%" height="64" onclick="delete_btn_onclick"/>
+        <Button id="save_btn" taborder="9" text="저장" left="92.48%" top="62" right="1.37%" height="64" onclick="save_btn_onclick"/>
+        <Button id="referencePeriod_btn" taborder="10" text="기간&#13;&#10;조회" onclick="referencePeriod_onclick" left="79%" top="62" right="14.75%" height="64"/>
+        <Static id="Static01_stc" taborder="12" text="일자" left="1.56%" top="207" right="87.6%" height="28" onclick="Static01_onclick"/>
+        <Static id="Static02_stc" taborder="13" text="명칭" onclick="Static01_onclick" left="1.56%" top="239" right="87.6%" height="28"/>
+        <Static id="Static03_stc" taborder="14" text="휴일근태구분" onclick="Static01_onclick" left="1.56%" top="271" right="87.6%" height="28"/>
+        <Static id="Static04_stc" taborder="15" text="비고" onclick="Static01_onclick" left="1.56%" top="303" right="87.6%" height="28"/>
+        <Edit id="addName_edt" taborder="16" left="12.79%" top="239" right="67.77%" height="28" style="align:center middle;"/>
+        <Combo id="addType_combo" taborder="17" text="Combo00" left="12.79%" top="271" right="60.74%" height="28" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">HGC000</Col>
+                <Col id="datacolumn">HGC000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">HGC001</Col>
+                <Col id="datacolumn">HGC001</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="addNote_edt" taborder="18" left="12.79%" top="303" right="60.74%" height="28" style="align:center middle;"/>
+        <Grid id="Grid00" taborder="19" binddataset="ds_holidayInfo" useinputpanel="false" autofittype="col" left="1.56%" top="480" right="60.94%" height="122" oncellclick="holidayInfo">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="50"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="날짜"/>
+                <Cell col="1" text="종류"/>
+                <Cell col="2" text="공공기관휴일"/>
+                <Cell col="3" text="명칭"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:LOCDATE"/>
+                <Cell col="1" text="bind:DATE_KIND"/>
+                <Cell col="2" text="bind:IS_HOLIDAY"/>
+                <Cell col="3" text="bind:DATE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Combo id="month_combo" taborder="20" codecolumn="codecolumn" datacolumn="datacolumn" left="15.14%" top="447" right="75%" height="30" onitemchanged="month_combo_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">01</Col>
+                <Col id="datacolumn">01</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">02</Col>
+                <Col id="datacolumn">02</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">03</Col>
+                <Col id="datacolumn">03</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">04</Col>
+                <Col id="datacolumn">04</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">05</Col>
+                <Col id="datacolumn">05</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">06</Col>
+                <Col id="datacolumn">06</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">07</Col>
+                <Col id="datacolumn">07</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">08</Col>
+                <Col id="datacolumn">08</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">09</Col>
+                <Col id="datacolumn">09</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">10</Col>
+                <Col id="datacolumn">10</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">11</Col>
+                <Col id="datacolumn">11</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">12</Col>
+                <Col id="datacolumn">12</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Static id="Static06" taborder="21" text="月" onclick="Static00_onclick" left="25.39%" top="447" right="70.9%" height="30"/>
+        <Static id="Static05" taborder="22" text="年" onclick="Static00_onclick" left="25.39%" top="413" right="70.9%" height="30"/>
+        <Spin id="year_spin" taborder="23" value="0" left="15.14%" top="413" right="75%" height="30" style="align:center middle;font:11 함초롬돋움,돋움;"/>
+        <Button id="Info_btn" taborder="24" text="휴일정보조회" left="29.39%" top="413" right="60.94%" height="64" onclick="info_btn"/>
+        <Button id="reset_btn" taborder="25" text="초기화" onclick="reset_onclick" left="19.34%" top="136" right="74.41%" height="64"/>
+        <Calendar id="addDate_cal" taborder="26" dateformat="yyyy-MM-dd" canchange="startDate_canchange" oneditclick="fromDate_cal_oneditclick" left="152" top="208" width="232" height="28" style="align:center middle;" position="absolute"/>
+        <Static id="Static00" taborder="31" text="휴일 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="Static01" taborder="33" text="휴일정보를　직접　입력하거나　아래의&#13;&#10;공휴일정보조회를　통해　선택하여　등록　가능" onclick="Static21_onclick" left="16" top="336" width="384" height="44" style="background:cornsilk;color:#ff0000ff;"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_holiday">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="HOLIDAY_NAME" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+          <Column id="HOLIDAY_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_holidayInfo">
+        <ColumnInfo>
+          <Column id="LOCDATE" type="STRING" size="256"/>
+          <Column id="SEQ" type="STRING" size="256"/>
+          <Column id="DATE_KIND" type="STRING" size="256"/>
+          <Column id="IS_HOLIDAY" type="STRING" size="256"/>
+          <Column id="DATE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+휴일 관리 화면                                             						                                                                         
+@Path			인사              				   				
+@Description	휴일 관리를 하기 위한  폼							
+@Author	  		김태형			    			                        								                                            
+@Create			2019. 02. 14.                             		                    				                                            
+********************************************************************************/
+
+var turn = 1;
+var thisYear = application.today().substring(0,4); //현재 년도
+var thisMonth = application.today().substring(4,6); //현재 월
+var thisDay = application.today(); //현재 년월일
+
+
+this.hr_HolidayManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.fromDate_cal.set_value(thisYear+"0101");
+	this.toDate_cal.set_value(thisYear+"1231");
+	this.year_spin.set_value(thisYear);
+
+	this.month_combo.set_value(thisMonth);
+
+}
+
+this.reference_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.transaction("findHolidayListAll",
+					"dataURL::hr/circumstance/findHolidayListAll.do",
+					"",
+					"ds_holiday=ds_holiday",
+					"",
+					"callback"
+					);
+}
+
+this.referencePeriod_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//alert(this.fromDate_cal.value+" "+this.toDate_cal.value);
+	this.transaction("findHolidayList",
+					"dataURL::hr/circumstance/findHolidayList.do",
+					"",
+					"ds_holiday=ds_holiday",
+					"fromDate='"+this.fromDate_cal.value+"'toDate='"+this.toDate_cal.value+"'",
+					"callback"
+					);					
+}
+
+
+this.info_btn = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//alert(this.year_spin.value +"월 "+ this.month_combo.value +"일 휴일정보 조회");	
+	this.transaction("findHolidayInfo",
+					"dataURL::common/util/findHolidayInfo.do",
+					"",
+					"ds_holidayInfo=ds_holidayInfo",
+					"year_spin='"+this.year_spin.value+"'month_combo='"+this.month_combo.value+"'",
+					""
+					);	
+}
+
+
+this.holidayInfo = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var dateName=this.ds_holidayInfo.getColumn(e.row,"DATE_NAME");
+	var locdate=this.ds_holidayInfo.getColumn(e.row,"LOCDATE");
+	var dateKind=this.ds_holidayInfo.getColumn(e.row,"DATE_KIND");
+	if(dateKind=="01"){
+		dateKind="국가지정공휴일";
+	}
+	var isHoliday=this.ds_holidayInfo.getColumn(e.row,"IS_HOLIDAY");
+	if(isHoliday=="Y"){
+		isHoliday="HGC001";
+	}else if(isHoliday=="N"){
+		isHoliday="HGC000";
+	}
+	
+    this.addName_edt.set_value(dateName);
+    this.addNote_edt.set_value(dateKind);
+    this.addDate_cal.set_value(locdate);
+    this.addType_combo.set_value(isHoliday);
+    
+}
+
+this.add_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("휴일 정보를 추가하시겠습니까?")){
+		if(this.addName_edt.value!=null && this.addNote_edt.value!=null && this.addDate_cal.value!=null && this.addType_combo.value!=null){	
+			var v_addName=this.addName_edt.value;
+			var v_addNote=this.addNote_edt.value;
+			var v_addDate=this.addDate_cal.value;
+			var v_addType=this.addType_combo.value;
+	
+			this.ds_holiday.addRow();
+			this.ds_holiday.setColumn(this.ds_holiday.rowposition, "BASIC_DAY", v_addDate);
+			this.ds_holiday.setColumn(this.ds_holiday.rowposition, "HOLIDAY_NAME", v_addName);
+			this.ds_holiday.setColumn(this.ds_holiday.rowposition, "HOLIDAY_TYPE", v_addType);
+			this.ds_holiday.setColumn(this.ds_holiday.rowposition, "NOTE", v_addNote);
+
+			this.transaction("batchHoliday",
+							"dataURL::hr/circumstance/batchHoliday.do",
+							"ds_holiday=ds_holiday:u",
+							"ds_holiday=ds_holiday",
+							"",
+							"callback",false
+							);
+		}else{
+			alert("필요한 항목을 입력하세요");
+		}
+	}	
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("변경사항을 저장하시겠습니까?")){	
+		this.transaction("batchHoliday",
+						"dataURL::hr/circumstance/batchHoliday.do",
+						"ds_holiday=ds_holiday:u",
+						"ds_holiday=ds_holiday",
+						"",
+						""
+						);		
+	}
+}
+
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+   this.ds_holiday.deleteRow(this.ds_holiday.rowposition);	
+}
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.progressBar_bar.set_step(5);
+	this.progressBar_bar.stepIt();
+}
+
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	alert(this.progressBar_bar.step.value);
+}
+
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.progressBar_bar.set_step(-5);
+	this.progressBar_bar.stepIt();	
+}
+
+this.reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+    this.addName_edt.set_value(null);
+    this.addNote_edt.set_value(null);
+    this.addDate_cal.set_value(null);
+    this.addType_combo.set_value(null);	
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

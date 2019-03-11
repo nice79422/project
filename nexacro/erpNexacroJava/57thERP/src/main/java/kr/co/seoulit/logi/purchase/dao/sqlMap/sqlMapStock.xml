@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.purchase.dao.StockDAO">
+
+	<!-- stockDAO -->
+	<resultMap type="stockTO" id="stockResult">
+		<result property="warehouseCode" column="WAREHOUSE_CODE"/>
+		<result property="itemCode" column="ITEM_CODE"/>
+		<result property="itemName" column="ITEM_NAME"/>
+		<result property="unitOfStock" column="UNIT_OF_STOCK"/>
+		<result property="safetyAllowanceAmount" column="SAFETY_ALLOWANCE_AMOUNT"/>
+		<result property="stockAmount" column="STOCK_AMOUNT"/>
+		<result property="description" column="DESCRIPTION"/>
+	</resultMap>
+
+	<select id="selectStockList" resultMap="stockResult">
+		SELECT
+		WAREHOUSE_CODE , ITEM_CODE
+		,ITEM_NAME , UNIT_OF_STOCK
+		, SAFETY_ALLOWANCE_AMOUNT , STOCK_AMOUNT
+		, DESCRIPTION
+		FROM STOCK
+	</select>
+	
+	<update id="updateStock" parameterType="stockTO">
+
+		UPDATE STOCK SET
+		 ITEM_NAME = #{itemName}
+		, UNIT_OF_STOCK = #{unitOfStock}
+		, SAFETY_ALLOWANCE_AMOUNT = #{safetyAllowanceAmount}
+		, STOCK_AMOUNT = #{stockAmount}
+		, DESCRIPTION = #{description}
+		WHERE
+		WAREHOUSE_CODE = 'WHS-01'
+		AND
+		ITEM_CODE = #{itemCode}
+
+	</update>
+</mapper>

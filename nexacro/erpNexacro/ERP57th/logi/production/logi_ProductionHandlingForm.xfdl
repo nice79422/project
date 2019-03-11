@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_ProductionHandling" left="0" top="0" width="1185" height="785" titletext="ProductionHandling" onload="logi_ProductionHandling_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="workInstruction_grid" taborder="1" binddataset="ds_workInstruction" useinputpanel="false" autofittype="col" left="36" top="88" width="1108" height="288" style="font:새굴림,11;" oncelldblclick="workInstruction_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="80"/>
+                <Column size="166"/>
+                <Column size="52"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시번호"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="소요량취합번호"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시수량"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시일"/>
+                <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시상태"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_NO"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MRP_GATHERING_NO"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_WORK_INSTRUCTION"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_AMOUNT"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:INSTRUCTION_DATE"/>
+                <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="prm_grid" taborder="2" binddataset="ds_prm" useinputpanel="false" autofittype="col" left="36" top="464" width="1108" height="280" style="font:새굴림,11;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="생산실적번호"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시번호"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="생산일자"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="생산수량"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:PRODUCTION_RESULT_NO"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_NO"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_PRODUCTION_RESULT"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:PRODUCTION_DATE"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:PRODUCTION_AMOUNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="registerEstimate_btn" taborder="3" text="생산실적등록" onclick="btn_registerEstimate_onclick" left="1014" top="409" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+        <Static id="prm_stc" taborder="4" text="생산실적등록" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_workInstruction">
+        <ColumnInfo>
+          <Column id="WORK_INSTRUCTION_NO" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="INSTRUCTION_DATE" type="STRING" size="256"/>
+          <Column id="UNIT_OF_WORK_INSTRUCTION" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_AMOUNT" type="STRING" size="256"/>
+          <Column id="PRODUCTION_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_stock">
+        <ColumnInfo>
+          <Column id="WAREHOUSE_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="DELIVERY_NO" type="STRING" size="256"/>
+          <Column id="PRODUCTION_RESULT_NO" type="STRING" size="256"/>
+          <Column id="INPUT_ITEM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="SAFETY_ALLOWANCE_AMOUNT" type="STRING" size="256"/>
+          <Column id="STOCK_AMOUNT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_warehousing">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="ORDER_AMOUNT" type="STRING" size="256"/>
+          <Column id="WAREHOUSING_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_WAREHOUSING" type="STRING" size="256"/>
+          <Column id="CUSTOMER" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="WAREHOUSING_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_prm">
+        <ColumnInfo>
+          <Column id="PRODUCTION_RESULT_NO" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_NO" type="STRING" size="256"/>
+          <Column id="PRODUCTION_DATE" type="STRING" size="256"/>
+          <Column id="PRODUCTION_AMOUNT" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_PRODUCTION_RESULT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.logi_ProductionHandling_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	this.transaction(
+		"findWorkInstructionList",
+		"dataURL::logi/production/findWorkInstructionList2.do",  
+		"",
+		"ds_workInstruction=ds_workInstruction",
+		"",
+		"callback",
+		false
+	);
+							
+	this.transaction(
+		"findPrmList",
+		"dataURL::logi/production/findPrmList.do",   
+		"",
+		"ds_prm=ds_prm",
+		"",
+		"callback",
+		false
+	);
+	
+	this.transaction(
+		"findStockList",
+		"dataURL::logi/purchase/findStockList.do",
+		"",
+		"ds_stock=ds_stock",
+		"",
+		"callback",
+		false
+	);
+		
+	this.transaction(
+		"findWarehousingList",
+		"dataURL::logi/purchase/findWarehousingList.do", 
+		"",
+		"ds_warehousing=ds_warehousing",
+		"",
+		"callback",
+		false
+	);
+				
+	//this.ds_prm.filter("PRODUCTION_RESULT_NO==null");
+	//this.ds_workInstruction.filter("PRODUCTION_STATUS=='N'");
+}
+
+
+this.squenceNo = "";
+this.workInstruction_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var workInstructionNo = this.ds_workInstruction.getColumn(e.row,"WORK_INSTRUCTION_NO");
+	var itemCode = this.ds_workInstruction.getColumn(e.row,"ITEM_CODE");
+	var itemName = this.ds_workInstruction.getColumn(e.row,"ITEM_NAME");
+	var unitOfProductionResult = this.ds_workInstruction.getColumn(e.row,"UNIT_OF_WORK_INSTRUCTION");
+	var productionAmount = this.ds_workInstruction.getColumn(e.row,"WORK_INSTRUCTION_AMOUNT");
+	
+	var objDate = application.today();	
+	var prmRow = this.ds_prm.addRow();
+	
+	this.transaction("takeSerialCode",
+		"dataURL::sys/findSequenceNo.do"
+		,""
+		,""
+		,"findSeq='PRM_SEQ'"
+		,"codeCallback"
+		,false
+	);
+   
+    var serialCode=this.squenceNo;
+    alert("시퀀스"+serialCode);
+    var prmNo="PRM"+serialCode;
+    alert("피알엠넘버+시퀀스"+prmNo);
+    
+	this.ds_prm.setColumn(prmRow,"PRODUCTION_RESULT_NO",prmNo);
+	this.ds_prm.setColumn(prmRow,"WORK_INSTRUCTION_NO",workInstructionNo);
+	this.ds_prm.setColumn(prmRow,"PRODUCTION_DATE",objDate);
+	this.ds_prm.setColumn(prmRow,"PRODUCTION_AMOUNT",productionAmount);
+	this.ds_prm.setColumn(prmRow,"ITEM_CODE",itemCode);
+	this.ds_prm.setColumn(prmRow,"ITEM_NAME",itemName);
+	this.ds_prm.setColumn(prmRow,"UNIT_OF_PRODUCTION_RESULT",unitOfProductionResult);
+	
+	var orderNo = this.ds_prm.getColumn(prmRow,"PRODUCTION_RESULT_NO");
+	
+	var warehousingRow = this.ds_warehousing.addRow();
+	this.transaction("takeSerialCode",
+		"dataURL::sys/findSequenceNo.do"
+		,""
+		,""
+		,"findSeq='WH_SEQ'"
+		,"codeCallback"
+		,false
+	);
+   
+    var whSQ=this.squenceNo;
+    alert("wh시퀀스"+whSQ);
+    var whNo="PMH"+whSQ;
+    
+			
+	this.ds_warehousing.setColumn(warehousingRow,"ITEM_CODE",itemCode);				
+	this.ds_warehousing.setColumn(warehousingRow,"ORDER_NO",prmNo);	
+	this.ds_warehousing.setColumn(warehousingRow,"ITEM_NAME",itemName);
+	this.ds_warehousing.setColumn(warehousingRow,"ORDER_AMOUNT",productionAmount);
+	this.ds_warehousing.setColumn(warehousingRow,"WAREHOUSING_AMOUNT",productionAmount);		
+	this.ds_warehousing.setColumn(warehousingRow,"UNIT_WAREHOUSING",unitOfProductionResult);		
+	this.ds_warehousing.setColumn(warehousingRow,"CUSTOMER",'BRC-01');
+	this.ds_warehousing.setColumn(warehousingRow,"WAREHOUSING_DATE",objDate);
+	this.ds_warehousing.setColumn(warehousingRow,"DESCRIPTION",'Y');
+	this.ds_warehousing.setColumn(warehousingRow,"WAREHOUSING_NO",whNo);
+
+
+	// 창고 ITEMCODE ROW 구함
+	var findStock = this.ds_stock.findRow("ITEM_CODE", itemCode);
+		alert("findStock"+findStock);
+	// 창고 재고 들고옴
+	var amount0 = this.ds_stock.getColumn(itemCode,"STOCK_AMOUNT");
+	alert("amount0"+amount0);
+	// 창고재고 + 생산한 재고
+	var setAmount = parseInt(amount0) + parseInt(productionAmount);
+	
+	alert("setAmount"+setAmount);
+	if(itemCode == 'DK-01'){
+	
+	this.ds_stock.setColumn(findStock,"STOCK_AMOUNT",setAmount);
+	
+	}else if(itemCode == 'DK-02'){
+	
+		this.ds_stock.setColumn(findStock,"STOCK_AMOUNT",setAmount);
+	}else if(itemCode == 'DK-AP02'){
+	
+		this.ds_stock.setColumn(findStock,"STOCK_AMOUNT",setAmount);
+	}else if(itemCode == 'DK-AP01'){
+	
+		this.ds_stock.setColumn(findStock,"STOCK_AMOUNT",setAmount);
+	}
+	
+	
+	this.ds_workInstruction.setColumn(e.row,"PRODUCTION_STATUS",'Y');
+	
+	this.ds_workInstruction.filter("PRODUCTION_STATUS!='Y'");
+}
+
+this.btn_registerEstimate_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.confirm("생산실적을 등록하시겠습니까?")){
+	
+		if(this.ds_workInstruction.getRowCount() >= 0 ){
+			for(var i = 0 ; i <= this.ds_workInstruction.getRowCount() ; i++){
+				this.ds_workInstruction.setColumn(i,"WORK_INSTRUCTION_STATUS",'Y');
+			}
+		}
+	
+		this.transaction(
+			"registPrm",
+			"dataURL::logi/production/registPrm.do",
+			"ds_workInstruction=ds_workInstruction:u ds_prm=ds_prm:u ds_stock=ds_stock:u ds_warehousing=ds_warehousing:u",
+			"ds_prm=ds_prm",
+			"",
+			"callback",
+			false
+		);
+	}
+	
+	this.ds_prm.filter("PRODUCTION_RESULT_NO==null");
+}
+
+
+function callback(strSvcID, nErrorCode, strErrorMassage){
+
+	if(strSvcID=="registPrm"){
+		alert(strErrorMassage);
+	};
+}]]></Script>
+  </Form>
+</FDL>

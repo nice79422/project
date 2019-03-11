@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.co.seoulit.logi.business.dao.DeliveryResultDAO">
+
+
+
+	<!-- deliveryResultDAO -->
+
+
+	<resultMap type="deliveryResultTO" id="deliverResultResult">
+
+		<result property="deliveryNo" column="DELIVERY_NO" />
+		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO" />
+
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfDeliveryResult"
+			column="UNIT_OF_DELIVERY_RESULT" />
+		<result property="deliveryDate" column="DELIVERY_DATE" />
+		<result property="deliveryAmount" column="DELIVERY_AMOUNT" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="customerCode" column="CUSTOMER_CODE" />
+
+
+	</resultMap>
+
+	<select id="selectDeliveryResultList"
+		resultMap="deliverResultResult">
+
+		SELECT
+		DELIVERY_NO, CONTRACT_DETAIL_NO
+		, ITEM_CODE, ITEM_NAME,
+		UNIT_OF_DELIVERY_RESULT
+		, DELIVERY_DATE, DELIVERY_AMOUNT, DESCRIPTION
+		,
+		CUSTOMER_CODE
+		FROM DELIVERY_RESULT
+
+	</select>
+
+
+	<insert id="insertDeliveryResult"
+		parameterType="deliveryResultTO">
+
+		INSERT INTO DELIVERY_RESULT(
+			DELIVERY_NO,
+			CONTRACT_DETAIL_NO, 
+			ITEM_CODE, 
+			ITEM_NAME, 
+			UNIT_OF_DELIVERY_RESULT,
+			DELIVERY_DATE, 
+			DELIVERY_AMOUNT, 
+			DESCRIPTION, 
+			CUSTOMER_CODE
+		)
+		VALUES(
+			#{deliveryNo}, 
+			#{contractDetailNo}, 
+			#{itemCode}, 
+			#{itemName},
+			#{unitOfDeliveryResult}, 
+			#{deliveryDate}, 
+			#{deliveryAmount},
+			#{description}, 
+			#{customerCode}
+		)
+
+	</insert>
+
+
+
+
+
+
+	<resultMap type="completeDeliveryResultTO"
+		id="completeDeliveryResult">
+
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO" />
+		<result property="customerCode" column="CUSTOMER_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="contractAmount" column="CONTRACT_AMOUNT" />
+		<result property="unitPriceOfContract"
+			column="UNIT_PRICE_OF_CONTRACT" />
+		<result property="mpsNo" column="MPS_NO" />
+		<result property="rItemCode" column="R_ITEM_CODE" />
+		<result property="rItemName" column="R_ITEM_NAME" />
+		<result property="itemClassification"
+			column="ITEM_CLASSIFICATION" />
+		<result property="mpsPlanDate" column="MPS_PLAN_DATE" />
+		<result property="workInstructionNo"
+			column="WORK_INSTRUCTION_NO" />
+		<result property="deliveryNo" column="DELIVERY_NO" />
+		<result property="deliveryDate" column="DELIVERY_DATE" />
+		<result property="deliveryAmount" column="DELIVERY_AMOUNT" />
+		<result property="dItemCode" column="D_ITEM_CODE" />
+		<result property="mrpGatheringNo" column="MRP_GATHERING_NO" />
+
+	</resultMap>
+
+	<select id="selectCompleteDeliveryResultList" parameterType="hashmap" resultMap="completeDeliveryResult">
+		SELECT C.CONTRACT_NO AS CONTRACT_NO
+		,D.CONTRACT_DETAIL_NO AS CONTRACT_DETAIL_NO
+		,C.CUSTOMER_CODE AS CUSTOMER_CODE
+		, D.ITEM_NAME AS ITEM_NAME
+		, D.ITEM_CODE AS ITEM_CODE
+		, D.CONTRACT_AMOUNT AS CONTRACT_AMOUNT
+		, D.UNIT_PRICE_OF_CONTRACT AS UNIT_PRICE_OF_CONTRACT
+		, M.MPS_NO AS MPS_NO
+		,R.ITEM_CODE AS R_ITEM_CODE
+		,R.ITEM_NAME AS R_ITEM_NAME
+		,R.ITEM_CLASSIFICATION AS ITEM_CLASSIFICATION
+		, M.MPS_PLAN_DATE AS MPS_PLAN_DATE
+		, WI.WORK_INSTRUCTION_NO AS WORK_INSTRUCTION_NO
+		, WI.MRP_GATHERING_NO AS MRP_GATHERING_NO
+		,DR.DELIVERY_NO AS DELIVERY_NO
+		,DR.DELIVERY_DATE AS DELIVERY_DATE
+		,DR.DELIVERY_AMOUNT AS DELIVERY_AMOUNT
+		,DR.ITEM_CODE AS D_ITEM_CODE
+		FROM CONTRACT C,CONTRACT_DETAIL D,MPS M,MRP R,MRP_GATHERING G,
+		WAREHOUSING WH,PRODUCTION_WORK_INSTRUCTION WI,PRODUCTION_RESULT_MANAGEMENT RM
+		,DELIVERY_RESULT DR
+		WHERE C.CONTRACT_NO=D.CONTRACT_NO AND C.DELIVERY_RESULT_STATUS='Y'
+			AND D.CONTRACT_DETAIL_NO=M.CONTRACT_DETAIL_NO
+			AND M.MPS_NO=R.MPS_NO AND R.MRP_GATHERING_NO=G.MRP_GATHERING_NO
+			AND G.MRP_GATHERING_NO=WI.MRP_GATHERING_NO 
+			AND WI.WORK_INSTRUCTION_NO=RM.WORK_INSTRUCTION_NO
+			AND RM.PRODUCTION_RESULT_NO=WH.ORDER_NO 
+			AND D.CONTRACT_DETAIL_NO=DR.CONTRACT_DETAIL_NO
+			AND CONTRACT_DATE BETWEEN #{fromDate} AND #{toDate}
+
+
+	</select>
+
+
+
+</mapper>

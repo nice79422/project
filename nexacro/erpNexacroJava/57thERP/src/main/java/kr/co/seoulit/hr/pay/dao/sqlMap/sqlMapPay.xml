@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.pay.dao.PayDAO">
+
+
+<!-- kr.co.seoulit.hr.emp.dao.PayDAO -->
+
+
+
+    <resultMap id="salaryInputResult" type="salaryInputTO">
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="salaryTypeCode" column="SALARY_TYPE_CODE"/>
+        <result property="totalSalary" column="TOTAL_SALARY"/>
+        <result property="totalDeductionPrice" column="TOTAL_DEDUCTION_PRICE"/>
+        <result property="deptCode" column="DEPT_CODE"/>
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="hireDate" column="HIRE_DATE"/>
+        <result property="retireDate" column="RETIRE_DATE"/>
+        <result property="chinePayments" column="CHINE_PAYMENTS"/>
+        <collection property="payDeductionList" select="selectPayDeductionList"
+        javaType="java.util.List" ofType="kr.co.seoulit.hr.pay.to.PayDeductionTO"
+        column="{empCode=EMP_CODE, paymentDate=PAYMENT_DATE}" />
+    </resultMap>
+
+    <resultMap id="payDeductionResult" type="payDeductionTO">
+        <result property="payDeductionSeq" column="PAY_DEDUCTION_SEQ"/>
+        <result property="price" column="PRICE"/>
+        <result property="payDeductionItemCode" column="PAY_DEDUCTION_ITEM_CODE"/>
+        <result property="payDeductionItemName" column="PAY_DEDUCTION_ITEM_NAME"/>
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="payDeductionTypeCode" column="PAY_DEDUCTION_TYPE_CODE"/>
+
+    </resultMap>
+
+   <!-- 입력된 급여 목록을 조회하는 메서드 [결과 ]-->
+    <select id="selectSalaryInputList" resultMap="salaryInputResult" parameterType="String">
+    <![CDATA[
+       SELECT *
+       FROM SAL_INPUT
+       WHERE PAYMENT_DATE=#{paymentDate}
+    ]]>
+    </select>
+
+   <!-- 지급일자의 해당사원의 지급/공제 목로글 조회하는 메서드 [결과를 담으면서 같이. ]-->
+    <select id="selectPayDeductionList" resultMap="payDeductionResult" parameterType="HashMap">
+    <![CDATA[
+       SELECT
+          *
+       FROM
+          PAY_DEDUCTION
+       WHERE
+          PAYMENT_DATE = #{paymentDate}
+       AND
+          EMP_CODE = #{empCode}
+    ]]>
+    </select>
+
+    <parameterMap type="Map" id="payParameter">
+      <parameter property="paymentDate" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+      <parameter property="standardDate" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorCode" mode="OUT" javaType="Integer" jdbcType="DECIMAL"/>
+        <parameter property="errorMsg" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+
+   </parameterMap>
+
+   <!-- 급여를 계산하는 프로시저 [넘어 오는건  지급일자 넘어 옴  EX 20180420]-->
+    <select id="payCalculate" statementType="CALLABLE" parameterMap="payParameter">
+      {CALL P_HR_PAY.P_CALC_PAY( ?,?,?,? )}
+   </select>
+</mapper>
