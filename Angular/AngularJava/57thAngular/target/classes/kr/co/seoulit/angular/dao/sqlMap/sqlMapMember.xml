@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.angular.dao.MemberDAO">
+
+
+<!-- appointmentDAO -->
+
+	<resultMap type="memberTO" id="memberResult">
+		<result property="id" column="ID" />
+		<result property="pw" column="PW" />
+		<result property="addr" column="ADDR" />
+		<result property="tel" column="TEL" />
+				
+	</resultMap>
+
+
+	<select id="selectMemberList" resultMap="memberResult">
+
+		SELECT ID,PW,ADDR,TEL FROM MEMBER
+		
+
+	</select>
+	
+	<insert id="insertMember" parameterType="memberTO">
+		<!-- 대부분의 RDBMS 시스템은 Sequence 와 같은 채번 자동 생성을 지원한다. 개발을 하다보면 종종 자동생성된 Sequence 
+			값을 가져와서 사용해야 하는 경우가 있다. 이런 경우에 <selectKey>를 사용한다. <selectKey>는 ibatis의 statement 
+			타입 중 <insert> 타입에만 사용할 수 있는 하위 요소이다. <insert> 문 아래에 사용함으로써, 자동생성된 키 값을 가져오며, 
+			이 값을 반환하여 활용할 수 있다. -->
+		INSERT INTO MEMBER(
+			id,pw,addr,tel
+		)
+		VALUES(
+			#{id},
+			#{pw},
+			#{addr},
+			#{tel}
+		)
+	</insert>
+
+	<delete id="deleteMember" parameterType="memberTO">
+		DELETE FROM MEMBER		
+        WHERE  ID  = #{id} 
+	</delete>
+	
+	
+ <select id="login" resultMap="memberResult" parameterType="String">
+	
+	        SELECT id,pw,addr,tel
+            FROM MEMBER 
+            WHERE id=#{id}
+            
+
+    </select>
+</mapper>
