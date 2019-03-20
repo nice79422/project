@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.CustomerDAO">
+
+	<!-- CustomerDAO -->
+
+	<resultMap type="customerTO" id="customerResult">
+	
+		<result property="customerCode" column="CUSTOMER_CODE" />
+		<result property="workplaceCode" column="WORKPLACE_CODE" />
+		<result property="customerName" column="CUSTOMER_NAME" />
+		<result property="customerType" column="CUSTOMER_TYPE" />
+		<result property="customerCeo" column="CUSTOMER_CEO" />
+		<result property="businessLicenseNumber" column="BUSINESS_LICENSE_NUMBER" />
+		<result property="socialSecurityNumber" column="SOCIAL_SECURITY_NUMBER" />
+		<result property="customerBusinessConditions" column="CUSTOMER_BUSINESS_CONDITIONS" />
+		<result property="customerBusinessItems" column="CUSTOMER_BUSINESS_ITEMS" />
+		<result property="customerZipCode" column="CUSTOMER_ZIP_CODE" />
+		<result property="customerBasicAddress" column="CUSTOMER_BASIC_ADDRESS" />
+		<result property="customerDetailAddress" column="CUSTOMER_DETAIL_ADDRESS" />
+		<result property="customerTelNumber" column="CUSTOMER_TEL_NUMBER" />
+		<result property="customerFaxNumber" column="CUSTOMER_FAX_NUMBER" />
+
+	</resultMap>
+
+
+	<select id="selectCustomerList" resultMap="customerResult">
+
+		SELECT
+		
+		CUSTOMER_CODE,
+		WORKPLACE_CODE,
+		CUSTOMER_NAME,
+		CUSTOMER_TYPE,
+		CUSTOMER_CEO,
+		BUSINESS_LICENSE_NUMBER,
+		SOCIAL_SECURITY_NUMBER,
+		CUSTOMER_BUSINESS_CONDITIONS,
+		CUSTOMER_BUSINESS_ITEMS,
+		CUSTOMER_ZIP_CODE,
+		CUSTOMER_BASIC_ADDRESS,
+		CUSTOMER_DETAIL_ADDRESS,
+		CUSTOMER_TEL_NUMBER,
+		CUSTOMER_FAX_NUMBER
+
+		FROM CUSTOMER
+
+
+	</select>
+	
+	<insert id="insertCustomer" parameterType="customerTO">
+		
+	        INSERT INTO
+	            CUSTOMER
+	            (
+	        CUSTOMER_CODE,
+			WORKPLACE_CODE,
+			CUSTOMER_NAME,
+			CUSTOMER_TYPE,
+			CUSTOMER_CEO,
+			BUSINESS_LICENSE_NUMBER,
+			SOCIAL_SECURITY_NUMBER,
+			CUSTOMER_BUSINESS_CONDITIONS,
+			CUSTOMER_BUSINESS_ITEMS,
+			CUSTOMER_ZIP_CODE,
+			CUSTOMER_BASIC_ADDRESS,
+			CUSTOMER_DETAIL_ADDRESS,
+			CUSTOMER_TEL_NUMBER,
+			CUSTOMER_FAX_NUMBER
+	            )
+	        VALUES (
+	            #{customerCode},
+	            #{workplaceCode},
+	            #{customerName},
+	            #{customerType},
+	            #{customerCeo},
+	            #{businessLicenseNumber},
+	            #{socialSecurityNumber},
+	            #{customerBusinessConditions},
+	            #{customerBusinessItems},
+	            #{customerZipCode},
+	            #{customerBasicAddress},
+	            #{customerDetailAddress},
+	            #{customerTelNumber},
+	            #{customerFaxNumber}
+	        )
+    
+	</insert>
+
+
+	<update id="updateCustomer" parameterType="customerTO">
+		
+	       UPDATE
+	             CUSTOMER
+	       SET
+			CUSTOMER_CODE = #{customerCode},
+			WORKPLACE_CODE = #{workplaceCode},
+			CUSTOMER_NAME = #{customerName},
+			CUSTOMER_TYPE = #{customerType},
+			CUSTOMER_CEO = #{customerCeo},
+			BUSINESS_LICENSE_NUMBER = #{businessLicenseNumber},
+			SOCIAL_SECURITY_NUMBER = #{socialSecurityNumber},
+			CUSTOMER_BUSINESS_CONDITIONS = #{customerBusinessConditions},
+			CUSTOMER_BUSINESS_ITEMS = #{customerBusinessItems},
+			CUSTOMER_ZIP_CODE = #{customerZipCode},
+			CUSTOMER_BASIC_ADDRESS = #{customerBasicAddress},
+			CUSTOMER_DETAIL_ADDRESS = #{customerDetailAddress},
+			CUSTOMER_TEL_NUMBER = #{customerTelNumber},
+			CUSTOMER_FAX_NUMBER = #{customerFaxNumber}
+	       WHERE
+	            CUSTOMER_CODE = #{customerCode}
+
+   
+	</update>
+
+
+	<delete id="deleteCustomer" parameterType="customerTO">
+		
+	      DELETE FROM
+	      		CUSTOMER
+	      WHERE
+	            CUSTOMER_CODE = #{customerCode}
+    	
+	</delete>
+</mapper>

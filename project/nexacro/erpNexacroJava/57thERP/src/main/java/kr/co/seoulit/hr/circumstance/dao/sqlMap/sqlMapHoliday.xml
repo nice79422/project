@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.circumstance.dao.HolidayDAO">
+
+
+	<resultMap id="holidayResult" type="holidayTO">
+		<result property="basicDay" column="BASIC_DAY" />
+		<result property="holidayName" column="HOLIDAY_NAME" />
+		<result property="note" column="NOTE" />
+		<result property="holidayType" column="HOLIDAY_TYPE" />
+	</resultMap>
+
+	<!-- 2016년 휴일목록을 다 가지고오는 메서드 -->
+	<select id="selectHolidayList" resultMap="holidayResult" parameterType="map">
+	<![CDATA[
+        SELECT 
+        	BASIC_DAY
+			,HOLIDAY_NAME
+			,NOTE
+			,HOLIDAY_TYPE 
+        FROM HOLIDAY_MGT 
+        WHERE BASIC_DAY BETWEEN #{fromDate} AND #{toDate}
+        ORDER BY BASIC_DAY
+    ]]>
+	</select>
+	
+	
+	
+	<!-- 모든 휴일목록을 다 가지고오는 메서드 -->
+	<select id="selectHolidayListAll" resultMap="holidayResult">
+	<![CDATA[
+        SELECT 
+        	BASIC_DAY
+			,HOLIDAY_NAME
+			,NOTE
+			,HOLIDAY_TYPE 
+        FROM
+        	HOLIDAY_MGT
+        ORDER BY
+        	BASIC_DAY
+    ]]>
+	</select>	
+	
+
+	<!-- 휴일을 등록하는 메서드 -->
+ 
+	<insert id="insertHoliday" parameterType="holidayTO">
+	<![CDATA[
+		INSERT INTO HOLIDAY_MGT VALUES (
+	            #{basicDay},
+	            #{holidayName},
+	            #{note},
+	            #{holidayType}
+	    )
+    ]]>
+	</insert>
+
+	<!-- 휴일을 수정하는 메서드 -->
+
+	<update id="updateHoliday" parameterType="holidayTO">
+	<![CDATA[
+  		UPDATE HOLIDAY_MGT
+		SET HOLIDAY_NAME = #{holidayName},
+	    	NOTE = #{note},
+	    	HOLIDAY_TYPE = #{holidayType}
+		WHERE BASIC_DAY = #{basicDay}
+    ]]>
+	</update>
+
+	<!-- 휴일을 삭제하는 메서드 -->
+
+	<delete id="deleteHoliday" parameterType="holidayTO">
+	<![CDATA[
+		DELETE FROM HOLIDAY_MGT
+ 		WHERE BASIC_DAY = #{basicDay}
+    ]]>
+	</delete>
+
+
+
+
+</mapper>

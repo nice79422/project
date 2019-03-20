@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.DepartmentDAO">
+
+	<resultMap type="departmentTO" id="departmentResult">
+	<result property="deptCode" column="DEPT_CODE"/>
+	<result property="deptName" column="DEPT_NAME"/>
+	<result property="deptTel" column="DEPT_TEL"/>
+	<result property="businessPlaceCode" column="BUSINESS_PLACE_CODE"/>
+	</resultMap>
+
+
+ 	<select id="selectDepartmentList" resultMap="departmentResult" parameterType="map">
+		SELECT
+		DEPT_CODE,
+		DEPT_NAME,
+		DEPT_TEL,
+		BUSINESS_PLACE_CODE
+		FROM
+		DEPARTMENT
+		WHERE BUSINESS_PLACE_CODE=#{businessPlaceCode}
+	</select>
+	
+	 <select id="selectAllDeptList" resultMap="departmentResult">
+		SELECT
+		DEPT_CODE,
+		DEPT_NAME,
+		DEPT_TEL,
+		BUSINESS_PLACE_CODE
+		FROM
+		DEPARTMENT
+	</select>
+	
+	<insert id="insertDept" parameterType="departmentTO">
+		
+	        INSERT INTO
+	            DEPARTMENT
+	            (
+	            DEPT_CODE,
+				DEPT_NAME,
+				DEPT_TEL,
+				BUSINESS_PLACE_CODE
+	            )
+	        VALUES (
+	            #{deptCode},
+	            #{deptName},
+	            #{deptTel},
+	            #{businessPlaceCode}
+	        )
+    
+	</insert>
+
+
+	<update id="updateDept" parameterType="departmentTO">
+		
+	       UPDATE
+	             DEPARTMENT
+	       SET
+	            DEPT_CODE = #{deptCode},
+	            DEPT_NAME = #{deptName},
+	            DEPT_TEL = #{deptTel},
+	            BUSINESS_PLACE_CODE = #{businessPlaceCode}
+	       WHERE
+	            DEPT_CODE = #{deptCode}
+
+   
+	</update>
+
+
+	<delete id="deleteDept" parameterType="departmentTO">
+		
+	      DELETE FROM
+	      		DEPARTMENT
+	      WHERE
+	            DEPT_CODE =  #{deptCode}
+    	
+	</delete>
+</mapper>

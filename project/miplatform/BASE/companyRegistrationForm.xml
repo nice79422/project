@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="companyRegistrationForm" Left="8" PidAttrib="7" Title="companyRegistrationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="6" TabOrder="1" Text="회사&#32;등록&#32;정보" Top="8" VAlign="Middle" Width="952"></Static>
+		<Tab BKColor="gainsboro" BKSelColor="white" Font="한컴&#32;윤고딕&#32;240,9" Height="702" HilightColor="user0" Id="CompanyRegistrationTab" Left="8" MouseOverColor="BACKGROUND" TabOrder="2" Top="48" Width="948">
+			<Contents>
+				<TabPage BorderColor="black" Font="한컴&#32;윤고딕&#32;240,11" Height="674" Id="tab1" Left="2" TabOrder="2" Text="기본등록사항" Top="26" Width="944">
+					<Static Border="RaisedEdge" Height="215" Hilight3dColor="black" Id="Static0" Left="24" TabOrder="1" Top="17" Width="897"></Static>
+					<Static Border="RaisedEdge" Height="200" Hilight3dColor="black" Id="Static2" Left="25" TabOrder="3" Top="459" Width="900"></Static>
+					<Static BKColor="gainsboro" Border="RaisedEdge" Height="215" Hilight3dColor="black" Id="Static1" Left="24" TabOrder="2" Top="238" Width="900"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static3" Left="204" TabOrder="4" Text="회계년도" Top="23" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static4" Left="204" TabOrder="5" Text="사업장등록번호" Top="57" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static5" Left="204" TabOrder="6" Text="법인등록번호" Top="91" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static6" Left="204" TabOrder="7" Text="대표자성명" Top="125" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static7" Left="204" TabOrder="8" Text="외국인여부" Top="159" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static8" Left="204" TabOrder="9" Text="주민등록번호" Top="193" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" Height="29" Id="Static9" Left="314" TabOrder="10" Text="제" Top="24" VAlign="Middle" Width="30"></Static>
+					<Edit Align="CENTER" BKColor="silver" Height="30" Id="Edit0" Left="352" TabOrder="11" Text="55" Top="23" Width="54"></Edit>
+					<Static Align="Center" Height="30" Id="Static10" Left="414" TabOrder="12" Text="기" Top="24" VAlign="Middle" Width="30"></Static>
+					<Calendar BKColor="silver" Height="30" Id="Calendar0" Left="471" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="13" Top="23" Width="127"></Calendar>
+					<Calendar BKColor="silver" Height="30" Id="Calendar1" Left="658" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="14" Top="23" Width="127"></Calendar>
+					<Static Align="Center" Height="29" Id="Static11" Left="613" TabOrder="15" Text="~" Top="24" VAlign="Middle" Width="30"></Static>
+					<Edit BKColor="silver" Height="30" Id="Edit1" Left="314" TabOrder="16" Text="135-78-223344" Top="57" Width="468"></Edit>
+					<Edit BKColor="silver" Height="30" Id="Edit2" Left="314" TabOrder="17" Text="135-78-223344" Top="91" Width="468"></Edit>
+					<Edit BKColor="silver" Height="31" Id="Edit3" Left="314" TabOrder="18" Text="강순용" Top="125" Width="234"></Edit>
+					<Combo BKColor="silver" Height="30" Id="Combo0" Left="314" TabOrder="19" Text="내국인" Top="159" Width="177"></Combo>
+					<Edit BKColor="silver" Height="31" Id="Edit4" Left="314" TabOrder="20" Text="871124-1777777" Top="193" Width="234"></Edit>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static12" Left="204" TabOrder="21" Text="본점우편번호" Top="244" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static13" Left="204" TabOrder="22" Text="본점주소" Top="278" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static14" Left="204" TabOrder="23" Text="본점번지" Top="312" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static15" Left="204" TabOrder="24" Text="본점전화번호" Top="346" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static16" Left="204" TabOrder="25" Text="본점FAX" Top="380" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static17" Left="204" TabOrder="26" Text="업태/종목" Top="414" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Height="31" Id="Edit5" Left="314" TabOrder="30" Text="음반&#32;/&#32;음원&#32;전문&#32;제작사" Top="414" Width="234"></Edit>
+					<Edit BKColor="silver" Height="31" Id="Edit6" Left="314" TabOrder="29" Text="055" Top="346" Width="47"></Edit>
+					<Edit BKColor="silver" Height="30" Id="Edit7" Left="314" TabOrder="28" Text="혜람빌딩" Top="312" Width="468"></Edit>
+					<Edit BKColor="silver" Height="30" Id="Edit8" Left="314" TabOrder="27" Text="진주시&#32;가좌동&#32;74번길&#32;8" Top="278" Width="468"></Edit>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static22" Left="204" TabOrder="31" Text="설립연월일" Top="499" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static23" Left="204" TabOrder="32" Text="개업연원일" Top="533" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static24" Left="204" TabOrder="33" Text="폐업연원일" Top="567" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Height="30" Id="Static25" Left="204" TabOrder="34" Text="사용여부" Top="601" VAlign="Middle" Width="107"></Static>
+					<Combo BKColor="silver" Height="30" Id="Combo2" Left="314" TabOrder="35" Text="사용" Top="601" Value="사용" Width="143"></Combo>
+					<Edit BKColor="silver" Height="30" Id="Edit9" Left="314" TabOrder="36" Text="54718" Top="244" Width="100"></Edit>
+					<Button BKColor="silver" Height="30" Id="Button0" Left="417" TabOrder="37" Text="검색" Top="244" Width="72"></Button>
+					<Static Align="Center" Height="29" Id="Static18" Left="365" TabOrder="38" Text=")" Top="348" VAlign="Middle" Width="30"></Static>
+					<Static Align="Center" Height="29" Id="Static19" Left="365" TabOrder="39" Text=")" Top="382" VAlign="Middle" Width="30"></Static>
+					<Edit BKColor="silver" Height="31" Id="Edit14" Left="399" TabOrder="40" Text="357-1355" Top="346" Width="77"></Edit>
+					<Edit BKColor="silver" Height="31" Id="Edit15" Left="399" TabOrder="41" Text="257-5822" Top="380" Width="77"></Edit>
+					<Edit BKColor="silver" Height="31" Id="Edit10" Left="314" TabOrder="42" Text="055" Top="380" Width="47"></Edit>
+					<Button BKColor="silver" Height="30" Id="Button2" Left="426" TabOrder="43" Text="검색" Top="499" Width="30"></Button>
+					<Button BKColor="silver" Height="30" Id="Button3" Left="426" TabOrder="44" Text="검색" Top="568" Width="30"></Button>
+					<Calendar BKColor="silver" Height="30" Id="Calendar2" Left="314" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="45" Top="499" Width="107"></Calendar>
+					<Calendar BKColor="silver" Height="30" Id="Calendar3" Left="314" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="46" Top="533" Width="107"></Calendar>
+					<Calendar BKColor="silver" Height="30" Id="Calendar4" Left="314" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="47" Top="567" Width="107"></Calendar>
+					<Button BKColor="silver" Height="30" Id="Button4" Left="426" TabOrder="48" Text="검색" Top="533" Width="30"></Button>
+				</TabPage>
+				<TabPage BorderColor="black" Font="한컴&#32;윤고딕&#32;240,11" Height="674" Id="tab2" Left="2" TabOrder="2" Text="추가등록사항" Top="26" Width="944">
+					<Static Border="Raised" Font="한컴&#32;윤고딕&#32;240,9" Height="317" Hilight3dColor="black" Id="Static1" Left="23" TabOrder="2" Top="340" Width="900"></Static>
+					<Static Border="Raised" Font="한컴&#32;윤고딕&#32;240,9" Height="317" Hilight3dColor="black" Id="Static0" Left="23" TabOrder="1" Top="15" Width="900"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static4" Left="187" TabOrder="3" Text="회사영문명" Top="108" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit1" Left="297" TabOrder="7" Text="SYCompany" Top="108" Width="468"></Edit>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static5" Left="187" TabOrder="4" Text="영문사업자명" Top="142" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit2" Left="297" TabOrder="8" Text="SYCompany" Top="142" Width="468"></Edit>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static6" Left="187" TabOrder="5" Text="회사영문주소" Top="176" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Edit3" Left="297" TabOrder="9" Text="SYCompany&#32;Entertainment&#32;-&#32;82" Top="176" Width="468"></Edit>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static7" Left="187" TabOrder="6" Text="홈페이지주소" Top="210" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit9" Left="297" OnChanged="CompanyRegistrationTab_tab2_Edit9_OnChanged" TabOrder="10" Text="www.SYcompany.com" Top="210" Width="437"></Edit>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Button0" Left="735" TabOrder="11" Text="검색" Top="210" Width="30"></Button>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static2" Left="187" TabOrder="12" Text="자택우편번호" Top="431" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit0" Left="298" TabOrder="13" Text="54791" Top="432" Width="100"></Edit>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Button1" Left="398" TabOrder="14" Text="검색" Top="431" Width="30"></Button>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static3" Left="187" TabOrder="15" Text="자택주소" Top="465" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static8" Left="187" TabOrder="16" Text="자택번지" Top="499" VAlign="Middle" Width="107"></Static>
+					<Static Align="Center" BKColor="silver" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static9" Left="187" TabOrder="17" Text="자택전화번호" Top="533" VAlign="Middle" Width="107"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit5" Left="297" TabOrder="19" Text="혜람빌딩" Top="499" Width="468"></Edit>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit6" Left="297" TabOrder="18" Text="경상남도&#32;진주시&#32;가좌동&#32;가좌길74번길8" Top="465" Width="468"></Edit>
+					<Static Align="Center" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static10" Left="349" TabOrder="20" Text=")" Top="535" VAlign="Middle" Width="30"></Static>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit4" Left="297" TabOrder="21" Text="055" Top="533" Width="47"></Edit>
+					<Edit BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Edit7" Left="382" TabOrder="22" Text="548-9755" Top="533" Width="77"></Edit>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script><![CDATA[
+function CompanyRegistrationTab_tab2_Edit9_OnChanged(obj,strText)
+{
+	
+}
+
+function CompanyRegistrationTab_tab2_Edit1_OnChanged(obj,strText)
+{
+	
+}
+]]></Script>
+</Window>

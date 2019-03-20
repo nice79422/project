@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="mainMenuForm" left="0" top="0" width="250" height="757" titletext="New Form" onload="mainMenuForm_onload" scrollbars="none">
+    <Layouts>
+      <Layout>
+        <Grid id="grd_menuTree" taborder="0" useinputpanel="false" left="130.4%" top="56" right="-117.6%" height="696" treeinitstatus="expand,all" binddataset="ds_menu" treeusecheckbox="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="190"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell displaytype="tree" edittype="tree" text="bind:MENU_NAME" treelevel="bind:LEVEL" treestate="expr:1" autosizecol="limitmax"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Tab id="Tab00" taborder="1" left="0%" top="3" right="1.2%" height="718" tabindex="0" scrollbars="autoboth" onchanged="Tab00_onchanged">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="인사">
+              <Layouts>
+                <Layout>
+                  <Grid id="grd_menuTree" taborder="0" binddataset="ds_menu" useinputpanel="false" treeusecheckbox="false" treeinitstatus="expand,all" left="2.45%" top="2" right="0.82%" height="668" autofittype="col" oncelldblclick="Tab00_tabpage1_grd_menuTree_oncelldblclick" autosizingtype="none" scrollbars="autoboth">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="190"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="body">
+                          <Cell displaytype="tree" edittype="tree" text="bind:MENU_NAME" treelevel="bind:LEVEL" treestate="expr:1" autosizecol="limitmax"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="물류">
+              <Layouts>
+                <Layout>
+                  <Grid id="grd_menuTree" taborder="0" binddataset="ds_menu" useinputpanel="false" autofittype="col" treeusecheckbox="false" treeinitstatus="expand,all" oncelldblclick="Tab00_tabpage1_grd_menuTree_oncelldblclick" left="2.45%" top="2" right="0.82%" height="668">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="190"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="body">
+                          <Cell displaytype="tree" edittype="tree" text="bind:MENU_NAME" treelevel="bind:LEVEL" treestate="expr:1" autosizecol="limitmax"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="회계">
+              <Layouts>
+                <Layout>
+                  <Grid id="grd_menuTree" taborder="0" binddataset="ds_menu" useinputpanel="false" autofittype="col" treeusecheckbox="false" treeinitstatus="expand,all" oncelldblclick="Tab00_tabpage1_grd_menuTree_oncelldblclick" left="2.45%" top="2" right="0.82%" height="668">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="190"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="body">
+                          <Cell displaytype="tree" edittype="tree" text="bind:MENU_NAME" treelevel="bind:LEVEL" treestate="expr:1" autosizecol="limitmax"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_menu">
+        <ColumnInfo>
+          <Column id="MENU_CODE" type="STRING" size="256"/>
+          <Column id="SUPER_MENU_CODE" type="STRING" size="256"/>
+          <Column id="MENU_NAME" type="STRING" size="256"/>
+          <Column id="MENU_URL" type="STRING" size="256"/>
+          <Column id="USING_STATUS" type="STRING" size="256"/>
+          <Column id="LEVEL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_menuAuthority">
+        <ColumnInfo>
+          <Column id="MENU_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="MENU_NAME" type="STRING" size="256"/>
+          <Column id="AUTHORITY_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+메인메뉴 화면                                             						                                                                         
+@Path		공통              				   				
+@Description	업무별 메뉴 트리그리드 폼							
+@Author	  	심승현				    			                        								                                            
+@Create           2019. 01. 31.                             		                    				                                            
+********************************************************************************/
+this.mainMenuForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findMenuList",
+					"dataURL::sys/findMenuList.do?",
+					"",
+					"ds_menu=gds_menu",
+					"",
+					"callback",
+					false);
+					
+	this.ds_menu.filter("String(MENU_CODE).indexOf('HR') >= 0 || String(MENU_CODE).indexOf('SYS') >= 0");				
+}
+
+this.Tab00_tabpage1_grd_menuTree_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	    this.transaction("findMenuAuthorityList",
+				"dataURL::sys/findMenuAuthorityList.do?",
+				"",
+				"ds_menuAuthority=gds_menuAuthority",
+				"authorityCode="+application.g_authorityCode,
+				"callback",true);
+	var sID=this.ds_menu.getColumn(e.row,"MENU_CODE");
+	trace(sID);
+	var sURL=this.ds_menu.getColumn(e.row,"MENU_URL");
+	trace(sURL);
+    var sTitle =this.ds_menu.getColumn(e.row,"MENU_NAME"); 
+    alert(sTitle);
+
+    if(sURL.length<0){
+		return;
+	}
+	
+	 var result = this.ds_menuAuthority.findRow("MENU_CODE", sID); 
+    trace(result);
+   
+    
+    if(result==-1){
+         //application.gfn_Open(sID,sURL,sTitle);
+       var formPath=application.mainframe.VFrameSet0.HFrameSet0.ChildFrame2;
+         formPath.alert("접근권한이 없습니다.");
+      
+    }
+    else{
+    
+    application.gfn_Open(sID,sURL,sTitle);
+    }
+  
+}
+
+this.Tab00_onchanged = function(obj:Tab, e:nexacro.TabIndexChangeEventInfo)
+{
+	trace(e.postindex);
+	/*
+	업무별 메뉴탭 필터적용
+	@Modification  2019. 01. 31.   
+	Like검색 예시 this.ds_data.filter("String(employee).indexOf('" + this.ed_name.value.replace("'","\\'") + "') >= 0");
+	*/
+	if(e.postindex==1){
+	this.ds_menu.filter("String(MENU_CODE).indexOf('LOGI') >= 0 || String(MENU_CODE).indexOf('SYS') >= 0 || SUPER_MENU_CODE=='HR01' || MENU_CODE=='HR01'");
+	}else if(e.postindex==2){
+	this.ds_menu.filter("String(MENU_CODE).indexOf('ACC') >= 0 || String(MENU_CODE).indexOf('SYS') >= 0 || SUPER_MENU_CODE=='HR01' || MENU_CODE=='HR01'");
+	}else if(e.postindex==0){
+	this.ds_menu.filter("String(MENU_CODE).indexOf('HR') >= 0 || String(MENU_CODE).indexOf('SYS') >= 0");
+	}
+}]]></Script>
+  </Form>
+</FDL>

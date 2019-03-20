@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="bankDialog" classname="bankDialog" inheritanceid="" position="absolute 0 0 350 400" titletext="New Form" onload="bankDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="은행 조회" position2="absolute l:0 w:350 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:10 w:334 t:51 h:337" positiontype="position2" binddataset="ds_detailCode" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;detail_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;detail_code_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;using_status&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:detail_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:detail_code_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:using_status&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="은행코드"/>
+                <Cell col="2" text="은행명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1"/>
+                <Cell col="1" text="bind:DETAIL_CODE"/>
+                <Cell col="2" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript4.0"><![CDATA[
+
+//로딩 시
+function bankDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'BNK'");		
+	
+}
+
+//선택시 더블클릭
+function Grid00_oncelldblclick(obj:Grid, e:GridClickEventInfo)
+{
+	var bankName = ds_detailCode.getColumn(e.row, "DETAIL_CODE_NAME");
+
+	this.opener.Tab00.tabpage3.bankName.value=bankName;	
+	close();
+}
+]]></Script>
+  </Form>
+</FDL>

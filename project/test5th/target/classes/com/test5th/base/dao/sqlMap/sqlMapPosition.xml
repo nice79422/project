@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test5th.base.dao.PositionDAO">
+
+    <resultMap id="positionResult" type="positionBean">
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="positionName" column="POSITION_NAME"/>
+        <collection property="hobongList" select="com.test5th.hr.circumstance.dao.HobongDAO.selectHobongList" column="POSITION_CODE" />
+    </resultMap>
+
+    <select id="selectPositionList" resultMap="positionResult">
+   
+        SELECT * FROM POSITION ORDER BY POSITION_CODE
+   
+    </select>
+
+    <!-- 직급하나 조회하기 -->
+   <select id="selectPosition" resultMap="positionResult" parameterType="String">
+  
+      SELECT * FROM POSITION WHERE POSITION_CODE=#{positionCode}
+    
+    </select>
+
+
+</mapper>

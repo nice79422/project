@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="777" Id="payBonusDateForm" Left="8" OnLoadCompleted="payBonusDateForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="payBonusDateForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsSalBonusType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSalaryType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSimultaneousPublicationSelection">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsJobFamily">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsSalPaymentDate">
+				<Contents>
+					<colinfo id="PAYMENT_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="INPUTED_YEAR_MONTH" size="256" summ="default" type="STRING"/>
+					<colinfo id="JIKJONG_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="TARGET_CHOICE" size="256" summ="default" type="STRING"/>
+					<colinfo id="SAME_TIME_SELECTION" size="256" summ="default" type="STRING"/>
+					<colinfo id="PAY_TYPE" size="256" summ="default" type="STRING"/>
+					<colinfo id="SALARY_TYPE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="NOTE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="급&#32;/&#32;상여&#32;지급일자&#32;등록" Top="1" VAlign="Middle" Width="953"></Static>
+		<Static BKColor="gainsboro" Font="한컴&#32;윤고딕&#32;240,9" Height="50" Id="Static1" Left="1" TabOrder="2" Top="35" Width="953"></Static>
+		<Combo CodeColumn="YEAR" DataColumn="YEAR" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="selBaseYear" INDEX="1" InnerDataset="dsBaseYear" Left="85" ResetIndex="FIRST" TabOrder="4" Text="선택하세요." Top="46" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static2" Left="17" TabOrder="3" Text="귀속연월" Top="46" VAlign="Middle" Width="57"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="searchBtn" Left="622" OnClick="searchBtn_OnClick" TabOrder="5" Text="조회" Top="46" Width="77"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="addBtn" Left="702" OnClick="addBtn_OnClick" TabOrder="6" Text="추가" Top="46" Width="77"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="removeBtn" Left="782" OnClick="removeBtn_OnClick" TabOrder="7" Text="삭제" Top="46" Width="77"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="saveBtn" Left="862" OnClick="saveBtn_OnClick" TabOrder="8" Text="저장" Top="46" Width="77"></Button>
+		<Static Color="red" Font="한컴&#32;윤고딕&#32;240,12" Height="37" Id="Static0" Left="24" TabOrder="9" Text="정규직&#32;근로자를&#32;제외한&#32;비정규직,&#32;계약직&#32;직원은&#32;상여급&#32;미지급&#32;대상입니다." Top="96" VAlign="Middle" Width="496"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static3" Left="171" TabOrder="10" Text="년" Top="46" VAlign="Middle" Width="30"></Static>
+		<Combo CodeColumn="MONTH" DataColumn="MONTH" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="selBaseMonth" InnerDataset="dsBaseMonth" Left="208" TabOrder="11" Text="선택하세요." Top="46" Width="87"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static4" Left="299" TabOrder="12" Text="월" Top="46" VAlign="Middle" Width="30"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsSalPaymentDate" BkColor2="default" BoldHead="true" Bottom="756" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,9" HeadHeight="25" Height="620" Id="paymDateGrid" InputPanel="FALSE" Left="17" LineColor="default" MinWidth="100" Right="939" RowHeight="20" TabOrder="13" TabStop="true" Top="136" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="922">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="100"/>
+						<col width="95"/>
+						<col width="120"/>
+						<col width="120"/>
+						<col width="120"/>
+						<col width="125"/>
+						<col width="140"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" colspan="7" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" text="지급일자"/>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="지급일자"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="동시발행"/>
+						<cell align="center" bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="대상자선정"/>
+						<cell align="center" bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="급여구분"/>
+						<cell align="center" bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="급여형태"/>
+						<cell align="center" bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="직종"/>
+						<cell align="center" bkcolor="silver" col="6" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" limit="-1" row="1" text="비고"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="PAYMENT_DATE" display="text" edit="mask" font="한컴&#32;윤고딕&#32;230,9" limit="-1" Mask="@@@@-@@-@@"/>
+						<cell align="center" col="1" colid="SAME_TIME_SELECTION" combocol="DETAIL_CODE" combodataset="dsSimultaneousPublicationSelection" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="2" colid="TARGET_CHOICE" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="3" colid="PAY_TYPE" combocol="DETAIL_CODE" combodataset="dsSalBonusType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="4" colid="SALARY_TYPE_CODE" combocol="DETAIL_CODE" combodataset="dsSalaryType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="5" colid="JIKJONG_CODE" combocol="DETAIL_CODE" combodataset="dsJobFamily" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+						<cell align="center" col="6" colid="note" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9" limit="-1"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+
+
+var baseYear;
+var baseMonth;
+
+
+function payBonusDateForm_OnLoadCompleted(obj)
+{
+	Http.Sync=true;
+	//코드 목록도 얻어 옴
+	transaction("findCodeList",
+				"svcBase::/code.do?method=findCodeList",
+				"",
+				"dsCode=dsCode dsDetailCode=dsDetailCode",
+				"",
+				"callback");
+	
+	// 동시 분리 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'ST'");
+	dsSimultaneousPublicationSelection.CopyF(dsDetailCode);
+   
+   //급여 상여 급상여 
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'SG'");
+	dsSalBonusType.CopyF(dsDetailCode);
+   //연봉 월급 주급..
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'PA'");
+	dsSalaryType.CopyF(dsDetailCode);
+   // 사무직 생산직  일용직.
+	dsDetailCode.Filter("SubStr(DETAIL_CODE,0,2) == 'JJ'");
+	dsJobFamily.CopyF(dsDetailCode);
+	
+	Http.Sync=false;
+}
+
+
+// 조회 
+function searchBtn_OnClick(obj)
+{
+	
+	baseYear = selBaseYear.Value;
+	baseMonth = selBaseMonth.Value;
+   	//alert(baseYear+baseMonth);
+   
+	if(selBaseYear.text =="" || selBaseMonth.text==""){
+		alert(" 귀속년월을 지정하시기 바랍니다. ");
+	}else{
+		transaction(
+			"findSalPaymentDateList",
+			"svcHrCircumstance::/payDate.do?method=findSalPaymentDateList",
+			"",
+			"dsSalPaymentDate=dsSalPaymentDate",
+			"inputedYearMonth="+(baseYear+baseMonth),
+			"callback"
+		);
+	}	
+}
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+   if(trid=='findSalPaymentDateList'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         if(dsSalPaymentDate.GetRowCount() == 0 ){
+            alert(" 귀속년도에 등록된 지급일자가 없습니다.  ");
+         }else{
+            alert(ErrorMsg);
+         }
+      }
+   }
+   
+   if(trid=='batchSalPaymentDate'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         dsSalPaymentDate.DeleteAll(); // 입력된 사항 모든 것을 지움 
+         alert(ErrorMsg);
+         
+      }   
+   }
+}
+
+// 추가시 
+function addBtn_OnClick(obj)
+{
+	
+	dsSalPaymentDate.AddRow();  // row 추가. 
+	dsSalPaymentDate.SetColumn(dsSalPaymentDate.row,"INPUTED_YEAR_MONTH",(baseYear+baseMonth));  // 값 세팅 
+	dsSalPaymentDate.SetColumn(dsSalPaymentDate.row,"TARGET_CHOICE","직종및급여형태별");
+	
+}
+
+// 삭제시 
+function removeBtn_OnClick(obj)
+{
+	dsSalPaymentDate.DeleteRow(dsSalPaymentDate.row);
+}
+
+
+// 저장 시 
+function saveBtn_OnClick(obj)
+{
+	if(confirm(" 급여/상여 지급일을 등록하시겠습니까? ")){
+      transaction(
+         "batchSalPaymentDate",
+         "svcHrCircumstance::/payDate.do?method=batchSalPaymentDate",
+         "dsSalPaymentDate=dsSalPaymentDate:u",
+         "",
+         "",
+         "callback"
+      );
+   }
+}
+]]></Script>
+</Window>

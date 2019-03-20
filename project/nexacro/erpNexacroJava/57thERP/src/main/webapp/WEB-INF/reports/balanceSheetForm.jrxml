@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanceSheetForm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78518d06-b5db-4061-8fa1-f798b7311054">
+	<property name="ireport.zoom" value="3.138428376721004"/>
+	<property name="ireport.x" value="2"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from temp_current_balance_sheet]]>
+	</queryString>
+	<field name="account_name" class="java.lang.String"/>
+	<field name="current_left" class="java.math.BigDecimal"/>
+	<field name="current_right" class="java.math.BigDecimal"/>
+	<field name="early_left" class="java.math.BigDecimal"/>
+	<field name="early_right" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="233" y="12" width="100" height="20" uuid="147618fc-8f8f-42b1-83a2-39f05c8b99c8"/>
+				<text><![CDATA[BALANCE SHEET]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="222" y="0" width="111" height="20" uuid="66f56c9f-ade7-4c60-ab82-e014e5f4a3eb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="111" height="20" uuid="cc8160b8-7a06-4d9f-acef-d81e03411ca2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="111" y="0" width="111" height="20" uuid="cb589319-97d3-46fb-ba8a-67bbc264beb0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="0" width="111" height="20" uuid="0b56a85a-817f-4883-8ad9-763570b3cb5d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="333" y="0" width="111" height="20" uuid="c0c0fb76-3f7d-49a3-ab8c-1f84313a951b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="6b5ad580-2e12-46fc-852b-15d710ba8b15"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[계정이름]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="d2081c7d-e0f4-43c4-baab-6291af200b64"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[당기좌변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="0e233ea3-96b1-4b10-87b3-a87ea3a65b52"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[당기우변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="0a88054c-9a3a-4057-b778-4ae44c51b5d9"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[전기좌변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="9ac82cfa-12b3-4e19-8119-77cacfb1a3bc"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[전기우변]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<rectangle>
+				<reportElement x="444" y="0" width="111" height="20" uuid="5778232a-3736-4ae1-99ec-f0c8584db1e6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="333" y="0" width="111" height="20" uuid="008eee68-ab4d-4d79-9852-0ff892387afa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="222" y="0" width="111" height="20" uuid="86a66c3b-d108-44e3-b306-8638b68e728a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="111" y="0" width="111" height="20" uuid="ec179a9f-20e5-4bf5-918f-56b68cbb7df3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="111" height="20" uuid="3a29f4a7-936c-491c-aa4a-7883c8d1fcfb"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="eaffea9e-4baf-4c66-8687-54379eb4a20a"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{account_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="111" y="0" width="111" height="20" uuid="cfd4d7a2-fe4c-4a82-8051-9fcc20afe00a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{current_left}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="222" y="0" width="111" height="20" uuid="acc73817-3da7-4a83-b8dc-2a597f26c15a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{current_right}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="0" width="111" height="20" uuid="373714a0-00fe-4b85-a6f2-7ef2ea922c78"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{early_left}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="444" y="0" width="111" height="20" uuid="efa2029e-5876-42c7-9c11-f4d6f35a6372"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{early_right}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

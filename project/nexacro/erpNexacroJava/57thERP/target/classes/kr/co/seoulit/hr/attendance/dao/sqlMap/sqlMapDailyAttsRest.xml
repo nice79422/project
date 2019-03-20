@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.attendance.dao.DailyAttdRestDAO">
+
+	<resultMap id="dailyAttdRestResult" type="dailyAttdRestTO">
+		<result property="attdRestSeq" column="ATTD_REST_SEQ" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="attdRestCode" column="ATTD_REST_CODE" />
+		<result property="requestDate" column="REQUEST_DATE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="days" column="DAYS" />
+		<result property="cost" column="COST" />
+		<result property="cause" column="CAUSE" />
+		<result property="approvalStatus" column="APPROVAL_STATUS" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="otherSudang" column="OTHER_SUDANG" />
+	</resultMap>
+
+	<!-- 근태외 목록을 가지고 오는 메서드 -->
+	<select id="selectAttdRestList" resultMap="dailyAttdRestResult" parameterType="map">
+	<![CDATA[
+		SELECT ARM.ATTD_REST_SEQ,
+		            ARM.EMP_CODE,
+		            ARM.ATTD_REST_CODE,
+		            ARM.REQUEST_DATE,
+		            ARM.START_DATE,
+		            ARM.END_DATE,
+		            ARM.DAYS,
+		            ARM.COST,
+		            ARM.CAUSE,
+		            ARM.APPROVAL_STATUS,
+		            E.EMP_NAME,
+		            ARM.OTHER_SUDANG
+		FROM ATTD_REST_MGT ARM, EMPLOYEE E
+		WHERE ARM.EMP_CODE=#{empCode}
+		AND REQUEST_DATE BETWEEN #{fromDate} AND #{toDate}
+		AND ARM.EMP_CODE=E.EMP_CODE
+		ORDER BY ATTD_REST_SEQ, LENGTH(APPROVAL_STATUS) DESC, END_DATE
+	]]>
+	</select>
+
+
+	<!-- 근태외 신청을 추가한 메서드 -->
+	<insert id="insertAttdRestList" parameterType="dailyAttdRestTO">
+		<selectKey keyProperty="attdRestSeq" resultType="String" order="BEFORE">
+	<![CDATA[
+		SELECT ATTD_REST_SEQ.NEXTVAL FROM DUAL
+	]]>
+		</selectKey>
+	<![CDATA[
+		INSERT INTO ATTD_REST_MGT(
+							EMP_CODE,
+							EMP_NAME,
+							ATTD_REST_SEQ,
+							ATTD_REST_CODE,
+							REQUEST_DATE,
+							START_DATE,
+							END_DATE,
+							DAYS,
+							COST,
+							CAUSE,
+							APPROVAL_STATUS,
+							OTHER_SUDANG
+		)VALUES(
+						#{empCode},
+						#{empName},
+						#{attdRestSeq},
+						#{attdRestCode},
+						#{requestDate},
+						#{startDate},
+						#{endDate},
+						#{days},
+						#{cost},
+						#{cause},
+						#{approvalStatus},
+						#{otherSudang}
+		)
+	]]>
+	</insert>
+
+	<!-- 일근태외 변경 사항 반영 -->
+	<update id="updateAttdRestList" parameterType="dailyAttdRestTO">
+		<![CDATA[
+	        UPDATE
+	            ATTD_REST_MGT
+	        SET
+	            ATTD_REST_CODE = #{attdRestCode},
+	            REQUEST_DATE = #{requestDate},
+	            START_DATE = #{startDate},
+	            END_DATE = #{endDate},
+	            DAYS = #{days},
+	            COST = #{cost},
+	            CAUSE = #{cause},
+	            APPROVAL_STATUS = #{approvalStatus},
+	            OTHER_SUDANG=#{otherSudang}
+	        WHERE
+	            ATTD_REST_SEQ = #{attdRestSeq} AND
+	            EMP_CODE = #{empCode}
+
+	    ]]>
+
+	</update>
+	
+	<!-- 일근태외 삭제 -->
+	<delete id="deleteAttdRestList" parameterType="dailyAttdRestTO">
+	    <![CDATA[
+	        DELETE FROM
+	            ATTD_REST_MGT
+	        WHERE
+	            ATTD_REST_SEQ = #{attdRestSeq} AND
+	            EMP_CODE = #{empCode}
+	    ]]>
+	</delete>
+
+
+	<!-- 해당 일자의 일근태관리의 근태외 내역 조회 -->
+	<select id="selectAttdRestListByCondition" resultMap="dailyAttdRestResult" parameterType="map">
+	
+		SELECT
+		arm.EMP_CODE
+		,arm.ATTD_REST_SEQ
+		,arm.ATTD_REST_CODE
+		,arm.REQUEST_DATE
+		,arm.START_DATE
+		,arm.END_DATE
+		,arm.DAYS
+		,arm.COST
+		,arm.CAUSE
+		,arm.APPROVAL_STATUS
+		,e.EMP_NAME
+		,arm.OTHER_SUDANG
+		,0 as chk
+		FROM
+		ATTD_REST_MGT arm, EMPLOYEE e
+		 <if test="deptCode != ''">
+            , DEPARTMENT p
+            </if>
+       <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            e.EMP_CODE = arm.EMP_CODE
+        
+           <if test="deptCode != ''">
+                AND e.DEPT_CODE = p.DEPT_CODE 
+                AND p.DEPT_CODE = #{deptCode}
+            </if>
+            <if test="basicDay != ''">
+                AND arm.REQUEST_DATE = #{basicDay}
+            </if>
+            <if test="approvalStatus != ''">
+                AND arm.APPROVAL_STATUS = #{approvalStatus}
+            </if>
+        </trim>
+		ORDER BY
+		arm.EMP_CODE
+	</select>
+
+
+	<!-- 일근태외 승인 후 목록 던짐 미승인에서 승인으로 변경 되면 던질 게 없어짐.. -->
+	<select id="selectUnApprovedDailyAttdRestList" resultMap="dailyAttdRestResult"
+		parameterType="String">
+    	<![CDATA[
+    	SELECT
+    		arm.*,e.*
+    	FROM
+    		ATTD_REST_MGT arm,EMPLOYEE e
+    	WHERE
+    		arm.REQUEST_DATE=#{basicDay}
+    	AND
+    		arm.APPROVAL_STATUS='N'
+    	AND
+    		arm.EMP_CODE=e.EMP_CODE
+    	ORDER BY
+    		 LENGTH(APPROVAL_STATUS) DESC,REQUEST_DATE
+    	]]>
+	</select>
+
+
+
+</mapper>

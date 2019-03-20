@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="deductionTaxForm" left="0" top="0" width="1185" height="785">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="급여 공제항목 등록 / 조회" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <GroupBox id="salaryDeductionItemSerch_gb" text="급여 공제항목 조회" taborder="1" left="1.35%" top="70" height="700" right="50.72%" titlealign="topcenter"/>
+        <Static id="baseYear_stc" taborder="3" text="기준연도" left="4.14%" top="94" right="85.91%" height="35"/>
+        <Combo id="baseYear_combo" taborder="4" left="14.77%" top="94" right="72.49%" height="35" index="-1"/>
+        <Button id="serch_btn" taborder="5" text="조회" left="29.62%" top="94" right="62.45%" height="35"/>
+        <Button id="delete_btn" taborder="6" text="삭제" left="38.4%" top="94" right="53.67%" height="35"/>
+        <GroupBox id="healthInsurance_gb" text="건강보험" taborder="8" left="1.86%" top="324" right="51.22%" height="80" titlealign="topcenter"/>
+        <Static id="reference_stc" taborder="12" text="※ 장기요양보험 계산&#13;&#10;※ 건강보험 * 7.38% *50%(근로자부담)" left="2.03%" top="678" right="51.56%" height="75" style="align:left middle;"/>
+        <Static id="healthInsuranceBurdenRatio_stc" taborder="13" text="건강보험 부담률" left="7.85%" top="350" right="75.53%" height="35"/>
+        <Edit id="healthInsuranceBurdenRatio_edt" taborder="14" left="24.89%" top="350" right="64.22%" height="35"/>
+        <Static id="ratio1_stc" taborder="15" text="%" left="36.2%" top="350" right="57.97%" height="35"/>
+        <GroupBox id="employmentInsurance_gb" text="고용보험" taborder="16" left="1.86%" top="409" right="51.22%" height="80" titlealign="topcenter"/>
+        <Static id="employmentInsuranceBurdenRate_stc" taborder="17" text="고용보험 부담률" left="7.85%" top="435" right="75.53%" height="35"/>
+        <Edit id="employmentInsuranceBurdenRate_edt" taborder="18" left="24.89%" top="435" right="64.22%" height="35"/>
+        <Static id="ratio2_stc" taborder="19" text="%" left="36.2%" top="435" right="57.97%" height="35"/>
+        <GroupBox id="nationalPension_gb" text="국민연금" taborder="20" left="1.86%" top="497" right="51.22%" height="80" titlealign="topcenter"/>
+        <Static id="nationalPensionBurdenRate_stc" taborder="21" text="국민연금 부담률" left="7.85%" top="523" right="75.53%" height="35"/>
+        <Edit id="nationalPensionBurdenRate_edt" taborder="22" left="24.89%" top="523" right="64.22%" height="35"/>
+        <Static id="ratio3_stc" taborder="23" text="%" left="36.2%" top="523" right="57.97%" height="35"/>
+        <GroupBox id="LongtermCareInsurance_gb" text="장기요양보험" taborder="24" left="1.86%" top="585" right="51.22%" height="80" titlealign="topcenter"/>
+        <Static id="LongtermCareInsuranceBurdenRate_stc" taborder="25" text="장기요양보험 부담률" left="7.85%" top="611" right="75.53%" height="35"/>
+        <Edit id="Edit03" taborder="26" left="24.89%" top="611" right="64.22%" height="35"/>
+        <Static id="ratio4_stc" taborder="27" text="%" left="36.2%" top="611" right="57.97%" height="35"/>
+        <GroupBox id="incomeTax_gb" text="소득세" taborder="51" left="1.86%" top="135" right="51.22%" height="182" titlealign="topcenter"/>
+        <Grid id="incomeTax_grid" taborder="53" useinputpanel="false" left="3.04%" top="150" right="52.41%" height="160">
+          <Formats/>
+        </Grid>
+        <GroupBox id="salaryDeductionItemSerch_gb00" text="급여 공제항목 조회" titlealign="topcenter" taborder="54" left="50.63%" top="70" right="1.43%" height="700"/>
+        <Static id="baseYear_stc00" taborder="55" text="기준연도" left="53.42%" top="94" right="36.62%" height="35"/>
+        <Combo id="baseYear_combo00" taborder="56" left="64.05%" top="94" right="23.21%" height="35"/>
+        <Button id="cancel_btn" taborder="57" text="취소" left="78.9%" top="94" right="13.16%" height="35"/>
+        <Button id="save_btn" taborder="58" text="저장" left="87.68%" top="94" right="4.39%" height="35"/>
+        <GroupBox id="healthInsurance_gb00" text="건강보험" titlealign="topcenter" taborder="59" left="51.14%" top="324" right="1.94%" height="80"/>
+        <Static id="reference_stc00" taborder="60" text="※ 주민세율 = 소득세 * 10%&#13;&#10;※ 주민세는 급여정산때 지방소득세로 계산됩니다. " left="51.31%" top="678" right="2.28%" height="75" style="align:left middle;"/>
+        <Static id="healthInsuranceBurdenRatio_stc00" taborder="61" text="건강보험 부담률" left="57.13%" top="350" right="26.24%" height="35"/>
+        <Edit id="healthInsuranceBurdenRatio_edt00" taborder="62" left="74.18%" top="350" right="14.94%" height="35"/>
+        <Static id="ratio1_stc00" taborder="63" text="%" left="85.49%" top="350" right="8.69%" height="35"/>
+        <GroupBox id="employmentInsurance_gb00" text="고용보험" titlealign="topcenter" taborder="64" left="51.14%" top="409" right="1.94%" height="80"/>
+        <Static id="employmentInsuranceBurdenRate_stc00" taborder="65" text="고용보험 부담률" left="57.13%" top="435" right="26.24%" height="35"/>
+        <Edit id="employmentInsuranceBurdenRate_edt00" taborder="66" left="74.18%" top="435" right="14.94%" height="35"/>
+        <Static id="ratio2_stc00" taborder="67" text="%" left="85.49%" top="435" right="8.69%" height="35"/>
+        <GroupBox id="nationalPension_gb00" text="국민연금" titlealign="topcenter" taborder="68" left="51.14%" top="497" right="1.94%" height="80"/>
+        <Static id="nationalPensionBurdenRate_stc00" taborder="69" text="국민연금 부담률" left="57.13%" top="523" right="26.24%" height="35"/>
+        <Edit id="nationalPensionBurdenRate_edt00" taborder="70" left="74.18%" top="523" right="14.94%" height="35"/>
+        <Static id="ratio3_stc00" taborder="71" text="%" left="85.49%" top="523" right="8.69%" height="35"/>
+        <GroupBox id="LongtermCareInsurance_gb00" text="장기요양보험" titlealign="topcenter" taborder="72" left="51.14%" top="585" right="1.94%" height="80"/>
+        <Static id="LongtermCareInsuranceBurdenRate_stc00" taborder="73" text="장기요양보험 부담률" left="57.13%" top="611" right="26.24%" height="35"/>
+        <Edit id="Edit00" taborder="74" left="74.18%" top="611" right="14.94%" height="35"/>
+        <Static id="ratio4_stc00" taborder="75" text="%" left="85.49%" top="611" right="8.69%" height="35"/>
+        <GroupBox id="incomeTax_gb00" text="소득세" titlealign="topcenter" taborder="76" left="51.14%" top="135" right="1.94%" height="182"/>
+        <Grid id="incomeTax_grid00" taborder="77" useinputpanel="false" left="52.32%" top="150" right="3.12%" height="160">
+          <Formats/>
+        </Grid>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

@@ -1,0 +1,668 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_PersonalAppointmentForm" left="0" top="0" width="1185" height="785" titletext="사원별 인사발령" onload="hr_PersonalAppointmentForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="사원별 인사발령" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Grid id="personalAppointmentDetail_grid" taborder="1" useinputpanel="false" left="2.78%" top="456" right="2.78%" height="296" binddataset="ds_personalAppointmentDetail" autofittype="col" style="font:11 함초롬돋움,돋움;" oncelldblclick="personalAppointmentDetail_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="25"/>
+                <Column size="78"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="55"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="9" text="사원 발령내역"/>
+                <Cell row="1" col="1" text="사원명"/>
+                <Cell row="1" col="2" text="발령호수"/>
+                <Cell row="1" col="3" text="발령내역"/>
+                <Cell row="1" col="4" text="현정보"/>
+                <Cell row="1" col="5" text="발령전정보"/>
+                <Cell row="1" col="6" text="발령후정보"/>
+                <Cell row="1" col="7" text="호수"/>
+                <Cell row="1" col="8" text="type"/>
+                <Cell row="1" col="9" text="적요"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1"/>
+                <Cell col="1" displaytype="combo" text="bind:EMPLOYEE_NO" combodataset="gds_employee" combocodecol="EMP_CODE" combodatacol="EMP_NAME"/>
+                <Cell col="2" text="bind:APPOINTMENT_NO"/>
+                <Cell col="3" displaytype="combo" edittype="none" text="bind:APPOINTMENT_HISTORY" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" displaytype="combo" edittype="none" text="bind:CURRENT_INFORMATION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="5" displaytype="combo" edittype="none" text="bind:PRE_APPOINTMENT_INFORMATION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="6" displaytype="combo" edittype="none" text="bind:APPOINTMENT_INFORMATION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="7" text="bind:APPOINTMENT_NO"/>
+                <Cell col="8" expr="expr:dataset.getRowType(currow)"/>
+                <Cell col="9" edittype="normal" text="bind:NOTE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="personalAppointment_grid" taborder="2" useinputpanel="false" left="2.45%" top="180" right="2.87%" height="204" autofittype="col" binddataset="ds_personalAppointment" style="font:11 함초롬돋움,돋움;" oncelldblclick="personalAppointment_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="32"/>
+                <Column size="71"/>
+                <Column size="62"/>
+                <Column size="65"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="81"/>
+                <Column size="54"/>
+                <Column size="103"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="8" text="발령대상자"/>
+                <Cell row="1" col="1" text="발령호수"/>
+                <Cell row="1" col="2" text="사원번호"/>
+                <Cell row="1" col="3" text="사원명"/>
+                <Cell row="1" col="4" text="직급"/>
+                <Cell row="1" col="5" text="부서"/>
+                <Cell row="1" col="6" text="적용일자"/>
+                <Cell row="1" col="7" text="승인여부"/>
+                <Cell row="1" col="8" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:APPOINTMENT_NO"/>
+                <Cell col="2" text="bind:EMPLOYEE_NO"/>
+                <Cell col="3" displaytype="normal" text="bind:EMPLOYEE_NAME" combodataset="ds_employee" combocodecol="EMP_CODE" combodatacol="EMP_NAME"/>
+                <Cell col="4" displaytype="combo" text="bind:POSITION" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="5" displaytype="combo" text="bind:DEPARTMENT" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="6" displaytype="date" edittype="date" text="bind:APPLY_DATE" calendardisplaynulltype="none"/>
+                <Cell col="7" text="bind:APPLY_STATUS" expr="expr:APPLY_STATUS=='Y' ? '승인' : APPLY_STATUS=='N'? '미승인': '취소'"/>
+                <Cell col="8" edittype="normal" text="bind:NOTE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="registerAppointment_btn" taborder="6" text="일괄발령" left="80.34%" top="132" right="12.24%" height="32" onclick="registerAppointment_btn_onclick"/>
+        <Button id="applyAppointment_btn" taborder="23" text="발령적용" left="89.11%" top="132" right="3.46%" height="32" visible="true" onclick="applyAppointment_btn_onclick"/>
+        <Static id="Static01" taborder="24" text="발령구분검색" left="78.14%" top="83" right="11.81%" height="34"/>
+        <Static id="Static02" taborder="27" text="발령호수" left="1.86%" top="83" right="90.8%" height="34"/>
+        <Edit id="appointmentNo_edt" taborder="28" left="10.13%" top="83" right="78.9%" height="34" onchanged="appointmentNo_edt_onchanged" readonly="true" style="align:center middle;"/>
+        <Button id="searchAppointmentNo_btn" taborder="29" left="21.1%" top="84" right="76.2%" height="32" style="background:#c5af94ff URL('theme://images/ico_zoomcombo.png') stretch;" onclick="searchAppointmentNo_btn_onclick"/>
+        <Combo id="appointmentDivision_combo" taborder="30" left="89.11%" top="83" right="3.46%" height="33" innerdataset="@ds_appointmentDivision" codecolumn="DIVISION_CODE" datacolumn="CODE_NAME" index="-1" displaynulltext="선택" onitemchanged="appointmentDivision_combo_onitemchanged" style="align:center middle;"/>
+        <Static id="Static03" taborder="31" text="발령일자" left="23.46%" top="131" right="69.2%" height="34"/>
+        <Static id="Static04" taborder="33" text="발령제목" left="45.06%" top="131" right="47.59%" height="34"/>
+        <Edit id="appointmentTitle_edt" taborder="34" readonly="true" onchanged="appointmentNo_edt_onchanged" left="53.33%" top="131" right="28.95%" height="34" style="align:center middle;"/>
+        <MaskEdit id="appointmentDate_mEdt" taborder="35" left="31.73%" top="131" right="57.47%" height="34" mask="@@@@-@@-@@" type="string" readonly="true" style="align:center middle;" autoselect="false"/>
+        <Button id="addAppointmentDetail_btn" taborder="36" text="내역추가" left="89.11%" top="416" right="3.46%" height="32" onclick="addAppointmentDetail_btn_onclick"/>
+        <Static id="Static05" taborder="37" text="발령구분" left="1.86%" top="131" right="90.8%" height="34"/>
+        <Combo id="appointmentDivision_combo00" taborder="39" innerdataset="@ds_appointmentDivision" codecolumn="DIVISION_CODE" datacolumn="CODE_NAME" onitemchanged="appointmentDivision_combo_onitemchanged" left="10.13%" top="131" right="78.9%" height="33" readonly="true"/>
+        <Button id="cancelAppointment_btn" taborder="40" text="발령취소" left="72.24%" top="132" right="20.34%" height="32" onclick="cancelAppointment_btn_onclick"/>
+        <Button id="Button00" taborder="41" text="테스트조회" onclick="Button00_onclick" left="60.08%" top="69" right="31.73%" height="32"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_personalAppointment">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NAME" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="APPLY_DATE" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_DIVISION" type="STRING" size="256"/>
+          <Column id="APPLY_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_personalAppointmentDetail">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_HISTORY" type="STRING" size="256"/>
+          <Column id="CURRENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="PRE_APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="NOTE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointmentDivision">
+        <ColumnInfo>
+          <Column id="PARENT_CODE" type="STRING" size="256"/>
+          <Column id="DIVISION_CODE" type="STRING" size="256"/>
+          <Column id="CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DIVISION_CODE">TEST010</Col>
+            <Col id="CODE_NAME">채용</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST011</Col>
+            <Col id="CODE_NAME">승진</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST012</Col>
+            <Col id="CODE_NAME">승급</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST013</Col>
+            <Col id="CODE_NAME">호봉승급</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST014</Col>
+            <Col id="CODE_NAME">보직변경</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST015</Col>
+            <Col id="CODE_NAME">부서이동</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST016</Col>
+            <Col id="CODE_NAME">대기</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST017</Col>
+            <Col id="CODE_NAME">해제</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST018</Col>
+            <Col id="CODE_NAME">전입</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST019</Col>
+            <Col id="CODE_NAME">전출</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST020</Col>
+            <Col id="CODE_NAME">파견</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST021</Col>
+            <Col id="CODE_NAME">복귀</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST022</Col>
+            <Col id="CODE_NAME">휴직</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST023</Col>
+            <Col id="CODE_NAME">복직</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+          <Row>
+            <Col id="DIVISION_CODE">TEST024</Col>
+            <Col id="CODE_NAME">퇴직</Col>
+            <Col id="PARENT_CODE">HR26</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_tempAppointment">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_HISTORY" type="STRING" size="256"/>
+          <Column id="CURRENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="PRE_APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_appointment">
+        <ColumnInfo>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256" description="발령호수"/>
+          <Column id="APPOINTMENT_TITLE" type="STRING" size="256" description="인사발령 제목"/>
+          <Column id="APPOINTMENT_DIVISION" type="STRING" size="256" description="발령구분"/>
+          <Column id="APPOINTMENT_DATE" type="STRING" size="256" description="발령일자"/>
+          <Column id="APPOINTMENT_DIRECTOR" type="STRING" size="256" description="발령자"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256" description="승인상태"/>
+          <Column id="NOTE" type="STRING" size="256" description="비고"/>
+          <Column id="APPOINTMENT_SEQ" type="STRING" size="256" description="시퀀스"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_tempAppointmentSub">
+        <ColumnInfo>
+          <Column id="EMPLOYEE_NO" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_HISTORY" type="STRING" size="256"/>
+          <Column id="CURRENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="PRE_APPOINTMENT_INFORMATION" type="STRING" size="256"/>
+          <Column id="APPOINTMENT_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************
+발령대상자 		상세내용 등록페이지 다이얼로그
+@Path			인사
+@Description	발령대상자 상세내용 등록페이지 다이얼로그
+@Author	  		심승현
+@Create         2019. 02. 14.
+********************************************************************************/
+//전역변수
+var appointmentDivision;
+var appointmentNo;
+var employeeNo;
+var eRow;
+
+//폼 온로드
+this.hr_PersonalAppointmentForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findPersonalAppointmentList",
+					"dataURL::hr/appointment/findPersonalAppointmentList.do",
+					"",
+					"ds_personalAppointment=ds_personalAppointment",
+					"",
+					"callback",
+					false
+					);	
+	this.transaction("findPersonalAppointmentDetailList2",
+					"dataURL::hr/appointment/findPersonalAppointmentDetailList2.do",
+					"",
+					"ds_personalAppointmentDetail=ds_personalAppointmentDetail",
+					"",
+					"callback",
+					false
+					);
+// 	this.transaction("findEmployeeList",
+// 					"dataURL::hr/emp/findEmployeeList.do",
+// 					"",
+// 					"gds_employee=gds_employee",
+// 					"",
+// 					"callback",
+// 					false
+// 					);	
+	this.transaction("findAppointmentList",
+					"dataURL::hr/appointment/findAppointmentList.do",
+					"",
+					"ds_appointment=ds_appointment",
+					"",
+					"callback",
+					false
+					);					
+	this.ds_personalAppointment.filter("APPOINTMENT_NO =='XXX'");	
+	this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO =='XXX'");	
+
+}
+
+//발령호수 검색버튼
+this.searchAppointmentNo_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	//검색버튼 클릭시 2개의 그리드 지우기 위해 필터
+	this.ds_personalAppointment.filter("APPOINTMENT_NO =='XXX'");	
+	this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO =='XXX'");	
+	
+	this.appointmentDivision_combo.set_value("");
+	
+	application.open(
+		"appointmentNo",
+		"hr_appointment::hr_AppointmentDialog.xfdl", 
+		this.getOwnerFrame(),
+		{mode:'modeless'}, 
+		"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='발령대상자 선택'"
+		);	
+	this.reload();	
+}
+
+//다이얼로그를 통해 발령호수 가져왔을때 필터링 하기 위함
+this.appointmentNo_edt_onchanged = function(obj:Edit, e:nexacro.ChangeEventInfo)
+{	
+	var appointmentNo = this.appointmentNo_edt.value;
+	this.ds_personalAppointment.filter("APPOINTMENT_NO =='"+appointmentNo+"'");
+	
+	this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO =='XXX'");	
+	var r=this.ds_personalAppointment.getRowCount();						//발령호수로 가져온 데이터셋의 row 수
+	var c=this.ds_personalAppointment.getCaseCount("APPLY_STATUS=='Y'");	//가져온 데이터셋에 승인 개수가 몇개인지
+	for(i=0; i<r; i++){
+	this.ds_personalAppointment.setColumn(i,"APPLY_DATE",application.today());
+	}
+	if(r==c){																//row수와  승인갯수가 같으면 수정/작성 안되도록 그리드 막음
+		this.personalAppointment_grid.set_readonly(true);
+		this.personalAppointmentDetail_grid.set_enable(false);
+	}else{																	//아닐경우에는 추가적인 내용 선택 및 작성하도록
+		this.personalAppointment_grid.set_readonly(false);
+		this.personalAppointmentDetail_grid.set_enable(true);	
+	}		
+}
+
+
+// 콤보박스 값 변경 이벤트
+this.appointmentDivision_combo_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{	
+	var appDiv = obj.value;
+	this.ds_personalAppointment.filter("APPOINTMENT_DIVISION =='"+appDiv+"'");	
+	this.appointmentNo_edt.set_value("");
+	this.appointmentTitle_edt.set_value("");
+	this.appointmentDate_mEdt.set_value("");
+	this.appointmentDivision_combo00.set_value("");
+	this.personalAppointment_grid.set_readonly(true);
+	this.personalAppointmentDetail_grid.set_readonly(true);
+}
+
+
+//인사발령대상자 더블클릭
+var cnt=1;
+this.personalAppointment_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{		
+ 	eRow=this.personalAppointment_grid.currentrow;
+	appointmentNo = this.ds_personalAppointment.getColumn(e.row, "APPOINTMENT_NO");
+	employeeNo = this.ds_personalAppointment.getColumn(e.row, "EMPLOYEE_NO");
+	applyDate = this.ds_personalAppointment.getColumn(e.row, "APPLY_DATE");
+ 	appointmentDivision = this.ds_personalAppointment.getColumn(e.row, "APPOINTMENT_DIVISION");
+ 	status = this.ds_personalAppointment.getColumn(e.row, "APPLY_STATUS");
+ 	trace("\n"+appointmentNo + "\n"+employeeNo+ "\n"+ applyDate+"\n"+appointmentDivision+"\n"+status);
+	
+	if(status=='Y'){
+		this.ds_personalAppointmentDetail.filter("");	
+		this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO=='"+appointmentNo+"'&&EMPLOYEE_NO=='"+employeeNo+"'");	
+	}else{
+		if(cnt==1){	//그리드 더블클릭이 1번 이상일경우에는 변경된 내용 세팅한것만 다시 보여주기 위해
+			cnt++;
+			if(appointmentDivision!='APM010'){
+			var rowCnt = this.ds_personalAppointment.getRowCount();
+			this.transaction("findAppointmentHistory",							//프로시저가는 트랜잭션
+						"dataURL::hr/appointment/findAppointmentHistory.do",
+						"",
+						"ds_tempAppointment=ds_tempAppointment",
+						"appointmentNo='"+appointmentNo+"' appointmentDivision='"+appointmentDivision+"'",//프로시저 수정내용
+						"callback",
+						false
+						);		
+				trace(this.ds_tempAppointment.saveXML());				
+				for(ai=0; ai<rowCnt; ai++){
+					var emNo = this.ds_personalAppointment.getColumn(ai, "EMPLOYEE_NO");
+					this.ds_tempAppointment.filter("EMPLOYEE_NO=='"+emNo+"'"); 
+					var maxVal=this.ds_tempAppointment.getMax("APPOINTMENT_NO");
+					this.ds_tempAppointment.filter("EMPLOYEE_NO=='"+emNo+"'&&APPOINTMENT_NO=='"+maxVal+"'"); 
+					var taRow=this.ds_tempAppointment.getRowCount();
+					this.ds_personalAppointmentDetail.filter("EMPLOYEE_NO=='"+emNo+"'&&APPOINTMENT_NO=='"+appointmentNo+"'"); 
+					
+					for(i=0; i<taRow; i++){
+					
+					this.ds_personalAppointmentDetail.addRow();					
+						var a=this.ds_tempAppointment.getColumn(i,"APPOINTMENT_HISTORY");
+						var b=this.ds_tempAppointment.getColumn(i,"CURRENT_INFORMATION");
+						var c=this.ds_tempAppointment.getColumn(i,"PRE_APPOINTMENT_INFORMATION");
+						trace("\n"+appointmentNo+"\n"+emNo+"\n"+a+"\n"+b+"\n"+c);
+						this.ds_personalAppointmentDetail.setColumn(i,"APPOINTMENT_NO",appointmentNo);
+						this.ds_personalAppointmentDetail.setColumn(i,"EMPLOYEE_NO",emNo);
+						this.ds_personalAppointmentDetail.setColumn(i,"APPOINTMENT_HISTORY",a);
+						this.ds_personalAppointmentDetail.setColumn(i,"CURRENT_INFORMATION",b);
+						this.ds_personalAppointmentDetail.setColumn(i,"PRE_APPOINTMENT_INFORMATION",c);
+						this.ds_personalAppointmentDetail.setColumn(i,"APPOINTMENT_INFORMATION","");
+						//alert(appointmentNo+"\n"+emNo+"\n"+a+"\n"+b+"\n"+c);
+					}
+			}
+			this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO=='"+appointmentNo+"'&&EMPLOYEE_NO=='"+emNo+"'");	
+			}
+		}else{
+			this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO=='"+appointmentNo+"'&&EMPLOYEE_NO=='"+employeeNo+"'");	
+		}
+	}
+}
+
+
+//발령내역 상세 추가
+var addrow;
+this.addAppointmentDetail_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	if(status=='N'){
+		var rowCnt = this.ds_personalAppointmentDetail.getRowCount();
+		var aaa = this.ds_personalAppointmentDetail.getColumn(rowCnt-1,"APPOINTMENT_HISTORY");
+		var empNo=this.ds_personalAppointment.getColumn(eRow,"EMPLOYEE_NO");	
+		var appNo=this.ds_personalAppointment.getColumn(eRow,"APPOINTMENT_NO");
+		var appDiv=this.ds_personalAppointment.getColumn(eRow,"APPOINTMENT_DIVISION");
+		
+		if(aaa!='APM011'){
+			addrow = this.ds_personalAppointmentDetail.addRow();
+			
+			this.ds_personalAppointmentDetail.setColumn(addrow,"EMPLOYEE_NO",empNo);
+			this.ds_personalAppointmentDetail.setColumn(addrow,"APPOINTMENT_NO",appNo);
+			this.ds_personalAppointmentDetail.setColumn(addrow,"APPOINTMENT_HISTORY","APM011");
+		}else{
+			addrow = this.ds_personalAppointmentDetail.addRow();
+			this.ds_personalAppointmentDetail.setColumn(addrow,"EMPLOYEE_NO",empNo);
+			this.ds_personalAppointmentDetail.setColumn(addrow,"APPOINTMENT_NO",appNo);
+			this.ds_personalAppointmentDetail.setColumn(addrow,"APPOINTMENT_HISTORY","APM015");
+		}
+	}else{
+		alert("승인된 발령, 추가 안됨");
+	}
+
+}
+
+
+//발령내역 그리드 더블클릭시
+this.personalAppointmentDetail_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	
+	currow = this.personalAppointmentDetail_grid.currentrow;
+	var appDv = this.ds_personalAppointmentDetail.getColumn(currow,"APPOINTMENT_HISTORY");
+	alert("appointmentDivision ::: "+appointmentDivision);
+	if(appointmentDivision=='APM010'){		//특수한경우로 발령내역이 채용일 경우
+		alert("채용");
+		switch(appDv){
+			case 'APM011': codeValue = 'SYS06';break;
+			case 'APM015': codeValue = 'SYS07';break;	
+		}
+		application.open("appointmentCode",
+					"hr_appointment::hr_AppointmentCodeDialog.xfdl", 
+					this.getOwnerFrame(),
+					{mode:'modal',code:codeValue,row:currow, cell:e.cell}, 
+					"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='발령선택'"
+					);
+	}else{	
+	
+	switch(e.cell)
+		{
+		case 6 : 
+			alert("발령후정보 선택");
+			var rowcnt = this.personalAppointmentDetail_grid.currentrow;
+			appointmentDivision = this.ds_personalAppointmentDetail.getColumn(addrow,"APPOINTMENT_HISTORY");
+			alert(appointmentDivision);
+			switch(appointmentDivision){
+				//case 'APM010': codeValue = 'SYS07';break;
+				case 'APM011': codeValue = 'SYS06';break;
+				case 'APM012': codeValue = 'SYS06';break;
+				case 'APM013': codeValue = 'APM10';break;
+				//case 'APM014': codeValue = 'SYS06';break;
+				case 'APM015': codeValue = 'SYS07';break;
+				case 'APM016': codeValue = 'SYS06';break;
+				case 'APM017': codeValue = 'SYS06';break;
+				case 'APM018': codeValue = 'SYS04';break;
+				case 'APM019': codeValue = 'SYS04';break;
+				case 'APM020': codeValue = 'HR13';break;
+				case 'APM021': codeValue = 'HR13';break;
+				case 'APM022': codeValue = 'SYS07';break;
+				case 'APM023': codeValue = 'SYS07';break;
+				case 'APM024': codeValue = 'SYS07';break;
+			}
+						
+			application.open("appointmentInfo",
+						"hr_appointment::hr_AppointmentCodeDialog.xfdl", 
+						this.getOwnerFrame(),
+						{mode:'modal',code:codeValue,row:rowcnt, cell:e.cell}, 
+						"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='코드선택'"
+						);
+			break;
+		}
+	}
+}
+
+
+
+//발령적용 버튼
+this.applyAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	var cur = this.personalAppointment_grid.currentrow;
+	if(this.ds_personalAppointment.getColumn(cur,"APPLY_DATE")==undefined){
+		alert("일자 선택 필요");
+	}else if(confirm("발령을 적용하시겠습니까?")){
+	this.setEmployeeAppointment();
+	for(ct=0; ct<tRow; ct++){
+		this.ds_personalAppointment.setColumn(ct,"APPLY_STATUS","Y");
+	}
+	this.ds_appointment.filter("APPOINTMENT_NO=='"+this.appointmentNo_edt.value+"'");
+	alert(this.ds_appointment.getRowCount());
+	this.ds_appointment.setColumn(0,"APPROVAL_STATUS","Y");
+	this.transaction("applyAppointment",
+				"dataURL::hr/appointment/batchPersonalAppointmentDetail.do",
+				"ds_appointment=ds_appointment:u ds_personalAppointment=ds_personalAppointment:u ds_personalAppointmentDetail=ds_personalAppointmentDetail:u gds_employee=gds_employee:u" ,
+				"",
+				"",
+				"callback",
+				false
+				);
+	
+	}
+}
+
+
+this.setEmployeeAppointment = function()			//인사기록카드에 업데이트하기 위해서 gds_employee 칼럼에 찾아서 등록하는 펑션
+{
+	tRow = this.ds_personalAppointment.getRowCount();
+	this.appointmentNo_edt.value;	
+	var tRow2 = this.ds_personalAppointmentDetail.getRowCount();
+
+	for(ac=0;ac<tRow;ac++){
+		var eNo = this.ds_personalAppointment.getColumn(ac,"EMPLOYEE_NO");
+		application.gds_employee.filter("EMP_CODE=='"+eNo+"'");
+		this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO=='"+this.appointmentNo_edt.value+"'&&EMPLOYEE_NO=='"+eNo+"'");
+		var rCount=this.ds_personalAppointmentDetail.getCaseCount("APPOINTMENT_NO=='"+this.appointmentNo_edt.value+"'")
+
+		for(cc=0; cc<rCount;cc++){
+			var en=this.ds_personalAppointmentDetail.getColumn(cc,"EMPLOYEE_NO");
+			var his=this.ds_personalAppointmentDetail.getColumn(cc,"APPOINTMENT_HISTORY");
+			var info=this.ds_personalAppointmentDetail.getColumn(cc,"APPOINTMENT_INFORMATION");
+		var subInfo = info.substr(0,3);
+			if(subInfo=='DEP'){
+				alert("DEP::::" +subInfo);
+				application.gds_employee.setColumn(0,"DEPT_CODE",info);
+			}else if(subInfo=='POS'){
+				alert("POS::::" +subInfo);
+				application.gds_employee.setColumn(0,"POSITION_CODE",info);
+			}else if(subInfo=='BRC'){
+				alert("BRC::::" +subInfo);
+				application.gds_employee.setColumn(0,"BUSINESS_PLACE_CODE",info);
+			}
+		}
+		this.ds_personalAppointmentDetail.filter("APPOINTMENT_NO=='XXX'");
+	}
+	trace(application.gds_employee.saveXML());
+}
+
+
+//발령취소
+this.cancelAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+alert(application.g_authorityCode);
+alert(application.g_deptCode);
+	var empPos=application.gds_employee.lookup("EMP_CODE",application.g_empCode,"POSITION_CODE");
+	alert(empPos);
+	if(application.g_authorityCode!='HR'){
+		alert("권한이 없습니다");
+	}
+	else if(empPos=='POS007'||empPos=='POS008'||empPos=='POS009'||empPos=='POS010'||empPos=='POS011'||empPos=='POS012'||empPos=='POS013'){
+	//else if( empPos=='POS013'){
+		alert("해당직급이 아닙니다");
+	}
+	else{
+		if(confirm("취소하면 돌이킬수 없습니다. \n정말로 발령을 취소하시겠습니까?")){
+			this.transaction("findCanceledAppointment",							//프로시저가는 트랜잭션
+						"dataURL::hr/appointment/findCanceledAppointment.do",
+						"",
+						"ds_tempAppointment=ds_tempAppointment",
+						"appointmentNo='"+this.appointmentNo_edt.value+"' appointmentDivision='"+this.appointmentDivision_combo00.value+"'",
+						"callback",
+						false
+						);	
+		}
+		else{
+		}
+	}
+}
+
+
+this.showModalDialogFunction = function (){
+			trace(this.ds_tempAppointment.saveXML());
+			this.ds_tempAppointmentSub.copyData(this.ds_tempAppointment);
+			alert("####################################");
+			alert(this.ds_tempAppointmentSub.saveXML());
+			trace("####################################");
+			var subDiglog=new ChildFrame();
+			subDiglog.set_showstatusbar(false);
+			subDiglog.init("tempAppointment","absolute",400,300,500,300,null,null,"hr_appointment::hr_TempAppointmentDialog.xfdl");
+			subDiglog.showModal("tempAppointment",this.getOwnerFrame(),{mode:'modal', ds:this.ds_tempAppointmentSub},this,'');		
+}
+
+//callback
+this.callback = function(strSvcID, nErrorCode, strErrorMsg) {
+   if(strSvcID=="applyAppointment"){
+		if(nErrorCode<0){
+			alert(strErrorMsg); 
+			this.reload();
+		}else{      
+			alert("발령이 적용되었습니다.");	
+			this.reload();
+		}
+	}
+	if(strSvcID=="findCanceledAppointment"){
+		if(nErrorCode<0){
+			alert(strErrorMsg); 
+			this.reload();
+		}else{
+			//alert(strErrorMsg+"\n발령이 정상적으로 취소되었습니다."); 
+			//this.showModalDialogFunction();	
+			trace(this.ds_tempAppointment.saveXML());
+			this.ds_tempAppointmentSub.copyData(this.ds_tempAppointment);
+			//alert("1   :::"+this.ds_tempAppointment.getRowCount());
+			var subDiglog=new ChildFrame();
+			subDiglog.set_showstatusbar(false);
+			//alert("2   :::"+this.ds_tempAppointment.getRowCount());
+			subDiglog.init("tempAppointment","absolute",400,300,500,300,null,null,"hr_appointment::hr_TempAppointmentDialog.xfdl");
+			//alert("3   :::"+this.ds_tempAppointment.getRowCount());
+			subDiglog.showModal("tempAppointment",this.getOwnerFrame(),{ds:this.ds_tempAppointmentSub},this,'');		
+			alert("발령이 취소/삭제되었습니다. \n취소내역을 확인하시기 바랍니다.");
+			this.reload();
+		}
+	}
+}
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	alert(this.ds_appointment.getRowCount());
+	this.ds_appointment.filter("APPOINTMENT_NO=='"+this.appointmentNo_edt.value+"'");
+	this.ds_personalAppointment.setColumn(0,"APPLY_STATUS","Y");
+	alert(this.ds_appointment.getRowCount());
+	
+	
+}
+]]></Script>
+  </Form>
+</FDL>

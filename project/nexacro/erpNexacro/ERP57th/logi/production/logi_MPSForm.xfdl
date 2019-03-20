@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_MPSForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="logi_MPSForm_onload">
+    <Layouts>
+      <Layout>
+        <GroupBox id="MPS_GB" taborder="0" left="1.18%" top="62" right="2.19%" height="705" titlealign="topcenter" style="font:bold 16 Dotum;"/>
+        <Tab id="MPS_tab" taborder="1" left="3.46%" top="97" right="3.8%" height="653" tabindex="0" scrollbars="autoboth" onchanged="MPS_tab_onchanged">
+          <Tabpages>
+            <Tabpage id="writeMPS_tPage" text="주생산계획(MPS)작성">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" taborder="0" text="수주목록" left="567" top="25" width="100" height="40" style="border:3 double darkslategray ;align:middle;font:한컴산뜻돋움,11,bold;"/>
+                  <Calendar id="fromDate_cal" taborder="1" left="680" top="25" width="115" height="40"/>
+                  <Calendar id="toDate_cal" taborder="2" left="824" top="25" width="115" height="40"/>
+                  <Button id="searchContract_btn" taborder="3" text="조회" left="962" top="25" width="100" height="40" style="font:한컴산뜻돋움,11,bold;" onclick="MPS_tab_writeMPS_tPage_searchContract_btn_onclick"/>
+                  <Static id="Static01" taborder="4" text="~" left="71.83%" top="26" height="40" width="45" style="border:1 none darkgray ;font:bold 20 함초롬돋움,돋움;"/>
+                  <Grid id="contractDetailManagement_grid" taborder="5" binddataset="ds_contractDetail" autoenter="select" useinputpanel="false" autofittype="col" left="2" top="77" width="1060" height="215" style="font:새굴림,11;" oncelldblclick="MPS_tab_writeMPS_tPage_contractDetailManagement_grid_oncelldblclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="50"/>
+                          <Column size="50"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="수주상세일련번호"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="수주일련번호"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="납기일"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="수량"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단가"/>
+                          <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="합계액"/>
+                          <Cell col="9" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="MPS적용여부"/>
+                          <Cell col="10" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="납품여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CONTRACT_DETAIL_NO"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CONTRACT_NO"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_CONTRACT"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DUE_DATE_OF_CONTRACT"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CONTRACT_AMOUNT"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_PRICE_OF_CONTRACT"/>
+                          <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:SUM_PRICE_OF_CONTRACT"/>
+                          <Cell col="9" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MPS_APPLY_STATUS"/>
+                          <Cell col="10" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DELIVERY_STATUS"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Grid id="mpsManagement_grid" taborder="7" binddataset="ds_mps" useinputpanel="false" autofittype="col" left="18" top="358" width="1060" height="250" style="font:새굴림,11;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="주생산계획번호"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="수주상세일련번호"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="계획일자"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="계획수량"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="납기일"/>
+                          <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="예정마감일자"/>
+                          <Cell col="9" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="MRP적용여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MPS_NO"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CONTRACT_DETAIL_NO"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_MPS"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MPS_PLAN_DATE"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MPS_PLAN_AMOUNT"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DUE_DATE_OF_MPS"/>
+                          <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:SCHEDULED_END_DATE"/>
+                          <Cell col="9" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MRP_APPLY_STATUS"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="btn_registerMps" taborder="8" text="MPS적용" left="962" top="308" width="100" height="40" style="font:한컴산뜻돋움,11,bold;" onclick="MPS_tab_writeMPS_tPage_btn_registerMps_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="checkMPS_tPage" text="MPS내역조회">
+              <Layouts>
+                <Layout>
+                  <Grid id="applyMps_grid" taborder="0" binddataset="ds_mps" useinputpanel="false" autofittype="col" left="18" top="64" width="1060" height="551" style="font:새굴림,11;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:새굴림,11,bold;" text="주생산계획번호"/>
+                          <Cell col="1" displaytype="normal" style="font:새굴림,11,bold;" text="수주상세일련번호"/>
+                          <Cell col="2" displaytype="normal" style="font:새굴림,11,bold;" text="품목코드"/>
+                          <Cell col="3" displaytype="normal" style="font:새굴림,11,bold;" text="품목명"/>
+                          <Cell col="4" displaytype="normal" style="font:새굴림,11,bold;" text="단위"/>
+                          <Cell col="5" displaytype="normal" style="font:새굴림,11,bold;" text="계획일자"/>
+                          <Cell col="6" displaytype="normal" style="font:새굴림,11,bold;" text="계획수량"/>
+                          <Cell col="7" displaytype="normal" style="font:새굴림,11,bold;" text="납기일"/>
+                          <Cell col="8" displaytype="normal" style="font:새굴림,11,bold;" text="예정마감일자"/>
+                          <Cell col="9" displaytype="normal" style="font:새굴림,11,bold;" text="MRP적용여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:새굴림,11;" text="bind:MPS_NO"/>
+                          <Cell col="1" displaytype="normal" style="font:새굴림,11;" text="bind:CONTRACT_DETAIL_NO"/>
+                          <Cell col="2" displaytype="normal" style="font:새굴림,11;" text="bind:ITEM_CODE"/>
+                          <Cell col="3" displaytype="normal" style="font:새굴림,11;" text="bind:ITEM_NAME"/>
+                          <Cell col="4" displaytype="normal" style="font:새굴림,11;" text="bind:UNIT_OF_MPS"/>
+                          <Cell col="5" displaytype="normal" style="font:새굴림,11;" text="bind:MPS_PLAN_DATE"/>
+                          <Cell col="6" displaytype="normal" style="font:새굴림,11;" text="bind:MPS_PLAN_AMOUNT"/>
+                          <Cell col="7" displaytype="normal" style="font:새굴림,11;" text="bind:DUE_DATE_OF_MPS"/>
+                          <Cell col="8" displaytype="normal" style="font:새굴림,11;" text="bind:SCHEDULED_END_DATE"/>
+                          <Cell col="9" displaytype="normal" style="font:새굴림,11;" text="bind:MRP_APPLY_STATUS"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Calendar id="fromDate_cal" taborder="1" left="669" top="12" width="115" height="40"/>
+                  <Static id="Static01" taborder="2" text="~" left="71.19%" top="13" width="45" height="40" style="border:1 none darkgray ;font:bold 20 함초롬돋움,돋움;"/>
+                  <Calendar id="toDate_cal" taborder="3" left="824" top="12" width="115" height="40"/>
+                  <Button id="searchContract_btn" taborder="4" text="조회" left="962" top="12" width="100" height="40" style="font:한컴산뜻돋움,11,bold;" position="absolute" defaultbutton="false" tooltiptype="default" onclick="MPS_tab_checkMPS_tPage_searchContract_btn_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Static id="MPS_stc" taborder="2" text="주생산계획" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_contractDetail">
+        <ColumnInfo>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="CONTRACT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="MPS_APPLY_STATUS" type="STRING" size="256"/>
+          <Column id="DELIVERY_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mps">
+        <ColumnInfo>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="SALES_PLAN_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MPS" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_DATE" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_AMOUNT" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_MPS" type="STRING" size="256"/>
+          <Column id="SCHEDULED_END_DATE" type="STRING" size="256"/>
+          <Column id="MRP_APPLY_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_stock">
+        <ColumnInfo>
+          <Column id="WAREHOUSE_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="DELIVERY_NO" type="STRING" size="256"/>
+          <Column id="PRODUCTION_RESULT_NO" type="STRING" size="256"/>
+          <Column id="INPUT_ITEM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="SAFETY_ALLOWANCE_AMOUNT" type="STRING" size="256"/>
+          <Column id="STOCK_AMOUNT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_MPSSqeNo">
+        <ColumnInfo>
+          <Column id="SEQ_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+/********************************************************************************                                                                            
+주생산계획(MPS) 관리 화면                                             						                                                                         
+@Path			물류              				   				
+@Description	주생산계획 관리를 하기 위한  폼							
+@Author	  		강호경   			                        								                                            
+@Create         2019. 02. 14.                             		                    				                                            
+********************************************************************************/
+
+//온로드
+this.logi_MPSForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//재고
+	this.transaction("findStockList",
+		"dataURL::logi/purchase/findStockList.do",
+		"",
+		"ds_stock=ds_stock",
+		"",
+		"callback",
+		true
+	);
+		
+	//수주상세 
+	this.transaction("findRangedContractDetailList",
+		"dataURL::logi/business/findRangedContractDetailList.do",
+		"",
+		"ds_contractDetail=ds_contractDetail",
+		"fromDate='"+application.today()+"' toDate='"+application.today()+"'",
+		"callback");
+	
+	//주생산계획
+	this.transaction("findMpsList",
+		"dataURL::logi/production/findMpsList.do",
+		"",
+		"ds_mps=ds_mps",
+		"fromDate='"+application.today()+"' toDate='"+application.today()+"'",
+		"callback");	
+	
+	this.ds_contractDetail.filter("MPS_APPLY_STATUS==null && DELIVERY_STATUS!='Y'");
+	this.ds_mps.filter("MPS_NO=='XX'");
+	
+	
+	application.trace(this.ds_contractDetail.getRowCount());
+}
+
+//탭 전환
+this.MPS_tab_onchanged = function(obj:Tab, e:nexacro.TabIndexChangeEventInfo)
+{
+	if(e.postindex==1){			// e.postindex로 tab 변할때 인덱스 확인
+		this.ds_mps.filter("");
+	} else {
+		this.ds_mps.filter("MPS_NO=='XX'");
+	}	
+}
+
+//수주 목록조회
+this.MPS_tab_writeMPS_tPage_searchContract_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	application.trace("조회작동");
+	application.trace("fromDate : "+this.MPS_tab.writeMPS_tPage.fromDate_cal.value);	
+	application.trace("toDate : "+this.MPS_tab.writeMPS_tPage.toDate_cal.value);	
+	this.transaction("findRangedContractDetailList",
+		"dataURL::logi/business/findRangedContractDetailList.do",
+		"",
+		"ds_contractDetail=ds_contractDetail",
+		"fromDate='"+this.MPS_tab.writeMPS_tPage.fromDate_cal.value+"' toDate='"+this.MPS_tab.writeMPS_tPage.toDate_cal.value+"'",
+		"callback");	
+	application.trace(this.ds_contractDetail.getRowCount());
+}
+
+function MakeDate(nYear, nMonth, nDate)
+{
+	var objDate = new Date(nYear, nMonth-1, nDate);
+	var sYear = objDate.getFullYear().toString();
+	var sMonth = Right("0" + (objDate.getMonth() + 1), 2);
+	var sDate = Right("0" + objDate.getDate(), 2);
+	return sYear + sMonth + sDate;
+}
+
+function AddDate(sDate, nOffset){
+	var nYear = parseInt(sDate.substr(0, 4));
+	var nMonth = parseInt(sDate.substr(4, 2));
+	var nDate = parseInt(sDate.substr(6, 2)) + nOffset;
+	return MakeDate(nYear, nMonth, nDate);
+}
+
+function Right(sOrg, nSize){
+	if( sOrg == null ){
+		return "";
+	}
+	
+	if( sOrg.length < nSize ){
+		return sOrg;
+	} else {
+		return sOrg.substr(sOrg.length-nSize, nSize);
+	}
+}
+this.squenceNo = "";
+//주생산계획 추가
+this.MPS_tab_writeMPS_tPage_contractDetailManagement_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	//======MPSNo 생성=========
+	this.transaction("takeSerialCode",
+	"dataURL::sys/findSequenceNo.do"
+	,""
+	,""
+	,"findSeq='SERIAL_SEQ'"
+	,"codeCallback"
+	,false);
+	
+	var serialCode=this.squenceNo;
+	application.trace("000"+serialCode);
+	var newNo="MPS"+serialCode;
+	application.trace(newNo);
+	//===========================
+	
+	/*
+	//======리드타임 계산======
+	this.transaction("sumStockList",
+		"dataURL::logi/purchase/findStockList.do",
+		"",
+		"ds_=ds_",
+		"",
+		"callback",
+		true
+	);		
+	//===========================
+	*/
+		
+	var rNum = e.row;
+	application.trace(rNum);
+	var itemName = this.ds_contractDetail.getColumn(rNum,"ITEM_NAME");
+	var contractAmount = this.ds_contractDetail.getColumn(rNum,"CONTRACT_AMOUNT");
+
+	var stockF = this.ds_stock.filter("ITEM_NAME=='"+itemName +"'");
+	//alert(stockF);
+	//var stockPosition = this.stockF.rowposition;
+	var stockNum =  this.ds_stock.getRowCount() - 1;
+	application.trace(stockNum);
+      
+	var stockItemName = this.ds_stock.getColumn(stockNum,"ITEM_NAME");
+	var safetyAmount = this.ds_stock.getColumn(stockNum,"SAFETY_ALLOWANCE_AMOUNT");
+	var stockAmount = this.ds_stock.getColumn(stockNum,"STOCK_AMOUNT");
+	application.trace("재고량"+stockAmount);
+	application.alert("창고 현재 재고량 " +"\n"+stockItemName + " : " + stockAmount +"개");
+	this.ds_stock.filter("");
+      
+	if(parseInt(stockAmount)-parseInt(contractAmount)>parseInt(safetyAmount)){
+		application.alert("재고있음");
+    
+		if(confirm("재고가 존재합니다."+"\n"+"납품페이지로 이동하시겠습니까?")){
+			application.gfn_Open("LOGI0204","logi_business::logi_DeliveryForm.xfdl","납품 계획");
+		} else {   
+			application.alert("생산지시");
+			this.ds_contractDetail.setColumn(rNum,"MPS_APPLY_STATUS","Y");
+			// MPS번호 생성
+			var mpsRowNum = this.ds_mps.addRow();
+		
+			var contractDateilNo = this.ds_contractDetail.getColumn(rNum,"CONTRACT_DETAIL_NO");
+			this.ds_mps.setColumn(mpsRowNum,"CONTRACT_DETAIL_NO",contractDateilNo);
+			
+			this.ds_mps.setColumn(mpsRowNum,"MPS_PLAN_CLASSIFICATION","수주");
+		
+			var itemCode = this.ds_contractDetail.getColumn(rNum,"ITEM_CODE");
+			this.ds_mps.setColumn(mpsRowNum,"ITEM_CODE",itemCode);
+		
+			var itemName = this.ds_contractDetail.getColumn(rNum,"ITEM_NAME");
+			this.ds_mps.setColumn(mpsRowNum,"ITEM_NAME",itemName);
+			
+			var unitOfMps = this.ds_contractDetail.getColumn(rNum,"UNIT_OF_CONTRACT");
+			this.ds_mps.setColumn(mpsRowNum,"UNIT_OF_MPS",unitOfMps);
+			
+			var dueDateOfMps = this.ds_contractDetail.getColumn(rNum,"DUE_DATE_OF_CONTRACT");
+			this.ds_mps.setColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);
+			
+			var dueDateOfMps = this.ds_contractDetail.getColumn(rNum,"DUE_DATE_OF_CONTRACT");
+			this.ds_mps.setColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);	
+		
+			var mpsPlanAmount = this.ds_contractDetail.getColumn(rNum,"CONTRACT_AMOUNT");
+			this.ds_mps.setColumn(mpsRowNum,"MPS_PLAN_AMOUNT",mpsPlanAmount);				
+			
+			var mpsPlanDate = dueDateOfMps-9;
+			this.ds_mps.setColumn(mpsRowNum,"MPS_PLAN_DATE",mpsPlanDate);
+			
+			var scheduledEndDate = dueDateOfMps-2;
+			this.ds_mps.setColumn(mpsRowNum,"SCHEDULED_END_DATE",scheduledEndDate);
+			
+			var day = application.today();
+	
+			this.ds_mps.setColumn(mpsRowNum,"MPS_NO",newNo);
+			
+			this.ds_contractDetail.filter("MPS_APPLY_STATUS!='Y' && DELIVERY_STATUS!='Y'");	
+			this.MPS_tab.writeMPS_tPage.contractDetailManagement_grid.setCellPos(1);	
+		}	
+	} else {
+		application.alert("재고 부족");
+		this.ds_contractDetail.setColumn(rNum,"MPS_APPLY_STATUS","Y");
+		// MPS번호 생성
+		var mpsRowNum = this.ds_mps.addRow();
+
+		var contractDateilNo = this.ds_contractDetail.getColumn(rNum,"CONTRACT_DETAIL_NO");
+		this.ds_mps.setColumn(mpsRowNum,"CONTRACT_DETAIL_NO",contractDateilNo);
+	
+		this.ds_mps.setColumn(mpsRowNum,"MPS_PLAN_CLASSIFICATION","수주");
+		
+		var itemCode = this.ds_contractDetail.getColumn(rNum,"ITEM_CODE");
+		this.ds_mps.setColumn(mpsRowNum,"ITEM_CODE",itemCode);
+		
+		var itemName = this.ds_contractDetail.getColumn(rNum,"ITEM_NAME");
+		this.ds_mps.setColumn(mpsRowNum,"ITEM_NAME",itemName);
+		
+		var unitOfMps = this.ds_contractDetail.getColumn(rNum,"UNIT_OF_CONTRACT");
+		this.ds_mps.setColumn(mpsRowNum,"UNIT_OF_MPS",unitOfMps);
+		
+		var dueDateOfMps = this.ds_contractDetail.getColumn(rNum,"DUE_DATE_OF_CONTRACT");
+		this.ds_mps.setColumn(mpsRowNum,"DUE_DATE_OF_MPS",dueDateOfMps);	
+		
+		var mpsPlanAmount = this.ds_contractDetail.getColumn(rNum,"CONTRACT_AMOUNT");
+		this.ds_mps.setColumn(mpsRowNum,"MPS_PLAN_AMOUNT",mpsPlanAmount);	
+		
+	
+		var mpsPlanDate = AddDate(dueDateOfMps,-9);
+		this.ds_mps.setColumn(mpsRowNum,"MPS_PLAN_DATE",mpsPlanDate);
+		
+		var scheduledEndDate = AddDate(dueDateOfMps,-2);
+		this.ds_mps.setColumn(mpsRowNum,"SCHEDULED_END_DATE",scheduledEndDate);
+
+		var day = application.today();
+	
+		this.ds_mps.setColumn(mpsRowNum,"MPS_NO",newNo);
+			
+		this.ds_contractDetail.filter("MPS_APPLY_STATUS!='Y' && DELIVERY_STATUS!='Y'");		
+		this.MPS_tab.writeMPS_tPage.contractDetailManagement_grid.setCellPos(1);    		
+	}
+}
+
+
+//MPS적용
+this.MPS_tab_writeMPS_tPage_btn_registerMps_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("MPS를 등록하시겠습니까?")){
+		this.transaction(
+		"registerMps",
+		"dataURL::logi/production/registerMps.do",
+		"ds_mps=ds_mps:u ds_contractDetail=ds_contractDetail:u",
+		"",
+		"",
+		"callback",
+		false);
+	}
+
+	this.ds_mps.filter("MPS_NO=='XX'");	
+}
+
+
+
+//MPS조회
+this.MPS_tab_checkMPS_tPage_searchContract_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.transaction("findMpsList",
+		"dataURL::logi/production/findMpsList.do",
+		"",
+		"ds_mps=ds_mps",
+		"fromDate='"+this.MPS_tab.checkMPS_tPage.fromDate_cal.value+"' toDate='"+this.MPS_tab.checkMPS_tPage.toDate_cal.value+"'",
+		"callback"
+		);	
+}
+
+
+//콜백
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid=="findStockList" || trid=="findRangedContractDetailList" || trid=="findMpsList"){
+		if(ErrorCode<0){
+			application.alert("온로드 실패");
+		} else {	
+		
+		}
+	} else if(trid=="findContractDetailList"){
+		if(ErrorCode<0){
+			application.alert("조회 실패");
+		} else {	
+			//application.alert("조회 성공");		
+		}	
+	} else if(trid=="registerMps"){
+		if(ErrorCode<0){
+			application.alert("적용 실패");
+		} else {	
+			application.alert("적용 완료");		
+		}	
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.CompanyDAO">
+
+<!-- ComapnyDAO -->
+
+	<resultMap type="companyTO" id="companyResult">
+	<result property="companyCode" column="COMPANY_CODE"/>
+	<result property="companyName" column="COMPANY_NAME"/>
+	<result property="companyDivision" column="COMPANY_DIVISION"/>
+	<result property="businessLicenseNumber" column="BUSINESS_LICENSE_NUMBER"/>
+	<result property="corporationLicenseNumber" column="CORPORATION_LICENSE_NUMBER"/>
+	<result property="companyCeoName" column="COMPANY_CEO_NAME"/>
+	<result property="companyBusinessConditions" column="COMPANY_BUSINESS_CONDITIONS"/>
+	<result property="companyBusinessItems" column="COMPANY_BUSINESS_ITEMS"/>
+	<result property="companyZipCode" column="COMPANY_ZIP_CODE"/>
+	<result property="companyBasicAddress" column="COMPANY_BASIC_ADDRESS"/>
+	<result property="companyDetailAddress" column="COMPANY_DETAIL_ADDRESS"/>
+	<result property="companyTelNumber" column="COMPANY_TEL_NUMBER"/>
+	<result property="companyFaxNumber" column="COMPANY_FAX_NUMBER"/>
+	<result property="companyEstablishmentDate" column="COMPANY_ESTABLISHMENT_DATE"/>
+	<result property="companyOpenDate" column="COMPANY_OPEN_DATE"/>
+
+	</resultMap>
+
+
+ 	<select id="selectCompanyList" resultMap="companyResult">
+
+		SELECT COMPANY_CODE,
+			COMPANY_NAME,
+			COMPANY_DIVISION,
+			BUSINESS_LICENSE_NUMBER,
+			CORPORATION_LICENSE_NUMBER,
+			COMPANY_CEO_NAME,
+			COMPANY_BUSINESS_CONDITIONS,
+			COMPANY_BUSINESS_ITEMS,
+			COMPANY_ZIP_CODE,
+			COMPANY_BASIC_ADDRESS,
+			COMPANY_DETAIL_ADDRESS,
+			COMPANY_TEL_NUMBER,
+			COMPANY_FAX_NUMBER,
+			COMPANY_ESTABLISHMENT_DATE,
+			COMPANY_OPEN_DATE
+			FROM COMPANY
+			ORDER BY COMPANY_CODE
+
+
+	</select>
+	
+		<update id="updateCompanyInfo" parameterType="companyTO">
+		
+	       UPDATE
+	             COMPANY
+	       SET
+	            COMPANY_CODE = #{companyCode},
+				COMPANY_NAME = #{companyName},
+				COMPANY_DIVISION = #{companyDivision},
+				BUSINESS_LICENSE_NUMBER = #{businessLicenseNumber},
+				CORPORATION_LICENSE_NUMBER = #{corporationLicenseNumber},
+				COMPANY_CEO_NAME = #{companyCeoName},
+				COMPANY_BUSINESS_CONDITIONS = #{companyBusinessConditions},
+				COMPANY_BUSINESS_ITEMS = #{companyBusinessItems},
+				COMPANY_ZIP_CODE = #{companyZipCode},
+				COMPANY_BASIC_ADDRESS = #{companyBasicAddress},
+				COMPANY_DETAIL_ADDRESS = #{companyDetailAddress},
+				COMPANY_TEL_NUMBER = #{companyTelNumber},
+				COMPANY_FAX_NUMBER = #{companyFaxNumber},
+				COMPANY_ESTABLISHMENT_DATE = #{companyEstablishmentDate},
+				COMPANY_OPEN_DATE = #{companyOpenDate}
+	       WHERE
+	            COMPANY_CODE = #{companyCode}
+
+
+	</update>
+	
+</mapper>

@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_basicWorktimeManagementForm" left="0" top="0" width="1185" height="785" titletext="hr_basicWorktimeManagementForm" onload="hr_basicWorktimeManagementForm_onload">
+    <Layouts>
+      <Layout>
+        <GroupBox id="serch_gb" text="검색" taborder="1" left="19.66%" top="80" right="18.31%" height="180" titlealign="topcenter"/>
+        <GroupBox id="workTime_gb" text="근무시간" taborder="2" left="19.66%" top="270" right="18.14%" height="470" titlealign="topcenter"/>
+        <Static id="Static00" taborder="3" text="기본 근무시간 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="applyYearSelect_stc" taborder="4" text="적용년도 선택" left="27%" top="155" right="57.97%" height="45"/>
+        <Static id="applyYear_stc" taborder="5" text="적용년도" left="27%" top="302" right="57.89%" height="45"/>
+        <Static id="attendTime_stc" taborder="6" text="출근시각" left="27%" top="352" right="57.89%" height="45"/>
+        <Static id="quitTime_stc" taborder="7" text="퇴근시각" left="27%" top="402" right="57.89%" height="45"/>
+        <Static id="lunchStartTime_stc" taborder="8" text="점심시작시각" left="27%" top="452" right="57.89%" height="45"/>
+        <Static id="lunchEndTime_stc" taborder="9" text="점심종료시각" left="27%" top="502" right="57.89%" height="45"/>
+        <Static id="overTime_stc" taborder="10" text="연장시각" left="27%" top="552" right="57.89%" height="45"/>
+        <Static id="nightTime_stc" taborder="11" text="심야시각" left="27%" top="602" right="57.89%" height="50"/>
+        <Edit id="applyYear_edt" taborder="12" left="43.63%" top="302" height="45" width="200" style=":disabled {align:center middle;}" enable="false"/>
+        <MaskEdit id="attendTime_mEdit" taborder="13" left="43.63%" top="352" height="45" width="200" enable="false" type="string" style=":disabled {align:center middle;}" mask="##:##"/>
+        <MaskEdit id="quitTime_mEdit" taborder="14" left="43.63%" top="402" width="200" height="45" enable="false" type="string" style=":disabled {align:center middle;}" mask="##:##"/>
+        <MaskEdit id="lunchStartTime_mEdit" taborder="15" left="43.63%" top="452" width="200" height="45" enable="false" type="string" style=":disabled {align:center middle;}" mask="##:##"/>
+        <MaskEdit id="lunchEndTime_mEdit" taborder="16" left="43.63%" top="502" width="200" height="45" enable="false" type="string" style=":disabled {align:center middle;}" mask="##:##"/>
+        <MaskEdit id="overTime_mEdit" taborder="17" left="43.63%" top="552" width="200" height="45" enable="false" type="string" style=":disabled {align:center middle;}" mask="##:##"/>
+        <MaskEdit id="nightTime_mEdit" taborder="18" left="43.63%" top="602" width="200" height="45" enable="false" type="string" style=":disabled {align:center middle;}" mask="##:##"/>
+        <Combo id="applyYear_combo" taborder="19" left="43.63%" top="155" height="45" width="200" innerdataset="@gds_baseYear" codecolumn="YEAR" datacolumn="YEAR" onitemchanged="applyYear_combo_onitemchanged"/>
+        <Button id="serch_btn" taborder="20" text="검  색" left="63.63%" top="131" height="45" width="130" onclick="serch_btn_onclick"/>
+        <Button id="register_btn" taborder="21" text="등  록" left="63.63%" top="195" height="45" width="130" onclick="register_btn_onclick" enable="false"/>
+        <Button id="save_btn" taborder="22" text="저  장" left="63.46%" top="602" height="45" width="130" onclick="save_btn_onclick"/>
+        <Static id="Static09" taborder="23" text=" ※저녁시간은 1시간이며, 퇴근시각 이후부터 저녁시간입니다." left="27%" top="663" right="25.4%" height="50" onclick="Static09_onclick" style="color:red;align:left middle;"/>
+        <Button id="cancel_btn" taborder="24" text="취소" left="63.63%" top="302" height="45" width="130" onclick="cancel_btn_onclick"/>
+        <Button id="delete_btn" taborder="25" text="삭제" left="63.46%" top="552" height="45" width="130" onclick="delete_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="applyYear_combo" propid="value" datasetid="gds_baseYear" columnid=""/>
+      <BindItem id="item1" compid="attendTime_mEdit" propid="value" datasetid="ds_baseWorkTime" columnid="ATTEND_TIME"/>
+      <BindItem id="item2" compid="quitTime_mEdit" propid="value" datasetid="ds_baseWorkTime" columnid="QUIT_TIME"/>
+      <BindItem id="item3" compid="lunchStartTime_mEdit" propid="value" datasetid="ds_baseWorkTime" columnid="LUNCH_START_TIME"/>
+      <BindItem id="item4" compid="lunchEndTime_mEdit" propid="value" datasetid="ds_baseWorkTime" columnid="LUNCH_END_TIME"/>
+      <BindItem id="item5" compid="overTime_mEdit" propid="value" datasetid="ds_baseWorkTime" columnid="OVER_TIME"/>
+      <BindItem id="item6" compid="nightTime_mEdit" propid="value" datasetid="ds_baseWorkTime" columnid="NIGHT_TIME"/>
+      <BindItem id="item7" compid="applyYear_edt" propid="value" datasetid="ds_baseWorkTime" columnid="APPLY_YEAR"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_baseWorkTime">
+        <ColumnInfo>
+          <Column id="APPLY_YEAR" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="OVER_TIME" type="STRING" size="256"/>
+          <Column id="NIGHT_TIME" type="STRING" size="256"/>
+          <Column id="LUNCH_START_TIME" type="STRING" size="256"/>
+          <Column id="LUNCH_END_TIME" type="STRING" size="256"/>
+          <Column id="DINNER_START_TIME" type="STRING" size="256"/>
+          <Column id="DINNER_END_TIME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+기본근무시간 관리 화면                                             						                                                                         
+@Path			인사              				   				
+@Description	기본 근무시간을 관리하기 위한  폼							
+@Author	  		손창우   			                        								                                            
+@Create         2019. 02. 15.                             		                    				                                            
+********************************************************************************/
+
+var dataLength;
+var presentYear;
+var choiceYear;
+
+
+this.hr_basicWorktimeManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findBasicWorkTimeList",
+					"dataURL::hr/circumstance/findBaseWorkTimeList.do",
+					"",
+					"ds_baseWorkTime=dsBaseWorkTime",
+					"",
+					"callback",
+					false);
+	this.applyYear_combo.set_value(application.today().toString().substr(0,4));
+	this.ds_baseWorkTime.filter("APPLY_YEAR==0");
+	
+	
+}
+
+
+this.serch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{  
+
+	this.ds_baseWorkTime.filter("APPLY_YEAR=='0'");
+	this.ds_baseWorkTime.filter("APPLY_YEAR=='"+this.applyYear_combo.value+"'");
+	this.ds_baseWorkTime.set_rowposition(0);	
+	
+	presentYear = String(application.g_today).substr(0,4);
+	choiceYear = this.applyYear_combo.value;	
+	dataLength=this.ds_baseWorkTime.getRowCount();
+		if(dataLength==0){
+			this.register_btn.set_enable(true);
+				alert("조회정보가 없습니다 \n등록버튼을 눌러 해당년도의 기본근무시간을 등록해 주세요");
+
+			}else{
+				
+				this.register_btn.set_enable(false);
+				this.attendTime_mEdit.set_enable(false);
+				this.quitTime_mEdit.set_enable(false);
+				this.lunchStartTime_mEdit.set_enable(false);
+				this.lunchEndTime_mEdit.set_enable(false);
+				this.overTime_mEdit.set_enable(false);
+				this.nightTime_mEdit.set_enable(false);
+		}
+}
+
+
+this.register_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	this.attendTime_mEdit.set_enable(true);
+	this.quitTime_mEdit.set_enable(true);
+	this.lunchStartTime_mEdit.set_enable(true);
+	this.lunchEndTime_mEdit.set_enable(true);
+	this.overTime_mEdit.set_enable(true);
+	this.nightTime_mEdit.set_enable(true);				
+	
+				this.ds_baseWorkTime.filter("");
+				this.ds_baseWorkTime.addRow();
+				this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"APPLY_YEAR",this.applyYear_combo.value)
+
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+
+		if(dataLength==0){this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"ATTEND_TIME",this.attendTime_mEdit.value)
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"QUIT_TIME",this.quitTime_mEdit.value)
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"LUNCH_START_TIME",this.lunchStartTime_mEdit.value)
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"LUNCH_END_TIME",this.lunchEndTime_mEdit.value)	
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"OVER_TIME",this.overTime_mEdit.value)
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"NIGHT_TIME",this.nightTime_mEdit.value)
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"DINNER_START_TIME",this.quitTime_mEdit.value);
+					this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"DINNER_END_TIME",this.overTime_mEdit.value);
+			
+				this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"DINNER_START_TIME",this.quitTime_mEdit.value)
+				this.ds_baseWorkTime.setColumn(this.ds_baseWorkTime.rowposition,"DINNER_END_TIME",this.overTime_mEdit.value)
+
+			this.transaction(
+				"addBasicWorkTimeList",
+				"dataURL::hr/circumstance/addBaseWorkTime.do",
+				"dsBaseWorkTime=ds_baseWorkTime:u",
+				"ds_baseWorkTime=dsBaseWorkTime",
+				"",
+				"callbackFunction",
+				true);
+
+		
+	}
+						
+}
+
+
+this.cancel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	this.reload();
+}
+
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var objDate=new Date();
+	var presentYear=nexacro.toNumber(objDate.getFullYear());				
+	var choiceYear=nexacro.toNumber(this.applyYear_combo.text);
+	var baseWorkTimeRemove=this.ds_baseWorkTime.getRowCount();
+
+			if(presentYear<choiceYear){
+				if(confirm(this.applyYear_combo.value+"년도 항목을 삭제하시겠습니까?")){
+					for(b=baseWorkTimeRemove; b>=0; b--){
+						this.ds_baseWorkTime.deleteRow(b);
+						
+					}
+					this.transaction("removeBaseWorkTime"
+							,"dataURL::hr/circumstance/removeBaseWorkTime.do"
+							,"dsBaseWorkTime=ds_baseWorkTime:u"
+							,"ds_baseWorkTime=dsBaseWorkTime"
+							,""
+							,"callbackFunction");				
+				}
+
+			}else{
+				alert("이전연도는 삭제할수 없습니다.\n정보기술팀으로 문의바랍니다.");
+			}
+							
+	}
+				
+
+this.callbackFunction=function(strSvcID, nErrorCode, strErrorMag){
+
+   if(strSvcID=="addBasicWorkTimeList"){
+      if(nErrorCode!=0){
+         alert(strErrorMag);
+      }else{
+         alert("완료되었습니다.");
+         this.reload();
+      }
+   }
+   
+     if(strSvcID=="removeBaseWorkTime"){
+      if(nErrorCode!=0){
+         alert(strErrorMag);
+      }else{
+         alert("완료되었습니다.");
+         this.reload();
+      }
+   }
+}
+
+
+
+
+
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

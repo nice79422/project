@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="estimate">
+
+	<typeAlias alias="EstimateBean"
+		type="com.test.logistics.business.to.EstimateBean" />
+	<resultMap id="EstimateResult" class="EstimateBean">
+		<result property="estimateCode" column="ESTIMATE_CODE" />
+		<result property="estimateDate" column="ESTIMATE_DATE" />
+		<result property="clientCode" column="CLIENT_CODE" />
+		<result property="contractStatus" column="CONTRACT_STATUS" />
+		<result property="standByStatus" column="STANDBY_STATUS" />
+	</resultMap>
+
+
+
+	<typeAlias alias="EstimateDetailBean"
+		type="com.test.logistics.business.to.EstimateDetailBean" />
+	<resultMap id="EstimateDetailResult" class="EstimateDetailBean">
+		<result property="estimateDetailCode" column="ESTIMATE_DETAIL_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="estimateCode" column="ESTIMATE_CODE" />
+		<result property="estimateAmount" column="ESTIMATE_AMOUNT" />
+		<result property="estimateDetailUnitPrice" column="ESTIMATE_DETAIL_UNIT_PRICE" />
+
+	</resultMap>
+
+
+	<resultMap id="EstimateDetailListResult" class="EstimateDetailBean">
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="estimateAmount" column="ESTIMATE_AMOUNT" />
+		<result property="clientCode" column="CLIENT_CODE" />
+	</resultMap>
+
+
+
+
+	<typeAlias alias="EstimateReportBean"
+		type="com.test.logistics.business.to.EstimateReportBean" />
+	<resultMap id="EstimateReportResult" class="EstimateReportBean">
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="clientName" column="CLIENT_NAME" />
+		<result property="estimateCode" column="ESTIMATE_CODE" />
+		<result property="estimateDetailCode" column="ESTIMATE_DETAIL_CODE" />
+		<result property="estimateDate" column="ESTIMATE_DATE" />
+		<result property="estimateAmount" column="ESTIMATE_AMOUNT" />
+		<result property="estimatePrice" column="ESTIMATE_DETAIL_UNIT_PRICE" />
+		<result property="estimateSum" column="ESTIMATE_SUM" />
+	</resultMap>
+
+
+
+	<select id="selectEstimateReviewList" resultMap="EstimateResult">
+    <![CDATA[
+		SELECT *
+		FROM ESTIMATE
+		WHERE ESTIMATE_DATE BETWEEN #startDate# AND #endDate#
+		ORDER BY ESTIMATE_CODE DESC
+    ]]>
+	</select>
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			ESTIMATE
+    ]]>
+	</select>
+
+	<select id="selectEstimate" resultMap="EstimateResult">
+    <![CDATA[
+		SELECT * 
+		FROM ESTIMATE
+		ORDER BY ESTIMATE_CODE
+    ]]>
+	</select>
+
+	<select id="selectEstimateDetail" resultMap="EstimateDetailListResult">
+    <![CDATA[
+	SELECT 
+	  d.ITEM_CODE
+	, d.ESTIMATE_AMOUNT
+	, e.CLIENT_CODE 
+	FROM ESTIMATE e ,ESTIMATE_DETAIL d
+	WHERE e.ESTIMATE_CODE=d.ESTIMATE_CODE 
+	AND e.CONTRACT_STATUS='N'                      
+	AND e.ESTIMATE_CODE= #estimateCode#                    
+    ]]>
+	</select>
+
+
+
+
+	<insert id="insertEstimate" parameterClass="EstimateBean">
+    <![CDATA[
+		INSERT INTO ESTIMATE VALUES
+       (
+          #estimateCode#
+        , #estimateDate#
+        , #clientCode#
+        , #contractStatus#
+        , #standByStatus#
+       )
+    ]]>
+	</insert>
+
+	<select id="selectEstimateList" resultMap="EstimateResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT 
+	  ESTIMATE_CODE
+	, ESTIMATE_DATE
+	, CONTRACT_STATUS
+	, CLIENT_CODE
+	FROM ESTIMATE
+ 	WHERE ROWNUM BETWEEN #startRow# AND #endRow#
+ 	ORDER BY ESTIMATE_CODE 
+    ]]>
+	</select>
+
+
+	<update id="updateEstimate" parameterClass="EstimateBean">
+	 <![CDATA[
+			UPDATE ESTIMATE
+		       SET CONTRACT_STATUS='Y'
+			 WHERE ESTIMATE_CODE= #estimateCode#
+ 	 ]]>
+	</update>
+
+
+
+	<select id="selectEstimateReport" resultMap="EstimateReportResult"
+		parameterClass="String">
+    <![CDATA[
+	SELECT e.ESTIMATE_CODE, ei.ESTIMATE_DETAIL_CODE, ei.ITEM_CODE, i.ITEM_NAME, v.CLIENT_NAME, e.ESTIMATE_DATE,     
+ 	ei.ESTIMATE_AMOUNT, ei.ESTIMATE_DETAIL_UNIT_PRICE, ei.ESTIMATE_AMOUNT*ei.ESTIMATE_DETAIL_UNIT_PRICE ESTIMATE_SUM
+	FROM ESTIMATE e , ESTIMATE_DETAIL ei, CLIENT v, ITEM i WHERE e.ESTIMATE_CODE = ei.ESTIMATE_CODE                 
+	AND v.CLIENT_CODE = e.CLIENT_CODE AND i.item_code = ei.ITEM_CODE AND e.ESTIMATE_CODE = #estimateCode#
+    ]]>
+	</select>
+
+
+	<select id="selectEstimateDetailCount" resultClass="int">
+    <![CDATA[
+		SELECT COUNT(*) FROM ESTIMATE_DETAIL
+    ]]>
+	</select>
+
+
+	<select id="selectEstimateDetailRowCount" resultClass="int"
+		parameterClass="String">
+    <![CDATA[
+		SELECT COUNT(*) FROM ESTIMATE_DETAIL WHERE ESTIMATE_CODE= #searchCode#
+    ]]>
+	</select>
+
+
+	<select id="selectEstimateDetailList" resultMap="EstimateDetailResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT *
+	FROM ( SELECT ROW_NUMBER() OVER (ORDER BY ESTIMATE_DETAIL_CODE ) RN                                        
+    , ESTIMATE_DETAIL_CODE                       
+    , ITEM_CODE                                  
+    , ESTIMATE_CODE                              
+    , ESTIMATE_AMOUNT                            
+    , ESTIMATE_DETAIL_UNIT_PRICE                 
+    FROM ESTIMATE_DETAIL                         
+    WHERE ESTIMATE_CODE = #estimateCode# )        
+	WHERE RN BETWEEN #startRow# AND #endRow#           
+    ]]>
+	</select>
+
+	<insert id="insertEstimateDetail" parameterClass="EstimateDetailBean">
+    <![CDATA[
+		INSERT INTO ESTIMATE_DETAIL VALUES
+       (
+           #estimateCode#||'-'||lpad(ESTIMATE_DETAIL_CODE_SEQ.NEXTVAL,5,'00000')
+         , #itemCode#
+         , #estimateCode#
+         , #estimateAmount#
+       	 , #estimateDetailUnitPrice#
+       )
+    ]]>
+	</insert>
+
+	<update id="updateEstimateDetail" parameterClass="EstimateDetailBean">
+	<![CDATA[
+	UPDATE CONTRACT_DETAIL
+    SET MPS_STATUS='Y'
+ 	WHERE CONTRACT_DETAIL_CODE= #estimateDetailCode#
+ 	]]>
+	</update>
+
+	<update id="updateStandByEstimate" parameterClass="EstimateBean">
+	 <![CDATA[
+	UPDATE ESTIMATE
+	SET STANDBY_STATUS='Y'
+ 	WHERE ESTIMATE_CODE=#estimateCode#
+ 	]]>
+	</update>
+</sqlMap>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="unCloseDailyAttdDialog" left="0" top="0" width="500" height="645" titletext="New Form" onload="unCloseDailyAttdDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="unCloseDailyAttdDialog_stc" taborder="0" text="일근태 미마감 목록" onclick="annualApplication_stc_onclick" left="4.8%" top="18" right="5.8%" height="45"/>
+        <Static id="standardYear_stc" taborder="1" text="기준년월" onclick="Static00_onclick" left="22.2%" top="79" right="55.2%" height="25"/>
+        <MaskEdit id="baseYearMonth_mEdit" taborder="2" type="string" mask="####-##" left="223" top="79" width="167" height="25" style="align:center middle;"/>
+        <Static id="Static02" taborder="6" text="※일근태만 한번에 마감 가능※&#13;&#10;※근태외 / 연차(휴가)의 경우 해당 일자들 각각 마감 할 것!※" left="26" top="570" width="446" height="62" style="background:cornsilk;color:#ff0000ff;"/>
+        <Grid id="Grid00" taborder="7" useinputpanel="false" left="4%" top="172" right="3.8%" height="388" binddataset="ds_unCloseDailyAttd" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="144"/>
+                <Column size="84"/>
+                <Column size="113"/>
+                <Column size="119"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="기준일자"/>
+                <Cell col="1" text="요일"/>
+                <Cell col="2" text="마감여부"/>
+                <Cell col="3" text="근무일 구분"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:BASIC_DAY" mask="####-##-##"/>
+                <Cell col="1" text="bind:DAILY"/>
+                <Cell col="2" text="bind:CLOSE_YN"/>
+                <Cell col="3" displaytype="combo" text="bind:ATTD_DAY_TYPE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="allClose_btn" taborder="8" text="전체마감" left="8%" top="121" right="68.8%" height="30" onclick="allClose_btn_onclick"/>
+        <Button id="save_btn" taborder="9" text="저장" left="38.4%" top="121" right="38.4%" height="30" onclick="save_btn_onclick"/>
+        <Button id="findMonthAttd_btn" taborder="10" text="조회" left="68%" top="121" right="8.8%" height="30" onclick="findMonthAttd_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_attdDayType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_unCloseDailyAttd">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="DAILY" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="ATTEND_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="LEAVE_TIME" type="STRING" size="256"/>
+          <Column id="RETURN_TIME" type="STRING" size="256"/>
+          <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="CLOSE_YN" type="STRING" size="256"/>
+          <Column id="ATTD_DAY_TYPE" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_TIME" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+일근태 미마감 목록 다이얼로그 화면                                             						                                                                         
+@Path		인사              				   				
+@Description	일근태 미마감 목록확인하기 위한  폼							
+@Author	  	김민서				    			                        								                                            
+@Create           2019. 02. 20.                             		                    				                                            
+********************************************************************************/
+
+
+//로딩 시
+this.unCloseDailyAttdDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+
+	this.baseYearMonth_mEdit.set_value(this.opener.selYear_cmb.value+this.opener.selMonth_cmb.value); 
+	//this.ds_detailCode.filter("");
+	this.transaction("findCodeList",
+					"dataURL::sys/findCodeList.do",
+					"",
+					"gds_code=ds_code",
+					"",
+					"callback"
+					);
+					
+	this.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"gds_codeDetail=gds_codeDetail",
+					"",
+					"callback"
+					);
+	this.transaction("findUnClosedDailyAttdReport",
+					"dataURL::hr/attendance/findUnClosedDailyAttdReport.do",
+					"",
+					"ds_unCloseDailyAttd=ds_dailyAttdReport",
+					"baseYearMonth=" +(this.baseYearMonth_mEdit.value),
+					"callback",
+					false);	
+													
+	application.gds_codeDetail.filter("DETAIL_CODE=='AQC008' || DETAIL_CODE=='AQC009' || DETAIL_CODE=='AQC010'");//휴무,휴일,정상근무일
+	this.ds_attdDayType.copyData(application.gds_codeDetail,true);			
+	//this.ds_unCloseDailyAttd.copyData(application.gds_codeDetail,true);	
+}
+
+
+//전체마감 
+this.allClose_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		for(var index = 0; index < this.ds_unCloseDailyAttd.rowcount; index++) {
+		this.ds_unCloseDailyAttd.setColumn(index,"CLOSE_YN","Y");
+	}	
+}
+
+//저장 시
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	alert(this.ds_unCloseDailyAttd.getColumn(0,"BASIC_DAY"));
+	this.transaction(
+				"batchDailyAttdCloseYN",
+				"dataURL::hr/attendance/batchDailyAttdCloseYN.do",
+				"ds_dailyAttdReport=ds_unCloseDailyAttd:u",
+				"ds_unCloseDailyAttd=ds_dailyAttdReport",
+				"",
+				"callback"
+			);
+}
+
+//조회시 
+this.findMonthAttd_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		if(confirm(" 현재 기준년월로 조회하시겠습니까? ")){
+		this.opener.findMonthAttdReport();
+		this.close();
+
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

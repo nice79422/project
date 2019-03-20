@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="authority">
+    <typeAlias alias="menuAuthorityBean" type="com.test4th.base.to.MenuAuthorityBean"/>
+	
+	<resultMap id="menuAuthorityResult" class="menuAuthorityBean">
+        <result property="authorityCode" column="AUTHORITY_CODE"/>
+        <result property="menuCode" column="MENU_CODE"/>
+        <result property="menuName" column="MENU_NAME"/>
+        <result property="authorityName" column="AUTHORITY_NAME"/>
+    </resultMap>
+    
+    <typeAlias alias="authorityBean" type="com.test4th.base.to.AuthorityBean"/>
+    <resultMap id="authorityResult" class="authorityBean">
+        <result property="authorityCode" column="AUTHORITY_CODE"/>
+        <result property="authorityName" column="AUTHORITY_NAME"/>
+    </resultMap>
+
+ 
+	<!-- 권한에 따른 메뉴를 가져오는 메서드 -->
+	<select id="selectMenuAuthorityList" resultMap="menuAuthorityResult" parameterClass="String">
+
+			SELECT  MA.AUTHORITY_CODE,
+				    MA.AUTHORITY_NAME,
+				    MA.MENU_CODE,
+				    M.MENU_NAME				
+            FROM MENU M,
+                MENU_AUTHORITY MA
+            WHERE M.MENU_CODE=MA.MENU_CODE
+            AND MA.AUTHORITY_CODE=#authorityCode#
+ 
+	</select>
+	
+	
+	 <!-- 모든 권한을 가져오는 메서드 -->
+    <select id="selectAuthorityList" resultMap="authorityResult">
+    <![CDATA[
+        SELECT * FROM AUTHORITY
+    ]]>
+    </select>
+
+    
+    <!-- 모든 권한에 따른 메뉴를 가져오는 메서드 -->
+    <select id="selectMenuAuthorityListAll" resultMap="menuAuthorityResult">
+	<![CDATA[
+        SELECT
+        	ma.AUTHORITY_CODE,
+        	ma.MENU_CODE,
+        	m.MENU_NAME,
+        	a.AUTHORITY_NAME
+		FROM
+			MENU_AUTHORITY ma,
+			MENU m,
+			AUTHORITY a
+		WHERE ma.MENU_CODE=m.MENU_CODE
+		AND a.AUTHORITY_CODE=ma.AUTHORITY_CODE
+ 	]]>
+    </select>
+
+
+	<!-- 권한을 추가해주는 메서드 -->
+    <insert id="insertAuthority" parameterClass="authorityBean">
+    <![CDATA[
+		INSERT INTO 
+		AUTHORITY
+        (
+        AUTHORITY_CODE,
+        AUTHORITY_NAME
+        )
+        VALUES( #authorityCode#, #authorityName# )
+	]]>
+    </insert>
+
+	<!-- 권한을 수정하는 메서드 -->
+    <update id="updateAuthority" parameterClass="authorityBean">
+	<![CDATA[
+		UPDATE AUTHORITY
+		SET AUTHORITY_NAME = #authorityName#
+		WHERE AUTHORITY_CODE = #authorityCode#
+	]]>
+	</update>
+
+
+	<!-- 권한을 삭제하는 메서드 -->
+	<delete id="deleteAuthority" parameterClass="authorityBean">
+	<![CDATA[
+        DELETE FROM AUTHORITY
+        WHERE AUTHORITY_CODE  = #authorityCode#
+	]]>		
+	</delete>
+	
+	<!-- 권한에 따른 메뉴를 추가하는 메서드 -->
+    <insert id="insertMenuAuthority" parameterClass="menuAuthorityBean">
+	<![CDATA[
+        INSERT INTO 
+        MENU_AUTHORITY
+        (
+        MENU_CODE,
+        AUTHORITY_CODE
+        )
+        VALUES ( #menuCode#, #authorityCode# )
+	]]>
+    </insert>
+
+	<!--  권한에 따른 메뉴를 삭제하는 메서드  -->
+    <delete id="deleteMenuAuthority" parameterClass="menuAuthorityBean">
+	<![CDATA[
+        DELETE FROM MENU_AUTHORITY
+        WHERE MENU_CODE = #menuCode#
+        AND AUTHORITY_CODE  = #authorityCode#
+	]]>
+    </delete>
+
+</sqlMap>

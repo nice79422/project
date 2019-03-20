@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="MrpDialog" left="0" top="0" width="1025" height="490" titletext="New Form" onload="MrpDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="mrp_grid2" taborder="0" binddataset="ds_mrpOpenTemp" useinputpanel="false" autofittype="col" left="10" top="20" width="1002" height="461" oncelldblclick="mrp_grid2_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="46"/>
+                <Column size="58"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="73"/>
+                <Column size="70"/>
+                <Column size="70"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="주생산계획번호"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="BOM번호"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품복분류"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="계획수량"/>
+                <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="발주일자"/>
+                <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="소요일자"/>
+                <Cell col="9" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="누적손실율"/>
+                <Cell col="10" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="계산수량"/>
+                <Cell col="11" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="필요수량"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MPS_NO"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:BOM_NO"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CLASSIFICATION"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_MRP"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:PLAN_AMOUNT"/>
+                <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_DATE"/>
+                <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:REQUIRED_DATE"/>
+                <Cell col="9" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:TOTAL_LOSS_RATE"/>
+                <Cell col="10" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CACULATED_AMOUNT"/>
+                <Cell col="11" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:REQUIRED_AMOUNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_mrpOpenTemp">
+        <ColumnInfo>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="BOM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP" type="STRING" size="256"/>
+          <Column id="PLAN_AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="REQUIRED_DATE" type="STRING" size="256"/>
+          <Column id="TOTAL_LOSS_RATE" type="STRING" size="256"/>
+          <Column id="CACULATED_AMOUNT" type="STRING" size="256"/>
+          <Column id="REQUIRED_AMOUNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/************************************************************************
+소요량전개 화면
+@Path			물류
+@Description	소요량전개폼
+@Author			wonminlee
+@Create			2019.02.20
+
+@Last Update    2019.02.20
+************************************************************************/
+this.MrpDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var i=this.ds_mrpOpenTemp.copyData(this.parent.ds);
+}
+
+this.mrp_grid2_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

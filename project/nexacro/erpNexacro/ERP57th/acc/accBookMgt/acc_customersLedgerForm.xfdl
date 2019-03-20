@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="customersLedgerForm" left="0" top="0" width="1185" height="785" titletext="customersLedgerForm Form" onload="acc_customersLedgerForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="장부관리&gt;거래처원장" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Tab id="Tab00" taborder="1" left="2.11%" top="78" right="2.03%" height="683" tabindex="0" scrollbars="autoboth">
+          <Tabpages>
+            <Tabpage id="balance_tPage" text="잔액">
+              <Layouts>
+                <Layout>
+                  <Static id="accountSubject_stc" taborder="0" text="계정과목" left="0.97%" top="39" right="91.45%" height="40"/>
+                  <Edit id="accountCode_edt" taborder="1" left="8.47%" top="39" right="81.75%" height="40" value="0108" style="align:center middle;" enable="false" oneditclick="Tab00_balance_tPage_accountCode_edt_oneditclick"/>
+                  <Edit id="accountName_edt" taborder="2" left="18.17%" top="39" right="72.05%" height="40" style="align:center middle;" value="외상매출금" enable="false" oneditclick="Tab00_balance_tPage_accountName_edt_oneditclick"/>
+                  <Static id="customer_stc" taborder="3" text="거래처" left="28.48%" top="39" right="63.93%" height="40"/>
+                  <Edit id="customerCode_edt" taborder="4" left="35.98%" top="39" right="54.23%" height="40" style="align:center middle;" oneditclick="Tab00_balance_tPage_customerCode_edt_oneditclick"/>
+                  <Edit id="customerName_edt" taborder="5" left="45.68%" top="39" right="44.53%" height="40" style="align:center middle;" oneditclick="Tab00_balance_tPage_customerName_edt_oneditclick"/>
+                  <Static id="term_stc" taborder="6" text="기간" left="56%" top="39" right="36.42%" height="40"/>
+                  <Calendar id="startDate_cal" taborder="7" left="63.49%" top="39" right="25.66%" height="40" style="align:center middle;"/>
+                  <Calendar id="endDate_cal" taborder="8" left="77.69%" top="39" right="11.46%" height="40" style="align:center middle;"/>
+                  <Static id="between_stc" taborder="9" text="~" left="74.34%" top="39" right="22.31%" height="40" style="align:center middle;"/>
+                  <Grid id="customerLedger_grid" taborder="10" useinputpanel="false" left="1.23%" top="99" right="1.5%" height="530" autosizingtype="none" autosizebandtype="body" autofittype="col" binddataset="ds_customerLedger">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="코드"/>
+                          <Cell col="1" text="거래처"/>
+                          <Cell col="2" text="잔액"/>
+                          <Cell col="3" text="전월이월"/>
+                          <Cell col="4" text="차변"/>
+                          <Cell col="5" text="대변"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CUSTOMER_CODE"/>
+                          <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                          <Cell col="2" text="bind:TOTAL_PRICE"/>
+                          <Cell col="3" text="bind:PRICE"/>
+                          <Cell col="4" text="bind:LEFT_DEBTOR_PRICE"/>
+                          <Cell col="5" text="bind:RIGHT_CREDITS_PRICE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="content_tPage" text="내용">
+              <Layouts>
+                <Layout>
+                  <Static id="accountSubject_stc" taborder="0" text="계정과목" left="0.97%" top="39" right="91.45%" height="40"/>
+                  <Edit id="accountCode_edt" taborder="1" left="8.47%" top="39" right="81.75%" height="40" value="0108" style="align:center middle;" enable="false"/>
+                  <Edit id="accountName_edt" taborder="2" left="18.17%" top="39" right="72.05%" height="40" value="외상매출금" style="align:center middle;" enable="false"/>
+                  <Static id="customer_stc" taborder="3" text="거래처" left="28.48%" top="39" right="63.93%" height="40"/>
+                  <Edit id="customerCode_edt" taborder="4" left="35.98%" top="39" right="54.23%" height="40" style="align:center middle;" oneditclick="Tab00_content_tPage_customerCode_edt_oneditclick"/>
+                  <Edit id="customerName_edt" taborder="5" left="45.68%" top="39" right="44.53%" height="40" style="align:center middle;"/>
+                  <Static id="term_stc" taborder="6" text="기간" left="56%" top="39" right="36.42%" height="40"/>
+                  <Calendar id="startDate_cal" taborder="7" left="63.49%" top="39" right="25.66%" height="40" style="align:center middle;"/>
+                  <Calendar id="endDate_cal" taborder="8" left="77.69%" top="39" right="11.46%" height="40" style="align:center middle;"/>
+                  <Static id="between_stc" taborder="9" text="~" left="74.34%" top="39" right="22.31%" height="40" style="align:center middle;"/>
+                  <Button id="Button00" taborder="10" text="조회" onclick="Button00_onclick" left="88.01%" top="140" right="2.91%" height="40"/>
+                  <Grid id="Grid00" taborder="11" useinputpanel="false" autofittype="col" left="1.23%" top="99" right="1.5%" height="530" binddataset="ds_customerLedgerDetail">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="일자"/>
+                          <Cell col="1" text="거래처코드"/>
+                          <Cell col="2" text="거래처명"/>
+                          <Cell col="3" text="차변"/>
+                          <Cell col="4" text="대변"/>
+                          <Cell col="5" text="잔액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:SLIP_APPROVAL_DATE"/>
+                          <Cell col="1" text="bind:CUSTOMER_CODE"/>
+                          <Cell col="2" text="bind:CUSTOMER_NAME"/>
+                          <Cell col="3" text="bind:L_PRICE"/>
+                          <Cell col="4" text="bind:R_PRICE"/>
+                          <Cell col="5" text="bind:BALANCE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="serch_btn" taborder="28" text="조회" left="88.02%" top="146" right="2.95%" height="40" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_customerLedger">
+        <ColumnInfo>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="TOTAL_PRICE" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_customerLedgerDetail">
+        <ColumnInfo>
+          <Column id="SLIP_APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="L_PRICE" type="STRING" size="256"/>
+          <Column id="R_PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[this.acc_customersLedgerForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ds_customerLedger.filter("CUSTOMER_CODE=='xxx'");	
+	this.ds_customerLedgerDetail.filter("CUSTOMER_CODE=='xxx'");
+}
+
+
+this.Tab00_balance_tPage_customerCode_edt_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+		application.open("customerDialog",
+			"base::customerDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'customerDialog',ds:this.ds_customerLedger}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='businessPlace'"
+			);	
+
+// var frameCode=1;
+// 	dialog("diaCompany","accbookmg::customerCodeForm.xfdl",MainFrame,{FC:frameCode},"",600,230);
+}
+]]></Script>
+  </Form>
+</FDL>

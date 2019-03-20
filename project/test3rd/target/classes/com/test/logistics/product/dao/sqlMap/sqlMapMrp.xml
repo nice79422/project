@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mrp">
+
+	<typeAlias alias="MrpBean" type="com.test.logistics.product.to.MrpBean" />
+	<typeAlias alias="MrpTotalBean" type="com.test.logistics.product.to.MrpTotalBean" />
+	<resultMap id="MrpResult" class="MrpBean">
+
+		<result property="mrpCode" column="MRP_CODE" />
+		<result property="mpsCode" column="MPS_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="purchaseQuantity" column="PURCHASE_AMOUNT" />
+		<result property="purchaseDate" column="PURCHASE_DATE" />
+		<result property="purchaseStatus" column="PURCHASE_STATUS"  />
+
+		<result property="mrpGatheringCode" column="MRP_GATHERING_CODE"  />
+		<result property="produceStatus" column="PRODUCE_STATUS" />
+		<result property="amount" column="AMOUNT" />
+		<result property="purchasingPlaceCode" column="PURCHASING_PLACE_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitPrice" column="UNIT_PRICE" />
+		<result property="level" column="LEV" />
+		<result property="planAmount" column="PLAN_AMOUNT" />
+
+	</resultMap>
+
+	<resultMap id="MrpTotalResult" class="MrpTotalBean">
+						
+		<result property="mrpGatheringCode" column="MRP_GATHERING_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unit" column="UNIT" />
+		<result property="purchaseDate" column="PURCHASE_DATE" />
+		<result property="amount" column="AMOUNT" />
+		<result property="purchaseStatus" column="PURCHASE_STATUS" />
+
+
+	</resultMap>
+
+	<resultMap id="ProcedureResult" class="MrpBean">
+
+		<result property="level" column="LEV" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="contractDetailCode" column="CONTRACT_DETAIL_CODE" />
+		<result property="purchaseDate" column="PLAN_DATE" />
+		<result property="parentCode" column="PARENT_CODE" />
+		<result property="workspaceCode" column="WORKPLACE_CODE" />
+		<result property="purchaseQuantity" column="ORDER_QUANTITY" />
+		<result property="itemName" column="ITEM_NAME" />
+
+	</resultMap>
+
+	<parameterMap id="mrpParameter" class="map">
+		<parameter property="workplaceCode" mode="IN" jdbcType="VARCHAR2"
+			javaType="java.lang.String" />
+		<parameter property="startDate" mode="IN" jdbcType="VARCHAR2"
+			javaType="java.lang.String" />
+		<parameter property="endDate" mode="IN" jdbcType="VARCHAR2"
+			javaType="java.lang.String" />
+		<parameter property="errorCode" mode="OUT" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="errorMsg" mode="OUT" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="result" mode="OUT" jdbcType="ORACLECURSOR"
+			javaType="java.sql.ResultSet" />
+	</parameterMap>
+
+	<procedure id="selectMrpOpenList" resultMap="ProcedureResult"
+		parameterMap="mrpParameter">
+		{call P_MRP_OPEN(?,?,?,?,?,?)}
+	</procedure>
+
+	<select id="selectMrpListRowCount" resultClass="int"
+		parameterClass="String">
+    <![CDATA[
+	SELECT count(*) from                                                                                            
+	(SELECT LEVEL, b.ITEM_CODE, b.PARENT_CODE, b.QUANTITY, t.LOSS_RATE, t.LEAD_TIME , t.CONTRACT_DETAIL_CODE,       
+	t.PLAN_DATE, t.PLAN_QUANTITY, t.MRP_STATUS, t.UNIT_PRICE FROM                                                      
+	(SELECT m.CONTRACT_DETAIL_CODE, m.PLAN_DATE, m.PLAN_QUANTITY, ci.ITEM_CODE, i.UNIT_PRICE, i.LEAD_TIME, i.LOSS_RATE,
+	ci.SUPPLY_DATE, m.MRP_STATUS FROM MPS m, CONTRACT_ITEM ci, ITEM i                                                  
+	WHERE m.CONTRACT_DETAIL_CODE = ci.CONTRACT_DETAIL_CODE AND ci.ITEM_CODE = i.ITEM_CODE                              
+	AND ci.MPS_STATUS = 'Y' AND m.MRP_STATUS = 'N' AND m.WORKPLACE_CODE=#workspaceCode#) t, BOM b                      
+	WHERE b.ITEM_CODE = t.ITEM_CODE(+) START WITH b.ITEM_CODE LIKE 'IT-FP%'                                            
+	CONNECT BY PRIOR b.ITEM_CODE = b.PARENT_CODE)                                                                      
+    ]]>
+	</select>
+
+	<select id="selectMrpCodeList" resultMap="MrpResult" 
+		parameterClass="map">
+    <![CDATA[
+	SELECT * FROM mrp 
+	WHERE mps_code= #mrpCode#
+	]]>
+	</select>
+
+
+	<select id="selectTotalMrpListRowCount" resultClass="int">
+    <![CDATA[
+	SELECT count(*) FROM MRP_OPEN_TEMP
+	]]>
+	</select>
+
+	<select id="selectTotalMrp" resultMap="MrpResult" 
+		parameterClass="map">
+    <![CDATA[
+	SELECT 
+	  rownum
+	, i.item_code 
+	, i.item_name 
+	, i.unit_price 
+	, i.unit_price * a.sum_quantity AS total_price                        
+	, a.sum_quantity as PURCHASE_AMOUNT
+	, a.plan_date  as PURCHASE_DATE
+	, '' MRP_CODE
+	, '' MPS_CODE
+	, '' PURCHASE_AMOUNT
+	, '' PURCHASE_DATE
+	, '' PURCHASE_STATUS
+	, '' MRP_GATHERING_CODE
+	, '' PRODUCE_STATUS
+	, '' AMOUNT
+	, '' PURCHASING_PLACE_CODE
+	, '' PLAN_AMOUNT
+	, '' LEV
+	FROM (SELECT item.ITEM_CODE , item.ITEM_NAME , SUM(ORDER_QUANTITY) sum_quantity                
+	, max(plan_date) plan_date FROM MRP_open_temp mrp , item WHERE item.item_code= mrp.ITEM_CODE AND mrp.ORDER_QUANTITY<>'0'      
+	GROUP BY ITEM.item_code , item.ITEM_NAME ) a , ITEM i WHERE a.item_code=i.item_code AND ROWNUM BETWEEN #startRow# AND #endRow#
+    ]]>
+	</select>
+
+
+	<insert id="insertMrpGathering" parameterClass="MrpBean">
+    <![CDATA[
+	INSERT INTO MRP_GATHERING VALUES
+       (
+           TO_CHAR(SYSDATE,'yyyymmdd')||'-'||LPAD(MRP_CODE_SEQ.NEXTVAL, 5,'00000')
+         , #itemCode#
+         , 'N'
+         , 'N'
+         , #purchaseQuantity#
+         , #purchaseDate#
+         
+       )
+    ]]>
+	</insert>
+
+	<update id="updateMrp" parameterClass="MrpBean">
+	<![CDATA[
+	UPDATE MRP_GATHERING
+    SET PURCHASE_STATUS = 'Y'
+ 	WHERE MRP_GATHERING_CODE=#mrpGatheringCode#
+ 		 ]]>
+	</update>
+
+
+
+	<select id="selectPurchaseOrderRowCount" resultClass="int"
+		parameterClass="String">
+    <![CDATA[
+	SELECT COUNT(*)
+ 	FROM MRP m
+    , ITEM i
+ 	WHERE m.ITEM_CODE = i.ITEM_CODE
+    AND i.PURCHASING_PLACE_CODE  = #purchasingPlaceCode#
+    AND purchase_status = 'N'
+    ]]>
+	</select>
+
+	<select id="selectPurchaseOrder" resultMap="MrpResult" 
+		parameterClass="map">
+    <![CDATA[
+	SELECT 
+		  MRP_GATHERING_CODE
+		, AMOUNT as PURCHASE_AMOUNT
+		, PURCHASE_DATE
+		, ITEM_CODE
+		, UNIT_PRICE
+		, PURCHASING_PLACE_CODE
+		, ITEM_NAME
+		, '' MRP_CODE
+		, '' MPS_CODE
+		, '' AMOUNT
+		, '' PURCHASE_STATUS
+		, '' PRODUCE_STATUS
+		, '' LEV
+		, '' PLAN_AMOUNT
+	FROM (SELECT row_number() over(ORDER BY MRP_GATHERING_CODE desc) rn, m.MRP_GATHERING_CODE
+	, m.AMOUNT , m.PURCHASE_DATE, i.ITEM_CODE, i.UNIT_PRICE, i.PURCHASING_PLACE_CODE, i.ITEM_NAME     
+	FROM MRP_GATHERING m, ITEM i WHERE purchase_status = 'N' AND m.ITEM_CODE = i.ITEM_CODE            
+	AND i.PURCHASING_PLACE_CODE= #purchasingPlaceCode# ) WHERE rn BETWEEN #startRow# AND #endRow#     
+    ]]>
+	</select>
+
+	<select id="dateMrp" resultClass="com.test.logistics.product.to.MrpBean" parameterClass="map" remapResults="true">
+    <![CDATA[
+	SELECT MRP_CODE mrpCode, MPS_CODE mpsCode, ITEM_CODE itemCode, PURCHASE_AMOUNT purchaseQuantity, PURCHASE_DATE purchaseDate, PURCHASE_STATUS purchaseStatus, ITEM_NAME itemName, LEV "level"
+	FROM MRP
+	WHERE purchase_date
+	BETWEEN #startDate# AND #endDate#
+    ]]>
+ 	</select>
+
+
+
+	<select id="selectMrpTotalReviewCount" resultClass="int">
+    <![CDATA[
+	SELECT COUNT(*) FROM MRP_GATHERING
+    ]]>
+	</select>
+	
+	<select id="selectMrpTotalReviewList" resultMap="MrpTotalResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT A.*,B.ITEM_NAME,B.UNIT
+	FROM (SELECT MRP_GATHERING.*,ROWNUM NUM FROM MRP_GATHERING) A, ITEM B
+	WHERE A.ITEM_CODE = B.ITEM_CODE AND NUM BETWEEN #startRow# AND #endRow#
+	ORDER BY A.PURCHASE_DATE DESC
+    ]]>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project active_adl="ERP57th" version="1.3">
+  <TypeDefinition url="default_typedef.xml"/>
+  <GlobalVariables url="globalvars.xml"/>
+  <ADL id="ERP57th" url="ERP57th_nexa.xadl"/>
+  <Themes>
+    <RecentlyUsed>
+      <Theme url="default_CUSTOM.xtheme" extern="false"/>
+    </RecentlyUsed>
+  </Themes>
+  <Services>
+    <Service id="images" file_ext="" include_subdir="true"/>
+  </Services>
+</Project>

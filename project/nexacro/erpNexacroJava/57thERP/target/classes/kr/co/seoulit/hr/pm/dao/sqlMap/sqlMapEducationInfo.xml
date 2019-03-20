@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.pm.dao.EducationInfoDAO">
+
+	<resultMap id="educationInfoResult" type="educationInfoTO">
+		<result property="educationSeq" column="EDUCATION_SEQ" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="campus" column="CAMPUS" />
+		<result property="major" column="MAJOR" />
+		<result property="subMajor" column="SUB_MAJOR" />
+		<result property="enterDate" column="ENTER_DATE" />
+		<result property="graduationDate" column="GRADUATION_DATE" />
+		<result property="grade" column="GRADE" />
+	</resultMap>
+	
+	<!-- 사원의 학력정보를 조회하는 메서드 -->
+	<select id="selectEducationInfoAll" resultMap="educationInfoResult">
+	<![CDATA[
+		SELECT EDUCATION_SEQ
+			  ,EMP_CODE
+			  ,CAMPUS
+			  ,MAJOR
+			  ,SUB_MAJOR
+			  ,ENTER_DATE
+			  ,GRADUATION_DATE
+			  ,GRADE
+		 FROM EDUCATION_INFO 
+		ORDER BY EMP_CODE
+	]]>
+	</select>
+
+	<!-- 사원의 학력정보를 추가하는 메서드 -->
+	<insert id="insertEducationInfo" parameterType="educationInfoTO">
+	<selectKey keyProperty="educationSeq" resultType="String">
+	<![CDATA[
+	     SELECT EDUCATION_SEQ.NEXTVAL FROM DUAL
+	]]>
+    </selectKey>
+	<![CDATA[
+		INSERT INTO
+			EDUCATION_INFO
+			(
+			EMP_CODE,
+			EDUCATION_SEQ,
+			CAMPUS,
+			MAJOR,
+			SUB_MAJOR,
+			ENTER_DATE,
+			GRADUATION_DATE,
+			GRADE
+			)
+		VALUES(
+			#{empCode},
+			#{educationSeq},
+			#{campus},
+			#{major},
+	       	#{subMajor},
+	       	#{enterDate},
+	       	#{graduationDate},
+	       	#{grade},
+		)
+	]]>
+	</insert>
+
+	<!-- 사원의 학력정보를 수정하는 메서드 -->
+    <update id="updateEducationInfo" parameterType="educationInfoTO">
+	<![CDATA[
+	       UPDATE
+	       		EDUCATION_INFO
+	       SET
+	       		CAMPUS=#{campus},
+	       		MAJOR=#{major},
+	       		SUB_MAJOR=#{subMajor},
+	       		ENTER_DATE=#{enterDate},
+	       		GRADUATION_DATE=#{graduationDate},
+	       		GRADE=#{grade},
+	       		LOCATION=#{location}
+	       	WHERE
+	       		EMP_CODE=#{empCode}
+	       	AND
+	       	    EDUCATION_SEQ=#{educationSeq}
+	]]>
+	</update>
+
+	<!-- 사원의 학력정보를 삭제하는 메서드 -->
+	<delete id="deleteEducationInfo" parameterType="educationInfoTO">
+	<![CDATA[
+		DELETE FROM
+			EDUCATION_INFO
+		WHERE
+			EMP_CODE=#{empCode}
+		AND
+			EDUCATION_SEQ=#{educationSeq}
+  	]]>
+	</delete>
+</mapper>

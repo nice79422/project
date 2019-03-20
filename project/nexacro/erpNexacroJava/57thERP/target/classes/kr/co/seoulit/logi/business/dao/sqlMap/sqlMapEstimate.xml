@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.business.dao.EstimateDAO">
+	<!-- estimateDAO -->
+
+	<resultMap type="estimateTO" id="estimateResult">
+
+		<result property="estimateNo" column="ESTIMATE_NO" />
+		<result property="customerCode" column="CUSTOMER_CODE" />
+		<result property="estimateDate" column="ESTIMATE_DATE" />
+		<result property="contractStatus" column="CONTRACT_STATUS" />
+		<result property="estimateRequester" column="ESTIMATE_REQUESTER" />
+		<result property="effectiveDate" column="EFFECTIVE_DATE" />
+		<result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE" />
+		<result property="description" column="DESCRIPTION" />
+
+	</resultMap>
+
+	<select id="selectEstimateList" parameterType="hashmap" resultMap="estimateResult">
+
+		SELECT
+		ESTIMATE_NO,
+		CUSTOMER_CODE, ESTIMATE_DATE, CONTRACT_STATUS
+		, ESTIMATE_REQUESTER,
+		EFFECTIVE_DATE
+		, PERSON_CODE_IN_CHARGE, DESCRIPTION
+		FROM ESTIMATE
+<!-- 		<if test="toDate != null and fromDate !='regContract'">
+		 WHERE ESTIMATE_DATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		<if test="fromDate=='regContract'">
+		 WHERE ESTIMATE_DATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		<if test="fromDate=='estimateNo'">
+		 WHERE ESTIMATE_NO = #{toDate}
+		</if> -->
+		
+		<choose>
+		<when test="fromDate=='estimateNo'">
+			WHERE ESTIMATE_NO = #{toDate}
+		</when>
+		<when test="fromDate=='regContract'">
+			 WHERE ESTIMATE_DATE BETWEEN #{fromDate} AND #{toDate}
+		</when>
+		<otherwise>
+			WHERE ESTIMATE_DATE BETWEEN #{fromDate} AND #{toDate}
+		</otherwise>	
+		</choose>
+
+	</select>
+
+	<select id="selectEstimateDialog" resultMap="estimateResult">
+		SELECT
+		ESTIMATE_NO, CUSTOMER_CODE, ESTIMATE_DATE, CONTRACT_STATUS
+		, ESTIMATE_REQUESTER, EFFECTIVE_DATE
+		, PERSON_CODE_IN_CHARGE, DESCRIPTION
+		FROM ESTIMATE
+		WHERE CONTRACT_STATUS ='N'
+		OR CONTRACT_STATUS IS NULL
+	</select>
+
+	<insert id="insertEstimate" parameterType="estimateTO">
+
+		INSERT INTO ESTIMATE
+		VALUES
+		( #{estimateNo}
+		, #{customerCode}
+		, #{estimateDate}
+		, #{contractStatus}
+		, #{estimateRequester}
+		, #{effectiveDate}
+		, #{personCodeInCharge}
+		,#{description} )
+
+	</insert>
+
+	<update id="updateEstimate" parameterType="estimateTO">
+
+		UPDATE ESTIMATE SET
+		CONTRACT_STATUS = #{contractStatus}
+		WHERE
+		ESTIMATE_NO = #{estimateNo}
+
+
+	</update>
+
+	<delete id="deleteEstimate" parameterType="estimateTO">
+
+		DELETE FROM ESTIMATE
+		WHERE
+		ESTIMATE_NO = #{estimateNo}
+
+	</delete>
+
+</mapper>

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_preFinancialStatementForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="acc_preFinancialStatementForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="preFinancialState_stc" taborder="0" text="전기분 재무상태표" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" left="1.37%" top="74" right="67.29%" height="679" binddataset="ds_preAssetsCount" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="64"/>
+                <Column size="97"/>
+                <Column size="112"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="3" text="자산"/>
+                <Cell row="1" col="1" text="코드"/>
+                <Cell row="1" col="2" text="계정과목"/>
+                <Cell row="1" col="3" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="2" text="bind:ACCOUNT_NAME"/>
+                <Cell col="3" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid02" taborder="3" useinputpanel="false" left="67.38%" top="74" right="1.37%" height="679" binddataset="ds_preFinancialStatements" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="108"/>
+                <Column size="131"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="2" text="계정별합계"/>
+                <Cell row="1" col="1" text="계정과목"/>
+                <Cell row="1" col="2" text="합계"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:GROUP_CODE"/>
+                <Cell col="2" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01" taborder="4" useinputpanel="false" left="34.38%" top="74" right="34.28%" height="679" binddataset="ds_preLiabilitiesAndCapitalCount" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="64"/>
+                <Column size="97"/>
+                <Column size="113"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="3" text="부채 및 자본"/>
+                <Cell row="1" col="1" text="코드"/>
+                <Cell row="1" col="2" text="계정과목"/>
+                <Cell row="1" col="3" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="2" text="bind:ACCOUNT_NAME"/>
+                <Cell col="3" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_preAssetsCount">
+        <ColumnInfo>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_preFinancialStatements">
+        <ColumnInfo>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_preLiabilitiesAndCapitalCount">
+        <ColumnInfo>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+전기분 재무상태표화면                                           						                                                                         
+@Path		회계              				   				
+@Description	전년도 재무상태 확인을 위한 창						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 28                             		                    				                                            
+********************************************************************************/
+this.acc_preFinancialStatementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var id = "findFinancialStatementsOnLastYear";
+    var url = "dataURL::statement/financialStatement/findFinancialStatementsOnLastYear.do";
+    var respDs = "";
+    var reqDs = "ds_preFinancialStatements=ds_earlyFinancialStatements ds_preAssetsCount=ds_earlyAssetsCount ds_preLiabilitiesAndCapitalCount=ds_earlyLiabilitiesAndCapitalCount";
+    var args = "";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback, false);	
+}
+
+
+function callback(trid , ErrorCode, ErrorMsg){
+	
+	if(trid == "findFinancialStatementsOnLastYear"){
+		if(ErrorCode < 0){
+			alert("조회 실패 : " + ErrorMsg);
+		}	
+	}
+}]]></Script>
+  </Form>
+</FDL>

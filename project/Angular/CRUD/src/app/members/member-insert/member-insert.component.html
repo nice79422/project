@@ -1,0 +1,26 @@
+<form class="emp-form" #memberForm="ngForm">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input class="form-control" name="Id" #Id="ngModel" [(ngModel)]="memberId" placeholder="ID" required>
+      <div class="validation-error" *ngIf="Id.invalid && Id.touched">필수 입력사항</div>
+    </div>
+    <div class="form-group col-md-6">
+      <input type="password" class="form-control" name="Pw" #Pw="ngModel" [(ngModel)]="memberPw" placeholder="PW" required>
+      <div class="validation-error" *ngIf="Pw.invalid && Pw.touched">필수 입력사항</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="Addr" #Addr="ngModel" [(ngModel)]="memberAddr" placeholder="ADDRESS">
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="Tel" #Tel="ngModel" [(ngModel)]="memberTel" placeholder="TEL">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+          <button [disabled]="!memberForm.valid" type="submit" class="btn btn-lg btn-block btn-info" (click)="submit()"><i class="fa fa-floppy-o"></i> 회원가입</button>
+        </div>
+        <div class="form-group col-md-4">
+          <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(memberForm)"><i class="fa fa-repeat"></i> 취소</button>
+        </div>
+      </div>
+  </form>

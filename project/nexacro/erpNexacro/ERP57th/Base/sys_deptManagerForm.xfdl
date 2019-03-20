@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="sys_deptManagerForm" left="0" top="0" width="1185" height="785" titletext="sys_deptManagerForm" onload="sys_deptManagerForm_onload">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="code_stc" taborder="3" left="8.78%" top="162" right="9.03%" height="592" onclick="Static00_onclick" text="부 서" style="color:black;align:center top;"/>
+        <Grid id="dept_grid" taborder="1" useinputpanel="false" left="11.81%" top="198" right="11.98%" height="531" binddataset="ds_dept" autosizingtype="col" autofittype="col" autoenter="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="부서코드"/>
+                <Cell col="1" text="부서명"/>
+                <Cell col="2" text="내선번호"/>
+                <Cell col="3" text="사업장코드"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="normal" text="bind:DEPT_CODE"/>
+                <Cell col="1" edittype="normal" text="bind:DEPT_NAME"/>
+                <Cell col="2" edittype="normal" text="bind:DEPT_TEL"/>
+                <Cell col="3" edittype="normal" text="bind:BUSINESS_PLACE_CODE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="12" text="부서 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Button id="add_btn" taborder="13" text="추가" left="51.14%" top="109" right="37.89%" height="36" onclick="add_btn_onclick"/>
+        <Button id="delete_btn" taborder="14" text="삭제" left="65.23%" top="109" right="23.8%" height="36" onclick="delete_btn_onclick"/>
+        <Button id="save_btn" taborder="15" text="저장" left="78.82%" top="109" right="10.21%" height="36" onclick="save_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="DEPT_TEL" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+부서검색                                             						                                                                         
+@Path		공통              				   				
+@Description	부서 CRUD						
+@Author	  	강순용			    			                        								                                            
+@Create           2019. 02. 15.                             		                    				                                            
+********************************************************************************/
+
+this.sys_deptManagerForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		obj.transaction("findBusinessPlaceList",
+					"dataURL::sys/findAllDeptList.do",
+					"",
+					"ds_dept=gds_department",
+					"",
+					"callback");
+}
+
+this.add_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_dept.addRow();
+}
+
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+			if(confirm("삭제하시겠습니까?"))
+			{
+			this.ds_dept.deleteRow(this.ds_dept.rowposition);
+			}
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		if(confirm("변경사항을 저장하시겠습니까?"))
+		{
+			this.transaction("batchDept"
+					,"dataURL::sys/batchDept.do"
+					,"gds_department=ds_dept:u"
+					,"" 
+					,""
+					,"callback"
+					);
+		}
+
+}]]></Script>
+  </Form>
+</FDL>

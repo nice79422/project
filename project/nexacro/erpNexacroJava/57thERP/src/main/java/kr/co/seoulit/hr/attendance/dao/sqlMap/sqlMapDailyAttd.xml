@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.attendance.dao.DailyAttdDAO">
+
+	<resultMap id="dailyAttdResult" type="dailyAttdTO">
+		<result property="empCode" column="EMP_CODE" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="dayAttdSeq" column="DAY_ATTD_SEQ" />
+		<result property="basicDay" column="BASIC_DAY" />
+		<result property="attdTypeCode" column="ATTD_TYPE_CODE" />
+		<result property="time" column="TIME" />
+		<result property="approvalStatus" column="APPROVAL_STATUS" />
+		<result property="cost" column="COST" />
+		<result property="cause" column="CAUSE" />
+		
+	</resultMap>
+	
+	
+	<!-- 일근태 목록을 가지고 오는 메서드 -->
+	<select id="selectDailyAttdList" resultMap="dailyAttdResult" parameterType="map">
+
+		SELECT E.EMP_CODE,DA.DAY_ATTD_SEQ,DA.EMP_NAME,DA.BASIC_DAY,
+					DA.ATTD_TYPE_CODE,DA.TIME,DA.APPROVAL_STATUS,DA.COST,DA.CAUSE
+    	FROM DAY_ATTD DA,EMPLOYEE E
+   		WHERE DA.EMP_CODE = #{empCode}
+    	AND DA.EMP_CODE = E.EMP_CODE
+   		AND BASIC_DAY BETWEEN #{fromDate} AND #{toDate}
+		ORDER BY DAY_ATTD_SEQ, LENGTH(APPROVAL_STATUS) DESC, BASIC_DAY
+
+	</select>
+	
+	
+	<!-- 근태신청한 내용을 추가하는 메서드 -->
+	<insert id="insertDailyAttdList" parameterType="dailyAttdTO">
+		<!-- 대부분의 RDBMS 시스템은 Sequence 와 같은 채번 자동 생성을 지원한다. 개발을 하다보면 종종 자동생성된 Sequence 
+			값을 가져와서 사용해야 하는 경우가 있다. 이런 경우에 <selectKey>를 사용한다. <selectKey>는 ibatis의 statement 
+			타입 중 <insert> 타입에만 사용할 수 있는 하위 요소이다. <insert> 문 아래에 사용함으로써, 자동생성된 키 값을 가져오며, 
+			이 값을 반환하여 활용할 수 있다. -->
+		<selectKey keyProperty="dayAttdSeq" resultType="String" order="BEFORE">
+	 <![CDATA[
+	     SELECT DAILY_ATTD_SEQ.NEXTVAL FROM DUAL
+	 ]]>
+		</selectKey>
+     <![CDATA[
+		INSERT INTO DAY_ATTD(
+								EMP_CODE,
+								DAY_ATTD_SEQ,
+								BASIC_DAY,
+								ATTD_TYPE_CODE,
+								TIME,
+								APPROVAL_STATUS,
+								COST,
+								CAUSE,
+								EMP_NAME
+		)		
+		VALUES(
+				#{empCode},
+				#{dayAttdSeq},
+				#{basicDay},
+				#{attdTypeCode},
+				#{time},
+				#{approvalStatus},
+				#{cost},
+				#{cause},
+				#{empName}
+		)
+	]]>
+	</insert>
+
+
+	<update id="updateDailyAttdList" parameterType="dailyAttdTO">
+	<![CDATA[
+		UPDATE DAY_ATTD
+		SET
+			BASIC_DAY = #{basicDay},
+			ATTD_TYPE_CODE = #{attdTypeCode},
+			APPROVAL_STATUS = #{approvalStatus},
+			TIME = #{time},
+			COST = #{cost},
+			CAUSE = #{cause}
+	    WHERE
+			DAY_ATTD_SEQ = #{dayAttdSeq} AND
+			EMP_CODE = #{empCode}
+	]]>
+	</update>	
+
+
+	<delete id="deleteDailyAttdList" parameterType="dailyAttdTO">
+	    <![CDATA[
+	        DELETE FROM
+	            DAY_ATTD
+	        WHERE
+	            DAY_ATTD_SEQ = #{dayAttdSeq} AND
+	            EMP_CODE = #{empCode}
+	    ]]>
+	</delete>
+	
+	<!-- 일근태 승인관리 부분에서 일근태를 조건에따라 조회하는 메서드 **동적쿼리** -->
+
+	<select id="selectDailyAttdListByCondition" resultMap="dailyAttdResult" parameterType="map">
+		SELECT
+		 DA.EMP_CODE
+		,DA.DAY_ATTD_SEQ
+		,DA.BASIC_DAY
+		,DA.ATTD_TYPE_CODE
+		,DA.TIME
+		,DA.APPROVAL_STATUS
+		,DA.COST
+		,DA.CAUSE
+		,E.EMP_NAME
+		FROM DAY_ATTD DA, EMPLOYEE E
+		<if test="deptCode != ''">
+			,DEPARTMENT D
+		</if>
+        <trim prefix="WHERE" prefixOverrides="AND || OR">
+       			DA.EMP_CODE = E.EMP_CODE
+            <if test="deptCode != ''">
+               AND E.DEPT_CODE = D.DEPT_CODE 
+               AND D.DEPT_CODE = #{deptCode}
+            </if>
+            <if test="basicDay != ''">
+               AND DA.BASIC_DAY = #{basicDay}
+            </if>
+ 	        <if test="approvalStatus != ''">
+               AND DA.APPROVAL_STATUS = #{approvalStatus}
+            </if>
+        </trim>
+		ORDER BY DA.EMP_CODE, DA.TIME
+	</select>	
+	
+	
+</mapper>

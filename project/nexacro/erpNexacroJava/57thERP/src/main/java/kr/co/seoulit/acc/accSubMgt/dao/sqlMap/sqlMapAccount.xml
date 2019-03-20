@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="kr.co.seoulit.acc.accSubMgt.dao.AccountDAO">
+
+	<resultMap type="accountTO" id="accountResult">
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="parentAccountInnerCode" column="PARENT_ACCOUNT_INNER_CODE" />
+		<result property="accountCode" column="PARENT_ACCOUNT_INNER_CODE" />
+		<result property="accountCharacter" column="ACCOUNT_CHARACTER" />
+		<result property="accountName" column="ACCOUNT_NAME" />
+		<result property="accountDispalyNameWithCode" column="ACCOUNT_DISPLAY_NAME_WITH_CODE" />
+		<result property="accountDisplayName" column="ACCOUNT_DISPLAY_NAME" />
+		<result property="accountDivision" column="ACCOUNT_DIVISION" />
+		<result property="accountUseCheck" column="ACCOUNT_USE_CHECK" />
+		<result property="accountDescription" column="ACCOUNT_DESCRIPTION" />
+		<result property="accountLevel" column="ACCOUNT_LEVEL" />
+	</resultMap>
+
+
+  	<resultMap type="parentAccountSummaryTO" id="parentAccountSummaryResult">
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="accountName" column="ACCOUNT_NAME" />
+		<collection property="accountList" select="selectAccountList" column="ACCOUNT_INNER_CODE"></collection>
+	</resultMap>
+
+  	<resultMap type="accountSummaryTO" id="accountSummaryResult">
+  	  	<result property="parentAccountInnerCode" column="PARENT_ACCOUNT_INNER_CODE" />
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="accountName" column="ACCOUNT_NAME" />
+		<result property="accountDescription" column="ACCOUNT_DESCRIPTION" />
+	</resultMap>
+
+	<select id="selectParentAccountList" resultMap="parentAccountSummaryResult">
+		WITH P_ACCOUNT AS(SELECT * FROM
+		(SELECT LEVEL LV,CONNECT_BY_ISLEAF LEAF,ACCOUNT_INNER_CODE,PARENT_ACCOUNT_INNER_CODE,ACCOUNT_CHARACTER,ACCOUNT_NAME FROM ACCOUNT
+		START WITH PARENT_ACCOUNT_INNER_CODE IS NULL
+		CONNECT BY PRIOR ACCOUNT_INNER_CODE=PARENT_ACCOUNT_INNER_CODE)
+		WHERE (LV=3 OR LV=2) AND LEAF=0
+		)
+		SELECT ACCOUNT_INNER_CODE,ACCOUNT_NAME FROM P_ACCOUNT WHERE ACCOUNT_NAME NOT IN(SELECT B.ACCOUNT_NAME FROM P_ACCOUNT A,P_ACCOUNT B
+		WHERE A.PARENT_ACCOUNT_INNER_CODE=B.ACCOUNT_INNER_CODE
+		GROUP BY B.ACCOUNT_NAME)
+		ORDER BY ACCOUNT_INNER_CODE ASC
+	</select>
+
+
+	<select id="selectAccountList" resultMap="accountSummaryResult">
+		SELECT PARENT_ACCOUNT_INNER_CODE,ACCOUNT_INNER_CODE,ACCOUNT_NAME,ACCOUNT_DESCRIPTION FROM(
+        SELECT LEVEL LV,CONNECT_BY_ISLEAF LEAF,ACCOUNT_INNER_CODE,ACCOUNT_NAME,PARENT_ACCOUNT_INNER_CODE,ACCOUNT_DESCRIPTION FROM ACCOUNT
+        START WITH PARENT_ACCOUNT_INNER_CODE IS NULL
+        CONNECT BY PRIOR ACCOUNT_INNER_CODE=PARENT_ACCOUNT_INNER_CODE)
+        WHERE PARENT_ACCOUNT_INNER_CODE=#{accountInnerCode}
+		ORDER BY ACCOUNT_INNER_CODE
+	</select>
+
+
+	 <select id="selectAllAccountList" resultMap="accountResult">
+		SELECT
+		LEVEL-1 AS ACCOUNT_LEVEL
+		, ACCOUNT_INNER_CODE
+		, PARENT_ACCOUNT_INNER_CODE
+		, ACCOUNT_CODE
+		, ACCOUNT_CHARACTER
+		, ACCOUNT_NAME
+		, ACCOUNT_DISPLAY_NAME_WITH_CODE
+		, ACCOUNT_DISPLAY_NAME
+		, ACCOUNT_DIVISION
+		, ACCOUNT_USE_CHECK
+		, ACCOUNT_DESCRIPTION
+		FROM ACCOUNT
+		START WITH PARENT_ACCOUNT_INNER_CODE IS NULL
+		CONNECT BY PRIOR ACCOUNT_INNER_CODE = PARENT_ACCOUNT_INNER_CODE
+	</select>
+
+</mapper>

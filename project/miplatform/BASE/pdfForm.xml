@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form Height="944" Id="form" Left="8" OnLoadCompleted="form_OnLoadCompleted" PidAttrib="7" Title="재직증명서" Top="8" Ver="1.0" Width="944" WorkArea="true">
+		<Adobe Bottom="930" Height="938" Id="Adobe0" Left="8" Right="938" Top="-8" Width="930"></Adobe>
+	</Form>
+	<Script><![CDATA[
+function form_OnLoadCompleted(obj)
+{
+	var eCode=Parent.sEmpCode;
+	trace("####"+eCode);
+            
+Adobe0.src="C:/workspace-sts-3.9.6.RELEASE/test4th/src/main/webapp/report/"+eCode+".pdf";
+
+}
+]]></Script>
+</Window>

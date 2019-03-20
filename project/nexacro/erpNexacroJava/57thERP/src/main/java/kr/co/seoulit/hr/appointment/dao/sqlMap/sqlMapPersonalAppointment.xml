@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.appointment.dao.PersonalAppointmentDAO">
+
+
+<!-- personalAppointmentDAO -->
+
+	<resultMap type="personalAppointmentTO" id="personalAppointmentResult">
+	
+		<result property="appointmentNo" column="APPOINTMENT_NO" />
+		<result property="employeeNo" column="EMPLOYEE_NO" />
+		<result property="employeeName" column="EMPLOYEE_NAME" />
+		<result property="department" column="DEPARTMENT" />
+		<result property="position" column="POSITION" />
+		<result property="applyDate" column="APPLY_DATE" />
+		<result property="note" column="NOTE" />
+		<result property="appointmentDivision" column="APPOINTMENT_DIVISION" />
+		<result property="applyStatus" column="APPLY_STATUS" />
+				
+	</resultMap>
+
+
+	<select id="selectPersonalAppointment" resultMap="personalAppointmentResult">
+
+		SELECT
+		APPOINTMENT_NO,
+		EMPLOYEE_NO,
+		EMPLOYEE_NAME,
+		DEPARTMENT,
+		POSITION,
+		APPLY_DATE,
+		NOTE,
+		APPOINTMENT_DIVISION,
+		APPLY_STATUS
+		FROM PERSONAL_APPOINTMENT
+		ORDER BY APPOINTMENT_NO DESC
+
+	</select>
+	
+	<insert id="insertPersonalAppointment" parameterType="personalAppointmentTO">
+		INSERT INTO PERSONAL_APPOINTMENT(
+			APPOINTMENT_NO,
+			EMPLOYEE_NO,
+			EMPLOYEE_NAME,
+			DEPARTMENT,
+			POSITION,
+			APPLY_DATE,
+			NOTE,
+			APPOINTMENT_DIVISION,
+			APPLY_STATUS
+		)
+		VALUES(
+			#{appointmentNo},
+			#{employeeNo},
+			#{employeeName},
+			#{department},
+			#{position},
+			#{applyDate},
+			#{note},
+			#{appointmentDivision},
+			#{applyStatus}
+		)
+	</insert>
+	
+	<update id="updatePersonalAppointment" parameterType="personalAppointmentTO">
+		UPDATE PERSONAL_APPOINTMENT
+		SET    APPOINTMENT_NO      =#{appointmentNo},
+		       EMPLOYEE_NO         =#{employeeNo},
+		       EMPLOYEE_NAME       =#{employeeName},
+		       DEPARTMENT          =#{department},
+		       POSITION            =#{position},
+		       APPLY_DATE          =#{applyDate},
+		       NOTE                =#{note},
+		       APPOINTMENT_DIVISION=#{appointmentDivision},
+		       APPLY_STATUS		   =#{applyStatus}	
+		WHERE  APPOINTMENT_NO      =#{appointmentNo}
+		AND    EMPLOYEE_NO         =#{employeeNo} 
+	</update>
+
+</mapper>

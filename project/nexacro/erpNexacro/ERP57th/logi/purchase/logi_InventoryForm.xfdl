@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_InventoryForm" left="0" top="0" width="1185" height="785" titletext="재고조회" onload="logi_InventoryForm_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="inventory_grid" taborder="1" binddataset="ds_stock" useinputpanel="false" left="14" top="69" width="1156" height="700" autofittype="col" oncelldblclick="inventory_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="112"/>
+                <Column size="149"/>
+                <Column size="73"/>
+                <Column size="95"/>
+                <Column size="133"/>
+                <Column size="167"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="품번"/>
+                <Cell col="1" text="품명"/>
+                <Cell col="2" text="단위"/>
+                <Cell col="3" text="안전재고"/>
+                <Cell col="4" text="가용재고"/>
+                <Cell col="5" text="자재"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ITEM_CODE"/>
+                <Cell col="1" text="bind:ITEM_NAME"/>
+                <Cell col="2" text="bind:UNIT_OF_STOCK"/>
+                <Cell col="3" text="bind:SAFETY_ALLOWANCE_AMOUNT"/>
+                <Cell col="4" expr="expr:(STOCK_AMOUNT)-(SAFETY_ALLOWANCE_AMOUNT)"/>
+                <Cell col="5" text="bind:STOCK_AMOUNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="inventory_stc" taborder="2" text="재고조회" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_stock">
+        <ColumnInfo>
+          <Column id="WAREHOUSE_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="DELIVERY_NO" type="STRING" size="256"/>
+          <Column id="PRODUCTION_RESULT_NO" type="STRING" size="256"/>
+          <Column id="INPUT_ITEM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="SAFETY_ALLOWANCE_AMOUNT" type="STRING" size="256"/>
+          <Column id="STOCK_AMOUNT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+//재고 온로드
+this.logi_InventoryForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"findStockList",
+		"dataURL::logi/purchase/findStockList.do",
+		"",
+		"ds_stock=ds_stock",
+		"",
+		"callback"
+		);	
+}
+
+//재고이력조회
+this.inventory_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var itemCode=this.ds_stock.getColumn(e.row,"ITEM_CODE");
+	var itemDsc=this.ds_stock.getColumn(e.row,"DESCRIPTION");
+	application.trace(itemDsc);
+	application.trace(itemCode);
+	
+	if(itemDsc!='부품'){
+		//반제품,제품일떄
+		application.open(
+			"logi_deliveryHistoryDial", 	
+			"logi_purchase::logi_deliveryHistoryDialog.xfdl", 
+			this.getOwnerFrame(),
+			{itemCode:itemCode},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='deliveryHistory'"
+		);
+	} else {	
+		//부품일떄
+		application.open(
+			"logi_InventoryHistoryDial",
+			"logi_purchase::logi_InventoryHistoryDialog.xfdl", 
+			this.getOwnerFrame(),
+			{itemCode:itemCode},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='InventoryHistory'" 
+		);
+	}	
+}
+
+
+//콜백
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid=="findStockList"){
+		if(ErrorCode<0){
+			application.alert("온로드 실패");
+		} else {	
+		
+		}
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

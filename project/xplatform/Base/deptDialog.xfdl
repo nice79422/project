@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="businessDialog" classname="businessDialog" inheritanceid="" position="absolute 0 0 273 402" titletext="New Form" onload="businessDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="부서조회" position2="absolute l:10 w:244 t:15 h:39" positiontype="position2" style="background:silver;color:floralwhite;align:middle;font:맑은 고딕,16,bold;"/>
+        <Grid id="deptGrid" taborder="1" useinputpanel="false" position2="absolute l:15 w:239 t:64 h:320" positiontype="position2" binddataset="ds_dept" autofittype="col" oncelldblclick="deptGrid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="116"/>
+                <Column size="98"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="background:silver;color:ghostwhite;" text="부서코드"/>
+                <Cell col="1" style="background:silver;color:ghostwhite;" text="부서명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DEPT_CODE"/>
+                <Cell col="1" text="bind:DEPT_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript4.0"><![CDATA[
+function businessDialog_onload(obj:Form, e:LoadEventInfo)
+{   
+	transaction("findDeptList",
+	"svcBase::findDeptList.do",
+	"",
+	"ds_dept=dsDepartment",
+	"",
+	"callback",
+	false);
+}
+
+function deptGrid_oncelldblclick(obj:Grid, e:GridClickEventInfo)
+{
+    var seldeptCode = ds_dept.getColumn(e.row, "DEPT_CODE");
+	var selDeptName = ds_dept.getColumn(e.row, "DEPT_NAME");
+	
+	g_deptName=selDeptName;
+	this.opener.deptCode.value=seldeptCode;
+
+	close();
+	
+	
+}
+
+
+
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

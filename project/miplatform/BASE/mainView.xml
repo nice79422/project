@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="780" Id="mainView" Left="8" PidAttrib="7" scroll="false" Title="mainView" Top="8" Ver="1.0" Width="970" WorkArea="true">
+		<Static Align="Center" Font="Default,11,Bold" Height="27" Id="Static0" Left="240" TabOrder="1" Text="Copyright&#32;(C)&#32;SY&#32;Company.All&#32;Rights&#32;Reserved." Top="704" Width="488"></Static>
+		<Image FillType="STRETCH" Height="564" Id="Image0" ImageID="iu3" Left="104" TabOrder="2" Top="64" Width="753"></Image>
+	</Form>
+	<Script></Script>
+</Window>

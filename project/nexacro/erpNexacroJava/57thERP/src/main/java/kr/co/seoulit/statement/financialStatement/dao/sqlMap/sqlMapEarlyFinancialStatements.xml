@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper  namespace="kr.co.seoulit.statement.financialStatement.dao.EarlyFinancialStatementsDAO">
+
+  	<resultMap type="earlyAssetsCountTO" id="earlyAssetsCountTOResult">
+		<result property="groupCode" column="GROUP_CODE" />
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="accountName" column="ACCOUNT_NAME" />
+	<result property="price" column="price" />
+    </resultMap>
+    
+  	<resultMap type="earlyLiabilitiesAndCapitalCountTO" id="earlyLiabilitiesAndCapitalCountTOResult">
+		<result property="groupCode" column="GROUP_CODE" />
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="accountName" column="ACCOUNT_NAME" />
+		<result property="price" column="price" />
+    </resultMap>
+    
+    <resultMap type="earlyFinancialStatementsTO" id="earlyFinancialStatementsResult">
+		<result property="groupCode" column="GROUP_CODE" />
+		<result property="price" column="price" />
+    </resultMap>
+    
+
+    <select id="selectAssetsOnLastYear" resultMap="earlyAssetsCountTOResult">
+    	SELECT 
+		a.GROUP_CODE AS GROUP_CODE
+		, e.ACCOUNT_INNER_CODE AS ACCOUNT_INNER_CODE
+		, e.ACCOUNT_NAME AS ACCOUNT_NAME
+		, CASE WHEN e.BALANCE_DIVISION = '대변' THEN e.RIGHT_CREDITS_PRICE
+			ELSE e.LEFT_DEBTOR_PRICE END AS price
+		FROM EARLY_STATEMENTS e 
+		, ACCOUNT a
+		WHERE 
+		a.ACCOUNT_INNER_CODE = e.ACCOUNT_INNER_CODE 
+		AND e.STATEMENTS_DIVISION = '재무' 
+		AND a.GROUP_CODE IN ('1.유동자산','2.비유동자산')
+		ORDER BY e.ACCOUNT_INNER_CODE 
+    </select>
+
+    <select id="selectLiabilitiesAndCapitalOnLastYear" resultMap="earlyLiabilitiesAndCapitalCountTOResult">
+   		SELECT 
+		a.GROUP_CODE AS GROUP_CODE
+		, e.ACCOUNT_INNER_CODE AS ACCOUNT_INNER_CODE
+		, e.ACCOUNT_NAME AS ACCOUNT_NAME
+		, e.RIGHT_CREDITS_PRICE AS price
+		FROM EARLY_STATEMENTS e 
+		, ACCOUNT a
+		WHERE 
+		a.ACCOUNT_INNER_CODE = e.ACCOUNT_INNER_CODE 
+		AND e.STATEMENTS_DIVISION = '재무' 
+		AND a.GROUP_CODE IN ('3.유동부채','4.비유동부채','5.자본')
+		ORDER BY e.ACCOUNT_INNER_CODE 
+    </select>
+    
+      	
+    <select id="selectFinancialStatementsOnLastYear" resultMap="earlyFinancialStatementsResult">
+		   
+		SELECT 
+		CASE WHEN total.GROUP_CODE IS NULL THEN 
+		'자산총계(1+2)'ELSE
+		total.GROUP_CODE END AS GROUP_CODE,
+		MAX(total.price) AS PRICE 
+		FROM (
+			SELECT
+			a.GROUP_CODE AS GROUP_CODE,
+			CASE a.GROUP_CODE WHEN '1.유동자산' THEN SUM(a.price)
+			WHEN '2.비유동자산' THEN SUM(a.price)
+		    END AS price
+		    FROM (
+		    	SELECT 
+		  		a.GROUP_CODE AS GROUP_CODE,
+		  		e.ACCOUNT_INNER_CODE AS ACCOUNT_INNER_CODE,
+		  		e.ACCOUNT_NAME AS 계정과목,
+				CASE WHEN e.BALANCE_DIVISION = '대변' THEN SUM(NVL(-e.RIGHT_CREDITS_PRICE,0))
+				ELSE
+				SUM(NVL(e.LEFT_DEBTOR_PRICE,0)) END AS price
+		  		FROM EARLY_STATEMENTS e , ACCOUNT a
+		  		WHERE 
+		  		a.account_inner_code = e.account_inner_code AND
+		  		e.STATEMENTS_DIVISION = '재무' AND
+		  		a.GROUP_CODE IN ('1.유동자산','2.비유동자산') 
+		  		GROUP BY a.GROUP_CODE,e.ACCOUNT_INNER_CODE,e.ACCOUNT_NAME,e.BALANCE_DIVISION) a
+		  	GROUP BY a.GROUP_CODE) total
+		GROUP BY ROLLUP(TOTAL.GROUP_CODE)
+		
+		UNION ALL
+		
+		SELECT
+		CASE WHEN total.GROUP_CODE IS NULL THEN '부채총계(3+4)'
+		ELSE total.GROUP_CODE END AS GROUP_CODE
+		, MAX(total.price) AS price 
+		FROM (
+			SELECT 
+			a.GROUP_CODE AS GROUP_CODE
+			, e.ACCOUNT_INNER_CODE AS 코드
+			, e.ACCOUNT_NAME AS 계정과목
+			, SUM(e.RIGHT_CREDITS_PRICE) AS price
+			, GROUPING_ID(a.GROUP_CODE
+			, e.ACCOUNT_INNER_CODE
+			, e.ACCOUNT_NAME) AS GP_ID
+			FROM 
+			EARLY_STATEMENTS e 
+			, ACCOUNT a
+			WHERE 
+			a.account_inner_code = e.account_inner_code 
+			AND e.STATEMENTS_DIVISION = '재무' 
+			AND a.GROUP_CODE IN ('3.유동부채','4.비유동부채')
+			GROUP BY ROLLUP(a.GROUP_CODE,e.ACCOUNT_INNER_CODE,e.ACCOUNT_NAME)
+			) total
+		GROUP BY total.GROUP_CODE
+			
+		UNION ALL
+		
+		SELECT
+		CASE WHEN total.GROUP_CODE IS NULL THEN '자본총계(5+6+7+8+9)'
+		ELSE total.GROUP_CODE END AS GROUP_CODE
+		, CASE MAX(total.price) WHEN 0 THEN 0 
+		ELSE MAX(total.price) END AS price 
+		FROM (
+			SELECT 
+			a.GROUP_CODE AS GROUP_CODE
+			, e.ACCOUNT_INNER_CODE AS 코드
+			, e.ACCOUNT_NAME AS 계정과목
+			, NVL(SUM(e.RIGHT_CREDITS_PRICE),0) AS price
+			, GROUPING_ID(a.GROUP_CODE, e.ACCOUNT_INNER_CODE, e.ACCOUNT_NAME) AS GP_ID
+			FROM 
+			EARLY_STATEMENTS e 
+			, ACCOUNT a
+			WHERE 
+			a.account_inner_code = e.account_inner_code 
+			AND e.STATEMENTS_DIVISION =	'재무' 
+			AND a.GROUP_CODE IN (SELECT GROUP_CODE FROM account where GROUP_CODE NOT IN ('1.유동자산','2.비유동자산','3.유동부채','4.비유동부채'))
+			GROUP BY ROLLUP(a.GROUP_CODE,e.ACCOUNT_INNER_CODE,e.ACCOUNT_NAME)
+			) total
+		GROUP BY total.GROUP_CODE
+		
+		UNION ALL
+		
+		SELECT
+		MAX(NVL(CASE WHEN total.GROUP_CODE IS NULL THEN '부채 및 자본 총계' END,0)) AS GROUP_CODE
+		, MAX(total.price) AS price 
+		FROM (
+			SELECT 
+			a.GROUP_CODE AS GROUP_CODE
+			, e.ACCOUNT_INNER_CODE AS 코드
+			, e.ACCOUNT_NAME AS 계정과목
+			, SUM(e.RIGHT_CREDITS_PRICE) AS price
+			, GROUPING_ID(a.GROUP_CODE, e.ACCOUNT_INNER_CODE, e.ACCOUNT_NAME) AS GP_ID
+			FROM 
+			EARLY_STATEMENTS e 
+			, ACCOUNT a
+			WHERE 
+			a.account_inner_code = e.account_inner_code 
+			AND e.STATEMENTS_DIVISION = '재무' 
+			AND a.GROUP_CODE IN (SELECT GROUP_CODE FROM account where GROUP_CODE NOT IN ('1.유동자산','2.비유동자산'))
+			GROUP BY ROLLUP(a.GROUP_CODE,e.ACCOUNT_INNER_CODE,e.ACCOUNT_NAME)
+			) total
+	
+	</select>
+	
+</mapper>
+    
+    
+  

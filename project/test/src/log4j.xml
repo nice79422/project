@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="EUC-KR" ?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN"
+    "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d{MMM dd hh:mm:ss aa} %p - %C{1}.%M(%F:%L) | %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="FILEAPPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="file" value="c:/temp/log.log" />
+        <param name="maxFileSize" value="10MB" />
+        <param name="maxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d{MMM dd hh:mm:ss aa} %p - %C{1}.%M(%L) | %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="FATALFILEAPPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="file" value="c:/temp/fatal.log" />
+        <param name="maxFileSize" value="10MB" />
+        <param name="maxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d{MMM dd hh:mm:ss aa} %p - %C{1}.%M(%L) | %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="info" />
+            <param name="LevelMax" value="fatal" />
+        </filter>
+    </appender>
+
+
+<!-- <appender name="SMTPAPPENDER" class="com.synote.common.appender.SecureSMTPAppender">
+         <param name="BufferSize" value="512" />
+        <param name="SMTPHost" value="smtp.naver.com" />
+         <param name="SMTPPort" value="587" />
+        <param name="useStartTLS" value="true" />
+        <param name="SMTPUsername" value="yourEmailId" />
+        <param name="SMTPPassword" value="password" />
+        <param name="From" value="yourEmailId@naver.com" />
+        <param name="To" value="yourEmailId@naver.com" />
+        <param name="Subject" value="TEST - log4j - FATAL - SMTPAPPENDER" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{ISO8601}]%n%n%-5p%n%n%c%n%n%m%n%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="error" />
+            <param name="LevelMax" value="fatal" />
+        </filter>
+    </appender> -->
+
+
+
+    <logger name="com.test">
+        <level value="DEBUG" />
+        <appender-ref ref="FILEAPPENDER" />
+    </logger>
+
+    <logger name="com.test">         <!-- 지정한 곳만 출력 -->
+      <!--      <level value="FATAL" />-->
+        <appender-ref ref="SMTPAPPENDER" />
+    </logger>
+
+    <root>               <!-- 루트 이하에 있는 모든 클래스 출력 -->
+        <level value="DEBUG" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</log4j:configuration>
+
+
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+factory 패턴
+log4j 오류나는 부분을 어디에 찍을 지 정할 수 있다. ex) 콘솔에 찍기, 메일에 찍기 등등..
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %5p [%c] %m%n" />
+        </layout>
+    </appender>
+  <appender name="rollingDEMOError" class="org.apache.log4j.RollingFileAppender">
+        <param name="Threshold" value="ERROR" />
+        <param name="File" value="c:/temp/fatal.log" />
+        <param name="MaxFileSize" value="5MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="{%d{yyyy-MM-dd HH:mm:ss.SSS}} [%5p] [%C] %m%n" />
+        </layout>
+    </appender>
+    <logger name="co.betterlogistics" additivity="true">
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+    </logger>
+     <logger name="co.betterlogistics" additivity="true">
+      <level value="DEBUG" />
+      <appender-ref ref="rollingDEMOError" />
+   </logger>
+</log4j:configuration> -->
+
+
+<!--
+ <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender"> 콘솔출력담당
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="[%d{HH:mm:ss.SSS}] %-5p %C{1}.%M(%F:%L) - %m%n" />
+        </layout>
+    </appender>-->
+
+
+<!--
+   <appender name="SMTPAppender" class="kr.co.seoulit.common.appender.SecureSMTPAppender">
+
+      <param name="BufferSize" value="512" />
+      <param name="SMTPHost" value="smtp.naver.com" />
+      <param name="SMTPPort" value="587" />
+      <param name="useStartTLS" value="true" />
+      <param name="SMTPUsername" value="" />
+      <param name="SMTPPassword" value="" />
+      <param name="From" value="" />
+      <param name="To" value= />
+      <param name="Subject" value="[SMTPAppender] Application message" />
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="[%d{ISO8601}]%n%n%-5p%n%n%c%n%n%m%n%n" />
+      </layout>
+      <filter class="org.apache.log4j.varia.LevelRangeFilter">
+         <param name="LevelMin" value="error" />
+         <param name="LevelMax" value="fatal" />
+      </filter>
+   </appender>-->
+
+
+<!--    <logger name="kr.co.seoulit" additivity="false">
+      <level value="FATAL" />
+      <appender-ref ref="FATALAPPENDER" />
+      <appender-ref ref="SMTPAppender" />
+   </logger>
+   <root>
+      <level value="DEBUG" />
+      <appender-ref ref="CONSOLE" />
+   </root>
+</log4j:configuration>
+ -->

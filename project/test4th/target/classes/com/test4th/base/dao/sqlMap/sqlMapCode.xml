@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="code">
+	<typeAlias alias="codeBean" type="com.test4th.base.to.CodeBean" />
+	<resultMap id="codeResult" class="codeBean">
+		<result property="code" column="CODE" />
+		<result property="codeName" column="CODE_NAME" />
+		<result property="usingStatus" column="USING_STATUS" />
+		<result property="detailCodeList" select="detailCode.selectDetailCodeList" column="CODE" />
+		<!-- 매개변수에 List를 바로 CODE Column를 이용하여 다른 sqlmap 실행 한다.  -->
+	</resultMap>
+
+	<!-- 코드목록을 가져오는 메서드 -->
+	<select id="findCodeList" resultMap="codeResult">
+    <![CDATA[
+      SELECT * FROM CODE ORDER BY CODE
+    ]]>
+	</select>
+
+
+	<insert id="insertCode" parameterClass="codeBean">
+		<![CDATA[
+	        INSERT INTO 
+	        CODE
+	        (
+	        CODE,
+	        CODE_NAME,
+	        USING_STATUS
+	        ) 
+	        VALUES(#code#, #codeName#, #usingStatus#)
+    	]]>
+	</insert>
+
+
+	<update id="updateCode" parameterClass="codeBean">
+		<![CDATA[
+	       UPDATE
+	            CODE
+	       SET
+	            CODE_NAME = #codeName#,
+	            USING_STATUS = #usingStatus#
+	       WHERE
+	            CODE = #code#
+
+    	]]>
+	</update>
+
+<!-- 삭제는 이용 안함!!! -->
+	<delete id="deleteCode" parameterClass="codeBean">
+		<![CDATA[
+	      DELETE
+	      FROM
+	      		CODE
+	      WHERE
+	            CODE = #code#
+    	]]>
+	</delete> 
+
+</sqlMap>

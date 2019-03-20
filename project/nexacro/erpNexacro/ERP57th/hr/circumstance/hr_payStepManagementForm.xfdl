@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="annualApplicationForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="hr_HolidayManagementForm_onload">
+    <Layouts>
+      <Layout width="1024" height="768">
+        <Grid id="Grid01" taborder="46" useinputpanel="false" left="28.61%" top="134" right="1.37%" height="530" binddataset="ds_payStep" autosizingtype="none" autosizebandtype="body" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="호봉"/>
+                <Cell col="1" text="직급코드"/>
+                <Cell col="2" text="기본급"/>
+                <Cell col="3" text="상여금"/>
+                <Cell col="4" text="시급"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="none" text="bind:HOBONG"/>
+                <Cell col="1" edittype="none" text="bind:POSITION_CODE"/>
+                <Cell col="2" displaytype="currency" edittype="none" text="bind:BASE_SAL" expr="expr:SIGUB*208"/>
+                <Cell col="3" displaytype="currency" edittype="none" text="bind:BONUS" expr="expr:SIGUB*104"/>
+                <Cell col="4" displaytype="currency" edittype="text" text="bind:SIGUB"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="reference_btn" taborder="47" text="조회" left="71.88%" top="64" right="21.88%" height="64" onclick="reference_btn_onclick"/>
+        <Button id="add_btn" taborder="48" text="추가" left="78.61%" top="64" right="15.14%" height="64" onclick="add_btn_onclick"/>
+        <Button id="delete_btn" taborder="50" text="삭제" left="85.35%" top="64" right="8.4%" height="64" onclick="delete_btn_onclick"/>
+        <Button id="save_btn" taborder="51" text="저장" left="92.09%" top="64" right="1.66%" height="64" onclick="save_btn_onclick"/>
+        <Grid id="Grid00" taborder="54" useinputpanel="false" left="1.37%" top="134" right="72.17%" height="530" binddataset="ds_codeDetail" autofittype="col" oncellclick="positionCell" tooltiptext="직급을 선택하면 해당 직급의 호봉정보가 출력됩니다." tooltiptype="default">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="분류코드"/>
+                <Cell col="1" text="직급코드"/>
+                <Cell col="2" text="직급명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DIVISION_CODE_NO"/>
+                <Cell col="1" edittype="text" text="bind:DETAIL_CODE"/>
+                <Cell col="2" edittype="text" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="positionReference_btn" taborder="55" text="조회" onclick="positionReference_btn_onclick" left="1.37%" top="64" right="92.38%" height="64"/>
+        <Static id="Static00" taborder="56" text="호봉 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Button id="positionDelete_btn" taborder="57" text="삭제" onclick="positionDelete_btn_onclick" left="14.84%" top="64" right="78.91%" height="64"/>
+        <Button id="positionAdd_btn" taborder="58" text="추가" onclick="positionAdd_btn_onclick" left="8.11%" top="64" right="85.64%" height="64"/>
+        <Button id="positionSave_btn" taborder="59" text="저장" onclick="positionSave_btn_onclick" left="21.58%" top="64" right="72.17%" height="64"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_payStep">
+        <ColumnInfo>
+          <Column id="HOBONG" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="BASE_SAL" type="STRING" size="256"/>
+          <Column id="BONUS" type="STRING" size="256"/>
+          <Column id="SIGUB" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_position">
+        <ColumnInfo>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="POSITION_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="POSITION_CODE">POS000</Col>
+            <Col id="POSITION_NAME">회장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS001</Col>
+            <Col id="POSITION_NAME">사장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS002</Col>
+            <Col id="POSITION_NAME">전무</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS003</Col>
+            <Col id="POSITION_NAME">상무</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS004</Col>
+            <Col id="POSITION_NAME">이사</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS005</Col>
+            <Col id="POSITION_NAME">부장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS006</Col>
+            <Col id="POSITION_NAME">차장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS007</Col>
+            <Col id="POSITION_NAME">과장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS008</Col>
+            <Col id="POSITION_NAME">계장</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS009</Col>
+            <Col id="POSITION_NAME">대리</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS010</Col>
+            <Col id="POSITION_NAME">주임</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS011</Col>
+            <Col id="POSITION_NAME">사원</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS012</Col>
+            <Col id="POSITION_NAME">인턴</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS013</Col>
+            <Col id="POSITION_NAME">일용</Col>
+          </Row>
+          <Row>
+            <Col id="POSITION_CODE">POS014</Col>
+            <Col id="POSITION_NAME">노예</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_code">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CODE_NAME" type="STRING" size="256"/>
+          <Column id="EDIT_STATUS" type="STRING" size="256"/>
+          <Column id="CODE_GROUP" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+직급별 호봉관리 화면                                             						                                                                         
+@Path			인사              				   				
+@Description	직급별 호봉관리를 하기 위한  폼							
+@Author	  		김태형			    			                        								                                            
+@Create			2019. 02. 14.                             		                    				                                            
+********************************************************************************/
+
+this.hr_HolidayManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_codeDetail=gds_codeDetail",
+					"",
+					"callback",false
+					);	
+	this.ds_codeDetail.filter("DIVISION_CODE_NO == 'SYS06'");
+					
+	this.transaction("findHolidayListAll",
+					"dataURL::hr/circumstance/findPayStepList.do",
+					"",
+					"ds_payStep=ds_payStep",
+					"",
+					"callback",false
+					);
+
+	var poscode=this.ds_codeDetail.getColumn(e.row,"DETAIL_CODE");
+    this.ds_payStep.filter("POSITION_CODE =='"+poscode+"'");
+ 
+}
+
+this.reference_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.transaction("findHolidayListAll",
+					"dataURL::hr/circumstance/findPayStepList.do",
+					"",
+					"ds_payStep=ds_payStep",
+					"",
+					"",false
+					);
+
+	var poscode=this.ds_codeDetail.getColumn(e.row,"DETAIL_CODE");
+    this.ds_payStep.filter("POSITION_CODE =='"+poscode+"'");	
+}
+
+
+this.positionCell = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var poscode=this.ds_codeDetail.getColumn(e.row,"DETAIL_CODE");
+    this.ds_payStep.filter("POSITION_CODE =='"+poscode+"'");		
+}
+
+this.add_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nPayStep=this.ds_payStep.rowcount+1;
+	var vPositionCode=this.ds_codeDetail.getColumn(this.ds_codeDetail.rowposition,"DETAIL_CODE");
+	this.ds_payStep.addRow();
+	this.ds_payStep.setColumn(this.ds_payStep.rowposition, "POSITION_CODE", vPositionCode);
+	this.ds_payStep.setColumn(this.ds_payStep.rowposition, "HOBONG", nPayStep+"호봉");
+}
+
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_payStep.deleteRow(this.ds_payStep.rowposition);
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("변경사항을 저장하시겠습니까?")){	
+		this.transaction("batchPayStep",
+						"dataURL::hr/circumstance/batchPayStep.do",
+						"ds_payStep=ds_payStep:u",
+						"ds_payStep=ds_payStep",
+						"",
+						""
+						);		
+	}
+}
+
+
+this.positionReference_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 직급조회
+{
+	this.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_codeDetail=ds_codeDetail",
+					"",
+					"callback",false
+					);	
+	this.ds_codeDetail.filter("DIVISION_CODE_NO == 'SYS06'");	
+}
+
+
+
+
+this.positionAdd_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 직급추가
+{
+ 	var posCount=this.ds_codeDetail.rowcount;
+	var posNumber=this.ds_codeDetail.getColumn(posCount-1,"DETAIL_CODE");
+	var posN=posNumber.substring(3,6);
+	var posK=parseInt(posN)+1;
+
+	this.ds_codeDetail.addRow();
+	this.ds_codeDetail.setColumn(posCount, "DIVISION_CODE_NO", "SYS06");
+	if(posK < 10){
+ 		this.ds_codeDetail.setColumn(posCount, "DETAIL_CODE", "POS00"+posK);
+	}else if(posK < 100){
+		this.ds_codeDetail.setColumn(posCount, "DETAIL_CODE", "POS0"+posK);
+	}else if(posK < 1000){
+		this.ds_codeDetail.setColumn(posCount, "DETAIL_CODE", "POS"+posK);
+	}
+	
+}
+
+this.positionDelete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 직급삭제
+{
+	this.ds_codeDetail.deleteRow(this.ds_codeDetail.rowposition);
+}
+
+this.positionSave_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 직급저장
+{
+	if(confirm("변경사항을 저장하시겠습니까?")){	
+		this.transaction("batchDetailCode",
+						"dataURL::sys/batchDetailCode.do",
+						"gds_codeDetail=gds_codeDetail:u",
+						"",
+						"",
+						"callback",
+						false
+						);		
+	}		
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="1.1">
+  <TypeDefinition url="default_typedef.xml"/>
+  <GlobalVariables url="globalvars.xml"/>
+  <Application id="test5th" codepage="utf-8" language="Korean" loginformurl="" loginformstyle="" windowopeneffect="" windowcloseeffect="" version="" tracemode="" themeid="default.xtheme" onload="application_onload">
+    <Layout>
+      <MainFrame id="mainframe" title="maintitle" defaultfont="" resizable="true" showtitlebar="true" showstatusbar="true" position="absolute 0 0 820 460" openalign="center middle" style="statusbarheight:0;">
+        <ChildFrame id="ChildFrame0" formurl="Base::loginForm.xfdl" position="absolute 0 0 0 0"/>
+      </MainFrame>
+    </Layout>
+    <ScreenInfo/>
+  </Application>
+  <Script type="xscript4.0"><![CDATA[/*function application_onload(obj:Object, e:LoadEventInfo)
+{
+	application.mainframe.visible = false; // mainframe을 처음에 보이지 않고 loginform 뜸!
+	openLoginFormDialog("loginform","LoginForm","Base::loginForm.xfdl");
+	//openDialog("loginForm","LoginForm","Base::loginForm.xfdl","","");
+	
+}
+
+function openLoginFormDialog(sID,sTitle,sUrl){
+
+	
+	//Dialog.showModal(sParent);
+	
+	var loginDialog = new ChildFrame(sID,0,0,0,0,sUrl);	
+	loginDialog.showstatusbar=false;
+	loginDialog.resizable = false;
+	//loginDialog.titletext=sTitle;
+	loginDialog.showstatusbar = false;
+	loginDialog.openalign = "center middle"; //ChildFrame 뜰때 위치 지정 
+	loginDialog.showcascadetitletext = false; // newForm 상단에 나타나는것 제거!!(text 미포함)
+	loginDialog.showModal(sID,"");  // 선언 순서 상관 있음 
+	
+}
+
+function gfn_Open(sID, sURL, sTitle){
+  var menuTreePath=application.mainframe.VFrameSet0.HFrameSet0.ChildFrame1;
+    
+    menuTreePath.formurl=sURL;
+    menuTreePath.titletext=sTitle;
+
+}
+*/]]></Script>
+</ADL>

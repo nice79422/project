@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="kr.co.seoulit.acc.accSubMgt.dao.AccountSummaryDAO">
+
+	<resultMap type="accountSummaryTO" id="accountSummaryResult">
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="accountCharacter" column="ACCOUNT_CHARACTER" />
+	</resultMap>
+
+	<select id="selectAccountSummaryList" resultMap="accountSummaryResult">
+			SELECT ACCOUNT_INNER_CODE,
+					ACCOUNT_CHARACTER
+					FROM ACCOUNT
+	</select>
+
+</mapper>

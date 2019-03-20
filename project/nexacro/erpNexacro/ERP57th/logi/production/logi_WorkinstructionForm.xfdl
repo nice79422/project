@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_WorkinstructionForm" left="0" top="0" width="1185" height="785" titletext="WorkinstructionForm" onload="logi_WorkinstructionForm_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="mrpGathering_grid" taborder="1" binddataset="ds_mrpGathering" useinputpanel="false" autofittype="col" left="46" top="90" width="1094" height="288" style="font:새굴림,11;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="154"/>
+                <Column size="80"/>
+                <Column size="145"/>
+                <Column size="64"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="소요량취합번호"/>
+                <Cell col="1" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목코드"/>
+                <Cell col="2" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="품목명"/>
+                <Cell col="3" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="단위"/>
+                <Cell col="4" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="필요수량"/>
+                <Cell col="5" displaytype="normal" style="font:bold 11 한컴산뜻돋움;" text="작업지시일"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:MRP_GATHERING_NO"/>
+                <Cell col="1" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_CODE"/>
+                <Cell col="2" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:ITEM_NAME"/>
+                <Cell col="3" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:UNIT_OF_MRP_GATHERING"/>
+                <Cell col="4" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:NECESSARY_AMOUNT"/>
+                <Cell col="5" displaytype="normal" style="font:11 한컴산뜻돋움;" text="bind:DUE_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="addWorkInstruction_btn" taborder="2" text="↓" left="547" top="406" width="117" height="39" style="font:한컴산뜻돋움,11,bold;" onclick="addWorkInstruction_btn_onclick"/>
+        <Grid id="workInsturction_grid" taborder="3" binddataset="ds_workInstruction" useinputpanel="false" autofittype="col" left="24" top="472" width="1094" height="278" style="font:새굴림,11;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="80"/>
+                <Column size="166"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시번호"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="소요량취합번호"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시수량"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시일"/>
+                <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="작업지시상태"/>
+                <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="생산완료여부"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_NO"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MRP_GATHERING_NO"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_WORK_INSTRUCTION"/>
+                <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_AMOUNT"/>
+                <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:INSTRUCTION_DATE"/>
+                <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WORK_INSTRUCTION_STATUS"/>
+                <Cell col="8" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:PRODUCTION_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Combo id="workinst_combo" taborder="4" codecolumn="codecolumn" datacolumn="datacolumn" type="search" left="1061" top="407" width="64" height="40" onitemchanged="workinst_combo_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">Y</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">N</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Static id="workinstruction_stc" taborder="5" text="작업지시" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_workInstruction">
+        <ColumnInfo>
+          <Column id="WORK_INSTRUCTION_NO" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="INSTRUCTION_DATE" type="STRING" size="256"/>
+          <Column id="UNIT_OF_WORK_INSTRUCTION" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_AMOUNT" type="STRING" size="256"/>
+          <Column id="PRODUCTION_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mrpGathering">
+        <ColumnInfo>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_OR_PRODUCTION_STATUS" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP_GATHERING" type="STRING" size="256"/>
+          <Column id="NECESSARY_AMOUNT" type="STRING" size="256"/>
+          <Column id="DUE_DATE" type="STRING" size="256"/>
+          <Column id="CLAIM_DATE" type="STRING" size="256"/>
+          <Column id="ON_GOING_PROCESS_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_materialCheckTempList">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="STOCKTAKING" type="STRING" size="256"/>
+          <Column id="SAFETY_STOCKTAKING" type="STRING" size="256"/>
+          <Column id="STOCK_STATUS" type="STRING" size="256"/>
+          <Column id="SAFETY_STOCK_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.logi_WorkinstructionForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)//자바단구현
+{
+	var gatheringStatus='N';
+
+	this.transaction(
+		"findMrpGatheringList",
+		"dataURL::logi/production/findMrpGatheringList.do",
+		"",
+		"ds_mrpGathering=ds_mrpGathering",
+		"gatheringStatus='"+gatheringStatus+"'",
+		"callback"
+		,true
+	);
+	
+	this.ds_mrpGathering.filter("ORDER_OR_PRODUCTION_STATUS=='생산' && ON_GOING_PROCESS_STATUS!='Y' && ON_GOING_PROCESS_STATUS!='O'");
+}
+
+var mrpNum;
+var mrpGno;
+this.errorCode="";
+this.addWorkInstruction_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var mrpGRow=this.ds_mrpGathering.rowposition;
+	
+	mrpGno=this.ds_mrpGathering.getColumn(mrpGRow,"MRP_GATHERING_NO");
+	this.transaction(
+		"findMaterialCheckTempList",
+		"dataURL::logi/production/findMaterialCheckTempList.do",
+		"",
+		"ds_materialCheckTempList=ds_materialCheckTempList",
+		"mrpGno='"+mrpGno+"'",
+		"callback"
+	);
+	this.transaction(
+		"batchMrpGathering",
+		"dataURL::logi/production/batchMrpGathering.do",
+		"ds_mrpGathering=ds_mrpGathering:u",
+		"",
+		"",
+		"callback"
+	);
+	this.ds_workInstruction.filter("MRP_GATHERING_NO=='"+mrpGno+"'");
+	this.ds_mrpGathering.filter("ORDER_OR_PRODUCTION_STATUS=='생산' && ON_GOING_PROCESS_STATUS!='Y' && ON_GOING_PROCESS_STATUS!='O'");
+}
+
+this.workinst_combo_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	if(e.posttext=='Y'){
+		this.ds_workInstruction.filter("PRODUCTION_STATUS=='Y'");
+	}else if(e.posttext=='N'){
+		this.ds_workInstruction.filter("PRODUCTION_STATUS=='N'");
+	}
+}
+
+this.errMsg="";
+this.callback = function(strSvcID, nErrorCode, strErrorMsg) {
+	if(strSvcID=="findMaterialCheckTempList"){
+		if(this.errorCode>=0){
+		var nRow = this.ds_mrpGathering.rowposition;
+		var uRow = this.ds_mrpGathering.setColumn(nRow,"ON_GOING_PROCESS_STATUS","Y");
+		var openD=application.open("modeless",
+								"logi_production::MaterialCheckDialog.xfdl", 
+								this.getOwnerFrame(),
+								{mode:'modeless',ds:this.ds_materialCheckTempList},
+								"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='MaterialCheckDialog'"
+				)
+			if(openD){
+				openD;
+				alert("작업지시완료");
+				this.workinstruction();
+			}
+		}
+		else{
+			alert(this.errMsg);
+			var openD2=application.open("modeless2",
+								"logi_production::MaterialCheckDialog.xfdl", 
+								this.getOwnerFrame(),
+								{mode:'modeless',ds:this.ds_materialCheckTempList},
+								"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='MaterialCheckDialog'"
+				)
+		}
+	}	
+}
+
+this.workinstruction = function(){
+	//this.ds_workInstruction.filter("PRODUCTION_STATUS=='N'");
+	this.transaction(
+		"workinstruction",
+		"dataURL::logi/production/findWorkInstructionList.do",
+		"",
+		"ds_workInstruction=ds_workInstruction",
+		"",
+		"callback"
+	);
+/*	
+	var gatheringStatus='N'
+	this.transaction(
+		"findMrpGatheringList",
+		"dataURL::logi/production/findMrpGatheringList.do",
+		"",
+		"ds_mrpGathering=ds_mrpGathering",
+		"gatheringStatus='"+gatheringStatus+"'",
+		"callback"
+		,true
+	);
+*/
+}
+
+/*
+this.ab = function(){
+	application.open("modeless",
+			"logi_production::MaterialCheckDialog.xfdl", 
+			this.getOwnerFrame(),
+			{mode:'modeless',mrpzno:mrpGno}, 
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='fff'"
+			)
+}
+*/
+
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_journal" left="0" top="0" width="1185" height="785" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Calendar id="Calendar_startDate" taborder="1" left="728" top="75" width="130" height="30" oneditclick="Calendar_startDate_oneditclick"/>
+        <Calendar id="Calendar_endDate" taborder="2" left="896" top="75" width="130" height="30"/>
+        <Static id="Static01" taborder="3" text="~" left="876" top="75" width="18" height="30" style="color:black;font:Verdana,13,bold;"/>
+        <Button id="Button_search" taborder="4" text="조회" onclick="Button_search_onclick" left="1039" top="75" width="76" height="30"/>
+        <Grid id="Grid_journal" taborder="5" binddataset="ds_journal" useinputpanel="false" autofittype="col" left="19" top="119" width="1091" height="508">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="30"/>
+                <Column size="80"/>
+                <Column size="253"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="40"/>
+                <Column size="0"/>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="No"/>
+                <Cell col="1" colspan="3" text="구분"/>
+                <Cell col="4" colspan="2" text="차변"/>
+                <Cell col="6"/>
+                <Cell col="7" colspan="2" text="대변"/>
+                <Cell col="9" colspan="2" text="거래처"/>
+                <Cell row="1" col="1" text="날짜"/>
+                <Cell row="1" col="2" text="번호"/>
+                <Cell row="1" col="3" text="계정코드"/>
+                <Cell row="1" col="4" text="금액"/>
+                <Cell row="1" col="5" colspan="3" text="계정과목"/>
+                <Cell row="1" col="8" text="금액"/>
+                <Cell row="1" col="9" text="거래처코드"/>
+                <Cell row="1" col="10" text="거래처명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1"/>
+                <Cell col="1" text="bind:SLIP_APPROVAL_DATE"/>
+                <Cell col="2" text="bind:JOURNAL_NO"/>
+                <Cell col="3" text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="4" text="bind:LEFT_DEBTOR_PRICE"/>
+                <Cell col="5" colspan="3" text="bind:ACCOUNT_NAME"/>
+                <Cell col="8" text="bind:RIGHT_CREDITS_PRICE"/>
+                <Cell col="9" text="bind:CUSTOMER_CODE"/>
+                <Cell col="10" text="bind:CUSTOMER_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static02" taborder="6" text="장부 관리 &gt; 분개장" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;align:left middle;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_journal" oncolumnchanged="ds_journal_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="SUMMARY_NUMBER" type="STRING" size="256"/>
+          <Column id="SUMMARY_COMMENT" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="SLIP_APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+분개 기록 화면                                             						                                                                         
+@Path			회계           				   				
+@Description	분개하기 위한 폼							
+@Author	  		정승훈			                        								                                            
+@Create         2019. 02. 27.                             		                    				                                            
+********************************************************************************/
+
+this.Button_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var startDate=this.Calendar_startDate.value;
+	var endDate=this.Calendar_endDate.value;
+	
+	var id = "findJournalList";
+    var url = "dataURL::acc/slip/findJournalList.do";
+    var respDs = "";
+    var reqDs = "ds_journal=gds_journal";
+    var args = "startDate='"+startDate+"' endDate='"+endDate+"'";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback);
+}
+
+
+
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid == "findJournalList"){
+		if(ErrorCode < 0){
+			alert("조회 실패" + ErrorMsg);
+		}
+	}
+}]]></Script>
+  </Form>
+</FDL>

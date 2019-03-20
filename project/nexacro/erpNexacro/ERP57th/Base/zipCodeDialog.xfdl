@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="zipCodeDialog" left="0" top="0" width="731" height="341" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="1" text="지번/도로명" wordwrap="char" onclick="Static00_onclick" left="2.05%" top="25" width="97" height="30" style="border:0 none #808080ff ;color:black;align:left middle;font:antialias 12 한컴 고딕;"/>
+        <Edit id="edt_address" taborder="2" left="14.36%" top="25" width="250" height="30" style="bordertype:normal 0 0 ;"/>
+        <Button id="Button00" taborder="3" text="검색" left="50.34%" top="26" width="60" height="28" style="background:#e6a15cff;color:white;bordertype:normal 0 0 ;font:antialias 12 한컴 고딕;" onclick="btn_serachAddress_onclick"/>
+        <Button id="btn_pre" taborder="5" text="이전" left="61.83%" top="26" width="60" height="28" style="background:#e6a15cff;color:white;bordertype:normal 0 0 ;font:antialias 12 한컴 고딕;" onclick="btn_pre_onclick"/>
+        <Button id="btn_next" taborder="6" text="다음" left="70.59%" top="26" width="60" height="28" style="background:#e6a15cff;color:white;bordertype:normal 0 0 ;font:antialias 12 한컴 고딕;" onclick="btn_next_onclick"/>
+        <Combo id="cbo_addressType" taborder="7" left="83.72%" top="25" right="4.24%" height="24" index="1" onitemchanged="cbo_addressType_onitemchanged" text="도로명" value="도로명" innerdataset="@ds_address" codecolumn="TYPE" datacolumn="TYPE"/>
+        <Div id="div0" taborder="8" left="2.74%" top="76" right="2.6%" height="233" visible="false">
+          <Layouts>
+            <Layout width="693" height="233"/>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="4" binddataset="ds_post" useinputpanel="false" left="3.28%" top="77" right="2.74%" height="231" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="178"/>
+                <Column size="509"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="ZIP_NO"/>
+                <Cell col="1" text="LNM_ADRES"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ZIP_NO"/>
+                <Cell col="1" text="bind:LNM_ADRES"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_post">
+        <ColumnInfo>
+          <Column id="ZIP_NO" type="STRING" size="256"/>
+          <Column id="LNM_ADRES" type="STRING" size="256"/>
+          <Column id="RN_ADRES" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_address">
+        <ColumnInfo>
+          <Column id="TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="TYPE">지번</Col>
+          </Row>
+          <Row>
+            <Col id="TYPE">도로명</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[var globalDong;
+var globalPage;
+this.zipCodeDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ds_post.clearData();
+}
+
+this.btn_pre_onclick = function(obj:Button,  e:nexacro.GridClickEventInfo)
+{
+	if(globalPage > 1){
+		globalPage = globalPage - 1;
+	}
+	searchAddressF(globalDong,globalPage);
+}
+
+this.btn_next_onclick = function(obj:Button,  e:nexacro.GridClickEventInfo)
+{
+	globalPage = globalPage + 1;
+	
+	searchAddressF(globalDong,globalPage);
+}
+
+this.btn_serachAddress_onclick = function (obj:Button,  e:nexacro.GridClickEventInfo)  //검색버튼
+{   	var dong = this.edt_address.text;
+      	globalDong = dong;
+	    globalPage = 1;
+	
+	 this.searchAddressF(dong,globalPage);
+	
+}
+
+
+this.searchAddressF = function(dong, page){
+	  this.transaction("findPostList",
+	              "dataURL::base/findPostList.do",
+	              "",
+	              "ds_post=ds_post",
+	              "dong='"+dong+"' page='"+globalPage+"'",
+	              "callback",
+	              false);
+ }
+ 
+ 
+
+this.cbo_addressType_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+   if(this.cbo_addressType.value == "지번"){
+		this.Grid00.set_enable(false);
+	}
+	else{
+		this.Grid00.set_enable(true);
+	}
+}
+
+
+
+this.Grid00_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var addressType = this.cbo_addressType.value;
+	
+	if(addressType == "지번"){
+		var rnAdres = this.ds_post.getColumn(e.row,"RN_ADRES");
+	}else{
+		var lnmAdres = this.ds_post.getColumn(e.row,"LNM_ADRES");
+	}
+	var zipCode = this.ds_post.getColumn(e.row,"ZIP_NO");
+	
+	this.close(rnAdres+"/"+lnmAdres+"/"+zipCode);	
+}
+]]></Script>
+  </Form>
+</FDL>

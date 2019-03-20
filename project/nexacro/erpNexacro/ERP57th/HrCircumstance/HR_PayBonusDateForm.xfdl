@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="payBonusDateForm" left="0" top="0" width="1185" height="785" titletext="New Form">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Grid id="Grid00" taborder="0" useinputpanel="false" left="8.69%" top="154" right="32.71%" height="230">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="지급일자" expandsize="5"/>
+                <Cell col="1" text="직종"/>
+                <Cell col="2" text="대상자"/>
+                <Cell col="3" text="동시발행"/>
+                <Cell col="4" text="급여구분"/>
+                <Cell col="5" text="급여형태"/>
+                <Cell col="6" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="1" text="급/상여 지급일자" left="8.59%" top="11" right="32.81%" height="35" style="align:middle;font:20 Dotum;"/>
+        <Combo id="Combo00" taborder="2" text="Combo00" left="7.03%" top="84" right="81.05%" height="36"/>
+        <Combo id="Combo01" taborder="3" text="Combo00" left="21.88%" top="84" right="66.21%" height="36"/>
+        <Button id="Button03" taborder="7" text="저장" left="60.94%" top="84" right="32.71%" height="36"/>
+        <Button id="Button00" taborder="8" text="조회" left="37.4%" top="84" right="56.25%" height="36" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="9" text="추가" left="45.21%" top="84" right="48.44%" height="36"/>
+        <Button id="Button02" taborder="10" text="삭제" left="53.03%" top="84" right="40.63%" height="36"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[]]></Script>
+  </Form>
+</FDL>

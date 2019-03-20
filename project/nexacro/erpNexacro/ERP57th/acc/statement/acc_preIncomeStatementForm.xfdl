@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_preIncomeStatementForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="acc_preIncomeStatementForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="preIncomeState_stc" taborder="0" text="전기분 손익계산서" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Grid id="preIncomeStatementRevenuesAndExpense_grid" taborder="1" useinputpanel="false" left="2.05%" top="75" right="51.27%" height="677" autofittype="col" binddataset="ds_RevenuesAndExpenseOnLastYear">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="132"/>
+                <Column size="134"/>
+                <Column size="142"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="3" text="전기"/>
+                <Cell row="1" col="1" text="코드"/>
+                <Cell row="1" col="2" text="계정과목명"/>
+                <Cell row="1" col="3" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="2" text="bind:ACCOUNT_NAME"/>
+                <Cell col="3" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="preIncomeStatement_grid" taborder="2" useinputpanel="false" left="51.07%" top="75" right="2.34%" height="677" autofittype="col" binddataset="ds_IncomeStatementOnLastYear">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="99"/>
+                <Column size="125"/>
+                <Column size="142"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="NO"/>
+                <Cell col="1" colspan="2" text="계정별합계"/>
+                <Cell row="1" col="1" text="계정명"/>
+                <Cell row="1" col="2" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="expr:currow+1"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+                <Cell col="2" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_IncomeStatementOnLastYear">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="PARENT_ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_RevenuesAndExpenseOnLastYear">
+        <ColumnInfo>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+전기분 손익계산서 화면                                           						                                                                         
+@Path		회계              				   				
+@Description	전년도 손익계산 확인을 위한 창						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 28                             		                    				                                            
+********************************************************************************/
+this.acc_preIncomeStatementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var id = "findIncomeStatementOnLastYear";
+    var url = "dataURL::statement/incomeStatement/findIncomeStatementOnLastYear.do";
+    var respDs = "";
+    var reqDs = "ds_IncomeStatementOnLastYear=ds_EarlyIncomeStatement ds_RevenuesAndExpenseOnLastYear=ds_EarlyrevenuesAndExpense";
+    var args = "";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback);	
+}
+
+
+function callback(trid , ErrorCode, ErrorMsg){
+	
+	if(trid=="findIncomeStatementOnLastYear"){
+		if(ErrorCode <0){
+			alert("조회 실패 : " + ErrorMsg);
+		}	
+	}
+}]]></Script>
+  </Form>
+</FDL>

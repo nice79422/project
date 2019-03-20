@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<decorators defaultdir="/decorator">
+	<decorator name="main" page="decorator.jsp">
+        	<pattern>/*</pattern>
+	</decorator>
+	<excludes>
+		<pattern>/loginform.*</pattern>
+		<pattern>/base/login.do?method=logout</pattern>
+		<pattern>/emp/empDetailForm.*</pattern>
+		<pattern>/emp/emp.*</pattern>
+		<pattern>/base/zipCode.*</pattern>
+		<pattern>/base/zipCodeForm.*</pattern>
+		<pattern>/base/basicCode.*</pattern>
+		<pattern>/base/CodeListForm.*</pattern>
+		<pattern>/base/detailCodeList*</pattern>
+		<pattern>/logistics/item/item.*</pattern>
+		<pattern>/logistics/item/bom.*</pattern>
+		<pattern>/logistics/item/bomListForm.*</pattern>
+		<pattern>/logistics/item/addItemForm.*</pattern>
+		<pattern>/logistics/business/client.*</pattern>
+		<pattern>/logistics/business/contract.*</pattern>
+		<pattern>/logistics/business/estimate.*</pattern>
+		<pattern>/logistics/product/mps.*</pattern>
+		<pattern>/logistics/product/mrp.*</pattern>
+		<pattern>/logistics/purchase/purchase.*</pattern>
+		<pattern>/logistics/purchase/purchasingPlace.*</pattern>
+	</excludes>
+</decorators>

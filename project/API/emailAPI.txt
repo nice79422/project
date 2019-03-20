@@ -1,0 +1,70 @@
+	//email 보내기
+	   @RequestMapping("hr/pm/sendEmail.do")
+	   public void sendEmail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	      PlatformData inData = (PlatformData) request.getAttribute("inData"); 
+	        String empCode = inData.getVariable("sEmpCode").getString();
+	         String sEmail = inData.getVariable("sEmail").getString();
+	         // 메일 관련 정보
+	         
+	         System.out.println(empCode);
+	         System.out.println(sEmail);
+	         
+	            String host = "smtp.naver.com";
+	            final String username = "";               //네이버 아이디
+	            final String password = "";      //비밀번호
+	            int port=465;
+	             
+	            // 메일 내용
+	            String recipient = sEmail;                   //받는 사람의 이메일
+	            String subject = empCode+"님의 재직 증명서 입니다.";    //이메일 제목
+	            String body = "확인 후 회신바랍니다";                //이메일 내용
+	             
+	            Properties props = System.getProperties();
+	             
+	            props.put("mail.smtp.host", host);
+	            props.put("mail.smtp.port", port);
+	            props.put("mail.smtp.auth", "true");
+	            props.put("mail.smtp.ssl.enable", "true");
+	            props.put("mail.smtp.ssl.trust", host);
+	              
+	            Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+	                String un=username;
+	                String pw=password;
+	                protected PasswordAuthentication getPasswordAuthentication() {
+	               return new PasswordAuthentication(un, pw);
+	                }
+	            });
+	            session.setDebug(true);
+	              
+	            Message msg = new MimeMessage(session);
+	            msg.setFrom(new InternetAddress("nice79422@naver.com","테스트발송"));    //첫인자가 보내는 사람 이메일, 두번째 인자가 보내는 사람 이름
+	            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+	            msg.setSubject(subject);
+	             
+	            // 파일첨부를 위한 Multipart
+	            Multipart multipart = new MimeMultipart();
+	             
+	            // BodyPart를 생성
+	            BodyPart bodyPart = new MimeBodyPart();
+	            bodyPart.setText(body);
+	             
+	            //Multipart에 BodyPart를 붙인다.
+	            multipart.addBodyPart(bodyPart);
+	             
+	            //이미지를 첨부한다.
+	            bodyPart = new MimeBodyPart();
+	            String filename = "C:/workspace-sts-3.9.6.RELEASE/test5th/src/main/webapp/report/"+empCode+".pdf";
+	            //첨부할 파일 경로
+	            FileDataSource source = new FileDataSource(filename);
+	            bodyPart.setDataHandler(new DataHandler(source));
+	            
+	            bodyPart.setFileName(empCode+"_salary.pdf");
+	            //첨부할 파일의 이름을 바꿔서 보낼수 있음
+	            
+	            bodyPart.setHeader("Content-ID", "image_id");
+	            multipart.addBodyPart(bodyPart);
+	             
+	            // 이메일 메시지의 내용에 Multipart를 붙인다.
+	            msg.setContent(multipart);
+	            Transport.send(msg);
+	      }

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.purchase.dao.OrderDetailDAO">
+
+	<!-- orderDetailDAO -->
+	<resultMap type="orderGatheringTO" id="orderGatheringResult">
+		<result property="itemCode" column="ITEM_CODE"/>
+		<result property="itemName" column="ITEM_NAME"/>
+		<result property="unitOfOrder" column="UNIT_OF_ORDER"/>
+		<result property="deliveryScheduleDate" column="DELIVERY_SCHEDULE_DATE"/>
+		<result property="amount" column="AMOUNT"/>
+		<result property="orderAmount" column="ORDER_AMOUNT"/>
+		<result property="orderGatheringStatus" column="ORDER_GATHERING_STATUS"/>
+	</resultMap>
+
+ 	<select id="selectOrderGatheringList" resultMap="orderGatheringResult">
+ 		SELECT
+ 		M.ITEM_CODE
+		, M.ITEM_NAME
+		, M.UNIT_OF_MRP_GATHERING AS UNIT_OF_ORDER
+		, M.CLAIM_DATE AS DELIVERY_SCHEDULE_DATE
+		, M.NECESSARY_AMOUNT AS AMOUNT
+		, DECODE(SIGN(S.STOCK_AMOUNT -M.NECESSARY_AMOUNT- S.SAFETY_ALLOWANCE_AMOUNT)
+		, -1
+		, ABS(S.STOCK_AMOUNT -M.NECESSARY_AMOUNT- S.SAFETY_ALLOWANCE_AMOUNT),0) AS ORDER_AMOUNT
+		, NULL AS ORDER_GATHERING_STATUS
+		FROM
+		(SELECT ITEM_CODE
+			, STOCK_AMOUNT
+			, SAFETY_ALLOWANCE_AMOUNT
+			FROM STOCK) S
+		, (SELECT ITEM_CODE
+			, ITEM_NAME
+			, UNIT_OF_MRP_GATHERING
+			, MIN(CLAIM_DATE) CLAIM_DATE
+			, SUM(TO_NUMBER(NECESSARY_AMOUNT)) AS NECESSARY_AMOUNT
+			FROM MRP_GATHERING
+			WHERE ORDER_OR_PRODUCTION_STATUS = '구매'
+			AND ON_GOING_PROCESS_STATUS IS NULL
+			GROUP BY ITEM_CODE,ITEM_NAME, UNIT_OF_MRP_GATHERING) M
+		WHERE S.ITEM_CODE =  M.ITEM_CODE
+	</select>
+
+
+	<resultMap type="orderDetailTO" id="orderDetailResult">
+		<result property="orderDetailNo" column="ORDER_DETAIL_NO"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="itemCode" column="ITEM_CODE"/>
+		<result property="itemName" column="ITEM_NAME"/>
+		<result property="unitOfOrder" column="UNIT_OF_ORDER"/>
+		<result property="dueDateOfOrder" column="DUE_DATE_OF_ORDER"/>
+		<result property="deliveryScheduleDate" column="DELIVERY_SCHEDULE_DATE"/>
+		<result property="orderAmount" column="ORDER_AMOUNT"/>
+		<result property="unitPriceOfOrder" column="UNIT_PRICE_OF_ORDER"/>
+		<result property="sumPriceOfOrder" column="SUM_PRICE_OF_ORDER"/>
+		<result property="description" column="DESCRIPTION"/>
+		<result property="mrpGatheringNo" column="MRP_GATHERING_NO"/>
+		<result property="orderDetailStatus" column="ORDER_DETAIL_STATUS"/>
+		<result property="slipRegistStatus" column="SLIP_REGIST_STATUS"/>
+	</resultMap>
+
+
+ 	<select id="selectOrderDetailList" resultMap="orderDetailResult" parameterType="map">
+		SELECT
+		ORDER_DETAIL_NO, ORDER_NO, ITEM_CODE, ITEM_NAME
+		, UNIT_OF_ORDER, DUE_DATE_OF_ORDER, DELIVERY_SCHEDULE_DATE
+		, ORDER_AMOUNT, UNIT_PRICE_OF_ORDER, SUM_PRICE_OF_ORDER, MRP_GATHERING_NO
+		, DESCRIPTION, MRP_GATHERING_NO, ORDER_DETAIL_STATUS,SLIP_REGIST_STATUS
+		FROM ORDER_DETAIL
+		<!-- <if test="requestStatus.equals('slipSelect') and value != null">
+			WHERE ORDER_NO IN
+			<foreach collection="value" item="item" index="index" open="(" separator="," close=")">
+   				  (#{item})
+			</foreach>
+				ORDER BY ITEM_CODE
+		</if> -->
+	</select>
+	
+ 	<select id="selectOrderDetailList2" resultMap="orderDetailResult" parameterType="map">
+		SELECT
+		ORDER_DETAIL_NO, ORDER_NO, ITEM_CODE, ITEM_NAME
+		, UNIT_OF_ORDER, DUE_DATE_OF_ORDER, DELIVERY_SCHEDULE_DATE
+		, ORDER_AMOUNT, UNIT_PRICE_OF_ORDER, SUM_PRICE_OF_ORDER, MRP_GATHERING_NO
+		, DESCRIPTION, MRP_GATHERING_NO, ORDER_DETAIL_STATUS,SLIP_REGIST_STATUS
+		FROM ORDER_DETAIL
+		 <if test="requestStatus.equals('slipSelect') and value != null">
+			WHERE ORDER_NO IN
+			<foreach collection="value" item="item" index="index" open="(" separator="," close=")">
+   				  (#{item})
+			</foreach>
+				ORDER BY ITEM_CODE
+		</if>
+	</select>
+	
+	
+	<insert id="insertOrderDetail" parameterType="orderDetailTO">
+
+		INSERT INTO ORDER_DETAIL
+		( ORDER_DETAIL_NO, ORDER_NO, ITEM_CODE, ITEM_NAME
+		, UNIT_OF_ORDER, DUE_DATE_OF_ORDER, DELIVERY_SCHEDULE_DATE
+		, ORDER_AMOUNT, UNIT_PRICE_OF_ORDER, SUM_PRICE_OF_ORDER
+		, DESCRIPTION, MRP_GATHERING_NO, ORDER_DETAIL_STATUS,SLIP_REGIST_STATUS )
+		VALUES
+		( #{orderDetailNo}
+		, #{orderNo}
+		, #{itemCode}
+		, #{itemName}
+		, #{unitOfOrder}
+		, #{dueDateOfOrder}
+		, #{deliveryScheduleDate}
+		, #{orderAmount}
+		, #{unitPriceOfOrder}
+		, #{sumPriceOfOrder}
+		, #{description}
+		, #{mrpGatheringNo}
+		, #{orderDetailStatus}
+		, #{slipRegistStatus} )
+	</insert>
+
+
+	<update id="updateOrderDetail" parameterType="orderDetailTO">
+		UPDATE ORDER_DETAIL SET
+		ITEM_CODE = #{itemCode}
+		, ITEM_NAME = #{itemName}
+		, UNIT_OF_ORDER = #{unitOfOrder}
+		, DUE_DATE_OF_ORDER = #{dueDateOfOrder}
+		, DELIVERY_SCHEDULE_DATE = #{deliveryScheduleDate}
+		, ORDER_AMOUNT = #{orderAmount}
+		, UNIT_PRICE_OF_ORDER = #{unitPriceOfOrder}
+		, SUM_PRICE_OF_ORDER = #{sumPriceOfOrder}
+		, DESCRIPTION = #{description}
+		, ORDER_DETAIL_STATUS = #{orderDetailStatus}
+		, SLIP_REGIST_STATUS =#{slipRegistStatus}
+		WHERE
+		ORDER_DETAIL_NO = #{orderDetailNo}
+	</update>
+
+
+
+</mapper>

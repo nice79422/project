@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="attendanceApprovalManagement" Left="8" OnLoadCompleted="attendanceApprovalManagement_OnLoadCompleted" PidAttrib="7" scroll="false" Title="attendanceApprovalManagement" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsLocalDailyAttd">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAY_ATTD_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASIC_DAY" size="256" summ="default" type="STRING"/>
+					<colinfo id="TIME" size="256" summ="default" type="STRING"/>
+					<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="COST" size="256" summ="default" type="STRING"/>
+					<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsLocalDailyAttdRest">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTD_REST_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="REQUEST_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="COST" size="256" summ="default" type="STRING"/>
+					<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+					<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATT_REST_SEQ" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsLocalApproval">
+				<Contents>
+					<colinfo id="CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="VALUE" size="256" summ="default" type="STRING"/>
+					<record>
+						<CODE>Y</CODE>
+						<VALUE>승인</VALUE>
+					</record>
+					<record>
+						<CODE>N</CODE>
+						<VALUE>미승인</VALUE>
+					</record>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsDayAnnual">
+				<Contents>
+					<colinfo id="DAY_ANNUAL_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="CAUSE_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CAUSE" size="256" summ="default" type="STRING"/>
+					<colinfo id="STANDARD_YEAR" size="256" summ="default" type="STRING"/>
+					<colinfo id="ANNUAL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="WINDOWTEXT" Font="한컴&#32;윤고딕&#32;230,12" Height="30" Id="Static0" Left="1" TabOrder="1" Text="근태&#32;승인&#32;관리" Top="1" VAlign="Middle" Width="953"></Static>
+		<Tab BKColor="gainsboro" BKSelColor="APPWORKSPACE" Color="WINDOWTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="685" Id="attdApprovalTab" Left="8" SelColor="silver" SelectFont="한컴&#32;윤고딕&#32;230,11" TabOrder="2" Top="64" Width="940">
+			<Contents>
+				<TabPage BorderColor="black" Height="651" Id="tab1" Left="2" TabOrder="2" Text="일근태&#32;승인관리" Top="32" Width="936">
+					<Grid BindDataset="dsLocalDailyAttd" BkColor2="default" BoldHead="true" Bottom="640" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="480" Id="Grid1" InputPanel="FALSE" Left="14" LineColor="default" Right="929" RowHeight="20" TabOrder="1" TabStop="true" Top="160" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="915">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="127"/>
+									<col width="87"/>
+									<col width="1"/>
+									<col width="162"/>
+									<col width="87"/>
+									<col width="127"/>
+									<col width="89"/>
+									<col width="231"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,12" text="사원번호"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,12" text="사원명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,12"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,12" text="기준일"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,12" text="시간"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,12" text="금액"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,12" text="승인상태"/>
+									<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,12" text="사유"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="2" colid="DAY_ATTD_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="3" colid="BASIC_DAY" display="text" font="한컴&#32;윤고딕&#32;230,11" Mask="####-##-##"/>
+									<cell align="center" col="4" colid="TIME" display="text" font="한컴&#32;윤고딕&#32;230,11" Mask="#&#32;#&#32;:&#32;#&#32;#"/>
+									<cell align="center" col="5" colid="COST" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="6" colid="APPROVAL_STATUS" display="text" font="한컴&#32;윤고딕&#32;230,11"/>
+									<cell align="center" col="7" colid="CAUSE" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,11"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Combo CodeColumn="CODE" DataColumn="VALUE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="selApprovalStatus" InnerDataset="dsApproval" Left="622" TabOrder="3" Top="77" Width="96"></Combo>
+					<Combo CodeColumn="DEPT_CODE" DataColumn="DEPT_NAME" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="selDeptCode" InnerDataset="dsDepartment" Left="412" TabOrder="4" Top="77" Width="104"></Combo>
+					<Calendar EditAlign="CENTER" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="basicDate" Left="169" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="5" Top="77" Width="136"></Calendar>
+					<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="empName" Left="200" Readonly="TRUE" TabOrder="2" Top="37" Width="103"></Edit>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static0" Left="80" TabOrder="6" Text="승인관리접속자" Top="37" VAlign="Middle" Width="117"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static1" Left="80" TabOrder="7" Text="기&#32;준&#32;일" Top="77" VAlign="Middle" Width="87"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static2" Left="323" TabOrder="8" Text="부&#32;서" Top="77" VAlign="Middle" Width="87"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="Static3" Left="533" TabOrder="9" Text="승인구분" Top="77" VAlign="Middle" Width="87"></Static>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="batchBtn" Left="657" OnClick="attdApprovalTab_tab1_batchBtn_OnClick" TabOrder="10" Text="일괄승인" Top="128" Width="87"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="saveBtn" Left="748" OnClick="attdApprovalTab_tab1_saveBtn_OnClick" TabOrder="11" Text="저&#32;&#32;장" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="cancelBtn" Left="839" OnClick="attdApprovalTab_tab1_cancelBtn_OnClick" TabOrder="12" Text="취&#32;&#32;소" Top="127" Width="87"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="searchBtn" Left="566" OnClick="attdApprovalTab_tab1_searchBtn_OnClick" TabOrder="13" Text="조&#32;&#32;회" Top="128" Width="87"></Button>
+				</TabPage>
+				<TabPage BorderColor="black" Height="651" Id="tab2" Left="2" TabOrder="2" Text="근태외&#32;승인관리" Top="32" Width="936">
+					<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="empName" Left="200" Readonly="TRUE" TabOrder="2" Top="37" Width="103"></Edit>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="80" TabOrder="6" Text="승인관리접속자" Top="37" VAlign="Middle" Width="117"></Static>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="80" TabOrder="7" Text="기&#32;준&#32;일" Top="77" VAlign="Middle" Width="87"></Static>
+					<Calendar DayFont="LG&#32;PC,11" EditAlign="CENTER" Font="한컴&#32;윤고딕&#32;240,12" HeaderFont="LG&#32;PC,11" Height="30" Id="requestDate" Left="169" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11,Bold" SundayTextColor="red" TabOrder="5" Top="77" WeeksFont="LG&#32;PC,11" Width="136"></Calendar>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="323" TabOrder="8" Text="부&#32;서" Top="77" VAlign="Middle" Width="87"></Static>
+					<Combo CodeColumn="DEPT_CODE" DataColumn="DEPT_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selDeptCode" InnerDataset="dsDepartment" Left="412" TabOrder="4" Top="77" Width="104"></Combo>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="533" TabOrder="9" Text="승인구분" Top="77" VAlign="Middle" Width="87"></Static>
+					<Combo CodeColumn="CODE" DataColumn="VALUE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selApprovalStatus" InnerDataset="dsApproval" Left="622" TabOrder="3" Top="77" Width="96"></Combo>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="searchBtn" Left="566" OnClick="attdApprovalTab_tab2_searchBtn_OnClick" TabOrder="13" Text="조&#32;&#32;회" Top="128" Width="87"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="batchBtn" Left="657" OnClick="attdApprovalTab_tab2_batchBtn_OnClick" TabOrder="10" Text="일괄승인" Top="127" Width="87"></Button>
+					<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="saveBtn" Left="748" OnClick="attdApprovalTab_tab2_saveBtn_OnClick" TabOrder="11" Text="저&#32;&#32;장" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="cancelBtn" Left="838" OnClick="attdApprovalTab_tab2_cancelBtn_OnClick" TabOrder="12" Text="취&#32;&#32;소" Top="127" Width="87"></Button>
+					<Grid BindDataset="dsLocalDailyAttdRest" BkColor2="default" BoldHead="true" Bottom="643" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="480" Id="Grid1" InputPanel="FALSE" Left="11" LineColor="default" Right="926" RowHeight="20" TabOrder="1" TabStop="true" Top="163" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="915">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="127"/>
+									<col width="87"/>
+									<col width="0"/>
+									<col width="87"/>
+									<col width="87"/>
+									<col width="87"/>
+									<col width="87"/>
+									<col width="127"/>
+									<col width="100"/>
+									<col width="300"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="DAY_ATTD_SEQ"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청일자"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="시작일"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="종료일"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="일수"/>
+									<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,11" text="금액"/>
+									<cell bkcolor="silver" col="8" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인상태"/>
+									<cell bkcolor="silver" col="9" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사유"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="2" colid="DAY_ATTD_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="3" colid="REQUEST_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="####-##-##"/>
+									<cell align="center" col="4" colid="START_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="5" colid="END_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="6" colid="DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="7" colid="COST" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell col="8" colid="APPROVAL_STATUS" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell col="9" colid="CAUSE" combocol="CODE" combodataset="dsApproval" combotext="VALUE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+				<TabPage BorderColor="black" Height="651" Id="tab3" Left="2" TabOrder="2" Text="연장/심야&#32;승인관리" Top="32" Width="936">
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="80" TabOrder="6" Text="승인관리접속자" Top="37" VAlign="Middle" Width="117"></Static>
+					<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="empName" Left="200" Readonly="TRUE" TabOrder="2" Top="37" Width="103"></Edit>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="80" TabOrder="7" Text="기&#32;준&#32;일" Top="77" VAlign="Middle" Width="87"></Static>
+					<Calendar DayFont="LG&#32;PC,11" EditAlign="CENTER" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="requestDate" Left="169" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="5" Top="77" Width="136"></Calendar>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="323" TabOrder="8" Text="부&#32;서" Top="77" VAlign="Middle" Width="87"></Static>
+					<Combo CodeColumn="DEPT_CODE" DataColumn="DEPT_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selDeptCode" InnerDataset="dsDepartment" Left="412" TabOrder="4" Top="77" Width="104"></Combo>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="533" TabOrder="9" Text="승인구분" Top="77" VAlign="Middle" Width="87"></Static>
+					<Combo CodeColumn="CODE" DataColumn="VALUE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selApprovalStatus" InnerDataset="dsApproval" Left="622" TabOrder="3" Top="77" Width="96"></Combo>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="searchBtn" Left="566" OnClick="attdApprovalTab_tab3_searchBtn_OnClick" TabOrder="13" Text="조&#32;&#32;회" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="batchBtn" Left="657" OnClick="attdApprovalTab_tab3_batchBtn_OnClick" TabOrder="10" Text="일괄승인" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="saveBtn" Left="748" OnClick="attdApprovalTab_tab3_saveBtn_OnClick" TabOrder="11" Text="저&#32;&#32;장" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="cancelBtn" Left="839" OnClick="attdApprovalTab_tab3_cancelBtn_OnClick" TabOrder="12" Text="취&#32;&#32;소" Top="127" Width="87"></Button>
+					<Grid AutoFit="TRUE" BindDataset="dsOverNight" BkColor2="default" BoldHead="true" Bottom="643" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="480" Id="Grid1" InputPanel="FALSE" Left="11" LineColor="default" MinWidth="100" Right="926" RowHeight="20" TabOrder="1" TabStop="true" Top="163" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="915">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="0"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,12" text="사원번호"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,12" text="사원명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,12" text="DAY_ATTD_SEQ"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,12" text="신청일자"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,12" text="신청유형"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,12" text="승인여부"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,12" text="신청여부"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="2" colid="DAY_ATTD_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="3" colid="BASIC_DAY" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="####-##-##"/>
+									<cell align="center" col="4" colid="TYPE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="5" colid="APPROVAL_STATUS" color="expr:decode(APPROVAL_STATUS,&apos;N&apos;,&#32;&apos;red&apos;,&#32;&apos;Y&apos;,&#32;&apos;green&apos;)" combocol="CODE" combodataset="dsLocalApproval" combotext="VALUE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="6" colid="REQUEST_STATUS" color="expr:decode(REQUEST_STATUS,&apos;N&apos;,&apos;red&apos;,&apos;Y&apos;,&apos;green&apos;)" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+				<TabPage BorderColor="black" Height="651" Id="tab4" Left="2" TabOrder="2" Text="휴가/연차&#32;승인관리" Top="32" Width="936">
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="80" TabOrder="6" Text="승인관리접속자" Top="37" VAlign="Middle" Width="117"></Static>
+					<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="empName" Left="200" Readonly="TRUE" TabOrder="2" Top="37" Width="103"></Edit>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="80" TabOrder="7" Text="기&#32;준&#32;일" Top="77" VAlign="Middle" Width="87"></Static>
+					<Calendar DayFont="LG&#32;PC,11" EditAlign="CENTER" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="requestDate" Left="169" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="5" Top="77" Width="136"></Calendar>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="323" TabOrder="8" Text="부&#32;서" Top="77" VAlign="Middle" Width="87"></Static>
+					<Combo CodeColumn="DEPT_CODE" DataColumn="DEPT_NAME" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selDeptCode" InnerDataset="dsDepartment" Left="412" TabOrder="4" Top="77" Width="104"></Combo>
+					<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="533" TabOrder="9" Text="승인구분" Top="77" VAlign="Middle" Width="87"></Static>
+					<Combo CodeColumn="CODE" DataColumn="VALUE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="selApprovalStatus" InnerDataset="dsApproval" Left="622" TabOrder="3" Top="77" Width="96"></Combo>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="searchBtn" Left="566" OnClick="attdApprovalTab_tab4_searchBtn_OnClick" TabOrder="13" Text="조&#32;&#32;회" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="batchBtn" Left="657" OnClick="attdApprovalTab_tab4_batchBtn_OnClick" TabOrder="10" Text="일괄승인" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="saveBtn" Left="748" OnClick="attdApprovalTab_tab4_saveBtn_OnClick" TabOrder="11" Text="저&#32;&#32;장" Top="127" Width="87"></Button>
+					<Button BKColor="silver" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="cancelBtn" Left="839" OnClick="attdApprovalTab_tab4_cancelBtn_OnClick" TabOrder="12" Text="취&#32;&#32;소" Top="127" Width="87"></Button>
+					<Grid BindDataset="dsDayAnnual" BkColor2="default" BoldHead="true" Bottom="643" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="480" Id="Grid1" InputPanel="FALSE" Left="11" LineColor="default" Right="926" RowHeight="20" TabOrder="1" TabStop="true" Top="163" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="915">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="127"/>
+									<col width="87"/>
+									<col width="0"/>
+									<col width="87"/>
+									<col width="87"/>
+									<col width="87"/>
+									<col width="300"/>
+									<col width="227"/>
+									<col width="227"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원번호"/>
+									<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사원명"/>
+									<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="DAY_ATTD_SEQ"/>
+									<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="시작일"/>
+									<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="종료일"/>
+									<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="일수"/>
+									<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사유"/>
+									<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인상태"/>
+									<cell bkcolor="mistyrose" col="8" display="text" font="한컴&#32;윤고딕&#32;240,11" text="상세사유"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="2" colid="START_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="3" colid="START_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="####-##-##"/>
+									<cell align="center" col="4" colid="END_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="5" colid="DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="6" colid="CAUSE_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="7" colid="APPROVAL_STATUS" combocol="CODE" combodataset="dsApproval" combotext="VALUE" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell col="8" colid="DETAIL_CAUSE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+				</TabPage>
+			</Contents>
+		</Tab>
+	</Form>
+	<Script><![CDATA[
+
+var flag=0;
+
+function attendanceApprovalManagement_OnLoadCompleted(obj)
+{
+	http.sync=true;
+	
+	transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+		
+	attdApprovalTab.tab1.empName.text=g_empName;
+	attdApprovalTab.tab1.basicDate.Value=today();
+	
+	attdApprovalTab.tab2.empName.text=g_empName;
+	attdApprovalTab.tab2.requestDate.Value=today();
+	
+	
+	attdApprovalTab.tab3.empName.text=g_empName;
+	attdApprovalTab.tab3.requestDate.Value=today();
+	
+	attdApprovalTab.tab4.empName.text=g_empName;
+	attdApprovalTab.tab4.requestDate.Value=today();
+		
+	
+	dsOverNight.Filter("EMP_CODE=0"); 
+	// 어디서 받아 오는지 일단 보류!!(다른 것들은 지역 dataset을 만들어서 담아서 사용 이것은 Global 바로 사용 그래서 초기화 필요)
+	http.sync=false;
+}
+
+
+// 일근태 승인 관리 조회 버튼!!
+function attdApprovalTab_tab1_searchBtn_OnClick(obj)
+{
+	
+	var basicDate=attdApprovalTab.tab1.basicDate.Value;
+	var deptCode=attdApprovalTab.tab1.selDeptCode.Value;
+	var approvalStatus=attdApprovalTab.tab1.selApprovalStatus.Value;
+   
+	transaction(
+		"findDailyAttdListByCondition",
+		"svcHrAttendance::/dailyAttd.do?method=findDailyAttdListByCondition",
+		"",
+		"dsLocalDailyAttd=dsDailyAttd",
+		"approvalStatus='" + approvalStatus + "' basicDay='" + basicDate + "' deptCode='" + deptCode + "'" ,
+		"callback"
+	);
+	
+}
+
+//일괄 승인 버튼 누를 경우 !!
+function attdApprovalTab_tab1_batchBtn_OnClick(obj)
+{
+	for(var index = 0; index < dsLocalDailyAttd.rowCount; index++) {  // 있는 수 만큼 for문 돌면서 N-> Y로 변경 !
+            dsLocalDailyAttd.SetColumn(index, "APPROVAL_STATUS", "Y");
+      }
+      attdApprovalTab.tab1.cancelBtn.Enable=true;  // 취소 버튼 활성화 
+}
+
+//취소 버튼 누를 경우 !!
+function attdApprovalTab_tab1_cancelBtn_OnClick(obj)
+{
+	if(confirm("일괄 승인을 취소하시겠습니까 ?")){
+      flag=1;		//왜 0 -> 1 로 변경 해 뒀는가???????????????
+      attdApprovalTab_tab1_searchBtn_OnClick(attdApprovalTab.tab1.searchBtn); //다시 조회 버튼을 누른다. 검색 조기 상태로 돌림
+      obj.Enable=false;
+   }
+}
+
+// 일근태 승인 관리 저장!!
+function attdApprovalTab_tab1_saveBtn_OnClick(obj)
+{
+	if(confirm("일근태 내역을 승인 하시겠습니까? ")){
+      transaction(
+         "batchDailyAttd",
+         "svcHrAttendance::/dailyAttd.do?method=batchDailyAttd",
+         "dsDailyAttd=dsLocalDailyAttd:u",
+         "",
+         "",
+         "callback"
+      );
+   }
+	
+	
+}
+
+
+
+// 근태외 승인 관리 버튼 
+function attdApprovalTab_tab2_searchBtn_OnClick(obj)
+{
+	  var requestDate=attdApprovalTab.tab2.requestDate.Value;
+      var deptCode=attdApprovalTab.tab2.selDeptCode.Value;
+      var approvalStatus=attdApprovalTab.tab2.selApprovalStatus.Value;
+      
+      transaction(
+         "findAttdRestListByCondition",
+         "svcHrAttendance::/dailyAttdRest.do?method=findAttdRestListByCondition",
+         "",
+         "dsLocalDailyAttdRest=dsDailyAttdRest",
+         "approvalStatus='" + approvalStatus + "' basicDay='" + requestDate + "' deptCode='" + deptCode + "'" ,
+         "callback"
+      );
+	
+	
+}
+
+//근태외 일괄 승인 버튼 
+function attdApprovalTab_tab2_batchBtn_OnClick(obj)
+{
+	for(var index = 0; index < dsLocalDailyAttdRest.rowCount; index++) {
+      dsLocalDailyAttdRest.SetColumn(index, "APPROVAL_STATUS", "Y");
+   }
+      attdApprovalTab.tab2.cancelBtn.Enable=true;
+	
+	
+}
+// 취소 시..
+function attdApprovalTab_tab2_cancelBtn_OnClick(obj)
+{
+	 if(confirm("취소하시겠습니까 ?")){
+      flag=1;
+      attdApprovalTab_tab2_searchBtn_OnClick(attdApprovalTab.tab2.searchBtn);
+      obj.Enable=false;
+   }
+}
+
+// 근태외 승인 저장 
+
+function attdApprovalTab_tab2_saveBtn_OnClick(obj)
+{
+	if(confirm("저장하시겠습니까?")){
+         transaction(
+            "batchDailyAttdRest",
+            "svcHrAttendance::/dailyAttdRest.do?method=batchDailyAttdRest",
+            "dsDailyAttdRest=dsLocalDailyAttdRest:u",
+            "",
+            "",
+            "callback"
+         );
+	}
+}
+
+
+
+
+// 연장 심야 조회시 
+function attdApprovalTab_tab3_searchBtn_OnClick(obj)
+{
+	  
+      var requestDate=attdApprovalTab.tab3.requestDate.Value;
+      var deptCode=attdApprovalTab.tab3.selDeptCode.Value;
+      var approvalStatus=attdApprovalTab.tab3.selApprovalStatus.Value;
+      
+      transaction(
+         "findOverNightByCondition",
+         "svcHrAttendance::/attdReport.do?method=findOverNightReportByCondition",
+         "",
+         "dsOverNight=dsOverNight",
+         "deptCode='" + deptCode + "' approvalStatus='" + approvalStatus + "' basicDay='" + requestDate + "'",
+         "callback"
+      );
+	
+	
+}
+
+//연장 심야 일관 승인 
+function attdApprovalTab_tab3_batchBtn_OnClick(obj)
+{
+	if(dsOverNight.FindRow("REQUEST_STATUS","N")<0){  
+			// 신청일 경우 만족하는 값 없을 때 -1 N을 못찾으면 -1(즉 신청 된 상태) 0인경우 찾으면
+	   
+	   for(var index = 0; index < dsOverNight.rowCount; index++) {
+         dsOverNight.SetColumn(index, "APPROVAL_STATUS", "Y");
+      }
+      attdApprovalTab.tab3.cancelBtn.Enable=true;
+   }else{
+      alert("연장 / 심야 승인 신청이 이루어 지지 않았습니다. \t(연장/심야 승인 신청을 먼저 해주세요)");
+   }      
+}
+
+
+
+// 연장 심야 신청 취소시. 
+function attdApprovalTab_tab3_cancelBtn_OnClick(obj)
+{
+	if(confirm("취소하시겠습니까 ?")){
+      flag=1;
+      attdApprovalTab_tab3_searchBtn_OnClick(attdApprovalTab.tab3.searchBtn);
+      obj.Enable=false;
+   }
+}
+
+
+// 연장 심야 저장 시.. 
+function attdApprovalTab_tab3_saveBtn_OnClick(obj)
+{
+	if(confirm("저장하시겠습니까 ?")){
+     
+         transaction(
+               "batchOverNight",
+               "svcHrAttendance::/attdReport.do?method=batchOverNight",
+               "dsOverNight=dsOverNight:u",
+               "",
+               "",
+               "callback"
+            );
+         
+      
+      }
+   
+	
+	
+}
+
+//연차 휴가 조회 버튼 
+function attdApprovalTab_tab4_searchBtn_OnClick(obj)
+{
+	
+	var basicDate=attdApprovalTab.tab4.requestDate.Value;
+	var deptCode=attdApprovalTab.tab4.selDeptCode.Value;
+	var approvalStatus=attdApprovalTab.tab4.selApprovalStatus.Value;
+   
+	transaction(
+		"findDayAnnualListByCondition",
+		"svcHrAttendance::/dayAnnual.do?method=findDayAnnualListByCondition",
+		"",
+		"dsDayAnnual=dsDayAnnual",
+		"deptCode='" + deptCode + "' approvalStatus='" + approvalStatus + "' basicDay='" + basicDate + "'",
+		"callback"
+	);
+	
+}
+
+
+
+// 연차 휴가 신청 일괄 버튼 
+function attdApprovalTab_tab4_batchBtn_OnClick(obj)
+{
+	for(var index = 0; index < dsDayAnnual.rowCount; index++) {
+            dsDayAnnual.SetColumn(index, "APPROVAL_STATUS", "Y");
+      }
+      attdApprovalTab.tab4.cancelBtn.Enable=true;
+}
+
+
+// 연차 휴가 취소 버튼 
+function attdApprovalTab_tab4_cancelBtn_OnClick(obj)
+{
+	if(confirm("취소하시겠습니까 ?")){
+      flag=1;
+      attdApprovalTab_tab4_searchBtn_OnClick(attdApprovalTab.tab4.searchBtn);
+      obj.Enable=false;
+   }
+}
+
+
+//연차 휴가 일괄 저장 
+function attdApprovalTab_tab4_saveBtn_OnClick(obj)
+{
+	if(confirm("저장하시겠습니까?")){
+	
+      transaction(
+         "batchDayAnnual",
+         "svcHrAttendance::/dayAnnual.do?method=batchDayAnnual",
+         "dsDayAnnual=dsDayAnnual:u",
+         "",
+         "",
+         "callback"
+      );      
+   }
+}
+
+
+
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+   if(trid=='findDailyAttdListByCondition'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         if(dsLocalDailyAttd.GetRowCount()==0){
+            alert("조회할 내역이 없습니다. ");
+         }else{
+            if(flag!=1){
+               //alert(" flag!=1 :) ");
+               //최초 조회이다. 
+            }else{
+               flag=0;  // 일괄승인 햇다가 취소 했다가 다시 조회된 경우 
+            }
+         }
+      }   
+   }
+   
+   if(trid=='batchDailyAttd'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0:)  ");
+      }else{
+         alert(ErrorMsg);
+      }   
+   }
+   
+   if(trid=='findAttdRestListByCondition'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         if(dsLocalDailyAttdRest.GetRowCount()==0){
+            alert("조회할 내역이 없습니다.  ");
+         }else{
+            if(flag!=1){
+               //alert("flag!=1 :) ");
+            }else{
+               flag=0;
+            }
+         }
+      }   
+   }
+   
+   if(trid=='batchDailyAttdRest'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         alert(ErrorMsg);
+      }   
+   }
+   
+   if(trid=='batchOverNight'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         alert(ErrorMsg);
+      }   
+   }
+
+   if(trid=='findDayAnnaulListByCondition'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         if(dsLocalDailyAttd.GetRowCount()==0){
+            alert(" dsDayAnnaul.GetRowCount()==0 :( ");
+         }else{
+            if(flag!=1){
+               //alert(" flag!=1 :) ");
+            }else{
+               flag=0;
+            }
+         }
+      }   
+   }
+   
+   if(trid=='batchDayAnnaul'){
+      if(ErrorCode!=0){
+         alert(" ErrorCode!=0 :( ");
+      }else{
+         alert(ErrorMsg);
+      }   
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></Script>
+</Window>

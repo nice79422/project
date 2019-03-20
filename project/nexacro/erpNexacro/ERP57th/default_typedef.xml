@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TypeDefinition version="1.2">
+  <Modules>
+    <Module url="CompBase.json"/>
+    <Module url="ComComp.json"/>
+    <Module url="Grid.json"/>
+    <Module url="DeviceAPI.json"/>
+  </Modules>
+  <Components>
+    <Component type="JavaScript" id="Div" classname="nexacro.Div"/>
+    <Component type="JavaScript" id="Button" classname="nexacro.Button"/>
+    <Component type="JavaScript" id="PopupDiv" classname="nexacro.PopupDiv"/>
+    <Component type="JavaScript" id="Combo" classname="nexacro.Combo"/>
+    <Component type="JavaScript" id="CheckBox" classname="nexacro.CheckBox"/>
+    <Component type="JavaScript" id="ListBox" classname="nexacro.ListBox"/>
+    <Component type="JavaScript" id="Edit" classname="nexacro.Edit"/>
+    <Component type="JavaScript" id="MaskEdit" classname="nexacro.MaskEdit"/>
+    <Component type="JavaScript" id="TextArea" classname="nexacro.TextArea"/>
+    <Component type="JavaScript" id="Menu" classname="nexacro.Menu"/>
+    <Component type="JavaScript" id="Tab" classname="nexacro.Tab"/>
+    <Component type="JavaScript" id="ImageViewer" classname="nexacro.ImageViewer"/>
+    <Component type="JavaScript" id="Radio" classname="nexacro.Radio"/>
+    <Component type="JavaScript" id="Calendar" classname="nexacro.Calendar"/>
+    <Component type="JavaScript" id="Static" classname="nexacro.Static"/>
+    <Component type="JavaScript" id="Grid" classname="nexacro.Grid"/>
+    <Component type="JavaScript" id="Spin" classname="nexacro.Spin"/>
+    <Component type="JavaScript" id="PopupMenu" classname="nexacro.PopupMenu"/>
+    <Component type="JavaScript" id="GroupBox" classname="nexacro.GroupBox"/>
+    <Component type="JavaScript" id="ProgressBar" classname="nexacro.ProgressBar"/>
+    <Component type="JavaScript" id="Plugin" classname="nexacro.Plugin"/>
+    <Component type="JavaScript" id="Dataset" classname="nexacro.NormalDataset"/>
+    <Component type="JavaScript" id="FileDialog" classname="nexacro.FileDialog"/>
+    <Component type="JavaScript" id="FileDownload" classname="nexacro.FileDownload"/>
+    <Component type="JavaScript" id="FileUpload" classname="nexacro.FileUpload"/>
+  </Components>
+  <Protocols/>
+  <Services>
+    <Service prefixid="base" type="form" url="./Base/" version="0" communicationversion="0"/>
+    <Service prefixid="dataURL" type="JSP" url="http://localhost:8282/57thERP/" communicationversion="0"/>
+    <Service prefixid="test" type="form" url="./test/" communicationversion="0"/>
+    <Service prefixid="hr_pay" type="form" url="./hr/pay/" communicationversion="0"/>
+    <Service prefixid="hr_circumstance" type="form" url="./hr/circumstance/" communicationversion="0"/>
+    <Service prefixid="hr_pm" type="form" url="./hr/pm/" communicationversion="0"/>
+    <Service prefixid="hr_attendance" type="form" url="./hr/attendance/" communicationversion="0"/>
+    <Service prefixid="logi_business" type="form" url="./logi/business/" communicationversion="0"/>
+    <Service prefixid="logi_production" type="form" url="./logi/production/" communicationversion="0"/>
+    <Service prefixid="logi_purchase" type="form" url="./logi/purchase/" communicationversion="0"/>
+    <Service prefixid="logi_base" type="form" url="./logi/base/" communicationversion="0"/>
+    <Service prefixid="acc_base" type="form" url="./acc/base" communicationversion="0"/>
+    <Service prefixid="acc_accBookMgt" type="form" url="./acc/accBookMgt/" communicationversion="0"/>
+    <Service prefixid="acc_slip" type="form" url="./acc/slip/" communicationversion="0"/>
+    <Service prefixid="acc_statement" type="form" url="./acc/statement/" communicationversion="0"/>
+    <Service prefixid="hr_appointment" type="form" url="./hr/appointment/" communicationversion="0"/>
+    <Service prefixid="images" type="file" url="./images/" communicationversion="0"/>
+  </Services>
+  <Update/>
+</TypeDefinition>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="nationalPenDialog" classname="nationalPenDialog" inheritanceid="" position="absolute 0 0 400 200" titletext="New Form" onload="nationalPenDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="국민연금계산" position2="absolute l:0 w:400 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;opacity:100;"/>
+        <Static id="Static13" text="자동계산" enable="false" enableevent="false" position2="absolute l:16 w:110 t:80 h:24" positiontype="position2" style="background:cornflowerblue;color:black;align:center middle;opacity:100; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;}"/>
+        <Static id="Static01" text="X" enable="false" enableevent="false" position2="absolute l:223 w:33 t:80 h:24" positiontype="position2" style="background:cornflowerblue;color:black;align:center middle;opacity:100; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;}"/>
+        <Static id="Static02" text="%" enable="false" enableevent="false" position2="absolute l:320 w:33 t:80 h:24" positiontype="position2" style="background:cornflowerblue;color:black;align:center middle;opacity:100; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;}"/>
+        <Static id="Static03" text="직접입력" enable="false" enableevent="false" position2="absolute l:17 w:110 t:128 h:24" positiontype="position2" style="background:cornflowerblue;color:black;align:center middle;opacity:100; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;}"/>
+        <Edit id="rate" taborder="1" position2="absolute l:260 w:58 t:79 h:25" positiontype="position2" enable="false"/>
+        <Button id="calculationBtn" taborder="1" text="계 산" position2="absolute l:196 w:68 t:164 h:24" positiontype="position2" onclick="calculationBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="finishBtn" taborder="1" text="적 용" position2="absolute l:282 w:68 t:164 h:24" positiontype="position2" onclick="finishBtn_onclick" style="background:silver;color:white;"/>
+        <CheckBox id="directCheckbox" taborder="1" position2="absolute l:16 w:23 t:106 h:20" positiontype="position2" onclick="directCheckbox_onclick"/>
+        <MaskEdit id="salary" taborder="1" position2="absolute l:127 w:95 t:80 h:24" positiontype="position2" mask="99,999" enable="false"/>
+        <MaskEdit id="result" taborder="1" position2="absolute l:129 w:224 t:128 h:24" positiontype="position2" enable="false" mask="99,999" style=":disabled {align:right middle;}"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="rate" propid="value" datasetid="dsDeductionTax" columnid="NATIONAL_PEN_RATE"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[
+var sysDate;
+var baseSal;
+
+
+function nationalPenDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	// 현재 년도 구하기 
+	sysDate  = String(g_toDate).substr(0,4);
+	baseSal=this.opener.Tab00.tabpage3.baseSal.value;
+	
+	
+	salary.value=baseSal;
+	dsDeductionTax.filter("");
+	dsDeductionTax.filter("INPUTED_YEAR=='"+sysDate+"'");
+	dsDeductionTax.rowposition=0;
+	directCheckbox.value=0;	
+	
+}
+
+
+
+//체크 클릭 시 
+function directCheckbox_onclick(obj:CheckBox,  e:ClickEventInfo)
+{
+	if(directCheckbox.value==1){
+		result.enable=1;
+		calculationBtn.enable=false;
+	}else{
+		result.enable=0;
+		calculationBtn.enable=true;
+	}
+}
+
+//계산 시 
+function calculationBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	result.value=Math.round(parseFloat(salary.value) * parseFloat(rate.value)/100,0);
+	
+}
+
+//적용 시 
+function finishBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	this.opener.Tab00.tabpage3.national.value=result.value;	
+	close();
+}
+]]></Script>
+  </Form>
+</FDL>

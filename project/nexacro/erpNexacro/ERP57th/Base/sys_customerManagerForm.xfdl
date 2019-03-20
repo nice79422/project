@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="sys_customerManagerForm" left="0" top="0" width="1185" height="785" titletext="sys_customerManagerForm" onload="sys_customerManagerForm_onload">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="code_stc" taborder="3" left="8.78%" top="162" right="9.03%" height="592" onclick="Static00_onclick" text="거 래 처" style="color:black;align:center top;"/>
+        <Grid id="code_grid" taborder="1" useinputpanel="false" left="11.81%" top="198" right="11.98%" height="531" binddataset="ds_customer" autosizingtype="col" autofittype="none" oncellclick="code_grid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="58"/>
+                <Column size="80"/>
+                <Column size="84"/>
+                <Column size="86"/>
+                <Column size="143"/>
+                <Column size="127"/>
+                <Column size="122"/>
+                <Column size="154"/>
+                <Column size="107"/>
+                <Column size="210"/>
+                <Column size="110"/>
+                <Column size="120"/>
+                <Column size="155"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="28"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="코드"/>
+                <Cell col="1" text="거래처명"/>
+                <Cell col="2" text="거래처유형"/>
+                <Cell col="3" text="대표자"/>
+                <Cell col="4" text="사업자번호"/>
+                <Cell col="5" text="주민등록번호"/>
+                <Cell col="6" text="업태"/>
+                <Cell col="7" text="종목"/>
+                <Cell col="8" text="우편번호"/>
+                <Cell col="9" text="주소"/>
+                <Cell col="10" text="상세주소"/>
+                <Cell col="11" text="전화번호"/>
+                <Cell col="12" text="팩스번호"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="normal" text="bind:CUSTOMER_CODE"/>
+                <Cell col="1" edittype="normal" text="bind:CUSTOMER_NAME"/>
+                <Cell col="2" edittype="normal" text="bind:CUSTOMER_TYPE"/>
+                <Cell col="3" edittype="normal" text="bind:CUSTOMER_CEO"/>
+                <Cell col="4" edittype="normal" text="bind:BUSINESS_LICENSE_NUMBER"/>
+                <Cell col="5" edittype="normal" text="bind:SOCIAL_SECURITY_NUMBER"/>
+                <Cell col="6" edittype="normal" text="bind:CUSTOMER_BUSINESS_CONDITIONS"/>
+                <Cell col="7" edittype="normal" text="bind:CUSTOMER_BUSINESS_ITEMS"/>
+                <Cell col="8" edittype="normal" text="bind:CUSTOMER_ZIP_CODE"/>
+                <Cell col="9" edittype="normal" text="bind:CUSTOMER_BASIC_ADDRESS"/>
+                <Cell col="10" edittype="normal" text="bind:CUSTOMER_DETAIL_ADDRESS"/>
+                <Cell col="11" edittype="normal" text="bind:CUSTOMER_TEL_NUMBER"/>
+                <Cell col="12" edittype="normal" text="bind:CUSTOMER_FAX_NUMBER"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="12" text="거래처 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Button id="add_btn" taborder="13" text="추가" left="51.14%" top="109" right="37.89%" height="36" onclick="add_btn_onclick"/>
+        <Button id="delete_btn" taborder="14" text="삭제" left="65.23%" top="109" right="23.8%" height="36" onclick="delete_btn_onclick"/>
+        <Button id="save_btn" taborder="15" text="저장" left="78.82%" top="109" right="10.21%" height="36" onclick="save_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_customer">
+        <ColumnInfo>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="CUSTOMER_TYPE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CEO" type="STRING" size="256"/>
+          <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+          <Column id="SOCIAL_SECURITY_NUMBER" type="STRING" size="256"/>
+          <Column id="CUSTOMER_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_BUSINESS_ITEMS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_ZIP_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_BASIC_ADDRESS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_TEL_NUMBER" type="STRING" size="256"/>
+          <Column id="CUSTOMER_FAX_NUMBER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+메인메뉴 화면                                             						                                                                         
+@Path		공통              				   				
+@Description 거래처							
+@Author	  	강순용				    			                        								                                            
+@Create           2019. 02. 14.                             		                    				                                            
+********************************************************************************/
+
+this.sys_customerManagerForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		this.transaction("findCustomerList",
+					"dataURL::sys/findCustomerList.do",
+					"",
+					"ds_customer=ds_customer",
+					"",
+					"callback"
+					);
+}
+
+this.add_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_customer.addRow();
+	var n = this.ds_customer.rowcount; 
+	var auto = this.ds_customer.setColumn(this.ds_customer.rowposition,"CUSTOMER_CODE","PTN-"+n+"");
+}
+
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	if(confirm("삭제하시겠습니까?"))
+	{
+		this.ds_customer.deleteRow(this.ds_customer.rowposition);
+	}
+}
+
+this.save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		if(confirm("변경사항을 저장하시겠습니까?"))
+		{
+			this.transaction("batchCustomer"
+					,"dataURL::sys/batchCustomer.do"
+					,"ds_customer=ds_customer:u"
+					,"" 
+					,""
+					,"callback"
+					);
+		}
+
+}]]></Script>
+  </Form>
+</FDL>

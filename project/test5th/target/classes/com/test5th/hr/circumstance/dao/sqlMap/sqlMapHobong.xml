@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test5th.hr.circumstance.dao.HobongDAO">
+  
+    <resultMap id="hobongResult" type="hobongBean">
+        <result property="hobong" column="HOBONG"/>
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="baseSal" column="BASE_SAL"/>
+        <result property="bonus" column="BONUS"/>
+        <result property="sigub" column="SIGUB"/>
+    </resultMap>
+
+	<!-- 직급에서 호봉목록을 찾는 메서드  -->
+    <select id="selectHobongList" resultMap="hobongResult" parameterType="String">
+    <![CDATA[
+      SELECT * FROM HOBONG WHERE POSITION_CODE=#{positionCode} ORDER BY TO_NUMBER(SUBSTR(HOBONG,0,INSTR(HOBONG,'호')-1))
+    ]]>
+    </select><!-- INSTR ( [문자열], [찾을 문자 값], [찾기를 시작할 위치(1,-1)], [찾은 결과의 순번(1...n)] ) [10호봉의 경우 정렬 때문에]-->
+
+  <!--호봉검색 -->
+ <select id="selectDirectHobongList" resultMap="hobongResult">
+    <![CDATA[
+      SELECT * FROM HOBONG ORDER BY TO_NUMBER(SUBSTR(HOBONG,0,INSTR(HOBONG,'호')-1))
+    ]]>
+    </select><!-- INSTR ( [문자열], [찾을 문자 값], [찾기를 시작할 위치(1,-1)], [찾은 결과의 순번(1...n)] ) [10호봉의 경우 정렬 때문에]-->
+
+	
+	<!-- 호봉을 입력하는 메서드 -->
+	<insert id="insertHobong" parameterType="hobongBean">
+	<![CDATA[
+ 		INSERT INTO HOBONG VALUES(
+				#{hobong},
+ 				#{positionCode},
+ 				#{baseSal},
+ 				#{bonus},
+ 				#{sigub}
+ 		)
+    ]]>
+	</insert>
+
+	<!-- 호봉을 수정하는 메서드 -->
+	<update id="updateHobong" parameterType="hobongBean">
+	<![CDATA[
+	       UPDATE 
+	       		HOBONG 
+	       SET
+	            BASE_SAL=#{baseSal},
+	            BONUS=#{bonus},
+	            SIGUB=#{sigub}
+	       WHERE POSITION_CODE=#{positionCode}
+	       AND HOBONG=#{hobong}
+    ]]>
+	</update>
+
+	<!-- 호봉을 삭제하는 메서드 -->
+	<delete id="deleteHobong" parameterType="hobongBean">
+	<![CDATA[
+	     DELETE FROM HOBONG
+	     WHERE POSITION_CODE=#{positionCode}
+	     AND HOBONG=#{hobong}
+    ]]>
+	</delete>
+	
+
+</mapper>

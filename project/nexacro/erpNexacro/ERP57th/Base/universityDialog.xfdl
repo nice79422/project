@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="universityDialog" left="0" top="0" width="250" height="400" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Grid id="grd_dept" taborder="0" binddataset="ds_dept" useinputpanel="false" autofittype="col" oncelldblclick="grd_dept_oncelldblclick" left="5%" top="10" right="5%" height="375">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_University"/>
+    </Objects>
+  </Form>
+</FDL>

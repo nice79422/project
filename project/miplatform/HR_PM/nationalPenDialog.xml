@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="200" Id="nationalPenDialog" Left="8" PidAttrib="7" Title="nationalPenDialog" Top="8" Ver="1.0" Width="317" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="국민연금계산" Top="2" VAlign="Middle" Width="310"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static1" Left="8" TabOrder="2" Text="자동계산" Top="79" VAlign="Middle" Width="77"></Static>
+		<MaskEdit Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="salary" Left="88" Mask="@@@,@@@,@@@" TabOrder="8" Top="78" Value="MaskEdit2" Width="88"></MaskEdit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static2" Left="176" TabOrder="4" Text="X" Top="78" VAlign="Middle" Width="24"></Static>
+		<MaskEdit BindDataset="dsDeductionTax" Column="NATIONAL_PEN_RATE" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="nationalPenRate" Left="200" TabOrder="9" Top="78" Value="MaskEdit2" Width="72"></MaskEdit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static3" Left="272" TabOrder="5" Text="%" Top="78" VAlign="Middle" Width="30"></Static>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="resultPen" Left="88" TabOrder="10" Top="118" Width="214"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="Static0" Left="8" TabOrder="3" Text="집접입력" Top="118" VAlign="Middle" Width="77"></Static>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="calculationBtn" Left="136" OnClick="calculationBtn_OnClick" TabOrder="6" Text="계&#32;산" Top="157" Width="80"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="finishBtn" Left="222" OnClick="finishBtn_OnClick" TabOrder="7" Text="적&#32;용" Top="157" Width="80"></Button>
+		<Checkbox Font="한컴&#32;윤고딕&#32;240,12" Height="12" Id="directCheckbox" Left="8" OnClick="directCheckbox_OnClick" TabOrder="11" Top="155" Width="12"></Checkbox>
+	</Form>
+	<Script><![CDATA[
+
+
+var sysDate;
+var baseSal;
+var Bounse;
+
+
+function nationalPenDialog_OnLoadCompleted(obj)
+{
+	sysDate=substr(today(),0,4); // 년도 
+	
+	baseSal=StripNum(parent.detailRegistrationTab.tab3.baseSal.text);
+			//기본금의 통화단위 , 제외 하고 숫자만 가져 오기 !![StripNum]
+	trace(baseSal);
+	salary.text=baseSal;
+	dsDeductionTax.UnFilter();
+	dsDeductionTax.Filter("INPUTED_YEAR='"+sysDate+"'");// 해당 년도의 국민연금 부담율 가져옴 
+	directCheckbox.Value=0; //0 -> false 1-> true 직접 계산을 하지 않겠다 일단은 자동 계산 
+	
+}
+
+// 직접 입력 체크시 
+function directCheckbox_OnClick(obj,strValue)
+{
+	
+	if(directCheckbox.Value == 1){
+			resultPen.Enable=1;
+			calculationBtn.Enable=false;
+	}else{
+			resultPen.Enable=0;
+			calculationBtn.Enable=true;
+	}
+	
+}
+
+// 계산 버튼 누를 경우 
+function calculationBtn_OnClick(obj)
+{
+	var result=StripNum(salary.text) * ParseFloat(nationalPenRate.text)/100;
+		resultPen.text=Round(result,0);
+}
+
+// 적용 버튼 
+function finishBtn_OnClick(obj)
+{
+	parent.detailRegistrationTab.tab3.nationalPen.text=ToString(resultPen.text);
+	close();
+}
+
+/*
+ 시간 있음 수정 할 것!! 
+ 
+ 총액 = 기준소득월액 X 9%(연금보험율)
+
+ 예) 기준소득월액은 최저 28만원에서 최고금액은 434만원까지의 범위로 결정하게 됩니다.
+
+ 따라서, 신고한 소득월액이 28만원보다 적으면 28만원을 기준소득월액으로 하고, 
+
+ 434만원보다 많으면 434만원을 기준소득월액으로 합니다. (2016.7.1 기준)
+
+
+
+출처: http://seyoungstory.tistory.com/37 [에스와이]
+
+*/]]></Script>
+</Window>

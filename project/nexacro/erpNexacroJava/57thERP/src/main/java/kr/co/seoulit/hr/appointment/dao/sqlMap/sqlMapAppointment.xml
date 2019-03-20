@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.appointment.dao.AppointmentDAO">
+
+
+<!-- appointmentDAO -->
+
+	<resultMap type="appointmentTO" id="appointmentResult">
+		<result property="appointmentNo" column="APPOINTMENT_NO" />
+		<result property="appointmentTitle" column="APPOINTMENT_TITLE" />
+		<result property="appointmentDivision" column="APPOINTMENT_DIVISION" />
+		<result property="appointmentDate" column="APPOINTMENT_DATE" />
+		<result property="appointmentDirector" column="APPOINTMENT_DIRECTOR" />
+		<result property="approvalStatus" column="APPROVAL_STATUS" />
+		<result property="note" column="NOTE" />
+		<result property="appointmentSeq" column="APPOINTMENT_SEQ" />
+				
+	</resultMap>
+
+
+	<select id="selectAppointment" resultMap="appointmentResult">
+
+		SELECT
+		APPOINTMENT_SEQ,
+        APPOINTMENT_NO,
+		APPOINTMENT_TITLE,
+		APPOINTMENT_DIVISION,
+		APPOINTMENT_DATE,
+		APPOINTMENT_DIRECTOR,
+        APPROVAL_STATUS,
+		NOTE
+		FROM APPOINTMENT
+        ORDER BY APPOINTMENT_SEQ DESC
+		
+
+	</select>
+	
+	<insert id="insertAppointment" parameterType="appointmentTO">
+		<!-- 대부분의 RDBMS 시스템은 Sequence 와 같은 채번 자동 생성을 지원한다. 개발을 하다보면 종종 자동생성된 Sequence 
+			값을 가져와서 사용해야 하는 경우가 있다. 이런 경우에 <selectKey>를 사용한다. <selectKey>는 ibatis의 statement 
+			타입 중 <insert> 타입에만 사용할 수 있는 하위 요소이다. <insert> 문 아래에 사용함으로써, 자동생성된 키 값을 가져오며, 
+			이 값을 반환하여 활용할 수 있다. -->
+        <selectKey keyProperty="appointmentSeq" resultType="String" order="BEFORE">
+	     SELECT APPOINTMENT_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+		INSERT INTO APPOINTMENT(
+			APPOINTMENT_NO,
+			APPOINTMENT_TITLE,
+			APPOINTMENT_DIVISION,
+			APPOINTMENT_DATE,
+			APPOINTMENT_DIRECTOR,
+			APPROVAL_STATUS,
+		    NOTE,
+            APPOINTMENT_SEQ
+		)
+		VALUES(
+			#{appointmentNo},
+			#{appointmentTitle},
+			#{appointmentDivision},
+			#{appointmentDate},
+			#{appointmentDirector},
+			#{approvalStatus},
+			#{note},
+            #{appointmentSeq}
+		)
+	</insert>
+
+	<update id="updateAppointment" parameterType="appointmentTO">
+		UPDATE APPOINTMENT
+		SET    APPROVAL_STATUS =#{approvalStatus},
+		       NOTE            =#{note}
+        WHERE  APPOINTMENT_NO  =#{appointmentNo} 
+	</update>
+</mapper>

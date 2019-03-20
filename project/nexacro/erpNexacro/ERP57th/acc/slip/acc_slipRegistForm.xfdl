@@ -1,0 +1,1157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_slipRegistForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="acc_slipRegistForm_onload">
+    <Layouts>
+      <Layout>
+        <Calendar id="fromDate_cal" taborder="0" left="41.11%" top="59" right="41.8%" height="29"/>
+        <Calendar id="endDate_cal" taborder="1" left="64.94%" top="59" right="17.97%" height="29"/>
+        <Button id="slipSearch_btn" taborder="2" text="조회" left="86.23%" top="60" right="3.13%" height="30" onclick="slipSearch_btn_onclick"/>
+        <Static id="Static00" taborder="3" text="~" left="59.86%" top="56" right="37.3%" height="33" style="align:middle;font:bold 10 Dotum;"/>
+        <Grid id="journalList_grid" taborder="6" useinputpanel="false" left="2.44%" top="356" right="0.78%" height="124" autofittype="col" oncellclick="journalList_grid_oncellclick" onselectchanged="journalList_grid_onselectchanged" oncelldblclick="journalList_grid_oncelldblclick" onkeyup="journalList_grid_onkeyup">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="146"/>
+                <Column size="104"/>
+                <Column size="122"/>
+                <Column size="103"/>
+                <Column size="96"/>
+                <Column size="107"/>
+                <Column size="88"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="분개일련번호"/>
+                <Cell col="1" text="대차구분"/>
+                <Cell col="2" text="계정코드"/>
+                <Cell col="3" text="계정명"/>
+                <Cell col="4" text="적요"/>
+                <Cell col="5" text="거래처코드"/>
+                <Cell col="6" text="거래처명"/>
+                <Cell col="7" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="none" text="bind:JOURNAL_NO"/>
+                <Cell col="1" edittype="combo" text="bind:BALANCE_DIVISION" combodataset="ds_journalDevision" combocodecol="CODE" combodatacol="VALUE"/>
+                <Cell col="2" edittype="none" text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="3" edittype="text" text="bind:ACCOUNT_NAME"/>
+                <Cell col="4" edittype="text" text="bind:SUMMARY_COMMENT"/>
+                <Cell col="5" text="bind:CUSTOMER_CODE"/>
+                <Cell col="6" text="bind:CUSTOMER_NAME"/>
+                <Cell col="7" edittype="text" expr="expr:BALANCE_DIVISION==&quot;대변&quot;?RIGHT_CREDITS_PRICE:LEFT_DEBTOR_PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="slipAdd_btn" taborder="7" text="전표추가" left="62.11%" top="100" right="27.83%" height="25" onclick="slipAdd_btn_onclick"/>
+        <Button id="slipDel_btn" taborder="8" text="전표삭제" left="74.8%" top="100" right="15.14%" height="25" onclick="slipDel_btn_onclick"/>
+        <Button id="batch_btn" taborder="9" text="일괄저장" left="87.5%" top="100" right="2.44%" height="25" onclick="batch_btn_onclick"/>
+        <Grid id="slipList_grid" taborder="10" useinputpanel="false" left="1.66%" top="134" right="1.56%" height="154" binddataset="ds_slip" autofittype="col" oncellclick="slipList_grid_oncellclick" oncelldblclick="slipList_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="182"/>
+                <Column size="138"/>
+                <Column size="111"/>
+                <Column size="87"/>
+                <Column size="102"/>
+                <Column size="115"/>
+                <Column size="105"/>
+                <Column size="125"/>
+                <Column size="137"/>
+                <Column size="107"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="전표일련번호"/>
+                <Cell col="1" text="회계기수번호"/>
+                <Cell col="2" text="결의부서명"/>
+                <Cell col="3" text="전표유형"/>
+                <Cell col="4" text="품의내역"/>
+                <Cell col="5" text="작성자코드"/>
+                <Cell col="6" text="작성날짜"/>
+                <Cell col="7" text="승인자코드"/>
+                <Cell col="8" text="승인날짜"/>
+                <Cell col="9" text="승인여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:SLIP_NO"/>
+                <Cell col="1" text="bind:ACCOUNT_PERIOD_NO"/>
+                <Cell col="2" text="bind:DEPT_CODE"/>
+                <Cell col="3" displaytype="normal" edittype="none" text="bind:SLIP_TYPE"/>
+                <Cell col="4" edittype="text" text="bind:EXPENSE_REPORT"/>
+                <Cell col="5" text="bind:REPORTING_EMP_CODE"/>
+                <Cell col="6" displaytype="normal" edittype="date" text="bind:REPORTING_DATE"/>
+                <Cell col="7" text="bind:APPROVAL_EMP_CODE"/>
+                <Cell col="8" text="bind:APPROVAL_DATE"/>
+                <Cell col="9" text="bind:SLIP_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="journalAdd_btn" taborder="12" text="분개추가" left="75%" top="319" right="14.75%" height="25" onclick="journalAdd_btn_onclick"/>
+        <Button id="journalDel_btn" taborder="13" text="분개삭제" left="87.7%" top="319" right="2.05%" height="25" onclick="journalDel_btn_onclick"/>
+        <Grid id="credit_grid" taborder="17" useinputpanel="false" left="4.79%" top="562" right="53.13%" height="180" binddataset="ds_credit" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="215"/>
+                <Column size="215"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+                <Row size="24" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell colspan="2" text="차변"/>
+                <Cell row="1" text="금액"/>
+                <Cell row="1" col="1" text="계정명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:LEFT_DEBTOR_PRICE"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="합계"/>
+                <Cell col="1" expr="dataset.getSum('parseInt(LEFT_DEBTOR_PRICE)')"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="debit_grid" taborder="18" binddataset="ds_debit" useinputpanel="false" left="50.88%" top="564" right="7.03%" height="180" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="215"/>
+                <Column size="215"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+                <Row size="24" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell colspan="2" text="대변"/>
+                <Cell row="1" text="금액"/>
+                <Cell row="1" col="1" text="계정명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:RIGHT_CREDITS_PRICE"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="합계"/>
+                <Cell col="1" expr="dataset.getSum('parseInt(RIGHT_CREDITS_PRICE)')"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Combo id="status_combo" taborder="20" left="26.76%" top="58" right="61.04%" height="27" innerdataset="@ds_status" codecolumn="CODE" datacolumn="VALUE" index="1" value="미결" text="미결"/>
+        <Edit id="Edit00" taborder="22" top="306" right="77.73%" height="25" left="890"/>
+        <Static id="Static04" taborder="24" text="대차차액" left="45.9%" top="308" right="45.9%" height="24" style="align:center middle;"/>
+        <MaskEdit id="balanceDifference_mEdit" taborder="25" left="54.69%" top="302" right="27.54%" height="34" enable="false"/>
+        <Static id="slip_stc" taborder="26" text="전표관리/전표입력" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="journal_stc" taborder="32" text="분개입력" left="1.56%" top="299" right="89.45%" height="40" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="journalDetail_stc" taborder="33" text="분개상세&gt;&gt;" left="1.76%" top="498" right="87.7%" height="40" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_slip">
+        <ColumnInfo>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="ACCOUNT_PERIOD_NO" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="SLIP_TYPE" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="AUTHORIZATION_STATUS" type="STRING" size="256"/>
+          <Column id="REPORTING_EMP_CODE" type="STRING" size="256"/>
+          <Column id="REPORTING_DATE" type="STRING" size="256"/>
+          <Column id="APPROVAL_EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="SLIP_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="SLIP_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journal" oncolumnchanged="ds_journal_oncolumnchanged" cancolumnchange="ds_journal_cancolumnchange">
+        <ColumnInfo>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="SUMMARY_NUMBER" type="STRING" size="256"/>
+          <Column id="SUMMARY_COMMENT" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="SLIP_APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_debit">
+        <ColumnInfo>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_credit">
+        <ColumnInfo>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_status">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">승인</Col>
+            <Col id="VALUE">승인</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">미결</Col>
+            <Col id="VALUE">미결</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_journalDetail">
+        <ColumnInfo>
+          <Column id="JOURNAL_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="ITEM" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DETAIL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journalDetailForm">
+        <ColumnInfo>
+          <Column id="ACCOUNT_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CONTROL_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CONTROL_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CONTROL_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journalDevision">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">대변</Col>
+            <Col id="VALUE">대변</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">차변</Col>
+            <Col id="VALUE">차변</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_journalDetailCopy">
+        <ColumnInfo>
+          <Column id="JOURNAL_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="ITEM" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DETAIL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+전표입력화면                                             						                                                                         
+@Path		회계              				   				
+@Description	전표,분개,분개상세 조회 및 입력을 위한 창						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 22                             		                    				                                            
+********************************************************************************/
+
+
+this.addrow="";
+this.squenceNo=""; 
+var sToday=application.today();
+
+this.acc_slipRegistForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+        var s_today=sToday.toString();   
+        var v_today=s_today.substr(0,4)+"-"+s_today.substr(4,2)+"-"+s_today.substr(6,2);
+
+         this.transaction("findSlipList"
+		                 ,"dataURL::acc/slip/findSlipListByCondition.do"
+		                 ,""
+		                 ,"ds_slip=gds_slip ds_journal=gds_journal ds_journalDetail=gds_journalDetail"
+		                 ,"startDate="+v_today+" endDate="+v_today+" slipStatus="+"미결"
+		                 ,"callback"
+		                 ,false);
+ 
+}
+
+
+this.slipSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)  //조회 버튼
+{       type=0;//insert 빼고는 다 0 줄거다
+	    var v_startDate=this.fromDate_cal.value;
+	    var v_endDate=this.endDate_cal.value;
+  
+                if(v_startDate==null || v_endDate==null){
+                  alert("조회날짜가 비었습니다");
+                 return;
+                }
+               else{
+               v_startDate=this.fromDate_cal.value.toString();
+               v_endDate=this.endDate_cal.value.toString();
+               }
+        
+        var startDate=v_startDate.substr(0,4)+"-"+v_startDate.substr(4,2)+"-"+v_startDate.substr(6,2);
+		var endDate=v_endDate.substr(0,4)+"-"+v_endDate.substr(4,2)+"-"+v_endDate.substr(6,2);
+  
+        if( endDate<startDate){
+           alert("조회기간 설정을 다시 해주십시오");
+        }
+  
+  
+		this.transaction("findSlipList"
+		                 ,"dataURL::acc/slip/findSlipListByCondition.do"
+		                 ,""
+		                 ,"ds_slip=gds_slip ds_journal=gds_journal ds_journalDetail=gds_journalDetail"
+		                 ,"startDate="+startDate+" endDate="+endDate+" slipStatus="+this.status_combo.value
+		                 ,"callback"
+		                 ,false);
+ 
+         if(this.status_combo.value=="승인")     //승인인경우 수정 못하게 막음
+            {  
+              for(var i=0; i<this.ds_slip.getColCount(); i++){
+                this.slipList_grid.setCellProperty("Body", i, "edittype", "none");             
+             } 
+             
+             for(var ii=0; ii<this.ds_journal.getColCount(); ii++){
+                this.journalList_grid.setCellProperty("Body", ii, "edittype", "none");             
+             } 
+                  
+                  
+            }      
+            
+         else{  //미결인 경우 수정할수 있게
+           //this.slipList_grid.setCellProperty("Body", 3, "edittype", "text");  
+            this.slipList_grid.setCellProperty("Body", 4, "edittype", "text");   
+            this.slipList_grid.setCellProperty("Body", 6, "edittype", "none");   //입력할때는 달력나오게 수정일때는 못고치도록
+
+           for(var j=0; j<this.ds_journal.getColCount(); j++){
+                 
+                 if(j==1){
+                    this.journalList_grid.setCellProperty("Body", j, "edittype", "combo");   
+                 }
+                 else if(j==0){
+                    this.journalList_grid.setCellProperty("Body", j, "edittype", "none");   
+                 }
+                 else{
+                 this.journalList_grid.setCellProperty("Body", j, "edittype", "text");             
+                 }
+              }
+        
+        
+        }  		             
+
+}
+
+
+
+this.slipAdd_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 전표추가버튼
+{            
+         var today=sToday.substr(0,4)+"-"+sToday.substr(4,2)+"-"+sToday.substr(6,2);
+  
+	var slipAddRow=this.ds_slip.addRow();
+	//alert(this.ds_slip.getRowType(this.ds_slip.rowposition));
+	
+//전표유형,품의내역만이 수정가능
+ //this.slipList_grid.setCellProperty("body",3,"edittype","expr:currow=="+"'"+slipAddRow+"'"+"?'combo':'none'"); //addrow한거에 대해서 수정가능하게 한거-전표유형은 대체만 다른거아직 구현 안함.
+ this.slipList_grid.setCellProperty("body",4,"edittype","expr:currow=="+"'"+slipAddRow+"'"+"?'text':'none'"); //addrow한거에 대해서 수정가능하게 한거  
+ 
+
+//*****시퀀스 조회 넣기
+     var id = "findSequenceNo";
+        var url = "dataURL::sys/findSequenceNo.do";
+        var reqDs = "";
+        var respDs = "";
+        var args = "findSeq=SLIP_SEQ";
+        var callback = "callback";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback, false);
+//*****  
+    var slipSequence=this.squenceNo;
+    
+    application.gds_baseYear.filter("YEAR==2019");
+    var accountPeriod=application.gds_baseYear.getColumn(0,"ACCOUNT_PERIOD");
+	this.ds_slip.setColumn(this.ds_slip.rowposition,"SLIP_NO",slipSequence);
+	this.ds_slip.setColumn(this.ds_slip.rowposition,"ACCOUNT_PERIOD_NO",accountPeriod);//회계기수번호
+	this.ds_slip.setColumn(this.ds_slip.rowposition, "DEPT_CODE",application.g_deptCode); //결의부서명
+	this.ds_slip.setColumn(this.ds_slip.rowposition, "SLIP_TYPE","대체"); //전표유형
+	this.ds_slip.setColumn(this.ds_slip.rowposition, "REPORTING_EMP_CODE",application.g_empCode); //작성자코드
+	this.ds_slip.setColumn(this.ds_slip.rowposition, "REPORTING_DATE",today); //작성날짜
+    this.ds_slip.setColumn(this.ds_slip.rowposition, "APPROVAL_EMP_CODE",'미결'); //승인자코드
+    this.ds_slip.setColumn(this.ds_slip.rowposition, "APPROVAL_DATE",'미결'); //승인날짜
+    this.ds_slip.setColumn(this.ds_slip.rowposition, "SLIP_STATUS",'미결'); //승인여부
+}
+
+
+this.slipDel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) //전표삭제
+{   type=0;
+   if(this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_STATUS")=="승인"){
+    alert("승인된 전표는 삭제 불가능 합니다.");
+   }
+   else{
+   this.ds_slip.deleteRow(this.ds_slip.rowposition);
+   }
+}
+
+
+
+this.batch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{   if(confirm("저장하시겠습니까?")){
+       
+         trace("일괄저장 시작전: "+this.ds_journal.saveXML());
+         var journalTotalCount=this.ds_journal.getRowCount();  //저널 총 갯수
+
+        for(var a=0; a<journalTotalCount; a++)
+        {
+				if(this.ds_journal.getColumn(a,"BALANCE_DIVISION")==undefined){
+					alert("대변,차변을 선택이 누락되었습니다.");
+					return;
+			     }    
+	            if(type!=2){
+	           
+					if(this.ds_journal.getColumn(a,"LEFT_DEBTOR_PRICE")==undefined ||this.ds_journal.getColumn(a,"RIGHT_CREDITS_PRICE") ==undefined){
+						alert(" 누락된 금액이 있습니다");
+						return;
+					}
+				 }
+			 
+				if(this.ds_journal.getColumn(a,"PRICE")<0){
+					alert("마이너스 금액은 입력하실 수 없습니다");
+				    return;
+				}
+
+        }
+        
+     
+         if(this.balanceDifference_mEdit.value!=0){
+               alert("대차차액이 0원이 아니므로 저장이 취소됩니다.");      
+                       return;
+            }
+        
+  
+  if(type==2){  //삽입인경우
+ 
+            for(var i=0; i<journalTotalCount; i++){
+			var price=this.ds_journal.getColumn(i,"PRICE");
+			if(this.ds_journal.getColumn(i,"BALANCE_DIVISION")=="대변") //대변일때
+			{ 			   
+	
+			 this.journalList_grid.setCellProperty("body",7,"text","expr:currow=="+"'"+i+"'"+"?RIGHT_CREDITS_PRICE:LEFT_DEBTOR_PRICE"); //대변이면 다시 RIGHT_CREDUTS_PRICE로 BINDING 바꿈
+			 this.ds_journal.setColumn(i,"RIGHT_CREDITS_PRICE",price); //PRICE 값을  다시 대변금액으로 넣는작업
+			 this.ds_journal.setColumn(i,"LEFT_DEBTOR_PRICE","0");
+			 this.ds_journal.setColumn(i,"PRICE",""); //PRICE 값에는 null 들어가도록 만듬.
+
+			}
+			else{   //차변일때
+     		 
+			 this.journalList_grid.setCellProperty("body",7,"text","expr:currow=="+"'"+i+"'"+"?LEFT_DEBTOR_PRICE:RIGHT_CREDITS_PRICE");
+			 this.ds_journal.setColumn(i,"LEFT_DEBTOR_PRICE",price);
+			 this.ds_journal.setColumn(i,"RIGHT_CREDITS_PRICE","0");
+			 this.ds_journal.setColumn(i,"PRICE","");//PRICE 값에는 null 들어가도록 만듬.
+			}
+			
+        }  //journal for문 종료
+        
+        
+          for(var a=0; a<journalTotalCount; a++)
+        {
+				if(this.ds_journal.getColumn(a,"BALANCE_DIVISION")==undefined){
+					alert("대변,차변을 선택이 누락되었습니다.");
+					return;
+			     }    
+	
+				if(this.ds_journal.getColumn(a,"PRICE")==undefined){
+					alert(" 누락된 금액이 있습니다");
+					return;
+				 }
+			 
+				if(this.ds_journal.getColumn(a,"PRICE")<0){
+					alert("마이너스 금액은 입력하실 수 없습니다");
+				    return;
+				}
+
+        }
+          trace("필터전 데이터셋개수: "+this.ds_journalDetail.getRowCount());
+         this.ds_journalDetail.filter("VALUE!='null'");   //'null'(문자열)인거 거르기  
+   
+         this.ds_journalDetailCopy.appendData(this.ds_journalDetail,true,false);  //분개상세 삽입할것만 걸러서 ds_journalDetailCopy에 넣음
+          trace("필터후 카피  데이터셋개수: "+this.ds_journalDetailCopy.getRowCount());
+         
+          trace("필터후 데이터셋"+this.ds_journalDetail.saveXML());       
+         
+         this.ds_journalDetailCopy.set_updatecontrol(false); //normal로 되어있기때문에 inserted로 바꾸는 작업
+		 this.ds_journalDetailCopy.set_enableevent(false);   //normal로 되어있기때문에 inserted로 바꾸는 작업
+				for(var i=0; i<this.ds_journalDetailCopy.rowcount; i++) //normal로 되어있기때문에 inserted로 바꾸는 작업
+				{
+					this.ds_journalDetailCopy.setRowType(i, 2);   //normal로 되어있기때문에 inserted로 바꾸는 작업
+				}	
+		 this.ds_journalDetailCopy.set_enableevent(true); //normal로 되어있기때문에 inserted로 바꾸는 작업
+		 this.ds_journalDetailCopy.set_updatecontrol(true); //normal로 되어있기때문에 inserted로 바꾸는 작업
+         
+         
+         trace("필터후 카피 데이터셋"+this.ds_journalDetailCopy.saveXML());
+         
+                
+	    var id = "batchSlipAndJournalAndJournalDetailInfo";
+        var url = "dataURL::acc/slip/batchSlipAndJournalAndJournalDetailInfo.do";
+        var reqDs = "gds_slip=ds_slip:U gds_journal=ds_journal:U gds_journalDetail=ds_journalDetailCopy:U";
+        var respDs = "";
+        var args = "";
+        var callback = "callback";
+        
+    this.transaction(id, url, reqDs, respDs, args, callback, false);   
+    
+       }
+    else{ //수정이나 삭제임
+         this.ds_journalDetail.filter("VALUE!='null'");   //'null'(문자열)인거 거르기   
+         
+         trace("전표만 입력하거나 분개수정이나 삭제임");
+            
+	    var id = "batchSlipAndJournalAndJournalDetailInfo";
+        var url = "dataURL::acc/slip/batchSlipAndJournalAndJournalDetailInfo.do";
+        var reqDs = "gds_slip=ds_slip:U gds_journal=ds_journal:U gds_journalDetail=ds_journalDetail:U";
+        var respDs = "";
+        var args = "";
+        var callback = "callback";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback, false);   
+    
+    }   
+   }
+}
+
+
+
+var flag;
+var totalSum;
+this.slipList_grid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo) //전표그리드 클릭시 분개 띄우기 
+{
+      var slipNo = this.ds_slip.getColumn(e.row,"SLIP_NO");
+      this.ds_journal.filter("SLIP_NO=='"+slipNo+"'");
+      var rowCount =  this.ds_journal.getRowCount();
+	if(rowCount==0){
+	this.ds_credit.filter("LEFT_DEBTOR_PRICE=='x'");
+	this.ds_debit.filter("RIGHT_CREDITS_PRICE=='x'");
+	}else{
+			for(var i = 0 ; i<rowCount; i++){
+				var  balanceDivision  =  this.ds_journal.getColumn(i,"BALANCE_DIVISION");
+					if(balanceDivision=="차변"){
+						this.ds_credit.copyData(this.ds_journal,true);
+						this.ds_credit.filter("LEFT_DEBTOR_PRICE!=0");
+					}else if(balanceDivision=="대변"){
+						this.ds_debit.copyData(this.ds_journal,true);
+						this.ds_debit.filter("RIGHT_CREDITS_PRICE!=0");
+					}
+			}
+	}
+       
+       
+       
+      var leftPrice= this.ds_journal.getCaseSum("BALANCE_DIVISION=='차변'","LEFT_DEBTOR_PRICE");
+	  var rightPrice=this.ds_journal.getCaseSum("BALANCE_DIVISION=='대변'","RIGHT_CREDITS_PRICE"); 
+        	totalSum = Math.abs(leftPrice-rightPrice);
+		if(totalSum!=0){
+		this.balanceDifference_mEdit.set_style("color:red");
+		}else{
+		this.balanceDifference_mEdit.set_style("color:black");
+		}
+		this.balanceDifference_mEdit.set_value(totalSum);          
+           
+	  if(flag!=0){
+	   this.journalList_grid.set_binddataset("ds_journal");
+	   flag=0;
+	  }
+	  
+}
+
+
+this.slipList_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)//전표그리드 더블클릭해서 수정할 시
+{ 
+  if(this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_STATUS")=="승인")
+  { 
+   alert("승인된 전표는 수정 불가능 합니다");
+  }
+   
+}
+
+var type="";
+this.journalAdd_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)//분개추가
+{   type=2; //insert인경우
+ 
+    for(var b=0; b<this.ds_journal.getRowCount(); b++){
+       if(this.ds_journal.getRowType(b)==4){
+          alert("수정시 저장후 분개추가 사용 가능합니다");
+          return;
+       }
+    }
+    
+     for(var c=0; c<this.ds_journalDetail.getRowCount(); c++){
+       if(this.ds_journalDetail.getRowType(c)==4){
+          alert("수정시 저장후 분개추가 사용 가능합니다");
+          return;
+       }
+    }
+ 
+ 
+ 
+    if(this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_STATUS")=="승인"){
+         alert("승인된 전표에 분개추가 불가능합니다");
+         return;
+    }
+
+    this.journalList_grid.set_binddataset("ds_journal");
+    this.addrow = this.ds_journal.addRow();
+    this.journalList_grid.setCellProperty("body",7,"expr","");    //차변인지 대변인지에 따라 expr 걸려있던거 지움
+    this.journalList_grid.setCellProperty("body",7,"text","bind:PRICE"); //bind price로 바꿈 (이렇게해야 들어감) 
+    
+
+       for(var j=0; j<this.ds_journal.getColCount(); j++){     //입력모드로 변환
+                 
+                 if(j==1){
+                    this.journalList_grid.setCellProperty("Body", j, "edittype", "combo");   
+                 }
+                 else if(j==0){
+                    this.journalList_grid.setCellProperty("Body", j, "edittype", "none");   
+                 }
+                 else{
+                 this.journalList_grid.setCellProperty("Body", j, "edittype", "text");   
+                           
+                           
+                 }
+          }
+    
+    
+    
+    
+//****분개시퀀스 조회   
+        var id = "findJournalSequenceNo";  
+        var url = "dataURL::sys/findSequenceNo.do";
+        var reqDs = "";
+        var respDs = "";
+        var args = "findSeq=JOURNAL_SEQ";
+        var callback = "callback";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback, false);
+//*****  
+var journalSequence=this.squenceNo;
+	this.ds_journal.setColumn(this.addrow,"JOURNAL_NO",journalSequence); //분개일련번호 넣기
+    this.ds_journal.setColumn(this.addrow ,"SLIP_NO",this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_NO")); //분개에 전표일련번호 넣어주기
+     
+}
+
+
+
+this.journalDel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) //분개삭제
+{    type=0;
+	this.ds_journal.deleteRow(this.ds_journal.rowposition);
+}
+
+
+
+
+this.journalList_grid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)//분개그리드 클릭하면 분개상세 띄우기
+{   
+     if(this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_STATUS")=="승인" )
+     {
+   
+     }
+	
+     else{
+      if(e.col==2 || e.col==3) //계정과목 클릭하면
+		{
+			var accountDiglog=new ChildFrame();
+			accountDiglog.set_showstatusbar(false);
+			accountDiglog.init("account","absolute",400,300,536,376,null,null,"acc_base::acc_accountDialog.xfdl");
+			accountDiglog.showModal("account",this.getOwnerFrame(),null,this,this.fn_callback);
+		}
+	
+	  if(e.col==5 || e.col==6) //거래처 클릭하면
+		{
+			var customerDiglog=new ChildFrame();
+			customerDiglog.set_showstatusbar(false);
+			customerDiglog.init("customer","absolute",400,300,536,376,null,null,"base::customerDialog.xfdl");
+			customerDiglog.showModal("customer",this.getOwnerFrame(),null,this,this.fn_callback);
+        }
+        }
+      
+    this.journalDetail_fn();
+
+}
+
+
+
+//***************************************** 분개상세 만드는 function******************************
+
+this.journalDetail_fn=function(){
+    
+
+	var accountInnerCode=this.ds_journal.getColumn(this.ds_journal.rowposition,"ACCOUNT_INNER_CODE");
+    var journalNo=this.ds_journal.getColumn(this.ds_journal.rowposition,"JOURNAL_NO");	
+	this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"'"); //선택한곳의 분개번호의 분개상세들만 거름
+
+    trace("분개상세 처음꺼 필터: "+this.ds_journalDetail.saveXML());
+	var id = "findAccountControlDetailList";
+        var url = "dataURL::acc/slip/findAccountControlDetailList.do";
+        var reqDs = "";
+        var respDs = "ds_journalDetailForm=gds_accountControlDetail";
+        var args = "accountCode="+accountInnerCode;
+        var callback = "callback";
+    
+    this.transaction(id, url, reqDs, respDs, args, callback, false);
+  
+
+   
+   for(var index=1; index<=4; index++)  // 분개상세 컴포넌트들 다 지우는 작업(동적으로 못만듬 ㅜㅠㅜ)
+     {
+	  this.removeChild("journalDetail_"+index+"_stc");    // 이전에 만들어진거 지우기
+      this.removeChild("journalDetail_"+index+"_edt");
+      this.removeChild("journalDetail_"+index+"_cal");
+      //this.removeChild("journalDetail"+index+"_stc");
+      }  
+     
+     var num=0;
+     var s_left=15.63;   //분개상세 주제 왼쪽여백
+     var s_right=77.15;  //분개상세 주제 오른쪽여백
+     var left=23.93;    //각종 다른 컴포넌트 왼쪽여백
+     var right=64.45;   //각종 다른 컴포넌트 오른쪽여백
+     
+     for(var index=0; index<this.ds_journalDetailForm.getRowCount(); index++)
+     {   num++;
+        var stcId="journalDetail_"+num+"_stc"
+        var objStatic = new Static(stcId,"absolute",s_left+"%", "65.76%", null, "3.91%", s_right+"%", null);   //갖고있는 ACCOUNT_CONTROL_NAME 만큼 static 만들기
+        this.addChild(stcId,objStatic);
+        objStatic.enable=false;
+        objStatic.style.set_background("#c5af94ff");
+        objStatic.style.set_color("white");
+        objStatic.style.set_align("center middle");
+        
+        objStatic.text=this.ds_journalDetailForm.getColumn(index,"ACCOUNT_CONTROL_NAME");
+        objStatic.show();
+        
+        s_left+=20.80;   //왼쪽으로 213씩 옮기기(20.08%)
+        s_right-=20.80; // 오른쪽으로 213씩 빼기(20.08%)
+       
+    
+     
+        if(this.ds_journalDetailForm.getColumn(index,"ACCOUNT_CONTROL_TYPE")=="TEXT" || this.ds_journalDetailForm.getColumn(index,"ACCOUNT_CONTROL_TYPE")=="CODE")// 형태가 텍스트거나 코드면
+        {
+        var edtId="journalDetail_"+num+"_edt"
+        var objEdit = new Edit(edtId,"absolute",left+"%", "65.76%", null, "3.91%", right+"%", null);   //TEXT 만들기
+        this.addChild(edtId,objEdit);
+      
+        if(this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_STATUS")=="승인"){
+          objEdit.enable=false;  
+        }   
+        //this.ds_journalDetail.filter("");
+        this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"' && ITEM=='"+objStatic.text+"' && VALUE!='null'");   //코드일때는 처음 창띄울때 한번 킬포커스 작동되서 비어있을때 'null'(문자)이라고 입력되게 해놨음 그래서 null 이 아닌거 갖고오기
+        var postCode=this.ds_journal.getColumn(this.ds_journal.rowposition,"ACCOUNT_INNER_CODE");
+             trace("코드나 텍스트일때 디테일 xml "+this.ds_journalDetail.saveXML());
+          
+         if(this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode)==0 && change=="Y"){  //계정과목이 데이터셋에 있고 계정과목이 바뀌면
+           
+           trace("텍스트 변경된거 데이터셋에 있다면");
+           trace("텍스트 프리코드:"+preCode);
+           trace("텍스트 여부 "+this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode));
+         
+            if(this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode)==0){ //데이터셋에 계정과목 변경된 값이있으면
+                var journalDetailTotalCount=this.ds_journalDetail.getRowCount();   
+				
+				for(var a=0; a<journalDetailTotalCount; a++){
+				    for(var b=0; b<preCode.length; b++){
+						if(this.ds_journalDetail.getColumn(a,"ACCOUNT_INNER_CODE")==preCode[b]){   //프리코드 0부터 이때까지 꺼 다지우기
+							this.ds_journalDetail.deleteRow(a); 
+						}
+					}
+				}
+				
+               objEdit.set_value(this.ds_journalDetail.getColumn(0,"VALUE"));
+            }
+            else{ //데이터셋에 계정과목 변경된 값이 없으면
+           
+				  objEdit.set_value(this.ds_journalDetail.getColumn(0,"VALUE"));
+            
+            } 
+
+		}
+         else{    //데이터셋이 없고 계정과목 안바뀌면 
+           trace("텍스트 변경된거 데이터셋에 없다면");
+           trace("텍스트 여부~ "+this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode));
+           trace("********************************************");
+          if(this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode)==0){
+              trace("데이터셋이 있고 계정과목 변경 안되면");
+              trace(this.ds_journalDetail.saveXML());
+              trace("값:"+this.ds_journalDetail.getColumn(0,"VALUE"));
+              objEdit.set_value(this.ds_journalDetail.getColumn(0,"VALUE"));
+          }
+          else{
+             trace("데이터셋이 없고 계정과목 변경 안되면");
+              trace(this.ds_journalDetail.saveXML());
+          objEdit.set_value(undefined); //없는걸로 셋팅
+          }
+         }
+
+        objEdit.show();
+// ************************ 동적으로 이벤트 걸기(텍스트 생성 메서드 안)******************************************************      
+          if(this.ds_journalDetailForm.getColumn(index,"ACCOUNT_CONTROL_TYPE")=="CODE") 
+          {
+                    objEdit.addEventHandler("oneditclick",this.codeInput_oneditclick,this);
+ 
+          }
+       
+//********************************************************************************************************        
+                    objEdit.addEventHandler("onkillfocus",this.text_onkillfocus,this);
+//**********************************************************************************************************
+      }  //형태가 텍스트나 코드면 메서드 끝 
+        
+        
+     if(this.ds_journalDetailForm.getColumn(index,"ACCOUNT_CONTROL_TYPE")=="CALENDAR")// 형태가 달력이면
+        {
+        var calId="journalDetail_"+num+"_cal"
+        var objCalendar = new Calendar(calId,"absolute",left+"%", "65.76%", null, "3.91%", right+"%", null);   //달력 만들기
+  
+
+        this.addChild(calId,objCalendar);
+        
+        if(this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_STATUS")=="승인"){
+           objCalendar.enable=false; 
+        }      
+       //this.ds_journalDetail.filter("");
+        this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"' && ITEM=='"+objStatic.text+"'");
+          trace("uu"+this.ds_journalDetail.getRowCount());
+  
+        var postCode=this.ds_journal.getColumn(this.ds_journal.rowposition,"ACCOUNT_INNER_CODE");
+      
+       if(this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode)==0 && change=="Y"){  //계정과목이 데이터셋에 있고 계정과목이 바뀌면
+           
+           trace("캘린더 변경된거 데이터셋에 있다면");
+           trace("캘린더 프리코드:"+preCode);
+           trace("캘린더 여부 "+this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode));
+         
+            if(this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode)==0){ //데이터셋에 계정과목 변경된 값이있으면
+                var journalDetailTotalCount=this.ds_journalDetail.getRowCount();   
+				
+				for(var a=0; a<journalDetailTotalCount; a++){
+				    for(var b=0; b<preCode.length; b++){
+						if(this.ds_journalDetail.getColumn(a,"ACCOUNT_INNER_CODE")==preCode[b]){   //프리코드 0부터 이때까지 꺼 다지우기
+							this.ds_journalDetail.deleteRow(a); 
+						}
+					}
+				}
+				
+               objCalendar.set_value(this.ds_journalDetail.getColumn(0,"VALUE"));
+            }
+            else{ //데이터셋에 계정과목 변경된 값이 없으면
+           
+			objCalendar.set_value(this.ds_journalDetail.getColumn(0,"VALUE"));
+            
+            } 
+
+		}
+         else{    //데이터셋이 없고 계정과목 안바뀌면 
+           trace("캘린더 변경된거 데이터셋에 없다면");
+           trace("캘린더 여부~ "+this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode));
+           trace("********************************************");
+			if(this.ds_journalDetail.findRow("ACCOUNT_INNER_CODE",postCode)==0){
+				trace("데이터셋이 있고 계정과목 변경 안되면");
+				trace(this.ds_journalDetail.saveXML());
+				trace("값:"+this.ds_journalDetail.getColumn(0,"VALUE"));
+				objCalendar.set_value(this.ds_journalDetail.getColumn(0,"VALUE"));
+			}
+			else{
+				trace("데이터셋이 없고 계정과목 변경 안되면");
+				trace(this.ds_journalDetail.saveXML());
+				objCalendar.set_value(undefined); //없는걸로 셋팅
+			}
+        }
+
+           objCalendar.show();
+        
+           objCalendar.addEventHandler("onkillfocus",this.calendar_onkillfocus,this);
+   } //형태가 달력이면 끝
+        
+         left+=21;   //왼쪽으로 213씩 옮기기
+         right-=20.8; // 오른쪽으로 213씩 빼기
+        
+     } //for문 종료
+}
+
+
+var codeEditId;
+
+//********** 코드인풋
+this.codeInput_oneditclick=function(obj:Edit, e:nexacro.ClickEventInfo){
+          codeEditId=obj.id;
+          var array=codeEditId.split("_"); //edt 이랑 stc 랑 숫자 같으니까 etdid에서  빼와서 stc id 생성해서 값 갖고올거임!!
+	      var stcVal=eval("this.journalDetail_"+array[1]+"_stc.text");
+	     
+	     switch(stcVal){
+	     case "금융기관" :
+			    this.dialog_open("financialcustomer","base::financialCustomerDialog.xfdl");	
+				break;
+	     case "거래처" :
+				this.dialog_open("journalDetailCustomer","base::customerDialog.xfdl");	
+				break;
+	     case "사원" : //dialog는 만들었으나 분개상세에 사용되는 곳이 우선은 없음..
+				this.dialog_open("employee","base::employeeDialog.xfdl");
+				break;
+	     case "사업장" :
+				this.dialog_open("businessPlace","base::businessDialog.xfdl");
+				break;
+	     case "창고" :
+				this.dialog_open("warehouse","base::warehouseDialog.xfdl");	
+				break;
+	     case "증권종류" :     //증권종류 데이터 없다. dialog그래서 안만듬
+				this.dialog_open("stock","base::stockDialog.xfdl");
+				break;
+
+	     }
+    
+ }
+ 
+ 
+//*********dialog 만들어서 띄우는 함수
+this.dialog_open=function(v_dialogName,xfdlPath){
+            var customerDiglog=new ChildFrame();
+			customerDiglog.set_showstatusbar(false);
+			customerDiglog.init(v_dialogName,"absolute",400,300,536,376,null,null,xfdlPath);
+			customerDiglog.showModal(v_dialogName,this.getOwnerFrame(),{dialogName:v_dialogName},this,this.fn_callback);
+}
+ //*******
+
+ 
+var click=0;
+//********** 텍스트 킬포커스
+this.text_onkillfocus=function(obj:Edit, e:nexacro.ClickEventInfo){
+
+var journalNo=this.ds_journal.getColumn(this.ds_journal.rowposition,"JOURNAL_NO"); 
+var journalAccCode=this.ds_journal.getColumn(this.ds_journal.rowposition,"ACCOUNT_INNER_CODE");
+var edtId=obj.id;
+var array=edtId.split("_"); //edt 이랑 stc 랑 숫자 같으니까 etdid에서  빼와서 stc id 생성할 거임.
+var stcVal=eval("this.journalDetail_"+array[1]+"_stc.text");   
+   
+      this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"' && ITEM=='"+stcVal+"' && VALUE!='null'");
+   if(this.ds_journalDetail.findRow("JOURNAL_NO",journalNo)===-1){   //선택한 분개번호가 분개상세에는 없으면 데이터 셋팅하기
+     trace("분개상세에 없어서 새로 셋팅: ");
+     trace(this.ds_journalDetail.findRow("JOURNAL_NO",journalNo));
+	var adr=this.ds_journalDetail.addRow();
+	this.ds_journalDetail.setColumn(adr,"JOURNAL_NO",journalNo); 
+	this.ds_journalDetail.setColumn(adr,"ACCOUNT_INNER_CODE",journalAccCode);
+	this.ds_journalDetail.setColumn(adr,"ITEM",stcVal); //stc 값 -> item 칼럼에 집어넣기
+	if(obj.value==undefined){    //텍스트안에 아무것도 없으면(코드의 경우 한번 띄워질때 그 빈값이 한번 셋팅되기 때문에)
+	    this.ds_journalDetail.setColumn(adr,"VALUE","null");
+	}
+	else{
+	this.ds_journalDetail.setColumn(adr,"VALUE",obj.value);  // 생성한 컴포넌트의 값 셋팅
+    }    
+  }
+   else{ //분개상세 새로넣는거 아니고 수정의 경우
+    if(this.ds_journalDetail.getRowCount()==0) //수정인데 분개상세에 정보와 값이 안들어가 있었을 경우
+    {  
+      var adr=this.ds_journalDetail.addRow();
+      this.ds_journalDetail.setColumn(adr,"JOURNAL_NO",journalNo); 
+      this.ds_journalDetail.setColumn(adr,"ACCOUNT_INNER_CODE",journalAccCode);
+	  this.ds_journalDetail.setColumn(adr,"ITEM",stcVal); //stc 값 -> item 칼럼에 집어넣기 
+      this.ds_journalDetail.setColumn(adr,"VALUE",obj.value); 
+    }  
+    else{ //원래 값이 있고 수정의 경우
+    this.ds_journalDetail.setColumn(0,"ACCOUNT_INNER_CODE",journalAccCode);
+   this.ds_journalDetail.setColumn(0,"VALUE",obj.value);
+    }
+   }
+   
+}
+
+//********** 캘린더 킬포커스(text랑 같은원리)
+this.calendar_onkillfocus=function(obj:Calendar, e:nexacro.ClickEventInfo){
+     
+ 
+var journalNo=this.ds_journal.getColumn(this.ds_journal.rowposition,"JOURNAL_NO"); 
+var journalAccCode=this.ds_journal.getColumn(this.ds_journal.rowposition,"ACCOUNT_INNER_CODE");
+var calId=obj.id;
+var array=calId.split("_");
+var stcVal=eval("this.journalDetail_"+array[1]+"_stc.text");
+this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"' && ITEM=='"+stcVal+"'");
+  
+    
+  if(this.ds_journalDetail.findRow("JOURNAL_NO",journalNo)==-1){
+    
+	var adr=this.ds_journalDetail.addRow();
+	this.ds_journalDetail.setColumn(adr,"JOURNAL_NO",journalNo);
+    this.ds_journalDetail.setColumn(adr,"ACCOUNT_INNER_CODE",journalAccCode);
+	this.ds_journalDetail.setColumn(adr,"ITEM",stcVal);
+	this.ds_journalDetail.setColumn(adr,"VALUE",obj.value);
+	}
+  else{
+   //this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"' && ITEM=='"+stcVal+"'");
+    if(this.ds_journalDetail.getRowCount()==0) //수정인데 분개상세에 정보와 값이 안들어가 있었을 경우 즉 수정인데 추가인 경우
+    {  
+      var adr=this.ds_journalDetail.addRow();
+      this.ds_journalDetail.setColumn(adr,"JOURNAL_NO",journalNo); 
+      this.ds_journalDetail.setColumn(adr,"ACCOUNT_INNER_CODE",journalAccCode);
+	  this.ds_journalDetail.setColumn(adr,"ITEM",stcVal); //stc 값 -> item 칼럼에 집어넣기 
+      this.ds_journalDetail.setColumn(adr,"VALUE",obj.value); 
+    }  
+    else{ //원래 값이 있고 수정의 경우
+    this.ds_journalDetail.setColumn(0,"ACCOUNT_INNER_CODE",journalAccCode);
+    this.ds_journalDetail.setColumn(0,"VALUE",obj.value);
+    }
+   
+  }
+
+}
+
+
+
+//***********************************************************************
+this.fn_callback = function(strID, Variant) //팝업창에서 변수 받아오기 
+{  
+    switch(strID){
+    case "account":
+			var v=Variant;
+			var array=v.split("/");
+			var accountCode=array[0];
+			var accountName=array[1];
+			this.ds_journal.setColumn(this.ds_journal.rowposition,"ACCOUNT_INNER_CODE",accountCode);
+			this.ds_journal.setColumn(this.ds_journal.rowposition,"ACCOUNT_NAME",accountName);
+			this.journalDetail_fn(); //계정과목 수정되면 분개상세 다시 만들어야 하니까 function 호출
+            break;
+    case "customer":
+            var v=Variant;
+			var array=v.split("/");
+			var customerCode=array[0];
+			var customerName=array[1];
+			this.ds_journal.setColumn(this.ds_journal.rowposition,"CUSTOMER_CODE",customerCode);
+			this.ds_journal.setColumn(this.ds_journal.rowposition,"CUSTOMER_NAME",customerName);
+			break;
+     case "financialcustomer":
+            var v=Variant;
+			eval("this."+codeEditId+".set_value(v)");    
+			break;
+     case "journalDetailCustomer":
+			var v=Variant;
+			eval("this."+codeEditId+".set_value(v)");   
+			break;
+     case "employee":
+			var v=Variant;
+			eval("this."+codeEditId+".set_value(v)");   
+			break;
+     case "businessPlace":
+			var v=Variant;
+			eval("this."+codeEditId+".set_value(v)");   
+			break;
+     case "warehouse":
+			var v=Variant;
+			eval("this."+codeEditId+".set_value(v)");   
+			break;
+     case "stock":
+			var v=Variant;
+			eval("this."+codeEditId+".set_value(v)");   
+			break;
+    
+    }
+    
+    
+}
+
+
+
+ this.journalList_grid_onselectchanged = function(obj:Grid, e:nexacro.GridSelectEventInfo)
+ {   
+     for(var index=1; index<=this.ds_journalDetailForm.getRowCount(); index++)
+      {
+	  this.removeChild("journalDetail_"+index+"_stc");    // 이전에 만들어진거 지우기
+      this.removeChild("journalDetail_"+index+"_edt");
+      this.removeChild("journalDetail_"+index+"_cal"); 
+       //this.removeChild("journalDetail"+index+"_stc");
+       }
+   
+ }
+
+
+this.balanceDifference_fn=function(obj,e){     //대차액 계산 함수 
+
+var leftPrice= this.ds_journal.getCaseSum("BALANCE_DIVISION=='차변'","PRICE"); //등록할때는 price로 바껴서 bind 되기 때문에
+	  var rightPrice=this.ds_journal.getCaseSum("BALANCE_DIVISION=='대변'","PRICE"); 
+        	totalSum = Math.abs(leftPrice-rightPrice);
+		if(totalSum!=0){
+		this.balanceDifference_mEdit.set_style("color:red");
+		}else{
+		this.balanceDifference_mEdit.set_style("color:black");
+		}
+		this.balanceDifference_mEdit.set_value(totalSum);   
+		
+}
+
+this.journalList_grid_onkeyup = function(obj:Grid, e:nexacro.KeyEventInfo) 
+{          
+    this.balanceDifference_fn();
+}
+
+
+var change;
+this.ds_journal_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo){  //금액 먼저적고 대변, 차변 바꾸는거 할때 적용되게 하기위해 칼럼체인지이벤트 사용  
+	
+		if(e.columnid=="ACCOUNT_INNER_CODE"|| e.columnid=="ACCOUNT_NAME")
+        {  
+            change="Y";   // 계정과목코드 칼럼 변경시 Y로
+        }
+        else{
+			change="N";  //아니면 N
+        }																				    
+																		    
+																					    
+   this.balanceDifference_fn();   //금액계산함수
+   
+}
+
+
+
+     
+this.callback = function(trid, ErrorCode, ErrorMsg){
+   if(trid=="batchSlipAndJournalAndJournalDetailInfo"){
+      if(ErrorCode<0){
+          alert("저장을 실패하였습니다");
+      } else {   
+          alert("성공적으로 저장하였습니다");
+          this.reload();
+      }
+   }
+
+}
+
+var preCode=[];
+this.ds_journal_cancolumnchange = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)//칼럼체인지 전에 일어나는 거
+{
+     if(e.columnid=="ACCOUNT_INNER_CODE"){
+		preCode.push(obj.getColumn(obj.rowposition,"ACCOUNT_INNER_CODE"));
+      }
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="dailyAttdRestApplicationForm" Left="8" OnLoadCompleted="dailyAttdRestApplicationForm_OnLoadCompleted" PidAttrib="7" Title="dailyAttdRestApplicationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsAttdRestType">
+				<Contents>
+					<colinfo id="DETAIL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="DETAIL_CODE_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsEtcSalCopy">
+				<Contents>
+					<colinfo id="ETC_SAL_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="ETC_SAL_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="ETC_SAL_PRICE" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsTempRest">
+				<Contents>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="APPROVAL_STATUS" size="256" summ="default" type="STRING"/>
+					<colinfo id="CAUSE" size="256" summ="default" type="STRING"/>
+					<colinfo id="COST" size="256" summ="default" type="STRING"/>
+					<colinfo id="DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="START_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="END_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="REQUEST_DATE" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTD_REST_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTD_REST_SEQ" size="256" summ="default" type="STRING"/>
+					<colinfo id="OTHER_SUDANG" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,14" Height="30" Id="formtitle" Left="2" TabOrder="1" Text="근태외&#32;신청" Top="2" VAlign="Middle" Width="953"></Static>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,14" Height="30" Id="Static0" Left="1" TabOrder="2" Text="근태외&#32;현황조회" Top="306" VAlign="Middle" Width="953"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static2" Left="8" TabOrder="3" Text="신청구분" Top="80" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static1" Left="536" TabOrder="4" Text="신청날짜" Top="80" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static3" Left="271" TabOrder="5" Text="추가경비" Top="224" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static4" Left="8" TabOrder="6" Text="사원번호" Top="152" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static5" Left="8" TabOrder="7" Text="기타수당" Top="224" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static6" Left="271" TabOrder="8" Text="사원명" Top="152" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static7" Left="271" TabOrder="9" Text="부서" Top="80" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static8" Left="536" TabOrder="10" Text="신청기간" Top="152" VAlign="Middle" Width="77"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static9" Left="536" TabOrder="11" Text="사유" Top="224" VAlign="Middle" Width="77"></Static>
+		<Combo CodeColumn="DETAIL_CODE" DataColumn="DETAIL_CODE_NAME" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="applyType" InnerDataset="dsAttdRestType" Left="88" TabOrder="12" Top="80" Width="157"></Combo>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empCode" Left="85" Readonly="TRUE" TabOrder="15" Top="152" Width="157"></Edit>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="deptName" Left="351" Readonly="TRUE" TabOrder="13" Top="80" Width="157"></Edit>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empName" Left="351" Readonly="TRUE" TabOrder="14" Top="152" Width="157"></Edit>
+		<Edit Align="CENTER" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="plusCost" Left="351" TabOrder="19" Top="224" Width="157"></Edit>
+		<MaskEdit Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="requestDate" Left="615" Mask="@@@@-@@-@@" TabOrder="20" Top="80" Type="STRING" Width="218"></MaskEdit>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="fromDate" Left="615" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="17" Top="152" WeeksFont="LG&#32;PC,11" Width="116"></Calendar>
+		<Calendar DayFont="LG&#32;PC,11" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="toDate" Left="763" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="18" Top="152" WeeksFont="LG&#32;PC,11" Width="116"></Calendar>
+		<Edit Align="CENTER" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="cause" Left="615" TabOrder="16" Top="224" Width="320"></Edit>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static17" Left="731" TabOrder="21" Text="~" Top="152" VAlign="Middle" Width="32"></Static>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,11" Height="33" Id="applyBtn" Left="849" OnClick="applyBtn_OnClick" TabOrder="22" Text="신&#32;청" Top="77" Width="87"></Button>
+		<Calendar Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="searchFromDate" Left="121" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="23" Top="368" Width="127"></Calendar>
+		<Calendar Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="searchToDate" Left="282" SaturdayTextColor="blue" SundayTextColor="red" TabOrder="24" Top="368" Width="127"></Calendar>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static10" Left="248" TabOrder="25" Text="~" Top="368" VAlign="Middle" Width="32"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static11" Left="17" TabOrder="26" Text="조회기간" Top="368" VAlign="Middle" Width="104"></Static>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,11" Height="33" Id="searchBtn" Left="849" OnClick="searchBtn_OnClick" TabOrder="27" Text="조&#32;회" Top="368" Width="87"></Button>
+		<Combo CodeColumn="ETC_SAL_CODE" DataColumn="ETC_SAL_NAME" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="etcSal" InnerDataset="dsEtcSalCopy" Left="85" TabOrder="28" Top="224" Width="157"></Combo>
+		<Grid BindDataset="dsDailyAttdRest" BkColor2="default" BoldHead="true" Bottom="745" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,9" HeadHeight="25" Height="337" Id="dayAttdRestGrid" InputPanel="FALSE" Left="16" LineColor="default" Right="944" RowHeight="20" TabOrder="29" TabStop="true" Top="408" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="928">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="130"/>
+						<col width="100"/>
+						<col width="80"/>
+						<col width="120"/>
+						<col width="80"/>
+						<col width="120"/>
+						<col width="120"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="300"/>
+						<col width="0"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,10" text="사원번호"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청자명"/>
+						<cell bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="승인상태"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,11" text="비용"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,11" text="일수"/>
+						<cell bkcolor="silver" col="5" display="text" font="한컴&#32;윤고딕&#32;240,11" text="시작일"/>
+						<cell bkcolor="silver" col="6" display="text" font="한컴&#32;윤고딕&#32;240,11" text="종료일"/>
+						<cell bkcolor="silver" col="7" display="text" font="한컴&#32;윤고딕&#32;240,11" text="신청일"/>
+						<cell bkcolor="silver" col="8" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근태외구분"/>
+						<cell bkcolor="silver" col="9" display="text" font="한컴&#32;윤고딕&#32;240,11" text="사유"/>
+						<cell bkcolor="mistyrose" col="10" display="text" font="한컴&#32;윤고딕&#32;240,11" text="ATTD_REST_SEQ"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="APPROVAL_STATUS" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="COST" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="4" colid="DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="5" colid="START_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="6" colid="END_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="7" colid="REQUEST_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="8" colid="ATTD_REST_CODE" combocol="DETAIL_CODE" combodataset="dsAttdRestType" combotext="DETAIL_CODE_NAME" display="combo" edit="combo" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="9" colid="CAUSE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell col="10" colid="ATTD_REST_SEQ" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+
+function dailyAttdRestApplicationForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	deptName.Text=g_deptName;
+   empCode.Text=g_empCode;
+   empName.Text=g_empName;
+   
+   //코드와 상세코드 한번에 받아 온다. 두개 동시에..
+	transaction("findCodeList","svcBase::/code.do?method=findCodeList","","dsCode=dsCode dsDetailCode=dsDetailCode","","callback");
+    //dsDetailCode.Filter("CODE=='CO-17'");
+    dsDetailCode.Filter("DETAIL_CODE='ASC002' || DETAIL_CODE='ASC003'");
+	dsAttdRestType.CopyF(dsDetailCode);
+   
+	transaction("findSalaryList","svcBase::/salary.do?method=findSalaryList","","dsEtcSal=dsEtcSal dsOvertimeSal=dsOvertimeSal","","callback");
+	dsEtcSal.Filter("substr(ETC_SAL_CODE,0,3)=='ETS'");
+	
+	dsEtcSalCopy.CopyF(dsEtcSal);
+   
+   requestDate.Value=today();
+   
+   transaction(
+      "findAttdRestList",
+      "svcHrAttendance::/dailyAttdRest.do?method=findAttdRestList",
+      "",
+      "dsDailyAttdRest=dsDailyAttdRest",
+      "empCode='"+g_empCode+"'",
+      "callback"
+   );
+   dsTempRest.CopyF(dsDailyAttdRest);
+   dsDailyAttdRest.Filter("START_DATE='0'");
+	
+}
+
+//조회 버튼 누를 시 
+function searchBtn_OnClick(obj)
+{
+	
+	var fromDate=searchFromDate.Value;
+	var toDate=searchToDate.Value;
+	if(fromDate=="" || toDate==""){
+		alert("기간을 선택해 주세요.  ");
+   }else if(fromDate>toDate){
+      alert(" 조회 기간을 확인해 주세요.");
+      Reload();
+   }else if(fromDate!="" || toDate!=""){
+      dsDailyAttdRest.UnFilter();
+      dsDailyAttdRest.Filter("START_DATE>='"+fromDate+"'&& START_DATE <='"+toDate+"'");
+   }
+	
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=="addDailyAttdRest"){
+      if(ErrorCode<0){
+         alert(ErrorMsg);   
+      }else{      
+         alert(ErrorMsg);
+         Reload();
+      }
+   }
+}
+
+
+// 근태외 신청 시
+function applyBtn_OnClick(obj)
+{
+	var empCode=empCode.Text;
+	var empName=empName.Text;
+	var applyType=applyType.Value;
+	var requestDate=requestDate.Value;
+	var fromDate=fromDate.Value;
+	var toDate=toDate.Value;
+	var days=ParseInt(toDate)-ParseInt(fromDate)+1;
+	
+	dsEtcSalCopy.UnFilter();
+	dsEtcSalCopy.Filter("ETC_SAL_CODE=='"+etcSal.Value+"'");
+    var etcPrice = dsEtcSalCopy.GetColumn(0, "ETC_SAL_PRICE");
+    var cost=ParseInt(etcPrice)+ParseInt(plusCost.Value);
+    var cause=cause.Value;
+    var etcsalCode=etcSal.Value;
+   if(fromDate=="" || toDate=="" || applyType==""){
+		alert(" 근태외 신청시 누락된 부분이 있습니다. 확인해 주세요 .");
+	}else if(requestDate > fromDate){
+		alert("신청기간의 시작일은 날짜보다 빠를수 없습니다.");
+	}else if(requestDate = fromDate){
+		alert("오늘의 근태외 신청사유 발생시 일근태신청란에 근태구분        ★★★★★★★외출★★★★★★★로 신청하세요.");
+	}else{
+      if(confirm(" 신청하시겠습니까?")){
+   
+         dsDailyAttdRest.AddRow();
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"EMP_CODE",empCode);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"ATTD_REST_CODE",applyType);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"REQUEST_DATE",requestDate);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"START_DATE",fromDate);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"END_DATE",toDate);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"DAYS",ToString(days));
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"COST",ToString(cost));
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"CAUSE",cause);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"APPROVAL_STATUS","N");
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"EMP_NAME",empName);
+         dsDailyAttdRest.SetColumn(dsDailyAttdRest.row,"OTHER_SUDANG",etcSal.Value);
+   
+         transaction(
+            "addDailyAttdRest",
+            "svcHrAttendance::/dailyAttdRest.do?method=addDailyAttdRest",
+            "dsDailyAttdRest=dsDailyAttdRest:u",
+            "dsDailyAttdRest=dsDailyAttdRest",
+            "",
+            "callback"
+         );
+      }
+   }	
+}]]></Script>
+</Window>

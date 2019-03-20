@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="kr.co.seoulit.acc.slip.dao.JournalDAO">
+    
+    <resultMap type="journalTo" id="journalResult">
+    	<result property="journalNo" column="JOURNAL_NO"/>
+    	<result property="slipNo" column="SLIP_NO"/>
+    	<result property="balanceDivision" column="BALANCE_DIVISION"/>
+    	<result property="accountInnerCode" column="ACCOUNT_INNER_CODE"/>
+    	<result property="accountName" column="ACCOUNT_NAME"/>
+    	<result property="summaryNumber" column="SUMMARY_NUMBER"/>
+    	<result property="summaryComment" column="SUMMARY_COMMENT"/>
+    	<result property="customerCode" column="CUSTOMER_CODE"/>
+    	<result property="customerName" column="CUSTOMER_NAME"/>
+    	<result property="leftDebtorPrice" column="LEFT_DEBTOR_PRICE"/>
+    	<result property="rightCreditsPrice" column="RIGHT_CREDITS_PRICE"/>
+    	<result property="journalDescription" column="JOURNAL_DESCRIPTION"/>
+    	<result property="slipApprovalDate" column="SLIP_APPROVAL_DATE"/>
+    	<result property="price" column="PRICE"/>
+    	<collection property="journalDetailToList" select="selectJournalDetailList" column="JOURNAL_NO"/>
+    </resultMap>
+    
+    
+    <select id="findJournalList" resultMap="journalResult" parameterType="map">
+    	SELECT * FROM JOURNAL
+		WHERE SLIP_APPROVAL_DATE BETWEEN #{startDate} AND #{endDate}
+   	</select>
+
+   	<select id="selectJournalListForSlip" resultMap="journalResult" parameterType="String">
+		SELECT * FROM JOURNAL
+		WHERE SLIP_NO = #{slipNo}
+   	</select>
+
+	<insert id="insertJournalInfo" parameterType="journalTo">
+		INSERT INTO JOURNAL(
+		JOURNAL_NO
+		, SLIP_NO
+		, BALANCE_DIVISION
+		, ACCOUNT_INNER_CODE
+		, ACCOUNT_NAME
+		, SUMMARY_NUMBER
+		, SUMMARY_COMMENT
+		, CUSTOMER_CODE
+		, CUSTOMER_NAME
+		, LEFT_DEBTOR_PRICE
+		, RIGHT_CREDITS_PRICE
+		, JOURNAL_DESCRIPTION
+		, SLIP_APPROVAL_DATE
+		, PRICE
+		) VALUES (
+		#{journalNo}
+		, #{slipNo}
+		, #{balanceDivision}
+		, #{accountInnerCode}
+		, #{accountName}
+		, #{summaryNumber}
+		, #{summaryComment}
+		, #{customerCode}
+		, #{customerName}
+		, #{leftDebtorPrice}
+		, #{rightCreditsPrice}
+		, #{journalDescription}
+		, #{slipApprovalDate}
+		, #{price}
+		)
+	</insert>
+
+	<delete id="deleteJournalInfo" parameterType="journalTo">
+		DELETE FROM JOURNAL 
+		WHERE JOURNAL_NO = #{journalNo}
+	</delete>
+  
+	<update id="updateJournalInfo" parameterType="journalTo">
+		UPDATE JOURNAL SET
+			JOURNAL_NO = #{journalNo},
+    		SLIP_NO	= #{slipNo},
+    		BALANCE_DIVISION = #{balanceDivision},
+    		ACCOUNT_INNER_CODE = #{accountInnerCode},
+    		ACCOUNT_NAME = #{accountName},
+    		SUMMARY_NUMBER = #{summaryNumber},
+    		SUMMARY_COMMENT = #{summaryComment},
+    		CUSTOMER_CODE = #{customerCode},
+    		CUSTOMER_NAME = #{customerName},
+    		LEFT_DEBTOR_PRICE = #{leftDebtorPrice},
+    		RIGHT_CREDITS_PRICE	= #{rightCreditsPrice},
+    		JOURNAL_DESCRIPTION	= #{journalDescription},
+    		SLIP_APPROVAL_DATE = #{slipApprovalDate},
+    		PRICE = #{price}
+    	WHERE JOURNAL_NO = #{journalNo}
+	</update>
+
+	<resultMap type="accountControlDetailTO" id="accountControlDetailResult">
+		<result property="accountCode" column="ACCOUNT_CODE" />
+		<result property="accountcontrolCode" column="ACCOUNT_CONTROL_CODE" />
+		<result property="accountcontrolName" column="ACCOUNT_CONTROL_NAME" />
+		<result property="accountcontrolType" column="ACCOUNT_CONTROL_TYPE" />
+	</resultMap>
+
+
+	<select id="selectAccountControlDetailList" resultMap="accountControlDetailResult" parameterType="string">
+		SELECT 
+		a.ACCOUNT_CODE as ACCOUNT_CODE
+		, a.ACCOUNT_CONTROL_CODE as ACCOUNT_CONTROL_CODE
+		, b.ACCOUNT_CONTROL_NAME as ACCOUNT_CONTROL_NAME
+		, b.ACCOUNT_CONTROL_TYPE as ACCOUNT_CONTROL_TYPE
+		FROM ACCOUNT_CONTROL_CODE a,ACCOUNT_CONTROL_DETAIL b
+		WHERE a.ACCOUNT_CONTROL_CODE=B.ACCOUNT_CONTROL_CODE
+		  AND a.ACCOUNT_CODE=#{accountCode}
+		ORDER BY ACCOUNT_CONTROL_CODE
+	</select>
+
+	<resultMap type="journalDetailTO" id="journalDetailResult">
+		<result property="journaldetailNo" column="JOURNAL_DETAIL_NO" />
+		<result property="journalNo" column="JOURNAL_NO" />
+		<result property="item" column="ITEM" />
+		<result property="value" column="VALUE" />
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+	</resultMap>
+
+
+	<select id="selectJournalDetailList" resultMap="journalDetailResult" parameterType="string">
+		SELECT * FROM JOURNAL_DETAIL WHERE JOURNAL_NO = #{journalNo}
+	</select>
+
+
+	<insert id="insertJournalDetailInfo" parameterType="journalDetailTO">
+		
+		INSERT INTO
+		JOURNAL_DETAIL(JOURNAL_DETAIL_NO,
+					   JOURNAL_NO,
+					   ITEM,
+					   VALUE,
+					   ACCOUNT_INNER_CODE
+				   
+					   )
+		VALUES(#{journaldetailNo},
+			   #{journalNo},
+			   #{item},
+			   #{value},
+			   #{accountInnerCode}
+			
+			   )
+	</insert>
+
+	<delete id="deleteJournalDetailInfo" parameterType="journalDetailTO">
+		DELETE FROM JOURNAL_DETAIL WHERE JOURNAL_DETAIL_NO=#{journaldetailNo}
+	</delete>
+
+	<update id="updateJournalDetailInfo" parameterType="journalDetailTO">
+		UPDATE JOURNAL_DETAIL SET
+			JOURNAL_DETAIL_NO=#{journaldetailNo},
+			JOURNAL_NO=#{journalNo},
+			ITEM=#{item},
+			VALUE=#{value},	
+			ACCOUNT_INNER_CODE=#{accountInnerCode}	
+		WHERE JOURNAL_DETAIL_NO = #{journaldetailNo}
+	</update>
+
+</mapper>

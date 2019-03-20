@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="hobong">
+    <typeAlias alias="hobongBean" type="com.test4th.hr.circumstance.to.HobongBean"/>
+    <resultMap id="hobongResult" class="hobongBean">
+        <result property="hobong" column="HOBONG"/>
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="baseSal" column="BASE_SAL"/>
+        <result property="bonus" column="BONUS"/>
+        <result property="sigub" column="SIGUB"/>
+    </resultMap>
+
+	<!-- 호봉목록을 가지고오는 메서드  -->
+    <select id="selectHobongList" resultMap="hobongResult" parameterClass="String">
+    <![CDATA[
+      SELECT * FROM HOBONG WHERE POSITION_CODE=#positionCode# ORDER BY TO_NUMBER(SUBSTR(HOBONG,0,INSTR(HOBONG,'호')-1))
+    ]]>
+    </select><!-- INSTR ( [문자열], [찾을 문자 값], [찾기를 시작할 위치(1,-1)], [찾은 결과의 순번(1...n)] ) [10호봉의 경우 정렬 때문에]-->
+
+	
+	<!-- 호봉을 입력하는 메서드 -->
+	<insert id="insertHobong" parameterClass="hobongBean">
+	<![CDATA[
+ 		INSERT INTO HOBONG VALUES(
+				#hobong#,
+ 				#positionCode#,
+ 				#baseSal#,
+ 				#bonus#,
+ 				#sigub#
+ 		)
+    ]]>
+	</insert>
+
+	<!-- 호봉을 수정하는 메서드 -->
+	<update id="updateHobong" parameterClass="hobongBean">
+	<![CDATA[
+	       UPDATE 
+	       		HOBONG 
+	       SET
+	            BASE_SAL=#baseSal#,
+	            BONUS=#bonus#,
+	            SIGUB=#sigub#
+	       WHERE POSITION_CODE=#positionCode#
+	       AND HOBONG=#hobong#
+    ]]>
+	</update>
+
+	<!-- 호봉을 삭제하는 메서드 -->
+	<delete id="deleteHobong" parameterClass="hobongBean">
+	<![CDATA[
+	     DELETE FROM HOBONG
+	     WHERE POSITION_CODE=#positionCode#
+	     AND HOBONG=#hobong#
+    ]]>
+	</delete>
+	
+
+</sqlMap>

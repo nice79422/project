@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_ItemForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="logi_ItemForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Item_stc" taborder="0" text="품목 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Grid id="Item_grid" taborder="1" useinputpanel="false" left="12" top="103" width="1160" height="671" autofittype="col" binddataset="ds_item">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="30"/>
+                <Column size="135"/>
+                <Column size="75"/>
+                <Column size="80"/>
+                <Column size="50"/>
+                <Column size="80"/>
+                <Column size="85"/>
+                <Column size="85"/>
+                <Column size="90"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkbox" edittype="checkbox"/>
+                <Cell col="1" text="품목코드"/>
+                <Cell col="2" text="품목명"/>
+                <Cell col="3" text="품목군코드"/>
+                <Cell col="4" text="품목분류"/>
+                <Cell col="5" text="단위"/>
+                <Cell col="6" text="손실율"/>
+                <Cell col="7" text="소요일"/>
+                <Cell col="8" text="표준단가"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkbox" edittype="checkbox" text="bind:CHK"/>
+                <Cell col="1" edittype="normal" text="bind:ITEM_CODE"/>
+                <Cell col="2" edittype="normal" text="bind:ITEM_NAME"/>
+                <Cell col="3" edittype="normal" text="bind:ITEM_GROUP_CODE"/>
+                <Cell col="4" edittype="normal" text="bind:ITEM_CLASSIFICATION"/>
+                <Cell col="5" edittype="none" text="bind:UNIT_OF_STOCK"/>
+                <Cell col="6" edittype="normal" text="bind:LOSS_RATE"/>
+                <Cell col="7" edittype="normal" text="bind:LEAD_TIME"/>
+                <Cell col="8" edittype="normal" text="bind:STANDARD_UNIT_PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="saveItem_btn" taborder="2" text="저장" left="1087" top="63" width="85" height="30" onclick="saveItem_btn_onclick"/>
+        <Button id="delItem_btn" taborder="3" text="삭제" left="993" top="63" width="85" height="30" onclick="delItem_btn_onclick"/>
+        <Button id="addItem_btn" taborder="4" text="추가" left="898" top="63" width="85" height="30" onclick="addItem_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_item">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="ITEM_GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="LOSS_RATE" type="STRING" size="256"/>
+          <Column id="LEAD_TIME" type="STRING" size="256"/>
+          <Column id="STANDARD_UNIT_PRICE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+//온로드
+this.logi_ItemForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//품목조회
+	this.transaction("findItemList",
+		"dataURL::logi/purchase/findItemList.do",
+		"",
+		"ds_item=ds_item",
+		"",
+		"callback",
+		false
+	);
+}
+
+//추가
+this.addItem_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{     
+	var rowNum = this.ds_item.addRow();
+
+	this.ds_item.setColumn(rowNum,"UNIT_OF_STOCK","EA");	
+	
+	var ItemCount = this.ds_item.getRowCount();
+	application.trace(ItemCount);	
+}
+
+//삭제
+this.delItem_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	if(confirm("품목을 삭제하시겟습니까?")){
+		//alert("check : "+this.ds_item.getColumn(e.row,"CHK"));
+   
+		var CHK_NO=this.ds_item.getRowCount();	// for문 실행횟수
+		application.trace("rowCount : "+CHK_NO);
+
+		for( i=(CHK_NO-1); i>=0; i--){		// 그리드에서 제일 뒷행부터 삭제해야 삭제될 행이 안밀리기때문에 뒤에서부터 작업한다
+			if(this.ds_item.getColumn(i,"CHK")==1){		//체크박스 체크한것만 적용
+				this.ds_item.deleteRow(i);
+			}
+		}
+	}
+
+	
+}
+
+//저장
+this.saveItem_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("저장하시겠습니까?")){		
+		this.transaction(
+			"batchItem",
+			"dataURL::logi/purchase/batchItem.do",
+			"ds_item=ds_item:u",
+			"",
+			"",
+			"callback",
+			false
+		);
+	}
+}
+
+
+//콜백
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid == "findItemList"){
+		if(ErrorCode<0){
+			application.alert("온로드 실패");
+		} else {	
+		
+		}
+	} else if(trid == "batchItem"){
+		if(ErrorCode<0){
+			application.alert("저장 실패");
+		} else {	
+			application.alert("저장 성공");		
+		}
+	
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

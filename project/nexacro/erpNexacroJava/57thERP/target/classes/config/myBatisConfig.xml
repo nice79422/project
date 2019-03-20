@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting value="true" name="callSettersOnNulls" />
+		<setting value="false" name="cacheEnabled" />
+		<setting value="true" name="useGeneratedKeys" />
+		<setting value="REUSE" name="defaultExecutorType" />
+		<setting value="VARCHAR" name="jdbcTypeForNull" />
+		<setting value="true" name="mapUnderscoreToCamelCase" />
+	</settings>
+
+
+
+
+	<typeAliases>
+
+		<!-- sys -->
+		<typeAlias alias="customerTO" type="kr.co.seoulit.sys.to.CustomerTO" />
+		<typeAlias alias="companyTO" type="kr.co.seoulit.sys.to.CompanyTO" />
+		<typeAlias alias="codeTO" type="kr.co.seoulit.sys.to.CodeTO" />
+		<typeAlias alias="menuTO" type="kr.co.seoulit.sys.to.MenuTO" />
+		<typeAlias alias="codeDetailTO" type="kr.co.seoulit.sys.to.CodeDetailTO" />
+		<typeAlias alias="businessPlaceTO" type="kr.co.seoulit.sys.to.BusinessPlaceTO" />
+		<typeAlias alias="departmentTO" type="kr.co.seoulit.sys.to.DepartmentTO" />
+		<typeAlias alias="authorityTO" type="kr.co.seoulit.sys.to.AuthorityTO" />
+		<typeAlias alias="menuAuthorityTO" type="kr.co.seoulit.sys.to.MenuAuthorityTO" />
+		<typeAlias alias="baseYearTO" type="kr.co.seoulit.sys.to.BaseYearTO" />
+
+		<!-- hr.emp -->
+		<typeAlias alias="employeeTO" type="kr.co.seoulit.hr.emp.to.EmployeeTO" />
+
+		<!-- hr.attendance -->
+		<typeAlias alias="dailyAttdTO" type="kr.co.seoulit.hr.attendance.to.DailyAttdTO" />
+
+		<!-- hr.pm -->
+		<typeAlias alias="educationInfoTO"    	type="kr.co.seoulit.hr.pm.to.EducationInfoTO" />
+     	<typeAlias alias="empInfoTO"      		type="kr.co.seoulit.hr.pm.to.EmpInfoTO" />
+     	<typeAlias alias="familyInfoTO" 	    	type="kr.co.seoulit.hr.pm.to.FamilyInfoTO" />
+     	<typeAlias alias="licenseInfoTO" 			type="kr.co.seoulit.hr.pm.to.LicenseInfoTO" />
+     	<typeAlias alias="salInfoTO" 				type="kr.co.seoulit.hr.pm.to.SalInfoTO" />
+     	<typeAlias alias="workInfoTO" 			type="kr.co.seoulit.hr.pm.to.WorkInfoTO" />
+    	<typeAlias alias="reportTO"         		type="kr.co.seoulit.hr.pm.to.ReportTO"/>
+
+		<!-- hr.circumstance -->
+		<typeAlias alias="payStepTO" type="kr.co.seoulit.hr.circumstance.to.PayStepTO" />
+		<typeAlias alias="annualLeaveTO" type="kr.co.seoulit.hr.circumstance.to.AnnualLeaveTO" />
+		<typeAlias alias="holidayTO" type="kr.co.seoulit.hr.circumstance.to.HolidayTO" />
+		<typeAlias alias="salPaymentDateTO" type="kr.co.seoulit.hr.circumstance.to.SalPaymentDateTO" />
+		<typeAlias alias="payDeductionItemTO" type="kr.co.seoulit.hr.circumstance.to.PayDeductionItemTO"/>
+		<typeAlias alias="etcSudangTO" type="kr.co.seoulit.hr.circumstance.to.EtcSudangTO"/>
+		<typeAlias alias="overtimeSudangTO" type="kr.co.seoulit.hr.circumstance.to.OvertimeSudangTO"/>
+		<typeAlias alias="baseWorkTimeTO" type="kr.co.seoulit.hr.circumstance.to.BaseWorkTimeTO" />
+		<typeAlias alias="deductionTaxTO" type="kr.co.seoulit.hr.circumstance.to.DeductionTaxTO" />
+		<typeAlias alias="incomeTaxTO" type="kr.co.seoulit.hr.circumstance.to.IncomeTaxTO" />
+
+		<!-- hr.attendance -->
+		<typeAlias alias="dayAnnualTO" type="kr.co.seoulit.hr.attendance.to.DayAnnualTO"/>
+		<typeAlias alias="dailyAttdRestTO" type="kr.co.seoulit.hr.attendance.to.DailyAttdRestTO"/>
+     	<typeAlias alias="overNightReportTO" type="kr.co.seoulit.hr.attendance.to.OverNightReportTO"/>
+    	<typeAlias alias="dailyAttdReportTO" type="kr.co.seoulit.hr.attendance.to.DailyAttdReportTO"/>
+     	<typeAlias alias="monthAttdReportTO" type="kr.co.seoulit.hr.attendance.to.MonthAttdReportTO"/>
+     	
+		<!-- hr.appointment -->
+		<typeAlias alias="appointmentTO" type="kr.co.seoulit.hr.appointment.to.AppointmentTO" />
+		<typeAlias alias="personalAppointmentTO" type="kr.co.seoulit.hr.appointment.to.PersonalAppointmentTO" />
+		<typeAlias alias="personalAppointmentDetailTO" type="kr.co.seoulit.hr.appointment.to.PersonalAppointmentDetailTO" />
+        <typeAlias alias="tempAppointmentTO" type="kr.co.seoulit.hr.appointment.to.TempAppointmentTO" />
+
+		<!-- hr.pay -->
+		<typeAlias alias="salaryInputTO" type="kr.co.seoulit.hr.pay.to.SalaryInputTO" />
+		<typeAlias alias="payDeductionTO" type="kr.co.seoulit.hr.pay.to.PayDeductionTO" />
+
+		<!-- logi.business -->
+		<typeAlias alias="estimateTO" type="kr.co.seoulit.logi.business.to.EstimateTO" />
+		<typeAlias alias="estimateDetailTO" type="kr.co.seoulit.logi.business.to.EstimateDetailTO" />
+		<typeAlias alias="contractTO" type="kr.co.seoulit.logi.business.to.ContractTO" />
+		<typeAlias alias="contractDetailTO" type="kr.co.seoulit.logi.business.to.ContractDetailTO" />
+		<typeAlias alias="completeDeliveryResultTO" type="kr.co.seoulit.logi.business.to.CompleteDeliveryResultTO" />
+		<typeAlias alias="deliveryResultTO" type="kr.co.seoulit.logi.business.to.DeliveryResultTO" />
+
+		<!-- logi.production -->
+		<typeAlias alias="mpsTO" type="kr.co.seoulit.logi.production.to.MpsTO" />
+		<typeAlias alias="workInstructionTO" type="kr.co.seoulit.logi.production.to.WorkInstructionTO" />
+		<typeAlias alias="materialCheckTempTO" type="kr.co.seoulit.logi.production.to.MaterialCheckTempTO" />
+		<typeAlias alias="prmTO" type="kr.co.seoulit.logi.production.to.PrmTO" />
+		<typeAlias alias="mrpGatheringTO" type="kr.co.seoulit.logi.production.to.MrpGatheringTO" />
+		<typeAlias alias="mrpGatheringTO2" type="kr.co.seoulit.logi.production.to.MrpGatheringTO2" />
+		<typeAlias alias="mrpTO" type="kr.co.seoulit.logi.production.to.MrpTO" />
+		<typeAlias alias="mrpOpenTempTO" type="kr.co.seoulit.logi.production.to.MrpOpenTempTO" />
+
+		<!-- logi.purchase -->
+		<typeAlias alias="stockTO" type="kr.co.seoulit.logi.purchase.to.StockTO" />
+		<typeAlias alias="materialPaymentTO" type="kr.co.seoulit.logi.purchase.to.MaterialPaymentTO" />
+		<typeAlias alias="orderGatheringTO" type="kr.co.seoulit.logi.purchase.to.OrderGatheringTO" />
+		<typeAlias alias="orderInfoTO" type="kr.co.seoulit.logi.purchase.to.OrderInfoTO" />
+		<typeAlias alias="orderDetailTO" type="kr.co.seoulit.logi.purchase.to.OrderDetailTO" />
+		<typeAlias alias="itemTO" type="kr.co.seoulit.logi.purchase.to.ItemTO" />
+		<typeAlias alias="warehousingTO" type="kr.co.seoulit.logi.purchase.to.WarehousingTO" />
+		<typeAlias alias="bomTO" type="kr.co.seoulit.logi.purchase.to.BomTO" />
+		<typeAlias alias="bomDeployTO" type="kr.co.seoulit.logi.purchase.to.BomDeployTO" />
+
+
+	<!-- Account -->
+	
+<!--accSubMgt -->	
+	<typeAlias alias="accountTO" type="kr.co.seoulit.acc.accSubMgt.to.AccountTO"/>
+	<typeAlias alias="parentAccountSummaryTO" type="kr.co.seoulit.acc.accSubMgt.to.ParentAccountSummaryTO"/>
+	<typeAlias alias="accountSummaryTO" type="kr.co.seoulit.acc.accSubMgt.to.AccountSummaryTO"/>
+	
+<!-- slip -->
+	<typeAlias alias="slipTO" type="kr.co.seoulit.acc.slip.to.SlipTO"/>
+	<typeAlias alias="journalTO" type="kr.co.seoulit.acc.slip.to.JournalTO"/>
+	<typeAlias alias="journalDetailTO" type="kr.co.seoulit.acc.slip.to.JournalDetailTO"/>
+	<typeAlias alias="accountControlDetailTO" type="kr.co.seoulit.acc.slip.to.AccountControlDetailTO"/>
+<!-- earlyFinancialStatement -->
+  	<typeAlias alias="earlyAssetsCountTO" type="kr.co.seoulit.statement.financialStatement.to.EarlyAssetsCountTO"/>
+	<typeAlias alias="earlyLiabilitiesAndCapitalCountTO" type="kr.co.seoulit.statement.financialStatement.to.EarlyLiabilitiesAndCapitalCountTO"/>
+	<typeAlias alias="earlyFinancialStatementsTO" type="kr.co.seoulit.statement.financialStatement.to.EarlyFinancialStatementsTO"/>
+
+<!-- earlyIncomestatement -->	
+	<typeAlias alias="earlyrevenuesAndExpenseTO" type="kr.co.seoulit.statement.incomeStatement.to.EarlyrevenuesAndExpenseTO"/>
+	<typeAlias alias="earlyIncomeStatementTO" type="kr.co.seoulit.statement.incomeStatement.to.EarlyIncomeStatementTO"/>
+
+<!-- financialStatements -->	
+	<typeAlias alias="financialStatementsTO" type="kr.co.seoulit.statement.financialStatement.to.FinancialStatementsTO"/>
+	<typeAlias alias="eFinancialStatementsTO" type="kr.co.seoulit.statement.financialStatement.to.eFinancialStatementsTO"/>
+
+<!-- IncomeStatement -->	
+	<typeAlias alias="incomeStatementTO" type="kr.co.seoulit.statement.incomeStatement.to.IncomeStatementTO"/>
+
+<!-- TotalTrialBalance -->	
+	<typeAlias alias="totalTrialBalanceTO" type="kr.co.seoulit.statement.totalTrialBalance.to.TotalTrialBalanceTO"/>
+
+<!--accBookMgt -->
+
+	<typeAlias alias="accountantTO" type="kr.co.seoulit.acc.accBookMgt.to.AccountantTO"/>
+
+	
+	</typeAliases>
+
+
+
+
+
+</configuration>

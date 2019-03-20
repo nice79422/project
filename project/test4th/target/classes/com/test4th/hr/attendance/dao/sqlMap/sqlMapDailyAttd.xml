@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="dailyAttd">
+	<typeAlias alias="dailyAttdBean"
+		type="com.test4th.hr.attendance.to.DailyAttdBean" />
+	<typeAlias alias="conditionBean"
+		type="com.test4th.hr.attendance.to.ConditionBean" /><!-- bean에 담아서 
+		넘긴 형태 -->
+
+	<resultMap id="dailyAttdResult" class="dailyAttdBean">
+		<result property="dayAttdSeq" column="DAY_ATTD_SEQ" />
+		<result property="empCode" column="EMP_CODE" />
+		<result property="basicDay" column="BASIC_DAY" />
+		<result property="attdTypeCode" column="ATTD_TYPE_CODE" />
+		<result property="time" column="TIME" />
+		<result property="approvalStatus" column="APPROVAL_STATUS" />
+		<result property="cost" column="COST" />
+		<result property="cause" column="CAUSE" />
+		<result property="empName" column="EMP_NAME" />
+	</resultMap>
+
+	<!-- 일근태 목록을 가지고 오는 메서드 -->
+	<select id="selectDailyAttdList" resultMap="dailyAttdResult"
+		parameterClass="map">
+ 
+    	SELECT DA.*, E.*
+		FROM DAY_ATTD DA, EMPLOYEE E
+		WHERE DA.EMP_CODE = #empCode#
+		AND DA.EMP_CODE = E.EMP_CODE
+		AND BASIC_DAY BETWEEN #fromDate# AND #toDate#
+		ORDER BY DAY_ATTD_SEQ, LENGTH(APPROVAL_STATUS) DESC, BASIC_DAY
+
+	</select>
+
+	<!-- 신청한 일근태 내용을 추가하는 메서드 -->
+
+	<insert id="insertDailyAttd" parameterClass="dailyAttdBean">
+		<!-- 대부분의 RDBMS 시스템은 Sequence 와 같은 채번 자동 생성을 지원한다. 개발을 하다보면 종종 자동생성된 Sequence 
+			값을 가져와서 사용해야 하는 경우가 있다. 이런 경우에 <selectKey>를 사용한다. <selectKey>는 ibatis의 statement 
+			타입 중 <insert> 타입에만 사용할 수 있는 하위 요소이다. <insert> 문 아래에 사용함으로써, 자동생성된 키 값을 가져오며, 
+			이 값을 반환하여 활용할 수 있다. -->
+		<selectKey keyProperty="dayAttdSeq" resultClass="String">
+	 <![CDATA[
+	     SELECT DAILY_ATTD_SEQ.NEXTVAL FROM DUAL
+	 ]]>
+		</selectKey>
+     <![CDATA[
+		INSERT INTO 
+		DAY_ATTD
+		(
+		EMP_CODE,
+		DAY_ATTD_SEQ,
+		BASIC_DAY,
+		ATTD_TYPE_CODE,
+		TIME,
+		APPROVAL_STATUS,
+		COST,
+		CAUSE,
+		EMP_NAME
+		)		
+		VALUES(
+				#empCode#,
+				#dayAttdSeq#,
+				#basicDay#,
+				#attdTypeCode#,
+				#time#,
+				#approvalStatus#,
+				#cost#,
+				#cause#,
+				#empName#
+		)
+	]]>
+	</insert>
+
+
+	<!-- 일근태 승인관리 부분에서 일근태를 조건에따라 조회하는 메서드 **동적쿼리** -->
+
+	<select id="selectDailyAttdListByCondition" resultMap="dailyAttdResult"
+		parameterClass="conditionBean">
+		SELECT
+		DA.EMP_CODE
+		,DA.DAY_ATTD_SEQ
+		,DA.BASIC_DAY
+		,DA.ATTD_TYPE_CODE
+		,DA.TIME
+		,DA.APPROVAL_STATUS
+		,DA.COST
+		,DA.CAUSE
+		,E.EMP_NAME
+		FROM DAY_ATTD DA, EMPLOYEE E
+		<isNotEmpty property="deptCode">
+			,DEPARTMENT D
+		</isNotEmpty>
+		<dynamic>
+			WHERE DA.EMP_CODE = E.EMP_CODE
+			<isNotEmpty property="deptCode" prepend="AND">
+				E.DEPT_CODE = D.DEPT_CODE AND
+				D.DEPT_CODE = #deptCode#
+			</isNotEmpty>
+			<isNotEmpty property="basicDay" prepend="AND">
+				DA.BASIC_DAY = #basicDay#
+			</isNotEmpty>
+			<isNotEmpty property="approvalStatus" prepend="AND">
+				DA.APPROVAL_STATUS = #approvalStatus#
+			</isNotEmpty>
+		</dynamic>
+		ORDER BY DA.EMP_CODE, DA.TIME
+	</select>
+
+
+
+	<!-- 일근태 미승인 내역 -> 승인 으로 변경된 내역을 조회 ??? -->
+	<select id="selectUnApprovedDailyAttdList" resultMap="dailyAttdResult"
+		parameterClass="String">
+    <![CDATA[
+    	SELECT
+    		da.*
+    	FROM
+    		DAY_ATTD da,EMPLOYEE e
+    	WHERE
+    		BASIC_DAY=#basicDay#
+    	AND
+    		APPROVAL_STATUS='N'
+    	AND
+    		da.EMP_CODE=e.EMP_CODE
+    	ORDER BY
+    		 LENGTH(APPROVAL_STATUS) DESC,BASIC_DAY
+    	]]>
+	</select>
+
+
+
+
+	<!-- 일근태 변동 사항 수정 (승인 N -> Y) -->
+
+	<update id="updateDailyAttd" parameterClass="dailyAttdBean">
+	<![CDATA[
+		UPDATE DAY_ATTD
+		SET
+			BASIC_DAY = #basicDay#,
+			ATTD_TYPE_CODE = #attdTypeCode#,
+			APPROVAL_STATUS = #approvalStatus#,
+			COST = #cost#,
+			CAUSE = #cause#
+	    WHERE
+			DAY_ATTD_SEQ = #dayAttdSeq# AND
+			EMP_CODE = #empCode#
+	]]>
+	</update>
+
+
+	<delete id="deleteDailyAttd" parameterClass="dailyAttdBean">
+	    <![CDATA[
+	        DELETE FROM
+	            DAY_ATTD
+	        WHERE
+	            DAY_ATTD_SEQ = #dayAttdSeq# AND
+	            EMP_CODE = #empCode#
+	    ]]>
+	</delete>
+
+</sqlMap>

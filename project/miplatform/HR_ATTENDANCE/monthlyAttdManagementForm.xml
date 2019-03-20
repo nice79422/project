@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,12" Height="777" Id="monthlyAttdApplicationForm" Left="8" OnLoadCompleted="monthlyAttdApplicationForm_OnLoadCompleted" PidAttrib="7" Title="monthlyAttdApplicationForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Datasets>
+			<Dataset DataSetType="Dataset" Id="dsBaseMonth">
+				<Contents>
+					<colinfo id="MONTH" size="256" type="STRING"/>
+					<record>
+						<MONTH>01</MONTH>
+					</record>
+					<record>
+						<MONTH>02</MONTH>
+					</record>
+					<record>
+						<MONTH>03</MONTH>
+					</record>
+					<record>
+						<MONTH>04</MONTH>
+					</record>
+					<record>
+						<MONTH>05</MONTH>
+					</record>
+					<record>
+						<MONTH>06</MONTH>
+					</record>
+					<record>
+						<MONTH>07</MONTH>
+					</record>
+					<record>
+						<MONTH>08</MONTH>
+					</record>
+					<record>
+						<MONTH>09</MONTH>
+					</record>
+					<record>
+						<MONTH>10</MONTH>
+					</record>
+					<record>
+						<MONTH>11</MONTH>
+					</record>
+					<record>
+						<MONTH>12</MONTH>
+					</record>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsMonthAttdReport">
+				<Contents>
+					<colinfo id="BASIC_YEAR_MONTH" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASIC_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASIC_WORK_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="WEEKDAY_WORK" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_WORK_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="ABSENT_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="LATE_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="LATE_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="LEAVE_EARLY_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="LEAVE_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="CLOSE_YN" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTD_REST_DAYS" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+			<Dataset DataSetType="Dataset" Id="dsClosedMonthAttdReport">
+				<Contents>
+					<colinfo id="BASIC_YEAR_MONTH" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_CODE" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASIC_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="BASIC_WORK_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="WEEKDAY_WORK" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_WORK_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_OVER_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="HOLIDAY_NIGHT_WORK_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="ABSENT_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="LATE_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="LATE_HOUR" size="256" summ="default" type="STRING"/>
+					<colinfo id="LEAVE_EARLY_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="LEAVE_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="CLOSE_YN" size="256" summ="default" type="STRING"/>
+					<colinfo id="ATTD_REST_DAYS" size="256" summ="default" type="STRING"/>
+					<colinfo id="EMP_NAME" size="256" summ="default" type="STRING"/>
+				</Contents>
+			</Dataset>
+		</Datasets>
+		<Tab BKSelColor="user2" ButtonColor="SCROLLBAR" Font="한컴&#32;윤고딕&#32;240,9" Height="694" Id="monthAttdManagementTab" Left="16" MouseOverColor="default" SelColor="BACKGROUND" SelectFont="한컴&#32;윤고딕&#32;230,9" TabOrder="2" Top="64" Width="920">
+			<Contents>
+				<TabPage BorderColor="black" Font="한컴&#32;윤고딕&#32;230,10" Height="666" Id="tab1" Left="2" TabOrder="2" Text="월근태&#32;미마감&#32;항목" Top="26" Width="916">
+					<Static Color="red" Font="한컴&#32;윤고딕&#32;230,10" Height="40" Id="Static23" Left="24" TabOrder="1" Text="사원&#32;개인의&#32;월근태&#32;내역&#32;확인&#32;후&#32;단체&#32;항목을&#32;클릭하여&#32;월근태&#32;마감을&#32;실시&#32;하세요." Top="14" VAlign="Middle" Width="501"></Static>
+					<Button BKColor="silver" Cursor="HAND" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="closeBtn" Left="819" OnClick="monthAttdManagementTab_tab1_closeBtn_OnClick" TabOrder="4" Text="마&#32;&#32;감" Top="15" Width="87"></Button>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="searchBtn" Left="729" OnClick="monthAttdManagementTab_tab1_searchBtn_OnClick" TabOrder="3" Text="조&#32;&#32;회" Top="15" Width="87"></Button>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="indivisualItemBtn" Left="640" OnClick="monthAttdManagementTab_tab1_indivisualItemBtn_OnClick" TabOrder="2" Text="개인&#32;항목" Top="15" Visible="FALSE" Width="87"></Button>
+					<Grid AutoFit="TRUE" BindDataset="dsEmployee" BkColor2="default" BoldHead="true" Bottom="544" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="477" Id="empGrid" InputPanel="FALSE" Left="16" LineColor="default" MinWidth="100" OnCellClick="empGrid_OnCellClick" Right="322" RowHeight="20" TabOrder="5" TabStop="true" Top="67" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="306">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="0"/>
+									<col width="0"/>
+									<col width="80"/>
+									<col width="0"/>
+								</columns>
+								<head>
+									<cell col="0" color="black" display="text" font="LG&#32;PC,11" text="사원번호"/>
+									<cell col="1" color="black" display="text" font="LG&#32;PC,11" text="사원명"/>
+									<cell bkcolor="royalblue" col="2" color="black" display="text" font="LG&#32;PC,11" text="emp_pass"/>
+									<cell bkcolor="royalblue" col="3" color="black" display="text" font="LG&#32;PC,11" text="emp_mgr_code"/>
+									<cell col="4" color="black" display="text" font="LG&#32;PC,11" text="부서명"/>
+									<cell bkcolor="royalblue" col="5" color="white" display="text" font="LG&#32;PC,11" text="authority_code"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="LG&#32;PC,11"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="LG&#32;PC,11"/>
+									<cell align="center" col="2" colid="emp_pass" display="text" font="LG&#32;PC,11"/>
+									<cell align="center" col="3" colid="emp_mgr_code" display="text" font="LG&#32;PC,11"/>
+									<cell align="center" col="4" colid="dept_code" combocol="dept_code" combodataset="dsDepartment" combotext="dept_name" display="combo" font="LG&#32;PC,11"/>
+									<cell col="5" colid="authority_code" display="text" font="LG&#32;PC,11"/>
+								</body>
+								<summary>
+									<cell align="center" col="0" color="black" display="text" font="LG&#32;PC,11" text="총&#32;인원"/>
+									<cell align="center" col="1" color="black" colspan="4" display="text" expr='RowCount+&quot;명&quot;' font="LG&#32;PC,11"/>
+									<cell align="center" bkcolor="royalblue" col="5" color="white" display="text" font="LG&#32;PC,11"/>
+								</summary>
+							</format>
+						</contents>
+					</Grid>
+					<Grid BindDataset="dsMonthAttdReport" BkColor2="default" BoldHead="true" Bottom="644" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="577" Id="monthlyAttdReportGrid" InputPanel="FALSE" Left="341" LineColor="default" Right="898" RowHeight="20" TabOrder="6" TabStop="true" Top="67" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="557">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="120"/>
+									<col width="100"/>
+									<col width="100"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="100"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="102"/>
+									<col width="105"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell align="center" col="0" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="사원번호"/>
+									<cell align="center" col="1" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="사원이름"/>
+									<cell align="center" col="2" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="적용년월"/>
+									<cell align="center" col="3" color="black" colspan="2" display="text" font="LG&#32;PC,11" text="근무일"/>
+									<cell align="center" col="5" color="black" colspan="2" display="text" font="LG&#32;PC,11" text="근무시간"/>
+									<cell align="center" col="7" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="연장근무시간"/>
+									<cell align="center" col="8" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="심야근무시간"/>
+									<cell align="center" col="9" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="지각시간"/>
+									<cell align="center" col="10" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="근태외일수(연차)"/>
+									<cell align="center" col="11" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="결근일수"/>
+									<cell align="center" col="12" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="지각일수"/>
+									<cell align="center" col="13" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="조퇴일수"/>
+									<cell align="center" col="14" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="외출일수"/>
+									<cell align="center" col="15" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="휴일근무일수"/>
+									<cell align="center" col="16" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="휴일근무시간"/>
+									<cell align="center" col="17" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="휴일연장근무시간"/>
+									<cell align="center" col="18" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="휴일심야근무시간"/>
+									<cell align="center" col="19" color="black" display="text" font="LG&#32;PC,11" rowspan="2" text="마감여부"/>
+									<cell align="center" col="3" color="black" display="text" font="LG&#32;PC,11" row="1" text="기준일수"/>
+									<cell align="center" col="4" color="black" display="text" font="LG&#32;PC,11" row="1" text="실제일수"/>
+									<cell align="center" col="5" color="black" display="text" font="LG&#32;PC,11" row="1" text="기준시간"/>
+									<cell align="center" col="6" color="black" display="text" font="LG&#32;PC,11" row="1" text="실제시간"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="LG&#32;PC,11"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="LG&#32;PC,11"/>
+									<cell align="center" col="2" colid="BASIC_YEAR_MONTH" display="text" font="LG&#32;PC,11" Mask="@@@@-@@"/>
+									<cell align="center" col="3" colid="WEEKDAY_WORK" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="4" colid="WEEKDAY_WORK" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="5" colid="BASIC_WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="6" colid="WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="7" colid="OVER_WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="8" colid="NIGHT_WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="9" colid="LATE_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="10" colid="ATTD_REST_DAYS" display="text" edit="mask" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="11" colid="ABSENT_DAYS" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="12" colid="LATE_DAYS" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="13" colid="LEAVE_EARLY_DAYS" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="14" colid="LEAVE_DAYS" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="15" colid="HOLIDAY_WORK_DAYS" display="text" font="LG&#32;PC,11" Mask="@@일"/>
+									<cell align="center" col="16" colid="HOLIDAY_WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="17" colid="HOLIDAY_OVER_WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="18" colid="HOLIDAY_NIGHT_WORK_HOUR" display="text" font="LG&#32;PC,11" Mask="@@@시간"/>
+									<cell align="center" col="19" colid="CLOSE_YN" display="text" font="LG&#32;PC,11"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Static Align="Center" Color="crimson" Font="LG&#32;PC,11" Height="56" Id="Static0" Left="16" TabOrder="7" Text="사원&#32;개인의&#32;월근태&#32;내역&#32;확인&#32;후&#32;&#13;&#10;단체&#32;항목을&#32;클릭하여&#32;월근태&#32;마감을&#32;&#13;&#10;실시&#32;하세요" Top="571" VAlign="Middle" Width="256"></Static>
+					<Div BKColor="ACTIVECAPTION" Height="580" Id="indivisualItemDiv" Left="16" TabOrder="8" Text="Div0" Top="67" Width="890">
+						<Contents>
+							<Grid AutoFit="TRUE" BindDataset="dsMonthAttdReport" BkColor2="default" BoldHead="true" Bottom="295" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="295" Id="monthlyAttdReportGrid1" InputPanel="FALSE" LineColor="default" MinWidth="100" Right="890" RowHeight="20" TabOrder="1" TabStop="true" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="890">
+								<contents>
+									<format id="Default">
+										<columns>
+											<col width="80"/>
+											<col width="80"/>
+											<col width="80"/>
+											<col width="80"/>
+											<col width="80"/>
+											<col width="80"/>
+											<col width="80"/>
+											<col width="95"/>
+											<col width="100"/>
+											<col width="101"/>
+										</columns>
+										<head>
+											<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="사원번호"/>
+											<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="사원이름"/>
+											<cell align="center" bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="적용년월"/>
+											<cell align="center" bkcolor="silver" col="3" color="black" colspan="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근무일"/>
+											<cell align="center" bkcolor="silver" col="5" color="black" colspan="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근무시간"/>
+											<cell bkcolor="silver" col="7" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="연장근무시간"/>
+											<cell bkcolor="silver" col="8" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="심야근무시간"/>
+											<cell bkcolor="silver" col="9" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="지각시간"/>
+											<cell align="center" bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="기준일수"/>
+											<cell align="center" bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="실제일수"/>
+											<cell align="center" bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="기준시간"/>
+											<cell align="center" bkcolor="silver" col="6" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="실제시간"/>
+										</head>
+										<body>
+											<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+											<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+											<cell align="center" col="2" colid="BASIC_YEAR_MONTH" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@@-@@"/>
+											<cell align="center" col="3" colid="BASIC_WORK_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="4" colid="WEEKDAY_WORK" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="5" colid="BASIC_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="6" colid="WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="7" colid="OVER_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="8" colid="NIGHT_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="9" colid="LATE_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+										</body>
+									</format>
+								</contents>
+							</Grid>
+							<Grid AutoFit="TRUE" BindDataset="dsMonthAttdReport" BkColor2="default" BoldHead="true" Bottom="586" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="295" Id="monthlyAttdReportGrid2" InputPanel="FALSE" LineColor="default" MinWidth="100" Right="890" RowHeight="20" TabOrder="1" TabStop="true" Top="291" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="890">
+								<contents>
+									<format id="Default">
+										<columns>
+											<col width="80"/>
+											<col width="69"/>
+											<col width="72"/>
+											<col width="70"/>
+											<col width="71"/>
+											<col width="97"/>
+											<col width="105"/>
+											<col width="124"/>
+											<col width="122"/>
+											<col width="76"/>
+										</columns>
+										<head>
+											<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="근태외일수"/>
+											<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="결근일수"/>
+											<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="지각일수"/>
+											<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="조퇴일수"/>
+											<cell bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="외출일수"/>
+											<cell bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일근무일수"/>
+											<cell bkcolor="silver" col="6" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일근무시간"/>
+											<cell bkcolor="silver" col="7" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일연장근무시간"/>
+											<cell bkcolor="silver" col="8" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일심야근무시간"/>
+											<cell align="center" bkcolor="silver" col="9" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="마감여부"/>
+										</head>
+										<body>
+											<cell align="center" col="0" colid="ATTD_REST_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="1" colid="ABSENT_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="2" colid="LATE_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="3" colid="LEAVE_EARLY_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="4" colid="LEAVE_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="5" colid="HOLIDAY_WORK_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+											<cell align="center" col="6" colid="HOLIDAY_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="7" colid="HOLIDAY_OVER_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="8" colid="HOLIDAY_NIGHT_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+											<cell align="center" col="9" colid="CLOSE_YN" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+										</body>
+									</format>
+								</contents>
+							</Grid>
+						</Contents>
+					</Div>
+				</TabPage>
+				<TabPage BorderColor="black" Height="666" Id="tab2" Left="2" TabOrder="2" Text="월근태&#32;마감항목" Top="26" Width="916">
+					<Grid AutoFit="TRUE" BindDataset="dsClosedMonthAttdReport" BkColor2="default" BoldHead="true" Bottom="649" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="282" Id="monthlyAttdReportGrid2" InputPanel="FALSE" Left="14" LineColor="default" MinWidth="100" Right="904" RowHeight="20" TabOrder="2" TabStop="true" Top="367" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="890">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="80"/>
+									<col width="72"/>
+									<col width="69"/>
+									<col width="67"/>
+									<col width="67"/>
+									<col width="95"/>
+									<col width="95"/>
+									<col width="129"/>
+									<col width="130"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="근태외일수"/>
+									<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="결근일수"/>
+									<cell bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="지각일수"/>
+									<cell bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="조퇴일수"/>
+									<cell bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="외출일수"/>
+									<cell bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일근무일수"/>
+									<cell bkcolor="silver" col="6" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일근무시간"/>
+									<cell bkcolor="silver" col="7" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일연장근무시간"/>
+									<cell bkcolor="silver" col="8" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="휴일심야근무시간"/>
+									<cell align="center" bkcolor="silver" col="9" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="마감여부"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="ATTD_REST_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="1" colid="ABSENT_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="2" colid="LATE_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="3" colid="LEAVE_EARLY_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="4" colid="LEAVE_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="5" colid="HOLIDAY_WORK_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="6" colid="HOLIDAY_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="7" colid="HOLIDAY_OVER_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="8" colid="HOLIDAY_NIGHT_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="9" colid="CLOSE_YN" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Grid AutoFit="TRUE" BindDataset="dsClosedMonthAttdReport" BkColor2="default" BoldHead="true" Bottom="366" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="295" Id="monthlyAttdReportGrid1" InputPanel="FALSE" Left="14" LineColor="default" MinWidth="100" Right="904" RowHeight="20" TabOrder="1" TabStop="true" Top="71" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="890">
+						<contents>
+							<format id="Default">
+								<columns>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="80"/>
+									<col width="94"/>
+									<col width="98"/>
+									<col width="80"/>
+								</columns>
+								<head>
+									<cell bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="사원번호"/>
+									<cell bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="사원이름"/>
+									<cell align="center" bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="적용년월"/>
+									<cell align="center" bkcolor="silver" col="3" color="black" colspan="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근무일"/>
+									<cell align="center" bkcolor="silver" col="5" color="black" colspan="2" display="text" font="한컴&#32;윤고딕&#32;240,11" text="근무시간"/>
+									<cell bkcolor="silver" col="7" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="연장근무시간"/>
+									<cell bkcolor="silver" col="8" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="심야근무시간"/>
+									<cell bkcolor="silver" col="9" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" rowspan="2" text="지각시간"/>
+									<cell align="center" bkcolor="silver" col="3" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="기준일수"/>
+									<cell align="center" bkcolor="silver" col="4" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="실제일수"/>
+									<cell align="center" bkcolor="silver" col="5" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="기준시간"/>
+									<cell align="center" bkcolor="silver" col="6" color="black" display="text" font="한컴&#32;윤고딕&#32;240,11" row="1" text="실제시간"/>
+								</head>
+								<body>
+									<cell align="center" col="0" colid="EMP_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="1" colid="EMP_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+									<cell align="center" col="2" colid="BASIC_YEAR_MONTH" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@@-@@"/>
+									<cell align="center" col="3" colid="BASIC_WORK_DAYS" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="4" colid="WEEKDAY_WORK" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@일"/>
+									<cell align="center" col="5" colid="BASIC_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="6" colid="WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="7" colid="OVER_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="8" colid="NIGHT_WORK_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+									<cell align="center" col="9" colid="LATE_HOUR" display="text" font="한컴&#32;윤고딕&#32;230,9" Mask="@@@시간"/>
+								</body>
+							</format>
+						</contents>
+					</Grid>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="findMonthAttdBtn" Left="727" OnClick="monthAttdManagementTab_tab2_findMonthAttdBtn_OnClick" TabOrder="3" Text="조&#32;&#32;회" Top="19" Width="87"></Button>
+					<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,11" Height="30" Id="uncloseBtn" Left="817" OnClick="monthAttdManagementTab_tab2_uncloseBtn_OnClick" TabOrder="4" Text="마감&#32;취소" Top="18" Width="87"></Button>
+				</TabPage>
+			</Contents>
+		</Tab>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="WINDOWTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" TabOrder="1" Text="월근태&#32;관리" VAlign="Middle" Width="953"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static1" Left="436" TabOrder="3" Text="기준년도" Top="39" VAlign="Middle" Width="97"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static0" Left="691" TabOrder="4" Text="기준월" Top="39" VAlign="Middle" Width="97"></Static>
+		<Edit Align="CENTER" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="selYear" Left="534" TabOrder="5" Top="39" Width="97"></Edit>
+		<Combo CodeColumn="month" DataColumn="month" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="selMonth" InnerDataset="dsBaseMonth" Left="788" TabOrder="6" Top="39" Width="97"></Combo>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="31" Id="Static2" Left="885" TabOrder="7" Text="월" Top="39" VAlign="Middle" Width="40"></Static>
+		<Static Align="Center" Border="Sunken" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="Static3" Left="632" TabOrder="7" Text="년" Top="39" VAlign="Middle" Width="40"></Static>
+	</Form>
+	<Script><![CDATA[
+var baseYear;
+var baseMonth;
+
+// 로딩 시 기준 년도 입력 
+function monthlyAttdApplicationForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	transaction("findEmployeeList","svcBase::/employee.do?method=findEmployeeList","","dsEmployee=dsEmployee","","callback"); //전체 사원 목록 받아 옴
+	selYear.text=substr(today(),0,4);
+	http.Sync=false;
+}
+
+
+// 미 마감 목록 조회시 
+
+	
+function monthAttdManagementTab_tab1_searchBtn_OnClick(obj)
+{	
+	baseYear=selYear.Value;
+	baseMonth=selMonth.Value;  //검색 조건 년월 입력 !!
+   if(selMonth.text == "" || selYear.text == ""){
+     // alert("selMonth.text == '' || selYear.text == '' :( ");
+      monthAttdManagementTab.tab1.indivisualItemBtn.Visible=false;  // 검색 조건을 넣지 않을 경우 
+      break;
+   }else{
+	  http.Sync=true;
+      transaction(
+         "findUnClosedDailyAttdReport",
+         "svcHrAttendance::/attdReport.do?method=findUnClosedDailyAttdReport",
+         "",
+         "dsUnCloseDailyAttd=dsDailyAttdReport",
+         "baseYearMonth=" +(baseYear+baseMonth),
+         "callback2"
+      );
+      http.Sync=false;
+      
+      if(confirm(baseYear+" "+baseMonth+" ")){
+         if(dsUnCloseDailyAttd.GetRowCount()>0 ){ // 일근태 미마감 항목이 있다면 여기 실행!!
+            Dialog("HR_ATTENDANCE::unCloseDailyAttdDialog.xml","baseYearMonth="+baseYear+baseMonth);
+         }else{
+            findMonthAttdReport();
+         }   
+      }
+      monthAttdManagementTab.tab1.indivisualItemBtn.Visible=true;
+   }
+   
+   monthAttdManagementTab.tab1.closeBtn.Enable=true;
+	
+}
+
+// 월 근태 목록 조회 !!(프로시저 )
+function findMonthAttdReport(){
+   transaction(
+      "findMonthAttdReport",
+      "svcHrAttendance::/attdReport.do?method=findMonthAttdReport",
+      "",
+      "dsMonthAttdReport=dsMonthAttdReport",
+      "baseYearMonth=" +(baseYear+baseMonth),
+      "callback2"
+   );
+}
+
+
+	
+// 개인 항목 보기 !!!(숨겨진 버튼 활성화 시킴)
+function monthAttdManagementTab_tab1_indivisualItemBtn_OnClick(obj)
+{
+	if(monthAttdManagementTab.tab1.indivisualItemBtn.Text=="단체항목"){
+      monthAttdManagementTab.tab1.closeBtn.Enable=true;
+      monthAttdManagementTab.tab1.indivisualItemDiv.Visible=true;
+      monthAttdManagementTab.tab1.indivisualItemBtn.Text = "개인항목";
+      dsMonthAttdReport.UnFilter();
+   }else{
+	
+      var empCode=dsEmployee.GetColumn(dsEmployee.rowpos,"EMP_CODE");
+      dsMonthAttdReport.Filter("EMP_CODE == '"+empCode+"'");
+      
+      monthAttdManagementTab.tab1.closeBtn.Enable=false;
+      monthAttdManagementTab.tab1.indivisualItemDiv.Visible=false;
+      monthAttdManagementTab.tab1.indivisualItemBtn.Text = "단체항목";
+     
+   }
+}
+
+// 사원 선택 시!!
+function empGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	var empCode=dsEmployee.GetColumn(nRow,"EMP_CODE");
+	dsMonthAttdReport.Filter("EMP_CODE == '"+empCode+"'");
+}
+
+// 월근태 마감을 누를 경우 !!
+function monthAttdManagementTab_tab1_closeBtn_OnClick(obj)
+{
+	 if(confirm("월근태 마감을 하시겠습니까?? ")){
+      for(var index = 0; index < dsMonthAttdReport.rowCount; index++) {
+         dsMonthAttdReport.SetColumn(index,"CLOSE_YN","Y");
+      }
+      updateMonthCloseYNTR();
+      monthAttdManagementTab.tab1.indivisualItemBtn.Visible=false;
+      monthAttdManagementTab.tab1.closeBtn.Enable=false;
+   }   
+}
+
+
+function updateMonthCloseYNTR()
+{
+   transaction(
+      "updateMonthAttdCloseYN",
+      "svcHrAttendance::/attdReport.do?method=updateMonthAttdCloseYN",
+      "dsMonthAttdReport=dsMonthAttdReport:u",
+      "",
+      "",
+      "callback2"
+   );
+}
+
+
+
+
+function callback2(trid, ErrorCode, ErrorMsg) {
+
+   if(trid=='updateMonthAttdCloseYN'){ //마감 할 때 
+      if(ErrorCode!=0){
+         alert("ErrorCode!=0 :( ");
+      }else{
+         dsMonthAttdReport.ClearData(); // Column 만 제외 하고 나머지는 다 지움 
+         /*monthAttdTab.monthAttdUnCloseTab.visualGridButton.Visible=false;*/
+         alert(ErrorMsg);
+      }
+   }
+   
+   if(trid=='updateMonthAttdUnCloseYN'){
+      if(ErrorCode!=0){
+         alert("ErrorCode!=0 :( ");
+      }else{
+         dsClosedMonthAttdReport.ClearData();
+         alert(ErrorMsg);
+      }
+   }
+   
+   if(trid=='findClosedMonthAttdReport'){
+      if(ErrorCode!=0){
+         alert("ErrorCode!=0");
+      }else{
+         if(dsClosedMonthAttdReport.GetRowCount()=0){
+            monthAttdManagementTab.monthAttdCloseTab.UncloseButton.Enable=false;
+            alert("해당 년월에 월근태 마감 내역이 존재하지 않습니다. ");
+         }else{
+            alert(ErrorMsg);
+         }
+      }   
+   }
+   
+   
+   if(trid=='findMonthAttdReport'){
+      if(ErrorCode!=0){
+         alert("ErrorCode!=0:( ");
+      }else{
+         var closeYN=dsMonthAttdReport.GetColumn(0,"CLOSE_YN");
+         
+         if(dsMonthAttdReport.GetRowCount() >0 && closeYN='Y'){ //미마감 내역 조회시 마감이 되어 있으면.. 
+            dsMonthAttdReport.ClearData();
+            monthAttdManagementTab.tab1.indivisualItemBtn.Visible=false;
+            monthAttdManagementTab.tab1.closeBtn.Enable=false;
+			
+         }
+		dsMonthAttdReport.Filter("CLOSE_YN='N'");
+      }   
+   }
+}
+
+
+// 월근태 마감 항목 조회시
+function monthAttdManagementTab_tab2_findMonthAttdBtn_OnClick(obj)
+{
+	baseYear=selYear.Value;
+	baseMonth=selMonth.Value;
+	if(selMonth.text == "" || selYear.text == ""){
+		alert(" 지정 년월을 입력 하세요 ");
+		monthAttdManagementTab.tab2.uncloseBtn.Enable=false;
+		break;
+	}else{
+		transaction(
+		"findClosedMonthAttdReport",
+		"svcHrAttendance::/attdReport.do?method=findClosedMonthAttdReport",
+		"",
+		"dsClosedMonthAttdReport=dsMonthAttdReport",
+		"baseYearMonth=" +(baseYear+baseMonth),
+		"callback2"
+	);
+		monthAttdManagementTab.tab2.uncloseBtn.Enable=true;
+	}
+}
+//마감 취소 시!
+function monthAttdManagementTab_tab2_uncloseBtn_OnClick(obj)
+{
+		
+	 if(confirm(" 월 근태 마감을 취소 하시겠습니까? ")){
+      for(var index = 0; index < dsClosedMonthAttdReport.rowCount; index++) {
+         dsClosedMonthAttdReport.SetColumn(index,"CLOSE_YN","N");
+      }
+      
+      transaction(
+         "updateMonthAttdUnCloseYN",
+         "svcHrAttendance::/attdReport.do?method=updateMonthAttdCloseYN",
+         "dsMonthAttdReport=dsClosedMonthAttdReport:u",
+         "",
+         "",
+         "callback2"
+      );   
+      monthAttdManagementTab.tab2.uncloseBtn.Enable=false;
+   }
+   
+}
+
+]]></Script>
+</Window>

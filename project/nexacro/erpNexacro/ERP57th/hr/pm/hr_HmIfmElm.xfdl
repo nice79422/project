@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_HmIfmElm" left="0" top="0" width="1185" height="785" style="background:#ebe9e4ff;color:#46463dff;" titletext="New Form" onload="HmIfmElm_onload">
+    <Layouts>
+      <Layout>
+        <Div id="EmpName_div" taborder="5" left="1.95%" top="83" height="75" style="background:#faf9f5ff;" width="800">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Static id="EmpCode_stc" taborder="2" text="사원코드 / 사원명" left="3.63%" top="105" onclick="Static00_onclick" style="border:0 none #808080ff ;color:black;align:left middle;font:antialias 12 한컴 고딕;" wordwrap="char" height="30" width="126"/>
+        <Button id="EmpCodeSearch_btn" taborder="7" text="검색" left="33.08%" top="106" width="60" height="28" style="background:#e6a15cff;color:white;bordertype:normal 0 0 ;font:antialias 12 한컴 고딕;" onclick="EmpCodeSearch_btn_onclick"/>
+        <Grid id="EmpList_grid" taborder="9" useinputpanel="false" left="1.94%" top="171" right="0.93%" height="423" binddataset="ds_employeeinfo" onheadclick="EmpList_grid_onheadclick" style="cursor:auto;" oncellclick="EmpList_grid_onclick" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="60"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkbox" edittype="checkbox"/>
+                <Cell col="1" displaytype="normal" text="사원번호"/>
+                <Cell col="2" text="사원명"/>
+                <Cell col="3" text="주민등록번호"/>
+                <Cell col="4" text="성별"/>
+                <Cell col="5" text="TEL"/>
+                <Cell col="6" text="PHONE"/>
+                <Cell col="7" text="장애인여부"/>
+                <Cell col="8" text="E-MAIL"/>
+                <Cell col="9" text="내국인여부"/>
+                <Cell col="10" text="주소"/>
+                <Cell col="11" text="상세주소"/>
+                <Cell col="12" text="우편번호"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkbox" edittype="checkbox" text="bind:CHK"/>
+                <Cell col="1" displaytype="decoratetext" edittype="none" style="color:blue;color2:blue;font:underline 9 arial;cursor:pointer;" text="bind:EMP_CODE"/>
+                <Cell col="2" text="bind:EMP_NAME"/>
+                <Cell col="3" displaytype="normal" edittype="none" text="bind:RESIDENT_NUMBER" mask="######-#{######}"/>
+                <Cell col="4" text="bind:GENDER"/>
+                <Cell col="5" text="bind:TEL" mask="###-###-####"/>
+                <Cell col="6" text="bind:PHONE_NUMBER" mask="###-####-####"/>
+                <Cell col="7" text="bind:NATIVE_TYPE_CODE"/>
+                <Cell col="8" text="bind:EMAIL"/>
+                <Cell col="9" text="bind:HIGHEST_EDUCATION_CODE"/>
+                <Cell col="10" text="bind:BASE_ADDRESS"/>
+                <Cell col="11" text="bind:DETAIL_ADDRESS"/>
+                <Cell col="12" text="bind:ZIP_CODE" mask="###-###"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Nrgst_btn" taborder="10" text="신규등록" left="62.7%" top="615" width="80" height="35" style="background:#544e4cff;color:white;bordertype:normal 0 0 ;font:antialias 11 한컴 고딕;" onclick="Nrgst_btn_onclick"/>
+        <Button id="Uld_btn" taborder="11" text="업로드" left="55.36%" top="615" width="80" height="35" style="background:white;color:black;bordertype:normal 0 0 ;font:antialias 11 한컴 고딕;"/>
+        <Button id="HmIfmPrt_btn" taborder="12" text="사원정보 인쇄" left="2.03%" top="615" width="120" height="35" style="background:white;color:black;bordertype:normal 0 0 ;font:antialias 11 한컴 고딕;"/>
+        <Button id="Del_btn" taborder="13" text="삭제" left="12.83%" top="615" width="60" height="35" style="background:white;color:black;bordertype:normal 0 0 ;font:antialias 11 한컴 고딕;" onclick="Del_btn_onclick"/>
+        <Div id="Emptotal_div" taborder="14" left="2.03%" width="799" style="background:#e0ded5ff;" height="70" bottom="49"/>
+        <Static id="Emptotal_stc" taborder="15" text="※ 총사원 : 00명" wordwrap="char" onclick="Static00_onclick" left="4.73%" top="709" width="146" height="30" style="border:0 none #808080ff ;color:black;align:left middle;font:antialias 14 한컴 고딕;"/>
+        <Edit id="EmpCode_edt" taborder="16" left="14.68%" top="105" height="30" style="border:1 solid #a6a6a9ff ;bordertype:normal 0 0 ;" width="210"/>
+        <Static id="EmpElm_stc" taborder="17" text="사원등록" left="1.52%" top="12" height="60" style="border:1 none transparent ;color:black;font:bold antialias 24 한컴 고딕;" width="155"/>
+        <Button id="Save_btn" taborder="18" text="저장" onclick="Save_btn_onclick" left="18.57%" top="615" width="60" height="35" style="background:white;color:black;bordertype:normal 0 0 ;font:antialias 11 한컴 고딕;"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item1" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="EMP_CODE"/>
+      <BindItem id="item0" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="EMP_NAME"/>
+      <BindItem id="item2" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="RESIDENT_NUMBER"/>
+      <BindItem id="item3" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="BIRTH_DATE"/>
+      <BindItem id="item4" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="GENDER"/>
+      <BindItem id="item5" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="TEL"/>
+      <BindItem id="item6" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="PHONE_NUMBER"/>
+      <BindItem id="item7" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="BIRTH_DATE"/>
+      <BindItem id="item8" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="GENDER"/>
+      <BindItem id="item9" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="TEL"/>
+      <BindItem id="item10" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="NATIVE_TYPE_CODE"/>
+      <BindItem id="item11" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="EMAIL"/>
+      <BindItem id="item12" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="HIGHEST_EDUCATION_CODE"/>
+      <BindItem id="item13" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="BASE_ADDRESS"/>
+      <BindItem id="item14" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="DETAIL_ADDRESS"/>
+      <BindItem id="item15" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="ZIP_CODE"/>
+      <BindItem id="item16" compid="EmpList_grid" propid="" datasetid="ds_employeeinfo" columnid="IMG_SRC"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_employeeinfo">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENT_NUMBER" type="STRING" size="256"/>
+          <Column id="BIRTH_DATE" type="STRING" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIVE_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="HIGHEST_EDUCATION_CODE" type="STRING" size="256"/>
+          <Column id="BASE_ADDRESS" type="STRING" size="256"/>
+          <Column id="DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="ZIP_CODE" type="STRING" size="256"/>
+          <Column id="IMG_SRC" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************
+사원정보등록
+@Path                  인사
+@Description           사원정보를 등록하기 위한 폼
+@Author                서정훈
+@Create                2019. 02. 12.
+************************************************************/
+
+this.HmIfmElm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction("findEmpInfoList",
+					"dataURL::hr/pm/findEmpInfoList.do",
+					"",
+					"ds_employeeinfo=dsEmpInfo",
+					"",
+					"callback",
+					false
+					);
+	var empCount = this.ds_employeeinfo.rowcount;				
+			//alert(empCount);
+	this.Emptotal_stc.set_text("※ 총사원 : "+empCount+" 명");
+}
+
+
+
+// EmpList_grid Checkbox Controller(전체선택 / 부분선택)
+this.EmpList_grid_onheadclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+ 		if(e.cell == 0){
+ 		trace(e.cell);
+ 			if(obj.getCellProperty("head",0,'text') ==1){
+ 				obj.setCellProperty("head",0,'text',0);
+ 				for(var i=0;i<this.ds_employeeinfo.rowcount;i++){  
+ 					this.ds_employeeinfo.setColumn(i,"CHK",0);
+ 				}
+ 			}else{
+ 				obj.setCellProperty("head",0,'text',1);
+ 				for(var i=0;i<this.ds_employeeinfo.rowcount;i++){
+ 					this.ds_employeeinfo.setColumn(i,"CHK",1);
+
+ 				}
+ 			}
+ 		} 
+}
+
+
+
+// 행 삭제
+this.Del_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("삭제 하시겠습니까?")){
+		 var empRow=this.ds_employeeinfo.getRowCount();   
+			for(var i=0; i<empRow; i++){
+				var chk=this.ds_employeeinfo.getColumn(empRow,"CHK");
+				if(chk=="1"){
+					this.ds_employeeinfo.set_updatecontrol(false); // set 
+					var bSucc = this.ds_employeeinfo.setRowType(i,"D");
+					//alert(bSucc);
+				}
+			}
+				this.transaction("batchEmpInfoList",
+										"dataURL::hr/pm/batchEmpInfoList.do",
+										"dsEmpInfo=ds_employeeinfo:U",
+										"",
+										"",
+										"callbackFunction",
+										false
+				);
+	}
+}
+
+
+ 
+// 저장
+this.Save_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("등록 하시겠습니까?")){
+		this.transaction("batchEmpInfoList",
+								"dataURL::hr/pm/batchEmpInfoList.do",
+								"dsEmpInfo=ds_employeeinfo:U",
+								"",
+								"",
+								"callbackFunction",
+								false
+								);
+	}
+}
+
+// 사원별 상세정보 다이얼로그 띄우기
+this.EmpList_grid_onclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	if(e.cell==1){
+		var v_empCode=this.ds_employeeinfo.getColumn(this.ds_employeeinfo.rowposition,"EMP_CODE");
+		var empInfoDiglog=new ChildFrame();
+				empInfoDiglog.set_showstatusbar(false);
+				empInfoDiglog.init("empInfo","absolute",0,0,536,376,null,null,"hr_pm::hr_HmIfmRfrcDialog.xfdl");
+				empInfoDiglog.showModal(this.getOwnerFrame(),{empCode:v_empCode},this);
+	}
+}
+
+//사원조회
+this.EmpCodeSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var searchCode=this.EmpCode_edt.value;
+	if(searchCode!=""){
+		this.ds_employeeinfo.filter("EMP_CODE=='"+searchCode+"' || EMP_NAME=='"+searchCode+"'");
+    }else{
+		this.ds_employeeinfo.filter("");
+    }
+}
+
+
+//사원등록
+this.Nrgst_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	application.open("HmIfmElmDialog",
+							"hr_pm::hr_HmIfmElmDialog.xfdl", 
+							this.getOwnerFrame(),
+							{}, 
+							"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='사원등록'"
+							);
+}]]></Script>
+  </Form>
+</FDL>

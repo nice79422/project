@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="annualApplicationForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="hr_annualLeaveManagementForm_onload">
+    <Layouts>
+      <Layout width="1024" height="768">
+        <Static id="Static20" taborder="42" text="적용&#13;&#10;년도" onclick="Static00_onclick" left="62.21%" top="60" height="64" width="64" style="align:center;font:12 함초롬돋움,돋움;"/>
+        <Grid id="Grid01" taborder="46" useinputpanel="false" left="37.89%" top="128" right="1.56%" height="529" binddataset="ds_annualLeave" autosizingtype="none" autosizebandtype="body" autofittype="col" oncellclick="annualLeave">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="기준년도"/>
+                <Cell col="1" text="사원코드"/>
+                <Cell col="2" text="사용일수"/>
+                <Cell col="3" text="잔여일수"/>
+                <Cell col="4" text="가용일수"/>
+                <Cell col="5" text="근속년수"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="text" text="bind:STANDARD_YEAR"/>
+                <Cell col="1" text="bind:EMP_CODE"/>
+                <Cell col="2" edittype="text" text="bind:USED_DAYS"/>
+                <Cell col="3" edittype="text" text="bind:REST_DAYS"/>
+                <Cell col="4" edittype="text" text="bind:USABLE_DAYS"/>
+                <Cell col="5" edittype="text" text="bind:LENGTH_OF_SERVICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00" taborder="54" useinputpanel="false" left="1.37%" top="128" right="62.89%" height="529" binddataset="ds_workInfo" autofittype="col" oncellclick="employee">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원코드"/>
+                <Cell col="1" text="입사일자"/>
+                <Cell col="2" text="직종코드"/>
+                <Cell col="3" text="사원명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:HIRE_DATE"/>
+                <Cell col="2" text="bind:JIKJONG_CODE"/>
+                <Cell col="3" text="bind:EMP_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="employeeReference_btn" taborder="55" text="전체사원&#13;&#10;조회" onclick="employeeReference_onclick" left="30.86%" top="60" right="62.89%" height="64"/>
+        <Spin id="period_spin" taborder="56" value="0" left="69.24%" top="94" height="30" width="94"/>
+        <Button id="find_btn" taborder="57" text="조회" onclick="find_btn_onclick" left="78.71%" top="60" right="15.04%" height="64"/>
+        <CheckBox id="period_chk" taborder="58" text="년도별 조회" left="69.24%" top="60" right="21.58%" height="28" value="false"/>
+        <Edit id="search_edt" taborder="61" left="14.45%" top="94" right="76.17%" height="30"/>
+        <Button id="employeeReference_btn00" taborder="62" text="조건&#13;&#10;검색" onclick="empSearch_onclick" left="24.22%" top="60" right="69.53%" height="64"/>
+        <Static id="Static00" taborder="66" text="연차 관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Combo id="search_combo" taborder="67" left="14.45%" top="60" right="76.17%" height="30" codecolumn="codecolumn" datacolumn="datacolumn" text="사원명" value="사원명" onitemchanged="search_combo_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">사원명</Col>
+                <Col id="datacolumn">사원명</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">사원코드</Col>
+                <Col id="datacolumn">사원코드</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">직종코드</Col>
+                <Col id="datacolumn">직종코드</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">입사일자</Col>
+                <Col id="datacolumn">입사일자</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Button id="regist_btn" taborder="68" text="등록" onclick="regist_btn_onclick" left="85.45%" top="60" right="8.3%" height="64"/>
+        <Button id="excelExport_btn00" taborder="69" text="엑셀&#13;&#10;출력" onclick="excelExport_btn_onclick" left="92.19%" top="60" right="1.56%" height="64"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_annualLeave">
+        <ColumnInfo>
+          <Column id="STANDARD_YEAR" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="USED_DAYS" type="STRING" size="256"/>
+          <Column id="REST_DAYS" type="STRING" size="256"/>
+          <Column id="USABLE_DAYS" type="STRING" size="256"/>
+          <Column id="LENGTH_OF_SERVICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_employee">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_sequence">
+        <ColumnInfo>
+          <Column id="SEQ_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_workInfo">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="HIRE_DATE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYEEMENT_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="RETIRE_CAUSE" type="STRING" size="256"/>
+          <Column id="PROBATION_STATUS" type="STRING" size="256"/>
+          <Column id="PROBATION_EXPIRE_DATE" type="STRING" size="256"/>
+          <Column id="PROJECT_CODE" type="STRING" size="256"/>
+          <Column id="JIKJONG_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="EX_PROJECT_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+연차 관리 화면                                             						                                                                         
+@Path			인사              				   				
+@Description	연차 관리를 하기 위한  폼							
+@Author	  		김태형   			                        								                                            
+@Create         2019. 02. 14.                             		                    				                                            
+********************************************************************************/
+
+var thisYear = application.today().substring(0,4); //현재 년도
+var vEmpCode="DEFAULT";
+var vEmpName="DEFAULT";
+var vHireDate="DEFAULT";
+
+this.hr_annualLeaveManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.period_spin.set_value(thisYear);
+
+	this.transaction("findWorkInfoAll",
+					"dataURL::hr/pm/findWorkInfoAll.do",
+					"",
+					"ds_workInfo=ds_workInfo",
+					"",
+					"callback",false
+					);	
+					
+	this.transaction("findAnnualLeaveList",
+					"dataURL::hr/circumstance/findAnnualLeaveList.do",
+					"",
+					"ds_annualLeave=ds_annualLeave",
+					"",
+					"callback",false
+					);	
+
+	if(this.period_chk.value == true){
+	var empcode=this.ds_workInfo.getColumn(e.row,"EMP_CODE");
+    this.ds_annualLeave.filter("EMP_CODE =='"+empcode+"' && STANDARD_YEAR =='"+this.period_spin.value+"'");				
+	}else{
+	var empcode=this.ds_workInfo.getColumn(e.row,"EMP_CODE");
+	//alert(empcode);
+    this.ds_annualLeave.filter("EMP_CODE =='"+empcode+"'");				
+	}
+}
+
+this.add_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 추가
+{
+	var vEmpCode=this.ds_employee.getColumn(this.ds_employee.rowposition,"EMP_CODE");
+	var vEmpName=this.ds_employee.getColumn(this.ds_employee.rowposition,"EMP_NAME");
+	var vHireDate=this.ds_employee.getColumn(this.ds_employee.rowposition,"HIRE_DATE");
+	
+	this.ds_annualLeave.addRow();
+	this.ds_annualLeave.setColumn(this.ds_annualLeave.rowposition, "STANDARD_YEAR", thisYear);
+	this.ds_annualLeave.setColumn(this.ds_annualLeave.rowposition, "EMP_CODE", vEmpCode);	
+}
+
+
+this.employeeReference_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 사원 조회
+{
+	this.transaction("findWorkInfoAll",
+					"dataURL::hr/pm/findWorkInfoAll.do",
+					"",
+					"ds_workInfo=ds_workInfo",
+					"",
+					"callback",false
+					);	
+	var searchName=this.search_edt.value;
+	//this.minSearcher(); 
+   this.ds_workInfo.filter("EMP_NAME !=''");		
+}
+
+
+
+this.employee = function(obj:Grid, e:nexacro.GridClickEventInfo) // 사원셀 클릭
+{
+
+	vEmpCode=this.ds_workInfo.getColumn(this.ds_workInfo.rowposition,"EMP_CODE");
+	vEmpName=this.ds_workInfo.getColumn(this.ds_workInfo.rowposition,"EMP_NAME");
+	vHireDate=this.ds_workInfo.getColumn(this.ds_workInfo.rowposition,"HIRE_DATE");
+	
+	if(this.period_chk.value == true){
+	var empcode=this.ds_workInfo.getColumn(e.row,"EMP_CODE");
+    this.ds_annualLeave.filter("EMP_CODE =='"+empcode+"' && STANDARD_YEAR =='"+this.period_spin.value+"'");				
+	}else{
+	var empcode=this.ds_workInfo.getColumn(e.row,"EMP_CODE");
+    this.ds_annualLeave.filter("EMP_CODE =='"+empcode+"'");				
+	}
+	
+	/*
+	this.transaction("findEmployeeList",
+					"dataURL::hr/emp/findEmployeeList.do",
+					"",
+					"ds_annualLeave=ds_annualLeave",
+					"",
+					"callback"
+					);
+	*/
+	
+}
+
+this.find_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 조회
+{
+	vEmpCode=this.ds_workInfo.getColumn(this.ds_workInfo.rowposition,"EMP_CODE");
+	vEmpName=this.ds_workInfo.getColumn(this.ds_workInfo.rowposition,"EMP_NAME");
+	vHireDate=this.ds_workInfo.getColumn(this.ds.workInfo.rowposition,"HIRE_DATE");
+
+	this.transaction("findAnnualLeaveList",
+					"dataURL::hr/circumstance/findAnnualLeaveList.do",
+					"",
+					"ds_annualLeave=ds_annualLeave",
+					"",
+					"callback"
+					);
+
+	if(this.period_chk.value == true){
+	var empcode=this.ds_workInfo.getColumn(e.row,"EMP_CODE");
+    this.ds_annualLeave.filter("EMP_CODE =='"+empcode+"' && STANDARD_YEAR =='"+this.period_spin.value+"'");				
+	}else{
+	var empcode=this.ds_workInfo.getColumn(e.row,"EMP_CODE");
+    this.ds_annualLeave.filter("EMP_CODE =='"+empcode+"'");				
+	}
+}
+
+this.save_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 저장
+{
+	if(confirm("변경사항을 저장하시겠습니까?")){	
+		this.transaction("batchAnnualLeave",
+						"dataURL::hr/circumstance/batchAnnualLeave.do",
+						"ds_annualLeave=ds_annualLeave:u",
+						"ds_annualLeave=ds_annualLeave",
+						"",
+						""
+						);		
+	}	
+}
+
+this.delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 삭제
+{
+   this.ds_annualLeave.deleteRow(this.ds_annualLeave.rowposition);	
+}
+
+
+this.empSearch_onclick = function(obj:Button, e:nexacro.ClickEventInfo) // 이름으로 검색
+{
+	if(this.search_combo.value=="사원명"){
+		this.ds_workInfo.filter("EMP_NAME.indexOf('"+this.search_edt.value+"')>-1");	
+	}else if(this.search_combo.value=="사원코드"){
+		this.ds_workInfo.filter("EMP_CODE.indexOf('"+this.search_edt.value+"')>-1");	
+	}else if(this.search_combo.value=="직종코드"){
+		this.ds_workInfo.filter("JIKJONG_CODE.indexOf('"+this.search_edt.value+"')>-1");	
+	}else if(this.search_combo.value=="입사일자"){
+		this.ds_workInfo.filter("HIRE_DATE.indexOf('"+this.search_edt.value+"')>-1");	
+	}
+}
+
+
+
+
+this.sequence_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.transaction("takeSerial",
+					"dataURL::sys/takeSerialCodeTest.do",
+					"",
+					"gd_sequence=gd_sequence",
+					"findSeq='SERIAL_SEQ'",
+					"",false
+					);	
+	alert(this.gd_sequence.getColumn(0, "SEQ_NO"));	
+	
+}
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var objFileDialog = new FileDialog();  
+	objFileDialog("FileDialog", this);
+	
+}
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+// 파일 업로드
+var strLogoFilePath = this.FileUpload00.value;
+if (this .gfn_IsNull (strLogoFilePath))
+{
+this.alert ( "파일을 지정하십시오.");
+return true;
+}
+
+// URL의 지정은 인수로 업로드 경로를 전달-> PATH
+this.FileUpload00.set_uploadurl ( "SVC :: fileUpload.jsp? PATH = sampleFile");
+this.FileUpload00.upload ();	
+}
+
+
+
+
+
+this.regist_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	var year=this.period_spin.value;
+	
+	this.ds_annualLeave.filter("");
+	this.ds_annualLeave.filter("STANDARD_YEAR=='"+year+"' && EMP_CODE=='"+vEmpCode+"'");
+	
+	if(vEmpCode =="DEFAULT" && vHireDate =="DEFAULT"){
+		alert(" 연차를 등록할 사원을 선택해주세요 :( ");
+	}else if(year==null){
+		alert(" 연차를 등록하실 년도를 선택해주세요 :( ");
+	}else{
+		if(this.ds_annualLeave.getRowCount() != 0){
+			alert(" 해당년도에 이미 연차가 등록되어 있습니다. :( ");
+		}else{
+			alert(year +" "+ vEmpCode +" "+ vHireDate);
+			if(vHireDate == null){
+				alert("입사날짜가 등록되어 있지 않은 사원은 연차등록을 할 수 없습니다. :( ");
+			}else{	
+				if(confirm(vEmpName+"님의 연차를 등록하시겠습니까?")){
+					this.transaction(
+						"createAnnualLeave",
+						"dataURL::hr/circumstance/createAnnualLeave.do",
+						"",
+						"ds_annualLeave=ds_annualLeave",
+						"standardYear='" + year + "'empCode='" + vEmpCode + "'hireDate='" + vHireDate +"'",
+						"callback",
+						false
+					);
+				}
+			}
+		}
+	}		
+}
+
+
+this.excelExport_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+    this.exportObj = new ExcelExportObject();
+    var ret = this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, 
+        this.Grid01, "Sheet1!A1");
+    this.exportObj.set_exporturl("http://localhost:8282/nexacro-xeni/XExportImport");   
+    this.exportObj.exportData(); 
+
+   
+}
+
+this.annualLeave = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	
+}
+
+this.search_combo_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

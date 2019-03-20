@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="450" Id="deptDialog" Left="8" OnLoadCompleted="deptDialog_OnLoadCompleted" PidAttrib="7" scroll="false" Title="deptDialog" Top="8" Ver="1.0" Width="300" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="CAPTIONTEXT" Font="한컴&#32;윤고딕&#32;240,14" Height="30" Id="Static1" Left="9" TabOrder="1" Text="부서&#32;조회" Top="5" VAlign="Middle" Width="280"></Static>
+		<Grid BindDataset="dsDepartment" BkColor2="default" BoldHead="true" Bottom="438" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" Height="395" Id="deptGrid" InputPanel="FALSE" Left="9" LineColor="default" OnCellDBLClick="deptGrid_OnCellDblClick" Right="289" TabOrder="2" TabStop="true" Top="43" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="280">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="138"/>
+						<col width="138"/>
+					</columns>
+					<head>
+						<cell bkcolor="silver" col="0" display="text" expandsize="20" font="한컴&#32;윤고딕&#32;240,9" text="부서코드"/>
+						<cell bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,9" text="부서명"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="DEPT_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="1" colid="DEPT_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function deptDialog_OnLoadCompleted(obj)
+{
+	transaction("findDeptList","svcBase::/department.do?method=findDeptList","","dsDepartment=dsDepartment","","callback");
+}
+
+
+function deptGrid_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	var selDeptCode = dsDepartment.GetColumn(nRow, "DEPT_CODE");
+	var selDeptName = dsDepartment.GetColumn(nRow, "DEPT_NAME");
+	
+	g_deptName=selDeptName;
+	parent.deptCode.text=selDeptCode;
+	parent.deptName.text=selDeptName;
+
+	close();
+}]]></Script>
+</Window>

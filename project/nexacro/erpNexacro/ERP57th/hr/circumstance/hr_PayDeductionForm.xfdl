@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_PaydeductionForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="hr_PaydeductionForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="지급 공제 항목 등록" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Combo id="selPayType" taborder="1" displaynulltext="선택하세요." innerdataset="@ds_payType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" left="18.23%" top="96" right="70.3%" height="45" onitemchanged="selPayType_onitemchanged"/>
+        <Combo id="selPayDeductionType" taborder="2" displaynulltext="선택하세요." innerdataset="@ds_payDeductionType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" onitemchanged="year_onitemchanged" left="49.62%" top="96" right="38.99%" height="45"/>
+        <Combo id="selYear" taborder="3" displaynulltext="선택하세요." innerdataset="@gds_baseYear" codecolumn="YEAR" datacolumn="YEAR" left="81.27%" top="96" right="7.34%" height="45"/>
+        <Static id="Static01" taborder="4" text="급여구분" left="7.43%" top="96" right="82.19%" height="45"/>
+        <Static id="Static02" taborder="5" text="귀속년도" left="70.38%" top="96" right="19.24%" height="45"/>
+        <Static id="Static03" taborder="6" text="지급공제구분" left="38.82%" top="96" right="50.8%" height="45"/>
+        <Button id="searchBtn" taborder="7" text="조회" onclick="searchBtn_onclick" left="54.43%" top="168" right="37.22%" height="45" style="color:white;font:bold 11 함초롬돋움;"/>
+        <Button id="batchBtn" taborder="8" text="저장" onclick="batchBtn_onclick" left="66.16%" top="168" right="25.49%" height="45" style="color:white;font:bold 11 함초롬돋움;"/>
+        <GroupBox id="GroupBox00" text="지급/공제항목 목록" taborder="9" left="22.28%" top="233" right="52.41%" height="318" onlbuttondown="GroupBox00_onlbuttondown" style="titleimagealign:middle;"/>
+        <Grid id="Grid00" taborder="10" useinputpanel="false" left="24.05%" top="263" right="54.26%" height="267" binddataset="ds_payDeductionMgt">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="128"/>
+                <Column size="128"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" edittype="normal" text="항목코드"/>
+                <Cell col="1" text="항목명"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" edittype="none" text="bind:PAY_DEDUCTION_ITEM_CODE" editacceptsenter="true"/>
+                <Cell col="1" edittype="normal" text="bind:PAY_DEDUCTION_ITEM_NAME" editdisplay="edit"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="addBtn" taborder="11" text="추가" onclick="addBtn_onclick" left="21.6%" top="168" right="70.04%" height="45" style="color:white;font:bold 11 함초롬돋움;"/>
+        <Button id="removeBtn" taborder="12" text="삭제" onclick="removeBtn_onclick" left="39.92%" top="168" right="51.73%" height="45" style="color:white;font:bold 11 함초롬돋움;"/>
+        <GroupBox id="GroupBox01" text="지급/공제항목 설정" taborder="13" left="51.65%" top="234" right="23.04%" height="318" style="titleimagealign:middle;" onlbuttondown="GroupBox00_onlbuttondown"/>
+        <Combo id="selTaxType" taborder="14" left="65.06%" top="285" right="25.06%" height="35" style="itemheight:20;" innerdataset="@ds_taxType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" index="-1" onitemchanged="selTaxType_onitemchanged"/>
+        <Combo id="selMonthSal" taborder="15" left="65.06%" top="338" right="25.06%" height="35" style="itemheight:20;" innerdataset="@ds_salMonth" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" onitemchanged="selMonthSal_onitemchanged"/>
+        <Combo id="selSusub" taborder="16" left="65.15%" top="391" right="24.98%" height="35" style="itemheight:20;" innerdataset="@ds_susubApply" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME"/>
+        <Combo id="selInoutApply" taborder="17" left="65.06%" top="443" right="25.06%" height="35" style="itemheight:20;" innerdataset="@ds_inOutApply" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME"/>
+        <Static id="Static04" taborder="18" text="과세구분" left="53.76%" top="285" right="36.37%" height="35"/>
+        <Static id="Static05" taborder="19" text="월정급여" left="53.76%" top="338" right="36.37%" height="35"/>
+        <Static id="Static06" taborder="20" text="수습적용" left="53.76%" top="391" right="36.37%" height="35"/>
+        <Static id="Static07" taborder="21" text="입퇴사적용" left="53.76%" top="443" right="36.37%" height="35"/>
+        <Static id="Static08" taborder="22" text="금액" left="53.76%" top="495" right="36.37%" height="35"/>
+        <TextArea id="input_price" taborder="23" left="771" top="495" width="117" height="35"/>
+        <Button id="adjustBtn" taborder="24" text="수정모드" left="30.72%" top="168" right="60.84%" height="45" positionstep="0" onclick="adjustBtn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item4" compid="input_price" propid="value" datasetid="ds_payDeductionMgt" columnid="PRICE"/>
+      <BindItem id="item1" compid="selTaxType" propid="value" datasetid="ds_payDeductionMgt" columnid="TAX_TYPE_CODE"/>
+      <BindItem id="item0" compid="selMonthSal" propid="value" datasetid="ds_payDeductionMgt" columnid="MONTH_SAL"/>
+      <BindItem id="item2" compid="selSusub" propid="value" datasetid="ds_payDeductionMgt" columnid="SUSUB_APPLY"/>
+      <BindItem id="item3" compid="selInoutApply" propid="value" datasetid="ds_payDeductionMgt" columnid="IN_OUT_APPLY"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_susubApply" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_taxType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_salMonth" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_inOutApply" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_payDeductionType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_payType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_payDeductionMgt" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="PAY_DEDUCTION_ITEM_SEQ" type="STRING" size="256"/>
+          <Column id="PAY_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="PAY_DEDUCTION_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="INPUTED_YEAR" type="STRING" size="256"/>
+          <Column id="PAY_DEDUCTION_ITEM_CODE" type="STRING" size="256"/>
+          <Column id="PAY_DEDUCTION_ITEM_NAME" type="STRING" size="256"/>
+          <Column id="TAX_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="SUSUB_APPLY" type="STRING" size="256"/>
+          <Column id="MONTH_SAL" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="IN_OUT_APPLY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+지급 공제 항목 등록 화면                                             						                                                                         
+@Path			인사              				   				
+@Description	지급/공제 항목을 등록하기 위한 폼							
+@Author	  		정승훈			                        								                                            
+@Create         2019. 02. 18.                             		                    				                                            
+********************************************************************************/
+
+
+var payType;
+var payDeductionType;
+var presentYear;
+
+var inputYear;
+var selRow;
+//var flag=0; //삼항연산자로 대체함 
+
+
+//로딩시 
+this.hr_PaydeductionForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	application.gds_codeDetail.filter("");
+	
+	presentYear= String(application.g_today).substr(0,4);//현재 년도
+	this.selYear.value = presentYear;
+	
+	//코드 목록 얻어옴 
+	this.transaction("findCodeList",
+					"dataURL::sys/findCodeList.do",
+					"",
+					"ds_code=ds_code",
+					"",	
+					"callback",false // false 동기 :기다리는거  //true 비동기 :기다려주지않음 앞에꺼 완료 안되도 다른거 실행 
+					);
+					
+	this.transaction("findCodeDetailList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_codeDetail=gds_codeDetail",
+					"",
+					"callback",false
+					);
+
+		//급상여,급여,상여
+		application.gds_codeDetail.filter("String(DETAIL_CODE).substr(0,3) == 'SGC'");
+		this.ds_payType.copyData(application.gds_codeDetail,true);
+
+
+
+		
+	
+
+	this.transaction(
+		"findPayDeductionList",
+		"dataURL::hr/circumstance/findPayDeductionList.do",
+		"",
+		"ds_payDeductionMgt=ds_payDeductionMgt",
+		"",
+		"callback",false
+	);
+		//지급 공제 호출 !
+		application.gds_codeDetail.filter("String(DETAIL_CODE).substr(0,3) == 'PDC'");
+		this.ds_payDeductionType.copyData(application.gds_codeDetail,true);
+	
+
+
+		//과세,비과세
+		application.gds_codeDetail.filter("String(DETAIL_CODE).substr(0,3) == 'PTC'");
+		this.ds_taxType.copyData(application.gds_codeDetail,true);
+	
+	//alert(this.ds_taxType.getRowCount());
+	
+		//환경등록적용,정상적용, 일할적용
+		application.gds_codeDetail.filter("String(DETAIL_CODE).substr(0,3) == 'PDM'");
+		this.ds_susubApply.copyData(application.gds_codeDetail,true); //수습적용
+		this.ds_inOutApply.copyData(application.gds_codeDetail,true); //입퇴사적용
+	
+		//포함 비포함
+		application.gds_codeDetail.filter("String(DETAIL_CODE).substr(0,3) == 'PMC'");
+		this.ds_salMonth.copyData(application.gds_codeDetail,true); //월정급여
+	
+		this.ds_payDeductionMgt.filter("PAY_TYPE_CODE==0");	
+	
+	
+	}
+
+
+
+//조회시 
+
+this.searchBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	payType=this.selPayType.value;
+	payDeductionType=this.selPayDeductionType.value;
+	inputYear=this.selYear.value;
+	//alert(payType+":::"+payDeductionType+":::"+inputYear);
+
+	if(payType==undefined || payDeductionType==undefined || inputYear==undefined){
+		alert(" 검색조건을 모두 입력해주세요 :( "); 
+	}else{
+		this.ds_payDeductionMgt.filter("");
+		this.ds_payDeductionMgt.filter("PAY_TYPE_CODE=='"+payType+"' && PAY_DEDUCTION_TYPE_CODE=='"+payDeductionType+"' && INPUTED_YEAR=='"+inputYear+"'");
+		if(this.ds_payDeductionMgt.getRowCount() ==0){
+			alert(" 해당검색조건을 만족하는 데이터가 없습니다 ");
+		}
+	}	
+	
+}
+
+//지급공제목록 선택시 
+function Grid00_oncellclick(obj:Grid, e:GridClickEventInfo)
+{
+	g_rowposition=e.row;	//변수에 담아둠? 왜 일까?? 일단은 
+	
+	
+	
+
+	
+}
+
+
+//추가시
+var flag=0;
+this.addBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	payType=this.selPayType.value;
+	payDeductionType=this.selPayDeductionType.value;
+	inputYear=this.selYear.value;
+	
+	if(payType==undefined || payDeductionType==undefined || inputYear==undefined){
+		alert("추가하실 지급/공제항목의 급여구분,지급공제구분,귀속년도 \n\t데이터를 모두입력해주세요 :)"); 
+	}else{
+		//flag=1;
+		this.ds_payDeductionMgt.addRow();
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"PAY_TYPE_CODE",payType);
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"PAY_DEDUCTION_TYPE_CODE",payDeductionType);
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"INPUTED_YEAR",inputYear);	
+	}
+	if(flag==0){
+	this.Grid00.setCellProperty("body",1,"edittype","normal");
+	
+}
+}
+
+//삭제시 
+this.removeBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+
+{
+	this.ds_payDeductionMgt.deleteRow(this.ds_payDeductionMgt.rowposition);	
+}
+
+
+
+
+
+//일괄 저장!
+this.batchBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	if(confirm("현재 내용을 저장 하시겠습니까?")){
+	
+		var taxType=this.selTaxType.value;
+		var monthSal=this.selMonthSal.value;
+		var susub=this.selSusub.value;
+		var inoutApply=this.selInoutApply.value;
+		var price=this.input_price.value;
+
+		/*trace(taxType+"  "+monthSal+"  "+susub+"  "+inoutApply+" "+price);*/
+	
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"TAX_TYPE_CODE",taxType);
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"MONTH_SAL",monthSal);
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"SUSUB_APPLY",susub);
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"IN_OUT_APPLY",inoutApply);
+		this.ds_payDeductionMgt.setColumn(this.ds_payDeductionMgt.rowposition,"PRICE",price);
+    
+		this.transaction(
+			"batchPayDeduction",
+			"dataURL::hr/circumstance/batchPayDeduction.do",
+			"ds_payDeductionMgt=ds_payDeductionMgt:u",
+			"ds_payDeductionMgt=ds_payDeductionMgt",
+			"",
+			"callback",false
+		);
+		
+		
+	}
+	
+}
+
+
+
+
+
+//수정모드
+var flag=0;
+this.adjustBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+alert("aa");
+    if(flag==0){
+	this.Grid00.setCellProperty("body",1,"edittype","normal");
+    flag=1;
+    }
+    else{
+    	this.Grid00.setCellProperty("body",1,"edittype","none");
+    	flag=0;
+    }
+}
+
+
+
+
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid=='batchPayDeduction'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 성공적으로 데이터를 저장하였습니다 :) ");
+		}	
+	}
+}]]></Script>
+  </Form>
+</FDL>

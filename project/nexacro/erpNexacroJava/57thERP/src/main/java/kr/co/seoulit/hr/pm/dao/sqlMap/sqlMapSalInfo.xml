@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.pm.dao.SalInfoDAO">
+	
+	<resultMap id="salInfoResult" type="salInfoTO">
+		<result property="empCode" column="EMP_CODE" />
+		<result property="hobong" column="HOBONG" />
+		<result property="salaryTypeCode" column="SALARY_TYPE_CODE" />
+		<result property="pensionType" column="PENSION_TYPE" />
+		<result property="nationalPension" column="NATIONAL_PENSION" />
+		<result property="healthInsurance" column="HEALTH_INSURANCE" />
+		<result property="employeementInsurance" column="EMPLOYEEMENT_INSURANCE" />
+		<result property="longTermCareInsurance" column="LONG_TERM_CARE_INSURANCE" />
+		<result property="supportTwentyBelow" column="SUPPORT_TWENTY_BELOW" />
+		<result property="supportSixtyAbove" column="SUPPORT_SIXTY_ABOVE" />
+		<result property="manyChildDeduction" column="MANY_CHILD_DEDUCTION" />
+		<result property="accountCode" column="ACCOUNT_CODE" />
+		<result property="accountHolder" column="ACCOUNT_HOLDER" />
+		<result property="salTransBank" column="SAL_TRANS_BANK" />
+	</resultMap>
+
+	<!-- 사원의 급여정보를 가지고 오는 메서드 -->
+	<select id="selectSalInfoAll" resultMap="salInfoResult">
+	<![CDATA[
+		SELECT * FROM SAL_INFO ORDER BY EMP_CODE
+	 ]]>
+	</select>
+
+	 <update id="updateSalInfo" parameterType="salInfoTO">
+	    <![CDATA[
+
+	           UPDATE
+	           		SAL_INFO
+	           SET
+	           		HOBONG=#{hobong#},
+	           		SALARY_TYPE_CODE=#{salaryTypeCode},
+	           		PENSION_TYPE=#{pensionType},
+	           		NATIONAL_PENSION=#{nationalPension},
+	           		HEALTH_INSURANCE=#{healthInsurance},
+	           		EMPLOYEEMENT_INSURANCE=#{employeementInsurance},
+	           		LONG_TERM_CARE_INSURANCE=#{longTermCareInsurance},
+	           		SUPPORT_TWENTY_BELOW=#{supportTwentyBelow},
+	           		SUPPORT_SIXTY_ABOVE=#{supportSixtyAbove},
+	           		MANY_CHILD_DEDUCTION=#{manyChildDeduction},
+	           		ACCOUNT_CODE=#{accountCode},
+	           		ACCOUNT_HOLDER=#{accountHolder},
+	           		SAL_TRANS_BANK=#{salTransBank}
+	           WHERE
+	           		EMP_CODE=#{empCode}
+
+	   		 ]]>
+    </update>
+</mapper>

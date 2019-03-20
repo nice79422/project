@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.seoulit.hr.attendance.dao.AttdReportDAO">
+
+
+    <resultMap id="overNightReportResult" type="overNightReportTO">
+        <result property="basicDay" column="BASIC_DAY"/>
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="overNightSeq" column="OVER_NIGHT_SEQ"/>
+        <result property="approvalStatus" column="APPROVAL_STATUS"/>
+        <result property="requestStatus" column="REQUEST_STATUS"/>
+        <result property="type" column="TYPE"/>
+        <result property="requestDate" column="REQUEST_DATE"/>
+        <result property="fromTime" column="FROM_TIME"/>
+        <result property="toTime" column="TO_TIME"/>
+      </resultMap>
+    
+    <resultMap id="dailyAttdReportResult" type="dailyAttdReportTO">
+        <result property="basicDay" column="BASIC_DAY"/>
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="daily" column="DAILY"/>
+        <result property="attendTime" column="ATTEND_TIME"/>
+        <result property="attendTypeCode" column="ATTEND_TYPE_CODE"/>
+        <result property="quitTime" column="QUIT_TIME"/>
+        <result property="quitTypeCode" column="QUIT_TYPE_CODE"/>
+        <result property="leaveTime" column="LEAVE_TIME"/>
+        <result property="returnTime" column="RETURN_TIME"/>
+        <result property="leaveHour" column="LEAVE_HOUR"/>
+        <result property="workHour" column="WORK_HOUR"/>
+        <result property="lateHour" column="LATE_HOUR"/>
+        <result property="overWorkHour" column="OVER_WORK_HOUR"/>
+        <result property="nightWorkHour" column="NIGHT_WORK_HOUR"/>
+        <result property="closeYn" column="CLOSE_YN"/>
+        <result property="attdDayType" column="ATTD_DAY_TYPE"/>
+        <result property="earlyLeaveTime" column="EARLY_LEAVE_TIME"/>
+        <result property="empName" column="EMP_NAME"/>
+    </resultMap>
+ 
+    <!-- 일근태 프로시저 사용 !! -->
+    <parameterMap type="Map" id="dailyAttdParameter">
+      <parameter property="basicDate" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorCode" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorMsg" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+   </parameterMap>
+
+
+   
+   <!-- 월근태 조회전 일근태 미마감 항목이 있는지 조사..   --> 
+     <resultMap id="UnClosedDailyAttdReportResult" type="dailyAttdReportTO">
+        <result property="basicDay" column="BASIC_DAY"/>
+        <result property="daily" column="DAILY"/>
+        <result property="attdDayType" column="ATTD_DAY_TYPE"/>
+      <result property="closeYn" column="CLOSE_YN"/>
+    </resultMap> 
+    
+    <!-- 월근태 계산 프로시저 사용 !!  --> 
+    <parameterMap type="Map" id="monthAttdParameter">
+      <parameter property="baseYearMonth" mode="IN" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorCode" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+        <parameter property="errorMsg" mode="OUT" javaType="string" jdbcType="VARCHAR"/>
+   </parameterMap>
+   
+
+   <!-- 월근태 내역 호출 -->
+    
+   <resultMap id="monthAttdReportResult" type="monthAttdReportTO">
+      <result property="basicYearMonth" column="BASIC_YEAR_MONTH"/>
+        <result property="empCode" column="EMP_CODE"/>
+        <result property="basicWorkHour" column="BASIC_WORK_HOUR"/>
+        <result property="workHour" column="WORK_HOUR"/>
+        <result property="overWorkHour" column="OVER_WORK_HOUR"/>
+        <result property="nightWorkHour" column="NIGHT_WORK_HOUR"/>
+        <result property="basicWorkDays" column="BASIC_WORK_DAYS"/>
+        <result property="weekdayWork" column="WEEKDAY_WORK"/>
+        <result property="holidayWorkDays" column="HOLIDAY_WORK_DAYS"/>
+        <result property="holidayWorkHour" column="HOLIDAY_WORK_HOUR"/>
+        <result property="holidayOverWorkHour" column="HOLIDAY_OVER_WORK_HOUR"/>
+        <result property="holidayNightWorkHour" column="HOLIDAY_NIGHT_WORK_HOUR"/>
+        <result property="absentDays" column="ABSENT_DAYS"/>
+        <result property="lateDays" column="LATE_DAYS"/>
+        <result property="lateHour" column="LATE_HOUR"/>
+        <result property="leaveEarlyDays" column="LEAVE_EARLY_DAYS"/>
+        <result property="leaveDays" column="LEAVE_DAYS"/>
+        <result property="closeYn" column="CLOSE_YN"/>
+        <result property="attdRestDays" column="ATTD_REST_DAYS"/>
+        <result property="empName" column="EMP_NAME"/>
+   </resultMap>
+
+
+
+
+    <select id="selectOverNightReport" resultMap="overNightReportResult" parameterType="map">
+
+         SELECT
+             BASIC_DAY
+             ,EMP_NAME
+             ,APPROVAL_STATUS
+             ,REQUEST_STATUS
+             ,TYPE
+             ,EMP_CODE
+             ,OVER_NIGHT_SEQ 
+             ,REQUEST_DATE
+             ,FROM_TIME
+             ,TO_TIME
+          FROM OVER_NIGHT_TIME_MGT
+          WHERE EMP_CODE=#{empCode} 
+          AND BASIC_DAY BETWEEN #{fromDate} AND #{toDate}
+               
+    </select>
+    
+   
+    <!-- 연장심야 일괄신청(N -> Y) --> 
+    <update id="updateRequestStatus" parameterType="overNightReportTO">
+    <![CDATA[
+         UPDATE OVER_NIGHT_TIME_MGT
+         SET REQUEST_STATUS='Y'
+         WHERE EMP_CODE=#{empCode}
+         AND BASIC_DAY=#{basicDay}
+    ]]>
+    </update>
+   
+   
+    <!-- 일근태관리테이블에서 기준일에 해당하는 승인된 데이터를 조회하는 메서드 -->
+   
+   <select id="selectApprovalDailyAttdReport" resultMap="dailyAttdReportResult" parameterType="String">
+    <![CDATA[
+       SELECT 
+          DAM.EMP_CODE
+         ,DAM.BASIC_DAY
+         ,DAM.DAILY
+         ,DAM.ATTEND_TIME
+         ,DAM.ATTEND_TYPE_CODE
+         ,DAM.QUIT_TIME
+         ,DAM.QUIT_TYPE_CODE
+         ,DAM.LEAVE_TIME
+         ,DAM.RETURN_TIME
+         ,DAM.LEAVE_HOUR
+         ,DAM.WORK_HOUR
+         ,DAM.LATE_HOUR
+         ,DAM.OVER_WORK_HOUR
+         ,DAM.NIGHT_WORK_HOUR
+         ,DAM.CLOSE_YN
+         ,DAM.ATTD_DAY_TYPE
+         ,DAM.EARLY_LEAVE_TIME
+         ,E.EMP_NAME
+        FROM DAY_ATTD_MGT DAM, EMPLOYEE E
+      WHERE BASIC_DAY=#{baseDay}
+        AND DAM.EMP_CODE=E.EMP_CODE
+        AND DAM.CLOSE_YN='Y'
+    ]]>
+    </select>
+    
+    
+    
+   <!-- 해당하는 날짜의 일근태를 모든 사월의  마감하는 메서드 (Y ->N / N -> Y) (일괄 처리 그날 해당 사원들 전부다 반영 됨.)-->
+   
+ 
+    <update id="updateDailyAttdCloseYN" parameterType="dailyAttdReportTO">
+    
+       UPDATE
+          DAY_ATTD_MGT
+       SET
+          CLOSE_YN=#{closeYn}          
+       WHERE
+          BASIC_DAY=#{basicDay}
+       
+       <if test='closeYn =="Y"'>
+       AND 
+          CLOSE_YN='N'
+       </if>
+       
+         <if test='closeYn =="N"'>
+       AND 
+          CLOSE_YN='Y'
+       </if>
+ 
+
+    </update>
+
+ 
+   <!-- 일근태 관리테이블에 해당 날짜의 데이터가 미마감이면 해당날짜의 일근태관리테이블에 들어갈 데이터를 생성 -->
+ 
+   <select id="createDailyAttdReport" statementType="CALLABLE" parameterMap="dailyAttdParameter">
+   <![CDATA[
+      CALL P_HR_ATTENDANCE.P_CREATE_DAILY_ATTD(?,?,?)
+    ]]>
+   </select>
+ 
+  
+   <!-- 해당날짜의 일근태관리테이블을 조회하는 메서드 -->
+
+   <select id="selectDailyAttdReportByDate" resultMap="dailyAttdReportResult" parameterType="String">
+    <![CDATA[
+         SELECT 
+             DAM.EMP_CODE 
+           ,DAM.BASIC_DAY      
+           ,DAM.DAILY 
+           ,DAM.ATTEND_TIME 
+           ,DAM.ATTEND_TYPE_CODE      
+           ,DAM.QUIT_TIME 
+           ,DAM.QUIT_TYPE_CODE 
+           ,DAM.LEAVE_TIME      
+           ,DAM.RETURN_TIME 
+           ,DAM.LEAVE_HOUR 
+           ,DAM.WORK_HOUR 
+           ,DAM.LATE_HOUR 
+           ,DAM.OVER_WORK_HOUR 
+           ,DAM.NIGHT_WORK_HOUR 
+           ,DAM.CLOSE_YN 
+           ,DAM.ATTD_DAY_TYPE 
+           ,DAM.EARLY_LEAVE_TIME 
+          ,E.EMP_NAME 
+       FROM DAY_ATTD_MGT DAM, EMPLOYEE E
+       WHERE BASIC_DAY=#{baseDay}
+        AND DAM.EMP_CODE=E.EMP_CODE
+    ]]>
+    </select>
+
+   <!-- 연장 심야 신청 승인 관리 목록 조회   -->
+   <select id="selectOverNightReportByCondition" parameterType="map" resultMap="overNightReportResult">
+         SELECT O.BASIC_DAY
+         			,O.EMP_NAME
+         			,O.APPROVAL_STATUS
+         			,O.REQUEST_STATUS
+         			,O.TYPE
+         			,O.OVER_NIGHT_SEQ
+         			,O.REQUEST_DATE
+         			,O.FROM_TIME
+         			,O.TO_TIME
+         			,E.EMP_CODE
+         			,0 AS CHK
+         FROM OVER_NIGHT_TIME_MGT O, EMPLOYEE E
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+              O.EMP_CODE=E.EMP_CODE
+            <if test="deptCode !=''">
+                AND E.DEPT_CODE = #{deptCode}
+            </if>
+            <if test="basicDay!=''">
+                AND O.REQUEST_DATE = #{basicDay}
+            </if>
+            <if test="approvalStatus!=''">
+                AND O.APPROVAL_STATUS = #{approvalStatus}
+            </if>
+       </trim>
+    </select>
+    
+
+   <!--  연장 심야 상세 승인 등록   -->
+    <update id="updateApprovalStatus" parameterType="overNightReportTO">
+    <![CDATA[
+         UPDATE OVER_NIGHT_TIME_MGT
+         SET APPROVAL_STATUS='Y'
+         WHERE EMP_CODE=#{empCode}
+         AND BASIC_DAY=#{basicDay}
+    ]]>
+    </update>
+  
+
+    <insert id="insertOverNightReport" parameterType="overNightReportTO">
+    
+    
+    		 <selectKey keyProperty="overNightSeq" resultType="String" order="BEFORE">
+	 
+	           SELECT OVER_NIGHT_SEQ.NEXTVAL FROM DUAL
+	
+		     </selectKey>
+		    
+		     INSERT INTO 
+		            OVER_NIGHT_TIME_MGT
+		     ( EMP_CODE
+              ,BASIC_DAY
+              ,EMP_NAME
+              ,APPROVAL_STATUS
+              ,REQUEST_STATUS
+              ,TYPE
+              ,OVER_NIGHT_SEQ
+              ,REQUEST_DATE
+              ,FROM_TIME
+              ,TO_TIME  
+       		)		
+		    VALUES(
+				 #{empCode}
+				,#{basicDay}
+				,#{empName}
+				,#{approvalStatus}
+				,#{requestStatus}
+				,#{type}
+				,#{overNightSeq}
+				,#{requestDate}
+				,#{fromTime}
+				,#{toTime}
+		    )
+		     
+    </insert>
+   
+    <delete id="deleteOverNightReport" parameterType="overNightReportTO">
+    
+	        DELETE FROM
+	            OVER_NIGHT_TIME_MGT
+	        WHERE
+	            OVER_NIGHT_SEQ = #{overNightSeq} AND
+	            EMP_CODE = #{empCode}
+	   
+    </delete>
+
+
+
+   <!-- 해당년월의 일근태관리테이블의 데이터중 미마감인 day관련 정보를 조회하는 항목 -->
+  
+    <select id="selectUnClosedDailyAttdReport" resultMap="UnClosedDailyAttdReportResult" parameterType="map">
+    <![CDATA[
+		SELECT
+			DISTINCT(BASIC_DAY),
+			DAILY,
+			CLOSE_YN,
+			ATTD_DAY_TYPE
+		FROM
+			DAY_ATTD_MGT
+		WHERE
+			BASIC_DAY like (#{baseYearMonth} || '%')
+		AND
+			CLOSE_YN = 'N'
+			ORDER BY
+			BASIC_DAY
+    ]]>
+    </select>
+ 
+  
+     <!--  월근태관리테이블에서 기준일에 해당하는 데이터를 생성하는 메서드  -->
+    
+  
+   <select id="createMonthAttdReport" statementType="CALLABLE" parameterMap="monthAttdParameter">
+      CALL P_HR_ATTENDANCE.P_CREATE_MONTH_ATTD(?,?,?)
+   </select>
+ 
+ 
+
+    <!-- 월근태 목록 호출 함  --> 
+    <select id="selectDailyAttdReportByYearMonth" resultMap="monthAttdReportResult" parameterType="map">
+    <![CDATA[
+       SELECT          
+          mam.EMP_CODE
+           ,mam.BASIC_YEAR_MONTH
+           ,mam.BASIC_WORK_HOUR
+           ,mam.WORK_HOUR
+           ,mam.OVER_WORK_HOUR
+           ,mam.NIGHT_WORK_HOUR
+           ,mam.BASIC_WORK_DAYS
+           ,mam.WEEKDAY_WORK
+           ,mam.HOLIDAY_WORK_DAYS
+           ,mam.HOLIDAY_WORK_HOUR
+           ,mam.HOLIDAY_OVER_WORK_HOUR
+           ,mam.HOLIDAY_NIGHT_WORK_HOUR
+           ,mam.ABSENT_DAYS
+           ,mam.LATE_DAYS
+           ,mam.LATE_HOUR
+           ,mam.LEAVE_EARLY_DAYS
+           ,mam.LEAVE_DAYS
+           ,mam.CLOSE_YN
+           ,mam.ATTD_REST_DAYS
+           ,e.EMP_NAME
+       FROM
+          MONTH_ATTD_MGT mam,EMPLOYEE e
+       where
+          BASIC_YEAR_MONTH=#{baseYearMonth}
+       AND
+          mam.EMP_CODE=e.EMP_CODE
+    ]]>
+    </select>
+ 
+ 
+  
+   <!-- 월근태 미마감항목 조회에서 일근태/근태외를 미마감한 경우 일괄적으로 처리하는 메서드 -->
+   
+    
+    <update id="updateMonthAttdCloseYN" parameterType="Map">
+ 
+       UPDATE
+          MONTH_ATTD_MGT
+       SET
+          CLOSE_YN=#{closeYn}
+       WHERE
+          BASIC_YEAR_MONTH=#{basicYearMonth}
+          
+         <if test='closeYn =="Y"'>
+       AND 
+          CLOSE_YN='N'
+       </if>
+       
+         <if test='closeYn =="N"'>
+       AND 
+          CLOSE_YN='Y'
+       </if>    
+      
+    </update>
+  
+
+   
+
+
+
+   <!--월근태 마감 내역 조회 -->
+   <select id="selectClosedMonthAttdReport" resultMap="monthAttdReportResult" parameterType="map">
+    <![CDATA[
+       SELECT
+          mam.EMP_CODE
+           ,mam.BASIC_YEAR_MONTH
+           ,mam.BASIC_WORK_HOUR
+           ,mam.WORK_HOUR
+           ,mam.OVER_WORK_HOUR
+           ,mam.NIGHT_WORK_HOUR
+           ,mam.BASIC_WORK_DAYS
+           ,mam.WEEKDAY_WORK
+           ,mam.HOLIDAY_WORK_DAYS
+           ,mam.HOLIDAY_WORK_HOUR
+           ,mam.HOLIDAY_OVER_WORK_HOUR
+           ,mam.HOLIDAY_NIGHT_WORK_HOUR
+           ,mam.ABSENT_DAYS
+           ,mam.LATE_DAYS
+           ,mam.LATE_HOUR
+           ,mam.LEAVE_EARLY_DAYS
+           ,mam.LEAVE_DAYS
+           ,mam.CLOSE_YN
+           ,mam.ATTD_REST_DAYS
+           ,e.EMP_NAME
+       FROM
+          MONTH_ATTD_MGT mam,EMPLOYEE e
+       where
+          BASIC_YEAR_MONTH=#{baseYearMonth}
+       AND
+          mam.EMP_CODE=e.EMP_CODE
+       AND
+          mam.CLOSE_YN='Y'
+    ]]>
+    </select>
+
+  
+
+
+
+</mapper>

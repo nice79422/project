@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_ItemDialog" left="0" top="0" width="473" height="404" titletext="New Form" onload="logi_ItemDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="sys_bisinessPlace_stc" taborder="0" text="품목코드" onclick="Static00_onclick" left="11" top="11" right="41" height="45" style="border:3 solid darkgray ;color:dimgray;font:bold 16 함초롬돋움,돋움;"/>
+        <Grid id="grd_itemDialog" taborder="1" binddataset="ds_item" useinputpanel="false" oncelldblclick="grd_itemDialog_oncelldblclick" left="12" top="77" width="420" height="279">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="60"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="품목코드"/>
+                <Cell col="1" text="품목명"/>
+                <Cell col="2" text="단위"/>
+                <Cell col="3" text="표준단가"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ITEM_CODE"/>
+                <Cell col="1" text="bind:ITEM_NAME"/>
+                <Cell col="2" text="bind:UNIT_OF_STOCK"/>
+                <Cell col="3" text="bind:STANDARD_UNIT_PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_item">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="ITEM_GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="LOSS_RATE" type="STRING" size="256"/>
+          <Column id="LEAD_TIME" type="STRING" size="256"/>
+          <Column id="STANDARD_UNIT_PRICE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.logi_ItemDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+		obj.transaction("findItemList",
+					"dataURL::logi/purchase/findItemList.do",
+					"",
+					"ds_item=ds_item",
+					"",
+					"callback");
+	
+}
+
+
+
+var dialogName="";
+this.grd_itemDialog_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	//dialogName=this.parent.dialogName; 
+
+	var selitemCode = this.ds_item.getColumn(e.row, "ITEM_CODE");
+	
+	var selitemName = this.ds_item.getColumn(e.row, "ITEM_NAME");
+	
+	var selunitOfStock = this.ds_item.getColumn(e.row, "UNIT_OF_STOCK");
+	
+	var selstandardUnitPrice = this.ds_item.getColumn(e.row, "STANDARD_UNIT_PRICE");
+
+	this.close(selitemCode+"/"+selitemName+"/"+selunitOfStock+"/"+selstandardUnitPrice);
+
+}]]></Script>
+  </Form>
+</FDL>

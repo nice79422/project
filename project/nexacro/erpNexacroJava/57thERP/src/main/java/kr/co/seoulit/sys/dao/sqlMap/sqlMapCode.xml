@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.CodeDAO">
+
+<!-- codeDAO -->
+
+	<resultMap type="codeTO" id="codeResult">
+	<result property="code" column="CODE"/>
+	<result property="codeName" column="CODE_NAME"/>
+	<result property="editStatus" column="EDIT_STATUS"/>
+	<result property="codeGroup" column="CODE_GROUP"/>
+
+	</resultMap>
+
+
+ 	<select id="selectCodeList" resultMap="codeResult">
+
+		SELECT CODE,CODE_NAME,EDIT_STATUS,CODE_GROUP
+		FROM CODE ORDER BY CODE
+
+
+	</select>
+
+
+	<select id="takeSerialCode"  parameterType="map" resultType="string" >
+
+		SELECT CASE WHEN
+		<if test="findSeq.equals('WIT_SEQ') ">
+		3>LENGTH(WIT_SEQ.NEXTVAL) THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(WIT_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||WIT_SEQ.CURRVAL END FROM DUAL
+		</if>
+		<if test="findSeq.equals('SERIAL_SEQ') ">
+		3>LENGTH(SERIAL_SEQ.NEXTVAL) THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(SERIAL_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||SERIAL_SEQ.CURRVAL END FROM DUAL
+		</if>
+		<if test="findSeq.equals('PRM_SEQ') ">
+		3>LENGTH(PRM_SEQ.NEXTVAL) THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(PRM_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||PRM_SEQ.CURRVAL END FROM DUAL
+		</if>
+		<if test="findSeq.equals('WH_SEQ') ">
+	 	3>LENGTH(WH_SEQ.NEXTVAL) THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(WH_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||WH_SEQ.CURRVAL END FROM DUAL
+		</if>
+		<if test="findSeq.equals('RWH_SEQ') ">
+	 	3>LENGTH(RWH_SEQ.NEXTVAL) THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(RWH_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||RWH_SEQ.CURRVAL END FROM DUAL
+		</if>
+		<if test="findSeq.equals('ESTI_SEQ') ">
+	 	3>LENGTH(ESTI_SEQ.NEXTVAL) THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(ESTI_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||ESTI_SEQ.CURRVAL END FROM DUAL
+		</if>
+		<if test="findSeq.equals('MPS_SEQ') ">
+		<![CDATA[
+	 	LENGTH(MPS_SEQ.NEXTVAL)<3 THEN TO_CHAR(SYSDATE,'YYMMDD')||'-'||LPAD(MPS_SEQ.CURRVAL,2,0) ELSE TO_CHAR(SYSDATE,'YYMMDD')||'-'||MPS_SEQ.CURRVAL END FROM DUAL
+		 ]]>
+		</if>
+
+	</select> 
+
+	<select id="takeSerialCodeTest"  parameterType="map" resultType="string" >
+
+		select case when
+		<if test="findSeq.equals('WIT_SEQ')" >
+		3>length(WIT_SEQ.NEXTVAL) then to_char(sysdate,'yymmdd')||'-'||lpad(WIT_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||WIT_SEQ.currval end from dual
+		</if>
+		<if test="findSeq.equals('SERIAL_SEQ')" >
+		3>length(SERIAL_SEQ.NEXTVAL) then to_char(sysdate,'yymmdd')||'-'||lpad(SERIAL_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||SERIAL_SEQ.currval end from dual
+		</if>
+		<if test="findSeq.equals('PRM_SEQ')" >
+		3>length(PRM_SEQ.NEXTVAL) then to_char(sysdate,'yymmdd')||'-'||lpad(PRM_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||PRM_SEQ.currval end from dual
+		</if>
+		<if test="findSeq.equals('WH_SEQ')" >
+	 	3>length(WH_SEQ.NEXTVAL) then to_char(sysdate,'yymmdd')||'-'||lpad(WH_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||WH_SEQ.currval end from dual
+		</if>
+		<if test="findSeq.equals('RWH_SEQ')" >
+	 	3>length(RWH_SEQ.NEXTVAL) then to_char(sysdate,'yymmdd')||'-'||lpad(RWH_SEQ.currval,2,0) else to_char(sysdate,'yymmdd')||'-'||RWH_SEQ.currval end from dual
+		</if>
+	</select>
+
+
+</mapper>

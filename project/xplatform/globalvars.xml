@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GlobalVariables>
+  <Dataset id="ds_dept" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+    <ColumnInfo>
+      <Column id="DEPT_CODE" type="STRING" size="256"/>
+      <Column id="DEPT_NAME" type="STRING" size="256"/>
+      <Column id="DEPT_TEL" type="STRING" size="256"/>
+      <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_company">
+    <ColumnInfo>
+      <Column id="COMPANY_CODE" type="STRING" size="256"/>
+      <Column id="COMPANY_NAME" type="STRING" size="256"/>
+      <Column id="COMPANY_DIVISION" type="STRING" size="256"/>
+      <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="CORPORATION_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="COMPANY_CEO_NAME" type="STRING" size="256"/>
+      <Column id="COMPANY_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+      <Column id="COMPANY_BUSINESS_ITEMS" type="STRING" size="256"/>
+      <Column id="COMPANY_ZIP_CODE" type="STRING" size="256"/>
+      <Column id="COMPANY_BASIC_ADDRESS" type="STRING" size="256"/>
+      <Column id="COMPANY_DETAIL_ADDRESS" type="STRING" size="256"/>
+      <Column id="COMPANY_TEL_NUMBER" type="STRING" size="256"/>
+      <Column id="COMPANY_FAX_NUMBER" type="STRING" size="256"/>
+      <Column id="COMPANY_ESTABLISHMENT_DATE" type="STRING" size="256"/>
+      <Column id="COMPANY_OPEN_DATE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_businessPlace">
+    <ColumnInfo>
+      <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+      <Column id="BUSINESS_PLACE_NAME" type="STRING" size="256"/>
+      <Column id="BUSINESS_PLACE_TEL" type="STRING" size="256"/>
+      <Column id="COMPANY_CODE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_employee">
+    <ColumnInfo>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+      <Column id="PASSWORD" type="STRING" size="256"/>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+      <Column id="DEPT_CODE" type="STRING" size="256"/>
+      <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_menu">
+    <ColumnInfo>
+      <Column id="LEVEL" type="STRING" size="256"/>
+      <Column id="USING_STATUS" type="STRING" size="256"/>
+      <Column id="MENU_URL" type="STRING" size="256"/>
+      <Column id="SUPER_MENU_CODE" type="STRING" size="256"/>
+      <Column id="MENU_NAME" type="STRING" size="256"/>
+      <Column id="MENU_CODE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_menuAuthority">
+    <ColumnInfo>
+      <Column id="MENU_CODE" type="STRING" size="256"/>
+      <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+      <Column id="MENU_NAME" type="STRING" size="256"/>
+      <Column id="AUTHORITY_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_authorityCombo">
+    <ColumnInfo>
+      <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+      <Column id="AUTHORITY_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_authority">
+    <ColumnInfo>
+      <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+      <Column id="AUTHORITY_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_code">
+    <ColumnInfo>
+      <Column id="CODE" type="STRING" size="256"/>
+      <Column id="CODE_NAME" type="STRING" size="256"/>
+      <Column id="USING_STATUS" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_detailCode">
+    <ColumnInfo>
+      <Column id="CODE" type="STRING" size="256"/>
+      <Column id="DETAIL_CODE" type="STRING" size="256"/>
+      <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+      <Column id="USING_STATUS" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_position">
+    <ColumnInfo>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="POSITION_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_annual">
+    <ColumnInfo>
+      <Column id="STANDARD_YEAR" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="USED_DAYS" type="STRING" size="256"/>
+      <Column id="REST_DAYS" type="STRING" size="256"/>
+      <Column id="USABLE_DAYS" type="STRING" size="256"/>
+      <Column id="LENGTH_OF_SERVICE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_dayAnnual">
+    <ColumnInfo>
+      <Column id="DAY_ANNUAL_SEQ" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="START_DATE" type="STRING" size="256"/>
+      <Column id="END_DATE" type="STRING" size="256"/>
+      <Column id="CAUSE_CODE" type="STRING" size="256"/>
+      <Column id="DETAIL_CAUSE" type="STRING" size="256"/>
+      <Column id="STANDARD_YEAR" type="STRING" size="256"/>
+      <Column id="ANNUAL_CODE" type="STRING" size="256"/>
+      <Column id="DAYS" type="STRING" size="256"/>
+      <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_dailyAttd">
+    <ColumnInfo>
+      <Column id="DAY_ATTD_SEQ" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="BASIC_DAY" type="STRING" size="256"/>
+      <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="TIME" type="STRING" size="256"/>
+      <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      <Column id="COST" type="STRING" size="256"/>
+      <Column id="CAUSE" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_dailyAttdRest">
+    <ColumnInfo>
+      <Column id="ATTD_REST_SEQ" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="ATTD_REST_CODE" type="STRING" size="256"/>
+      <Column id="REQUEST_DATE" type="STRING" size="256"/>
+      <Column id="START_DATE" type="STRING" size="256"/>
+      <Column id="END_DATE" type="STRING" size="256"/>
+      <Column id="DAYS" type="STRING" size="256"/>
+      <Column id="COST" type="STRING" size="256"/>
+      <Column id="CAUSE" type="STRING" size="256"/>
+      <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+      <Column id="OTHER_SUDANG" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_overNight">
+    <ColumnInfo>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="BASIC_DAY" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+      <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      <Column id="REQUEST_STATUS" type="STRING" size="256"/>
+      <Column id="TYPE" type="STRING" size="256"/>
+      <Column id="OVER_NIGHT_SEQ" type="STRING" size="256"/>
+      <Column id="REQUEST_DATE" type="STRING" size="256"/>
+      <Column id="FROM_TIME" type="STRING" size="256"/>
+      <Column id="TO_TIME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_approval">
+    <ColumnInfo>
+      <Column id="CODE" type="STRING" size="256"/>
+      <Column id="VALUE" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="CODE">Y</Col>
+        <Col id="VALUE">승인</Col>
+      </Row>
+      <Row>
+        <Col id="CODE">N</Col>
+        <Col id="VALUE">미승인</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="ds_dailyAttdManage">
+    <ColumnInfo>
+      <Column id="DAY_ATTD_SEQ" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="BASIC_DAY" type="STRING" size="256"/>
+      <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="TIME" type="STRING" size="256"/>
+      <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      <Column id="COST" type="STRING" size="256"/>
+      <Column id="CAUSE" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_dailyAttdRestManage">
+    <ColumnInfo>
+      <Column id="ATTD_REST_SEQ" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="ATTD_REST_CODE" type="STRING" size="256"/>
+      <Column id="REQUEST_DATE" type="STRING" size="256"/>
+      <Column id="START_DATE" type="STRING" size="256"/>
+      <Column id="END_DATE" type="STRING" size="256"/>
+      <Column id="DAYS" type="STRING" size="256"/>
+      <Column id="COST" type="STRING" size="256"/>
+      <Column id="CAUSE" type="STRING" size="256"/>
+      <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+      <Column id="OTHER_SUDANG" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_dailyAttdReport">
+    <ColumnInfo>
+      <Column id="BASIC_DAY" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="DAILY" type="STRING" size="256"/>
+      <Column id="ATTEND_TIME" type="STRING" size="256"/>
+      <Column id="ATTEND_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="QUIT_TIME" type="STRING" size="256"/>
+      <Column id="QUIT_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="LEAVE_TIME" type="STRING" size="256"/>
+      <Column id="RETURN_TIME" type="STRING" size="256"/>
+      <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+      <Column id="WORK_HOUR" type="STRING" size="256"/>
+      <Column id="LATE_HOUR" type="STRING" size="256"/>
+      <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="CLOSE_YN" type="STRING" size="256"/>
+      <Column id="ATTD_DAY_TYPE" type="STRING" size="256"/>
+      <Column id="EARLY_LEAVE_TIME" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_etcSal">
+    <ColumnInfo>
+      <Column id="ETC_SAL_CODE" type="STRING" size="256"/>
+      <Column id="ETC_SAL_NAME" type="STRING" size="256"/>
+      <Column id="ETC_SAL_PRICE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_overtimeSal">
+    <ColumnInfo>
+      <Column id="OVERTIME_SAL_CODE" type="STRING" size="256"/>
+      <Column id="OVERTIME_SAL_NAME" type="STRING" size="256"/>
+      <Column id="OVERTIME_SAL_RATE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_unCloseDailyAttd">
+    <ColumnInfo>
+      <Column id="BASIC_DAY" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="DAILY" type="STRING" size="256"/>
+      <Column id="ATTEND_TIME" type="STRING" size="256"/>
+      <Column id="ATTEND_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="QUIT_TIME" type="STRING" size="256"/>
+      <Column id="QUIT_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="LEAVE_TIME" type="STRING" size="256"/>
+      <Column id="RETURN_TIME" type="STRING" size="256"/>
+      <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+      <Column id="WORK_HOUR" type="STRING" size="256"/>
+      <Column id="LATE_HOUR" type="STRING" size="256"/>
+      <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="CLOSE_YN" type="STRING" size="256"/>
+      <Column id="ATTD_DAY_TYPE" type="STRING" size="256"/>
+      <Column id="EARLY_LEAVE_TIME" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_baseYear">
+    <ColumnInfo>
+      <Column id="YEAR" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="YEAR">2018</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2019</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2020</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2021</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2022</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2023</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2024</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2025</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2026</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2027</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2028</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2029</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2030</Col>
+      </Row>
+      <Row>
+        <Col id="YEAR">2031</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="ds_baseWorkTime">
+    <ColumnInfo>
+      <Column id="APPLY_YEAR" type="STRING" size="256"/>
+      <Column id="ATTEND_TIME" type="STRING" size="256"/>
+      <Column id="QUIT_TIME" type="STRING" size="256"/>
+      <Column id="OVER_TIME" type="STRING" size="256"/>
+      <Column id="NIGHT_TIME" type="STRING" size="256"/>
+      <Column id="LUNCH_START_TIME" type="STRING" size="256"/>
+      <Column id="LUNCH_END_TIME" type="STRING" size="256"/>
+      <Column id="DINNER_START_TIME" type="STRING" size="256"/>
+      <Column id="DINNER_END_TIME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_deductionTax">
+    <ColumnInfo>
+      <Column id="INPUTED_YEAR" type="STRING" size="256"/>
+      <Column id="HEALTH_INSUR_RATE" type="STRING" size="256"/>
+      <Column id="NATIONAL_PEN_RATE" type="STRING" size="256"/>
+      <Column id="LONG_TERM_CARE_RATE" type="STRING" size="256"/>
+      <Column id="EMPLOYEEMENT_INSUR_RATE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_incomeTax">
+    <ColumnInfo>
+      <Column id="INCOME_TAX_RATE" type="STRING" size="256"/>
+      <Column id="INPUTED_YEAR" type="STRING" size="256"/>
+      <Column id="LOW_SAL" type="STRING" size="256"/>
+      <Column id="HIGH_SAL" type="STRING" size="256"/>
+      <Column id="PROGRESSIVE_DEDUCTION" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_hobong">
+    <ColumnInfo>
+      <Column id="HOBONG" type="STRING" size="256"/>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="BASE_SAL" type="STRING" size="256"/>
+      <Column id="BONUS" type="STRING" size="256"/>
+      <Column id="SIGUB" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_holiday">
+    <ColumnInfo>
+      <Column id="BASIC_DAY" type="STRING" size="256"/>
+      <Column id="HOLIDAY_NAME" type="STRING" size="256"/>
+      <Column id="NOTE" type="STRING" size="256"/>
+      <Column id="HOLIDAY_TYPE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_baseMonth">
+    <ColumnInfo>
+      <Column id="MONTH" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="MONTH">01</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">02</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">03</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">04</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">05</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">06</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">07</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">08</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">09</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">10</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">11</Col>
+      </Row>
+      <Row>
+        <Col id="MONTH">12</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Dataset id="ds_salaryInput">
+    <ColumnInfo>
+      <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="SALARY_TYPE_CODE" type="STRING" size="256"/>
+      <Column id="TOTAL_SALARY" type="STRING" size="256"/>
+      <Column id="TOTAL_DEDUCTION_PRICE" type="STRING" size="256"/>
+      <Column id="DEPT_CODE" type="STRING" size="256"/>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="HIRE_DATE" type="STRING" size="256"/>
+      <Column id="RETIRE_DATE" type="STRING" size="256"/>
+      <Column id="CHINE_PAYMENTS" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_payDeduction">
+    <ColumnInfo>
+      <Column id="PAY_DEDUCTION_SEQ" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+      <Column id="PRICE" type="STRING" size="256"/>
+      <Column id="PAY_DEDUCTION_ITEM_CODE" type="STRING" size="256"/>
+      <Column id="PAY_DEDUCTION_ITEM_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_post">
+    <ColumnInfo>
+      <Column id="ZIP_NO" type="STRING" size="256"/>
+      <Column id="LNM_ADRES" type="STRING" size="256"/>
+      <Column id="RN_ADRES" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_employeeList">
+    <ColumnInfo>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+      <Column id="PASSWORD" type="STRING" size="256"/>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+      <Column id="DEPT_CODE" type="STRING" size="256"/>
+      <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Variable id="g_authorityCode"/>
+  <Variable id="g_businessCode"/>
+  <Variable id="g_deptCode"/>
+  <Variable id="g_positionCode"/>
+  <Variable id="g_empCode"/>
+  <Variable id="g_empName"/>
+  <Dataset id="ds_dailyAttdType">
+    <ColumnInfo>
+      <Column id="DETAIL_CODE" type="STRING" size="256"/>
+      <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Variable id="g_deptName"/>
+  <Variable id="g_today"/>
+  <Variable id="g_basicDay"/>
+  <Dataset id="ds_monthAttdReport">
+    <ColumnInfo>
+      <Column id="BASIC_YEAR_MONTH" type="STRING" size="256"/>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="BASIC_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="WORK_HOUR" type="STRING" size="256"/>
+      <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="BASIC_WORK_DAYS" type="STRING" size="256"/>
+      <Column id="WEEKDAY_WORK" type="STRING" size="256"/>
+      <Column id="HOLIDAY_WORK_DAYS" type="STRING" size="256"/>
+      <Column id="HOLIDAY_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="HOLIDAY_OVER_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="HOLIDAY_NIGHT_WORK_HOUR" type="STRING" size="256"/>
+      <Column id="ABSENT_DAYS" type="STRING" size="256"/>
+      <Column id="LATE_DAYS" type="STRING" size="256"/>
+      <Column id="LATE_HOUR" type="STRING" size="256"/>
+      <Column id="LEAVE_EARLY_DAYS" type="STRING" size="256"/>
+      <Column id="LEAVE_DAYS" type="STRING" size="256"/>
+      <Column id="CLOSE_YN" type="STRING" size="256"/>
+      <Column id="ATTD_REST_DAYS" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_close">
+    <ColumnInfo>
+      <Column id="CODE" type="STRING" size="256"/>
+      <Column id="VALUE" type="STRING" size="256"/>
+    </ColumnInfo>
+    <Rows>
+      <Row>
+        <Col id="CODE">Y</Col>
+        <Col id="VALUE">마감</Col>
+      </Row>
+      <Row>
+        <Col id="CODE">N</Col>
+        <Col id="VALUE">미마감</Col>
+      </Row>
+    </Rows>
+  </Dataset>
+  <Variable id="g_baseYearMonth"/>
+  <Variable id="g_education"/>
+  <Dataset id="ds_dust">
+    <ColumnInfo>
+      <Column id="STATION_NAME" type="STRING" size="256"/>
+      <Column id="DATA_TIME" type="STRING" size="256"/>
+      <Column id="PM10GRADE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="ds_email">
+    <ColumnInfo>
+      <Column id="S_EMP_CODE" type="STRING" size="256"/>
+      <Column id="S_EMAIL" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+</GlobalVariables>

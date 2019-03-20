@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="mainForm" left="0" top="0" width="1440" height="900" onload="mainForm_onload">
+    <Layouts>
+      <Layout width="1440" height="900"/>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+메인 화면                                             						                                                                         
+@Path		공통              				   				
+@Description	메인화면							
+@Author	  	심승현				    			                        								                                            
+@Create           2019. 01. 31.                             		                    				                                            
+********************************************************************************/
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="companyRegistrationForm" classname="companyRegistrationForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" style="background:gainsboro;color:black;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="회사 상세 정보" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold;"/>
+        <Static id="Static03" text="회 사 명" enable="false" enableevent="false" position2="absolute l:108 w:245 t:133 h:49" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold; :disabled {background:silver;color:black;font:휴먼엑스포,14,bold;}"/>
+        <Static id="Static02" text="사업장 소재지" enable="false" enableevent="false" position2="absolute l:108 w:245 t:279 h:49" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold; :disabled {background:silver;color:black;font:휴먼엑스포,14,bold;}"/>
+        <Static id="Static04" text="대 표 자 명" enable="false" enableevent="false" position2="absolute l:108 w:245 t:206 h:49" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold; :disabled {background:silver;color:black;font:휴먼엑스포,14,bold;}"/>
+        <Static id="Static05" text="사업자 등록번호" enable="false" enableevent="false" position2="absolute l:108 w:245 t:352 h:49" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold; :disabled {background:silver;color:black;font:휴먼엑스포,14,bold;}"/>
+        <Static id="Static06" text="회사 창립일" enable="false" enableevent="false" position2="absolute l:108 w:245 t:425 h:49" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold; :disabled {background:silver;color:black;font:휴먼엑스포,14,bold;}"/>
+        <Static id="Static07" text="사업 구분" enable="false" enableevent="false" position2="absolute l:108 w:245 t:498 h:49" positiontype="position2" style="background:silver;color:black;align:center middle;font:Ink Free,18,bold; :disabled {background:silver;color:black;font:휴먼엑스포,14,bold;}"/>
+        <GroupBox id="GroupBox01" position2="absolute l:384 w:479 t:133 h:49" positiontype="position2" style="background:gainsboro;color:#f24a00ff;font:휴먼엑스포,18,bold;"/>
+        <GroupBox id="GroupBox02" position2="absolute l:385 w:479 t:206 h:49" positiontype="position2" style="background:gainsboro;font:Ink Free,18,bold;"/>
+        <GroupBox id="GroupBox03" position2="absolute l:384 w:479 t:279 h:49" positiontype="position2" style="background:gainsboro;font:Ink Free,18,bold;"/>
+        <GroupBox id="GroupBox04" position2="absolute l:384 w:479 t:352 h:49" positiontype="position2" style="background:gainsboro;font:Ink Free,18,bold;"/>
+        <GroupBox id="GroupBox05" position2="absolute l:384 w:479 t:425 h:49" positiontype="position2" style="background:gainsboro;font:Ink Free,18,bold;"/>
+        <GroupBox id="GroupBox06" position2="absolute l:385 w:479 t:498 h:49" positiontype="position2" style="background:gainsboro;font:Ink Free,18,bold;"/>
+        <Static id="Static13" text="음반 제작,유통" position2="absolute l:425 w:399 t:502 h:39" positiontype="position2" style="background:gainsboro;color:black;align:center middle;font:휴먼엑스포,18,bold;"/>
+        <Static id="Static12" text="2019.1.1" position2="absolute l:425 w:399 t:430 h:39" positiontype="position2" style="background:gainsboro;color:black;align:center middle;font:휴먼엑스포,18,bold;"/>
+        <Static id="Static11" text="7541 - 02 - 01795" position2="absolute l:425 w:399 t:358 h:39" positiontype="position2" style="background:gainsboro;color:black;align:center middle;font:휴먼엑스포,18,bold;"/>
+        <Static id="Static10" text="경남 진주시 가좌동 혜람빌딩 5층" position2="absolute l:424 w:399 t:284 h:39" positiontype="position2" style="background:gainsboro;color:black;align:center middle;font:휴먼엑스포,18,bold;"/>
+        <Static id="Static08" text="강 순 용" position2="absolute l:424 w:399 t:210 h:39" positiontype="position2" style="background:gainsboro;color:black;align:center middle;font:휴먼엑스포,18,bold;"/>
+        <Static id="Static09" text="SY Company" position2="absolute l:424 w:399 t:138 h:39" positiontype="position2" style="background:gainsboro;color:black;align:center middle;font:휴먼 엑스포,18,bold antialias;"/>
+        <Static id="Static01" position2="absolute l:80 w:818 t:104 h:471" positiontype="position2" style="border:2px solid black ;"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

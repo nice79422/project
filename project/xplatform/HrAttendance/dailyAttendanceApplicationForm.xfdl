@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="dailyAttendanceApplicationForm" classname="dailyAttendanceApplicationForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" style="background:gainsboro; :focused {border:2 dashed #ccccccff white;}" onload="dailyAttendanceApplicationForm_onload" ontimer="setTime">
+    <Layouts>
+      <Layout>
+        <Static id="Static08" position2="absolute l:13 w:391 t:85 h:550" positiontype="position2" style="background:gainsboro;border:1px solid black ;opacity:50;" onclick="Static08_onclick"/>
+        <Static id="Static04" text="기준일" position2="absolute l:39 w:98 t:137 h:40" positiontype="position2" style="background:silver;color:white;align:center middle;font:맑은 고딕,12,bold;"/>
+        <Button id="clockInsertBtn" taborder="1" text="시간입력" position2="absolute l:45 w:88 t:279 h:42" positiontype="position2" style="background:silver;color:white;font:맑은 고딕,12,bold;" onclick="clockInsertBtn_onclick"/>
+        <Button id="searchBtn" taborder="2" text="조회" position2="absolute l:872 w:56 t:81 h:40" positiontype="position2" style="background:silver;color:white;font:Verdana,11,bold;" onclick="searchBtn_onclick"/>
+        <Static id="Static05" text="근태구분" position2="absolute l:40 w:98 t:357 h:40" positiontype="position2" onclick="Static05_onclick" style="background:silver;color:white;align:center middle;font:맑은 고딕,12,bold;"/>
+        <Static id="Static06" text="기타수당" onclick="Static05_onclick" position2="absolute l:40 w:98 t:429 h:40" positiontype="position2" style="background:silver;color:white;align:center middle;font:맑은 고딕,12,bold;"/>
+        <Static id="Static07" text="신청사유" onclick="Static05_onclick" position2="absolute l:40 w:98 t:501 h:40" positiontype="position2" style="background:silver;color:white;align:center middle;font:맑은 고딕,12,bold;"/>
+        <Grid id="DayAttdGrid" taborder="3" useinputpanel="false" position2="absolute l:428 w:512 t:144 h:490" positiontype="position2" binddataset="ds_dailyAttd" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="127"/>
+                <Column size="110"/>
+                <Column size="93"/>
+                <Column size="125"/>
+                <Column size="109"/>
+                <Column size="97"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" text="사원코드"/>
+                <Cell col="1" displaytype="normal" text="기준일"/>
+                <Cell col="2" displaytype="normal" text="근태구분"/>
+                <Cell col="3" displaytype="normal" text="시간"/>
+                <Cell col="4" displaytype="normal" text="승인상태"/>
+                <Cell col="5" displaytype="normal" text="금액"/>
+                <Cell col="6" displaytype="normal" text="신청사유"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" text="bind:EMP_CODE"/>
+                <Cell col="1" displaytype="normal" text="bind:BASIC_DAY" mask="####-##-##"/>
+                <Cell col="2" displaytype="combo" text="bind:ATTD_TYPE_CODE" combodataset="ds_dailyAttdType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" displaytype="normal" text="bind:TIME" mask="##:##"/>
+                <Cell col="4" displaytype="normal" text="bind:APPROVAL_STATUS"/>
+                <Cell col="5" displaytype="normal" text="bind:COST"/>
+                <Cell col="6" displaytype="normal" text="bind:CAUSE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" text="시간" position2="absolute l:40 w:98 t:212 h:40" positiontype="position2" style="background:silver;color:white;align:center middle;font:맑은 고딕,12,bold;"/>
+        <Calendar id="basicDate" taborder="4" position2="absolute l:146 w:209 t:138 h:38" positiontype="position2"/>
+        <Edit id="clock" taborder="5" position2="absolute l:146 w:209 t:214 h:40" positiontype="position2"/>
+        <Edit id="cause" taborder="6" position2="absolute l:146 w:209 t:502 h:38" positiontype="position2"/>
+        <MaskEdit id="currentTime" taborder="7" position2="absolute l:146 w:209 t:279 h:42" positiontype="position2" enable="false" mask="##:##" displaynulltext="24시간제로 입력하세요" type="string" style="align:center middle;"/>
+        <Combo id="attendanceType" taborder="8" position2="absolute l:146 w:209 t:359 h:37" positiontype="position2" index="-1" innerdataset="@ds_dailyAttdType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME"/>
+        <Combo id="etcSal" taborder="9" position2="absolute l:146 w:209 t:429 h:39" positiontype="position2" index="-1" innerdataset="@ds_etcSal" codecolumn="ETC_SAL_CODE" datacolumn="ETC_SAL_NAME"/>
+        <Static id="Static02" text="조회기간" position2="absolute l:416 w:75 t:81 h:40" positiontype="position2" style="font:Verdana,11,bold;"/>
+        <Calendar id="fromDate" taborder="10" position2="absolute l:507 w:134 t:81 h:40" positiontype="position2" dateformat="yyyy-MM-dd" value="null"/>
+        <Calendar id="toDate" taborder="11" position2="absolute l:684 w:134 t:81 h:40" positiontype="position2" dateformat="yyyy-MM-dd"/>
+        <Static id="Static03" text="~" position2="absolute l:654 w:23 t:81 h:40" positiontype="position2" style="font:Verdana,11,bold;"/>
+        <Button id="applicationBtn" taborder="12" text="신청" position2="absolute l:266 w:89 t:560 h:35" positiontype="position2" style="background:silver;color:white;font:맑은 고딕,12,bold;" onclick="applicationBtn_onclick"/>
+        <Static id="Static11" text="일 근태 신청" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript4.0"><![CDATA[var today;
+function dailyAttendanceApplicationForm_onload(obj:Form, e:LoadEventInfo)
+{     
+         ds_dailyAttd.clearData();
+      
+    today=new Date().toFormatString("%Y%m%d");   
+      basicDate.value=today;
+
+     setTimer(setTime(),1000);
+     
+        transaction("findCodeList","svcBase::findCodeList.do","","ds_code=dsCode ds_detailCode=dsDetailCode","","callback",false);
+       
+        ds_detailCode.filter("DETAIL_CODE=='ADC001' ||DETAIL_CODE=='ADC002'||DETAIL_CODE=='ADC003'||DETAIL_CODE=='ADC004'");
+        ds_dailyAttdType.copyData(ds_detailCode,true);
+       
+        
+        transaction("findSalaryList","svcBase::findSalaryList.do?","","ds_etcSal=dsEtcSal","","callback",false);
+        ds_etcSal.filter("String(ETC_SAL_CODE).substr(0,3) == 'ETS'");
+      
+    
+         
+         transaction(
+     "findDailyAttdList",
+      "svcHrAttendance::findDailyAttdList.do",
+      "",
+      "ds_dailyAttd=dsDailyAttd",
+      "empCode="+g_empCode+" fromDate="+basicDate.value+" toDate="+basicDate.value,
+      "dayAttdCallback",
+      false
+        );
+        
+     
+}
+
+function setTime(){  //시계
+
+var date="'"+new Date()+"'";
+clock.value=date.substr(16,10).trim(" ");
+
+//clock.value=date.toFormatString("%H%M%S");
+
+}
+
+
+var flag;
+
+function clockInsertBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+     if(g_authorityCode=="GENERAL"){
+      alert("일반사용자는 사용하실 수 없습니다");
+      }
+     else{
+       
+       flag++;
+     
+       if(flag==1){
+          currentTime.enable=false;
+          clock.enable=true;
+          flag=-1;    
+       }else{
+          currentTime.enable=true;
+          clock.enable=false;
+          flag=0;
+       }
+
+   }
+}
+
+
+
+function searchBtn_onclick(obj:Button,  e:ClickEventInfo)  //조회버튼
+{
+   var v_fromDate=fromDate.value;
+   var v_toDate=toDate.value;
+   
+     
+   if(v_fromDate==null || v_toDate==null){
+      alert("값이 입력 되지 않았습니다.");
+   }else if(v_fromDate>v_toDate){
+      alert("조회기간이 잘못 입력 되었습니다.");
+   }else{
+      
+      transaction(
+      "findDailyAttdList",
+      "svcHrAttendance::findDailyAttdList.do",
+      "",
+      "ds_dailyAttd=dsDailyAttd",
+      "empCode='"+g_empCode + "' fromDate='"+v_fromDate+"' toDate='"+v_toDate+"'",
+      "dayAttdCallback"
+      ,false
+        );
+   
+      if(ds_dailyAttd.getRowCount()==0)
+         alert("조회할 목록이 없습니다. ");
+   }   
+}
+
+
+
+
+function applicationBtn_onclick(obj:Button,  e:ClickEventInfo)
+{   
+    
+   var empCode=g_empCode;
+   var empName=g_empName;
+   var v_basicDate=basicDate.value;
+   var clockText=clock.value.split(":",3);
+   var hrmm=clockText[0]+clockText[1] //시간 분
+   var price="";
+   var attdTime="";
+   var approvalStatus='Y';
+  
+   if(etcSal.value != null){
+
+      ds_etcSal.filter("ETC_SAL_CODE=='"+etcSal.value+"'");
+      price=ds_etcSal.getColumn(0,"ETC_SAL_PRICE");   
+
+
+   }else{
+      price=0;
+   }
+   
+   if(cause.text == ""){
+      cause.value="cause";
+   }
+   
+   if(currentTime.value!=null){
+       attdTime=currentTime.value;
+      }
+   else{
+       attdTime=hrmm;  
+                   }
+                   
+    if(attendanceType.value=="ADC002" && parseInt(attdTime)==2400){
+       alert("자정시간입력은 익일00:00 시로 해주세요.");
+       return;
+   }
+
+        transaction(
+      "findDailyAttdList",
+      "svcHrAttendance::findDailyAttdList.do",
+      "",
+      "ds_dailyAttd=dsDailyAttd",
+      "empCode='"+g_empCode + "' fromDate='"+v_basicDate+"' toDate='"+v_basicDate+"'",
+      "dayAttdCallback",
+      false
+        );
+   
+   for(var i=0; i<ds_dailyAttd.getRowCount(); i++){
+   if(attendanceType.value=="ADC001" && ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC001")
+     {   
+       alert("출근기록이 있습니다");
+       return;
+     }
+    else if(attendanceType.value=="ADC002" && ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC002" && parseInt(ds_dailyAttd.getColumn(i,"TIME"))>=0900 && attdTime>=0900)
+    { 
+       alert("퇴근기록이 있습니다");
+       return;
+    }  
+    else if(attendanceType.value=="ADC003" && ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC003")
+    {
+       alert("외출은 한번만 허용합니다");
+       return;
+    
+    } 
+    else if(attendanceType.value=="ADC004" && ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC004"){
+       alert("이미 귀사하였습니다");
+          return;
+    }
+     
+     } //for문 종료
+     
+
+
+   if(v_basicDate==null || attendanceType.value==null || attdTime==""){
+      alert("기준일, 시간, 근태형태를 입력하세요  ");
+   }else{
+          alert("신청하시겠습니까 전 "+v_basicDate);
+      if(confirm(" 신청 하시겠습니까? ")){
+      
+         ds_dailyAttd.addRow();   
+          
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"EMP_CODE",g_empCode);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"BASIC_DAY",v_basicDate);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"ATTD_TYPE_CODE",attendanceType.value);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"TIME",attdTime);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"COST",price);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"CAUSE",cause.text);   
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"APPROVAL_STATUS",approvalStatus);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"DAY_ATTD_SEQ",approvalStatus);
+         ds_dailyAttd.setColumn(ds_dailyAttd.rowposition,"EMP_NAME",g_empName);
+        
+
+
+         transaction(
+            "addDailyAttd",
+            "svcHrAttendance::addDailyAttd.do", 
+            "dsDailyAttd=ds_dailyAttd:u", // 입력한 값만 날라간다.
+            "ds_dailyAttd=dsDailyAttd", // 받아온 값
+            "",
+            "callback",
+            false
+         );   
+            
+   
+
+      }
+   }
+      
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   if(trid=="addDailyAttd"){
+      if(ErrorCode!=0){
+         alert(" callback_ErrorCode!=0 ");
+      }else{
+         alert(ErrorMsg);
+         reload();
+      }
+   }
+}
+]]></Script>
+  </Form>
+</FDL>

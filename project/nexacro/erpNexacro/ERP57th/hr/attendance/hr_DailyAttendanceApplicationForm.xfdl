@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_DailyAttendanceApplicationForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="hr_DailyAttendanceApplicationForm_onload" style="background:#f7f2eaff;" ontimer="hr_DailyAttendanceApplicationForm_ontimer">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="Static00" taborder="0" text="일근태신청" left="0.59%" top="9" right="0.76%" height="45"/>
+        <Static id="Static01" taborder="1" text="조회기간" left="3.46%" top="81" right="88.35%" height="40"/>
+        <Calendar id="fromDate_cal" taborder="2" left="12.49%" top="81" right="76.12%" height="40"/>
+        <Static id="Static02" taborder="3" text="~" left="24.56%" top="81" right="71.98%" height="40"/>
+        <Calendar id="toDate_cal" taborder="4" left="28.95%" top="81" right="59.75%" height="40"/>
+        <Button id="search_btn" taborder="5" text="조회" left="41.43%" top="81" right="52.15%" height="40" onclick="search_btn_onclick"/>
+        <Grid id="dailyAttd_grid" taborder="6" useinputpanel="false" left="2.7%" top="134" right="41.77%" height="616" binddataset="ds_dailyAttd" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원코드"/>
+                <Cell col="1" text="기준일"/>
+                <Cell col="2" text="근태구분"/>
+                <Cell col="3" text="시간"/>
+                <Cell col="4" text="금액"/>
+                <Cell col="5" text="신청사유"/>
+                <Cell col="6" text="승인상태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:BASIC_DAY" mask="####-##-##"/>
+                <Cell col="2" displaytype="combo" text="bind:ATTD_TYPE_CODE" combodataset="ds_dailyAttdType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" displaytype="date" edittype="expr:APPROVAL_STATUS=='Y'?'none':'normal'" text="bind:TIME" mask="HH:mm" maskchar="0"/>
+                <Cell col="4" text="bind:COST"/>
+                <Cell col="5" edittype="expr:APPROVAL_STATUS=='Y'?'none':'normal'" text="bind:CAUSE"/>
+                <Cell col="6" text="bind:APPROVAL_STATUS"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static03" taborder="7" text="기준일" left="63.63%" top="162" right="27%" height="50"/>
+        <Static id="Static04" taborder="8" text="시간" left="63.63%" top="274" right="27%" height="50"/>
+        <Static id="Static06" taborder="10" text="근태구분" left="63.63%" top="418" right="27%" height="50"/>
+        <Static id="Static07" taborder="11" text="기타수당" left="63.63%" top="490" right="27%" height="50"/>
+        <Static id="Static08" taborder="12" text="신청사유" left="63.63%" top="562" right="27%" height="50"/>
+        <Calendar id="basicDate_cal" taborder="13" left="74.51%" top="162" right="4.64%" height="50"/>
+        <Edit id="clock_edt" taborder="14" left="74.51%" top="274" right="4.64%" height="50" enable="true"/>
+        <Edit id="cause_edt" taborder="15" left="74.51%" top="562" right="4.64%" height="50"/>
+        <Combo id="attType_combo" taborder="16" left="74.51%" top="419" right="4.64%" height="50" innerdataset="@ds_dailyAttdType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME"/>
+        <Combo id="etcSal_combo" taborder="17" left="74.51%" top="491" right="4.64%" height="50" value="null" innerdataset="@ds_etcSal" codecolumn="ETC_SAL_CODE" datacolumn="ETC_SAL_NAME"/>
+        <Button id="application_btn" taborder="18" text="신청" left="86.33%" top="656" right="4.64%" height="50" onclick="application_btn_onclick"/>
+        <MaskEdit id="currentTime_mEdit" taborder="19" left="74.51%" top="350" right="4.64%" height="50" displaynulltext="24시간제로 입력하세요" style="align:center middle;" mask="@@':'@@" maskchar="0" oneditclick="currentTime_mEdit_oneditclick" enable="false" type="string" autoselect="true"/>
+        <Button id="clockInsert_btn" taborder="20" text="시간입력" left="63.63%" top="352" right="27%" height="50" onclick="clockInsert_btn_onclick"/>
+        <Button id="modified_btn" taborder="21" text="수정" left="67.43%" top="656" right="24.64%" height="50" onclick="modified_btn_onclick"/>
+        <Button id="delete_btn" taborder="22" text="삭제" left="76.88%" top="656" right="15.19%" height="50" onclick="delete_btn_onclick"/>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_etcSal">
+        <ColumnInfo>
+          <Column id="ETC_SAL_CODE" type="STRING" size="256"/>
+          <Column id="ETC_SAL_NAME" type="STRING" size="256"/>
+          <Column id="ETC_SAL_PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttd">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_SEQ" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttdType">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+일근태신청  화면                                             						                                                                         
+@Path		인사              				   				
+@Description	일일 근태신청을 하기 위한  폼							
+@Author	  	조아람				    			                        								                                            
+@Create           2019. 02. 12.                             		                    				                                            
+********************************************************************************/
+
+this.hr_DailyAttendanceApplicationForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var today = application.today();
+	this.basicDate_cal.set_value(today);
+	
+	this.setTimer(0,1000);
+	
+	this.transaction( 
+				"findCodeList" ,
+				"dataURL::sys/findCodeDetailList.do",
+				"",
+				"ds_codeDetail=gds_codeDetail",
+				"",
+				"callbackFunction",
+				false
+	);
+
+	this.ds_codeDetail.filter("DETAIL_CODE=='ADC001'||DETAIL_CODE=='ADC002'||DETAIL_CODE=='ADC003'||DETAIL_CODE=='ADC004'");
+	this.ds_dailyAttdType.copyData(this.ds_codeDetail,true);
+	
+	this.transaction( 
+				"findSudangList" ,
+				"dataURL::hr/circumstance/findSudangList.do",
+				"",
+				"ds_etcSal=ds_etcSal",
+				"",
+				"callbackFunction",
+				false
+	);
+
+	this.transaction( 
+				"findDailyAttdList" ,
+				"dataURL::hr/attendance/findDailyAttdList.do",
+				"",
+				"ds_dailyAttd=ds_dailyAttd",
+				"empCode="+application.g_empCode+" fromDate="+this.basicDate_cal.value+" toDate="+this.basicDate_cal.value+"",
+				"callbackFunction",
+				false
+	);
+}
+
+this.hr_DailyAttendanceApplicationForm_ontimer = function(obj:Form, e:nexacro.TimerEventInfo)
+{
+	var date = "'"+new Date()+"'";
+	this.clock_edt.set_value(date.substr(16,10));
+}
+
+var flag=0;
+this.clockInsert_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	  if(application.g_authorityCode!="HR"){
+			alert("일반사용자는 사용하실 수 없습니다");
+      }else{
+       
+       flag++;
+     
+       if(flag==1){
+          this.currentTime_mEdit.set_enable(true);
+          this.clock_edt.set_enable(false);
+          flag=-1;    
+       }else{
+          this.currentTime_mEdit.set_enable(false);
+          this.clock_edt.set_enable(true);
+          flag=0;
+       }
+   }
+}
+
+this.search_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var fromDate = this.fromDate_cal.value;
+	var toDate = this.toDate_cal.value;
+	
+	if(fromDate=="" || toDate==""){
+		alert("값이 입력 되지 않았습니다.");
+	}else if(fromDate>toDate){
+		alert("조회기간이 잘못 입력 되었습니다.");
+	}else{
+	   
+	   this.transaction(
+				"findDailyAttdList" ,
+				"dataURL::hr/attendance/findDailyAttdList.do",
+				"",
+				"ds_dailyAttd=ds_dailyAttd",
+				"empCode="+application.g_empCode+" fromDate="+fromDate+" toDate="+toDate+"",
+				"callbackFunction",
+				false
+     	);
+   
+		if(this.ds_dailyAttd.getRowCount()==0){
+			alert("조회할 목록이 없습니다. ");
+		}
+	}	
+}
+
+this.application_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+   var empCode=application.g_empCode;
+   var empName=application.g_empName;
+   var basicDate=this.basicDate_cal.value;
+   var clockText=this.clock_edt.value.split(":",3);
+   var clock=clockText[0]+clockText[1] //시간 분
+   var hrmm= nexacro.trim(clock,"");
+   var attType = this.attType_combo.value;
+   var price;
+   var attdTime;
+   //기타수당 if문
+    if(this.etcSal_combo.value != ""){
+
+		this.ds_etcSal.filter("ETC_SAL_CODE=='"+this.etcSal_combo.value+"'");
+		price=this.ds_etcSal.getColumn(0,"ETC_SAL_PRICE");	
+
+	}else{
+		price=0;
+	}
+   //신청사유 if문
+	if(this.cause_edt.text == ""){
+			this.cause_edt.set_value("cause");
+			
+	}
+	
+	//시간 if문
+	if(this.currentTime_mEdit.value == undefined){
+		attdTime=hrmm;
+	}else if(this.currentTime_mEdit.value != ""){
+		attdTime=this.currentTime_mEdit.value;
+	}else{
+		attdTime=hrmm;
+	}
+	
+	//근태구문 if문
+    if(attType=="ADC002" && parseInt(attdTime)==2400){
+    
+		alert("자정시간입력은 익일00:00 시로 해주세요.");
+		return;
+   }
+   
+	this.transaction( 
+				"findDailyAttdList" ,
+				"dataURL::hr/attendance/findDailyAttdList.do",
+				"",
+				"ds_dailyAttd=ds_dailyAttd",
+				"empCode="+application.g_empCode+" fromDate="+this.basicDate_cal.value+" toDate="+this.basicDate_cal.value+"",
+				"callbackFunction",
+				false
+	);  
+
+	for(var i=0; i<this.ds_dailyAttd.getRowCount(); i++){
+		var time = this.ds_dailyAttd.getColumn(i,"TIME");
+		
+	   if(attType=='ADC001' && this.ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC001"){
+		   alert("출근기록이 있습니다");
+		   return;
+		}else if(attType=='ADC002' && this.ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC002" && parseInt(this.ds_dailyAttd.getColumn(i,"TIME"))>=0900 && attdTime>=0900){ 
+		   alert("퇴근기록이 있습니다");
+		   return;
+		}else if(attType=='ADC003' && this.ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC003"){
+		   alert("외출은 한번만 허용합니다");
+		   return;
+		}else if(attType=='ADC004' && this.ds_dailyAttd.getColumn(i,"ATTD_TYPE_CODE")=="ADC004"){
+		   alert("이미 귀사하였습니다");
+			return;
+		}else if(attdTime==time){
+			alert("동일한 시간에는 신청하실수 없습니다.");
+			return;	
+		}
+	}
+	
+	if(basicDate=="" || attType=="" || attdTime==""){
+		alert("기준일, 시간, 근태형태를 입력하세요  ");
+	}else{
+
+      if(confirm(" 신청 하시겠습니까? ")){
+      
+         var dailyAttdRow = this.ds_dailyAttd.addRow();   
+          
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"EMP_CODE",empCode);
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"BASIC_DAY",basicDate);
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"ATTD_TYPE_CODE",attType);
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"TIME",attdTime);
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"COST",price);
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"CAUSE",this.cause_edt.text);   
+         
+		if(attType=='ADC003'){
+			this.ds_dailyAttd.setColumn(dailyAttdRow,"APPROVAL_STATUS",'N');
+		}else{
+			this.ds_dailyAttd.setColumn(dailyAttdRow,"APPROVAL_STATUS",'Y');
+		}
+         
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"DAY_ATTD_SEQ","XXX");
+         this.ds_dailyAttd.setColumn(dailyAttdRow,"EMP_NAME",empName);
+        
+         this.transaction(
+            "batchDailyAttd",
+            "dataURL::hr/attendance/batchDailyAttd.do", 
+            "ds_dailyAttd=ds_dailyAttd:u", 
+            "", 
+            "",
+            "callbackFunction",
+            false
+         );   
+
+      }
+   }
+}
+
+this.modified_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+         this.transaction(
+            "batchDailyAttd",
+            "dataURL::hr/attendance/batchDailyAttd.do", 
+            "ds_dailyAttd=ds_dailyAttd:U", 
+            "", 
+            "",
+            "callbackFunction",
+            false
+         );	
+}
+
+this.delete_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var dailyRow;
+	var status;
+	
+	dailyRow = this.ds_dailyAttd.rowposition;
+	status = this.ds_dailyAttd.getColumn(dailyRow,"APPROVAL_STATUS");
+	
+	if(status=="Y"){
+		alert("승인이 완료되면 삭제할 수 없습니다.");
+	}else{
+		this.ds_dailyAttd.deleteRow(dailyRow);
+
+		this.transaction(
+            "batchDailyAttd",
+            "dataURL::hr/attendance/batchDailyAttd.do", 
+            "ds_dailyAttd=ds_dailyAttd:U", 
+            "", 
+            "",
+            "callbackFunction",
+            false
+         );   	
+	}		
+}
+
+this.callbackFunction=function(strSvcID, nErrorCode, strErrorMag){
+
+   if(strSvcID=="batchDailyAttd"){
+      if(nErrorCode!=0){
+         alert(strErrorMag);
+      }else{
+         alert("완료되었습니다.");
+         this.reload();
+      }
+   }
+}
+
+
+
+]]></Script>
+  </Form>
+</FDL>

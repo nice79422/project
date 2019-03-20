@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+  <sqlMap namespace="contract">
+
+	<typeAlias alias="ContractBean"
+		type="com.test.logistics.business.to.ContractBean" />
+	<resultMap id="ContractResult" class="ContractBean">
+		<result property="contractCode" column="CONTRACT_CODE" />
+		<result property="estimateCode" column="ESTIMATE_CODE" />
+		<result property="contractDate" column="CONTRACT_DATE" />
+		<result property="produceStatus" column="PRODUCE_STATUS" />
+		<result property="standByStatus" column="STANDBY_STATUS" />
+	</resultMap>
+
+	<typeAlias alias="ContractDetailBean"
+		type="com.test.logistics.business.to.ContractDetailBean" />
+	<resultMap id="ContractDetailResult" class="ContractDetailBean">
+		<result property="contractDetailCode" column="CONTRACT_DETAIL_CODE" />
+		<result property="clientCode" column="CLIENT_CODE" />
+		<result property="contractQuantity" column="CONTRACT_QUANTITY" />
+		<result property="deliveryScheduleDate" column="DELIVERY_SCHEDULE_DATE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="mpsStatus" column="MPS_STATUS" />
+	</resultMap>
+
+
+	<select id="selectContractReviewList" resultMap="ContractResult">
+    <![CDATA[
+		SELECT *
+		FROM CONTRACT
+		WHERE CONTRACT_DATE BETWEEN #startDate# AND #endDate#
+		ORDER BY CONTRACT_CODE DESC
+    ]]>
+	</select>
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			CONTRACT
+    ]]>
+	</select>
+
+	<insert id="insertContract" parameterClass="ContractBean">
+    <![CDATA[
+		INSERT INTO CONTRACT VALUES
+       (
+           #contractCode#
+         , #estimateCode#
+         , #contractDate#
+         , #produceStatus#
+         , #standByStatus#
+       )
+    ]]>
+	</insert>
+
+	<select id="selectContractList" resultMap="ContractResult"
+		parameterClass="map">
+    <![CDATA[
+		SELECT * FROM CONTRACT                      
+		WHERE ROWNUM BETWEEN #startRow# AND #endRow#
+		ORDER BY CONTRACT_CODE            
+    ]]>
+	</select>
+
+
+	<select id="selectContractDetailRowCount" resultClass="int">
+    <![CDATA[
+		SELECT COUNT(*) FROM CONTRACT_DETAIL
+    ]]>
+	</select>
+
+
+
+
+	<select id="selectSearchRowCount" resultClass="int" parameterClass="string">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			CONTRACT_DETAIL
+		WHERE
+			CONTRACT_CODE = #searchCode#
+    ]]>
+	</select>
+
+	<select id="selectContractDetail" resultClass="ContractDetailBean" parameterClass="String">
+    <![CDATA[
+		SELECT *
+		  FROM CONTRACT_DETAIL
+		 WHERE contract_detail_code = #contractDetailCode#
+    ]]>
+	</select>
+
+
+	<select id="selectContractDetaillList" resultMap="ContractDetailResult" parameterClass="String">
+    <![CDATA[
+	SELECT *
+		  FROM CONTRACT_DETAIL
+		 WHERE contract_detail_code = #contractDetailCode#
+    ]]>
+	</select>
+
+
+	<select id="selectContractDetailLists" resultMap="ContractDetailResult"
+		parameterClass="map">
+    <![CDATA[
+		SELECT  * FROM CONTRACT_DETAIL              
+		WHERE CONTRACT_CODE = #searchCode#          
+		AND ROWNUM BETWEEN #startRow#  AND #endRow# 
+		ORDER BY CONTRACT_DETAIL_CODE               
+    ]]>
+	</select>
+
+
+	<insert id="insertContractDetail" parameterClass="ContractDetailBean">
+    <![CDATA[
+		INSERT INTO CONTRACT_DETAIL VALUES
+       (
+           #contractCode#||'-'|| lpad(CONTRACT_DETAIL_CODE_SEQ.NEXTVAL,5,'00000')
+         , #contractCode#
+         , #clientCode#
+         , #contractQuantity#
+         , #deliveryScheduleDate#
+         , #itemCode#
+         , #mpsStatus#
+       )
+    ]]>
+	</insert>
+
+	<update id="updateContractDetail" parameterClass="ContractDetailBean">
+			 <![CDATA[
+		UPDATE CONTRACT_DETAIL
+       	SET MPS_STATUS='Y'
+ 		WHERE CONTRACT_DETAIL_CODE=#contractDetailCode#
+ 		 ]]>
+	</update>
+
+	<update id="updateStandByContract" parameterClass="ContractBean">
+		<![CDATA[
+		UPDATE CONTRACT
+		SET STANDBY_STATUS='Y'
+ 		WHERE CONTRACT_CODE=#contractCode#
+ 		]]>
+	</update>
+
+	<update id="updateContract" parameterClass="ContractDetailBean">
+		<![CDATA[
+		UPDATE CONTRACT SET PRODUCE_STATUS ='Y'
+		WHERE CONTRACT_CODE = ( SELECT cd.CONTRACT_CODE FROM CONTRACT c,CONTRACT_DETAIL cd
+		WHERE c.CONTRACT_CODE=cd.CONTRACT_CODE
+		AND cd.CONTRACT_DETAIL_CODE=#contractDetailCode#)
+ 		]]>
+	</update>
+	
+	
+</sqlMap>

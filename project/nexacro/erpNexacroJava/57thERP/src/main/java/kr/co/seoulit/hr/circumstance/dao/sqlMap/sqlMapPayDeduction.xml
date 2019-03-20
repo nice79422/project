@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.circumstance.dao.PayDeductionDAO">
+
+
+	<resultMap id="payDeductionResult" type="payDeductionItemTO">
+        <result property="payDeductionItemSeq" column="PAY_DEDUCTION_ITEM_SEQ"/>
+        <result property="payTypeCode" column="PAY_TYPE_CODE"/>
+        <result property="payDeductionTypeCode" column="PAY_DEDUCTION_TYPE_CODE"/>
+        <result property="inputedYear" column="INPUTED_YEAR"/>
+        <result property="payDeductionItemCode" column="PAY_DEDUCTION_ITEM_CODE"/>
+        <result property="payDeductionItemName" column="PAY_DEDUCTION_ITEM_NAME"/>
+        <result property="taxTypeCode" column="TAX_TYPE_CODE"/>
+        <result property="susubApply" column="SUSUB_APPLY"/>
+        <result property="monthSal" column="MONTH_SAL"/>
+        <result property="price" column="PRICE"/>
+        <result property="inOutApply" column="IN_OUT_APPLY"/>
+        
+        
+	</resultMap>
+
+	<select id="selectPayDeductionList" resultMap="payDeductionResult">
+	           SELECT PAY_DEDUCTION_ITEM_SEQ
+					,PAY_TYPE_CODE
+					,PAY_DEDUCTION_TYPE_CODE
+					,INPUTED_YEAR
+					,PAY_DEDUCTION_ITEM_CODE
+					,PAY_DEDUCTION_ITEM_NAME
+					,TAX_TYPE_CODE
+					,SUSUB_APPLY
+					,MONTH_SAL
+					,PRICE
+					,IN_OUT_APPLY
+       FROM PAY_DEDUCTION_MGT
+       ORDER BY TO_NUMBER(SUBSTR(PAY_DEDUCTION_ITEM_CODE,3))
+	</select>
+	
+	
+	<insert id="insertPayDeduction" parameterType="payDeductionItemTO">
+		<selectKey keyProperty="payDeductionItemSeq" resultType="String" order="BEFORE">
+		SELECT PAY_DEDUCTION_ITEM_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		<![CDATA[
+	     INSERT INTO
+	           PAY_DEDUCTION_MGT
+	     VALUES (
+	            #{payDeductionItemSeq},
+	            #{payTypeCode},
+	            #{payDeductionTypeCode},
+	            #{inputedYear},
+	            #{payDeductionItemCode},
+	            #{payDeductionItemName},
+	            #{taxTypeCode},	            
+	            #{susubApply},
+	            #{monthSal},	  
+	            #{price},
+	            #{inOutApply}
+	            )    
+		]]>
+	</insert>
+
+
+	<update id="updatePayDeduction" parameterType="payDeductionItemTO">
+	<![CDATA[
+	       UPDATE
+	            PAY_DEDUCTION_MGT
+	       SET
+	            PAY_DEDUCTION_ITEM_CODE = #{payDeductionItemCode},
+	            PAY_DEDUCTION_ITEM_NAME = #{payDeductionItemName},
+	            TAX_TYPE_CODE = #{taxTypeCode},
+	            SUSUB_APPLY = #{susubApply},
+	            MONTH_SAL = #{monthSal},
+	            PRICE = #{price},
+	            IN_OUT_APPLY = #{inOutApply}
+	           
+	       WHERE
+	            PAY_DEDUCTION_ITEM_SEQ = #{payDeductionItemSeq}
+	       AND
+	       		INPUTED_YEAR = #{inputedYear}
+	       AND
+	       		PAY_TYPE_CODE = #{payTypeCode}
+	       AND
+	       		PAY_DEDUCTION_TYPE_CODE = #{payDeductionTypeCode}
+    ]]>
+	</update>
+	
+
+	<delete id="deletePayDeduction" parameterType="payDeductionItemTO">
+	<![CDATA[
+	      DELETE FROM
+	      		PAY_DEDUCTION_MGT
+	      WHERE
+	            PAY_DEDUCTION_ITEM_SEQ = #{payDeductionItemSeq}
+	      AND
+	       		INPUTED_YEAR=#{inputedYear}
+	      AND
+	       		PAY_TYPE_CODE=#{payTypeCode}
+	      AND
+				PAY_DEDUCTION_TYPE_CODE=#{payDeductionTypeCode}
+    ]]>
+	</delete>
+	
+</mapper>

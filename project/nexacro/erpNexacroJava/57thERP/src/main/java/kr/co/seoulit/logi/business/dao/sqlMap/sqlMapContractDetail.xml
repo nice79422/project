@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.co.seoulit.logi.business.dao.ContractDetailDAO">
+	<!-- contractDetailDAO -->
+
+	<resultMap type="contractDetailTO" id="contractDetailResult">
+
+		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO" />
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfContract" column="UNIT_OF_CONTRACT" />
+		<result property="dueDateOfContract" column="DUE_DATE_OF_CONTRACT" />
+		<result property="contractAmount" column="CONTRACT_AMOUNT" />
+		<result property="unitPriceOfContract" column="UNIT_PRICE_OF_CONTRACT" />
+		<result property="sumPriceOfContract" column="SUM_PRICE_OF_CONTRACT" />
+		<result property="mpsApplyStatus" column="MPS_APPLY_STATUS" />
+		<result property="deliveryStatus" column="DELIVERY_STATUS" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="deliveryRemain" column="DELIVERY_REMAIN" />
+		<result property="slipRegistStatus" column="SLIP_REGIST_STATUS" />
+
+	</resultMap>
+
+	<select id="selectContractDetailList" resultMap="contractDetailResult">
+
+		SELECT
+		CONTRACT_DETAIL_NO, CONTRACT_NO, ITEM_CODE, ITEM_NAME
+		, UNIT_OF_CONTRACT, DUE_DATE_OF_CONTRACT, CONTRACT_AMOUNT
+		,
+		UNIT_PRICE_OF_CONTRACT, SUM_PRICE_OF_CONTRACT
+		, MPS_APPLY_STATUS,
+		DELIVERY_STATUS, DESCRIPTION,DELIVERY_REMAIN,SLIP_REGIST_STATUS
+		FROM CONTRACT_DETAIL
+		where
+		CONTRACT_NO=#{contractNo}
+	</select>
+
+		<select id="selectAllContractDetailList" resultMap="contractDetailResult">
+
+		SELECT
+		CONTRACT_DETAIL_NO, CONTRACT_NO, ITEM_CODE, ITEM_NAME
+		, UNIT_OF_CONTRACT, DUE_DATE_OF_CONTRACT, CONTRACT_AMOUNT
+		,
+		UNIT_PRICE_OF_CONTRACT, SUM_PRICE_OF_CONTRACT
+		, MPS_APPLY_STATUS,
+		DELIVERY_STATUS, DESCRIPTION,DELIVERY_REMAIN,SLIP_REGIST_STATUS
+		FROM CONTRACT_DETAIL
+	</select>
+
+	<select id="selectRangedContractDetailList" parameterType="map" resultMap="contractDetailResult">
+
+		SELECT
+	<if test="requestStatus!='slipSelect'">
+
+		CONTRACT_DETAIL_NO, CONTRACT_NO, ITEM_CODE, ITEM_NAME
+		,
+		UNIT_OF_CONTRACT, DUE_DATE_OF_CONTRACT, CONTRACT_AMOUNT
+		,
+		UNIT_PRICE_OF_CONTRACT, SUM_PRICE_OF_CONTRACT
+		, MPS_APPLY_STATUS,
+		DELIVERY_STATUS, DESCRIPTION,DELIVERY_REMAIN,SLIP_REGIST_STATUS
+		FROM CONTRACT_DETAIL
+		<if test="requestStatus != null and requestStatus.equals('date') ">
+			WHERE
+			('20' || substr(CONTRACT_NO,5,6)) BETWEEN #{value.fromDate} AND #{value.toDate}
+		</if>
+		<if test="requestStatus.equals('mpsSelect') and value.equals('unDelivery')">
+			WHERE
+			MPS_APPLY_STATUS IS NULL AND DELIVERY_STATUS ='N' OR MPS_APPLY_STATUS='N' AND
+			DELIVERY_STATUS ='N'
+		</if>
+	</if>
+		<if test="requestStatus.equals('slipSelect') and value != null">
+				DISTINCT D.CONTRACT_NO
+				,D.ITEM_CODE
+				,D.ITEM_NAME
+				,D.UNIT_OF_CONTRACT
+				,SUM(D.CONTRACT_AMOUNT) OVER(ORDER BY D.ITEM_CODE) AS CONTRACT_AMOUNT
+				,UNIT_PRICE_OF_CONTRACT
+				,SUM(D.SUM_PRICE_OF_CONTRACT) OVER(ORDER BY D.ITEM_CODE) AS SUM_PRICE_OF_CONTRACT
+				,D.MPS_APPLY_STATUS
+				,D.DELIVERY_STATUS
+				,D.DESCRIPTION
+				,D.DELIVERY_REMAIN
+				,D.SLIP_REGIST_STATUS
+				FROM CONTRACT C,CONTRACT_DETAIL D
+				WHERE
+				C.CONTRACT_NO=D.CONTRACT_NO
+				AND
+				C.CONTRACT_NO IN
+			<foreach collection="value" item="item" index="index" open="(" separator="," close=")">
+   				  (#{item})
+			</foreach>
+				ORDER BY D.ITEM_CODE
+		</if>
+
+	</select>
+
+	<insert id="insertContractDetail" parameterType="contractDetailTO">
+
+		INSERT INTO CONTRACT_DETAIL(
+		  CONTRACT_DETAIL_NO
+		, CONTRACT_NO
+		, ITEM_CODE
+		, ITEM_NAME
+		, UNIT_OF_CONTRACT
+		, DUE_DATE_OF_CONTRACT
+		, CONTRACT_AMOUNT
+		, UNIT_PRICE_OF_CONTRACT
+		, SUM_PRICE_OF_CONTRACT
+		, MPS_APPLY_STATUS
+		, DELIVERY_STATUS
+		, DESCRIPTION
+		, DELIVERY_REMAIN
+		)
+		VALUES
+		( #{contractDetailNo}
+		, #{contractNo}
+		, #{itemCode}
+		, #{itemName}
+		, #{unitOfContract}
+		, #{dueDateOfContract}
+		, #{contractAmount}
+		, #{unitPriceOfContract}
+		, #{contractAmount}*#{unitPriceOfContract}
+		, #{mpsApplyStatus}
+		, #{deliveryStatus}
+		, #{description}
+		, #{deliveryRemain}
+		)
+
+	</insert>
+
+	<update id="updateContractDetail" parameterType="contractDetailTO">
+
+		UPDATE CONTRACT_DETAIL SET
+		ITEM_CODE = #{itemCode}
+		, ITEM_NAME = #{itemName}
+		, UNIT_OF_CONTRACT = #{unitOfContract}
+		, DUE_DATE_OF_CONTRACT = #{dueDateOfContract}
+		, CONTRACT_AMOUNT = #{contractAmount}
+		, UNIT_PRICE_OF_CONTRACT = #{unitPriceOfContract}
+		, SUM_PRICE_OF_CONTRACT = #{sumPriceOfContract}
+		, MPS_APPLY_STATUS = #{mpsApplyStatus}
+		, DELIVERY_STATUS =	#{deliveryStatus}
+		, DESCRIPTION = #{description}
+		,DELIVERY_REMAIN = #{deliveryRemain}
+		,SLIP_REGIST_STATUS = #{slipRegistStatus}
+		WHERE
+		CONTRACT_DETAIL_NO =
+		#{contractDetailNo}
+		AND
+		CONTRACT_NO = #{contractNo}
+	</update>
+
+	<delete id="deleteContractDetail" parameterType="contractDetailTO">
+		DELETE FROM CONTRACT_DETAIL
+		WHERE CONTRACT_DETAIL_NO =
+		#{contractDetailNo}
+		AND CONTRACT_NO= #{contractNo}
+	</delete>
+
+</mapper>

@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_WarehousingForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="logi_WarehousingForm_onload">
+    <Layouts>
+      <Layout>
+        <GroupBox id="GroupBox00" text="입출고관리" taborder="0" left="0.76%" top="3" right="0.68%" height="773" style="background:transparent;border:2 solid #333333ff ;color:black;font:25 Dotum,HY견고딕;"/>
+        <Tab id="Tab00" taborder="1" left="27" top="70" width="1134" height="704" tabindex="0" scrollbars="autoboth" style="font:한컴산뜻돋움,13,bold;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="입고처리 및 내역">
+              <Layouts>
+                <Layout>
+                  <Button id="btn_registWarehousing" taborder="30" text="입고품등록" onclick="Tab00_tabpage1_btn_registWarehousing_onclick" left="1000" top="307" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+                  <Grid id="grd_warehousing" taborder="31" binddataset="ds_warehousing" useinputpanel="false" autofittype="col" left="-14" top="354" width="1108" height="293" style="font:새굴림,11;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="발주번호"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="발주수량"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="입고수량"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="업체명"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="입고완료여부"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="입고일"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_NO"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_AMOUNT"/>
+                          <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WAREHOUSING_AMOUNT"/>
+                          <Cell col="5" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CUSTOMER"/>
+                          <Cell col="6" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DESCRIPTION"/>
+                          <Cell col="7" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:WAREHOUSING_DATE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="btn_registerMps00" taborder="32" text="발주목록" enable="false" left="24" top="27" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+                  <Button id="btn_registerMps01" taborder="33" text="미입고 발주품목" enable="false" left="560" top="27" width="132" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+                  <Button id="btn_registerMps02" taborder="34" text="입고내역" enable="false" left="24" top="307" width="117" height="39" style="font:한컴산뜻돋움,11,bold;"/>
+                  <Grid id="grd_orderInfo" taborder="36" binddataset="ds_orderInfo" useinputpanel="false" autofittype="col" oncelldblclick="Tab00_tabpage1_grd_orderInfo_oncelldblclick" left="20" top="73" width="536" height="225" onrbuttonup="Tab00_tabpage1_grd_orderInfo_onrbuttonup">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="131"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="발주번호"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="업체"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="발주일자"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="담당자"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_NO"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CUSTOMER_CODE"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_DATE"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:PERSON_CODE_IN_CHARGE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Grid id="grd_orderDetail" taborder="37" binddataset="ds_orderDetail" useinputpanel="false" autofittype="col" oncelldblclick="Tab00_tabpage1_grd_orderDetail_oncelldblclick" left="561" top="73" width="563" height="225">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="25"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="입고예정일"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="발주수량"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                          <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_ORDER"/>
+                          <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DUE_DATE_OF_ORDER"/>
+                          <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_AMOUNT"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_orderInfo">
+        <ColumnInfo>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_orderDetail">
+        <ColumnInfo>
+          <Column id="ORDER_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DELIVERY_SCHEDULE_DATE" type="STRING" size="256"/>
+          <Column id="ORDER_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_DETAIL_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_stock">
+        <ColumnInfo>
+          <Column id="WAREHOUSE_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="DELIVERY_NO" type="STRING" size="256"/>
+          <Column id="PRODUCTION_RESULT_NO" type="STRING" size="256"/>
+          <Column id="INPUT_ITEM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="SAFETY_ALLOWANCE_AMOUNT" type="STRING" size="256"/>
+          <Column id="STOCK_AMOUNT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_warehousing">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="ORDER_AMOUNT" type="STRING" size="256"/>
+          <Column id="WAREHOUSING_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_WAREHOUSING" type="STRING" size="256"/>
+          <Column id="CUSTOMER" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="WAREHOUSING_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_materialPayment">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="PAYMENT_DATE" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="PAYMENT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PAYMENT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="RELEASE_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+var customerCode;
+
+var orderRow;
+
+var orderNo;
+
+var warehousingRow;
+
+var orderDetailRow;
+
+//온로드
+this.logi_WarehousingForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{		
+
+	this.ds_orderInfo.filter("ORDER_INFO_STATUS!='YY'");
+	//this.ds_orderDetail.filter("ITEM_CODE=='XX'");
+	this.ds_warehousing.filter("ITEM_CODE=='XX'");
+	
+		this.transaction("findOrderInfoList",
+				"dataURL::logi/purchase/findOrderInfoList.do",
+				"",
+				"ds_orderInfo=ds_orderInfo",
+				"",
+				"callback",
+				false);
+				
+		this.transaction("findStockList",
+				"dataURL::logi/purchase/findStockList.do",
+				"",
+				"ds_stock=ds_stock",
+				"",
+				"callback",
+				false);
+					
+		this.transaction("findWarehousingList",
+				"dataURL::logi/purchase/findWarehousingList.do",
+				"",
+				"ds_warehousing=ds_warehousing",
+				"",
+				"callback",
+				false);
+}
+
+//입고품등록
+this.Tab00_tabpage1_btn_registWarehousing_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var allWarRow=this.ds_warehousing.getRowCount();
+	var ordAmount=0;
+	var warAmount=0;
+	for(var ix=0;ix<allWarRow;ix++){
+	ordAmount=ordAmount+parseInt(this.ds_warehousing.getColumn(ix,"ORDER_AMOUNT"));
+	warAmount=warAmount+parseInt(this.ds_warehousing.getColumn(ix,"WAREHOUSING_AMOUNT"));
+	}
+	if(confirm("입고를 등록하시겠습니까?")){
+	this.Tab00.tabpage1.grd_orderInfo.set_enableredraw(false);
+		if(ordAmount-warAmount==0){
+		this.ds_orderInfo.setColumn(orderRow,"ORDER_INFO_STATUS",'YY');
+		this.ds_orderInfo.setColumn(orderRow,"CUSTOMER",'BRC-01');
+		}
+		this.transaction(
+		"registWarehousing",
+		"dataURL::logi/purchase/registWarehousing.do",
+		"ds_orderInfo=ds_orderInfo:u ds_orderDetail=ds_orderDetail:u ds_stock=ds_stock:u ds_warehousing=ds_warehousing:u",
+		"ds_stock=ds_stock ds_warehousing=ds_warehousing",
+		"",
+		"callback",
+		false);
+	}
+}
+
+//발주목록
+this.Tab00_tabpage1_grd_orderInfo_onrbuttonup = function(obj:Grid, e:nexacro.GridMouseEventInfo)
+{
+	orderRow = e.row;
+	trace(orderRow);
+	trace(e.row);
+	orderNo = this.ds_orderInfo.getColumn(e.row,"ORDER_NO");
+	trace(orderNo);
+	customerCode = this.ds_orderInfo.getColumn(e.row,"CUSTOMER_CODE");
+	trace(customerCode);
+		this.transaction("findOrderDetailList",
+				"dataURL::logi/purchase/findOrderDetailList.do",
+				"",
+				"ds_orderDetail=ds_orderDetail",
+				"orderNo='"+orderNo+"'",
+				"callback",
+				false);
+	
+	this.ds_orderDetail.filter("");
+	this.ds_orderDetail.filter("ORDER_NO=='"+orderNo+"'");
+}
+
+//미입고 발주품목
+this.squenceNo="";
+this.Tab00_tabpage1_grd_orderDetail_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.transaction("findSequenceNo",
+		"dataURL::sys/findSequenceNo.do",
+ 		"",
+ 		"",
+ 		"findSeq='WH_SEQ'",
+ 		"callback",
+ 		false);
+ 		
+ 	var serialCode=this.squenceNo;
+	var newWarehousingNo="WHN"+serialCode;
+
+	var odItemCode = this.ds_orderDetail.getColumn(e.row,"ITEM_CODE");
+	
+	// 창고 ITEMCODE ROW 구함
+	var findStock = this.ds_stock.findRow("ITEM_CODE",odItemCode);
+	
+	
+	var odAmount = this.ds_orderDetail.getColumn(e.row,"ORDER_AMOUNT");
+	
+	var stockAmount = this.ds_stock.getColumn(findStock,"STOCK_AMOUNT");
+
+	var amount0 = parseInt(stockAmount) + parseInt(odAmount);
+	
+	var day = application.today();
+	
+	var itemCode = this.ds_orderDetail.getColumn(e.row,"ITEM_CODE");
+	var itemName = this.ds_orderDetail.getColumn(e.row,"ITEM_NAME");
+	var orderNo0 = this.ds_orderDetail.getColumn(e.row,"ORDER_DETAIL_NO");
+	var orderAmount = this.ds_orderDetail.getColumn(e.row,"ORDER_AMOUNT");	
+	var unitWarehousing = this.ds_orderDetail.getColumn(e.row,"UNIT_OF_ORDER");
+	
+	warehousingRow = this.ds_warehousing.addRow();
+	
+	this.ds_warehousing.setColumn(warehousingRow,"ITEM_CODE",itemCode);			
+	this.ds_warehousing.setColumn(warehousingRow,"ORDER_NO",orderNo0);
+	this.ds_warehousing.setColumn(warehousingRow,"ITEM_NAME",itemName);
+	this.ds_warehousing.setColumn(warehousingRow,"ORDER_AMOUNT",orderAmount);
+	this.ds_warehousing.setColumn(warehousingRow,"WAREHOUSING_AMOUNT",orderAmount);
+	this.ds_warehousing.setColumn(warehousingRow,"UNIT_WAREHOUSING",unitWarehousing);
+	this.ds_warehousing.setColumn(warehousingRow,"CUSTOMER",customerCode);
+	this.ds_warehousing.setColumn(warehousingRow,"WAREHOUSING_DATE",day);
+	this.ds_warehousing.setColumn(warehousingRow,"DESCRIPTION",'Y');
+	
+	this.ds_orderDetail.setColumn(e.row,"DELIVERY_SCHEDULE_DATE",day);
+	this.ds_orderDetail.setColumn(e.row,"ORDER_DETAIL_STATUS",'Y');
+	
+	this.ds_stock.setColumn(findStock,"STOCK_AMOUNT",amount0);
+	this.ds_warehousing.setColumn(warehousingRow,"WAREHOUSING_NO",newWarehousingNo);	
+	
+	this.ds_orderDetail.filter("ORDER_DETAIL_STATUS!='Y' && ORDER_NO=='"+orderNo+"'");
+	
+	trace(this.ds_orderDetail.getRowCount());
+	if(this.ds_orderDetail.getRowCount()==0)
+	{
+	orderRow=this.ds_orderInfo.findRow("ORDER_NO",orderNo);
+	this.ds_orderInfo.setColumn(orderRow,"ORDER_INFO_STATUS",'Y');
+	trace(this.ds_orderInfo.getColumn(orderRow,"ORDER_INFO_STATUS"));
+	this.ds_orderInfo.filter("ORDER_INFO_STATUS!='Y'");				
+	alert("모든 주문이 입고되었습니다");
+	}
+	
+}
+
+//콜백
+this.callback = function(trid, ErrorCode, ErrorMsg)
+{
+if(trid=="registWarehousing"){
+	alert(this.ErrorCode);
+	};
+}
+]]></Script>
+  </Form>
+</FDL>

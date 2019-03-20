@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="200" Id="militaryDialog" Left="8" PidAttrib="7" Title="militaryDialog" Top="8" Ver="1.0" Width="317" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,16" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="병역정보조회" Top="2" VAlign="Middle" Width="310"></Static>
+		<Grid BindDataset="dsMilitaryInfo" BkColor2="default" BoldHead="true" Bottom="188" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="25" Height="147" Id="militaryGrid" InputPanel="FALSE" Left="1" LineColor="default" OnCellDBLClick="bankGrid_OnCellDblClick" Right="311" RowHeight="20" TabOrder="2" TabStop="true" Top="41" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="310">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="39"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="순번" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="병역구분" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;240,12" text="군번" Valign="Center"/>
+						<cell bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,12" text="입영일자" Valign="Center"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,12" text="전역일자" Valign="Center"/>
+						<cell bkcolor="mistyrose" col="5" display="text" font="한컴&#32;윤고딕&#32;240,12" text="군별" Valign="Center"/>
+						<cell bkcolor="mistyrose" col="6" display="text" font="한컴&#32;윤고딕&#32;240,12" text="병과" Valign="Center"/>
+						<cell bkcolor="mistyrose" col="7" display="text" font="한컴&#32;윤고딕&#32;240,12" text="제대구분" Valign="Center"/>
+						<cell bkcolor="mistyrose" col="8" display="text" font="한컴&#32;윤고딕&#32;240,12" text="계급" Valign="Center"/>
+						<cell bkcolor="mistyrose" col="9" display="text" font="한컴&#32;윤고딕&#32;240,12" text="면제사유"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="1" colid="ARMY_DIVISION" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell align="center" col="2" colid="ARMY_SERIAL_NUMBER" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="3" colid="ARMY_START_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="4" colid="ARMY_END_DATE" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="5" colid="ARMY_GROUP" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="6" colid="ARMY_BRANCH" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="7" colid="DISCHARGE_ARMY_DIVISION" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="8" colid="RANK" display="text" font="한컴&#32;윤고딕&#32;230,9" Valign="Center"/>
+						<cell col="9" colid="EXEMPTION_REASON" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script></Script>
+</Window>

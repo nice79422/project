@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.business.dao.ContractDAO">
+<!-- contractDAO -->
+
+	<resultMap type="contractTO" id="contractResult">
+
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="estimateNo" column="ESTIMATE_NO" />
+		<result property="contractType" column="CONTRACT_TYPE" />
+		<result property="customerCode" column="CUSTOMER_CODE" />
+		<result property="contractDate" column="CONTRACT_DATE" />
+		<result property="contractRequester" column="CONTRACT_REQUESTER" />
+		<result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="deliveryResultStatus" column="DELIVERY_RESULT_STATUS" />
+		<result property="slipRegistStatus" column="SLIP_REGIST_STATUS" />
+
+	<collection property="contractDetailList" ofType="contractDetailTO"
+	select="kr.co.seoulit.logi.business.dao.ContractDetailDAO.selectContractDetailList"
+	column="CONTRACT_NO"
+	/>
+	</resultMap>
+
+	<select id="selectContractTo" parameterType="string" resultMap="contractResult">
+
+		SELECT
+		CONTRACT_NO, ESTIMATE_NO, CONTRACT_TYPE, CUSTOMER_CODE
+		,CONTRACT_DATE, CONTRACT_REQUESTER, PERSON_CODE_IN_CHARGE
+		,DESCRIPTION, DELIVERY_RESULT_STATUS,SLIP_REGIST_STATUS
+
+		FROM CONTRACT
+		where CONTRACT_NO= #{contractNo}
+
+	</select>
+
+	<select id="selectContractList" parameterType="map" resultMap="contractResult">
+
+		SELECT
+		CONTRACT_NO, ESTIMATE_NO, CONTRACT_TYPE, CUSTOMER_CODE
+		, CONTRACT_DATE,
+		CONTRACT_REQUESTER, PERSON_CODE_IN_CHARGE
+		, DESCRIPTION,
+		DELIVERY_RESULT_STATUS,SLIP_REGIST_STATUS
+		FROM CONTRACT
+		<if test="toDate != null and fromDate !='unDeliveried'">
+		WHERE
+		CONTRACT_DATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		<if test="fromDate.equals('unDeliveried')">
+		WHERE
+		DELIVERY_RESULT_STATUS IS NULL OR DELIVERY_RESULT_STATUS ='N'
+		</if>
+	</select>
+
+	<insert id="insertContract" parameterType="contractTO">
+
+		INSERT INTO CONTRACT(
+		CONTRACT_NO
+		, ESTIMATE_NO
+		, CONTRACT_TYPE
+		, CUSTOMER_CODE
+		, CONTRACT_DATE
+		,CONTRACT_REQUESTER
+		, PERSON_CODE_IN_CHARGE
+		, DESCRIPTION
+		,DELIVERY_RESULT_STATUS)
+		VALUES
+		( #{contractNo}
+		, #{estimateNo}
+		, #{contractType}
+		, #{customerCode}
+		,
+		#{contractDate}
+		, #{contractRequester}
+		, #{personCodeInCharge}
+		,#{description}
+		, #{deliveryResultStatus}
+		)
+
+	</insert>
+
+	<update id="updateContract" parameterType="contractTO">
+
+		UPDATE CONTRACT SET
+		CONTRACT_TYPE = #{contractType}
+		, CUSTOMER_CODE = #{customerCode}
+		,
+		CONTRACT_DATE = #{contractDate}
+		, CONTRACT_REQUESTER =
+		#{contractRequester}
+		, PERSON_CODE_IN_CHARGE = #{personCodeInCharge}
+		,
+		DESCRIPTION = #{description}
+		, DELIVERY_RESULT_STATUS =
+		#{deliveryResultStatus}
+		,SLIP_REGIST_STATUS =
+		#{slipRegistStatus}
+		WHERE
+		CONTRACT_NO = #{contractNo}
+		AND
+		ESTIMATE_NO =
+		#{estimateNo}
+
+	</update>
+
+	<delete id="deleteContract" parameterType="contractTO">
+		DELETE FROM CONTRACT
+		WHERE CONTRACT_NO = #{contractNo}
+	</delete>
+
+</mapper>

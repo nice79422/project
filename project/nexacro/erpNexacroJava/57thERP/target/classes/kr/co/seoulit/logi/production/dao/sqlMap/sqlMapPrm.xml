@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.production.dao.PrmDAO">
+
+
+	<!-- prmDAO -->
+
+
+	<resultMap type="prmTO" id="prmResult">
+
+		<result property="productionResultNo"
+			column="PRODUCTION_RESULT_NO" />
+		<result property="workInstructionNo"
+			column="WORK_INSTRUCTION_NO" />
+		<result property="productionDate" column="PRODUCTION_DATE" />
+		<result property="productionAmount" column="PRODUCTION_AMOUNT" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfProductionResult"
+			column="UNIT_OF_PRODUCTION_RESULT" />
+		<result property="description" column="DESCRIPTION" />
+
+
+
+	</resultMap>
+
+	<select id="selectPrmList" resultMap="prmResult">
+
+		SELECT
+		PRODUCTION_RESULT_NO, WORK_INSTRUCTION_NO
+		, PRODUCTION_DATE,
+		PRODUCTION_AMOUNT, ITEM_CODE
+		, ITEM_NAME, UNIT_OF_PRODUCTION_RESULT,
+		DESCRIPTION
+		FROM PRODUCTION_RESULT_MANAGEMENT
+
+	</select>
+
+
+
+	<insert id="insertPrm" parameterType="prmTO">
+
+		INSERT INTO
+		PRODUCTION_RESULT_MANAGEMENT
+		VALUES
+		( #{productionResultNo}
+		,
+		#{workInstructionNo}
+		, #{productionDate}
+		, #{productionAmount}
+		, #{itemCode}
+		, #{itemName}
+		, #{unitOfProductionResult}
+		, #{description} )
+
+	</insert>
+
+</mapper>

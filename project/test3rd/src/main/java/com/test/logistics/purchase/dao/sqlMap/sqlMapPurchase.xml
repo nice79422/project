@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="purchase">
+
+	<typeAlias alias="PurchaseBean"
+		type="com.test.logistics.purchase.to.PurchaseBean" />
+	<resultMap id="PurchaseResult" class="PurchaseBean">
+		<result property="purchaseCode" column="PURCHASE_CODE" />
+		<result property="mrpGatheringCode" column="MRP_GATHERING_CODE" />
+		<result property="purchasingPlaceCode" column="PURCHASING_PLACE_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="purchaseDate" column="PURCHASE_DATE" />
+		<result property="purchaseAmount" column="PURCHASE_AMOUNT" />
+	
+	</resultMap>
+	
+	
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT COUNT(*)
+  FROM PURCHASE
+    ]]>
+	</select>
+
+	<select id="selectPurchaseList" resultMap="PurchaseResult"
+		parameterClass="map">
+    <![CDATA[
+	 SELECT * FROM                                                                                                 
+	 (SELECT ROW_NUMBER() OVER(ORDER BY PURCHASE_CODE) rn,                                                         
+	 PURCHASE_CODE,MRP_GATHERING_CODE,PURCHASING_PLACE_CODE,ITEM_CODE,PURCHASE_DATE ,PURCHASE_AMOUNT FROM PURCHASE)
+	 WHERE rn BETWEEN #startRow# AND #endRow#                                                                      
+    ]]>
+	</select>
+
+	<insert id="insertPurchase">
+    <![CDATA[
+INSERT INTO purchase VALUES
+       (
+           TO_CHAR(SYSDATE, 'YYYYMMDD')||'-'||LPAD(PURCHASE_CODE_SEQ.NEXTVAL, 5, '00000')
+         ,#mrpGatheringCode#
+         ,#purchasingPlaceCode#
+         ,#itemCode#
+         ,#purchaseDate#
+         ,#purchaseQuantity#
+         )
+    ]]>
+	</insert>
+
+</sqlMap>

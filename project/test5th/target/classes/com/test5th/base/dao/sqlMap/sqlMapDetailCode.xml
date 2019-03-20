@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test5th.base.dao.DetailCodeDAO">
+
+	<resultMap id="detailCodeResult" type="detailCodeBean">
+		<result property="code" column="CODE" />
+		<result property="detailCode" column="DETAIL_CODE" />
+		<result property="detailCodeName" column="DETAIL_CODE_NAME" />
+		<result property="usingStatus" column="USING_STATUS" />
+	</resultMap>
+
+	<select id="selectDetailCodeList" resultMap="detailCodeResult" parameterType="String">
+ 
+        SELECT * FROM DETAIL_CODE WHERE CODE=#{code}
+    
+	</select>
+
+ 
+	<insert id="insertDetailCode" parameterType="detailCodeBean">
+	
+	        INSERT INTO
+	            DETAIL_CODE
+	            (
+	            CODE,
+	            DETAIL_CODE,
+	            
+	            DETAIL_CODE_NAME,
+	            USING_STATUS
+	            )
+	        VALUES (
+	         #{code},
+	            #{detailCode},
+	           
+	            #{detailCodeName},
+	            #{usingStatus}
+	        )
+    
+	</insert>
+
+
+	<update id="updateDetailCode" parameterType="detailCodeBean">
+		
+	       UPDATE
+	            DETAIL_CODE
+	       SET
+	            DETAIL_CODE_NAME = #{detailCodeName},
+	            USING_STATUS = #{usingStatus}
+	       WHERE
+	            CODE = #{code}
+	       AND
+	       		DETAIL_CODE = #{detailCode}
+
+    
+	</update>
+
+
+	<delete id="deleteDetailCode" parameterType="detailCodeBean">
+		
+	      DELETE FROM
+	      		DETAIL_CODE
+	      WHERE
+	            CODE = #{code}
+	      AND
+	       		DETAIL_CODE = #{detailCode}
+
+  
+	</delete>
+ 
+</mapper>

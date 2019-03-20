@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GlobalVariables>
+  <Variable id="g_authorityCode"/>
+  <Variable id="g_businessCode"/>
+  <Variable id="g_deptCode"/>
+  <Variable id="g_positionCode"/>
+  <Variable id="g_empCode"/>
+  <Variable id="g_empName"/>
+  <Variable id="g_deptName"/>
+  <Variable id="g_today"/>
+  <Variable id="g_basicDay"/>
+  <Variable id="g_baseYearMonth"/>
+  <Variable id="g_education"/>
+  <Dataset id="gds_menu">
+    <ColumnInfo>
+      <Column id="MENU_CODE" type="STRING" size="256"/>
+      <Column id="SUPER_MENU_CODE" type="STRING" size="256"/>
+      <Column id="MENU_NAME" type="STRING" size="256"/>
+      <Column id="MENU_URL" type="STRING" size="256"/>
+      <Column id="USING_STATUS" type="STRING" size="256"/>
+      <Column id="LEVEL" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_dustStatus">
+    <ColumnInfo>
+      <Column id="STATION_NAME" type="STRING" size="256"/>
+      <Column id="DATA_TIME" type="STRING" size="256"/>
+      <Column id="PM10GRADE" type="STRING" size="256"/>
+      <Column id="CO_VALUE" type="STRING" size="256"/>
+      <Column id="O3VALUE" type="STRING" size="256"/>
+      <Column id="MANG_NAME" type="STRING" size="256"/>
+      <Column id="SO2VALUE" type="STRING" size="256"/>
+      <Column id="PM25GRADE" type="STRING" size="256"/>
+      <Column id="PM10GRADE1H" type="STRING" size="256"/>
+      <Column id="PM25GRADE1H" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_code">
+    <ColumnInfo>
+      <Column id="CODE" type="STRING" size="256"/>
+      <Column id="CODE_NAME" type="STRING" size="256"/>
+      <Column id="EDIT_STATUS" type="STRING" size="256"/>
+      <Column id="CODE_GROUP" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_codeDetail">
+    <ColumnInfo>
+      <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+      <Column id="DETAIL_CODE" type="STRING" size="256"/>
+      <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+      <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+      <Column id="DESCRIPTION" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_dept">
+    <ColumnInfo>
+      <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+      <Column id="DEPT_CODE" type="STRING" size="256"/>
+      <Column id="DEPT_NAME" type="STRING" size="256"/>
+      <Column id="WORKPLACE_NAME" type="STRING" size="256"/>
+      <Column id="COMPANY_CODE" type="STRING" size="256"/>
+      <Column id="COMPANY_NAME" type="STRING" size="256"/>
+      <Column id="DEPT_START_DATE" type="STRING" size="256"/>
+      <Column id="DEPT_END_DATE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_employee" oncolumnchanged="gds_employee_oncolumnchanged">
+    <ColumnInfo>
+      <Column id="EMP_CODE" type="STRING" size="256"/>
+      <Column id="EMP_NAME" type="STRING" size="256"/>
+      <Column id="PASSWORD" type="STRING" size="256"/>
+      <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+      <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+      <Column id="DEPT_CODE" type="STRING" size="256"/>
+      <Column id="BUSINESS_PLACE_CODE" type="STRING" size="256"/>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="CHK" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_company">
+    <ColumnInfo>
+      <Column id="COMPANY_CODE" type="STRING" size="256"/>
+      <Column id="COMPANY_NAME" type="STRING" size="256"/>
+      <Column id="COMPANY_DIVISION" type="STRING" size="256"/>
+      <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="CORPORATION_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="COMPANY_CEO_NAME" type="STRING" size="256"/>
+      <Column id="COMPANY_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+      <Column id="COMPANY_BUSINESS_ITEMS" type="STRING" size="256"/>
+      <Column id="COMPANY_ZIP_CODE" type="STRING" size="256"/>
+      <Column id="COMPANY_BASIC_ADDRESS" type="STRING" size="256"/>
+      <Column id="COMPANY_DETAIL_ADDRESS" type="STRING" size="256"/>
+      <Column id="COMPANY_TEL_NUMBER" type="STRING" size="256"/>
+      <Column id="COMPANY_FAX_NUMBER" type="STRING" size="256"/>
+      <Column id="COMPANY_ESTABLISHMENT_DATE" type="STRING" size="256"/>
+      <Column id="COMPANY_OPEN_DATE" type="STRING" size="256"/>
+      <Column id="HOMEPAGE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_workplace">
+    <ColumnInfo>
+      <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+      <Column id="COMPANY_CODE" type="STRING" size="256"/>
+      <Column id="WORKPLACE_NAME" type="STRING" size="256"/>
+      <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="CORPORATION_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="WORKPLACE_CEO_NAME" type="STRING" size="256"/>
+      <Column id="WORKPLACE_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+      <Column id="WORKPLACE_BUSINESS_ITEMS" type="STRING" size="256"/>
+      <Column id="WORKPLACE_ZIP_CODE" type="STRING" size="256"/>
+      <Column id="WORKPLACE_BASIC_ADDRESS" type="STRING" size="256"/>
+      <Column id="WORKPLACE_DETAIL_ADDRESS" type="STRING" size="256"/>
+      <Column id="WORKPLACE_TEL_NUMBER" type="STRING" size="256"/>
+      <Column id="WORKPLACE_FAX_NUMBER" type="STRING" size="256"/>
+      <Column id="WORKPLACE_ESTABLISH_DATE" type="STRING" size="256"/>
+      <Column id="WORKPLACE_OPEN_DATE" type="STRING" size="256"/>
+      <Column id="WORKPLACE_CLOSE_DATE" type="STRING" size="256"/>
+      <Column id="IS_MAIN_OFFICE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_position">
+    <ColumnInfo>
+      <Column id="POSITION_CODE" type="STRING" size="256"/>
+      <Column id="POSITION_NAME" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_customer">
+    <ColumnInfo>
+      <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+      <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+      <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+      <Column id="CUSTOMER_TYPE" type="STRING" size="256"/>
+      <Column id="CUSTOMER_CEO" type="STRING" size="256"/>
+      <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+      <Column id="SOCIAL_SECURITY_NUMBER" type="STRING" size="256"/>
+      <Column id="CUSTOMER_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+      <Column id="CUSTOMER_BUSINESS_ITEMS" type="STRING" size="256"/>
+      <Column id="CUSTOMER_ZIP_CODE" type="STRING" size="256"/>
+      <Column id="CUSTOMER_BASIC_ADDRESS" type="STRING" size="256"/>
+      <Column id="CUSTOMER_DETAIL_ADDRESS" type="STRING" size="256"/>
+      <Column id="CUSTOMER_TEL_NUMBER" type="STRING" size="256"/>
+      <Column id="CUSTOMER_FAX_NUMBER" type="STRING" size="256"/>
+      <Column id="CUSTOMER_NOTE" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_post">
+    <ColumnInfo>
+      <Column id="ZIP_NO" type="STRING" size="256"/>
+      <Column id="LNM_ADRES" type="STRING" size="256"/>
+      <Column id="RN_ADRES" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Dataset id="gds_baseYear">
+    <ColumnInfo>
+      <Column id="YEAR" type="STRING" size="256"/>
+      <Column id="ACCOUNT_PERIOD" type="STRING" size="256"/>
+      <Column id="INDEX_NO" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+  <Images>
+    <Image id="1" url="..\..\Documents\nexacro\outputs\ERP57th_nexa\_theme_\default_CUSTOM\images\1.png"/>
+    <Image id="2" url="test\test1\2.png"/>
+    <Image id="testImage" url="images::testImage.png"/>
+  </Images>
+  <Dataset id="gds_seqNo">
+    <ColumnInfo>
+      <Column id="SEQ_NO" type="STRING" size="256"/>
+    </ColumnInfo>
+  </Dataset>
+</GlobalVariables>

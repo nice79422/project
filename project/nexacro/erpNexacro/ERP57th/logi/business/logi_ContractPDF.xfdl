@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_ContractPDF" left="0" top="0" width="1104" height="768" titletext="New Form" onload="logi_ContractPDF_onload" onclick="logi_ContractPDF_onclick">
+    <Layouts>
+      <Layout>
+        <Plugin id="Plugin00" left="3.3%" top="13" right="1.4%" height="743" taborder="0" classid="{CA8A9780-280D-11CF-A24D-444553540000}" popupstyle="true" windowed="true"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.0"><![CDATA[this.logi_ContractPDF_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var contractNum=this.parent.contractNo;
+	trace("a");
+	this.Plugin00.setProperty("src", "http://localhost:8282/57thERP/logi/business/pdfPrint.do?contractNo='"+contractNum+"'");
+	trace("b");
+	this.Plugin00.show();
+	trace("c");
+}]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.production.dao.MrpDAO">
+
+
+	<!-- mrpDAO -->
+
+
+
+	<resultMap type="mrpTO" id="mrpResult">
+
+		<result property="mrpNo" column="MRP_NO" />
+		<result property="mpsNo" column="MPS_NO" />
+		<result property="mrpGatheringNo" column="MRP_GATHERING_NO" />
+		<result property="itemClassifcation"
+			column="ITEM_CLASSIFICATION" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfMrp" column="UNIT_OF_MRP" />
+		<result property="requiredAmount" column="REQUIRED_AMOUNT" />
+		<result property="orderDate" column="ORDER_DATE" />
+		<result property="requiredDate" column="REQUIRED_DATE" />
+		<result property="mrpGatheringStatus"
+			column="MRP_GATHERING_STATUS" />
+
+
+	</resultMap>
+
+	<select id="selectMrpList" parameterType="hashmap" resultMap="mrpResult">
+
+		SELECT
+		MRP_NO, MPS_NO,
+		MRP_GATHERING_NO, ITEM_CLASSIFICATION
+		, ITEM_CODE, ITEM_NAME,
+		UNIT_OF_MRP, REQUIRED_AMOUNT
+		, ORDER_DATE, REQUIRED_DATE,
+		MRP_GATHERING_STATUS
+		FROM MRP
+		<if test="mrpgStatus.equals('NO')">
+		WHERE
+		MRP_GATHERING_STATUS IS NULL OR MRP_GATHERING_STATUS='N'
+		</if>
+		<if test="mrpgStatus.equals('YES')">
+		WHERE
+		MRP_GATHERING_STATUS='Y'
+		</if>
+		<if test="mrpgStatus!='YES' and mrpgStatus!='NO'" >
+		WHERE
+		MRP_GATHERING_NO=#{mrpgStatus}
+		</if>
+	</select>
+
+
+	<insert id="insertMrp" parameterType="mrpTO">
+
+		INSERT INTO MRP
+		VALUES
+		(
+		#{mrpNo}
+		, #{mpsNo}
+		, #{mrpGatheringNo}
+		, #{itemClassifcation}
+		, #{itemCode}
+		,
+		#{itemName}
+		, #{unitOfMrp}
+		, #{requiredAmount}
+		, #{orderDate}
+		, #{requiredDate}
+		, #{mrpGatheringStatus}
+
+		)
+
+	</insert>
+
+
+
+	<update id="updateMrp" parameterType="mrpTO">
+
+		UPDATE MRP SET
+		MRP_GATHERING_NO = #{mrpGatheringNo}
+		, MRP_GATHERING_STATUS =
+		#{mrpGatheringStatus}
+		WHERE
+		MRP_NO = #{mrpNo}
+
+	</update>
+
+
+
+
+
+	<!-- MrpOpenTemp -->
+
+	<resultMap id="MrpOpenTempResult" type="MrpOpenTempTO">
+		<result property="mpsNo" column="MPS_NO" />
+		<result property="bomNo" column="BOM_NO" />
+		<result property="itemClassification"
+			column="ITEM_CLASSIFICATION" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfMrp" column="UNIT_OF_MRP" />
+		<result property="planAmount" column="PLAN_AMOUNT" />
+		<result property="orderDate" column="ORDER_DATE" />
+		<result property="requiredDate" column="REQUIRED_DATE" />
+		<result property="totalLossRate" column="TOTAL_LOSS_RATE" />
+		<result property="caculatedAmount" column="CACULATED_AMOUNT" />
+		<result property="requiredAmount" column="REQUIRED_AMOUNT" />
+	</resultMap>
+
+
+	<select id="MrpOpenTempProcessList" statementType="CALLABLE"
+		parameterType="hashmap">
+   <![CDATA[
+             {call MRP_PKG.P_MRP_OPEN
+        ( #{mpsNo, mode=IN, typeHandler= kr.co.seoulit.common.util.OracleCallBackHandler}
+        ,#{errorCode, mode=OUT, jdbcType=NUMERIC, javaType=int}
+        ,#{errorCode, mode=OUT, jdbcType=VARCHAR, javaType=string}
+        ,#{result, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=MrpOpenTempResult}
+        )
+        }
+    ]]>
+	</select>
+
+		<parameterMap id="MrpInsert" type="map">
+			<parameter property="errorCode" mode="OUT"
+				jdbcType="NUMERIC" javaType="int" />
+			<parameter property="errorMsg" mode="OUT"
+				jdbcType="VARCHAR" javaType="string" />
+		</parameterMap>
+
+
+
+
+		<select id="MrpInsertProcess" statementType="CALLABLE"
+			parameterMap="MrpInsert">
+   <![CDATA[
+        {call MRP_PKG.P_MRP(?,?)}
+    ]]>
+		</select>
+
+
+
+</mapper>

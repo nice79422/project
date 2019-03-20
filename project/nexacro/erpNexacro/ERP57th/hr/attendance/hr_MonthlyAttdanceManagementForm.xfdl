@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_monthlyAttdanceManagementForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="hr_monthlyAttdanceManagementForm_onload">
+    <Layouts>
+      <Layout width="1185" height="785">
+        <Static id="Static00" taborder="0" text="월 근태 관리" left="0.59%" top="9" right="0.76%" height="45"/>
+        <Static id="Static01" taborder="1" text="기준년도" left="58.99%" top="64" right="32.15%" height="32"/>
+        <Combo id="selYear_cmb" taborder="3" left="67.68%" top="64" right="21.77%" height="32" codecolumn="YEAR" datacolumn="YEAR" innerdataset="@gds_baseYear"/>
+        <Static id="Static02" taborder="4" text="기준월" left="78.65%" top="64" right="12.49%" height="32"/>
+        <Combo id="selMonth_cmb" taborder="5" left="87.34%" top="64" right="2.11%" height="32" codecolumn="MONTH" datacolumn="MONTH" innerdataset="@ds_baseMonth"/>
+        <Tab id="Tab00" taborder="6" left="2.7%" top="109" right="2.53%" height="643" tabindex="0" scrollbars="autoboth" style="font:13 Dotum;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="월근태 미마감 항목">
+              <Layouts>
+                <Layout>
+                  <Button id="search_btn" taborder="0" text="조회" left="72.35%" top="10" right="16.86%" height="34" onclick="Tab00_tabpage1_search_btn_onclick"/>
+                  <Button id="close_btn" taborder="1" text="마감" left="84.83%" top="10" right="4.37%" height="34" onclick="Tab00_tabpage1_close_btn_onclick"/>
+                  <Grid id="Grid00" taborder="2" useinputpanel="false" left="2.5%" top="54" right="2.23%" height="542" binddataset="ds_monthAttdReport">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="124"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="99"/>
+                          <Column size="130"/>
+                          <Column size="140"/>
+                          <Column size="87"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell rowspan="2" text="사원번호"/>
+                          <Cell col="1" rowspan="2" text="사원명"/>
+                          <Cell col="2" rowspan="2" text="적용년월"/>
+                          <Cell col="3" colspan="2" text="근무일"/>
+                          <Cell col="5" colspan="2" text="근무시간"/>
+                          <Cell col="7" rowspan="2" text="연장근무시간"/>
+                          <Cell col="8" rowspan="2" text="심야근무시간"/>
+                          <Cell col="9" rowspan="2" text="지각시간"/>
+                          <Cell col="10" rowspan="2" text="근태외일수(연차)"/>
+                          <Cell col="11" rowspan="2" text="결근일수"/>
+                          <Cell col="12" rowspan="2" text="지각일수"/>
+                          <Cell col="13" rowspan="2" text="조퇴일수"/>
+                          <Cell col="14" rowspan="2" text="외출일수"/>
+                          <Cell col="15" rowspan="2" text="휴일근무일수"/>
+                          <Cell col="16" rowspan="2" text="휴일근무시간"/>
+                          <Cell col="17" rowspan="2" text="휴일연장근무시간"/>
+                          <Cell col="18" rowspan="2" text="휴일심야근무시간"/>
+                          <Cell col="19" rowspan="2" text="마감여부"/>
+                          <Cell row="1" col="3" text="기준일수"/>
+                          <Cell row="1" col="4" text="실제일수"/>
+                          <Cell row="1" col="5" text="기준시간"/>
+                          <Cell row="1" col="6" text="실제시간"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:BASIC_YEAR_MONTH" mask="####-##"/>
+                          <Cell col="3" text="bind:BASIC_WORK_DAYS"/>
+                          <Cell col="4" text="bind:WEEKDAY_WORK"/>
+                          <Cell col="5" text="bind:BASIC_WORK_HOUR"/>
+                          <Cell col="6" text="bind:WORK_HOUR"/>
+                          <Cell col="7" text="bind:OVER_WORK_HOUR"/>
+                          <Cell col="8" text="bind:NIGHT_WORK_HOUR"/>
+                          <Cell col="9" text="bind:LATE_HOUR"/>
+                          <Cell col="10" text="bind:ATTD_REST_DAYS"/>
+                          <Cell col="11" text="bind:ABSENT_DAYS"/>
+                          <Cell col="12" text="bind:LATE_DAYS"/>
+                          <Cell col="13" text="bind:LEAVE_EARLY_DAYS"/>
+                          <Cell col="14" text="bind:LEAVE_DAYS"/>
+                          <Cell col="15" text="bind:HOLIDAY_WORK_DAYS"/>
+                          <Cell col="16" text="bind:HOLIDAY_WORK_HOUR"/>
+                          <Cell col="17" text="bind:HOLIDAY_OVER_WORK_HOUR"/>
+                          <Cell col="18" text="bind:HOLIDAY_NIGHT_WORK_HOUR"/>
+                          <Cell col="19" text="bind:CLOSE_YN"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="월근태 마감 항목">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="3" binddataset="ds_closedMonthAttdReport" useinputpanel="false" visible="true" left="2.5%" top="54" right="2.23%" height="542">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="124"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="95"/>
+                          <Column size="99"/>
+                          <Column size="130"/>
+                          <Column size="140"/>
+                          <Column size="87"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell rowspan="2" text="사원번호"/>
+                          <Cell col="1" rowspan="2" text="사원명"/>
+                          <Cell col="2" rowspan="2" text="적용년월"/>
+                          <Cell col="3" colspan="2" text="근무일"/>
+                          <Cell col="5" colspan="2" text="근무시간"/>
+                          <Cell col="7" rowspan="2" text="연장근무시간"/>
+                          <Cell col="8" rowspan="2" text="심야근무시간"/>
+                          <Cell col="9" rowspan="2" text="지각시간"/>
+                          <Cell col="10" rowspan="2" text="근태외일수(연차)"/>
+                          <Cell col="11" rowspan="2" text="결근일수"/>
+                          <Cell col="12" rowspan="2" text="지각일수"/>
+                          <Cell col="13" rowspan="2" text="조퇴일수"/>
+                          <Cell col="14" rowspan="2" text="외출일수"/>
+                          <Cell col="15" rowspan="2" text="휴일근무일수"/>
+                          <Cell col="16" rowspan="2" text="휴일근무시간"/>
+                          <Cell col="17" rowspan="2" text="휴일연장근무시간"/>
+                          <Cell col="18" rowspan="2" text="휴일심야근무시간"/>
+                          <Cell col="19" rowspan="2" text="마감여부"/>
+                          <Cell row="1" col="3" text="기준일수"/>
+                          <Cell row="1" col="4" text="실제일수"/>
+                          <Cell row="1" col="5" text="기준시간"/>
+                          <Cell row="1" col="6" text="실제시간"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:BASIC_YEAR_MONTH" mask="####-##"/>
+                          <Cell col="3" text="bind:BASIC_WORK_DAYS"/>
+                          <Cell col="4" text="bind:WEEKDAY_WORK"/>
+                          <Cell col="5" text="bind:BASIC_WORK_HOUR"/>
+                          <Cell col="6" text="bind:WORK_HOUR"/>
+                          <Cell col="7" text="bind:OVER_WORK_HOUR"/>
+                          <Cell col="8" text="bind:NIGHT_WORK_HOUR"/>
+                          <Cell col="9" text="bind:LATE_HOUR"/>
+                          <Cell col="10" text="bind:ATTD_REST_DAYS"/>
+                          <Cell col="11" text="bind:ABSENT_DAYS"/>
+                          <Cell col="12" text="bind:LATE_DAYS"/>
+                          <Cell col="13" text="bind:LEAVE_EARLY_DAYS"/>
+                          <Cell col="14" text="bind:LEAVE_DAYS"/>
+                          <Cell col="15" text="bind:HOLIDAY_WORK_DAYS"/>
+                          <Cell col="16" text="bind:HOLIDAY_WORK_HOUR"/>
+                          <Cell col="17" text="bind:HOLIDAY_OVER_WORK_HOUR"/>
+                          <Cell col="18" text="bind:HOLIDAY_NIGHT_WORK_HOUR"/>
+                          <Cell col="19" text="bind:CLOSE_YN"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="search_btn" taborder="8" text="조회" left="72.35%" top="10" right="16.86%" height="34" onclick="Tab00_tabpage2_search_btn_onclick"/>
+                  <Button id="unclose_btn" taborder="9" text="마감취소" left="84.83%" top="10" right="4.37%" height="34" enable="false" onclick="Tab00_tabpage2_unclose_btn_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+      <Layout name="Layout00" screenid="screen_init" width="1440" height="900"/>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_baseMonth">
+        <ColumnInfo>
+          <Column id="MONTH" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MONTH">01</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">02</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">03</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">04</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">05</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">06</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">07</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">08</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">09</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">10</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">11</Col>
+          </Row>
+          <Row>
+            <Col id="MONTH">12</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_closedMonthAttdReport">
+        <ColumnInfo>
+          <Column id="BASIC_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="WEEKDAY_WORK" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="ABSENT_DAYS" type="STRING" size="256"/>
+          <Column id="LATE_DAYS" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="LEAVE_EARLY_DAYS" type="STRING" size="256"/>
+          <Column id="LEAVE_DAYS" type="STRING" size="256"/>
+          <Column id="CLOSE_YN" type="STRING" size="256"/>
+          <Column id="ATTD_REST_DAYS" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_employeeList">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_unCloseDailyAttd">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="DAILY" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="ATTEND_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="LEAVE_TIME" type="STRING" size="256"/>
+          <Column id="RETURN_TIME" type="STRING" size="256"/>
+          <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="CLOSE_YN" type="STRING" size="256"/>
+          <Column id="ATTD_DAY_TYPE" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_TIME" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_monthAttdReport">
+        <ColumnInfo>
+          <Column id="BASIC_YEAR_MONTH" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="BASIC_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="WEEKDAY_WORK" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_DAYS" type="STRING" size="256"/>
+          <Column id="HOLIDAY_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="HOLIDAY_NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="ABSENT_DAYS" type="STRING" size="256"/>
+          <Column id="LATE_DAYS" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="LEAVE_EARLY_DAYS" type="STRING" size="256"/>
+          <Column id="LEAVE_DAYS" type="STRING" size="256"/>
+          <Column id="CLOSE_YN" type="STRING" size="256"/>
+          <Column id="ATTD_REST_DAYS" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+월 근태 관리  화면                                             						                                                                         
+@Path		인사              				   				
+@Description	월 근태 관리을 하기 위한  폼							
+@Author	  	김민서				    			                        								                                            
+@Create           2019. 02. 20.                             		                    				                                            
+********************************************************************************/
+
+var baseYear;
+var baseMonth;
+
+this.hr_monthlyAttdanceManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+		var FullDate = new Date(); 
+		presentYear = FullDate.getFullYear().toString().padLeft(4, "0"); //현재 년도
+		presentMonth = (FullDate.getMonth()+1).toString().padLeft(2, "0"); //현재 월
+		
+		this.selYear_cmb.set_value(presentYear);
+		this.selMonth_cmb.set_value(presentMonth);
+		
+		this.transaction("findEmployeeList",
+						"dataURL::hr/emp/findEmployeeList.do",
+						"",
+						"ds_employeeList=gds_employee",
+						"",
+						"callback",
+						false);
+						
+		this.ds_employeeList.filter("");
+		this.ds_monthAttdReport.filter("EMP_CODE==0");				
+}
+
+
+
+//미마감 항목 조회시 
+this.Tab00_tabpage1_search_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	baseYear=this.selYear_cmb.value;
+	baseMonth=this.selMonth_cmb.value;
+	if(this.selYear_cmb.value == undefined || this.selMonth_cmb.value == undefined){
+		alert(" 기준년도 또는 기준월을 선택해 주세요 :( ");
+	}else{		
+				this.transaction("findUnClosedDailyAttdReport",
+							"dataURL::hr/attendance/findUnClosedDailyAttdReport.do",
+							"",
+							"ds_unCloseDailyAttd=ds_dailyAttdReport",
+							"baseYearMonth=" +(baseYear+baseMonth),
+							"callback",
+							false);
+							
+		// 해당 월에 일근태 미마감 항목이 있는지 조사		
+		if(confirm(baseYear+"년 "+baseMonth+"월 월근태 미마감현황을 조회하시겠습니까?")){
+			if(this.ds_unCloseDailyAttd.getRowCount()>0){	//미마감 내역이 있다면 여기 실행
+			alert("일근태 미 마감 내역  "+this.ds_unCloseDailyAttd.getRowCount()+"  건");
+				var v_baseYearMonth=baseYear+baseMonth; //해당 년월을 변수에 담음 
+						
+				application.open(
+					"hr_UnCloseDailyAttd",
+					"hr_attendance::hr_UnCloseDailyAttdDialog.xfdl",
+					this.getOwnerFrame(),
+					{mode:'modeless',ds:this.ds_unCloseDailyAttd},
+					"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='unCloseDailyAttd'"
+				);
+				}else{
+				alert("일근태 미 마감 내역이 없습니다.!");
+				this.findMonthAttdReport();
+			}
+		}				
+	}
+}
+
+// 월근태관리테이블에서 기준일에 해당하는 데이터를 생성,조회
+ this.findMonthAttdReport = function(){
+	this.ds_monthAttdReport.filter("");	
+	this.transaction(
+		"findMonthAttdReport",
+		"dataURL::hr/attendance/findMonthAttdReport.do",
+		"",
+		"ds_monthAttdReport=ds_monthAttdReport",
+		"baseYearMonth="+(baseYear+baseMonth),
+		"callback"
+	);
+}
+
+//월근태 미 마감 마감 시 !
+this.Tab00_tabpage1_close_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{ 
+	if(confirm(" 현재 기준월의 데이터를 마감하시겠습니까? ")){
+			for(var index = 0; index < this.ds_monthAttdReport.getRowCount(); index++) {
+			this.ds_monthAttdReport.setColumn(index,"CLOSE_YN","Y");
+			
+						
+						
+	}
+	this.updateMonthCloseYNTR();
+}
+
+}
+ this.updateMonthCloseYNTR = function(){
+	this.transaction(
+		"updateMonthAttdCloseYN",
+		"dataURL::hr/attendance/updateMonthAttdCloseYN.do",
+		"ds_monthAttdReport=ds_monthAttdReport:u",
+		"",
+		"",
+		"callback",false
+	);
+}
+
+
+	
+
+
+///////////////////////////////////////////////////////////////////////////////
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid=='updateMonthAttdCloseYN'){
+		if(ErrorCode<0){
+			alert(ErrorMsg);
+		}else{
+			this.ds_monthAttdReport.clearData();
+			alert(" 성공적으로 마감이 되었습니다 :) ");
+		 }
+		}
+		if(trid=='updateMonthAttdUnCloseYN'){
+			if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			this.ds_closedMonthAttdReport.clearData();
+			this.Tab00.tabpage2.unclose_btn.set_enable("false"); // 마감취소 버튼 활성화 
+			alert(" 성공적으로 마감을 취소하였습니다 :) ");
+		}
+	}
+	
+	if(trid=='findClosedMonthAttdReport'){  
+			if(ErrorCode!=0){
+				alert(ErrorMsg);
+			}else{
+				if(this.ds_closedMonthAttdReport.getRowCount()==0){
+					alert("현재날짜에는 마감된 항목이 없습니다");
+				}
+				this.Tab00.tabpage2.unclose_btn.set_enable("true"); // 마감취소 버튼 활성화 
+			
+			}
+		}
+		
+		if(trid=='findMonthAttdReport'){
+			if(ErrorCode!=0){
+				alert(ErrorMsg);
+			}else{
+				var closeYN=this.ds_monthAttdReport.getColumn(0,"CLOSE_YN");
+				if(this.ds_monthAttdReport.getRowCount() >0 && closeYN=='Y'){
+				   this.ds_monthAttdReport.clearData();
+					alert("현재월에는 마감이되어있습니다 마감취소후 다시마감해주세요");
+				}
+			}	
+		}
+	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+// 월근태 마감 항목 조회 
+this.Tab00_tabpage2_search_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+		
+		baseYear=this.selYear_cmb.value;
+		baseMonth=this.selMonth_cmb.value;
+		alert(baseYear+"년  "+baseMonth+"월  ");
+		
+		//alert("월근태마감확인 :: 월근태마감 인원수 = "+this.ds_closedMonthAttdReport.getRowCount());
+		
+	if(this.selYear_cmb.value == undefined || this.selMonth_cmb.value == undefined){
+		alert(" 기준년도 또는 기준월을 선택해 주세요 :( ");
+	}else{
+	
+		this.transaction(
+			"findClosedMonthAttdReport",
+			"dataURL::hr/attendance/findClosedMonthAttdReport.do",
+			"",
+			"ds_closedMonthAttdReport=ds_monthAttdReport",
+			"baseYearMonth=" +(baseYear+baseMonth),
+			"callback",false
+		);
+
+	}
+}
+
+//마감 취소 시 !!
+this.Tab00_tabpage2_unclose_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		if(confirm("마감취소 하시겠습니까?")){
+		for(var index = 0; index < this.ds_closedMonthAttdReport.rowcount; index++) {
+			this.ds_closedMonthAttdReport.setColumn(index,"CLOSE_YN","N");
+		}
+		
+		this.transaction(
+			"updateMonthAttdUnCloseYN",
+			"dataURL::hr/attendance/updateMonthAttdCloseYN.do",
+			"ds_monthAttdReport=ds_closedMonthAttdReport:u",
+			"",
+			"",
+			"callback"
+		);	
+	}	
+}]]></Script>
+  </Form>
+</FDL>

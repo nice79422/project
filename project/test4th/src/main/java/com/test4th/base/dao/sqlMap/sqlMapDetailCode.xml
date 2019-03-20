@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="detailCode">
+	<typeAlias alias="detailCodeBean" type="com.test4th.base.to.DetailCodeBean" />
+	<resultMap id="detailCodeResult" class="detailCodeBean">
+		<result property="code" column="CODE" />
+		<result property="detailCode" column="DETAIL_CODE" />
+		<result property="detailCodeName" column="DETAIL_CODE_NAME" />
+		<result property="usingStatus" column="USING_STATUS" />
+	</resultMap>
+
+	<select id="selectDetailCodeList" resultMap="detailCodeResult" parameterClass="String">
+    <![CDATA[
+        SELECT * FROM DETAIL_CODE WHERE CODE=#code#
+    ]]>
+	</select>
+
+ 
+	<insert id="insertDetailCode" parameterClass="detailCodeBean">
+		<![CDATA[
+	        INSERT INTO
+	            DETAIL_CODE
+	            (
+	            CODE,
+	            DETAIL_CODE,
+	            
+	            DETAIL_CODE_NAME,
+	            USING_STATUS
+	            )
+	        VALUES (
+	         #code#,
+	            #detailCode#,
+	           
+	            #detailCodeName#,
+	            #usingStatus#
+	        )
+    	]]>
+	</insert>
+
+
+	<update id="updateDetailCode" parameterClass="detailCodeBean">
+		<![CDATA[
+	       UPDATE
+	            DETAIL_CODE
+	       SET
+	            DETAIL_CODE_NAME = #detailCodeName#,
+	            USING_STATUS = #usingStatus#
+	       WHERE
+	            CODE = #code#
+	       AND
+	       		DETAIL_CODE = #detailCode#
+
+    	]]>
+	</update>
+
+
+	<delete id="deleteDetailCode" parameterClass="detailCodeBean">
+		<![CDATA[
+	      DELETE FROM
+	      		DETAIL_CODE
+	      WHERE
+	            CODE = #code#
+	      AND
+	       		DETAIL_CODE = #detailCode#
+
+    	]]>
+	</delete>
+ 
+</sqlMap>

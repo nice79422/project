@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.sys.dao.AuthorityDAO">
+
+	<resultMap id="authorityResult" type="menuAuthorityTO">
+		<result property="authorityCode" column="AUTHORITY_CODE" />
+		<result property="authorityName" column="AUTHORITY_NAME" />
+		<result property="menuCode" column="MENU_CODE" />
+	</resultMap>
+
+	<!-- 모든 권한을 가져오는 메서드 -->
+	<select id="selectMenuAuthorityList" resultMap="authorityResult"
+		parameterType="string">
+
+		SELECT AUTHORITY_CODE, AUTHORITY_NAME,MENU_CODE FROM MENU_AUTHORITY where
+		AUTHORITY_CODE= #{authorityCode}
+
+	</select>
+
+	<select id="selectAuthorityList" resultMap="authorityResult"
+		parameterType="string">
+
+		SELECT AUTHORITY_CODE, AUTHORITY_NAME FROM AUTHORITY
+
+	</select>
+</mapper>

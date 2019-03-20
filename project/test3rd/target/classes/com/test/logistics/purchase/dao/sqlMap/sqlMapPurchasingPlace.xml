@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="purchasingPlace">
+
+	<typeAlias alias="PurchasingPlaceBean"
+		type="com.test.logistics.purchase.to.PurchasingPlaceBean" />
+	<resultMap id="PurchasingPlaceResult" class="PurchasingPlaceBean">
+		<result property="purchasingPlaceCode" column="PURCHASING_PLACE_CODE" />
+		<result property="purchasingPlaceName" column="PURCHASING_PLACE_NAME" />
+		<result property="businessNumber" column="BUSINESS_NUMBER" />
+		<result property="businessConditions" column="BUSINESS_CONDITIONS" />
+		<result property="representName" column="REPRESENT_NAME" />
+		<result property="postNumber" column="POST_CODE" />
+		<result property="addr" column="ADDRESS" />
+		<result property="detailAddr" column="DETAIL_ADDRESS" />
+		<result property="tel" column="TEL" />
+		<result property="fax" column="FAX" />
+	</resultMap>
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+	SELECT COUNT(*) FROM PURCHASING_PLACE
+    ]]>
+	</select>
+
+	<select id="selectPurchasingPlaceList" resultMap="PurchasingPlaceResult"
+		parameterClass="map">
+    <![CDATA[
+	 SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY v.PURCHASING_PLACE_CODE) RN, v.PURCHASING_PLACE_CODE
+	, v.PURCHASING_PLACE_NAME , v.BUSINESS_NUMBER, v.BUSINESS_CONDITIONS, v.REPRESENT_NAME               
+	, v.POST_CODE, v.ADDRESS, v.DETAIL_ADDRESS , v.TEL, v.FAX FROM PURCHASING_PLACE v)                   
+	WHERE RN BETWEEN #startRow# AND #endRow#                                                             
+    ]]>
+	</select>
+	
+		<insert id="insertPurchasingPlace" parameterClass="PurchasingPlaceBean">
+    <![CDATA[
+	INSERT INTO PURCHASING_PLACE VALUES
+       (
+          #purchasingPlaceCode#
+         ,#purchasingPlaceName#
+         ,#businessNumber#
+         ,#businessConditions#
+         ,#representName#
+         ,#postNumber#
+         ,#addr#
+         ,#detailAddr#
+         ,#tel#
+         ,#fax#
+         )
+    ]]>
+	</insert>
+
+
+</sqlMap>

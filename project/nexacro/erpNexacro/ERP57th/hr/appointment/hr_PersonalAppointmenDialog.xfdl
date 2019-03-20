@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_AppointmentEmpForm" left="0" top="0" width="500" height="400" titletext="발령대상자 선택" onload="hr_AppointmentEmpForm_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="appointmentEmployee_grid" taborder="0" useinputpanel="false" left="5%" top="66" right="5%" height="316" binddataset="gds_employee" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="EMP_CODE"/>
+                <Cell col="1" text="EMP_NAME"/>
+                <Cell col="2" text="DEPT_CODE"/>
+                <Cell col="3" text="BUSINESS_PLACE_CODE"/>
+                <Cell col="4" text="POSITION_CODE"/>
+                <Cell col="5" text="CHK"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" text="bind:DEPT_CODE"/>
+                <Cell col="3" text="bind:BUSINESS_PLACE_CODE"/>
+                <Cell col="4" text="bind:POSITION_CODE"/>
+                <Cell col="5" displaytype="checkbox" edittype="checkbox" text="bind:CHK"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="registerAppointment_btn" taborder="1" text="선택완료" left="78%" top="24" right="5%" height="32" onclick="registerAppointment_btn_onclick" visible="true"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+발령대상자 선택 다이얼로그
+@Path		인사
+@Description	발령대상자 선택 다이얼로그 
+@Author	  	심승현
+@Create           2019. 02. 13.
+********************************************************************************/
+//폼 온로드
+this.hr_AppointmentEmpForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	application.gds_employee.filter("");
+	var gEmpRow=application.gds_employee.getRowCount();
+	for(i=0; i<gEmpRow; i++){
+		application.gds_employee.setColumn(i,"CHK",0);
+	}
+}
+// 
+// //선택완료 버튼
+// this.registerAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+// {
+// 	this.close();
+// }
+
+//발령 대상자 체크박스 선택시 발생하는 이벤트
+this.ds_employee_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	if(e.newvalue=='1')
+	{
+	alert(e.oldvalue + " ---->> " + e.newvalue);
+	var selEmpNo = this.ds_employee.getColumn(e.row, "EMP_CODE");
+	var selEmpName = this.ds_employee.getColumn(e.row, "EMP_NAME");
+	var selPosition = this.ds_employee.getColumn(e.row, "POSITION_CODE");
+	var selDept = this.ds_employee.getColumn(e.row, "DEPT_CODE");
+
+	var addrow = this.opener.ds_personalAppointment.addRow();
+	this.opener.ds_personalAppointment.setColumn(addrow,"EMPLOYEE_NO", selEmpNo);
+	this.opener.ds_personalAppointment.setColumn(addrow,"EMPLOYEE_NAME", selEmpName);
+	this.opener.ds_personalAppointment.setColumn(addrow,"POSITION", selPosition);
+	this.opener.ds_personalAppointment.setColumn(addrow,"DEPARTMENT", selDept);
+	this.opener.ds_personalAppointment.setColumn(addrow,"APPOINTMENT_NO",this.parent.variable);
+	this.opener.ds_personalAppointment.setColumn(addrow,"APPOINTMENT_DIVISION",this.parent.variable2);
+	this.opener.ds_personalAppointment.setColumn(addrow,"APPLY_STATUS","N");
+	addrow++;
+	}
+	if(e.newvalue=='0')
+	{
+	alert(e.row);
+	alert(e.oldvalue + " ---->> " + e.newvalue);
+	var selEmpNo = this.ds_employee.getColumn(e.row, "EMP_CODE");
+	alert(selEmpNo);
+	var rowcnt = this.opener.ds_personalAppointment.findRow("EMPLOYEE_NO",selEmpNo);
+	alert("rowcnt  :   " +rowcnt);
+	this.opener.ds_personalAppointment.deleteRow(rowcnt);
+	}
+	
+}
+
+
+//선택완료 버튼
+this.registerAppointment_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//application.gds_employee.
+	application.gds_employee.filter("CHK=='1'");
+	var gEmpRowCnt=application.gds_employee.getRowCount();
+	for(ii=0; ii<gEmpRowCnt; ii++){
+		var gEmpNoSel=application.gds_employee.getColumn(ii,"EMP_CODE");
+		var gEmpNameSel=application.gds_employee.getColumn(ii,"EMP_NAME");
+		var gPosCodeSel=application.gds_employee.getColumn(ii,"POSITION_CODE");
+		var gDeptCodeSel=application.gds_employee.getColumn(ii,"DEPT_CODE");
+	
+		this.opener.ds_personalAppointment.addRow();
+		this.opener.ds_personalAppointment.setColumn(ii,"EMPLOYEE_NO", gEmpNoSel);
+		this.opener.ds_personalAppointment.setColumn(ii,"EMPLOYEE_NAME", gEmpNameSel);
+		this.opener.ds_personalAppointment.setColumn(ii,"POSITION", gPosCodeSel);
+		this.opener.ds_personalAppointment.setColumn(ii,"DEPARTMENT", gDeptCodeSel);
+		this.opener.ds_personalAppointment.setColumn(ii,"APPOINTMENT_NO",this.parent.variable);
+		this.opener.ds_personalAppointment.setColumn(ii,"APPOINTMENT_DIVISION",this.parent.variable2);
+		this.opener.ds_personalAppointment.setColumn(ii,"APPLY_STATUS","N");	
+	}
+	this.close();
+}
+
+]]></Script>
+  </Form>
+</FDL>

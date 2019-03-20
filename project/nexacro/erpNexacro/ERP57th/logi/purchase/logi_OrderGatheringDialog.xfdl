@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_OrderGatheringDialog" left="0" top="0" width="1024" height="768" titletext="New Form" onload="logi_OrderGatheringDialog_onload">
+    <Layouts>
+      <Layout>
+        <Static id="giveOrder_stc" taborder="0" text="소요량발주취합" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Button id="cancel_btn" taborder="1" text="취소" visible="false" left="814" top="695" width="93" height="39" style="font:한컴산뜻돋움,11,bold;" onclick="cancel_btn_onclick"/>
+        <Button id="close_btn" taborder="2" text="닫기" left="917" top="695" width="93" height="39" style="font:한컴산뜻돋움,11,bold;" onclick="close_btn_onclick"/>
+        <Grid id="mrpGathering_grid" taborder="3" binddataset="ds_mrpGathering" useinputpanel="false" autofittype="col" left="14" top="70" width="484" height="296" style="font:새굴림,11;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="138"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="소요량취합번호"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="수량"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="납기일"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:MRP_GATHERING_NO"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:NECESSARY_AMOUNT"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:CLAIM_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="stock_grid" taborder="4" binddataset="ds_stock" useinputpanel="false" autofittype="col" left="526" top="118" width="484" height="568" style="font:새굴림,11;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="42"/>
+                <Column size="60"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="가용재고"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_STOCK"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:STOCK_AMOUNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="addOrderGathering_btn" taborder="5" text="발주취합" left="381" top="377" width="117" height="39" style="font:한컴산뜻돋움,11,bold;" onclick="addOrderGathering_btn_onclick"/>
+        <Grid id="orderGathering_grid" taborder="6" binddataset="ds_orderGathering" useinputpanel="false" autofittype="col" left="14" top="422" width="484" height="312" style="font:새굴림,11;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="56"/>
+                <Column size="52"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="25"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목코드"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="품목명"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="단위"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="소요량"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11,bold;" text="납기일"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_CODE"/>
+                <Cell col="1" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ITEM_NAME"/>
+                <Cell col="2" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:UNIT_OF_ORDER"/>
+                <Cell col="3" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:ORDER_AMOUNT"/>
+                <Cell col="4" displaytype="normal" style="font:한컴산뜻돋움,11;" text="bind:DELIVERY_SCHEDULE_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="stock_stc" taborder="8" text="재고현황" left="530" top="73" width="480" height="39" style="border:2 solid darkgray ;color:dimgray;align:center;font:bold 12 Verdana;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_mrpGathering">
+        <ColumnInfo>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_OR_PRODUCTION_STATUS" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_MRP_GATHERING" type="STRING" size="256"/>
+          <Column id="NECESSARY_AMOUNT" type="STRING" size="256"/>
+          <Column id="DUE_DATE" type="STRING" size="256"/>
+          <Column id="CLAIM_DATE" type="STRING" size="256"/>
+          <Column id="ON_GOING_PROCESS_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_stock">
+        <ColumnInfo>
+          <Column id="WAREHOUSE_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="DELIVERY_NO" type="STRING" size="256"/>
+          <Column id="PRODUCTION_RESULT_NO" type="STRING" size="256"/>
+          <Column id="INPUT_ITEM_NO" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_STOCK" type="STRING" size="256"/>
+          <Column id="SAFETY_ALLOWANCE_AMOUNT" type="STRING" size="256"/>
+          <Column id="STOCK_AMOUNT" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_orderGathering">
+        <ColumnInfo>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DELIVERY_SCHEDULE_DATE" type="STRING" size="256"/>
+          <Column id="AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_AMOUNT" type="STRING" size="256"/>
+          <Column id="ORDER_GATHERING_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+//온로드
+this.logi_OrderGatheringDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var gatheringStatus="N";
+	//소요량 취합
+	this.transaction("findMrpGatheringList",
+		"dataURL::logi/production/findMrpGatheringList.do",
+		"",
+		"ds_mrpGathering=ds_mrpGathering",
+		"gatheringStatus='"+gatheringStatus+"'",
+		"callback",
+		false
+	);
+		
+	//재고
+	this.transaction("findStockList",
+		"dataURL::logi/purchase/findStockList.do",
+		"",
+		"ds_stock=ds_stock",
+		"",
+		"callback",
+		false
+	);
+	
+	this.ds_mrpGathering.filter("ORDER_OR_PRODUCTION_STATUS=='구매' && ON_GOING_PROCESS_STATUS!='Y'" );	
+}
+
+
+//발주 취합버튼
+this.addOrderGathering_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_mrpGathering.filter("ORDER_OR_PRODUCTION_STATUS=='구매' && ON_GOING_PROCESS_STATUS!='Y'" );
+	var MGCount = this.ds_mrpGathering.getRowCount();
+	application.trace(MGCount);
+	if(MGCount >= 0 ){
+		for(var i=0; i<=MGCount; i++){
+			this.ds_mrpGathering.setColumn(i,"ON_GOING_PROCESS_STATUS",'O');
+		}
+	}
+
+	
+	if(confirm("발주취합을 실행하시겠습니까?"))
+	{
+		this.transaction("findOrderGatheringList",
+			"dataURL::logi/purchase/findOrderGatheringList.do",
+			"",
+			"ds_orderGathering=ds_orderGathering",
+			"",
+			"callback",
+			true
+		);
+	}
+		
+	var OGCount = this.ds_orderGathering.getRowCount();
+	application.trace(this.ds_orderGathering.getColumn(0,"ITEM_CODE"));
+	application.trace(this.ds_orderGathering.getColumn(0,"ITEM_NAME"));
+	application.trace(OGCount);
+	if(OGCount >= 0 ){
+		for(var i=0; i<=OGCount; i++){
+			application.trace(i);
+			var itemCode = this.ds_orderGathering.getColumn(i,"ITEM_CODE");
+			var itemAmount = this.ds_orderGathering.getColumn(i,"AMOUNT");
+			var stockFind = this.ds_stock.findRow("ITEM_CODE", itemCode);
+			var stockAmount = this.ds_stock.getColumn(stockFind,"STOCK_AMOUNT");
+			//var safetyAmount = this.ds_stock.getColumn(stockFind,"SAFETY_ALLOWANCE_AMOUNT");
+		
+			//var amount1 = stockAmount - safetyAmount;
+		
+			var amount2 = stockAmount - itemAmount;
+		
+			if(amount2 < 0){
+				this.ds_stock.setColumn(stockFind,"STOCK_AMOUNT",0);
+			} else {
+				this.ds_stock.setColumn(stockFind,"STOCK_AMOUNT",amount2);
+			}
+		}
+	}
+
+	this.ds_orderGathering.filter("ORDER_AMOUNT > 0 ");
+	this.ds_mrpGathering.filter("ON_GOING_PROCESS_STATUS==null" && "ORDER_OR_PRODUCTION_STATUS=='구매'");	
+	
+	//this.ds_orderGathering.copyData(this.ds_orderGathering,true); 
+		
+}
+
+/*
+//취소버튼
+this.cancel_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_orderGathering.deleteAll();
+	this.ds_mrpGathering.filter("ORDER_OR_PRODUCTION_STATUS=='구매' && ON_GOING_PROCESS_STATUS!='Y'" );
+		
+	
+	var MGCount = this.ds_mrpGathering.count();
+	application.trace(MGCount);
+	if(MGCount >= 0 ){
+		for(var i=0; i<=MGCount; i++)	{
+			trace(i);
+			gds_mrpGathering.setColumn(i,"ON_GOING_PROCESS_STATUS",null);
+		}
+	}
+
+	var gatheringStatus='N';
+	transaction("batchMrpGathering",
+		"dataURL::logi/production/batchMrpGathering.do",
+		"ds_mrpGathering=ds_mrpGathering:u",
+		"",
+		"gatheringStatus='"+gatheringStatus+"'",
+		"callback",
+		false
+	);
+		
+// 	transaction("findOrderGatheringList",
+// 		"dataURL::logi/purchase/findOrderGatheringList.do",
+// 		"",
+// 		"gds_orderGathering=gds_orderGathering",
+// 		"",
+// 		"callback"
+//	);
+
+}
+*/
+
+
+//닫기
+this.close_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_orderGathering.filter("ORDER_AMOUNT > 0 ");
+	
+	var OGCount = this.ds_orderGathering.getRowCount();
+	application.trace(OGCount);
+	this.opener.ds_orderGathering.clearData();
+	
+	for(i=0; i<OGCount; i++){
+		var nRow = this.opener.ds_orderGathering.addRow();
+		this.opener.ds_orderGathering.copyRow(nRow, this.ds_orderGathering, i);
+	}
+
+	this.close();
+}
+
+
+
+
+//콜백
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid == "findMrpGatheringList" || trid == "findStockList"){
+		if(ErrorCode<0){
+			application.alert("온로드 실패");
+		} else {	
+		
+		}
+	} else if(trid == "findOrderGatheringList") {
+		if(ErrorCode<0){
+			application.alert("발주취합승인요청 실패");
+		} else {	
+	
+		}	
+		this.ds_mrpGathering.filter("ORDER_OR_PRODUCTION_STATUS=='구매' && ON_GOING_PROCESS_STATUS!='Y' && ON_GOING_PROCESS_STATUS!='O'"  );
+
+		var gatheringStatus='N';
+		this.transaction("batchMrpGathering",
+			"dataURL::logi/production/batchMrpGathering.do",
+			"ds_mrpGathering=ds_mrpGathering:u",
+			"",
+			"gatheringStatus='"+gatheringStatus+"'",
+			"callback",
+			false);	
+	} else if(trid == "batchMrpGathering") {
+		if(ErrorCode<0){
+			//application.alert("발주취합취소요청  실패 : " + ErrorMsg);
+		} else {	
+		
+		}		
+	}
+	
+}]]></Script>
+  </Form>
+</FDL>

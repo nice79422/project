@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_DailyAttdManagementForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="hr_DailyAttdManagementForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="일근태 관리" left="0.59%" top="9" right="0.76%" height="45" onclick="Static00_onclick"/>
+        <Tab id="Tab00" taborder="1" left="1.18%" top="93" right="1.43%" height="667" tabindex="1" scrollbars="autoboth" canchange="Tab00_canchange">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="미마감 관리 항목" canlayoutchange="Tab00_tabpage1_canlayoutchange">
+              <Layouts>
+                <Layout width="1013" height="401">
+                  <Button id="search_btn" taborder="0" text="조회" left="77.52%" top="9" right="12.59%" height="54" onclick="Tab00_tabpage1_search_btn_onclick"/>
+                  <Button id="close_bnt" taborder="1" text="마감" left="88.63%" top="9" right="1.65%" height="54" onclick="Tab00_tabpage1_close_bnt_onclick"/>
+                  <Grid id="Grid00" taborder="2" useinputpanel="false" left="1.48%" top="72" right="1.3%" height="557" binddataset="ds_dailyAttdReport" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원코드"/>
+                          <Cell col="1" text="사원명"/>
+                          <Cell col="2" text="요일"/>
+                          <Cell col="3" text="출근시각"/>
+                          <Cell col="4" text="퇴근시각"/>
+                          <Cell col="5" text="외출시각"/>
+                          <Cell col="6" text="귀사시각"/>
+                          <Cell col="7" text="외출시간"/>
+                          <Cell col="8" text="근무시간"/>
+                          <Cell col="9" text="지각시간"/>
+                          <Cell col="10" text="연장근무"/>
+                          <Cell col="11" text="심야근무"/>
+                          <Cell col="12" text="마감여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:DAILY"/>
+                          <Cell col="3" text="bind:ATTEND_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="4" text="bind:QUIT_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="5" text="bind:LEAVE_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="6" text="bind:RETURN_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="7" text="bind:LEAVE_HOUR"/>
+                          <Cell col="8" text="bind:WORK_HOUR"/>
+                          <Cell col="9" text="bind:LATE_HOUR"/>
+                          <Cell col="10" text="bind:OVER_WORK_HOUR"/>
+                          <Cell col="11" text="bind:NIGHT_WORK_HOUR"/>
+                          <Cell col="12" text="bind:CLOSE_YN"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="마감 관리 항목" onclose="Tab00_tabpage2_onclose">
+              <Layouts>
+                <Layout>
+                  <Button id="search_btn" taborder="0" text="조회" left="77.52%" top="9" right="12.59%" height="54" onclick="Tab00_tabpage2_search_btn_onclick"/>
+                  <Button id="close_bnt" taborder="1" text="마감취소" left="88.63%" top="9" right="1.65%" height="54" onclick="Tab00_tabpage2_close_bnt_onclick"/>
+                  <Grid id="Grid00" taborder="2" useinputpanel="false" left="1.48%" top="71" right="1.56%" height="557" binddataset="ds_dailyAttdReport" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="사원코드"/>
+                          <Cell col="1" text="사원명"/>
+                          <Cell col="2" text="요일"/>
+                          <Cell col="3" text="출근시각"/>
+                          <Cell col="4" text="퇴근시각"/>
+                          <Cell col="5" text="외출시각"/>
+                          <Cell col="6" text="귀사시각"/>
+                          <Cell col="7" text="외출시간"/>
+                          <Cell col="8" text="근무시간"/>
+                          <Cell col="9" text="지각시간"/>
+                          <Cell col="10" text="연장근무"/>
+                          <Cell col="11" text="심야근무"/>
+                          <Cell col="12" text="마감여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EMP_CODE"/>
+                          <Cell col="1" text="bind:EMP_NAME"/>
+                          <Cell col="2" text="bind:DAILY"/>
+                          <Cell col="3" text="bind:ATTEND_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="4" text="bind:QUIT_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="5" text="bind:LEAVE_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="6" text="bind:RETURN_TIME" mask="##:##" maskchar="0"/>
+                          <Cell col="7" text="bind:LEAVE_HOUR"/>
+                          <Cell col="8" text="bind:WORK_HOUR"/>
+                          <Cell col="9" text="bind:LATE_HOUR"/>
+                          <Cell col="10" text="bind:OVER_WORK_HOUR"/>
+                          <Cell col="11" text="bind:NIGHT_WORK_HOUR"/>
+                          <Cell col="12" text="bind:CLOSE_YN"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Calendar id="basicDate_cal" taborder="2" left="77.22%" top="64" right="2.78%" height="40"/>
+        <Static id="Static01" taborder="3" text="기준일" left="68.27%" top="65" right="23.54%" height="40"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_attdDayType">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_attdQuitType">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttdReport">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="DAILY" type="STRING" size="256"/>
+          <Column id="ATTEND_TIME" type="STRING" size="256"/>
+          <Column id="ATTEND_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="QUIT_TIME" type="STRING" size="256"/>
+          <Column id="QUIT_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="LEAVE_TIME" type="STRING" size="256"/>
+          <Column id="RETURN_TIME" type="STRING" size="256"/>
+          <Column id="LEAVE_HOUR" type="STRING" size="256"/>
+          <Column id="WORK_HOUR" type="STRING" size="256"/>
+          <Column id="LATE_HOUR" type="STRING" size="256"/>
+          <Column id="OVER_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="NIGHT_WORK_HOUR" type="STRING" size="256"/>
+          <Column id="CLOSE_YN" type="STRING" size="256"/>
+          <Column id="ATTD_DAY_TYPE" type="STRING" size="256"/>
+          <Column id="EARLY_LEAVE_TIME" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttdRest">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="REQUEST_DATE" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="DAYS" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="ATTD_REST_CODE" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dailyAttd">
+        <ColumnInfo>
+          <Column id="BASIC_DAY" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="DAY_ATTD_SEQ" type="STRING" size="256"/>
+          <Column id="ATTD_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="TIME" type="STRING" size="256"/>
+          <Column id="APPROVAL_STATUS" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="COST" type="STRING" size="256"/>
+          <Column id="CAUSE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+일근태 관리 화면                                             						                                                                         
+@Path		인사              				   				
+@Description	일일근태를  관리하기 위한  폼							
+@Author	  	조아람				    			                        								                                            
+@Create           2019. 02. 20.                             		                    				                                            
+********************************************************************************/
+this.hr_DailyAttdManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var today = application.today();
+	this.basicDate_cal.set_value(today);
+	
+	this.transaction( 
+				"findCodeList" ,
+				"dataURL::sys/findCodeDetailList.do",
+				"",
+				"ds_codeDetail=gds_codeDetail",
+				"",
+				"callbackFunction",
+				false
+	);
+	
+	//휴무/휴일/정상근무일
+	this.ds_codeDetail.filter("DETAIL_CODE=='AQC008' || DETAIL_CODE=='AQC009' || DETAIL_CODE=='AQC010'");
+	this.ds_attdDayType.copyData(this.ds_codeDetail,true);
+	
+	//연장/심야/지각/정상출근/정상퇴근/조퇴/결근/출장/교육/연차
+	this.ds_codeDetail.filter("DETAIL_CODE=='AQC001' || DETAIL_CODE=='AQC002' || DETAIL_CODE=='AQC003' || DETAIL_CODE=='AQC004' || DETAIL_CODE=='AQC005' || DETAIL_CODE=='AQC006' || DETAIL_CODE=='AQC007' || DETAIL_CODE=='AQC008' || DETAIL_CODE=='AQC009' || DETAIL_CODE=='AQC011' || DETAIL_CODE=='AQC012' || DETAIL_CODE=='AQC013'");
+	this.ds_attdQuitType.copyData(this.ds_codeDetail,true);
+}
+
+//미마감 항목 조회
+this.Tab00_tabpage1_search_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo){
+
+	if(this.basicDate_cal.value==null){
+		alert("기준일을 선택해주세요");
+	}else{
+		var approvalStatus="N";
+		var basicDay=this.basicDate_cal.value;
+		var deptCode="";
+	
+		// 해당 일자의 미승인 일근태 내역 조회 (ds_dailyAttdManage -> 조회된 결과를 담을 dataset)
+		this.transaction(
+			"findUnapprovedDailyAttd",
+			"dataURL::hr/attendance/findDailyAttdListByCondition.do",
+			"",
+			"ds_dailyAttd=ds_dailyAttd",
+			"approvalStatus='"+approvalStatus+"' basicDay='"+ basicDay+"' deptCode='"+deptCode+"'",
+			"callbackFunction",
+			false
+		);
+
+		//해당 일자의 미승인 일근태외 내역 조회
+		this.transaction(
+			"findUnapprovedDailyAttdRest",
+			"dataURL::hr/attendance/findAttdRestListByCondition.do",
+			"",
+			"ds_dailyAttdRest=ds_dailyAttdRest",
+			"approvalStatus='"+approvalStatus+"' basicDay='"+ basicDay+"' deptCode='"+deptCode+"'",
+			"callbackFunction",
+			false
+		);
+		
+		if(confirm(this.basicDate_cal.value+" 일자 일근태현황 조회하시겠습니까? ")){
+
+			if(this.ds_dailyAttd.getRowCount()>0 || this.ds_dailyAttdRest.getRowCount()>0){
+					application.open("modeless",
+											"hr_attendance::hr_UnApprovedDailyAttdDialog.xfdl",
+											this.getOwnerFrame(),
+											{approvalStatus:approvalStatus, basicDay:basicDay,deptCode:deptCode},
+											"showtitlebar=true showstatusbar=false",
+											300, 50, 1185, 785,this
+					);
+			}else{
+				//해당 일자의 미승인 내역이 없을 때 실행 
+				this.findDailyAttdReport();
+			}
+		}
+	}	
+}
+
+this.findDailyAttdReport = function() {
+
+	trace("프로시저 가동 미마감 항목 생성 및 조회 ");
+	
+	this.transaction(
+		"findDailyAttdReport",
+		"dataURL::hr/attendance/findDailyAttdReport.do",
+		"",
+		"ds_dailyAttdReport=ds_dailyAttdReport",
+		"basicDate='"+this.basicDate_cal.value+"'",  
+		"callbackFunction",
+		false
+	);
+	this.ds_dailyAttdReport.filter("CLOSE_YN=='N'");//미마감 내역만.
+}
+
+//마감 버튼 경우 
+this.Tab00_tabpage1_close_bnt_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm(this.basicDate_cal.value+"일자의 데이터를 마감하시겠습니까? ")){
+		for(var i = 0; i < this.ds_dailyAttdReport.rowcount; i++) {
+			this.ds_dailyAttdReport.setColumn(i,"CLOSE_YN","Y");
+		}
+		this.transaction(
+			"updateDailyAttdCloseYN",
+			"dataURL::hr/attendance/updateDailyAttdCloseYN.do",
+			"ds_dailyAttdReport=ds_dailyAttdReport:U",
+			"",
+			"",
+			"callbackFunction",
+			false
+		);
+		
+		//trace(this.ds_dailyAttdRest.saveXML());
+	}		
+}
+
+
+//마감 항목 조회
+this.Tab00_tabpage2_search_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.basicDate_cal.value==""){
+		alert("기준일을 선택해주세요");
+	}else{
+		this.ds_dailyAttdReport.filter("");		
+		this.transaction(
+			"findApprovalDailyAttdReport",
+			"dataURL::hr/attendance/findApprovalDailyAttdReport.do",
+			"",
+			"ds_dailyAttdReport=ds_dailyAttdReport",
+			"baseDay='"+this.basicDate_cal.value+"'",
+			"callbackFunction",
+			false
+		);
+	}
+}
+
+this.Tab00_canchange = function(obj:Tab, e:nexacro.TabIndexChangeEventInfo)
+{
+	this.ds_dailyAttdReport.filter("CLOSE_YN=='XX'");		
+}
+
+this.Tab00_tabpage2_close_bnt_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("마감취소 하시겟습니까?")){
+		for(var i = 0; i < this.ds_dailyAttdReport.rowcount; i++) {
+			this.ds_dailyAttdReport.setColumn(i,"CLOSE_YN","N");
+		}
+	
+		this.transaction(
+			"updateDailyAttdCloseYN",
+			"dataURL::hr/attendance/updateDailyAttdCloseYN.do",
+			"ds_dailyAttdReport=ds_dailyAttdReport:U",
+			"",
+			"",
+			"callbackFunction"
+		);
+	}		
+}
+
+this.callbackFunction=function(strSvcID, nErrorCode, strErrorMag){
+	if(strSvcID=="findDailyAttdReport"){
+		if(nErrorCode!=0){
+			alert(strErrorMag);
+		}
+	}
+	
+	if(strSvcID=="updateDailyAttdCloseYN"){
+		if(nErrorCode!=0){
+			alert(strErrorMag);
+		}else{		
+			alert("마감하였습니다.");
+			this.reload();
+		}	
+	}
+	
+	if(strSvcID=="findApprovalDailyAttdReport"){
+		if(nErrorCode!=0){
+			alert(strErrorMag);
+		}else{
+			if(this.ds_dailyAttdReport.getRowCount()==0){
+				alert(" 현재날짜에는 마감된 항목이 없습니다.");	
+			}
+		}
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

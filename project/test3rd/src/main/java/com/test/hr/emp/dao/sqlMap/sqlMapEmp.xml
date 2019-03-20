@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="emp">
+
+	<typeAlias alias="EmpBean" type="com.test.hr.emp.to.EmpBean" />
+	<resultMap id="EmpResult" class="EmpBean">
+		<result property="empCode" column="EMP_CODE" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="jobTitle" column="JOB_TITLE" />
+		<result property="employmentTerm" column="EMPLOYMENT_TERM" />
+		<result property="socialNumber" column="SOCIAL_NUMBER" />
+		<result property="hireDate" column="HIRE_DATE" />
+		<result property="password" column="PASSWORD" />
+		<result property="tel" column="TEL" />
+		<result property="email" column="EMAIL" />
+		<result property="addr" column="ADDRESS" />
+		<result property="detailAddr" column="DETAIL_ADDRESS" />
+		<result property="image" column="IMAGE" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="postCode" column="POST_CODE" />
+	</resultMap>
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			EMP
+    ]]>
+	</select>
+
+
+	<insert id="insertEmp" parameterClass="EmpBean">
+    <![CDATA[
+		INSERT INTO EMP VALUES
+       (
+          #empCode#
+          ,#empName#
+          ,#jobTitle#
+          ,#hireDate#
+          ,#employmentTerm#
+          ,#socialNumber#
+          ,#tel#
+          ,#email#
+          ,#postCode#
+          ,#addr#
+          ,#detailAddr#
+          ,#password#
+          ,#image#
+          ,#deptCode#
+         )
+    ]]>
+	</insert>
+
+
+	<select id="selectEmpList" resultMap="EmpResult" parameterClass="map">
+    <![CDATA[
+	SELECT
+      EMP_CODE
+     ,JOB_TITLE
+     ,EMP_NAME
+     ,HIRE_DATE
+     ,DEPT_CODE
+     ,'' EMPLOYMENT_TERM
+     ,'' PASSWORD
+     ,'' SOCIAL_NUMBER
+     ,'' TEL
+     ,'' EMAIL
+     ,'' ADDRESS
+     ,'' DETAIL_ADDRESS
+     ,'' IMAGE
+     ,'' POST_CODE 
+ 	FROM
+       (SELECT ROW_NUMBER() OVER(ORDER BY EMP_CODE) RN, 
+       	EMP_CODE, JOB_TITLE, EMP_NAME, HIRE_DATE, DEPT_CODE FROM EMP)
+ 	WHERE RN BETWEEN #startRow# AND #endRow#
+    ]]>
+	</select>
+
+
+	<select id="selectAllSearchEmpList" resultMap="EmpResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT
+     		EMP_CODE
+     ,JOB_TITLE
+     ,EMP_NAME
+     ,HIRE_DATE
+     ,DEPT_CODE
+     ,'' EMPLOYMENT_TERM
+     ,'' PASSWORD
+     ,'' SOCIAL_NUMBER
+     ,'' TEL
+     ,'' EMAIL
+     ,'' ADDRESS
+     ,'' DETAIL_ADDRESS
+     ,'' IMAGE
+     ,'' POST_CODE 
+ 	FROM
+       (SELECT ROW_NUMBER() OVER(ORDER BY EMP_CODE) RN, 
+       	EMP_CODE, JOB_TITLE, EMP_NAME, HIRE_DATE, DEPT_CODE FROM EMP
+       	WHERE EMP_CODE LIKE '%'||#empCode#||'%'
+       	AND EMP_NAME LIKE '%'||#empName#||'%' )
+ 	WHERE RN BETWEEN #startRow# AND #endRow#
+    ]]>
+	</select>
+
+
+	<select id="selectCodeSearchEmpList" resultMap="EmpResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT
+     		EMP_CODE
+     ,JOB_TITLE
+     ,EMP_NAME
+     ,HIRE_DATE
+     ,DEPT_CODE
+     ,'' EMPLOYMENT_TERM
+     ,'' PASSWORD
+     ,'' SOCIAL_NUMBER
+     ,'' TEL
+     ,'' EMAIL
+     ,'' ADDRESS
+     ,'' DETAIL_ADDRESS
+     ,'' IMAGE
+     ,'' POST_CODE 
+ 	FROM
+       (SELECT ROW_NUMBER() OVER(ORDER BY EMP_CODE) RN, 
+       	EMP_CODE, JOB_TITLE, EMP_NAME, HIRE_DATE, DEPT_CODE FROM EMP )
+ 	WHERE RN BETWEEN #startRow# AND #endRow#
+ 	AND EMP_CODE LIKE '%'||#searchWord#||'%'  
+    ]]>
+	</select>
+
+	<select id="selectNameSearchEmpList" resultMap="EmpResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT
+     		EMP_CODE
+     ,JOB_TITLE
+     ,EMP_NAME
+     ,HIRE_DATE
+     ,DEPT_CODE
+     ,'' EMPLOYMENT_TERM
+     ,'' PASSWORD
+     ,'' SOCIAL_NUMBER
+     ,'' TEL
+     ,'' EMAIL
+     ,'' ADDRESS
+     ,'' DETAIL_ADDRESS
+     ,'' IMAGE
+     ,'' POST_CODE 
+ 	FROM
+       (SELECT ROW_NUMBER() OVER(ORDER BY EMP_CODE) RN, 
+       	EMP_CODE, JOB_TITLE, EMP_NAME, HIRE_DATE, DEPT_CODE FROM EMP )
+ 	WHERE RN BETWEEN #startRow# AND #endRow#
+ 	AND EMP_NAME LIKE '%'||#searchWord#||'%'  
+    ]]>
+	</select>
+
+	<select id="selectDbcount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			EMP
+    ]]>
+	</select>
+
+
+	<select id="selectEmp" resultMap="EmpResult" parameterClass="string">
+		 <![CDATA[
+		 SELECT 
+			EMP_CODE
+     		,JOB_TITLE
+     		,EMP_NAME
+     		,HIRE_DATE
+     		,DEPT_CODE
+     		,EMPLOYMENT_TERM
+     		,PASSWORD
+     		,SOCIAL_NUMBER
+     		,TEL
+     		,EMAIL
+     		,ADDRESS
+     		,DETAIL_ADDRESS
+     		,IMAGE
+     		,POST_CODE 
+  		FROM emp
+ 		WHERE EMP_CODE=#empCode#
+		 ]]>
+	</select>
+
+	<update id="updateEmp" parameterClass="EmpBean">
+			 <![CDATA[
+	UPDATE EMP
+       SET EMP_CODE=#empCode#
+     , EMP_NAME=#empName#
+     , JOB_TITLE=#jobTitle#
+     , HIRE_DATE=#hireDate#
+     , EMPLOYMENT_TERM=#employmentTerm#
+     , SOCIAL_NUMBER=#socialNumber#
+     , TEL=#tel#
+     , EMAIL=#email#
+     , POST_CODE=#postCode#
+     , ADDRESS=#addr#
+     , DETAIL_ADDRESS=#detailAddr#
+     , PASSWORD=#password#
+     , IMAGE=#image#
+     , DEPT_CODE=#deptCode#
+ 	WHERE EMP_CODE=#empCode#
+ 		 ]]>
+	</update>
+
+	<delete id="deleteEmp" parameterClass="string">
+	 <![CDATA[
+	 DELETE emp
+ 	 WHERE emp_code=#empCode#
+	 ]]>
+	</delete>
+
+</sqlMap>

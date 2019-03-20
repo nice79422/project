@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report5" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="711de322-0674-481d-8207-b2417c597d05">
+	<property name="ireport.zoom" value="1.610510000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="160"/>
+	<subDataset name="dataset1" uuid="e1054de8-ac9d-4bf2-893c-a58f11688bb1"/>
+	<subDataset name="dataset2" uuid="61a5126c-2141-438a-8b55-5f5ec392fc4c"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="contractNo" class="java.lang.String"/>
+	<field name="contractDate" class="java.lang.String"/>
+	<field name="itemCode" class="java.lang.String"/>
+	<field name="itemName" class="java.lang.String"/>
+	<field name="unitPriceOfContract" class="java.lang.String"/>
+	<field name="sumPriceOfContract" class="java.lang.String"/>
+	<field name="unitOfContract" class="java.lang.String"/>
+	<field name="contractAmount" class="java.lang.String"/>
+	<field name="businessLicenseNumber" class="java.lang.String"/>
+	<field name="customerName" class="java.lang.String"/>
+	<field name="customerCeo" class="java.lang.String"/>
+	<field name="customerBasicAddress" class="java.lang.String"/>
+	<field name="customerBusinessConditions" class="java.lang.String"/>
+	<field name="customerBusinessItems" class="java.lang.String"/>
+	<field name="sumPrice" class="java.lang.String"/>
+	<field name="sumAmount" class="java.lang.String"/>
+	<field name="sumTax" class="java.lang.String"/>
+	<field name="sumTotalAmount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="63" uuid="ee0e0b1f-e7b5-4e6d-b3e6-b538570e4887"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[수 주 확 인 서]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="84" height="20" uuid="39ab7d21-7350-4923-9456-425ea532c23f"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[ 주문년월일    :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="84" height="20" uuid="f92d8742-7ded-463f-afc5-c5a842659bbb"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[ 수 주 번 호     :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="199" height="1" uuid="5ac0c5ea-1e43-450d-81de-6fc20fa49e04"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="41" width="28" height="100" uuid="5849a045-2aa9-40c6-9bb9-88958ea1d520"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="41" width="28" height="20" uuid="25e0d6e7-655c-49c7-bef0-0c2857761a87"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[공]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="61" width="28" height="20" uuid="fcc59bc5-e7b0-4f2e-ac1d-0c3b7a405db7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[급]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="81" width="28" height="20" uuid="7500ae8c-c6ac-4f88-94ee-df740f56a66d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[받]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="101" width="28" height="20" uuid="3d07ca2f-4c2b-430e-be99-8649f43d8b6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[는]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="121" width="28" height="20" uuid="b8bebe20-a90f-41b9-9a99-290c67e0289c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[자]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="28" y="41" width="56" height="25" uuid="14aca7c3-419d-49aa-9726-9dca784d2f68"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="28" y="91" width="56" height="25" uuid="f91f8711-5d78-4eda-9adf-8603eb1ae640"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="28" y="66" width="56" height="25" uuid="20afa913-6e77-45ed-a16e-f33d7f6c77e0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="28" y="116" width="56" height="25" uuid="2e24dc86-1a54-4ec5-a1ae-48f35e3cf9e6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="84" y="41" width="166" height="25" uuid="f4f71d8e-42bc-4501-ab0a-15b10c7062e7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="29" y="41" width="55" height="26" uuid="a6891261-79f3-493c-bf7f-a6ce1f0bc377"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[등 록 번 호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="66" width="56" height="25" uuid="c99e013a-cad0-433e-bd55-c2e32889ee2c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[상          호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="91" width="56" height="25" uuid="9a7b89ef-c350-4679-887b-dc95b6e940c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[주          소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="116" width="56" height="25" uuid="206170cd-b52c-40ec-b154-7ee09db9b9c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[업          태]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="84" y="66" width="84" height="25" uuid="c5ca06d3-924a-4fa7-a15b-318144431686"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="168" y="66" width="31" height="25" uuid="bd69e6bf-a348-42c0-a1c6-41f5059907ba"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="168" y="67" width="31" height="24" uuid="3d14017d-17aa-488c-91bf-43e78aa58426"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[성명]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="199" y="66" width="51" height="25" uuid="5af9ffa3-6040-43b2-b1b5-11c2230466cd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="84" y="91" width="166" height="25" uuid="096e31ed-0ef2-4e08-bd5b-3c0f90e75617"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="84" y="116" width="61" height="25" uuid="d54f4ed3-3a94-4b54-85dd-01269cb3559f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="145" y="116" width="43" height="25" uuid="060d672b-ad1d-4a56-b3b3-8f831a996bd3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="145" y="116" width="43" height="25" uuid="23168535-d421-46ea-b80b-954b1dda2db7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[품목]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="188" y="116" width="62" height="25" uuid="76c68e06-8edc-4335-a85c-fd163defb501"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="250" y="41" width="10" height="100" uuid="99a9169b-55ef-4d34-bb8c-570fcd0d8619"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="260" y="41" width="28" height="100" uuid="5117d078-930f-4f24-9e19-2ad5bbe50d52"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="260" y="41" width="28" height="20" uuid="7564ecf8-7e44-4fd9-808c-337530418ee0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[공]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="81" width="28" height="20" uuid="505e8a4f-74dd-45be-9248-1b30fdfae134"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[급]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="121" width="28" height="20" uuid="0f4389f5-45d1-49f4-a841-7cc1df0a12fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[자]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="288" y="41" width="56" height="25" uuid="4d6dfc62-dac7-4bc8-a4d1-c7c05ff3aa5d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="288" y="66" width="56" height="25" uuid="a2f5c02d-cd43-4a7f-8664-75ecede9039f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="288" y="91" width="56" height="25" uuid="6215a9dd-9d84-408b-a8da-2a97d5c3d0dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="288" y="116" width="56" height="25" uuid="589b6159-de31-442d-a09c-e1b93b678dd7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="344" y="41" width="211" height="25" uuid="a485ef6f-5d91-4072-a342-f802811e8572"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="344" y="66" width="101" height="25" uuid="4a26dc9a-3ebd-493e-8225-d13f27061808"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="445" y="66" width="31" height="25" uuid="9a2aa934-11ea-4d85-99a7-008e515ffa3b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="476" y="66" width="79" height="25" uuid="4c8ffa76-75c3-4d7c-b8e7-eb1c30800742"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="344" y="91" width="211" height="25" uuid="655dfb48-428e-4c11-8073-a097b25a1106"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="422" y="116" width="43" height="25" uuid="40e0cfce-5f0f-4e8c-a14e-64a1dae3c7b3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="344" y="116" width="78" height="25" uuid="bbbca76c-cd4f-4d77-9734-3f45e72b1bd6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="465" y="116" width="90" height="25" uuid="40801e01-d49c-41a3-bb78-b3eba2754ac3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="288" y="41" width="56" height="25" uuid="000e62e4-2e95-4114-be0d-2fb1961fb725"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[등 록 번 호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="66" width="56" height="25" uuid="20e684c2-c8f3-4546-ab77-17cc760363c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[상          호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="91" width="56" height="25" uuid="e414b26f-3d59-4144-ace4-71378e7ae106"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[주          소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="116" width="56" height="25" uuid="bd5b2c19-9c24-4840-affb-86d2fcd00f16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[업          태]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="66" width="31" height="25" uuid="1575ac75-a7f5-43c2-a6f1-124c1d8930d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[성명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="116" width="43" height="25" uuid="12be84e5-64b9-4338-aa23-26a24c7dd137"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[품목]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="41" width="211" height="25" uuid="52be4a6b-6dca-4cb3-b163-733b77207508"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[120-81-25847]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="66" width="101" height="24" uuid="793a8853-7535-481b-a969-67fdb88bc2f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[Just Music]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="66" width="79" height="24" uuid="de5595fe-76b5-480d-a47c-18f3f3d9c83b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[문 지 훈]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="90" width="211" height="26" uuid="e21ede18-7a60-45c8-b00e-1b735b5a8a2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[서울 강남구 삼성동 512]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="116" width="78" height="25" uuid="bc8000cc-8ec1-4cf4-a76d-4234e610a2d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[제조, 도소매]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="116" width="90" height="25" uuid="1ba15527-210d-4454-bd9a-b08ca20ff2c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[전자제품 외]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="84" y="0" width="115" height="20" uuid="ff7ee7b5-ad42-48e5-a0f3-1964ce577615"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contractDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="19" width="115" height="20" uuid="5c42c6f6-b81a-4159-bb54-aca440296644"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contractNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="41" width="166" height="25" uuid="4d22aa70-cb7c-4ab1-b159-db6ed741d194"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{businessLicenseNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="67" width="84" height="23" uuid="1ca69898-d1fe-4d4d-9e21-f952f91b14cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="66" width="51" height="25" uuid="c6cf0dcb-0ffc-4640-8634-86ec32ea2ee8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerCeo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="91" width="166" height="25" uuid="1f0ced9c-7325-4780-8359-1bec045bb5fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerBasicAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="116" width="61" height="25" uuid="82c94ba3-d531-4ef3-85a4-c4009a2f5165"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerBusinessConditions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="116" width="62" height="25" uuid="bb8e9075-c158-45c0-84df-1a97077e6078"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerBusinessItems}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="250" y="0" width="49" height="20" uuid="b3f5da3c-cafc-43b9-ad86-1fb427ee6fff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="299" y="0" width="69" height="20" uuid="d125e249-6a7c-46c0-a2d7-1b5e38f19f59"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="0" width="85" height="20" uuid="91d093ff-79a7-4b24-8d40-8574973662e9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="0" width="102" height="20" uuid="330dd3fc-c95a-4478-8bd9-30f11c813c10"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="250" y="0" width="49" height="20" uuid="795825c6-4093-4ca8-b5a6-5029a6cda263"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[단     위]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="0" width="69" height="20" uuid="5cefb790-6b29-4110-abfa-5912b057c72a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[수          량]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="0" width="85" height="20" uuid="6c3de751-7012-4f40-bc39-88c3b84e9f25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[단          가]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="0" width="102" height="20" uuid="e03f5f1c-9fbd-41c5-ad5c-a89e94d40396"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[금               액]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="95" y="0" width="155" height="20" uuid="d390bd04-772d-442f-814b-b1dad0160ef9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="95" y="0" width="155" height="20" uuid="dd67414a-947f-4be6-ad51-af35037a0afd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[품                    명]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="95" height="20" uuid="f70dbd1a-0ea9-4352-893b-173462078ed8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="95" height="20" uuid="bce527dd-9f55-4a0b-8b52-157368f80c99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[품           번]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="95" y="0" width="155" height="20" uuid="522a327c-5696-4b57-90f2-7ec6091934bb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="299" y="0" width="69" height="20" uuid="dce0a352-6105-40ee-844c-1623c594f297"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="250" y="0" width="49" height="20" uuid="58624589-5ced-41d1-acfe-53cc8a6b2b5f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="0" width="85" height="20" uuid="e0c8f344-e141-44c9-800b-2ef784260ca5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="0" width="102" height="20" uuid="b7ad8b6b-80c8-4280-ae60-69cd3973f698"/>
+			</rectangle>
+			<textField>
+				<reportElement x="95" y="0" width="155" height="20" uuid="1108d970-58de-477b-85f4-519bf0f3540c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemName}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="0" width="95" height="20" uuid="15bd82f1-2e76-4c62-b3e2-8e71d039e0ed"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="95" height="20" uuid="7106d7ef-efed-484c-a2ca-8ed0e09d6fa0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="49" height="20" uuid="4c32b159-ded2-41b3-aab4-0a98967994d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unitOfContract}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="0" width="69" height="20" uuid="212049e0-1c5f-42a3-ab65-f75a4c1f796c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contractAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="5e600b0a-9349-4f13-8c09-e795fcb5bee5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumPriceOfContract}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="0" width="85" height="20" uuid="b5b146f6-d430-44f3-91d3-228c734215a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unitPriceOfContract}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="541" y="0" width="14" height="20" uuid="fb4390a0-b715-4d55-9950-43a509d5096d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[원]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="0" width="14" height="20" uuid="ce534a21-9be3-45cc-9393-f5b1da74bd66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[원]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="299" height="20" uuid="a2bdeb91-0bd7-4f4e-b84c-9fba74719df0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="0" width="85" height="20" uuid="2236814e-3b15-4b23-b241-c712eee154bd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="0" width="102" height="20" uuid="3dcbf093-1340-402d-93ce-e79a7304cac6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="299" height="20" uuid="dcb9aacb-0491-43d6-8a88-07f667251fe0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[소                    계]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="299" y="0" width="69" height="20" uuid="6a29783b-e68a-4ebe-954c-77d7c8ec3b33"/>
+			</rectangle>
+			<textField>
+				<reportElement x="453" y="0" width="102" height="20" uuid="e63571e3-e085-4090-8070-54935a5bc23b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="0" width="39" height="20" uuid="827e0342-86d7-4b28-9797-dd664a8b8e58"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="541" y="0" width="14" height="20" uuid="75db6613-61a2-4fef-be43-539705e0e29f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[원]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="299" y="0" width="17" height="20" uuid="87dc52cc-4705-4083-aa48-d8d8c6257013"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unitOfContract}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="122" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="60" width="555" height="62" uuid="65a050c9-49ce-46e0-a543-06d8abd37055"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="368" y="82" width="129" height="20" uuid="c05b808e-c746-454e-9781-4e0ec9f33977"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[Just Music 본사 문지훈]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="511" y="82" width="20" height="20" uuid="16b3e8cc-98fd-4168-acc0-30f01a883ab2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[(인)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="39" height="60" uuid="0765a4d1-8c5a-4242-ba9e-34c77adfaf5b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="39" y="0" width="211" height="60" uuid="68df3640-2995-4c84-a0a8-553e38793a21"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="250" y="0" width="118" height="20" uuid="51a5b9f9-b433-4e0c-a75f-4443c912ac36"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="250" y="20" width="118" height="20" uuid="4949c843-0f90-42fc-864b-6eaf65475144"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="250" y="40" width="118" height="20" uuid="417df4e6-cc20-4ad8-936a-d7091c93c1c3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="0" width="187" height="20" uuid="1d49bbbc-14b4-4adb-8673-6e2b1f5e403a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="20" width="187" height="20" uuid="8f610da9-7593-4900-a48b-656758da51c0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="40" width="187" height="20" uuid="2bbdf4b8-aab6-4693-a250-3e7372ac9d52"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="30" uuid="819212ba-13a4-41bf-a04b-50a4c03d5665"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[비]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="29" width="39" height="31" uuid="16235d61-09b0-40b3-ae46-2dc66650d960"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[고]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="118" height="20" uuid="d13248d1-e4a5-4362-bae1-018a74f5cae1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[공 급 가 액   합 계]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="20" width="118" height="20" uuid="546eebc4-337b-4db6-a82f-0c3f93ba228b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[부   가   가   치   세]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="40" width="118" height="20" uuid="7d9ca32b-1336-4bbf-a846-78c942a30aea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[총                          계]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="368" y="0" width="187" height="20" uuid="8c4cd576-9db6-49d4-841e-d1bf81f1c769"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="40" width="187" height="20" uuid="701ade23-2212-42ce-a54f-ff26ef2d161a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumTotalAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="20" width="187" height="20" uuid="08c3f26b-7023-4029-acd8-d9400cd86776"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumTax}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="541" y="0" width="14" height="20" uuid="73fc9b53-3dc3-4e29-ac7c-a8dd8fda9fe0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[원]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="541" y="20" width="14" height="20" uuid="16c78be7-74cc-49d2-ab17-4c584ff44cb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[원]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="541" y="40" width="14" height="20" uuid="c7174a89-d741-420d-9b18-bec681b08f8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[원]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="355" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="355" uuid="bfcf5c5f-ee78-4b8c-a259-9263f4b105c6"/>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="0" width="555" height="355" uuid="61ca90e2-2dbe-4846-b676-3a7b1639d56d"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

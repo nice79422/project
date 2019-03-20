@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="hr_deptDialog" left="0" top="0" width="300" height="400" titletext="New Form" onload="hr_deptDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="dept_grid" taborder="0" useinputpanel="false" left="6%" top="56" right="6.67%" height="321" binddataset="ds_dept" autofittype="col" oncelldblclick="dept_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="부서코드"/>
+                <Cell col="1" text="부서명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DETAIL_CODE"/>
+                <Cell col="1" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="1" text="부서" left="2.67%" top="8" right="4%" height="37"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_codeDetail">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+          <Column id="CODE_USE_CHECK" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.hr_deptDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.transaction( 
+				"findCodeList" ,
+				"dataURL::sys/findCodeDetailList.do",
+				"",
+				"ds_codeDetail=gds_codeDetail",
+				"",
+				"callbackFunction",
+				false
+	);
+	
+	this.ds_codeDetail.filter("DIVISION_CODE_NO=='SYS07'");
+	this.ds_dept.copyData(this.ds_codeDetail,true);	
+}
+
+this.dept_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var detailCode = this.ds_dept.getColumn(e.row,"DETAIL_CODE");
+	var detailCodeN = this.ds_dept.getColumn(e.row,"DETAIL_CODE_NAME");
+	
+	this.close(detailCode+"/"+detailCodeN);		
+}
+]]></Script>
+  </Form>
+</FDL>

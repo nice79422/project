@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="basicWorktimeManagementForm" classname="basicWorktimeManagementForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="basicWorktimeManagementForm_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="기본근무 시간관리" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <GroupBox id="GroupBox00" text="검색" position2="absolute l:182 w:622 t:53 h:126" positiontype="position2" style="background:gainsboro;color:black;"/>
+        <GroupBox id="GroupBox01" text="근무시간" position2="absolute l:182 w:622 t:192 h:420" positiontype="position2" style="background:gainsboro;color:black;"/>
+        <Static id="Static03" text="적용년도 검색" enable="false" enableevent="false" position2="absolute l:305 w:126 t:104 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Combo id="applyYear" taborder="1" innerdataset="@ds_baseYear" codecolumn="YEAR" datacolumn="YEAR" position2="absolute l:431 w:126 t:104 h:32" positiontype="position2"/>
+        <Button id="searchBtn" taborder="1" text="검  색" position2="absolute l:578 w:126 t:104 h:32" positiontype="position2" onclick="searchBtn_onclick" style="background:silver;color:white;font:Verdana,11,bold;"/>
+        <Static id="Static01" text="적용년도" enable="false" enableevent="false" position2="absolute l:305 w:126 t:232 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static02" text="출근시각" enable="false" enableevent="false" position2="absolute l:305 w:126 t:276 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static04" text="퇴근시각" enable="false" enableevent="false" position2="absolute l:305 w:126 t:320 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static05" text="점심시작시각" enable="false" enableevent="false" position2="absolute l:305 w:126 t:364 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static06" text="점심종료시각" enable="false" enableevent="false" position2="absolute l:305 w:126 t:408 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static07" text="연장시각" enable="false" enableevent="false" position2="absolute l:305 w:126 t:452 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Static id="Static08" text="심야시각" enable="false" enableevent="false" position2="absolute l:305 w:126 t:496 h:32" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Edit id="Edit00" taborder="1" position2="absolute l:435 w:141 t:232 h:32" positiontype="position2" style="align:center middle; :disabled {opacity:100;}" enable="false"/>
+        <MaskEdit id="attendTime" taborder="1" position2="absolute l:435 w:141 t:276 h:32" positiontype="position2" mask="##:##" style="align:center middle; :disabled {opacity:100;}" enable="false" type="string"/>
+        <MaskEdit id="quitTime" taborder="1" position2="absolute l:435 w:141 t:320 h:32" positiontype="position2" mask="##:##" style="align:center middle; :disabled {opacity:100;}" enable="false" type="string"/>
+        <MaskEdit id="lunchStartTime" taborder="1" position2="absolute l:435 w:141 t:364 h:32" positiontype="position2" mask="##:##" style="align:center middle; :disabled {opacity:100;}" enable="false" type="string"/>
+        <MaskEdit id="lunchEndTime" taborder="1" position2="absolute l:435 w:141 t:408 h:32" positiontype="position2" mask="##:##" style="align:center middle; :disabled {opacity:100;}" enable="false" type="string"/>
+        <MaskEdit id="overTime" taborder="1" position2="absolute l:435 w:141 t:452 h:32" positiontype="position2" mask="##:##" style="align:center middle; :disabled {opacity:100;}" enable="false" type="string"/>
+        <MaskEdit id="nightTime" taborder="1" position2="absolute l:435 w:141 t:496 h:32" positiontype="position2" mask="##:##" style="align:center middle; :disabled {opacity:100;}" enable="false" type="string"/>
+        <Static id="Static09" text="저녁시간은 1시간이며, 퇴근시각 이후부터 저녁시간입니다." position2="absolute l:297 w:392 t:544 h:43" positiontype="position2" style="background:gainsboro;border:1 solid black ;color:#ff0000ff;"/>
+        <Button id="addBtn" taborder="1" text="등 록" position2="absolute l:672 w:82 t:452 h:32" positiontype="position2" onclick="addBtn_onclick" enable="false" style="background:silver;color:white;font:Verdana,11,bold; :disabled {background:silver;color:white;opacity:100;}"/>
+        <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:672 w:82 t:488 h:32" positiontype="position2" onclick="saveBtn_onclick" style="background:silver;color:white;font:Verdana,11,bold;"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_baseWorkTime" columnid="APPLY_YEAR"/>
+      <BindItem id="item1" compid="attendTime" propid="value" datasetid="ds_baseWorkTime" columnid="ATTEND_TIME"/>
+      <BindItem id="item2" compid="quitTime" propid="value" datasetid="ds_baseWorkTime" columnid="QUIT_TIME"/>
+      <BindItem id="item3" compid="lunchStartTime" propid="value" datasetid="ds_baseWorkTime" columnid="LUNCH_START_TIME"/>
+      <BindItem id="item4" compid="lunchEndTime" propid="value" datasetid="ds_baseWorkTime" columnid="LUNCH_END_TIME"/>
+      <BindItem id="item5" compid="overTime" propid="value" datasetid="ds_baseWorkTime" columnid="OVER_TIME"/>
+      <BindItem id="item6" compid="nightTime" propid="value" datasetid="ds_baseWorkTime" columnid="NIGHT_TIME"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[var dataLength;
+
+
+var presentYear;
+var choiceYear
+
+
+//로딩시 
+function basicWorktimeManagementForm_onload(obj:Form, e:LoadEventInfo)
+{
+	
+	
+	transaction("findBasicWorkTimeList",
+				"svcHrCircumstance::findBaseWorkTimeList.do",
+				"",
+				"ds_baseWorkTime=dsBaseWorkTime",
+				"",
+				"callback",
+				false);
+	
+	
+	applyYear.value = String(g_today).substr(0,4);  //현재년도구하기 (기준년도 처음에 현재년도 세팅)
+	ds_baseWorkTime.filter("APPLY_YEAR=='"+applyYear.value+"'"); //처음에 나오지 않도록 
+}
+
+function searchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	ds_baseWorkTime.filter("APPLY_YEAR=='0'");	
+	ds_baseWorkTime.filter("APPLY_YEAR=='"+applyYear.value+"'");
+	
+	presentYear = String(g_today).substr(0,4);
+	choiceYear = applyYear.value;
+
+	dataLength=ds_baseWorkTime.getRowCount();//신규등록인지 수정인지 판단!
+	if(dataLength==0){
+		addBtn.enable="true";
+		alert(" 해당년도에 조회정보가 없습니다 \n(등록버튼을 눌러서 해당연도의 기본 근무시간을 등록해 주세요) ");
+	
+	}else{
+		addBtn.enable="false";
+	}
+			
+	if((presentYear>=choiceYear)==0){
+		
+		attendTime.enable="true";
+		overTime.enable="true";
+		lunchStartTime.enable="true";
+		lunchEndTime.enable="true";
+		quitTime.enable="true";
+		nightTime.enable="true";	
+	}else{
+		attendTime.enable="false";
+		overTime.enable="false";
+		lunchStartTime.enable="false";
+		lunchEndTime.enable="false";
+		quitTime.enable="false";
+		nightTime.enable="false";	
+	
+   }		
+}
+
+//등록시 
+function addBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	presentYear = String(g_toDate).substr(0,4);
+	choiceYear = applyYear.value;
+	
+	if((presentYear>=choiceYear)==0){
+		if(applyYear.value == ""){
+			alert(" 근무시간을 적용할 년도를 선택해주세요 :) ");
+		}else{
+			ds_baseWorkTime.filter("");
+			ds_baseWorkTime.addRow();
+			ds_baseWorkTime.setColumn(ds_baseWorkTime.rowposition,"APPLY_YEAR",applyYear.value);
+		}	
+	}else{
+		alert(" 현재년도의 다음년도부터 등록 가능 합니다. ");
+	}
+}
+
+//저장 시 
+function saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	if(confirm(" 변경된 내용을 저장 하시겠습니까? ")){
+		if(dataLength == 0){
+			var rownum = dsBaseWorkTime.rowposition;
+			ds_baseWorkTime.setColumn(rownum,"ATTEND_TIME",attendTime.value);
+			ds_baseWorkTime.setColumn(rownum,"QUIT_TIME",quitTime.value);
+			ds_baseWorkTime.setColumn(rownum,"OVER_TIME",overTime.value);
+			ds_baseWorkTime.setColumn(rownum,"NIGHT_TIME",nightTime.value);
+			ds_baseWorkTime.setColumn(rownum,"LUNCH_START_TIME",lunchStartTime.value);
+			ds_baseWorkTime.setColumn(rownum,"LUNCH_END_TIME",lunchEndTime.value);
+			ds_baseWorkTime.setColumn(rownum,"DINNER_START_TIME",quitTime.value); //퇴근 시각과같다.
+			ds_baseWorkTime.setColumn(rownum,"DINNER_END_TIME",overTime.value); //연장 시각과 같다.
+	
+			transaction(
+				"addBasicWorkTime",
+				"svcHrCircumstance::addBaseWorkTime.do",
+				"dsBaseWorkTime=ds_baseWorkTime:u",
+				"ds_baseWorkTime=dsBaseWorkTime",
+				"",
+				"callback",
+				false);
+			
+	
+		}else{
+		
+			ds_baseWorkTime.setColumn(rownum,"DINNER_START_TIME",quitTime.value); //퇴근 시각과같다.
+			ds_baseWorkTime.setColumn(rownum,"DINNER_END_TIME",overTime.value); //연장 시각과 같다.
+	
+			transaction(
+				"editBasicWorkTime",
+				"svcHrCircumstance::editBaseWorkTime.do",
+				"dsBaseWorkTime=ds_baseWorkTime:u",
+				"ds_baseWorkTime=dsBaseWorkTime",
+				"",
+				"callback",
+				false
+			);	
+			
+		}
+		
+	}	
+	
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+
+	if(trid=='addBasicWorkTime'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 해당년도에 기본근무시간이 추가되었습니다 :) ");
+			reload();
+		}	
+	}
+	
+	if(trid=='editBasicWorkTime'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 해당년도의 근무시간이 변경되었습니다 :) ");	
+			reload();
+		}	
+	}
+	
+	
+}
+
+]]></Script>
+  </Form>
+</FDL>

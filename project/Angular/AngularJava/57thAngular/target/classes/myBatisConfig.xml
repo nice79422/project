@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting value="true" name="callSettersOnNulls" />
+		<setting value="false" name="cacheEnabled" />
+		<setting value="true" name="useGeneratedKeys" />
+		<setting value="REUSE" name="defaultExecutorType" />
+		<setting value="VARCHAR" name="jdbcTypeForNull" />
+		<setting value="true" name="mapUnderscoreToCamelCase" />
+	</settings>
+
+
+
+
+	<typeAliases>
+
+		<typeAlias alias="memberTO" type="kr.co.seoulit.angular.to.MemberTO" />
+	
+	
+	</typeAliases>
+
+
+
+
+
+</configuration>

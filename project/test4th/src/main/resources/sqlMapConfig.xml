@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC '-//ibatis.apache.org//DTD SQL Map Config 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-config-2.dtd'>
+<sqlMapConfig>
+    <settings
+        cacheModelsEnabled="true"
+        lazyLoadingEnabled="true"
+        useStatementNamespaces="true"
+        enhancementEnabled="true" />
+
+    <!-- dtd파일 버그로 인해 sqlMap을 적어도 하나 이상 적어야한다 -->
+    <sqlMap resource="com/test4th/common/dao/sqlMap/sqlMapDummy.xml"/>
+</sqlMapConfig>

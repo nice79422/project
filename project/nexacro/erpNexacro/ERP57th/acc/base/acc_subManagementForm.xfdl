@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_subManagementForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="acc_subManagementForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="기초정보관리 &gt; 계정과목관리" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;padding:1 1 1 1;align:left middle;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="Static04" taborder="4" text="상위계정코드" left="10" top="76" width="81" height="44" style="linespace:0;border:0px solid #b1b5b9b3 ;align:center middle;font:bold 9 함초롬돋움,돋움,Verdana;opacity:100;"/>
+        <Edit id="Edit_acParentCode" taborder="5" left="95" top="76" width="124" height="46" style="align:center middle;" oneditclick="Edit_acParentCode_oneditclick"/>
+        <Static id="Static03" taborder="6" text="계정과목코드" left="233" top="76" width="81" height="44" style="linespace:0;border:0px solid #b1b5b9b3 ;align:center middle;font:bold 9 함초롬돋움,돋움,Verdana;opacity:100;"/>
+        <Edit id="Edit_accountCode" taborder="7" left="319" top="76" width="124" height="46" style="align:center middle;" oneditclick="Edit_accountCode_oneditclick"/>
+        <Grid id="Grid_account" taborder="12" binddataset="ds_account" useinputpanel="false" autofittype="col" oncellclick="Grid_account_oncellclick" left="16" top="137" width="331" height="481" scrollpixel="all">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell displaytype="tree" edittype="tree" text="bind:ACCOUNT_NAME" treelevel="bind:ACCOUNT_LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid_accountSummary" taborder="13" binddataset="ds_accountSummary" useinputpanel="false" autofittype="col" left="369" top="138" width="745" height="480">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정과목코드"/>
+                <Cell col="1" text="계정특성"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="1" text="bind:ACCOUNT_CHARACTER"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item3" compid="acParentCode" propid="value" datasetid="gds_account" columnid="PARENT_ACCOUNT_INNER_CODE"/>
+      <BindItem id="item1" compid="accountCode" propid="value" datasetid="gds_account" columnid="ACCOUNT_INNER_CODE"/>
+      <BindItem id="item0" compid="accountName" propid="value" datasetid="gds_account" columnid="ACCOUNT_NAME"/>
+      <BindItem id="item2" compid="acCharacter" propid="value" datasetid="gds_account" columnid="ACCOUNT_CHARACTER"/>
+      <BindItem id="item4" compid="Edit_acParentCode" propid="value" datasetid="ds_account" columnid="PARENT_ACCOUNT_INNER_CODE"/>
+      <BindItem id="item5" compid="Edit_accountCode" propid="value" datasetid="ds_account" columnid="ACCOUNT_INNER_CODE"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_accountSummary">
+        <ColumnInfo>
+          <Column id="ACCOUNT_SUMMARY_NO" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="SUMMARY_NUMBER" type="INT" size="256"/>
+          <Column id="SUMMARY_COMMENT" type="STRING" size="256"/>
+          <Column id="ACCOUNT_SUMMARY_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CHARACTER" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_account">
+        <ColumnInfo>
+          <Column id="ACCOUNT_LEVEL" type="INT" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CHARACTER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="PARENT_ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+계정과목관리 화면                                             						                                                                         
+@Path			회계 				   				
+@Description	계정과목을 관리하기 위한 폼							
+@Author	  		정승훈			                        								                                            
+@Create         2019. 02. 25.                             		                    				                                            
+********************************************************************************/
+
+//조회
+this.acc_subManagementForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var id = "findAccountList";
+    var url = "dataURL::acc/accSubMgt/findAccountList.do";
+    var respDs = "";
+    var reqDs = "ds_account=gds_account ds_accountSummary=gds_accountSummary";
+    var args = "";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback, false);	
+    
+    this.ds_accountSummary.filter("ACCOUNT_NAME=='xxx'");	
+}
+
+	    //alert(this.ds_accountSummary.getRowCount());
+	    
+//선택
+this.Grid_account_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var filter = this.ds_account.getColumn(this.ds_account.rowposition,"ACCOUNT_INNER_CODE");
+	this.ds_accountSummary.filter("ACCOUNT_INNER_CODE=='"+filter+"'");
+}
+
+
+
+
+
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid == "getAccountList"){
+		if(ErrorCode <0){
+			alert("조회 실패 : " + ErrorMsg);
+		}
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

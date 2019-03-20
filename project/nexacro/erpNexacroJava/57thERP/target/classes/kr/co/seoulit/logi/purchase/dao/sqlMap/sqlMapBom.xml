@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.purchase.dao.BomDAO">
+
+	<!-- bomDAO -->
+	<resultMap type="bomTO" id="bomResult">
+		<result property="no" column="NO" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="parentItemCode" column="PARENT_ITEM_CODE" />
+		<result property="netAmount" column="NET_AMOUNT" />
+		<result property="description" column="DESCRIPTION" />
+	</resultMap>
+
+
+	<resultMap type="bomDeployTO" id="bomDeployResult">
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="parentItemCode" column="PARENT_ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="itemClassification" column="ITEM_CLASSIFICATION" />
+		<result property="leadTime" column="LEAD_TIME" />
+		<result property="lossRate" column="LOSS_RATE" />
+		<result property="netAmount" column="NET_AMOUNT" />
+		<result property="standardUnitPrice" column="STANDARD_UNIT_PRICE" />
+		<result property="parentItemName" column="PARENT_ITEM_NAME" />
+	</resultMap>
+
+
+	<select id="selectBomList" resultMap="bomResult">
+		SELECT
+		NO, ITEM_CODE, PARENT_ITEM_CODE
+		, NET_AMOUNT, DESCRIPTION
+		FROM BOM
+	</select>
+
+
+	<select id="selectBomDeployList" parameterType="hashmap" resultMap="bomDeployResult">
+		SELECT 
+		BM.ITEM_CODE, BM.PARENT_ITEM_CODE
+		, BM.ITEM_NAME, BM.ITEM_CLASSIFICATION
+		, BM.LEAD_TIME, BM.LOSS_RATE
+		, BM.STANDARD_UNIT_PRICE, BM.NET_AMOUNT
+		,IT.ITEM_NAME AS PARENT_ITEM_NAME
+		FROM
+		(
+		SELECT 
+		B.LV, LPAD(B.ITEM_CODE,B.LV*10) AS ITEM_CODE
+		, B.PARENT_ITEM_CODE, I.ITEM_NAME
+		, B.NET_AMOUNT, I.ITEM_CLASSIFICATION
+		, I.LEAD_TIME, NVL(I.LOSS_RATE,0) AS LOSS_RATE
+		, I.STANDARD_UNIT_PRICE, ROW_NUMBER() OVER(ORDER BY ROWNUM) AS RN
+		FROM
+		(
+		SELECT 
+		LEVEL AS LV, ITEM_CODE
+		, PARENT_ITEM_CODE, NET_AMOUNT
+		FROM BOM
+		START WITH ITEM_CODE = #{itemCode}
+		CONNECT BY NOCYCLE
+		<if test="deployCondition.equals('forward') ">
+			PRIOR ITEM_CODE = PARENT_ITEM_CODE) B, ITEM I
+			WHERE B.ITEM_CODE = I.ITEM_CODE ) BM, ITEM IT
+			WHERE BM.PARENT_ITEM_CODE = IT.ITEM_CODE(+)
+			ORDER BY BM.RN
+		</if>
+		<if test="deployCondition.equals('reverse') ">
+			ITEM_CODE = PRIOR PARENT_ITEM_CODE) B, ITEM I
+			WHERE B.ITEM_CODE = I.ITEM_CODE ) BM, ITEM IT
+			WHERE BM.PARENT_ITEM_CODE = IT.ITEM_CODE(+)
+			ORDER BY BM.RN
+		</if>
+	</select>
+
+</mapper>

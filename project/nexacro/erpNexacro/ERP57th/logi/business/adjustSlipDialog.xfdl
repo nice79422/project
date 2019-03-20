@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="adjustSlipDialog" left="0" top="0" width="1000" height="330" titletext="adjustSlipDialog" onload="adjustSlipDialog_onload">
+    <Layouts>
+      <Layout>
+        <GroupBox id="GroupBox00" text="전표수정" taborder="9" left="0.8%" top="100" right="69.2%" height="216"/>
+        <Static id="adjustSlip_stc" taborder="0" text="전표수정요청" left="0" top="0" width="992" height="40"/>
+        <Edit id="slipNo_edit" taborder="1" left="15.6%" top="123" right="70.4%" height="30" enable="false"/>
+        <Static id="Static00" taborder="2" text="전표번호" left="2%" top="123" right="86%" height="30"/>
+        <Static id="Static01" taborder="3" text="신청부서" left="2%" top="163" right="86%" height="30"/>
+        <Edit id="dept_edit" taborder="4" left="15.6%" top="163" right="70.4%" height="30" enable="false"/>
+        <Static id="Static02" taborder="5" text="신청자" left="2%" top="203" right="86%" height="30"/>
+        <Edit id="emp_edit" taborder="6" left="15.6%" top="203" right="70.4%" height="30" enable="false"/>
+        <Static id="Static03" taborder="7" text="신청일" left="2%" top="243" right="86%" height="30"/>
+        <Edit id="day_edit" taborder="8" left="15.6%" top="243" right="70.4%" height="30" autoskip="true" enable="false"/>
+        <GroupBox id="adjustReason_grp" text="수정사유" taborder="10" left="34.4%" top="100" right="1.2%" height="216"/>
+        <Static id="adjustReason_stc" taborder="11" text="수정사유" left="36.4%" top="123" right="51.6%" height="30"/>
+        <Combo id="adjustReason_cmb" taborder="12" left="52.1%" top="123" right="35.9%" height="30" index="-1" innerdataset="@ds_adjustReason" codecolumn="REASON" datacolumn="REASON"/>
+        <Static id="adjustReason_stc00" taborder="13" text="상세" left="36.4%" top="163" right="51.6%" height="30"/>
+        <TextArea id="adjustReason_tArea" taborder="14" left="52.1%" top="167" right="2.1%" height="124"/>
+        <Button id="adjustReason_btn" taborder="15" text="제출" left="86.9%" top="52" right="1.1%" height="50" onclick="adjustReason_btn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_adjustSlip">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_slip">
+        <ColumnInfo>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="ACCOUNT_PERIOD_NO" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="SLIP_TYPE" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="AUTHORIZATION_STATUS" type="STRING" size="256"/>
+          <Column id="REPORTING_EMP_CODE" type="STRING" size="256"/>
+          <Column id="REPORTING_DATE" type="STRING" size="256"/>
+          <Column id="APPROVAL_EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="SLIP_DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journalDetail">
+        <ColumnInfo>
+          <Column id="JOURNAL_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="ITEM" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DETAIL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journal" oncolumnchanged="ds_journal_oncolumnchanged" cancolumnchange="ds_journal_cancolumnchange">
+        <ColumnInfo>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="SUMMARY_NUMBER" type="STRING" size="256"/>
+          <Column id="SUMMARY_COMMENT" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="SLIP_APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_adjustReason">
+        <ColumnInfo>
+          <Column id="REASON" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="REASON">반품</Col>
+          </Row>
+          <Row>
+            <Col id="REASON">표기오류</Col>
+          </Row>
+          <Row>
+            <Col id="REASON">기타</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="slipNo_edit" propid="value" datasetid="ds_slip" columnid=""/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[
+this.adjustSlipDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.slipNo_edit.set_value(this.parent.slipNo);
+	this.dept_edit.set_value(application.g_deptCode);
+	this.emp_edit.set_value(application.g_empCode);
+	this.day_edit.set_value(application.todayBar());
+}
+
+this.adjustReason_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	alert("테스트중입니다");
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

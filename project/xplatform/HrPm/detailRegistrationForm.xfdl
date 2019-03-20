@@ -1,0 +1,1117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="detailRegistrationForm" classname="detailRegistrationForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="detailRegistrationForm_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="사원 상세 정보 등록" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Static id="Static03" text="부서조회" enable="false" enableevent="false" position2="absolute l:10 w:158 t:50 h:30" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Combo id="deptSerchCombo" taborder="1" position2="absolute l:167 w:187 t:50 h:30" positiontype="position2" index="-1" innerdataset="@ds_dept" datacolumn="DEPT_NAME" codecolumn="DEPT_CODE" onitemchanged="deptSerchCombo_onitemchanged" style="opacity:100;"/>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:11 w:344 t:85 h:381" positiontype="position2" style="border:1 solid #cbcbcbff ;" binddataset="ds_tempEmp" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;password&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;dept_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;authority_code&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:password&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:dept_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:authority_code&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="90"/>
+                <Column size="70"/>
+                <Column size="90"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+                <Row size="24" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="사원명"/>
+                <Cell col="2" text="직급명"/>
+                <Cell col="3" text="부서명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" text="bind:POSITION_CODE" combodataset="ds_position" combocodecol="POSITION_CODE" combodatacol="POSITION_NAME"/>
+                <Cell col="3" text="bind:DEPT_CODE" combodataset="ds_dept" combocodecol="DEPT_CODE" combodatacol="DEPT_NAME"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="총인원"/>
+                <Cell col="1" colspan="3" text="expr:getRowCount(&quot;사원번호&quot;)+'명'"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Tab id="Tab00" taborder="1" position2="absolute l:360 w:592 t:54 h:412" positiontype="position2" tabindex="0" scrollbars="autoboth" style="color:black;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="사원정보" style="anchor:default;background:gainsboro;">
+              <Layouts>
+                <Layout>
+                  <GroupBox id="GroupBox00" text="사진" position2="absolute l:6 w:242 t:0 h:236" positiontype="position2"/>
+                  <ImageViewer id="empImg" taborder="1" position2="absolute l:8 w:237 t:12 h:222" positiontype="position2"/>
+                  <Button id="findPicture" taborder="1" text="사진찾기" position2="absolute l:5 w:77 t:237 h:23" positiontype="position2" onclick="Tab00_tabpage1_findPicture_onclick" style="background:silver;color:white;"/>
+                  <Button id="savePicture" taborder="1" text="사진저장" position2="absolute l:85 w:77 t:237 h:23" positiontype="position2" onclick="Tab00_tabpage1_savePicture_onclick" style="background:silver;color:white;"/>
+                  <Static id="Static03" text="사원코드" enable="false" enableevent="false" position2="absolute l:254 w:126 t:7 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static00" text="사원명" enable="false" enableevent="false" position2="absolute l:253 w:126 t:36 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static01" text="주민등록번호" enable="false" enableevent="false" position2="absolute l:253 w:126 t:65 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static02" text="성 별" enable="false" enableevent="false" position2="absolute l:253 w:126 t:94 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static04" text="최종학력" enable="false" enableevent="false" position2="absolute l:253 w:126 t:123 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static05" text="내국인여부" enable="false" enableevent="false" position2="absolute l:253 w:126 t:152 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static06" text="휴대폰번호" enable="false" enableevent="false" position2="absolute l:253 w:126 t:181 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static07" text="병력사항" enable="false" enableevent="false" position2="absolute l:253 w:126 t:210 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static08" text="우편번호" enable="false" enableevent="false" position2="absolute l:5 w:126 t:276 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static09" text="주  소" enable="false" enableevent="false" position2="absolute l:5 w:126 t:307 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Static id="Static10" text="상세주소" enable="false" enableevent="false" position2="absolute l:5 w:126 t:343 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Edit id="empCode" taborder="1" position2="absolute l:381 w:189 t:7 h:24" positiontype="position2" enable="false" style="opacity:100; :disabled {align:center middle;font:arial,11,bold antialias;}"/>
+                  <Edit id="empName" taborder="1" enable="false" position2="absolute l:381 w:189 t:36 h:24" positiontype="position2" style="opacity:100; :disabled {align:center middle;font:arial,11,bold antialias;}"/>
+                  <MaskEdit id="residentNumber" taborder="1" position2="absolute l:381 w:189 t:65 h:24" positiontype="position2" mask="@@@@@@-@@@@@@@" type="string" style="align:center middle;font:arial,11,bold antialias;opacity:100;"/>
+                  <Combo id="genderCombo" taborder="1" position2="absolute l:381 w:189 t:94 h:24" positiontype="position2" index="-1" innerdataset="@ds_gender" codecolumn="code" datacolumn="value" style="opacity:100;"/>
+                  <Static id="Static11" text="E-mail" enable="false" enableevent="false" position2="absolute l:253 w:126 t:239 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+                  <Edit id="highestEducation" taborder="1" position2="absolute l:381 w:132 t:123 h:24" positiontype="position2" enable="false" style="opacity:100;"/>
+                  <Button id="EducationCodeBtn" taborder="1" text="검 색" position2="absolute l:519 w:52 t:123 h:24" positiontype="position2" onclick="Tab00_tabpage1_EducationCodeBtn_onclick" style="background:silver;color:white;"/>
+                  <Combo id="native" taborder="1" position2="absolute l:381 w:189 t:152 h:24" positiontype="position2" index="-1" innerdataset="@ds_nativeType" datacolumn="detail_code_name" codecolumn="detail_code" style="align:center middle;font:arial,11,bold antialias;opacity:100;"/>
+                  <MaskEdit id="MaskEdit00" taborder="1" position2="absolute l:381 w:189 t:181 h:24" positiontype="position2" mask="@@@-@@@@-@@@@" type="string" style="align:center middle;font:arial,11,bold antialias;opacity:100;"/>
+                  <Combo id="Combo00" taborder="1" position2="absolute l:381 w:189 t:210 h:24" positiontype="position2" index="-1" innerdataset="@ds_disabilityType" codecolumn="detail_code" datacolumn="detail_code_name" style="opacity:100;"/>
+                  <Edit id="email" taborder="1" position2="absolute l:381 w:189 t:239 h:24" positiontype="position2" style="opacity:100;"/>
+                  <Edit id="zipCode" taborder="1" position2="absolute l:131 w:176 t:274 h:24" positiontype="position2" enable="false" style="opacity:100;"/>
+                  <Edit id="baseAddress" taborder="1" position2="absolute l:131 w:362 t:307 h:24" positiontype="position2" enable="false" style="opacity:100;"/>
+                  <Edit id="detailAddress" taborder="1" position2="absolute l:131 w:300 t:343 h:24" positiontype="position2" enable="true" style="opacity:100;"/>
+                  <Button id="adressSearchBtn" taborder="1" text="주소검색" position2="absolute l:389 w:85 t:272 h:30" positiontype="position2" onclick="Tab00_tabpage1_adressSearchBtn_onclick" style="background:silver;color:white;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="재직정보" style="anchor:default;background:gainsboro;">
+              <Layouts>
+                <Layout>
+                  <Static id="Static00" text="▶ 정확히 작성해 주세요! ◀" position2="absolute l:152 w:287 t:7 h:29" positiontype="position2" style="background:gainsboro;border:1 solid black ;color:#ff0000ff;align:center middle;"/>
+                  <Static id="Static03" text="입사일자" enable="false" enableevent="false" position2="absolute l:29 w:126 t:47 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static01" text="고용형태" enable="false" enableevent="false" position2="absolute l:29 w:126 t:101 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static02" text="수습만료일" enable="false" enableevent="false" position2="absolute l:29 w:126 t:155 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static04" text="퇴사사유" enable="false" enableevent="false" position2="absolute l:29 w:126 t:209 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static05" text="프로젝트" enable="false" enableevent="false" position2="absolute l:309 w:126 t:209 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static06" text="퇴사일자" enable="false" enableevent="false" position2="absolute l:309 w:126 t:47 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static07" text="수습여부" enable="false" enableevent="false" position2="absolute l:309 w:126 t:101 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Static id="Static08" text="직종" enable="false" enableevent="false" position2="absolute l:309 w:126 t:155 h:24" positiontype="position2" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}"/>
+                  <Combo id="Combo00" taborder="1" position2="absolute l:159 w:142 t:101 h:24" positiontype="position2" index="-1" innerdataset="@ds_employeementType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" style="align:center middle;"/>
+                  <Combo id="Combo01" taborder="1" innerdataset="@ds_jikjong" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" position2="absolute l:438 w:142 t:155 h:24" positiontype="position2"/>
+                  <Combo id="cmbProbYeobu" taborder="1" innerdataset="@ds_YN" codecolumn="VALUE" datacolumn="VALUE" position2="absolute l:438 w:142 t:101 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Calendar id="hireDate" taborder="1" dateformat="yyyy년MM월dd일 " position2="absolute l:159 w:142 t:47 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Calendar id="retireDate" taborder="1" dateformat="yyyy년MM월dd일" position2="absolute l:438 w:142 t:47 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Calendar id="probationEndDate" taborder="1" dateformat="yyyy년MM월dd일" position2="absolute l:159 w:142 t:155 h:24" positiontype="position2" style="align:center middle;"/>
+                  <Combo id="Combo02" taborder="1" innerdataset="@ds_project" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" position2="absolute l:438 w:142 t:209 h:24" positiontype="position2"/>
+                  <TextArea id="TextArea00" taborder="1" position2="absolute l:31 w:546 t:248 h:117" positiontype="position2" style="align:left top;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="급여정보" position="absolute 0 0 0 0">
+              <Layouts>
+                <Layout>
+                  <GroupBox id="GroupBox00" text="급여관리" position2="absolute l:4 w:577 t:7 h:191" positiontype="position2" style="background:gainsboro;color:black;"/>
+                  <Static id="Static00" text="※ 소득세, 지방소득세는 급여계산때 계산됩니다." position2="absolute l:113 w:321 t:23 h:19" style="background:gainsboro;border:1 solid black ;color:#ff0000ff;align:center middle;" positiontype="position2"/>
+                  <Static id="Static03" text="직  급" enable="false" enableevent="false" position2="absolute l:10 w:102 t:47 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static01" text="기 본 급" enable="false" enableevent="false" position2="absolute l:10 w:102 t:85 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static02" text="호  봉" enable="false" enableevent="false" position2="absolute l:10 w:102 t:123 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static04" text="상 여 금" enable="false" enableevent="false" position2="absolute l:10 w:102 t:161 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static05" text="시간당 기본수당" enable="false" enableevent="false" position2="absolute l:286 w:110 t:47 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,10,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static06" text="급여형태" enable="false" enableevent="false" position2="absolute l:286 w:110 t:75 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static07" text="급여이체은행" enable="false" enableevent="false" position2="absolute l:286 w:110 t:103 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,10,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static08" text="예 금 주" enable="false" enableevent="false" position2="absolute l:286 w:110 t:131 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static09" text="계좌번호" enable="false" enableevent="false" position2="absolute l:286 w:110 t:159 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <GroupBox id="GroupBox01" text="연급 및 보험관리" position2="absolute l:4 w:326 t:205 h:178" positiontype="position2" style="background:gainsboro;color:black;"/>
+                  <GroupBox id="GroupBox02" text="부양 가족 관리" position2="absolute l:337 w:244 t:205 h:178" positiontype="position2" style="background:gainsboro;color:black;"/>
+                  <Edit id="positionEdit" taborder="1" position2="absolute l:115 w:138 t:47 h:24" style="align:center middle;" enable="false" positiontype="position2"/>
+                  <Static id="Static10" text="원" enable="false" enableevent="false" position2="absolute l:537 w:33 t:47 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static11" text="원" enable="false" enableevent="false" position2="absolute l:253 w:25 t:85 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <MaskEdit id="sigup" taborder="1" position2="absolute l:399 w:138 t:47 h:24" mask="99,999" style="align:center middle; :disabled {align:right middle;}" enable="false" positiontype="position2"/>
+                  <MaskEdit id="baseSal" taborder="1" position2="absolute l:115 w:138 t:85 h:24" mask="99,999" style="align:center middle; :disabled {align:right middle;}" enable="false" positiontype="position2"/>
+                  <Combo id="Combo00" taborder="1" position2="absolute l:399 w:138 t:74 h:24" index="-1" innerdataset="@ds_salaryType" codecolumn="DETAIL_CODE" datacolumn="DETAIL_CODE_NAME" style="align:center middle;" displaynulltext="선택하세요" positiontype="position2"/>
+                  <Combo id="selHobong" taborder="1" position2="absolute l:115 w:138 t:122 h:24" index="-1" displaynulltext="선택하세요" innerdataset="@ds_hobongCopy" codecolumn="HOBONG" datacolumn="HOBONG" onitemchanged="Tab00_tabpage3_selHobong_onitemchanged" positiontype="position2"/>
+                  <Static id="Static12" text="원" enable="false" enableevent="false" position2="absolute l:253 w:25 t:161 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <MaskEdit id="bonus" taborder="1" position2="absolute l:115 w:138 t:161 h:24" enable="false" mask="99,999" style=":disabled {align:right middle;}" positiontype="position2"/>
+                  <Edit id="bankName" taborder="1" position2="absolute l:399 w:138 t:103 h:24" enable="false" style=":disabled {align:center middle;}" positiontype="position2"/>
+                  <Button id="findBankBtn" taborder="1" text="검색" position2="absolute l:537 w:43 t:100 h:29" onclick="Tab00_tabpage3_findBankBtn_onclick" positiontype="position2" style="background:silver;color:white;"/>
+                  <Edit id="accountHolder" taborder="1" position2="absolute l:399 w:179 t:132 h:24" positiontype="position2"/>
+                  <Edit id="accountNumber" taborder="1" position2="absolute l:399 w:179 t:162 h:24" positiontype="position2"/>
+                  <Static id="Static13" text="국민연금" enable="false" enableevent="false" position2="absolute l:13 w:110 t:231 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static14" text="고용보험" enable="false" enableevent="false" position2="absolute l:13 w:110 t:268 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static15" text="건강보험" enable="false" enableevent="false" position2="absolute l:13 w:110 t:305 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static16" text="장기요양보험" enable="false" enableevent="false" position2="absolute l:13 w:110 t:342 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static17" text="원" enable="false" enableevent="false" position2="absolute l:252 w:25 t:231 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static18" text="원" enable="false" enableevent="false" position2="absolute l:252 w:25 t:268 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static19" text="원" enable="false" enableevent="false" position2="absolute l:252 w:25 t:305 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static20" text="원" enable="false" enableevent="false" position2="absolute l:252 w:25 t:342 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:80;}" positiontype="position2"/>
+                  <Button id="findNationPenBtn" taborder="1" text="계산" position2="absolute l:279 w:43 t:229 h:29" onclick="Tab00_tabpage3_findNationPenBtn_onclick" positiontype="position2" style="background:silver;color:white;"/>
+                  <Button id="findEmpInsurBtn" taborder="1" text="계산" position2="absolute l:279 w:43 t:265 h:29" onclick="Tab00_tabpage3_findEmpInsurBtn_onclick" positiontype="position2" style="background:silver;color:white;"/>
+                  <Button id="findHealInsurBtn" taborder="1" text="계산" position2="absolute l:279 w:43 t:303 h:29" onclick="Tab00_tabpage3_findHealInsurBtn_onclick" positiontype="position2" style="background:silver;color:white;"/>
+                  <Button id="autoResultBtn" taborder="1" text="계산" position2="absolute l:279 w:43 t:339 h:29" onclick="Tab00_tabpage3_autoResultBtn_onclick" positiontype="position2" style="background:silver;color:white;"/>
+                  <MaskEdit id="national" taborder="1" position2="absolute l:125 w:126 t:231 h:24" enable="false" mask="99,999" style=":disabled {align:right middle;}" positiontype="position2"/>
+                  <MaskEdit id="empInsur" taborder="1" position2="absolute l:125 w:126 t:268 h:24" enable="false" mask="99,999" style=":disabled {align:right middle;}" positiontype="position2"/>
+                  <MaskEdit id="healthInsur" taborder="1" position2="absolute l:125 w:126 t:307 h:24" enable="false" mask="99,999" style=":disabled {align:right middle;}" positiontype="position2"/>
+                  <MaskEdit id="longTermCare" taborder="1" position2="absolute l:125 w:126 t:341 h:24" enable="false" mask="99,999" style=":disabled {align:right middle;}" positiontype="position2"/>
+                  <Static id="Static21" text="부양 20세 이하" enable="false" enableevent="false" position2="absolute l:341 w:111 t:247 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,10;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static22" text="부양 60세 이상" enable="false" enableevent="false" position2="absolute l:341 w:111 t:281 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,10;opacity:80;}" positiontype="position2"/>
+                  <Static id="Static23" text="다자녀 추가공제" enable="false" enableevent="false" position2="absolute l:341 w:111 t:315 h:24" style="background:royalblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,10;opacity:80;}" positiontype="position2"/>
+                  <Combo id="Combo02" taborder="1" displaynulltext="선택하세요." position2="absolute l:462 w:111 t:281 h:24" innerdataset="@ds_count" datacolumn="CODE" codecolumn="CODE" positiontype="position2"/>
+                  <Combo id="Combo03" taborder="1" displaynulltext="선택하세요." position2="absolute l:462 w:111 t:315 h:24" innerdataset="@ds_YN" datacolumn="VALUE" codecolumn="VALUE" positiontype="position2"/>
+                  <Combo id="Combo01" taborder="1" displaynulltext="선택하세요." position2="absolute l:462 w:111 t:247 h:24" innerdataset="@ds_count" datacolumn="CODE" codecolumn="CODE" positiontype="position2"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="batchBtn" taborder="1" text="일괄저장" position2="absolute l:816 w:117 t:50 h:22" positiontype="position2" onclick="batchBtn_onclick" style="background:silver;color:white;"/>
+        <Tab id="Tab01" taborder="1" position2="absolute l:8 w:944 t:471 h:166" positiontype="position2" tabindex="0" scrollbars="autoboth" style="color:black;">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="가족정보" position2="absolute l:12 w:944 t:26 h:124">
+              <Layouts>
+                <Layout>
+                  <Button id="familyAddBtn" taborder="0" text="+" position2="absolute l:875 w:29 t:0 h:25" positiontype="position2" onclick="Tab01_tabpage1_familyAddBtn_onclick"/>
+                  <Button id="familyRemoveBtn" taborder="1" text="-" position2="absolute l:910 w:29 t:0 h:25" positiontype="position2" onclick="Tab01_tabpage1_familyRemoveBtn_onclick"/>
+                  <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:10 w:923 t:25 h:103" positiontype="position2" binddataset="ds_familyInfo" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;family_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;family_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;family_birth_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;relationship&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;supporting&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;conhabitation_status&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;desability_code&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;highest_education_code&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;job&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;company_name&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;tel&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:family_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:family_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:family_birth_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:relationship&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:supporting&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:conhabitation_status&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:desability_code&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:highest_education_code&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:job&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:company_name&quot;/&gt;&#10;      &lt;Cell col=&quot;11&quot; disptype=&quot;normal&quot; text=&quot;bind:tel&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="40"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="90"/>
+                          <Column size="90"/>
+                          <Column size="110"/>
+                          <Column size="120"/>
+                          <Column size="150"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO"/>
+                          <Cell col="1" text="성명"/>
+                          <Cell col="2" text="생년월일"/>
+                          <Cell col="3" text="관계"/>
+                          <Cell col="4" text="부양여부"/>
+                          <Cell col="5" text="동거여부"/>
+                          <Cell col="6" text="병력사항"/>
+                          <Cell col="7" text="최종학력"/>
+                          <Cell col="8" text="직업"/>
+                          <Cell col="9" text="직장명"/>
+                          <Cell col="10" text="전화번호"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" edittype="normal" text="bind:FAMILY_NAME"/>
+                          <Cell col="2" edittype="normal" text="bind:FAMILY_BIRTH_DATE"/>
+                          <Cell col="3" displaytype="combo" edittype="combo" text="bind:RELATIONSHIP" combodataset="ds_relationship" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                          <Cell col="4" displaytype="checkbox" edittype="checkbox" text="bind:SUPPORTING"/>
+                          <Cell col="5" displaytype="checkbox" edittype="checkbox" text="bind:COHABITATION_STATUS"/>
+                          <Cell col="6" displaytype="combo" edittype="combo" text="bind:DISABILITY_CODE" combodataset="ds_disabilityType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                          <Cell col="7" displaytype="combo" edittype="combo" text="bind:HIGHEST_EDUCATION_CODE" combodataset="ds_highestEducation" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                          <Cell col="8" edittype="normal" text="bind:JOB"/>
+                          <Cell col="9" edittype="normal" text="bind:COMPANY_NAME"/>
+                          <Cell col="10" edittype="normal" text="bind:TEL"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="자격정보">
+              <Layouts>
+                <Layout>
+                  <Button id="licenseAddBtn" taborder="0" text="+" position2="absolute l:875 w:30 t:0 h:25" positiontype="position2" onclick="Tab01_tabpage2_licenseAddBtn_onclick"/>
+                  <Button id="licenseRemoveBtn" taborder="1" text="-" position2="absolute l:910 w:30 t:0 h:25" positiontype="position2" onclick="Tab01_tabpage2_licenseRemoveBtn_onclick"/>
+                  <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:7 w:930 t:22 h:101" positiontype="position2" binddataset="ds_licenseInfo" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;license_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;license_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;license_center&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;license_level&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;license_no&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:license_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:license_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:license_center&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:license_level&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:license_no&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="40"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO"/>
+                          <Cell col="1" text="자격증명"/>
+                          <Cell col="2" text="취득일"/>
+                          <Cell col="3" text="만료일"/>
+                          <Cell col="4" text="발행기관"/>
+                          <Cell col="5" text="등급"/>
+                          <Cell col="6" text="발급번호"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" edittype="normal" text="bind:LICENSE_NAME"/>
+                          <Cell col="2" edittype="normal" text="bind:START_DATE" mask="####-##-##"/>
+                          <Cell col="3" edittype="normal" text="bind:END_DATE" mask="####-##-##"/>
+                          <Cell col="4" edittype="normal" text="bind:LICENSE_CENTER"/>
+                          <Cell col="5" edittype="normal" text="bind:LICENSE_LEVEL"/>
+                          <Cell col="6" edittype="normal" text="bind:LICENSE_NO"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="학력정보">
+              <Layouts>
+                <Layout>
+                  <Button id="educationAddBtn" taborder="0" text="+" position2="absolute l:875 w:30 t:0 h:25" positiontype="position2" onclick="Tab01_tabpage3_educationAddBtn_onclick"/>
+                  <Button id="educationRemoveBtn" taborder="1" text="-" position2="absolute l:910 w:30 t:0 h:25" positiontype="position2" onclick="Tab01_tabpage3_educationRemoveBtn_onclick"/>
+                  <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:5 w:935 t:24 h:109" positiontype="position2" binddataset="ds_educationInfo" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;education_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;campus&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;major&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;sub_major&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;enter_date&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;graduation_date&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;grade&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;location&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:education_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:campus&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:major&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:sub_major&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:enter_date&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:graduation_date&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:grade&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:location&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="40"/>
+                          <Column size="130"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="95"/>
+                          <Column size="420"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO"/>
+                          <Cell col="1" text="학교명"/>
+                          <Cell col="2" text="전공"/>
+                          <Cell col="3" text="부전공"/>
+                          <Cell col="4" text="입학일"/>
+                          <Cell col="5" text="졸업일"/>
+                          <Cell col="6" text="학점"/>
+                          <Cell col="7" text="위치"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" displaytype="combo" edittype="combo" text="bind:CAMPUS" combodataset="ds_university" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                          <Cell col="2" edittype="normal" text="bind:MAJOR"/>
+                          <Cell col="3" edittype="normal" text="bind:SUB_MAJOR"/>
+                          <Cell col="4" edittype="normal" text="bind:ENTER_DATE" mask="####-##-##"/>
+                          <Cell col="5" edittype="normal" text="bind:GRADUATION_DATE" mask="####-##-##"/>
+                          <Cell col="6" edittype="normal" text="bind:GRADE"/>
+                          <Cell col="7" edittype="normal" text="bind:LOCATION"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="saveBtn" taborder="1" text="저 장" position2="absolute l:816 w:116 t:469 h:23" positiontype="position2" onclick="batchBtn_onclick" style="background:silver;color:white;"/>
+        <Button id="reportBtn" taborder="1" text="재직증명서" position2="absolute l:719 w:88 t:50 h:21" positiontype="position2" onclick="reportBtn_onclick" style="background:silver;color:white;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <FileDialog id="FileDialog" filter="All(*.*)|*.*|" filterindex="0" defaultextension="false"/>
+      <Dataset id="ds_img" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EMP_FILE_NAME" type="STRING" size="256"/>
+          <Column id="IMG_FILE_DATA" type="BLOB" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_empInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENT_NUMBER" type="STRING" size="256"/>
+          <Column id="BIRTH_DATE" type="STRING" size="256"/>
+          <Column id="GENDER" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="PHONE_NUMBER" type="STRING" size="256"/>
+          <Column id="NATIVE_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="HIGHEST_EDUCATION_CODE" type="STRING" size="256"/>
+          <Column id="BASE_ADDRESS" type="STRING" size="256"/>
+          <Column id="DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="ZIP_CODE" type="STRING" size="256"/>
+          <Column id="IMG_SRC" type="STRING" size="256"/>
+          <Column id="DISABILITY_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_familyInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="RELATIONSHIP" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="FAMILY_NAME" type="STRING" size="256"/>
+          <Column id="SUPPORTING" type="STRING" size="256"/>
+          <Column id="COHABITATION_STATUS" type="STRING" size="256"/>
+          <Column id="DISABILITY_CODE" type="STRING" size="256"/>
+          <Column id="HIGHEST_EDUCATION_CODE" type="STRING" size="256"/>
+          <Column id="JOB" type="STRING" size="256"/>
+          <Column id="COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="TEL" type="STRING" size="256"/>
+          <Column id="FAMILY_BIRTH_DATE" type="STRING" size="256"/>
+          <Column id="FAMILY_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_licenseInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="LICENSE_SEQ" type="STRING" size="256"/>
+          <Column id="LICENSE_NAME" type="STRING" size="256"/>
+          <Column id="START_DATE" type="STRING" size="256"/>
+          <Column id="END_DATE" type="STRING" size="256"/>
+          <Column id="LICENSE_CENTER" type="STRING" size="256"/>
+          <Column id="LICENSE_LEVEL" type="STRING" size="256"/>
+          <Column id="LICENSE_NO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_workInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="HIRE_DATE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="EMPLOYEEMENT_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="RETIRE_CAUSE" type="STRING" size="256"/>
+          <Column id="PROBATION_STATUS" type="STRING" size="256"/>
+          <Column id="PROBATION_EXPIRE_DATE" type="STRING" size="256"/>
+          <Column id="PROJECT_CODE" type="STRING" size="256"/>
+          <Column id="JIKJONG_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_salInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="HOBONG" type="STRING" size="256"/>
+          <Column id="SALARY_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="PENSION_TYPE" type="STRING" size="256"/>
+          <Column id="NATIONAL_PENSION" type="STRING" size="256"/>
+          <Column id="HEALTH_INSURANCE" type="STRING" size="256"/>
+          <Column id="EMPLOYEEMENT_INSURANCE" type="STRING" size="256"/>
+          <Column id="LONG_TERM_CARE_INSURANCE" type="STRING" size="256"/>
+          <Column id="SUPPORT_TWENTY_BELOW" type="STRING" size="256"/>
+          <Column id="MANY_CHILD_DEDUCTION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_HOLDER" type="STRING" size="256"/>
+          <Column id="SAL_TRANS_BANK" type="STRING" size="256"/>
+          <Column id="SUPPORT_SIXTY_ABOVE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_educationInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="EDUCATION_SEQ" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="CAMPUS" type="STRING" size="256"/>
+          <Column id="MAJOR" type="STRING" size="256"/>
+          <Column id="SUB_MAJOR" type="STRING" size="256"/>
+          <Column id="ENTER_DATE" type="STRING" size="256"/>
+          <Column id="GRADUATION_DATE" type="STRING" size="256"/>
+          <Column id="GRADE" type="STRING" size="256"/>
+          <Column id="LOCATION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_tempEmp">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_gender" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">M</Col>
+            <Col id="VALUE">남성</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">F</Col>
+            <Col id="VALUE">여성</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_nativeType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_disabilityType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_employeementType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_jikjong" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_project" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_salaryType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_hobongCopy" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="HOBONG" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="BASE_SAL" type="STRING" size="256"/>
+          <Column id="BONUS" type="STRING" size="256"/>
+          <Column id="SIGUB" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_count" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">0명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">2명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">3명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">4명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">5명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">6명</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">7명</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_relationship" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_highestEducation" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_university" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_YN" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="VALUE">Y</Col>
+          </Row>
+          <Row>
+            <Col id="VALUE">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item19" compid="Tab00.tabpage2.TextArea00" propid="value" datasetid="ds_workInfo" columnid="RETIRE_CAUSE"/>
+      <BindItem id="item18" compid="Tab00.tabpage2.Combo02" propid="value" datasetid="ds_workInfo" columnid="PROJECT_CODE"/>
+      <BindItem id="item16" compid="Tab00.tabpage2.probationEndDate" propid="value" datasetid="ds_workInfo" columnid="PROBATION_EXPIRE_DATE"/>
+      <BindItem id="item13" compid="Tab00.tabpage2.retireDate" propid="value" datasetid="ds_workInfo" columnid="RETIRE_DATE"/>
+      <BindItem id="item12" compid="Tab00.tabpage2.hireDate" propid="value" datasetid="ds_workInfo" columnid="HIRE_DATE"/>
+      <BindItem id="item15" compid="Tab00.tabpage2.cmbProbYeobu" propid="value" datasetid="ds_workInfo" columnid="PROBATION_STATUS"/>
+      <BindItem id="item17" compid="Tab00.tabpage2.Combo01" propid="value" datasetid="ds_workInfo" columnid="JIKJONG_CODE"/>
+      <BindItem id="item0" compid="Tab00.tabpage1.empCode" propid="value" datasetid="ds_empInfo" columnid="EMP_CODE"/>
+      <BindItem id="item1" compid="Tab00.tabpage1.empName" propid="value" datasetid="ds_empInfo" columnid="EMP_NAME"/>
+      <BindItem id="item2" compid="Tab00.tabpage1.residentNumber" propid="value" datasetid="ds_empInfo" columnid="RESIDENT_NUMBER"/>
+      <BindItem id="item3" compid="Tab00.tabpage1.genderCombo" propid="value" datasetid="ds_empInfo" columnid="GENDER"/>
+      <BindItem id="item4" compid="Tab00.tabpage1.highestEducation" propid="value" datasetid="ds_empInfo" columnid="HIGHEST_EDUCATION_CODE"/>
+      <BindItem id="item5" compid="Tab00.tabpage1.native" propid="value" datasetid="ds_empInfo" columnid="NATIVE_TYPE_CODE"/>
+      <BindItem id="item6" compid="Tab00.tabpage1.MaskEdit00" propid="value" datasetid="ds_empInfo" columnid="PHONE_NUMBER"/>
+      <BindItem id="item7" compid="Tab00.tabpage1.Combo00" propid="value" datasetid="ds_empInfo" columnid="DISABILITY_CODE"/>
+      <BindItem id="item8" compid="Tab00.tabpage1.email" propid="value" datasetid="ds_empInfo" columnid="EMAIL"/>
+      <BindItem id="item9" compid="Tab00.tabpage1.zipCode" propid="value" datasetid="ds_empInfo" columnid="ZIP_CODE"/>
+      <BindItem id="item10" compid="Tab00.tabpage1.baseAddress" propid="value" datasetid="ds_empInfo" columnid="BASE_ADDRESS"/>
+      <BindItem id="item11" compid="Tab00.tabpage1.detailAddress" propid="value" datasetid="ds_empInfo" columnid="DETAIL_ADDRESS"/>
+      <BindItem id="item14" compid="Tab00.tabpage2.Combo00" propid="value" datasetid="ds_workInfo" columnid="EMPLOYEEMENT_TYPE_CODE"/>
+      <BindItem id="item20" compid="Tab00.tabpage3.positionEdit" propid="value" datasetid="ds_position" columnid="POSITION_NAME"/>
+      <BindItem id="item23" compid="Tab00.tabpage3.Combo00" propid="value" datasetid="ds_salInfo" columnid="SALARY_TYPE_CODE"/>
+      <BindItem id="item21" compid="Tab00.tabpage3.selHobong" propid="value" datasetid="ds_salInfo" columnid="HOBONG"/>
+      <BindItem id="item22" compid="Tab00.tabpage3.bankName" propid="value" datasetid="ds_salInfo" columnid="SAL_TRANS_BANK"/>
+      <BindItem id="item24" compid="Tab00.tabpage3.accountHolder" propid="value" datasetid="ds_salInfo" columnid="ACCOUNT_HOLDER"/>
+      <BindItem id="item25" compid="Tab00.tabpage3.accountNumber" propid="value" datasetid="ds_salInfo" columnid="ACCOUNT_CODE"/>
+      <BindItem id="item26" compid="Tab00.tabpage3.national" propid="value" datasetid="ds_salInfo" columnid="NATIONAL_PENSION"/>
+      <BindItem id="item27" compid="Tab00.tabpage3.empInsur" propid="value" datasetid="ds_salInfo" columnid="EMPLOYEEMENT_INSURANCE"/>
+      <BindItem id="item28" compid="Tab00.tabpage3.healthInsur" propid="value" datasetid="ds_salInfo" columnid="HEALTH_INSURANCE"/>
+      <BindItem id="item29" compid="Tab00.tabpage3.longTermCare" propid="value" datasetid="ds_salInfo" columnid="LONG_TERM_CARE_INSURANCE"/>
+      <BindItem id="item30" compid="Tab00.tabpage3.Combo01" propid="value" datasetid="ds_salInfo" columnid="SUPPORT_TWENTY_BELOW"/>
+      <BindItem id="item31" compid="Tab00.tabpage3.Combo02" propid="value" datasetid="ds_salInfo" columnid="SUPPORT_SIXTY_ABOVE"/>
+      <BindItem id="item32" compid="Tab00.tabpage3.Combo03" propid="value" datasetid="ds_salInfo" columnid="MANY_CHILD_DEDUCTION"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[
+var selEmpCode;
+var selPositionCode;
+
+var imgDialog;
+
+var empFileName;
+
+
+// 로딩시 
+function detailRegistrationForm_onload(obj:Form, e:LoadEventInfo)
+{
+	//사원목록 
+	ds_employeeList.filter("");
+	//부서목록 - 다른곳 안들러도 로그인 시 가져옴
+	ds_dept.filter("");
+	//직급목록 - 로그인시 안가져옴 새로 가져와야됨
+	ds_position.filter("");
+	//호봉목록 - 수정되었을 경우 있기 때문에 새로 얻어옴 
+	ds_hobong.filter("");
+	
+	ds_salInfo.filter("");
+
+	//사원목록 구해오기
+	 transaction("findEmployeeList",
+				"svcBase::findEmployeeList.do",
+				"",
+				"ds_employeeList=dsEmployee",
+				"",
+				"callback",
+				false);	
+
+	
+	//직급목록 구해오기 
+	transaction("findPositionList",
+				"svcBase::findPositionList.do",
+				"",
+				"ds_position=dsPosition",
+				"",
+				"callback",
+				false);
+				
+	//코드정보 구해 오기 
+	transaction("findCodeList",
+				"svcBase::findCodeList.do",
+				"",
+				"ds_code=dsCode ds_detailCode=dsDetailCode",
+				"",
+				"callback",
+				false);
+	
+ 	//호봉 얻어 오기 
+	transaction("findHobongList",
+ 				"svcHrCircumstance::findHobongList.do",
+				"",
+ 				"ds_hobong=dsHobong",
+				"",
+ 				"callback",
+ 				false);
+ 				
+
+	//4대 보험 & 소득세 얻어옴 !!
+	ds_deductionTax.filter("");
+	ds_incomeTax.filter("");
+	transaction("findDeductionsInsuranceList",
+				"svcHrCircumstance::findDeductionInsuranceList.do",
+				"",
+				"ds_deductionTax=dsDeductionTax ds_incomeTax=dsIncomeTax",
+				"",
+				"callback",
+				false);
+	
+	//6개 상세 정보 구하기
+	transaction("findEmployeeInfoAll",
+		"svcHrPM::findEmployeeInfoAll.do",
+		"",
+		"ds_empInfo=dsEmpInfo ds_familyInfo=dsFamilyInfo ds_licenseInfo=dsLicenseInfo ds_workInfo=dsWorkInfo ds_salInfo=dsSalInfo ds_educationInfo=dsEducationInfo",
+		"",
+		"callback",
+		false
+	);
+	
+	//trace(dsEmpInfo.getRowCount()+"@@"+dsFamilyInfo.getRowCount()+"@@"+dsLicenseInfo.getRowCount());
+	//trace(dsWorkInfo.getRowCount()+"@@"+dsSalInfo.getRowCount()+"@@"+dsEducationInfo.getRowCount());
+	//초기 상태
+	
+	
+	ds_empInfo.filter("EMP_CODE==0"); //처음에 선택된 내용 없음!
+	ds_workInfo.filter("EMP_CODE==0");
+	ds_salInfo.filter("EMP_CODE==0");
+	ds_familyInfo.filter("EMP_CODE==0");
+	ds_licenseInfo.filter("EMP_CODE==0");
+	ds_educationInfo.filter("EMP_CODE==0");
+	
+	ds_position.filter("POSITION_CODE==0");
+	ds_hobongCopy.filter("POSITION_CODE==0");
+	
+	
+	
+	
+	detailCodeFilter();//코드 설정하기 
+	
+	
+}
+
+//코드 설정
+function detailCodeFilter(){
+	//내국인여부
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,2) == 'NA'");
+	ds_nativeType.copyData(ds_detailCode,true);
+	
+	//병역사항
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,2) == 'DI'");
+	ds_disabilityType.copyData(ds_detailCode,true);
+	
+	//고용형태
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'EMT'");
+	ds_employeementType.copyData(ds_detailCode,true);
+	
+	//직종
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'JJC'");
+	ds_jikjong.copyData(ds_detailCode,true);
+	
+	//프로젝트
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'PJC'");
+	ds_project.copyData(ds_detailCode,true);
+	
+	//급여형태 
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'PAC'");
+	ds_salaryType.copyData(ds_detailCode,true);
+	
+	//가족관계
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'RLC'");
+	ds_relationship.copyData(ds_detailCode,true);
+	
+	//최종학력
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'EDC'");
+	ds_highestEducation.copyData(ds_detailCode,true);
+	
+	//학교선택
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'UNC'");
+	ds_university.copyData(ds_detailCode,true);
+
+}
+
+
+
+//부서 선택시 
+function deptSerchCombo_onitemchanged(obj:Combo, e:ItemChangeEventInfo)
+{
+	
+	ds_employeeList.filter("DEPT_CODE=='"+deptSerchCombo.value+"'");
+	ds_tempEmp.copyData(ds_employeeList,true); // filter가 된 사원 리스트를 띄운다.
+}
+
+
+//사진 찾기
+function Tab00_tabpage1_findPicture_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	imgDialog=FileDialog.open("FileOpen",FileDialog.Load);
+	//alert(imgDialog);  // object.VirtualFiel이 나온다..
+	imgName = imgDialog.filename;
+	imgPath = imgDialog.path;
+	alert(imgPath+"@@@@@@"+imgName);
+	img = imgPath+imgName;
+	Tab00.tabpage1.empImg.image=img;
+	Tab00.tabpage1.empImg.stretch="fit";
+	
+	
+	
+	
+}
+//사진저장시!
+function Tab00_tabpage1_savePicture_onclick(obj:Button,  e:ClickEventInfo)
+{
+
+
+	var fileExtend = String(imgName).substr(imgName.lastIndexOf('.'));
+	   
+	empFileName =  selEmpCode + fileExtend;
+	alert(empFileName +"::::::::::::"+selEmpCode);
+	
+	
+	imgDialog.open(VirtualFile.openRead | VirtualFile.openBinary); // 앞쪽에서 선언함.. imgDialog = virtualfile 을 return  F1 -> fileDialog에서 반환받은 경우!
+				//읽기전용파일 열때 |  바이러리파일을 열때 사용
+	//alert(imgDialog.open(VirtualFile.openRead | VirtualFile.openBinary)); //true,false
+	var img_binary=imgDialog.read(imgDialog.getFileSize());
+	//버퍼데이터 또는 문자열 반환 
+	
+		
+		// 데이터셋에 추가하기 전에 기존 데이터가 있으면 삭제한다.
+	var findNum = ds_img.findRow("EMP_FILE_NAME",empFileName);
+	if(findNum > -1){
+		ds_img.deleteRow(findNum); 
+		trace("기존dataset은 지워 버린다.");
+	}
+	
+	ds_img.addRow();
+	ds_img.setColumn(0,"EMP_FILE_NAME",empFileName);
+	ds_img.setColumn(0,"IMG_FILE_DATA",img_binary);
+	
+	//이미지 주소 담음
+	ds_empInfo.setColumn(ds_empInfo.rowposition,"IMG_SRC",empFileName);
+
+	trace(ds_img.getRowCount()+"@@@@@@@@@@@@");
+	
+	
+	transaction("saveEmpImg",
+				"svcHrPM::saveEmpImg.do",
+				"dsImg=ds_img:u",
+				"",
+				"",
+				"callback",
+				false);
+	
+	
+}
+
+
+//사원목록에서 사원 선택 시!!(처음 시작되는 점)
+function Grid00_oncellclick(obj:Grid, e:GridClickEventInfo)
+{
+	selEmpCode = ds_employeeList.getColumn(e.row,"EMP_CODE");
+	selPositionCode = ds_employeeList.getColumn(e.row,"POSITION_CODE"); // 선택한 사원의 직급을 담음 
+	
+	ds_empInfo.filter("EMP_CODE=='"+selEmpCode+"'");
+	ds_empInfo.rowposition=0;
+		
+	ds_workInfo.filter("EMP_CODE=='"+selEmpCode+"'");
+	ds_workInfo.rowposition=0;
+	
+	ds_salInfo.filter("EMP_CODE=='"+selEmpCode+"'");
+	ds_salInfo.rowposition=0;
+	
+	ds_position.filter("POSITION_CODE=='"+selPositionCode+"'");
+	ds_position.rowposition=0;
+	
+	ds_familyInfo.filter("EMP_CODE=='"+selEmpCode+"'");
+	ds_familyInfo.rowposition=0;
+	
+	ds_licenseInfo.filter("EMP_CODE=='"+selEmpCode+"'");
+	ds_licenseInfo.rowposition=0;
+	
+	ds_educationInfo.filter("EMP_CODE=='"+selEmpCode+"'");
+	ds_educationInfo.rowposition=0;
+	
+	
+	
+	ds_hobong.filter("POSITION_CODE=='"+selPositionCode+"'");
+	ds_hobong.rowposition=0;
+	ds_hobongCopy.copyData(ds_hobong,true); //직급이 가진 호봉만 담기 위해!
+	ds_hobongCopy.rowposition=0;
+		
+	ds_hobong.filter("POSITION_CODE=='"+selPositionCode+"' && HOBONG=='"+ds_salInfo.getColumn(0,"HOBONG")+"'");
+	ds_hobong.rowposition=0;
+
+	
+	if(Tab00.tabpage3.selHobong.value!=null){
+		ds_hobong.filter("POSITION_CODE=='"+ds_position.getColumn(0,"POSITION_CODE")+"' && HOBONG=='"+Tab00.tabpage3.selHobong.value+"'");
+
+		Tab00.tabpage3.baseSal.value=ds_hobong.getColumn(0,"BASE_SAL");
+		Tab00.tabpage3.bonus.value=ds_hobong.getColumn(0,"BONUS");
+		Tab00.tabpage3.sigup.value=ds_hobong.getColumn(0,"SIGUB");
+	}else{
+	    
+		Tab00.tabpage3.baseSal.value="";
+		Tab00.tabpage3.bonus.value="";
+		Tab00.tabpage3.sigup.value="";
+	}
+	
+	
+	
+
+	
+	var empImgName=ds_empInfo.getColumn(0,'IMG_SRC');
+	if(empImgName!=null){
+		Tab00.tabpage1.empImg.image="http://localhost:8282/test5th/img/"+empImgName;	
+		Tab00.tabpage1.empImg.stretch="fit"; 
+	}else{
+		Tab00.tabpage1.empImg.image="http://localhost:8282/test5th/img/noimage.jpg";
+		Tab00.tabpage1.empImg.stretch="fit"; 
+	}	
+		//empImg.ImageID="http://localhost/xp5/EMP_IMG/"+empImgName+"?time="+timem();   
+	
+	
+}
+
+
+//최종학력 검색
+function Tab00_tabpage1_EducationCodeBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	application.dialog(
+		"modal",
+		"HrPm::highestEducationDialog.xfdl",
+		mainframe,
+		{},
+		"showtitlebar=true showstatusbar=false",
+		300, 300, 300, 350,
+		this
+	);
+	Tab00.tabpage1.highestEducation.value=g_education;	
+	
+}
+
+
+
+
+
+//일괄저장!!
+function batchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	
+	transaction(
+		"batchEmployeeInfoAll",
+		"svcHrPM::batchEmployeeInfoAll.do",
+		"dsEmpInfo=ds_empInfo:u dsWorkInfo=ds_workInfo:u dsSalInfo=ds_salInfo:u dsFamilyInfo=ds_familyInfo:u dsLicenseInfo=ds_licenseInfo:u dsEducationInfo=ds_educationInfo:u",
+		"ds_empInfo=dsEmpInfo ds_workInfo=dsWorkInfo ds_salInfo=dsSalInfo ds_familyInfo=dsFamilyInfo ds_licenseInfo=dsLicenseInfo ds_educationInfo=dsEducationInfo",
+		"",
+		"callback"
+	);	
+	
+	//trace(dsWorkInfo.saveXML());
+	
+}
+
+function callback(trid, ErrorCode, ErrorMsg) {
+		
+	if(trid=='batchEmployeeInfoAll'){
+		if(ErrorCode!=0){
+			alert(ErrorMsg);
+		}else{
+			alert(" 성공적으로 데이터를 저장하였습니다 :) ");
+			reload();
+		}	
+	}
+	
+}
+
+
+
+	
+
+
+
+	
+
+//주소 검색 
+function Tab00_tabpage1_adressSearchBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	application.dialog(
+		"zipCodeDialog",
+		"Base::zipCodeDialog.xfdl",
+		mainframe,
+		{},
+		"showtitlebar=true showstatusbar=false",
+		300,300,300,300,
+		this
+	);
+	
+}
+
+
+//호봉 변경시
+function Tab00_tabpage3_selHobong_onitemchanged(obj:Combo, e:ItemChangeEventInfo)
+{
+	
+	ds_hobong.filter("POSITION_CODE=='"+ds_position.getColumn(0,"POSITION_CODE")+"' && hobong=='"+e.postvalue+"'");
+	
+	Tab00.tabpage3.baseSal.value=ds_hobong.getColumn(0,"BASE_SAL");
+	Tab00.tabpage3.bonus.value=ds_hobong.getColumn(0,"BONUS");
+	Tab00.tabpage3.sigup.value=ds_hobong.getColumn(0,"SIGUB");
+	
+	Tab00.tabpage3.national.value="";
+	Tab00.tabpage3.empInsur.value="";
+	Tab00.tabpage3.healthInsur.value="";
+	Tab00.tabpage3.longTermCare.value="";
+	
+}
+
+//은행 검색 
+function Tab00_tabpage3_findBankBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	application.dialog(
+		"modal",
+		"HrPm::bankDialog.xfdl",
+		mainframe,
+		{},
+		"showtitlebar=true showstatusbar=false",
+		300, 300, 300, 350,
+		this
+	);
+}
+
+
+// 국민연금 계산
+function Tab00_tabpage3_findNationPenBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	application.dialog(
+		"modal",
+		"HrPm::nationalPenDialog.xfdl",
+		mainframe,
+		{},
+		"showtitlebar=true showstatusbar=false",
+		300, 300, 300, 350,
+		this
+	);
+	
+}
+
+
+//고용보험 계산 시 
+function Tab00_tabpage3_findEmpInsurBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	application.dialog(
+		"modal",
+		"HrPm::employeementInsurDialog.xfdl",
+		mainframe,
+		{},
+		"showtitlebar=true showstatusbar=false",
+		300, 300, 300, 350,
+		this
+	);
+}
+
+//건강보험 계산시 
+function Tab00_tabpage3_findHealInsurBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	application.dialog(
+		"modal",
+		"HrPm::healthInsurDialog.xfdl",
+		mainframe,
+		{},
+		"showtitlebar=true showstatusbar=false",
+		300, 300, 300, 350,
+		this
+	);
+}
+
+//장기요양보험 계산
+function Tab00_tabpage3_autoResultBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	if(Tab00.tabpage3.healthInsur.value == null){
+		alert("건강보험을 계산해 주세요");	
+	}else{
+		
+		ds_deductionTax.filter("");
+		ds_deductionTax.filter("INPUTED_YEAR=='"+String(Date().getYear())+"'");
+		var rate = dsDeductionTax.getColumn(0,"LONG_TERM_CARE_RATE");
+		var health = parseFloat(Tab00.tabpage3.healthInsur.value);
+		var result = health * parseFloat(rate) / 100;
+		Tab00.tabpage3.longTermCare.value = Math.round(result,0);
+	}	
+}
+
+// 가족관계 추가시 
+function Tab01_tabpage1_familyAddBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	//alert(selEmpCode);
+	ds_familyInfo.addRow();	
+	ds_familyInfo.setColumn(ds_familyInfo.rowposition,"EMP_CODE",selEmpCode);	//사원번호 세팅 ! family_seq는 sqlMap에서 
+}
+
+//가족관계 삭제시 
+function Tab01_tabpage1_familyRemoveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+		ds_familyInfo.deleteRow(ds_familyInfo.rowposition);
+}
+//자격증 정보 추가시 
+function Tab01_tabpage2_licenseAddBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	ds_licenseInfo.addRow();
+	ds_licenseInfo.setColumn(ds_licenseInfo.rowposition,"EMP_CODE",selEmpCode);	
+	
+}
+//자격증 정보 삭제시 
+function Tab01_tabpage2_licenseRemoveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	ds_licenseInfo.deleteRow(ds_licenseInfo.rowposition);	
+}
+
+ 
+//학력정보추가 시
+function Tab01_tabpage3_educationAddBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	ds_educationInfo.addRow();
+	ds_educationInfo.setColumn(ds_educationInfo.rowposition,"EMP_CODE",selEmpCode);	
+}
+//학력정보 삭제시 
+function Tab01_tabpage3_educationRemoveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	ds_educationInfo.deleteRow(ds_educationInfo.rowposition);	
+}
+
+
+//재직 증명서 (아이리포터 )
+function reportBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+		/* application.dialog(
+				"modal",
+				"HrPm::workReportDialog.xfdl",
+				mainframe,
+				{'empCode':Tab00.tabpage1.empCode.value},
+
+				"showtitlebar=true showstatusbar=false",
+				300, 300, 300, 350,
+				this
+		); */
+		   
+
+	dialog(
+   "modal", 
+   "HrPm::workReportDialog.xfdl", 
+   "", 
+   {"empCode":ds_tempEmp.getColumn(ds_tempEmp.rowposition,"EMP_CODE")},
+   "showtitlebar=true showstatusbar=true",
+   0,
+   0
+   );	
+		
+		
+		
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_slipForm" left="0" top="0" width="1185" height="785" titletext="logi_slipForm" onload="logi_slipForm_onload">
+    <Layouts>
+      <Layout>
+        <Div id="logiSlip_div" taborder="23" left="0.76%" top="180" right="0.68%" height="196"/>
+        <Static id="Static00" taborder="8" text="물류전표작성" left="14" top="9" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;" onclick="Static00_onclick" right="14"/>
+        <Grid id="logiSlip_grd" taborder="9" useinputpanel="false" left="1.18%" top="190" right="1.27%" height="180" binddataset="ds_contract" autofittype="col" onheadclick="logiSlip_grd_onheadclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkbox"/>
+                <Cell col="1" text="수주번호"/>
+                <Cell col="2" text="견적번호"/>
+                <Cell col="3" text="수주형태"/>
+                <Cell col="4" text="거래처"/>
+                <Cell col="5" text="수주일자"/>
+                <Cell col="6" text="수주요청자"/>
+                <Cell col="7" text="작성자"/>
+                <Cell col="8" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkbox" edittype="checkbox" text="bind:CHK"/>
+                <Cell col="1" text="bind:CONTRACT_NO"/>
+                <Cell col="2" text="bind:ESTIMATE_NO"/>
+                <Cell col="3" text="bind:CONTRACT_TYPE"/>
+                <Cell col="4" text="bind:CUSTOMER_CODE"/>
+                <Cell col="5" text="bind:CONTRACT_DATE"/>
+                <Cell col="6" text="bind:CONTRACT_REQUESTER"/>
+                <Cell col="7" text="bind:PERSON_CODE_IN_CHARGE"/>
+                <Cell col="8" text="bind:DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="contractSch_btn" taborder="10" text="조회" left="31.73%" top="121" right="58.14%" height="50" onclick="contractSch_btn_onclick"/>
+        <Button id="makeSlip_btn" taborder="11" text="작성" left="88.44%" top="121" right="1.43%" height="50" onclick="makeSlip_btn_onclick"/>
+        <Calendar id="fromDate_cal" taborder="13" left="1.1%" top="121" right="86.24%" height="50" dateformat="yyyy-MM-dd" value="null"/>
+        <Calendar id="toDate_cal" taborder="14" left="17.72%" top="121" right="69.62%" height="50" dateformat="yyyy-MM-dd" value="null"/>
+        <Grid id="slip_grd" taborder="15" useinputpanel="false" left="1.18%" top="526" right="1.27%" height="236" autofittype="col" binddataset="ds_slip" oncelldblclick="slip_grd_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="전표번호"/>
+                <Cell col="1" text="부서번호"/>
+                <Cell col="2" text="전표유형"/>
+                <Cell col="3" text="적요"/>
+                <Cell col="4" text="작성자"/>
+                <Cell col="5" text="작성일"/>
+                <Cell col="6" text="승인일자"/>
+                <Cell col="7" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:SLIP_NO"/>
+                <Cell col="1" text="bind:DEPT_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="2" text="bind:SLIP_TYPE"/>
+                <Cell col="3" text="bind:EXPENSE_REPORT"/>
+                <Cell col="4" displaytype="combo" text="bind:REPORTING_EMP_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="5" text="bind:REPORTING_DATE"/>
+                <Cell col="6" text="bind:APPROVAL_DATE"/>
+                <Cell col="7" text="bind:SLIP_DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="logislip_stc" taborder="16" text="전표등록 현황" onclick="Static00_onclick" left="14" top="385" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Button id="adjustSlip_btn00" taborder="18" text="수정신청" left="87.76%" top="465" right="2.11%" height="50" onclick="adjustSlip_btn00_onclick"/>
+        <Button id="slipSch_btn" taborder="19" text="조회" left="31.73%" top="465" right="58.14%" height="50" onclick="slipSch_btn_onclick"/>
+        <Calendar id="toDate_cal01" taborder="20" left="17.72%" top="465" right="69.62%" height="50" dateformat="yyyy-MM-dd" value="null"/>
+        <Calendar id="fromDate_cal01" taborder="21" left="1.1%" top="465" right="86.24%" height="50" dateformat="yyyy-MM-dd" value="null"/>
+        <Combo id="logiSlip_cmb" taborder="22" text="종류선택" left="44.89%" top="121" right="38.23%" height="50" innerdataset="@ds_type" codecolumn="type" datacolumn="type" onitemchanged="logiSlip_cmb_onitemchanged"/>
+        <Grid id="logiSlip_grd02" taborder="24" useinputpanel="false" autofittype="col" onheadclick="logiSlip_grd_onheadclick" left="1.18%" top="190" right="1.27%" height="180" binddataset="ds_orderInfo" visible="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkbox" edittype="checkbox"/>
+                <Cell col="1" text="발주번호"/>
+                <Cell col="2" text="거래처"/>
+                <Cell col="3" text="주문일"/>
+                <Cell col="4" text="주문담당자"/>
+                <Cell col="5" text="비고"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkbox" edittype="checkbox" text="bind:CHK"/>
+                <Cell col="1" text="bind:ORDER_NO"/>
+                <Cell col="2" displaytype="combo" text="bind:CUSTOMER_CODE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" text="bind:ORDER_DATE"/>
+                <Cell col="4" displaytype="combo" text="bind:PERSON_CODE_IN_CHARGE" combodataset="gds_codeDetail" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="5" text="bind:DESCRIPTION"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="journal_grd" taborder="25" useinputpanel="false" left="1.18%" top="526" right="1.27%" height="84" binddataset="ds_journal" autofittype="col" visible="false" oncelldblclick="journal_grd_oncelldblclick" oncellclick="journal_grd_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="분개번호"/>
+                <Cell col="1" text="계정과목"/>
+                <Cell col="2" text="적요"/>
+                <Cell col="3" text="거래처"/>
+                <Cell col="4" text="차변"/>
+                <Cell col="5" text="대변"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:JOURNAL_NO" autosizecol="limitmax"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+                <Cell col="2" text="bind:SUMMARY_COMMENT"/>
+                <Cell col="3" text="bind:CUSTOMER_NAME"/>
+                <Cell col="4" text="bind:LEFT_DEBTOR_PRICE"/>
+                <Cell col="5" text="bind:RIGHT_CREDITS_PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="journalDetail_grd" taborder="26" useinputpanel="false" left="1.18%" top="606" right="1.27%" height="156" binddataset="ds_journalDetail" autofittype="col" visible="false" oncelldblclick="journalDetail_grd_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="항목"/>
+                <Cell col="1" text="내역"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ITEM"/>
+                <Cell col="1" text="bind:VALUE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_contractDetail">
+        <ColumnInfo>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="CONTRACT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="MPS_APPLY_STATUS" type="STRING" size="256"/>
+          <Column id="DELIVERY_STATUS" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="DELIVERY_REMAIN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_slip">
+        <ColumnInfo>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="ACCOUNT_PERIOD_NO" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="SLIP_TYPE" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="AUTHORIZATION_STATUS" type="STRING" size="256"/>
+          <Column id="REPORTING_EMP_CODE" type="STRING" size="256"/>
+          <Column id="REPORTING_DATE" type="STRING" size="256"/>
+          <Column id="APPROVAL_EMP_CODE" type="STRING" size="256"/>
+          <Column id="APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="SLIP_DESCRIPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_contract" preload="false" loadkeymode="keep">
+        <ColumnInfo>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="ESTIMATE_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_TYPE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CONTRACT_DATE" type="STRING" size="256"/>
+          <Column id="CONTRACT_REQUESTER" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="DELIVERY_RESULT_STATUS" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_type">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">수주선급</Col>
+          </Row>
+          <Row>
+            <Col id="type">납품완료</Col>
+          </Row>
+          <Row>
+            <Col id="type">발주선급</Col>
+          </Row>
+          <Row>
+            <Col id="type">입고완료</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_orderInfo">
+        <ColumnInfo>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="ORDER_DATE" type="STRING" size="256"/>
+          <Column id="PERSON_CODE_IN_CHARGE" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journal" oncolumnchanged="ds_journal_oncolumnchanged" cancolumnchange="ds_journal_cancolumnchange">
+        <ColumnInfo>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="SLIP_NO" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="SUMMARY_NUMBER" type="STRING" size="256"/>
+          <Column id="SUMMARY_COMMENT" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="LEFT_DEBTOR_PRICE" type="STRING" size="256"/>
+          <Column id="RIGHT_CREDITS_PRICE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="SLIP_APPROVAL_DATE" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_journalDetail">
+        <ColumnInfo>
+          <Column id="JOURNAL_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="JOURNAL_NO" type="STRING" size="256"/>
+          <Column id="ITEM" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="JOURNAL_DETAIL_DESCRIPTION" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_orderDetail">
+        <ColumnInfo>
+          <Column id="ORDER_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="ORDER_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="UNIT_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DUE_DATE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DELIVERY_SCHEDULE_DATE" type="STRING" size="256"/>
+          <Column id="ORDER_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="SUM_PRICE_OF_ORDER" type="STRING" size="256"/>
+          <Column id="DESCRIPTION" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="ORDER_DETAIL_STATUS" type="STRING" size="256"/>
+          <Column id="SLIP_REGIST_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************
+물류전표작성 화면
+@Path		logi_business
+@Description	물류전표작성 폼
+@Author	  	허용석
+@Create           2019. 02. 20.
+********************************************************************************/
+var request="납품완료"; //전표 다이얼로그 유형설정변수
+this.logi_slipForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ds_contract.filter("DELIVERY_RESULT_STATUS=='Y' && SLIP_REGIST_STATUS!='Y'");
+	this.ds_orderInfo.filter("SLIP_REGIST_STATUS!='YY'");
+
+	this.transaction("findSlipList"
+    ,"dataURL::acc/slip/findSlipListByCondition.do"
+    ,""
+    ,"ds_slip=gds_slip ds_journal=gds_journal ds_journalDetail=gds_journalDetail"
+    ,"startDate="+application.todayBar()+" endDate="+application.todayBar()+" slipStatus=logi"
+    ,"callback"
+    ,false);
+
+}
+
+this.contractSch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	this.transaction("findContractList",
+             "dataURL::logi/business/findContractList.do",
+             "",
+             "ds_contract=ds_contract",
+             "fromDate='"+this.fromDate_cal.value+"' toDate='"+this.toDate_cal.value+"' ",
+             "callback");
+}
+
+this.contractSch_btn_onclick2 = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	this.transaction("findOrderInfoList",
+             "dataURL::logi/purchase/findOrderInfoList.do",
+             "",
+             "ds_orderInfo=ds_orderInfo",
+             "fromDate='"+this.fromDate_cal.value+"' toDate='"+this.toDate_cal.value+"'",
+             "callback");
+}
+
+
+this.makeSlip_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		var contractArray=new Array();
+		var index=0;
+		for(i=0; i<this.ds_contract.rowcount; i++){
+		var chk=this.ds_contract.getColumn(i,"CHK");
+				if(chk==1){
+					trace(this.ds_contract.getColumn(i,"CONTRACT_NO"));
+					contractArray[index]=this.ds_contract.getColumn(i,"CONTRACT_NO");
+					index++;
+				}
+		}
+		application.open("modeless",
+			"logi_business::logi_slipDialog.xfdl",
+			this.getOwnerFrame(),
+			{mode:'modeless',contractArray:contractArray,ds:this.ds_contract,request:request},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='logiSlipDialog'"
+			);
+}
+this.makeSlip_btn_onclick2 = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+		var orderArray=new Array();
+		var index=0;
+		for(i=0; i<this.ds_orderInfo.rowcount; i++){
+		var chk=this.ds_orderInfo.getColumn(i,"CHK");
+				if(chk==1){
+					trace(this.ds_orderInfo.getColumn(i,"ORDER_NO"));
+					orderArray[index]=this.ds_orderInfo.getColumn(i,"ORDER_NO");
+					index++;
+				}
+		}
+		application.open("modeless",
+			"logi_business::logi_slipDialog.xfdl",
+			this.getOwnerFrame(),
+			{mode:'modeless',orderArray:orderArray,ds:this.ds_orderInfo,request:request},
+			"showtitlebar=true showstatusbar=false openalign='center middle' showcascadetitletext=false titletext='logiSlipDialog'"
+			);
+}
+
+this.logiSlip_grd_onheadclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	 if (e.cell == 0)
+ {
+  this.gf_SetGridCheckAll(obj, e);
+ }
+}
+
+this.slipSch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	  var v_startDate=this.fromDate_cal01.value.toString();
+      var v_endDate=this.toDate_cal01.value.toString();
+
+      var startDate=v_startDate.substr(0,4)+"-"+v_startDate.substr(4,2)+"-"+v_startDate.substr(6,2);
+      var endDate=v_endDate.substr(0,4)+"-"+v_endDate.substr(4,2)+"-"+v_endDate.substr(6,2);
+				this.transaction("findSlipList"
+                       ,"dataURL::acc/slip/findSlipListByCondition.do"
+                       ,""
+                       ,"ds_slip=gds_slip ds_journal=gds_journal ds_journalDetail=gds_journalDetail"
+                       ,"startDate="+startDate+" endDate="+endDate+" slipStatus=logi"
+                       ,"callback"
+                       ,false);
+}
+
+this.adjustSlip_btn00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+			
+			var slipNo=this.ds_slip.getColumn(this.ds_slip.rowposition,"SLIP_NO");
+			var subDiglog=new ChildFrame();
+			subDiglog.set_showstatusbar(false);
+			subDiglog.init("adjustSlip","absolute",400,300,500,300,null,null,"logi_business::adjustSlipDialog.xfdl");
+			subDiglog.showModal("adjustSlip",this.getOwnerFrame(),{slipNo:slipNo},this,'');
+			
+}
+
+this.adjustSlipSend_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+}
+/*헤드로우 클릭시 모든셀 체크 적용/해제 펑션
+넥사크로 공식문서 이용
+*/
+this.gv_IsGridCheckAll = 0;
+this.gf_SetGridCheckAll = function (obj:Grid, e:GridClickEventInfo){
+ var dsObj = eval("this." +obj.binddataset);
+ var v_Colid = obj.getCellProperty("body", e.cell, "text").split("bind:").join("");
+ this.gv_IsGridCheckAll = (this.gv_IsGridCheckAll ? 0 : 1);
+ dsObj.set_enableevent(false);
+ for (var i = 0; i < dsObj.getRowCount(); i++)
+ {
+  dsObj.setColumn(i, v_Colid, this.gv_IsGridCheckAll);
+ }
+ obj.setCellProperty("Head", 0, "expr", this.gv_IsGridCheckAll);
+ dsObj.set_enableevent(true);
+}
+
+this.callback=function(sId,erCode,erMsg){
+
+	if(sId=="findSlipList" && erCode<0){
+		alert(erMsg);
+	}
+}
+this.logiSlip_cmb_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+		request=e.posttext;
+		if(e.posttext=="수주선급"){
+			this.ds_contract.filter("DELIVERY_RESULT_STATUS!='Y' && SLIP_REGIST_STATUS!='Y'");
+			this.logiSlip_grd.set_visible(true);
+			this.logiSlip_grd02.set_visible(false);
+
+			this.contractSch_btn.setEventHandler("onclick",this.contractSch_btn_onclick,this);
+			this.makeSlip_btn.setEventHandler("onclick",this.makeSlip_btn_onclick,this);
+
+
+
+		}else if(e.posttext=="납품완료"){
+
+			this.ds_contract.filter("DELIVERY_RESULT_STATUS=='Y' && SLIP_REGIST_STATUS!='YY'");
+
+			this.logiSlip_grd.set_visible(true);
+			this.logiSlip_grd02.set_visible(false);
+
+			this.contractSch_btn.setEventHandler("onclick",this.contractSch_btn_onclick,this);
+			this.makeSlip_btn.setEventHandler("onclick",this.makeSlip_btn_onclick,this);
+
+		}else if(e.posttext=="발주선급"){
+			this.ds_orderInfo.filter("SLIP_REGIST_STATUS!='Y' && SLIP_REGIST_STATUS!='YY'");
+
+			this.logiSlip_grd.set_visible(false);
+			this.logiSlip_grd02.set_visible(true);
+
+			this.contractSch_btn.setEventHandler("onclick",this.contractSch_btn_onclick2,this);
+			this.makeSlip_btn.setEventHandler("onclick",this.makeSlip_btn_onclick2,this);
+
+		}else if(e.posttext=="입고완료"){
+			this.ds_orderInfo.filter("ORDER_INFO_STATUS=='Y' && SLIP_REGIST_STATUS!='YY'");
+
+			this.logiSlip_grd.set_visible(false);
+			this.logiSlip_grd02.set_visible(true);
+			this.contractSch_btn.setEventHandler("onclick",this.contractSch_btn_onclick2,this);
+			this.makeSlip_btn.setEventHandler("onclick",this.makeSlip_btn_onclick2,this);
+		}
+}
+
+
+this.slip_grd_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var slipNo=this.ds_slip.getColumn(e.row,"SLIP_NO");
+	trace(slipNo);
+	this.ds_journal.filter("SLIP_NO=='"+slipNo+"'");
+
+	var journalRow=this.ds_journal.findRow("SLIP_NO",slipNo);
+	trace(journalRow);
+	var journalNo=this.ds_journal.getColumn(journalRow,"JOURNAL_NO");
+	trace(journalNo);
+	this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"'");
+
+	this.slip_grd.set_visible(false);
+	this.journal_grd.set_visible(true);
+	this.journalDetail_grd.set_visible(true);
+}
+this.journal_grd_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.slip_grd.set_visible(true);
+	this.journal_grd.set_visible(false);
+	this.journalDetail_grd.set_visible(false);
+
+}
+
+this.journalDetail_grd_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	this.slip_grd.set_visible(true);
+	this.journal_grd.set_visible(false);
+	this.journalDetail_grd.set_visible(false);
+}
+ErrorMsg="";
+this.callback=function(sId,erCode,ErrorMsg){
+if(sId=="findSlipList" ||sId=="findContractList"  || sId=="findOrderInfoList" ){
+		alert(ErrorMsg);
+	}
+}
+this.journal_grd_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var journalNo=this.ds_journal.getColumn(e.row,"JOURNAL_NO");
+	trace(journalNo);
+	this.ds_journalDetail.filter("JOURNAL_NO=='"+journalNo+"'");
+
+}
+]]></Script>
+  </Form>
+</FDL>

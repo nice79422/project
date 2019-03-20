@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="unApprovedDailyAttdDialog" classname="unApprovedDailyAttdDialog" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="unApprovedDailyAttdDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="일근태 / 근태외 미승인 목록" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Static id="Static03" text="기준일" enable="false" enableevent="false" position2="absolute l:352 w:94 t:52 h:24" positiontype="position2" style="background:cornflowerblue;color:black;align:center middle; :disabled {background:silver;color:white;font:휴먼엑스포,12,bold;opacity:100;}"/>
+        <Calendar id="unApprovalDate" taborder="1" dateformat="yyyy-MM-dd " position2="absolute l:452 w:148 t:52 h:24" positiontype="position2" style="align:center middle;" enable="false"/>
+        <GroupBox id="GroupBox00" text="일근태 미승인 목록" position2="absolute l:6 w:945 t:84 h:275" positiontype="position2" style="background:gainsboro;color:black;"/>
+        <GroupBox id="GroupBox01" text="일근태외 미승인 목록" position2="absolute l:6 w:945 t:374 h:259" positiontype="position2" style="background:gainsboro;color:black;"/>
+        <Grid id="Grid00" taborder="1" useinputpanel="false" position2="absolute l:21 w:916 t:112 h:236" positiontype="position2" binddataset="ds_dailyAttdManage" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;day_attd_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;attd_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;time&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;cost&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;cause&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:day_attd_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:basic_day&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_type_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:time&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:cost&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:cause&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="110"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="110"/>
+                <Column size="120"/>
+                <Column size="80"/>
+                <Column size="250"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="사원명"/>
+                <Cell col="2" text="기준일"/>
+                <Cell col="3" text="근태타입"/>
+                <Cell col="4" text="시간"/>
+                <Cell col="5" text="금액"/>
+                <Cell col="6" text="승인상태"/>
+                <Cell col="7" text="사유"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" text="bind:BASIC_DAY" mask="####-##-##"/>
+                <Cell col="3" displaytype="combo" text="bind:ATTD_TYPE_CODE" combodataset="ds_dailyAttdType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="4" text="bind:TIME" mask="##:##"/>
+                <Cell col="5" text="bind:COST"/>
+                <Cell col="6" displaytype="combo" text="bind:APPROVAL_STATUS" combodataset="dsApproval" combocodecol="code" combodatacol="value"/>
+                <Cell col="7" text="bind:CAUSE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01" taborder="1" useinputpanel="false" position2="absolute l:20 w:916 t:408 h:212" positiontype="position2" binddataset="ds_dailyAttdRestManage" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;attd_rest_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;attd_rest_code&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;request_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;days&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;cost&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;cause&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_rest_seq&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:attd_rest_code&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:request_date&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:start_date&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:end_date&quot;/&gt;&#10;      &lt;Cell col=&quot;6&quot; disptype=&quot;normal&quot; text=&quot;bind:days&quot;/&gt;&#10;      &lt;Cell col=&quot;7&quot; disptype=&quot;normal&quot; text=&quot;bind:cost&quot;/&gt;&#10;      &lt;Cell col=&quot;8&quot; disptype=&quot;normal&quot; text=&quot;bind:cause&quot;/&gt;&#10;      &lt;Cell col=&quot;9&quot; disptype=&quot;normal&quot; text=&quot;bind:approval_status&quot;/&gt;&#10;      &lt;Cell col=&quot;10&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="250"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="사원명"/>
+                <Cell col="2" text="근태외타입"/>
+                <Cell col="3" text="신청일자"/>
+                <Cell col="4" text="시작일"/>
+                <Cell col="5" text="종료일"/>
+                <Cell col="6" text="일수"/>
+                <Cell col="7" text="금액"/>
+                <Cell col="8" text="승인상태"/>
+                <Cell col="9" text="사유"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" displaytype="combo" text="bind:ATTD_REST_CODE" combodataset="ds_dailyAttdRestType" combocodecol="DETAIL_CODE" combodatacol="DETAIL_CODE_NAME"/>
+                <Cell col="3" text="bind:REQUEST_DATE" mask="####-##-##"/>
+                <Cell col="4" text="bind:START_DATE" mask="####-##-##"/>
+                <Cell col="5" text="bind:END_DATE" mask="####-##-##"/>
+                <Cell col="6" text="bind:DAYS"/>
+                <Cell col="7" text="bind:COST"/>
+                <Cell col="8" displaytype="combo" text="bind:APPROVAL_STATUS" combodataset="ds_approval" combocodecol="CODE" combodatacol="VALUE"/>
+                <Cell col="9" text="bind:CAUSE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="approvalBtn" taborder="1" text="일괄승인" position2="absolute l:628 w:94 t:52 h:32" positiontype="position2" onclick="approvalBtn_onclick" style="background:silver;color:white;font:Verdana,10,bold;"/>
+        <Button id="saveBtn" taborder="1" text="저  장" position2="absolute l:742 w:94 t:52 h:32" positiontype="position2" onclick="saveBtn_onclick" style="background:silver;color:white;font:Verdana,10,bold;"/>
+        <Button id="cancelBtn" taborder="1" text="취  소" position2="absolute l:856 w:94 t:52 h:32" positiontype="position2" onclick="cancelBtn_onclick" style="background:silver;color:white;font:Verdana,10,bold;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_dailyAttdRestType" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript4.0"><![CDATA[
+
+//로딩시 
+function unApprovedDailyAttdDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	unApprovalDate.value=g_basicDay;
+	
+	//코드 목록 받아옴 
+	transaction("findCodeList",
+				"svcBase::findCodeList.do",
+				"",
+				"ds_code=dsCode ds_detailCode=dsDetailCode",
+				"",
+				"callback",
+				false);
+	//경조사,출장,교육,예비군,휴가,오전반차,오후반차,초과근무			
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'ASC'");
+	ds_dailyAttdRestType.copyData(ds_detailCode,true);
+
+	//출근,퇴근,외출,귀사,조퇴,결근,휴무
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,3) == 'ADC'");
+	ds_dailyAttdType.copyData(ds_detailCode,true);				
+	
+}
+
+//일괄 승인 
+function approvalBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	if(confirm(unApprovalDate.text+"일자 근태/근태외 데이터를 일괄승인하시겠습니까? ")){
+		for(var index = 0; index < ds_dailyAttdManage.rowcount; index++) {
+			ds_dailyAttdManage.setColumn(index, "APPROVAL_STATUS", "Y");
+		}
+		for(var index = 0; index < ds_dailyAttdRestManage.rowcount; index++) {
+			ds_dailyAttdRestManage.setColumn(index, "APPROVAL_STATUS", "Y");
+		}
+	}	
+	
+}
+
+//취소시 
+function cancelBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+		if(confirm(" 취소하시겠습니까? ")){
+			if(ds_dailyAttdManage.getRowCount()>0 || ds_dailyAttdRestManage.getRowCount()>0){
+				close();
+			}
+	}	
+	
+	
+}
+
+//저장 버튼 누를 경우 
+function saveBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	
+	transaction(
+		"batchDailyAttd",
+		"svcHrAttendance::batchDailyAttd.do",
+		"dsDailyAttd=ds_dailyAttdManage:u",
+		"",
+		"",
+		"callback",
+		false
+	);
+	transaction(
+		"batchDailyAttdRest",
+		"svcHrAttendance::batchDailyAttdRest.do",
+		"dsDailyAttdRest=ds_dailyAttdRestManage:u",
+		"",
+		"" ,
+		"callback",
+		false
+	);	
+
+	opener.findDailyAttdReport();
+	close();
+	
+}
+]]></Script>
+  </Form>
+</FDL>

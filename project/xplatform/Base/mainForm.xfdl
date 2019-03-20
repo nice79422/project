@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="mainForm" classname="mainform" inheritanceid="" position="absolute 0 0 1220 840" onload="mainForm_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static01" text="부 서" enable="false" enableevent="false" position2="absolute l:360 w:97 t:28 h:32" positiontype="position2" style="background:#897585ff;color:black;align:center middle; :disabled {background:silver;color:black;font:Ink Free,16,bold;}"/>
+        <Static id="Static03" text="오늘날짜" enable="false" enableevent="false" position2="absolute l:361 w:97 t:69 h:32" positiontype="position2" style="background:#897585ff;color:black;align:center middle; :disabled {background:silver;color:black;font:Ink Free,16,bold;}"/>
+        <Static id="Static04" text="사원명" enable="false" enableevent="false" position2="absolute l:631 w:97 t:68 h:32" positiontype="position2" style="background:#897585ff;color:black;align:center middle; :disabled {background:silver;color:black;font:Ink Free,16,bold;}"/>
+        <Static id="Static05" text="사원번호" enable="false" enableevent="false" position2="absolute l:632 w:97 t:28 h:32" positiontype="position2" style="background:#897585ff;color:black;align:center middle; :disabled {background:silver;color:black;font:Ink Free,16,bold;}"/>
+        <Calendar id="toDay" taborder="9" position2="absolute l:460 w:156 t:68 h:34" positiontype="position2" expr="Date()" enable="false" style=":disabled {color:black;align:center middle;}"/>
+        <Edit id="deptName_input" taborder="8" position2="absolute l:459 w:156 t:27 h:34" positiontype="position2" enable="false" style=":disabled {color:black;align:center middle;font:휴먼엑스포,14,bold;}" oneditclick="deptName_input_oneditclick"/>
+        <Edit id="empCode_input" taborder="6" position2="absolute l:731 w:156 t:27 h:34" positiontype="position2" enable="false" style=":disabled {color:black;align:center middle;font:휴먼엑스포,14,bold;}" oneditclick="empCode_input_oneditclick"/>
+        <Edit id="empName_input" taborder="5" position2="absolute l:731 w:156 t:67 h:34" positiontype="position2" enable="false" style=":disabled {color:black;align:center middle;font:휴먼엑스포,14,bold;}"/>
+        <Grid id="treeMenu" taborder="4" useinputpanel="false" position2="absolute l:982 w:226 t:139 h:685" positiontype="position2" treeinitstatus="expand,all" treeusecheckbox="false" autofittype="col" oncellclick="treeMenu_oncellclick" binddataset="ds_menu_copy">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell displaytype="tree" edittype="tree" text="bind:MENU_NAME" treelevel="bind:LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="view" taborder="3" position2="absolute l:8 w:965 t:139 h:685" positiontype="position2">
+          <Layouts>
+            <Layout width="965" height="670"/>
+          </Layouts>
+        </Div>
+        <Button id="logoutBtn" taborder="2" text="로 그 아 웃" position2="absolute l:980 w:220 t:63 h:42" positiontype="position2" onclick="logoutBtn_onclick" style="background:silver;color:black;font:함초롬돋움,15,bold antialias; :disabled {font:Ink Free,16,bold;}"/>
+        <Button id="mainBtn" taborder="1" text="첫 화 면" position2="absolute l:980 w:220 t:23 h:42" positiontype="position2" onclick="mainBtn_onclick" style="background:silver;color:black;font:함초롬돋움,15,bold antialias; :disabled {font:Ink Free,16,bold;}"/>
+        <Grid id="treeMenu" taborder="0" useinputpanel="false" position2="absolute l:987 w:216 t:144 h:661" positiontype="position2" autofittype="col" binddataset="dsMenuCopy" treeinitstatus="expand,all" treeusecheckbox="false" oncellclick="treeMenu_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="tree" edittype="tree" text="bind:menu_name" treelevel="bind:level"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" text="지역" enable="false" enableevent="false" position2="absolute l:73 w:97 t:29 h:32" positiontype="position2" style="background:#897585ff;color:black;align:center middle; :disabled {background:silver;color:black;font:Ink Free,16,bold;}"/>
+        <Static id="Static02" text="미세먼지" enable="false" enableevent="false" position2="absolute l:73 w:97 t:67 h:32" positiontype="position2" style="background:#897585ff;color:black;align:center middle; :disabled {background:silver;color:black;font:Ink Free,16,bold;}"/>
+        <Combo id="dust1" taborder="12" position2="absolute l:172 w:156 t:29 h:32" positiontype="position2" index="-1" innerdataset="@ds_dust" codecolumn="STATION_NAME" datacolumn="STATION_NAME" style="align:center middle;font:휴먼엑스포,14,bold;" onitemchanged="dust1_onitemchanged"/>
+        <Edit id="dust2" taborder="13" enable="false" position2="absolute l:172 w:156 t:67 h:34" positiontype="position2" style=":disabled {color:black;align:center middle;font:휴먼엑스포,14,bold;}"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_menu_copy">
+        <ColumnInfo>
+          <Column id="LEVEL" type="STRING" size="256"/>
+          <Column id="USING_STATUS" type="STRING" size="256"/>
+          <Column id="MENU_URL" type="STRING" size="256"/>
+          <Column id="SUPER_MENU_CODE" type="STRING" size="256"/>
+          <Column id="MENU_NAME" type="STRING" size="256"/>
+          <Column id="MENU_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <VirtualFile id="VirtualFile00"/>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="dust2" propid="value" datasetid="ds_dust" columnid="PM10GRADE"/>
+    </Bind>
+    <Script type="xscript4.0"><![CDATA[
+
+function mainForm_onload(obj:Form, e:LoadEventInfo)
+{
+	mainframe.position = "absolute 300px 100px 1520px 980px";
+	
+	var objDate = new Date();
+	g_toDate = objDate.toFormatString("%Y%m%d");
+		
+	view.url="Base::mainView.xfdl";
+	
+
+	g_empName=ds_employee.getColumn(0,"EMP_NAME");
+	deptName_input.value=g_deptName;
+	empCode_input.value=g_empCode;	
+	empName_input.value=g_empName;
+
+	transaction("findDust",
+				"svcBase::findDust.do",
+				"",
+				"ds_dust=dsDust",
+				"",
+				"callback",
+				false);
+
+	transaction("findMenuList",
+				"svcBase::findMenuList.do",
+				"",
+				"ds_menu=dsMenu",
+				"",
+				"callback",
+				false);
+
+	
+	ds_menu_copy.copyData(ds_menu);
+	dust1.text=ds_dust.getColumn(e.row,"STATION_NAME");
+	dust2.value=ds_dust.getColumn(e.row,"PM10GRADE");
+		if(dust2.value==1){
+			dust2.value="좋음"
+			}
+			else if(dust2.value==2){
+				dust2.value="보통"
+				}
+					else if(dust2.value==3){
+						dust2.value="나쁨"
+						}
+							else if(dust2.value==4){
+								dust2.value="매우나쁨"
+							}
+
+}
+function mainBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	var result = confirm("메인화면으로 이동하시겠습니까?");
+	if(result==1){
+		view.url="Base::mainView.xfdl";
+	}	
+}
+
+
+
+function treeMenu_oncellclick(obj:Grid, e:GridClickEventInfo)
+{
+	//alert(e.row);
+	var menuUrl = ds_menu_copy.getColumn(e.row,"MENU_URL");
+	var menuCode = ds_menu_copy.getColumn(e.row,"MENU_CODE");
+	var menuName = ds_menu_copy.getColumn(e.row,"MENU_NAME");
+	var level = ds_menu_copy.getColumn(e.row,"LEVEL");
+	
+
+
+			view.url=menuUrl; 
+
+}
+
+
+function logoutBtn_onclick(obj:Button,  e:ClickEventInfo)
+{
+	var result = confirm("로그아웃 하시겠습니까?");
+	if(result==1){
+		mainframe.position = "absolute 500px 300px 1300px 750px";
+	go("Base::loginform.xfdl");
+}
+}
+
+
+function topMenu_onmenuclick(obj:Menu, e:MenuClickEventInfo)
+{
+
+	ds_menu.filter("MENU_CODE=='"+e.id+"'");
+	var menuUrl = ds_menu.getColumn(0,"MENU_URL");	
+	var menuCode = e.id;
+	var menuName = ds_menu.getColumn(0,"MENU_NAME");
+	var level = ds_menu.getColumn(0,"LEVEL");
+	
+}
+
+
+function dust1_onitemchanged(obj:Combo, e:ItemChangeEventInfo)
+{
+         var text = dust1.value;
+		var selectDong=ds_dust.findRow("STATION_NAME",text);
+		dust2.value=ds_dust.getColumn(selectDong,"PM10GRADE");	
+		
+		if(dust2.value==1){
+			dust2.value="좋음"
+			}
+			else if(dust2.value==2){
+				dust2.value="보통"
+				}
+					else if(dust2.value==3){
+						dust2.value="나쁨"
+						}
+							else if(dust2.value==4){
+								dust2.value="매우나쁨"
+							}
+
+}
+
+]]></Script>
+  </Form>
+</FDL>

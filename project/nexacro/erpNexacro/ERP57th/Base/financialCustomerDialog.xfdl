@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="financialCustomerDialog" left="0" top="0" width="373" height="376" titletext="New Form" onload="financialCustomerDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="financialCustomer_gird" taborder="1" useinputpanel="false" left="4.56%" top="62" right="3.22%" height="299" binddataset="ds_financialCustomerCode" autofittype="col" oncelldblclick="financialCustomer_gird_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="122"/>
+                <Column size="170"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="거래처코드"/>
+                <Cell col="1" text="거래처명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DETAIL_CODE"/>
+                <Cell col="1" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sys_financialCustomer_stc" taborder="2" text="금융거래처코드" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_financialCustomerCode" onload="ds_customer_onload">
+        <ColumnInfo>
+          <Column id="DIVISION_CODE_NO" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE" type="STRING" size="256"/>
+          <Column id="DETAIL_CODE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+금융거래처 다이얼로그                                             						                                                                         
+@Path		공통              				   				
+@Description	금융거래처코드 및 코드명 조회위함					
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 22                             		                    				                                            
+********************************************************************************/
+this.financialCustomerDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	this.transaction("findCustomerDetailCodeList",
+					"dataURL::sys/findCodeDetailList.do",
+					"",
+					"ds_financialCustomerCode=gds_codeDetail",
+					"",
+					"callback",
+					false
+					);
+					
+					
+		this.ds_financialCustomerCode.filter("DIVISION_CODE_NO=='HR11'");	
+	
+	
+}
+
+var dialogName=""; 
+
+this.financialCustomer_gird_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	 dialogName=this.parent.dialogName;
+
+    var detailCode=this.ds_financialCustomerCode.getColumn(e.row,"DETAIL_CODE");
+    var detailCodeName=this.ds_financialCustomerCode.getColumn(e.row,"DETAIL_CODE_NAME");
+
+     if(dialogName=="financialcustomer"){  //dialog 이름으로 if 걸어서  각각 받고 싶은 데이터 받아가세요~~ 
+	 this.close(detailCode+"/"+detailCodeName);
+	 return;
+	 }
+	 
+    this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

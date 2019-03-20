@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="mainView" classname="mainView" inheritanceid="" position="absolute 0 0 950 650" titletext="New Form" style="background:#ffffff00 URL('..\..\..\Users\hello\Pictures\iu3.jpg') stretch;align:center;">
+    <Layouts>
+      <Layout/>
+    </Layouts>
+  </Form>
+</FDL>

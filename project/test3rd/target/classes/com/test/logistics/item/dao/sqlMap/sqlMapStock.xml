@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="stock">
+
+	<typeAlias alias="StockBean" type="com.test.logistics.item.to.StockBean" />
+	<resultMap id="StockResult" class="StockBean">
+		<result property="stockCode" column="STOCK_CODE" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="inputAmount" column="INPUT_AMOUNT" />
+		<result property="inputDate" column="INPUT_DATE" />
+		<result property="inputExpecAmount" column="INPUT_EXPEC_AMOUNT" />
+		<result property="inputExpecDate" column="INPUT_EXPEC_DATE" />
+		<result property="outputAmount" column="OUTPUT_AMOUNT" />
+		<result property="outputDate" column="OUTPUT_DATE" />
+		<result property="outputExpecAmount" column="OUTPUT_EXPEC_AMOUNT" />
+		<result property="outputExpecDate" column="OUTPUT_EXPEC_DATE" />
+		<result property="stockAmount" column="STOCK_AMOUNT" />
+		<result property="produceStatus" column="PRODUCE_STATUS" />
+		<result property="warehouseCode" column="WAREHOUSE_CODE" />
+	 	<result property="itemBean" column="ITEM_CODE" select="item.selectItem"/>
+	</resultMap>
+
+	<select id="selectItemStock" resultClass="StockBean"
+		parameterClass="String">
+    <![CDATA[
+		SELECT 
+		  STOCK.STOCK_CODE
+		, STOCK.ITEM_CODE
+		, STOCK.INPUT_AMOUNT
+		, STOCK.INPUT_DATE
+		, STOCK.INPUT_EXPEC_AMOUNT
+		, STOCK.INPUT_EXPEC_DATE
+		, STOCK.OUTPUT_AMOUNT
+		, STOCK.OUTPUT_DATE
+		, STOCK.OUTPUT_EXPEC_AMOUNT
+		, STOCK.OUTPUT_EXPEC_DATE
+		, STOCK.STOCK_AMOUNT
+		, STOCK.PRODUCE_STATUS
+		, STOCK.WAREHOUSE_CODE
+		
+  FROM ITEM ,STOCK
+ WHERE ITEM.ITEM_CODE = STOCK.ITEM_CODE
+ AND ITEM.ITEM_CODE = #itemCode#
+    ]]>
+	</select>
+
+
+	<select id="selectRowCount" resultClass="int">
+    <![CDATA[
+		SELECT
+			COUNT(*)
+		FROM
+			STOCK
+    ]]>
+	</select>
+
+	<select id="selectStock" resultMap="StockResult" parameterClass="String">
+    <![CDATA[
+	SELECT *
+	FROM STOCK
+	WHERE ITEM_CODE=#itemCode#
+ 	]]>
+	</select>
+
+
+	<select id="dateStockList" resultMap="StockResult"
+		parameterClass="map">
+    <![CDATA[
+	SELECT *                                          
+	FROM STOCK                                        
+	WHERE OUTPUT_DATE BETWEEN #startRow# AND #endRow# 
+	OR INPUT_DATE BETWEEN #startRow#  AND #endRow#    
+	ORDER BY DECODE(ITEM_CODE,'WA',1 )                
+    ]]>
+	</select>
+	
+	
+
+	<select id="itemStockList" resultMap="StockResult"
+		parameterClass="String">
+    <![CDATA[
+	SELECT *                     
+	FROM  STOCK                  
+	WHERE item_code = #itemCode# 
+    ]]>
+	</select>
+
+	<update id="updateOutputScheduleStock" parameterClass="map">
+    <![CDATA[
+	UPDATE STOCK SET OUTPUT_DATE=#planDate#, OUTPUT_AMOUNT=#planQuantity#
+	WHERE ITEM_CODE=#itemCode#
+    ]]>
+	</update>
+
+
+</sqlMap>

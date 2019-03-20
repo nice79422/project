@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.circumstance.dao.OvertimeSudangDAO">
+
+	<resultMap type="overtimeSudangTO" id="overtimeSudangResult">
+
+		<result property="overtimeSalCode" column="OVERTIME_SAL_CODE" />
+		<result property="overtimeSalName" column="OVERTIME_SAL_NAME" />
+		<result property="overtimeSalRate" column="OVERTIME_SAL_RATE" />
+
+	</resultMap>
+	<select id="selectOvertimeSudangList" resultMap="overtimeSudangResult">
+    <![CDATA[
+	SELECT
+	OVERTIME_SAL_CODE,
+	OVERTIME_SAL_NAME,
+	OVERTIME_SAL_RATE
+	FROM
+	OVERTIME_SAL
+    ]]>
+	</select>
+
+	<update id="updateOvertimeSudang" parameterType="overtimeSudangTO">
+	<![CDATA[
+	UPDATE OVERTIME_SAL
+	SET
+	OVERTIME_SAL_NAME=#{overtimeSalName},
+	OVERTIME_SAL_RATE=#{overtimeSalRate}
+	WHERE
+	OVERTIME_SAL_CODE=#{overtimeSalCode}
+	]]>
+	</update>
+
+	<delete id="deleteOvertimeSudang" parameterType="overtimeSudangTO">
+	<![CDATA[
+	DELETE OVERTIME_SAL
+	WHERE
+	OVERTIME_SAL_CODE=#{overtimeSalCode}
+    ]]>
+	</delete>
+
+	<insert id="insertOvertimeSudang" parameterType="overtimeSudangTO">
+	<![CDATA[
+	INSERT INTO OVERTIME_SAL
+	(
+	OVERTIME_SAL_CODE,
+	OVERTIME_SAL_NAME,
+	OVERTIME_SAL_RATE
+	)
+	VALUES
+	(
+	#{overtimeSalCode},
+	#{overtimeSalName},
+	#{overtimeSalRate}
+	)
+    ]]>
+	</insert>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test5th.base.dao.CodeDAO">
+
+	<resultMap id="codeResult" type="codeBean">
+		<result property="code" column="CODE" />
+		<result property="codeName" column="CODE_NAME" />
+		<result property="usingStatus" column="USING_STATUS" />
+		<collection property="detailCodeList" select="com.test5th.base.dao.DetailCodeDAO.selectDetailCodeList" column="CODE" />
+		<!-- 매개변수에 List를 바로 CODE Column를 이용하여 다른 mapper 실행 한다.  -->
+	</resultMap>
+
+	<!-- 코드목록을 가져오는 메서드 -->
+	<select id="selectCodeList" resultMap="codeResult">
+  
+      SELECT * FROM CODE ORDER BY CODE
+
+	</select>
+
+
+	<insert id="insertCode" parameterType="codeBean">
+	
+	        INSERT INTO 
+	        CODE
+	        (
+	        CODE,
+	        CODE_NAME,
+	        USING_STATUS
+	        ) 
+	        VALUES(#{code}, #{codeName}, #{usingStatus})
+
+	</insert>
+
+
+	<update id="updateCode" parameterType="codeBean">
+		
+	       UPDATE
+	            CODE
+	       SET
+	            CODE_NAME = #{codeName},
+	            USING_STATUS = #{usingStatus}
+	       WHERE
+	            CODE = #{code}
+
+    
+	</update>
+
+<!-- 삭제는 이용 안함!!! -->
+	<delete id="deleteCode" parameterType="codeBean">
+		
+	      DELETE
+	      FROM
+	      		CODE
+	      WHERE
+	            CODE = #{code}
+    
+	</delete> 
+
+</mapper>

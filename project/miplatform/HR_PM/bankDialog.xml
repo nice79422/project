@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Height="200" Id="bankDialog" Left="8" PidAttrib="7" Title="bankDialog" Top="8" Ver="1.0" Width="317" WorkArea="true">
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="black" Font="한컴&#32;윤고딕&#32;240,16" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="은행조회" Top="2" VAlign="Middle" Width="310"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsDetailCode" BkColor2="default" BoldHead="true" Bottom="188" Enable="true" EndLineColor="default" Font="LG&#32;PC,11" HeadHeight="27" Height="147" Id="bankGrid" InputPanel="FALSE" Left="1" LineColor="default" MinWidth="100" OnCellDBLClick="bankGrid_OnCellDblClick" Right="311" RowHeight="20" TabOrder="2" TabStop="true" Top="41" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="310">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="39"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" text="순번" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="1" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" text="은행코드" Valign="Center"/>
+						<cell align="center" bkcolor="silver" col="2" color="black" display="text" font="한컴&#32;윤고딕&#32;230,11" text="은행명" Valign="Center"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,11" Valign="Center"/>
+						<cell align="center" col="1" colid="CODE" display="text" font="한컴&#32;윤고딕&#32;230,11" Valign="Center"/>
+						<cell align="center" col="2" colid="DETAIL_CODE_NAME" display="text" font="한컴&#32;윤고딕&#32;230,11" Valign="Center"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+	</Form>
+	<Script><![CDATA[
+function bankGrid_OnCellDblClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+	parent.detailRegistrationTab.tab3.bankName=dsDetailCode.getColumn(nRow,"DETAIL_CODE_NAME");
+	close();
+}
+]]></Script>
+</Window>

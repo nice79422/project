@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_journalDetailDialog" left="0" top="0" width="444" height="269" titletext="New Form" name="customerDialog" onload="acc_journalDetailDialog_onload">
+    <Layouts>
+      <Layout>
+        <Grid id="customer_gird" taborder="1" useinputpanel="false" left="4.56%" top="62" right="3.22%" height="178" binddataset="ds_journalDetailInfo" autofittype="col" oncelldblclick="journalDetail_gird_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="87"/>
+                <Column size="86"/>
+                <Column size="86"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정과목코드"/>
+                <Cell col="1" text="상세항목"/>
+                <Cell col="2" text="상세내역"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="1" text="bind:ITEM"/>
+                <Cell col="2" text="bind:VALUE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sys_customer_stc" taborder="2" text="분개상세내역" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_journalDetailInfo" onload="ds_customer_onload">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+분개상세 다이얼로그                                             						                                                                         
+@Path	회계              				   				
+@Description  전표승인창에서 분개 클릭하면 분개상세내역 조회할 수 있도록 하기 위해					
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 26                             		                    				                                            
+********************************************************************************/
+this.journalNo="";
+this.acc_journalDetailDialog_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{  
+     journalNo=this.parent.journalNo;
+     
+	 this.transaction("findJournalDetailByJournalNo",
+					"dataURL::acc/slip/findJournalDetailByJournalNo.do",
+					"",
+					"ds_journalDetailInfo=gds_journalDetail",
+					"journalNo="+journalNo,
+					"callback",
+					false
+					);
+					
+			
+}
+]]></Script>
+  </Form>
+</FDL>

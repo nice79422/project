@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.hr.emp.dao.EmployeeDAO">
+
+
+<!-- employeeDAO -->
+
+
+	<resultMap type="employeeTO" id="employeeResult">
+
+		<result property="empCode" column="EMP_CODE" />
+		<result property="empName" column="EMP_NAME" />
+	</resultMap>
+
+
+	<select id="selectEmployeeList" resultMap="employeeResult">
+		SELECT
+			EMP_CODE,
+			EMP_NAME,
+			PASSWORD,
+			POSITION_CODE,
+			AUTHORITY_CODE,
+			DEPT_CODE,
+			BUSINESS_PLACE_CODE		
+		FROM
+			EMPLOYEE
+	</select>
+
+	<select id="selectEmployee" parameterType="string" resultType="employeeTO">
+
+		SELECT
+		EMP_CODE,
+		EMP_NAME,
+		PASSWORD,
+		POSITION_CODE,
+		AUTHORITY_CODE,
+		DEPT_CODE,
+		BUSINESS_PLACE_CODE
+		FROM EMPLOYEE
+		WHERE EMP_CODE=#{empCode}
+
+	</select>
+
+	<insert id="insertEmployee" parameterType="employeeTO">
+
+		INSERT INTO EMPLOYEE(
+		EMP_CODE, EMP_NAME, COMPANY_CODE, WORKPLACE_CODE
+		, DEPT_CODE, POSITION_CODE, SOCIAL_SECURITY_NUMBER
+		, BIRTH_DATE, GENDER, EMAIL, PHONE_NUMBER, IMAGE
+		, USER_PW, ZIP_CODE, BASIC_ADDRESS, DETAIL_ADDRESS
+		, LEVEL_OF_EDUCATION, USER_OR_NOT
+		)
+		VALUES
+		( #{empCode}, #{empName}, #{companyCode}, #{workplaceCode}, #{deptCode},
+	#{positionCode}, #{socialSecurityNumber}, #{birthDate}, #{gender}, #{email},
+	#{phoneNumber}, #{image}, #{userPw}, #{zipCode}, #{basicAddress}, #{detailAddress},
+	#{levelOfEducation}, #{userOrNot}
+		 )
+
+	</insert>
+
+
+	<update id="updateEmployee" parameterType="employeeTO">     <!-- 발령시에 업데이트 될수있도록  by.seunghyeon -->
+        UPDATE  EMPLOYEE
+        SET     EMP_CODE        =#{empCode}, 
+			    POSITION_CODE   =#{positionCode}, 
+			    DEPT_CODE       =#{deptCode}
+        WHERE   EMP_CODE        =#{empCode}
+	</update>
+
+<delete id="deleteEmployee" parameterType="employeeTO">
+		DELETE FROM EMPLOYEE
+		WHERE EMP_CODE =  #{empCode}
+	</delete>
+
+
+
+
+</mapper>

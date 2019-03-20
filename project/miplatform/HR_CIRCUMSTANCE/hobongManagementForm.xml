@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="777" Id="hobongManagementForm" Left="8" OnLoadCompleted="hobongManagementForm_OnLoadCompleted" PidAttrib="7" Title="hobongManagementForm" Top="8" Ver="1.0" Width="960" WorkArea="true">
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="675" Hilight3dColor="black" Id="Static1" Left="376" TabOrder="5" Text="호봉테이블" Top="90" Type="Groupbox" Width="566"></Static>
+		<Static Border="RaisedEdge" Font="한컴&#32;윤고딕&#32;240,12" Height="674" Hilight3dColor="black" Id="Static0" Left="21" TabOrder="3" Text="대상&#32;직급" Top="91" Type="Groupbox" Width="328"></Static>
+		<Grid AutoFit="TRUE" BindDataset="dsPosition" BkColor2="default" BoldHead="true" Bottom="754" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="618" Id="positionGrid" InputPanel="FALSE" Left="32" LineColor="default" MinWidth="100" OnCellClick="positionGrid_OnCellClick" OnCellPosChanged="positionGrid_OnCellPosChanged" Right="338" RowHeight="20" TabOrder="2" TabStop="true" Top="136" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="306">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="45"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,12" text="NO"/>
+						<cell align="center" bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,12" text="코드"/>
+						<cell align="center" bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,12" text="직급"/>
+					</head>
+					<body>
+						<cell align="center" col="0" display="text" expr="currow+1" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="POSITION_CODE" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="POSITION_NAME" display="text" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Grid AutoFit="TRUE" BindDataset="dsHobong" BkColor2="default" BoldHead="true" Bottom="754" Editable="TRUE" Enable="true" EndLineColor="default" Font="한컴&#32;윤고딕&#32;240,12" HeadHeight="25" Height="618" Id="hobongGrid" InputPanel="FALSE" Left="391" LineColor="default" MinWidth="100" Right="927" RowHeight="20" TabOrder="4" TabStop="true" Top="136" UseDBuff="true" UsePopupMenu="true" UseSelColor="true" Visible="true" VLineColor="default" WheelScrollRow="1" Width="536">
+			<contents>
+				<format id="Default">
+					<columns>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+						<col width="80"/>
+					</columns>
+					<head>
+						<cell align="center" bkcolor="silver" col="0" display="text" font="한컴&#32;윤고딕&#32;240,12" text="호봉"/>
+						<cell align="center" bkcolor="silver" col="1" display="text" font="한컴&#32;윤고딕&#32;240,12" text="기본급"/>
+						<cell align="center" bkcolor="silver" col="2" display="text" font="한컴&#32;윤고딕&#32;240,12" text="상여금"/>
+						<cell align="center" bkcolor="silver" col="3" display="text" font="한컴&#32;윤고딕&#32;240,12" text="시급"/>
+						<cell bkcolor="silver" col="4" display="text" font="한컴&#32;윤고딕&#32;240,12" text="합계"/>
+					</head>
+					<body>
+						<cell align="center" col="0" colid="HOBONG" display="text" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="1" colid="BASE_SAL" display="currency" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="2" colid="BONUS" display="currency" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell align="center" col="3" colid="SIGUB" display="currency" edit="normal" font="한컴&#32;윤고딕&#32;230,9"/>
+						<cell col="4" display="currency" expr="ParseInt(BASE_SAL)+Parseint(BONUS)" font="한컴&#32;윤고딕&#32;230,9"/>
+					</body>
+				</format>
+			</contents>
+		</Grid>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="addHobongBtn" Left="576" OnClick="addHobongBtn_OnClick" TabOrder="6" Text="추&#32;가" Top="51" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="removeHobongBtn" Left="664" OnClick="removeHobongBtn_OnClick" TabOrder="7" Text="삭&#32;제" Top="51" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="saveBtn" Left="840" OnClick="saveBtn_OnClick" TabOrder="8" Text="일괄저장" Top="51" Width="87"></Button>
+		<Button BKColor="silver" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="resetHobongBtn" Left="752" OnClick="resetHobongBtn_OnClick" TabOrder="9" Text="취&#32;소" Top="51" Width="87"></Button>
+		<Static Align="Center" BKColor="silver" Border="Raised" BorderColor="user1" Color="MENUTEXT" Font="한컴&#32;윤고딕&#32;240,12" Height="30" Id="formtitle" Left="1" TabOrder="1" Text="호봉테이블&#32;등록" Top="1" VAlign="Middle" Width="953"></Static>
+	</Form>
+	<Script><![CDATA[//로드시..시작됨
+function hobongManagementForm_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	
+	transaction("findPositionList","svcBase::/position.do?method=findPositionList","","dsPosition=dsPosition dsHobong=dsHobong","","callback");
+	
+	dsHobong.Filter("POSITION_CODE=='"+0+"'");
+		
+	http.Sync=false;
+}
+
+function positionGrid_OnCellClick(obj,nRow,nCell,nX,nY,nPivotIndex)
+{
+
+	dsHobong.Filter("POSITION_CODE='"+dsPosition.GetColumn(nRow,"POSITION_CODE")+"'");
+	
+}
+function positionGrid_OnCellPosChanged(obj,nRow,nCell,nOldRow,nOldCell,nPivotIndex,nOldPivotIndex)
+{
+    dsHobong.Filter("POSITION_CODE='"+dsPosition.GetColumn(nRow,"POSITION_CODE")+"'");
+
+}
+
+function addHobongBtn_OnClick(obj)
+{
+	var rowNum=dsHobong.GetRowCount();
+	
+	var parentPositionCode=dsPosition.GetColumn(dsPosition.row,"POSITION_CODE");
+	
+	dsHobong.AddRow(); // row 추가
+	dsHobong.SetColumn(rowNum,"POSITION_CODE",parentPositionCode); // 상위코드의 직급 코드 가져 온다. 
+}
+
+function removeHobongBtn_OnClick(obj)
+{
+	dsHobong.DeleteRow(dsHobong.row);
+}
+
+
+
+function resetHobongBtn_OnClick(obj)
+{
+	Reload();
+}
+
+
+function saveBtn_OnClick(obj)
+{
+	
+	if(confirm("저장 하시겠습니까 ?")){
+      transaction(
+         "batchHobong",
+         "svcHrCircumstance::/hobong.do?method=batchHobong",
+         "dsHobong=dsHobong:u",
+         "dsHobong=dsHobong",
+         "",
+         "callback"
+      );
+   }
+}
+
+
+function callback(trid, ErrorCode, ErrorMsg) {
+   
+   if(trid=='batchHobong'){
+      if(ErrorCode!=0){
+         alert("저장중 ERROR발생! ");
+      }else{      
+         //var selPositionCode = dsPosition.GetColumn(dsPosition.rowpos,'POSITION_CODE');
+         //dsHobong.UnFilter();   
+         //dsHobong.Filter("POSITION_CODE='"+selPositionCode+"'");
+         Reload();
+         alert("저장에 성고하였습니다!");//ErrorCode==0 :) 
+      }   
+   }
+}
+]]></Script>
+</Window>

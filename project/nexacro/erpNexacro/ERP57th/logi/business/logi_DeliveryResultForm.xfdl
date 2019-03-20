@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="logi_DeliveryResultForm" left="0" top="0" width="1185" height="785" titletext="New Form" onload="logi_DeliveryResultForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="prm_stc" taborder="0" text="납품완료목록확인" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Static id="contract_stc" taborder="1" text="수주목록" left="18" top="60" width="95" height="39" style="background:darkgray;border:1 solid #b1b5b9b3 ;bordertype:roundjoin 10 10 ;align:center middle;"/>
+        <Calendar id="fromDate_cal" taborder="2" dateformat="yyMMdd" left="111" top="60" width="95" height="39"/>
+        <Calendar id="toDate_cal" taborder="3" dateformat="yyMMdd" left="223" top="60" width="95" height="39"/>
+        <Button id="search_btn" taborder="4" text="검색" left="325" top="60" width="95" height="39" onclick="search_btn_onclick"/>
+        <Static id="workList_stc" taborder="5" text="작업이력" left="618" top="60" width="95" height="39" style="background:darkgray;border:1 solid #b1b5b9b3 ;bordertype:roundjoin 10 10 ;align:center middle;"/>
+        <Grid id="contract_grid" taborder="6" binddataset="ds_completeDelivery" useinputpanel="false" left="18" top="103" width="553" height="305" autofittype="col" oncelldblclick="contract_grid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="157"/>
+                <Column size="83"/>
+                <Column size="114"/>
+                <Column size="55"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="수주상세번호"/>
+                <Cell col="1" text="거래처"/>
+                <Cell col="2" text="제품"/>
+                <Cell col="3" text="수량"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CONTRACT_DETAIL_NO" autosizecol="default"/>
+                <Cell col="1" text="bind:CUSTOMER_CODE"/>
+                <Cell col="2" text="bind:ITEM_CODE"/>
+                <Cell col="3" text="bind:CONTRACT_AMOUNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="contractDetail_grid" taborder="7" binddataset="ds_completeDelivery" useinputpanel="false" left="610" top="103" width="553" height="305" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="132"/>
+                <Column size="132"/>
+                <Column size="55"/>
+                <Column size="88"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="취합번호"/>
+                <Cell col="1" text="작업지시번호"/>
+                <Cell col="2" text="품명"/>
+                <Cell col="3" text="지시일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:MRP_GATHERING_NO"/>
+                <Cell col="1" text="bind:WORK_INSTRUCTION_NO"/>
+                <Cell col="2" text="bind:R_ITEM_CODE"/>
+                <Cell col="3" text="bind:MPS_PLAN_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="stc_contract01" taborder="8" text="출고이력" left="26" top="420" width="95" height="39" style="background:darkgray;border:1 solid #b1b5b9b3 ;bordertype:roundjoin 10 10 ;align:center middle;"/>
+        <Static id="stc_contract02" taborder="9" text="발송이력" left="618" top="420" width="95" height="39" style="background:darkgray;border:1 solid #b1b5b9b3 ;bordertype:roundjoin 10 10 ;align:center middle;"/>
+        <Grid id="stock_grid" taborder="10" binddataset="ds_completeDelivery" useinputpanel="false" left="18" top="463" width="553" height="284" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="202"/>
+                <Column size="205"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="품번"/>
+                <Cell col="1" text="품명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:R_ITEM_CODE"/>
+                <Cell col="1" text="bind:R_ITEM_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="deliveryResult_grid" taborder="11" binddataset="ds_completeDelivery" useinputpanel="false" left="610" top="463" width="553" height="284" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="156"/>
+                <Column size="101"/>
+                <Column size="72"/>
+                <Column size="74"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="납품번호"/>
+                <Cell col="1" text="납품일"/>
+                <Cell col="2" text="품번"/>
+                <Cell col="3" text="수량"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DELIVERY_NO"/>
+                <Cell col="1" text="bind:DELIVERY_DATE"/>
+                <Cell col="2" text="bind:D_ITEM_CODE"/>
+                <Cell col="3" text="bind:DELIVERY_AMOUNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_completeDelivery">
+        <ColumnInfo>
+          <Column id="CONTRACT_NO" type="STRING" size="256"/>
+          <Column id="CONTRACT_DETAIL_NO" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="ITEM_NAME" type="STRING" size="256"/>
+          <Column id="ITEM_CODE" type="STRING" size="256"/>
+          <Column id="CONTRACT_AMOUNT" type="STRING" size="256"/>
+          <Column id="UNIT_PRICE_OF_CONTRACT" type="STRING" size="256"/>
+          <Column id="MPS_NO" type="STRING" size="256"/>
+          <Column id="R_ITEM_CODE" type="STRING" size="256"/>
+          <Column id="R_ITEM_NAME" type="STRING" size="256"/>
+          <Column id="MPS_PLAN_DATE" type="STRING" size="256"/>
+          <Column id="WORK_INSTRUCTION_NO" type="STRING" size="256"/>
+          <Column id="DELIVERY_DATE" type="STRING" size="256"/>
+          <Column id="DELIVERY_AMOUNT" type="STRING" size="256"/>
+          <Column id="MRP_GATHERING_NO" type="STRING" size="256"/>
+          <Column id="D_ITEM_CODE" type="STRING" size="256"/>
+          <Column id="DELIVERY_NO" type="STRING" size="256"/>
+          <Column id="ITEM_CLASSIFICATION" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[this.logi_DeliveryResultForm_onload = function(obj:Form, e:nexacro.LoadEventInfo)   //온로드
+{
+	this.transaction("findCompleteDeliveryList",
+					"dataURL::logi/business/findCompleteDeliveryResultList.do",
+					"",
+					"ds_completeDelivery=ds_completeDelivery",
+					"fromDate='"+application.today()+"' toDate='"+application.today()+"'",
+					"callback"
+	);
+}
+
+this.contract_grid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)  //1번그리드 셀더블클릭
+{
+	var scode=this.ds_completeDelivery.GetColumn(e.row,"CONTRACT_DETAIL_NO");
+	this.ds_completeDelivery.filter("CONTRACT_DETAIL_NO=='"+scode+"'");
+}
+
+
+
+
+
+this.search_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)  //서치버튼 클릭
+{
+	alert("시작일:"+this.fromDate_cal.value+"  종료일:"+this.toDate_cal.value);
+	this.transaction("findCompleteDeliveryList",
+					"dataURL::logi/business/findCompleteDeliveryResultList.do",
+					"",
+					"ds_completeDelivery=ds_completeDelivery",
+					"fromDate='"+this.fromDate_cal.value+"' toDate='"+this.toDate_cal.value+"'",
+					"callback"
+	);
+}
+
+]]></Script>
+  </Form>
+</FDL>

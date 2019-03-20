@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQLMap 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="position">
+    <typeAlias alias="positionBean" type="com.test4th.base.to.PositionBean"/>
+    <resultMap id="positionResult" class="positionBean">
+        <result property="positionCode" column="POSITION_CODE"/>
+        <result property="positionName" column="POSITION_NAME"/>
+        <result property="hobongList" select="hobong.selectHobongList" column="POSITION_CODE" />
+    </resultMap>
+
+    <select id="selectPositionList" resultMap="positionResult">
+    <![CDATA[
+        SELECT * FROM POSITION ORDER BY POSITION_CODE
+    ]]>
+    </select>
+
+    <!-- 직급하나 조회하기 -->
+   <select id="selectPosition" resultMap="positionResult" parameterClass="String">
+  
+      SELECT * FROM POSITION WHERE POSITION_CODE=#positionCode#
+    
+    </select>
+
+
+</sqlMap>

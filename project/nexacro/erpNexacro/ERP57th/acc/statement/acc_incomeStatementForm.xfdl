@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\..\default_typedef.xml"/>
+  <Form id="acc_incomeStatementForm" left="0" top="0" width="1024" height="768" titletext="New Form" onload="acc_incomeStatementForm_onload">
+    <Layouts>
+      <Layout>
+        <Static id="incomeState_stc" taborder="0" text="손익계산서" onclick="Static00_onclick" left="14" top="9" right="14" height="45" style="border:3 solid darkgray ;font:bold 16 함초롬돋움,돋움;"/>
+        <Calendar id="income_cal" taborder="1" left="61.04%" top="72" right="21.09%" height="35"/>
+        <Button id="incomeSearch_btn" taborder="2" text="조회" left="80.86%" top="72" right="12.7%" height="34" onclick="incomeSearch_btn_onclick"/>
+        <Button id="incomeOutput_btn" taborder="3" text="출력" left="88.96%" top="72" right="4.59%" height="34" onclick="incomeOutput_btn_onclick"/>
+        <Grid id="incomeStatement_grid" taborder="4" useinputpanel="false" left="1.66%" top="113" right="1.37%" height="573" autofittype="col" binddataset="ds_incomeStatement">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="101"/>
+                <Column size="92"/>
+                <Column size="101"/>
+                <Column size="107"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="계정과목"/>
+                <Cell col="1" colspan="2" text="당기"/>
+                <Cell col="3" colspan="2" text="전기"/>
+                <Cell row="1" col="1" colspan="2" text="금액"/>
+                <Cell row="1" col="3" colspan="2" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DISPLAY_NAME"/>
+                <Cell col="1" text="bind:CURRENT_PERIOD_LEFT_COL"/>
+                <Cell col="2" text="bind:CURRENT_PERIOD_RIGHT_COL"/>
+                <Cell col="3" text="bind:PREVIOUS_PERIOD_LEFT_COL"/>
+                <Cell col="4" text="bind:PREVIOUS_PERIOD_RIGHT_COL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="noti_stc" taborder="5" text="중소기업 회계기준에 의하여 작성됨." left="32.03%" top="705" right="26.56%" height="38" style="color:red;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_incomeStatement">
+        <ColumnInfo>
+          <Column id="DISPLAY_NAME" type="STRING" size="256"/>
+          <Column id="CURRENT_PERIOD_LEFT_COL" type="STRING" size="256"/>
+          <Column id="CURRENT_PERIOD_RIGHT_COL" type="STRING" size="256"/>
+          <Column id="PREVIOUS_PERIOD_LEFT_COL" type="STRING" size="256"/>
+          <Column id="PREVIOUS_PERIOD_RIGHT_COL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/********************************************************************************                                                                            
+손익계산서화면                                           						                                                                         
+@Path		회계              				   				
+@Description	손익 계산을 위한 창						
+@Author	  	조윤희				    			                        								                                            
+@Create           2019. 02. 28                             		                    				                                            
+********************************************************************************/
+this.incomeSearch_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+     if(this.income_cal.value<=20181231){
+    alert("전년도 자료는 조회하실 수 없습니다");
+    return;
+    }
+    
+	var incomeStatementDate =this.income_cal.value;
+
+	var id = "findIncomeStatement";
+    var url = "dataURL::statement/incomeStatement/findIncomeStatement.do";
+    var respDs = "";
+    var reqDs = "ds_incomeStatement=ds_IncomeStatement";
+    var args = "approvalDate='"+incomeStatementDate+"'";
+    var callback = "callback";
+    
+    this.transaction(id, url, respDs, reqDs, args, callback, false);	
+}
+
+this.incomeOutput_btn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(confirm("손익계산서를 출력하시겠습니까?")){
+		this.exportObj = new ExcelExportObject();
+		var ret = this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, 
+        this.incomeStatement_grid, "Sheet1!A1");
+		this.exportObj.set_exporturl("http://localhost:8282/nexacro-xeni/XExportImport");   
+		this.exportObj.exportData(); 
+	}
+}
+
+function callback(trid , ErrorCode, ErrorMsg){
+
+	if(trid=="findIncomeStatement"){
+		if(ErrorCode <0){
+			alert("다시 확인하시고 입력해주세요");
+		}else{
+		}
+	}
+}]]></Script>
+  </Form>
+</FDL>

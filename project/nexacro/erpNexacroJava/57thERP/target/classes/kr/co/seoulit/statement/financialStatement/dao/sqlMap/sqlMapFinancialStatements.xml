@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper  namespace="kr.co.seoulit.statement.financialStatement.dao.FinancialStatementsDAO">
+  	
+   	<resultMap type="financialStatementsTO" id="financialStatementsBeanResult">
+  		<result property="accountName" column="ACCOUNT_NAME"/>
+  		<result property="currentLeft" column="CURRENT_LEFT"/>
+  		<result property="currentRight" column="CURRENT_RIGHT"/>
+  		<result property="earlyLeft" column="EARLY_LEFT"/>
+  		<result property="earlyRight" column="EARLY_RIGHT"/>
+  	</resultMap>
+  
+ 	<resultMap type="eFinancialStatementsTO" id="eFinancialStatementsBeanResult">
+  		<result property="accountName" column="ACCOUNT_NAME"/>
+  		<result property="lPrice" column="L_PRICE"/>
+  		<result property="rPrice" column="R_PRICE"/>
+  	</resultMap>
+  
+    <parameterMap id="proceduerResultMap" type="map">
+      	<parameter property="approvalDate" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+      	<parameter property="errorCode" javaType="java.lang.Integer" jdbcType="DECIMAL"  mode="OUT" />
+      	<parameter property="errorMsg" javaType="java.lang.String" jdbcType="VARCHAR" mode="OUT" />
+      	<parameter property="result" javaType="java.sql.ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="financialStatementsBeanResult"/>
+ 	</parameterMap>
+ 	
+	<select id="selectFinancialStatements" parameterMap="proceduerResultMap" statementType="CALLABLE">
+ 		<![CDATA[
+ 			{call P_BALANCE_SHEET_OPEN (?,?,?,?)}
+	   	]]>
+	</select> 
+  
+	
+	<select id="selectEFinancialStatements" resultMap="eFinancialStatementsBeanResult">
+	 <![CDATA[
+	 
+SELECT 
+MAX(DECODE(g_id,7,ACCOUNT_NAME,lpad(' ',4*ABS(g_id-3))||ACCOUNT_NAME)) AS ACCOUNT_NAME
+,CASE ACCOUNT_NAME 
+WHEN '외상매출금' THEN R_price
+WHEN '대손충당금' THEN R_price
+WHEN '받을어음' THEN R_price
+WHEN '차량운반구' THEN R_price
+WHEN '비품' THEN R_price
+WHEN '감가상각누계액' THEN R_price
+ELSE L_price END AS L_price
+,CASE ACCOUNT_NAME
+WHEN '외상매출금' THEN L_price
+WHEN '대손충당금' THEN  lag(R_price) over (ORDER BY GROUP_CODE NULLS LAST , PARENT_ACCOUNT_INNER_CODE NULLS FIRST , ACCOUNT_CODE NULLS FIRST)  - R_price
+WHEN '받을어음' THEN L_price
+WHEN '차량운반구' THEN L_price
+WHEN '비품' THEN L_price
+WHEN '감가상각누계액' THEN  lag(R_price) over (ORDER BY GROUP_CODE NULLS LAST , PARENT_ACCOUNT_INNER_CODE NULLS FIRST , ACCOUNT_CODE NULLS FIRST) - R_price
+WHEN '자본금' THEN R_price
+WHEN '5.자본' THEN R_price
+WHEN ' ' THEN L_price
+ELSE R_price END AS R_price
+from
+(SELECT DENSE_RANK() OVER(ORDER BY X.GROUP_CODE) as RN
+      ,x.PARENT_ACCOUNT_INNER_CODE as PARENT_ACCOUNT_INNER_CODE
+      ,x.ACCOUNT_CODE as ACCOUNT_CODE
+      ,MAX(DECODE(x.G_ID,7,' ',
+           DECODE(x.G_ID,3,
+            (SELECT DETAIL_CODE_NAME FROM CODE_DETAIL WHERE DETAIL_CODE_NAME = X.GROUP_CODE) 
+      ,DECODE(x.G_ID,1,
+      (SELECT ACCOUNT_NAME FROM ACCOUNT WHERE ACCOUNT_INNER_CODE=X.PARENT_ACCOUNT_INNER_CODE
+              ),A.ACCOUNT_NAME))))  AS ACCOUNT_NAME
+       , X.G_ID as G_ID
+      , X.GROUP_CODE as GROUP_CODE  
+      , abs(x.LEFT_DEBTOR_PRICE-RIGHT_CREDITS_PRICE) AS R_price
+      , CASE  WHEN LEFT_DEBTOR_PRICE IS NOT NULL THEN 0 END AS L_price 
+      from
+      (SELECT 
+      A.ACCOUNT_INNER_CODE  as ACCOUNT_CODE
+      , A.PARENT_ACCOUNT_INNER_CODE as PARENT_ACCOUNT_INNER_CODE
+      , A.GROUP_CODE as GROUP_CODE 
+      ,SUM(LEFT_DEBTOR_PRICE) AS LEFT_DEBTOR_PRICE
+      ,SUM(RIGHT_CREDITS_PRICE) AS RIGHT_CREDITS_PRICE
+      ,GROUPING_ID(A.GROUP_CODE,A.PARENT_ACCOUNT_INNER_CODE,A.ACCOUNT_INNER_CODE) as G_ID 
+      
+        FROM 
+        ( 
+            SELECT E.ACCOUNT_INNER_CODE AS ACCOUNT_INNER_CODE 
+                ,NVL(E.LEFT_DEBTOR_PRICE,0) AS LEFT_DEBTOR_PRICE 
+                ,NVL(E.RIGHT_CREDITS_PRICE,0) AS RIGHT_CREDITS_PRICE
+            FROM EARLY_STATEMENTS E
+            WHERE E.ACCOUNT_PERIOD_NO = (select max(ACCOUNT_PERIOD_NO) from SLIP)
+            AND E.STATEMENTS_DIVISION = '재무'
+
+            UNION ALL
+
+            SELECT J.ACCOUNT_INNER_CODE AS ACCOUNT_INNER_CODE
+                ,NVL(J.LEFT_DEBTOR_PRICE,0) AS LEFT_DEBTOR_PRICE 
+                ,NVL(J.RIGHT_CREDITS_PRICE,0) AS RIGHT_CREDITS_PRICE
+            FROM SLIP S, JOURNAL J 
+            WHERE  S.ACCOUNT_PERIOD_NO = (select max(ACCOUNT_PERIOD_NO) from SLIP)
+            AND S.SLIP_NO = J.SLIP_NO
+            AND S.APPROVAL_DATE between '2017-01-01' and '2017-12-31'
+           
+        ) T1, ACCOUNT A
+        WHERE     A.ACCOUNT_INNER_CODE = t1.ACCOUNT_INNER_CODE 
+             AND A.GROUP_CODE in ('1.유동자산','2.비유동자산','3.유동부채','4.비유동부채','5.자본')
+      GROUP BY ROLLUP(A.GROUP_CODE,A.PARENT_ACCOUNT_INNER_CODE, A.ACCOUNT_INNER_CODE)
+      ORDER BY GROUP_CODE) x  ,ACCOUNT A
+      where  X.ACCOUNT_CODE = A.ACCOUNT_CODE(+)
+      GROUP BY 
+      x.PARENT_ACCOUNT_INNER_CODE 
+      ,x.ACCOUNT_CODE 
+      , X.G_ID
+      , X.GROUP_CODE
+      , X.LEFT_DEBTOR_PRICE
+      , X.RIGHT_CREDITS_PRICE)  
+      GROUP BY ACCOUNT_NAME,L_price,R_price,GROUP_CODE,PARENT_ACCOUNT_INNER_CODE,ACCOUNT_CODE
+ 			ORDER BY GROUP_CODE NULLS LAST 
+     , PARENT_ACCOUNT_INNER_CODE NULLS FIRST 
+     , ACCOUNT_CODE NULLS FIRST
+	 ]]>
+	</select>
+
+</mapper>
+ 
+ 

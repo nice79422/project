@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test5th.hr.circumstance.dao.BaseWorkTimeDAO">
+    
+    <resultMap id="baseWorkTimeResult" type="baseWorkTimeBean">
+      	<result property="applyYear" column="APPLY_YEAR"/>
+        <result property="attendTime" column="ATTEND_TIME"/>
+        <result property="quitTime" column="QUIT_TIME"/>
+        <result property="overTime" column="OVER_TIME"/>
+        <result property="nightTime" column="NIGHT_TIME"/>
+        <result property="lunchStartTime" column="LUNCH_START_TIME"/>
+        <result property="lunchEndTime" column="LUNCH_END_TIME"/>
+        <result property="dinnerStartTime" column="DINNER_START_TIME"/>
+        <result property="dinnerEndTime" column="DINNER_END_TIME"/>
+    </resultMap>
+
+	<!-- 모든년도의 기본근무시간을 가져오는 메서드  -->
+    <select id="selectBaseWorkTimeList" resultMap="baseWorkTimeResult">
+    <![CDATA[
+  		SELECT APPLY_YEAR
+     		  ,ATTEND_TIME
+     		  ,QUIT_TIME
+     		  ,OVER_TIME
+     		  ,NIGHT_TIME
+     		  ,LUNCH_START_TIME
+     		  ,LUNCH_END_TIME
+     		  ,DINNER_START_TIME
+     		  ,DINNER_END_TIME 
+  		FROM BASE_WORK_TIME
+  		
+    ]]>
+    </select>
+
+	<!-- 해당년도의 기본근무시간을 추가하는 메서드 -->
+    <insert id="insertBaseWorkTime" parameterType="baseWorkTimeBean">
+	<![CDATA[
+		INSERT INTO 
+		BASE_WORK_TIME
+			(
+			APPLY_YEAR,
+			ATTEND_TIME,
+			QUIT_TIME,
+			OVER_TIME,
+			NIGHT_TIME,
+			LUNCH_START_TIME,
+			LUNCH_END_TIME,
+			DINNER_START_TIME,
+			DINNER_END_TIME
+			)
+			VALUES (
+			#{applyYear},
+			#{attendTime},
+			#{quitTime},
+			#{overTime},
+			#{nightTime},
+			#{lunchStartTime},
+			#{lunchEndTime},
+			#{dinnerStartTime},
+			#{dinnerEndTime}
+	   )
+	]]>
+	</insert>
+
+	<!-- 해당년도의 기본근무시간을 수정하는 메서드 -->
+	<update id="updateBaseWorkTime" parameterType="baseWorkTimeBean">
+	<![CDATA[
+		UPDATE BASE_WORK_TIME
+		SET
+			ATTEND_TIME = #{attendTime},
+			QUIT_TIME = #{quitTime},
+			OVER_TIME = #{overTime},
+			NIGHT_TIME = #{nightTime},
+			LUNCH_START_TIME = #{lunchStartTime},
+			LUNCH_END_TIME = #{lunchEndTime},
+			DINNER_START_TIME=#{quitTime},
+			DINNER_END_TIME=#{overTime}
+		WHERE APPLY_YEAR = #{applyYear}
+    ]]>
+  	</update>
+
+	<!-- 해당년도의 근무시간을 삭제하는 메서드  [삭제는 하지않는게좋 을 듯??]-->
+	<!--  
+  	<delete id="deleteBaseWorkTime" parameterClass="baseWorkTimeBean">
+	<![CDATA[
+	      DELETE FROM BASE_WORK_TIME
+	      WHERE APPLY_YEAR = #{applyYear#{
+    ]]>
+	</delete>
+	-->
+</mapper>

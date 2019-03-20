@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="highestEducationDialog" classname="highestEducationDialog" inheritanceid="" position="absolute 0 0 300 350" titletext="New Form" onload="highestEducationDialog_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="최종학력 조회" position2="absolute l:0 w:300 t:0 h:40" positiontype="position2" style="background:silver;align:center middle;font:HY견고딕,16,bold;"/>
+        <Grid id="educationGrid" taborder="1" useinputpanel="false" position2="absolute l:5 w:289 t:43 h:302" positiontype="position2" style="border:1 solid #cbcbcbff ;" binddataset="ds_detailCode" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;detail_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;detail_code_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;using_status&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:detail_code&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:detail_code_name&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:using_status&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col" oncelldblclick="educationGrid_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="학력코드"/>
+                <Cell col="2" text="최종학력명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1"/>
+                <Cell col="1" text="bind:DETAIL_CODE"/>
+                <Cell col="2" text="bind:DETAIL_CODE_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript4.0"><![CDATA[
+function highestEducationDialog_onload(obj:Form, e:LoadEventInfo)
+{
+	
+	ds_detailCode.filter("");
+	transaction("findCodeList",
+				"svcBase::findCodeList.do",
+				"",
+				"ds_code=dsCode ds_detailCode=dsDetailCode",
+				"",
+				"callback",
+				false);
+	ds_detailCode.filter("String(DETAIL_CODE).substr(0,2)=='ED'");
+	
+}
+
+//그리드 더블 클릭시 
+function educationGrid_oncelldblclick(obj:Grid, e:GridClickEventInfo)
+{
+	g_education=ds_detailCode.getColumn(e.row,"DETAIL_CODE_NAME");
+	
+	close();
+	
+}
+]]></Script>
+  </Form>
+</FDL>

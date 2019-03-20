@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.seoulit.logi.production.dao.MpsDAO">
+
+
+	<!-- mpsDAO -->
+
+	<resultMap type="mpsTO" id="mpsResult">
+
+		<result property="mpsNo" column="MPS_NO" />
+		<result property="mpsPlanClassification" column="MPS_PLAN_CLASSIFICATION" />
+		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO" />
+		<result property="salesPlanNo" column="SALES_PLAN_NO" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="unitOfMps" column="UNIT_OF_MPS" />
+		<result property="mpsPlanDate" column="MPS_PLAN_DATE" />
+		<result property="mpsPlanAmount" column="MPS_PLAN_AMOUNT" />
+		<result property="dueDateOfMps" column="DUE_DATE_OF_MPS" />
+		<result property="scheduledEndDate" column="SCHEDULED_END_DATE" />
+		<result property="mrpApplyStatus" column="MRP_APPLY_STATUS" />
+		<result property="description" column="DESCRIPTION" />
+
+	</resultMap>
+
+	<select id="selectMpsList" resultMap="mpsResult" parameterType="map">
+
+		SELECT
+		MPS_NO,
+		MPS_PLAN_CLASSIFICATION, CONTRACT_DETAIL_NO,
+		SALES_PLAN_NO, ITEM_CODE,
+		ITEM_NAME, UNIT_OF_MPS, 
+		MPS_PLAN_DATE, MPS_PLAN_AMOUNT,
+		DUE_DATE_OF_MPS, SCHEDULED_END_DATE, MRP_APPLY_STATUS,
+		DESCRIPTION
+		FROM MPS
+		<if test="toDate != null and fromDate !='mrpSelect'">
+		WHERE DUE_DATE_OF_MPS BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		<if test="fromDate.equals('mrpSelect')">
+		WHERE
+		MRP_APPLY_STATUS IS NULL OR MRP_APPLY_STATUS='N'
+		</if>
+	</select>
+
+
+	<insert id="insertMps" parameterType="mpsTO">
+		INSERT INTO MPS(
+		MPS_NO
+		, MPS_PLAN_CLASSIFICATION
+		, CONTRACT_DETAIL_NO
+		, SALES_PLAN_NO
+		, ITEM_CODE
+		, ITEM_NAME
+		, UNIT_OF_MPS
+		, MPS_PLAN_DATE
+		, MPS_PLAN_AMOUNT
+		, DUE_DATE_OF_MPS
+		, SCHEDULED_END_DATE
+		, MRP_APPLY_STATUS
+		, DESCRIPTION
+		)
+		VALUES
+		( #{mpsNo}
+		, #{mpsPlanClassification}
+		, #{contractDetailNo}
+		, #{salesPlanNo}
+		, #{itemCode}
+		, #{itemName}
+		, #{unitOfMps}
+		, #{mpsPlanDate}
+		, #{mpsPlanAmount}
+		, #{dueDateOfMps}
+		, #{scheduledEndDate}
+		, #{mrpApplyStatus}
+		, #{description}
+		)
+	</insert>
+
+
+
+
+</mapper>

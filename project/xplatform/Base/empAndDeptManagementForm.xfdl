@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="empAndDeptManagementForm" classname="empAndDeptManagementForm" inheritanceid="" position="absolute 0 0 962 650" titletext="New Form" onload="empAndDeptManagementForm_onload" style="background:gainsboro;">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" text="사원 / 부서 관리" position2="absolute l:0 w:962 t:0 h:40" positiontype="position2" style="background:silver;color:black;align:center middle;font:HY견고딕,16,bold;"/>
+        <GroupBox id="GroupBox01" text="사원목록" position2="absolute l:8 w:571 t:49 h:511" positiontype="position2" style="background:gainsboro;color:black;font:malgun gothic,14,bold antialias;"/>
+        <GroupBox id="GroupBox02" text="부서목록" position2="absolute l:593 w:359 t:49 h:511" positiontype="position2" style="background:gainsboro;color:black;font:arial,14,bold antialias;"/>
+        <Grid id="empGrid" taborder="1" useinputpanel="false" position2="absolute l:14 w:558 t:80 h:376" positiontype="position2" style="border:1 solid #cbcbcbff ;" binddataset="ds_employee_copy" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;password&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;dept_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;authority_code&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:emp_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:password&quot;/&gt;&#10;      &lt;Cell col=&quot;3&quot; disptype=&quot;normal&quot; text=&quot;bind:position_code&quot;/&gt;&#10;      &lt;Cell col=&quot;4&quot; disptype=&quot;normal&quot; text=&quot;bind:dept_code&quot;/&gt;&#10;      &lt;Cell col=&quot;5&quot; disptype=&quot;normal&quot; text=&quot;bind:authority_code&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col" cellsizingtype="none" autosizingtype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="120"/>
+                <Column size="104"/>
+                <Column size="101"/>
+                <Column size="98"/>
+                <Column size="90"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+                <Row size="24" band="summ"/>
+              </Rows>
+              <Band id="head" style="background:silver;">
+                <Cell text="NO"/>
+                <Cell col="1" text="사원번호"/>
+                <Cell col="2" text="사원명"/>
+                <Cell col="3" text="비밀번호"/>
+                <Cell col="4" text="직급명"/>
+                <Cell col="5" text="부서명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1"/>
+                <Cell col="1" text="bind:EMP_CODE"/>
+                <Cell col="2" edittype="normal" text="bind:EMP_NAME" suppress="0"/>
+                <Cell col="3" edittype="normal" text="bind:PASSWORD" autosizerow="limitmax" autosizecol="default"/>
+                <Cell col="4" displaytype="normal" edittype="normal" text="bind:POSITION_CODE"/>
+                <Cell col="5" displaytype="normal" edittype="normal" text="bind:DEPT_CODE"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="총인원"/>
+                <Cell col="1" colspan="5" text="expr:getRowCount(&quot;NO&quot;)+'명'"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="deptGrid" taborder="1" useinputpanel="false" position2="absolute l:600 w:349 t:80 h:376" positiontype="position2" style="border:1 solid #cbcbcbff ;" binddataset="ds_dept" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;24&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;24&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;dept_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;dept_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;dept_tel&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:dept_code&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:dept_name&quot;/&gt;&#10;      &lt;Cell col=&quot;2&quot; disptype=&quot;normal&quot; text=&quot;bind:dept_tel&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="35"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head" style="background:silver;">
+                <Cell text="NO"/>
+                <Cell col="1" text="부서코드"/>
+                <Cell col="2" text="부서명"/>
+                <Cell col="3" text="내선번호"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1" suppress="0"/>
+                <Cell col="1" edittype="expr:getRowType(currow) == 2 ? &quot;normal&quot; : &quot;none&quot;" text="bind:DEPT_CODE"/>
+                <Cell col="2" edittype="normal" text="bind:DEPT_NAME"/>
+                <Cell col="3" edittype="normal" text="bind:DEPT_TEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <CheckBox id="CheckBox" taborder="1" text="퇴지자포함" position2="absolute l:14 w:105 t:477 h:38" positiontype="position2" falsevalue="N" truevalue="Y" style="background:silver;border:1 solid black ;color:black;" value="Y"/>
+        <Button id="searchEmpBtn" taborder="1" text="사원조회" position2="absolute l:123 w:122 t:477 h:38" positiontype="position2" onclick="searchEmpBtn_onclick" style="background:silver;color:black;"/>
+        <Button id="resetBtn" taborder="1" text="수정취소" position2="absolute l:419 w:122 t:477 h:38" positiontype="position2" onclick="resetBtn_onclick" style="background:silver;color:black;"/>
+        <Button id="saveEmpBtn" taborder="1" text="저 장" position2="absolute l:271 w:122 t:477 h:38" positiontype="position2" onclick="saveEmpBtn_onclick" style="background:silver;color:black;"/>
+        <Button id="addDeptBtn" taborder="1" text="추가" position2="absolute l:603 w:69 t:482 h:38" positiontype="position2" onclick="addDeptBtn_onclick" style="background:silver;color:black;"/>
+        <Button id="removeDeptBtn" taborder="1" text="삭제" position2="absolute l:692 w:69 t:482 h:38" positiontype="position2" onclick="removeDeptBtn_onclick" style="background:silver;color:black;"/>
+        <Button id="saveDeptBtn" taborder="1" text="저장" position2="absolute l:781 w:69 t:482 h:38" positiontype="position2" onclick="saveDeptBtn_onclick" style="background:silver;color:black;"/>
+        <Button id="deptResetBtn" taborder="1" text="수정취소" position2="absolute l:870 w:69 t:482 h:38" positiontype="position2" onclick="deptResetBtn_onclick" style="background:silver;color:black;"/>
+        <GroupBox id="GroupBox00" position2="absolute l:178 w:606 t:571 h:69" positiontype="position2"/>
+        <Static id="Static01" text="▶ 사원목록 ( 사원번호변경 불가/ 퇴직자포함(미포함)선택가능/ 사원삭제불가 ◀&#13;&#10;▶ 부서목록(부서에 사원 있을 경우 삭제불가/부서코드변경불가 나머지 추가/수정/삭제 가능) ◀" position2="absolute l:187 w:589 t:580 h:52" positiontype="position2" style="color:#ff0000ff;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_employee_copy">
+        <ColumnInfo>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="PASSWORD" type="STRING" size="256"/>
+          <Column id="POSITION_CODE" type="STRING" size="256"/>
+          <Column id="AUTHORITY_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="BUSINESS_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript4.0"><![CDATA[
+
+//로딩싱
+function empAndDeptManagementForm_onload(obj:Form, e:LoadEventInfo)
+{
+
+	//사원목록			
+	transaction("findEmployeeList",
+				"svcBase::findEmployeeList.do",
+				"",
+				"ds_employee=dsEmployee",
+				"",
+				"callback",
+				false);
+
+
+	
+	ds_employee_copy.copyData(ds_employee);
+	ds_employee.filter("");
+
+	
+	
+}
+
+]]></Script>
+  </Form>
+</FDL>

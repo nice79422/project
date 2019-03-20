@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<aop:config>
+		<aop:pointcut id="serviceDaoPointcut"
+			expression="execution(* com..service.*.*(..)) or execution(* com..dao.*.*(..))" />
+        <aop:pointcut id="servicePointcut"
+            expression="execution(* com..service.*.*(..)) " />
+        <aop:pointcut id="transactionPointcut"
+            expression="execution(* com..service.*.*(..))" />
+
+		<!-- spring제공  transaction -->
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="servicePointcut" />
+		<!-- POJO를 이용한 logging, exception처리 -->
+		<aop:aspect id="commonAspect" ref="commonAdvice">
+			<aop:around pointcut-ref="serviceDaoPointcut" method="logging" />
+			<aop:after-throwing pointcut-ref="servicePointcut" method="afterThrowing" throwing="ex" />
+   		</aop:aspect>
+    </aop:config>
+
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+         <tx:attributes>
+        	<tx:method name="updateDailyAttdCloseYN" propagation="REQUIRED" />
+        	<tx:method name="updateMonthAttdCloseYN" propagation="REQUIRED" />
+        	<tx:method name="addDailyAttd" propagation="REQUIRED" />
+        	<tx:method name="addDailyAttdRest" propagation="REQUIRED" />
+        	<tx:method name="addDayAnnul" propagation="REQUIRED" />
+        	<tx:method name="addBaseWorkTime" propagation="REQUIRED" />
+        	<tx:method name="editBaseWorkTime" propagation="REQUIRED" />
+        	<tx:method name="removeBaseWorkTime" propagation="REQUIRED" />
+        	<tx:method name="removeDeductionsTax" propagation="REQUIRED" />
+        	<tx:method name="batch*" propagation="REQUIRED" />
+            <tx:method name="*" read-only="true" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+	<bean id="commonAdvice" class="com.test4th.common.advice.CommonAdvice" />
+
+</beans>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<bean id="attendanceUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="1" />
+		<property name="alwaysUseFullPath" value="false" />
+		<property name="mappings">
+			<props>
+				<prop key="dailyAttd.do">dailyAttdController</prop>
+				<prop key="dayAnnual.do">dayAnnualController</prop>
+				<prop key="dailyAttdRest.do">dailyAttdRestController</prop>			
+				<prop key="attdReport.do">attdReportController</prop>
+				
+				
+			</props>
+		</property>
+	</bean>
+
+	<bean id="dailyAttdController" class="com.test4th.hr.attendance.controller.DailyAttdController"
+		p:cacheSeconds="0"
+		p:attendanceServiceFacade-ref="attendanceServiceFacade"
+		parent="AbstractMiplatformMultiActionController" />
+		
+	<bean id="dayAnnualController" class="com.test4th.hr.attendance.controller.DayAnnualController"
+		p:cacheSeconds="0" 
+		p:attendanceServiceFacade-ref="attendanceServiceFacade" 
+		parent="AbstractMiplatformMultiActionController" />
+		
+	<bean id="dailyAttdRestController" class="com.test4th.hr.attendance.controller.DailyAttdRestController"
+		p:cacheSeconds="0"
+		p:attendanceServiceFacade-ref="attendanceServiceFacade"
+		parent="AbstractMiplatformMultiActionController" />
+		
+	
+	<bean id="attdReportController" class="com.test4th.hr.attendance.controller.AttdReportController"
+		p:cacheSeconds="0" 
+		p:attendanceServiceFacade-ref="attendanceServiceFacade" 
+		parent="AbstractMiplatformMultiActionController" />
+
+
+</beans>

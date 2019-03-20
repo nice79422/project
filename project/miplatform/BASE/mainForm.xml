@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Form BKColor="gainsboro" Font="LG&#32;PC,11" Height="850" Id="mainForm" Left="8" OnLoadCompleted="mainForm_OnLoadCompleted" PidAttrib="7" scroll="false" Title="mainForm" Top="8" Ver="1.0" Width="1280" WorkArea="true">
+		<Static BKColor="silver" Font="한컴&#32;윤고딕&#32;240,9" Height="50" Id="Static3" Left="1" TabOrder="14" Top="1" Width="1275"></Static>
+		<Static Align="Center" Border="None" Color="user4" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="deptName" Left="439" TabOrder="4" Text="부서&#32;:" Top="14" VAlign="Middle" Width="60"></Static>
+		<Static Align="Center" Border="None" BorderColor="WINDOW" Color="user4" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="authority" Left="296" Style="ORIGINAL_NOICON" TabOrder="1" Text="권한&#32;:" Top="14" VAlign="Middle" Width="60"></Static>
+		<Edit BKColor="silver" Border="None" BorderColor="silver" Color="black" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="authorityCode_input" Left="357" TabOrder="3" Top="14" UserData="&#32;" Width="77"></Edit>
+		<Edit BKColor="silver" Border="None" BorderColor="silver" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="deptName_input" Left="500" TabOrder="5" Top="14" Width="53"></Edit>
+		<Static Align="Center" Border="None" Color="user4" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empCode" Left="558" TabOrder="6" Text="사원번호&#32;:" Top="14" VAlign="Middle" Width="60"></Static>
+		<Edit BKColor="silver" Border="None" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empCode_input" Left="626" TabOrder="7" Top="16" Width="101"></Edit>
+		<Static Align="Center" Border="None" Color="user4" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empName" Left="725" TabOrder="8" Text="사원명&#32;:" Top="14" VAlign="Middle" Width="60"></Static>
+		<Edit BKColor="silver" Border="None" DisableBKColor="silver" Enable="FALSE" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="empName_input" Left="786" TabOrder="9" Top="14" Width="77"></Edit>
+		<Static Align="Center" Border="None" Color="user4" Font="한컴&#32;윤고딕&#32;240,9" Height="30" Id="calendar" Left="868" TabOrder="10" Text="TODAY" Top="14" VAlign="Middle" Width="77"></Static>
+		<Calendar Align="Right" BKColor="white" CanChange="info_calendar_input_CanChange" DayFont="LG&#32;PC,11" DisableBKColor="white" Font="한컴&#32;윤고딕&#32;240,9" HeaderFont="LG&#32;PC,11" Height="30" Id="calendar_input" Left="945" OnChanged="calendar_input_OnChanged" SaturdayTextColor="blue" SelectedDayFont="LG&#32;PC,11" SundayTextColor="red" TabOrder="11" Top="14" Value="TODAY" WeeksFont="LG&#32;PC,11" Width="105"></Calendar>
+		<Button BKColor="silver" Cursor="HAND" Font="한컴&#32;윤고딕&#32;240,9" Height="37" Id="mainBtn" Left="1179" OnClick="mainBtn_OnClick" TabOrder="13" Text="메인" Top="7" Width="87"></Button>
+		<Button BKColor="silver" Cursor="HAND" DefaultButton="TRUE" Font="한컴&#32;윤고딕&#32;240,9" Height="37" Id="logoutBtn" Left="1056" OnClick="logoutBtn_OnClick" TabOrder="12" Text="로그아웃" Top="8" Width="117"></Button>
+		<TreeView BindDataset="dsMenu" Font="한컴&#32;윤고딕&#32;240,9" Height="780" Id="treeMenu" LevelColumn="LEVEL" OnDblClick="treeMenu_OnDblClick" TabOrder="2" TEXTColumn="MENU_NAME" Top="56" Width="284"></TreeView>
+		<Div BKColor="gainsboro" Border="Flat" Font="한컴&#32;윤고딕&#32;240,9" Height="780" Id="mainView" Left="296" TabOrder="15" Text="Div0" Top="56" Url="base::mainView.xml" Width="970">
+			<Contents></Contents>
+		</Div>
+		<MenuBar BorderColor="silver" CaptionCol="MENU_NAME" EnableCol="Enable" EndColor="silver" Font="한컴&#32;윤고딕&#32;240,9" GradationMode="Horizontal" Height="30" HighlightBKColor="#3399ff" IconCol="Icon" Id="MenuBar" IDCol="MENU_URL" Left="28" LevelCol="LEVEL" MainTextColor="black" MenuDataset="dsMenu" OnMenuClick="MenuBar_OnMenuClick" PopupBoard3D="True" PopupLeftMargin="12" PopupTextColor="black" Selection3D="False" StartColor="silver" Style="ORIGINAL_NOICON" TabOrder="16" Top="14" Width="280"></MenuBar>
+	</Form>
+	<Script><![CDATA[
+function mainform_OnLoadCompleted(obj)
+{
+	http.Sync=true;
+	window.left=300;
+	window.top=0;
+	mainView.Url="BASE::mainView.xml";
+	
+	authorityCode_input=g_authorityCode;
+	deptName_input=g_deptName;
+	empCode_input=g_empCode;
+	empName_input=g_empName;
+	
+	//전체 메뉴 가져오기 Global dataset에 넣지 않음
+	transaction("findMenuList","svcBase::/menu.do?method=findMenuList","","dsMenu=dsMenu","","callback");  
+	//해당 사원의 메뉴 가져오기
+	transaction("findMenuAuthorityList","svcBase::/authority.do?method=findMenuAuthorityList","","dsMenuAuthority=dsMenuAuthority","authorityCode="+g_authorityCode,"callback");
+	
+	http.Sync=false;
+	
+}
+
+function logoutBtn_OnClick(obj)
+{
+	var checkResult = confirm("Logout하시겠습니까 ?"); //confirm -> 확인창 뜬다 확인시 true(1) /취소시 false(0)
+	if(checkResult==1){
+			go("base::loginform.xml");
+		}
+}
+
+function mainBtn_OnClick(obj)
+{
+	var checkResult = confirm("첫 화면으로 갑니까 ?");
+	if(checkResult==1){
+		mainView.Url="base::mainView.xml";
+	}
+}
+
+
+function treeMenu_OnDblClick(obj,nRow)  // treemenu의 경우 !
+{
+	var check = false;//기본 적으로 false값을 준다 판단하기 위해
+	var menuUrl = dsMenu.GetColumn(nRow,"MENU_URL");
+	var menuCode = dsMenu.GetColumn(nRow,"MENU_CODE");
+	var result = dsMenuAuthority.FindRow("MENU_CODE", menuCode); // 찾는 값이 없으면 -1이 뜬다. 나머지는 rownum이 다르게 정렬 되어 있는 듯
+	//trace(menuCode+","+result);
+	
+	if(!(result==-1)){
+			check = true;
+		}
+		if(check = false){
+			alert("접근할 권한이 없습니다.");
+			return;	
+		}
+		//alert(menuUrl+"로 연결이 될 겁니다.아직 안만들었음");
+		mainView.Url=menuUrl; 
+}
+
+function MenuBar_OnMenuClick(obj, strID)  //menubar의 경우 !
+{
+/*	
+	var rowCount=dsMenu.GetRowCount();  //전체 메뉴의 row 수!
+
+
+	
+	 for(var index=1; index<=rowCount; index++){   //  1~ 시작 index<31
+		 var menuCode = dsMenu.getColumn(index, "MENU_CODE"); //menuCode얻어옴
+		 var menuUrl = dsMenu.getColumn(index, "MENU_URL"); // menuUrl 얻어옴
+		
+		 trace("<<<<>>>>"+menuCode); //전체 권한이면 31번찍히는 건가?
+		 trace("<<<<>>>>"+menuUrl);
+			
+		 if(dsMenuAuthority.FindRow("MENU_CODE",menuCode)==-1 && menuUrl!=Null ){ //url이 존재하고 해당사원이 가진 mene_code와 전체 menu_code 비교해서 값이 존재하면 실행
+			 
+			 MenuBar.EnableItem(menuUrl,"false"); //EnableItem-> menubar 메소드 활성화 할지 말지 결정 -> id,true/false 들어감  왜 굳이 for문을 사용 할까??계속 반복되는데 
+		 }
+	 }
+*/
+	var Row=dsMenu.SearchRow("MENU_URL='"+strID+"'");	
+	var menuCode = dsMenu.getColumn(Row, "MENU_CODE");
+	
+	//alert("menuCode"+menuCode);
+	
+	if(strID!=""){	// 해당 사원 권한 없어도 url은 다 존재함 dsMenu 라서 .. 
+		if(dsMenuAuthority.FindRow("MENU_CODE",menuCode)!=-1){ //
+			mainView.Url=strID;
+			//alert(strID+"로 연결이 될 겁니다.아직 안만들었음");
+		}else{
+			alert("접근할 권한이 없습니다.");
+		}
+	}
+}
+
+]]></Script>
+</Window>
